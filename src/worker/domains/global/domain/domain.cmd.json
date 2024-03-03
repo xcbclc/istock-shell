@@ -1,0 +1,34 @@
+{
+  "应用查找": {
+    "name": "应用查找",
+    "cmd": "yycz",
+    "usage": "yycz [-gl <正则表达式|字符串>] [-sl <数量>]",
+    "description": "查看指定应用数据",
+    "options": {
+      "过滤": {
+        "name": "过滤",
+        "parameter": ["-gl", "--过滤"],
+        "parameterType": ["string", "RegExp"],
+        "description": "用正则或字符串匹配过滤菜单列表",
+        "default": "",
+        "optional": true,
+        "choices": []
+      },
+      "数量": {
+        "name": "数量",
+        "parameter": ["-sl", "--数量"],
+        "parameterType": ["number"],
+        "description": "限制展示查看应用列表的数量",
+        "default": "",
+        "optional": true,
+        "choices": []
+      }
+    }
+  },
+  "应用进入": {
+    "name": "应用进入",
+    "cmd": "yyjr",
+    "usage": "yyjr <应用名或应用显示名称>",
+    "description": "进入指定应用"
+  }
+}

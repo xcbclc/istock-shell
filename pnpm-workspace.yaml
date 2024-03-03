@@ -1,0 +1,3 @@
+packages:
+  # 独立模块
+  - 'src/packages/*'

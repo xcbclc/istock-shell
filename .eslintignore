@@ -1,0 +1,5 @@
+**/*.json
+src/style/**
+src/assets/**
+src/vite-env.d.ts
+src/packages/cli/dist/**

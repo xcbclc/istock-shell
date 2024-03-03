@@ -1,0 +1,20 @@
+{
+  "命令查找": {
+    "name": "命令查找",
+    "cmd": "mlcz",
+    "usage": "mlcz [命令] <-mc [名称]>",
+    "options": {
+      "名称": {
+        "name": "名称",
+        "parameter": ["-mc", "--名称"],
+        "parameterType": ["string"],
+        "description": "需要查询的命令名称，通配符匹配",
+        "default": "",
+        "optional": true,
+        "choices": []
+      }
+    },
+    "description": "查找当前域下命令",
+    "remarks": ""
+  }
+}

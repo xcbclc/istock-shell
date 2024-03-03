@@ -1,0 +1,13 @@
+import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
+import { <%= className %>Model } from './<%= fileName %>.model';
+import { <%= className %>Service } from './<%= fileName %>.service';
+import cmdJson from './<%= fileName %>.cmd';
+
+@Controller({
+  alias: '<%= fileName %>',
+})
+export class <%= className %>Controller {
+  constructor(private readonly <%= instanceName %>Service: <%= className %>Service) {}
+
+  // 命令控制器方法
+}

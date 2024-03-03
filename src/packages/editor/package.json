@@ -1,0 +1,9 @@
+{
+  "name": "@istock/editor",
+  "version": "0.0.1",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@istock/command-parser": "workspace:^",
+    "@istock/util": "workspace:^"
+  }
+}

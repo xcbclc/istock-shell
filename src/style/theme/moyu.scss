@@ -1,0 +1,29 @@
+:root {
+  --color-primary: #282828;
+  --color-primary-darker: var(--color-primary);
+  --color-primary-lighter: var(--color-primary);
+  --color-primary-red: var(--color-primary);
+  --color-primary-green: var(--color-primary);
+  --color-secondary: var(--color-primary);
+  --color-text-default: var(--color-primary);
+  --color-text-primary: var(--color-primary);
+  --color-text-hover: var(--color-primary);
+  --color-text-success: var(--color-primary);
+  --color-text-warning: var(--color-primary);
+  --color-text-danger: var(--color-primary);
+
+  // 背景色
+  --color-background: #181818;
+  --color-sub-background: #1f1f1f;
+
+  // 命令
+  --color-text-command: var(--color-primary);
+  --color-text-option: var(--color-primary);
+  --color-text-parameter: var(--color-primary);
+
+  // 提示符
+  --color-prompt: var(--color-primary);
+
+  // 加载颜色
+  --color-loading: var(--color-primary);
+}

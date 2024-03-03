@@ -1,0 +1,79 @@
+{
+  "name": "istock-shell",
+  "private": true,
+  "title": "iStock Shell",
+  "version": "0.1.1",
+  "type": "module",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:docker": "pnpm run build & docker build -f ./Dockerfile -t istock-shell .",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "lint": "eslint -c .eslintrc.cjs --ignore-path .eslintignore",
+    "lint:fix": "eslint -c .eslintrc.cjs --ignore-path .eslintignore --fix",
+    "format": "prettier --write ./**/*.{ts,tsx,js,mjs,cjs,svelte,css,scss,json,md}",
+    "prepare": "husky install",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:build:docker": "pnpm run docs:build & docker build -f ./docs/Dockerfile -t istock-shell-doc .",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@antv/g2": "^5.1.15",
+    "@commitlint/cli": "^18.6.1",
+    "@commitlint/config-conventional": "^18.6.2",
+    "@istock/cli": "workspace:^",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "@tsconfig/svelte": "^5.0.2",
+    "@types/qs": "^6.9.11",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard-with-typescript": "^40.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-svelte": "^2.35.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-svelte": "^3.2.1",
+    "sass": "^1.71.1",
+    "svelte": "^4.2.11",
+    "svelte-check": "^3.6.4",
+    "svelte-preprocess": "^5.1.3",
+    "tsc-alias": "^1.8.8",
+    "tslib": "^2.6.2",
+    "typedoc": "^0.25.8",
+    "typedoc-plugin-markdown": "^3.17.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.3",
+    "vite-plugin-eslint": "^1.8.1",
+    "vitepress": "1.0.0-rc.44"
+  },
+  "dependencies": {
+    "@istock/command-parser": "workspace:^",
+    "@istock/editor": "workspace:^",
+    "@istock/iswork": "workspace:^",
+    "@istock/shell-ui": "workspace:^",
+    "@istock/util": "workspace:^",
+    "qs": "^6.11.2"
+  },
+  "lint-staged": {
+    "src/**/*.{js,cjs,ts}": [
+      "pnpm run lint",
+      "pnpm run format"
+    ],
+    "*.{html,css,scss,svelte,md}": [
+      "pnpm run format"
+    ]
+  }
+}

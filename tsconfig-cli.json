@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "outDir": "./src/packages/cli/dist",
+    "paths": {
+      "@root/*": ["*"],
+      "@/*": ["src/*"],
+      "@istock/iswork": ["src/packages/iswork/src"],
+      "@istock/util": ["src/packages/util/src"],
+      "@domains/*": ["src/worker/domains/*"]
+    }
+  },
+  "include": ["./src/worker/domains/**/*.cmd.ts"]
+}

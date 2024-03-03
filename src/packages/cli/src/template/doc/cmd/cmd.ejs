@@ -1,0 +1,25 @@
+# <%- domainName %>
+
+<% list.forEach(function(cmd) { -%>
+## <%- cmd.cmd %> <%- cmd.name %> <% if (cmd.tag) { %><Badge type="tip" text="<%- cmd.tag %>" /> <% } %>
+<%- cmd.description %>
+
+<% if (cmd.usage) { -%>
+### 用法
+
+`<%- cmd.usage -%>`
+<% } -%>
+
+<% if (cmd.options) { -%>
+### 参数
+<% Object.entries(cmd.options).forEach(([key, option]) => { %>
+<%- option.name %>：`<%- option.parameter.join('，') %>`
+
+<%- replaceAllStar(option.description) %>
+
+| 参数类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :--: | :--: | :--: |
+| <%- option.parameterType.join('，') -%> | <%- option.optional -%> | <%- replaceAllStar(option.default) -%> | <%- option.choices -%> |
+<% }) -%>
+<% } -%>
+<% }) %>

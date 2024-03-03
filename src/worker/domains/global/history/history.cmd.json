@@ -1,0 +1,29 @@
+{
+  "历史删除": {
+    "name": "历史删除",
+    "cmd": "lssc",
+    "usage": "lssc [-sl <数量>] [-ms <删除模式>]",
+    "options": {
+      "数量": {
+        "name": "数量",
+        "parameter": ["-sl", "--数量"],
+        "parameterType": ["number"],
+        "description": "需要删除的数量，从最后一个历史命令开始删除",
+        "default": "",
+        "optional": true,
+        "choices": []
+      },
+      "模式": {
+        "name": "模式",
+        "parameter": ["-ms", "--模式"],
+        "parameterType": ["number"],
+        "description": "删除模式，值0表示仅删除显示，值1表示完全删除数据",
+        "default": 0,
+        "optional": true,
+        "choices": [0, 1]
+      }
+    },
+    "description": "删除当前历史命令数据",
+    "remarks": ""
+  }
+}

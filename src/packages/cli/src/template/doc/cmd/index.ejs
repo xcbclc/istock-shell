@@ -1,0 +1,9 @@
+# 命令列表
+所有内置命令列表。
+
+<% links.forEach(function(link) { %>
+## <%- link.appName %>
+<% (link.list ?? []).forEach(function(item) { %>
+[<%- item.name %>](<%- item.link %>)
+<% }) %>
+<% }) %>

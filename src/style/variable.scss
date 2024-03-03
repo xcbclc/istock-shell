@@ -1,0 +1,45 @@
+:root {
+  --font-size-root: 14px;
+  --font-size-default: 1em;
+  --font-size-larger: 1.15em;
+  --font-size-smaller: 0.85em;
+  --font-weight: 600;
+
+  // 主色调
+  --color-primary: #f26522;
+  --color-primary-darker: #c94400;
+  --color-primary-lighter: #ff7d51;
+  --color-primary-red: #b50c2e;
+  --color-primary-green: #028127;
+  --color-secondary: #744f36;
+
+  // 文本颜色
+  --color-text-default: #958881;
+  --color-text-primary: var(--color-primary);
+  --color-text-hover: var(--color-primary);
+
+  // 状态色
+  --color-text-success: var(--color-primary-green);
+  --color-text-warning: #8b4513;
+  --color-text-danger: var(--color-primary-red);
+
+  // 背景色
+  --color-background: #181818;
+  --color-sub-background: #1f1f1f;
+
+  // 命令
+  --color-text-command: var(--color-primary);
+  --color-text-option: var(--color-secondary);
+  --color-text-parameter: #e09960;
+
+  // 提示符
+  --color-prompt: var(--color-secondary);
+
+  // 加载颜色
+  --color-loading: var(--color-primary);
+
+  --color-border: var(--color-text-default);
+  --gap-default: 0.5em;
+  --gap-2x: 1em;
+  --transition-duration: 0.15s;
+}
