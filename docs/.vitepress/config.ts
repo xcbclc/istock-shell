@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress';
 import themeLocales from './config/theme-locales';
 import themeSidebar from './config/theme-sidebar';
 import themeNav from './config/theme-nav';
+import head from './config/head';
 
 export default defineConfig({
   // base: './',
@@ -17,10 +18,10 @@ export default defineConfig({
       lang: 'zh',
     },
   },
+  head,
   lang: 'zh-Hans',
   title: 'iStock Shell',
   description: '一个金融数据查询终端',
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   appearance: 'dark', // 黑白主题
   themeConfig: {
     search: {

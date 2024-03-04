@@ -13,7 +13,29 @@ export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
     base: './',
-    plugins: [svelte(), tsPlugin, eslint()],
+    plugins: [
+      svelte(),
+      tsPlugin,
+      eslint(),
+      {
+        name: 'html-transform',
+        transformIndexHtml(html) {
+          if (env.VITE_SITE_BAIDU_ANALYSIS !== 'true') return html;
+          const index = html.indexOf('</head>');
+          const baidu = `<script>
+            var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?dfec2bfb0d9f6e4c9e142271e4c34a1e";
+              var s = document.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(hm, s);
+            })();
+          </script>
+          `;
+          return html.substring(0, index) + baidu + html.substring(index);
+        },
+      },
+    ],
     worker: {
       plugins: () => [tsPlugin],
     },
