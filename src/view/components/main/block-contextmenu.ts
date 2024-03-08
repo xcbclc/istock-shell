@@ -70,17 +70,11 @@ export const handleBlockContextmenuFactory = (
       offset: { x, y },
     });
   };
-  const handleBlockMouseOver = (ev: MouseEvent, index: number) => {
+  const handleBlockMouseEnter = (ev: MouseEvent, index: number) => {
     const element = ev.target as HTMLElement;
     if (isViewContextmenu) return;
-    if (index === hoverBlockIndex) {
-      if (element && document.activeElement !== element) {
-        element.focus();
-      }
-      return;
-    }
     hoverBlockIndex = index;
-    if (element && document.activeElement !== element) {
+    if (element) {
       element.focus();
     }
     updatePosition({ offset: { x: -1, y: -1 } });
@@ -95,7 +89,7 @@ export const handleBlockContextmenuFactory = (
     handleMenuClick,
     handleMenuShortcutKey,
     handleOpenBlockContextmenu,
-    handleBlockMouseOver,
+    handleBlockMouseEnter,
     handleOnClick,
   };
 };
