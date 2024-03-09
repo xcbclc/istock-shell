@@ -64,7 +64,7 @@
 
 <style lang="scss">
   :root {
-    --recommend-font-size: var(--font-size-smaller);
+    --recommend-font-size: var(--font-size-sm);
     --recommend-gap: var(--gap-default);
     --recommend-radius: var(--gap-default);
     --recommend-background-color: var(--color-sub-background);

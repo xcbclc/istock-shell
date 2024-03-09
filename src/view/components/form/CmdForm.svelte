@@ -3,7 +3,7 @@
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import CmdPrompt from '../prompt/CmdPrompt.svelte';
   import CmdInput from './CmdInput.svelte';
-  import RecommendList from '../recommend/list.svelte';
+  import RecommendList from '../recommend/List.svelte';
 
   export let windowId: number;
   let cmdInputComponent: CmdInput;

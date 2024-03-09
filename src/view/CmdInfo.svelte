@@ -28,7 +28,7 @@
   :root {
     --cmd-info-title: 1.4em;
     --cmd-info-description: var(--font-size-default);
-    --cmd-info-pre: var(--font-size-smaller);
+    --cmd-info-pre: var(--font-size-sm);
     --cmd-info-gap: var(--gap-default);
     --cmd-info-color: var(--color-primary);
   }
