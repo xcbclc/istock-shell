@@ -14,3 +14,5 @@ export * from './select/index';
 export * from './table/index';
 export * from './text/index';
 export * from './textarea/index';
+export * from './modal/index';
+export * from './button/index';
