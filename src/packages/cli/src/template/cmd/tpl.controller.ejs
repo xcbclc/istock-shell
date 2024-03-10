@@ -4,7 +4,7 @@ import { <%= className %>Service } from './<%= fileName %>.service';
 import cmdJson from './<%= fileName %>.cmd';
 
 @Controller({
-  alias: '<%= fileName %>',
+  alias: '<%= classAlias %>',
 })
 export class <%= className %>Controller {
   constructor(private readonly <%= instanceName %>Service: <%= className %>Service) {}
