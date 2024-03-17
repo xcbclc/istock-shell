@@ -5,26 +5,26 @@
   export let isOpen = false;
   export let title = '';
   export let size: 'small' | 'medium' | 'large' = 'medium';
-  export let closable = true;
+  export let closable = false;
   export let maskClosable = true;
-  export let onOk: (() => void) | null = null;
-  export let onCancel: (() => void) | null = null;
+  export let onOk: (() => Promise<void>) | null = null;
+  export let onCancel: (() => Promise<void>) | null = null;
   export let okText = '确定';
   export let cancelText = '取消';
 
   const dispatch = createEventDispatcher();
 
-  const handleOk = () => {
+  const handleOk = async () => {
     if (onOk) {
-      onOk();
+      await onOk();
     }
     dispatch('ok');
     closeModal();
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
     if (onCancel) {
-      onCancel();
+      await onCancel();
     }
     dispatch('cancel');
     closeModal();
@@ -46,6 +46,13 @@
     }
   };
 
+  const onModalKeydown = async (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      await handleOk();
+    }
+  };
+
   onDestroy(() => {
     window.removeEventListener('keydown', handleKeyDown);
   });
@@ -60,7 +67,7 @@
 </script>
 
 {#if isOpen}
-  <div class="modal">
+  <div class="modal" on:keydown={onModalKeydown}>
     <div class="modal-mask" on:click={handleMaskClick}></div>
     <div class="modal-container {size}">
       {#if closable}
@@ -73,8 +80,8 @@
         <slot />
       </div>
       <div class="modal-footer">
-        <Button on:click={handleCancel} type="secondary" {size}>{cancelText}</Button>
         <Button on:click={handleOk} type="primary" {size}>{okText}</Button>
+        <Button on:click={handleCancel} type="secondary" {size}>{cancelText}</Button>
       </div>
     </div>
   </div>
@@ -104,6 +111,8 @@
 
   .modal-container {
     position: relative;
+    padding-top: var(--gap-default);
+    padding-bottom: var(--gap-default);
     background-color: var(--color-sub-background);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -112,7 +121,6 @@
 
   .modal-header {
     padding: var(--gap-default) var(--gap-2x);
-    border-bottom: 1px solid var(--border-color);
   }
 
   .modal-title {
@@ -128,7 +136,6 @@
   .modal-footer {
     padding: var(--gap-default) var(--gap-2x);
     text-align: right;
-    border-top: 1px solid var(--border-color);
     button {
       vertical-align: middle;
     }
@@ -149,8 +156,9 @@
   }
 
   .small {
-    width: 30%;
-    max-width: 320px;
+    width: 40%;
+    min-width: 320px;
+    max-width: 400px;
     .modal-title {
       font-size: var(--font-size);
     }
@@ -164,11 +172,13 @@
 
   .medium {
     width: 60%;
+    min-width: 360px;
     max-width: 540px;
   }
 
   .large {
     width: 80%;
+    min-width: 720px;
     max-width: 960px;
   }
 </style>

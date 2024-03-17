@@ -4,11 +4,11 @@ import {
   type TContextmenuItems,
   type TContextmenuItem,
   type TContextmenuPosition,
-  COPY,
 } from '@/store/cmd/cmd-contextmenu';
 import type { ICmdOutput } from '@/store/cmd/cmd-output/store';
 import { CmdWindowsManager } from '@/window/cmd-windows-manager';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
+import { contextmenuAction } from './contextmenu-action';
 
 export const handleBlockContextmenuFactory = (
   ctx: CmdWindowContext,
@@ -21,19 +21,7 @@ export const handleBlockContextmenuFactory = (
     isViewContextmenu = ev.detail;
   };
   const handleMenuAction = async (action: TAction, block: ICmdOutput) => {
-    const prompt = block.promptTexts.map((item) => item.text).join(' ');
-    if (action === COPY.input) {
-      await navigator.clipboard.writeText(block.input);
-    }
-    if (action === COPY.prompt) {
-      await navigator.clipboard.writeText(prompt);
-    }
-    if (action === COPY.output) {
-      await navigator.clipboard.writeText(JSON.stringify(block.output));
-    }
-    if (action === COPY.all) {
-      await navigator.clipboard.writeText(`${prompt} ${block.input}\n${JSON.stringify(block.output)}`);
-    }
+    await contextmenuAction(ctx, action, block);
     updatePosition({ offset: { x: -1, y: -1 } });
   };
   const handleMenuClick = async (ev: CustomEvent<TContextmenuItem>, blocks: ICmdOutput[]) => {
@@ -52,6 +40,7 @@ export const handleBlockContextmenuFactory = (
       }
       const shortcutKeys = ['ctrl'];
       if (ev.shiftKey) shortcutKeys.push('shift');
+      if (ev.altKey) shortcutKeys.push('alt');
       shortcutKeys.push(key.toLowerCase());
       const shortcutKey = shortcutKeys.join('+');
       const contextMenuItem = allContextMenuItem.find((item) => item.shortcutKey === shortcutKey);

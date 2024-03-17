@@ -11,6 +11,7 @@ export interface ICmdOutputData {
 }
 
 export interface ICmdOutput {
+  id: string | number;
   promptTexts: TPromptText[];
   input: string;
   output: ICmdOutputData[];
@@ -45,7 +46,7 @@ export const getCmdOutput = (ctx: CmdWindowContext) => {
     const promptTexts = get(ctx.cmdStore.cmdPromptTexts);
 
     // 添加加载loading
-    const lastOutput: ICmdOutput = getCmdOutputLoading(input, promptTexts);
+    const lastOutput: ICmdOutput = getCmdOutputLoading(ctx.message.nextId(), input, promptTexts);
     cmdOutput.update((output) => {
       const list = output.list;
       list.push(lastOutput);

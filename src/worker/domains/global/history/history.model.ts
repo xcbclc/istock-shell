@@ -19,6 +19,9 @@ export class HistoryModel extends BaseModel {
   source!: string;
 
   @Column()
+  domainName!: string;
+
+  @Column()
   promptTexts!: Array<{ text: string; type: string }>;
 
   @Column()

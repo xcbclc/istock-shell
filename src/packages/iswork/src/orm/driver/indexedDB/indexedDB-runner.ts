@@ -163,6 +163,9 @@ export class IndexedDBRunner extends AbstractRunner<TConnector> {
         return data[field] <= value;
       case 'in':
         return isArray(value) && value.includes(data[field]);
+      case 'cont':
+        if (isString(value) && isString(data[field])) return data[field].includes(value);
+        return false;
       default:
         return false;
     }

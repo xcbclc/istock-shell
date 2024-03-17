@@ -14,6 +14,8 @@ import { ChartService } from './chart/chart.service';
 import { ChartController } from './chart/chart.controller';
 import { StockCodeService } from './stock-code/stock-code.service';
 import { StockCodeController } from './stock-code/stock-code.controller';
+import { CmdAliasService } from './cmd-alias/cmd-alias.service';
+import { CmdAliasController } from './cmd-alias/cmd-alias.controller';
 
 @Global()
 @Domain({
@@ -27,6 +29,7 @@ import { StockCodeController } from './stock-code/stock-code.controller';
     RecommendService,
     ChartService,
     StockCodeService,
+    CmdAliasService,
   ],
   controllers: [
     CmdRouteController,
@@ -36,6 +39,7 @@ import { StockCodeController } from './stock-code/stock-code.controller';
     RecommendController,
     ChartController,
     StockCodeController,
+    CmdAliasController,
   ],
 })
 export class GlobalDomain {

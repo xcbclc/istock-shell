@@ -1,5 +1,6 @@
 import { EventEmitter, ScopeError, isNil, isString, FESnowflake, unWarp, wrap } from '@istock/util';
 import type { CmdWindowContext } from './cmd-window-context';
+import { get } from 'svelte/store';
 
 export type TWorkerMessageMeta = Record<string, unknown> | null;
 
@@ -32,6 +33,13 @@ export class WorkerMessage extends EventEmitter {
     this.#generateId = new FESnowflake(1, this.#ctx.windowId);
   }
 
+  /**
+   * 构建下一个id
+   */
+  nextId() {
+    return this.#generateId.nextId();
+  }
+
   async send<Result = unknown>(
     domainPath: string,
     executePath: string,
@@ -39,11 +47,18 @@ export class WorkerMessage extends EventEmitter {
     meta: TWorkerMessageMeta = {}
   ): Promise<TWorkerMessage<Result>> {
     const { windowId, worker, domainStore } = this.#ctx;
+
+    // 获取执行域
+    const originPrompt = get(this.#ctx.cmdStore.cmdPrompt);
+    const { domains } = originPrompt;
+    const domainNames: string[] = domains.map((domain) => domain.name);
+    const domainName: string = domainNames.join('.');
+
     const userInfo = domainStore.user.getUserInfo();
     const request = {
       payload,
       address: `${this.#protocol}@${userInfo.username}.${domainPath}:${windowId}/${executePath}`, // 使用cmd协议
-      meta: { ...meta, messageId: this.#generateId.nextId() },
+      meta: { domainName, ...meta, messageId: this.nextId() },
     };
     worker.postMessage(wrap(request));
 

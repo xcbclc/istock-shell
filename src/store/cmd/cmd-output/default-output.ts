@@ -1,13 +1,16 @@
+import {} from '@istock/util';
 import type { TPromptText } from '../cmd-prompt';
 import type { ICmdOutput, ICmdOutputData } from './store';
 
 /**
  * 返回loading需要的组件数据
+ * @param id
  * @param input
  * @param promptTexts
  */
-export const getCmdOutputLoading = (input: string, promptTexts: TPromptText[]): ICmdOutput => {
+export const getCmdOutputLoading = (id: string, input: string, promptTexts: TPromptText[]): ICmdOutput => {
   return {
+    id,
     input,
     output: [
       {

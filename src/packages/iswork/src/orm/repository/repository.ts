@@ -47,4 +47,11 @@ export class Repository {
       filter: ['id', 'eq', id],
     });
   }
+
+  async findOneById(model: TModelType, id: string | number): Promise<unknown> {
+    const list = await this.#repositoryManager.query(model, {
+      filter: ['id', 'eq', id],
+    });
+    return list?.length ? list[0] : null;
+  }
 }

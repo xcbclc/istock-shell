@@ -7,22 +7,23 @@ export type TContextmenuPosition = {
 };
 
 export enum COPY {
-  input,
-  output,
-  prompt,
-  link,
-  all,
+  input = 'input',
+  output = 'output',
+  prompt = 'prompt',
+  link = 'link',
+  all = 'all',
 }
 
 export enum SPLIT {
-  up,
-  right,
-  down,
-  left,
+  up = 'up',
+  right = 'right',
+  down = 'down',
+  left = 'left',
 }
 
 export enum OTHER {
-  bookmark,
+  addCmdAlias = 'addCmdAlias',
+  bookmark = 'bookmark',
 }
 
 export type TAction = COPY | SPLIT | OTHER;
@@ -69,11 +70,11 @@ export const getCmdContextmenu = (_ctx: CmdWindowContext) => {
           { text: '向下拆分', action: SPLIT.down, shortcutKey: 'ctrl+d' },
           { text: '向左拆分', action: SPLIT.left, shortcutKey: 'ctrl+l' },
         ],
-      },
+      }, */
       {
         groupName: '其它',
-        menus: [{ text: '切换书签', action: OTHER.bookmark, shortcutKey: 'ctrl+shift+b' }],
-      }, */
+        menus: [{ text: '添加别名', action: OTHER.addCmdAlias, shortcutKey: 'ctrl+alt+a' }],
+      },
     ])
   );
   cmdContextmenu.getAllMenuItem = () => {
