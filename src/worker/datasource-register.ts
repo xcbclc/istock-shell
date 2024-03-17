@@ -18,8 +18,9 @@ import {
   PqsjlModel,
 } from '@domains/ag/lshqsj/lshqsj.model';
 import { LsfbsjModel } from '@domains/ag/lsfbsj/lsfbsj.model';
+import { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
 
-export const indexedDataSourceModels = [UserModel, HistoryModel];
+export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel];
 export const fetchDataSourceModels = [
   SzgpsczmModel,
   SzlbtjModel,
@@ -48,7 +49,7 @@ export const inintDataSource = async () => {
     type: 'indexedDB',
     entities: indexedDataSourceModels,
     dbName: 'istock',
-    version: 4,
+    version: 5,
   });
   await indexedDataSource.initialize();
 

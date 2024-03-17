@@ -9,6 +9,7 @@ import {
   Component,
   CmdRouteOptions,
 } from '@istock/iswork';
+import { isString } from '@istock/util';
 import { HistoryService } from './history.service';
 import type { HistoryModel } from './history.model';
 import cmdJson from './history.cmd.json';
@@ -18,9 +19,10 @@ export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
   @Method('add')
   async add(ctx: ApplicationContext, @Payload() data: TModelCreate<HistoryModel>) {
-    const { port } = ctx.cmdp.getInfo();
+    const { port, meta } = ctx.cmdp.getInfo();
     if (!port) throw new Error('创建命令历史记录失败，port没有值');
     data.port = String(port);
+    if (meta) data.domainName = isString(meta.domainName) ? meta.domainName : '';
     return await this.historyService.create(data);
   }
 

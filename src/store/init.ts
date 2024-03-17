@@ -77,11 +77,7 @@ function onInputRecommendCmd(ctx: CmdWindowContext) {
       }
     }
     if (action === ECommandEditorActionTypes.Auto) {
-      const { domains } = get(cmdStore.cmdPrompt);
-      await domainStore.inputRecommend.recommend(
-        input,
-        domains.map((v) => v.name)
-      );
+      await domainStore.inputRecommend.recommend(input);
     }
   };
   ctx.event.on(eventAddress, handler);

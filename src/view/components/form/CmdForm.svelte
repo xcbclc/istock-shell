@@ -3,7 +3,8 @@
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import CmdPrompt from '../prompt/CmdPrompt.svelte';
   import CmdInput from './CmdInput.svelte';
-  import RecommendList from '../recommend/list.svelte';
+  import RecommendList from '../recommend/List.svelte';
+  import type { TInputRecommendItem, EInputRecommendType } from '@/store/domains/global/input-recommend';
 
   export let windowId: number;
   let cmdInputComponent: CmdInput;
@@ -19,10 +20,10 @@
       return data;
     });
   };
-  const handleRecommendSelect = (data: CustomEvent) => {
+  const handleRecommendSelect = (type: EInputRecommendType, data: CustomEvent<TInputRecommendItem>) => {
     const { detail } = data;
     if (detail?.value) {
-      cmdInputComponent.handleCommandInput(detail.value);
+      cmdInputComponent.handleCommandInput(type, detail.value);
     }
     handleRecommendClose();
   };
@@ -30,7 +31,13 @@
 
 <div class="cmd-form">
   <CmdPrompt texts={$cmdPromptTexts} />
-  <RecommendList list={$inputRecommend.list} on:close={handleRecommendClose} on:select={handleRecommendSelect} />
+  <RecommendList
+    list={$inputRecommend.list}
+    on:close={handleRecommendClose}
+    on:select={(event) => {
+      handleRecommendSelect($inputRecommend.type, event);
+    }}
+  />
   <CmdInput {windowId} bind:this={cmdInputComponent} />
 </div>
 

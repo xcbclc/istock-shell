@@ -4,6 +4,10 @@
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">iStock Shell v0.1</h1>
 <h4 align="center">一个金融数据查询命令终端</h4>
 <h4 align="center">它简单、高效、灵活，并很容易定制自己的金融数据查询工具。</h4>
+<p align="center">
+	<a href="https://istock.red/shell" target="_blank">演示</a> 
+    <a href="https://istock.red/" target="_blank">文档</a> 
+</p>
 
 ---
 
@@ -22,7 +26,7 @@
 
 #### 技术栈
 
-`svelte + typescript + vite`
+`typescript + svelte + vite`
 
 ### 内置功能
 
@@ -37,14 +41,13 @@
 
 ### 迭代计划
 
-**03月04日-03月10日：**
+**03月18日-03月24日：**
 
 |     任务项目     |              描述              | 该迭代是否上线 |
 | :--------------: | :----------------------------: | :------------: |
 | 金融网站导航命令 | 用命令获取对应分类金融网站列表 |       是       |
-|   添加命令别名   |  命令输入返回后可添加命令别名  |       是       |
 
-**03月11日-03月17日预计任务项：**
+**03月25日-03月31日预计任务项：**
 
 暂无安排
 

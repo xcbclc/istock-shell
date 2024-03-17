@@ -64,7 +64,10 @@ export abstract class AbstractCmdp {
    */
   protected initByAddress(address: string) {
     if (!this.check(address)) {
-      throw new ScopeError(`iswork.${this.constructor.name}`, `校验地址失败，请传入正确的"${this.protocol}"协议地址`);
+      throw new ScopeError(
+        `iswork.${this.constructor.name}`,
+        `校验地址失败，请传入正确的"${this.protocol}"协议地址，地址：${address}`
+      );
     }
     const info = this.parse(address);
     this.address = address;

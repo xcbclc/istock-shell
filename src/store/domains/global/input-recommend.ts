@@ -1,13 +1,18 @@
 import { writable, type Writable } from 'svelte/store';
+import { keyCommand } from '@istock/command-parser';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
+import type { ERecommendType } from '@domains/global/recommend/recommend.service';
+export { ERecommendType as EInputRecommendType } from '@domains/global/recommend/recommend.service';
 
+export type TInputRecommendItem = { label: string; value: string; description: string };
 export type TInputRecommend = {
-  list: Array<{ value: string; description: string }> | null;
+  list: TInputRecommendItem[] | null;
   input: string;
+  type: ERecommendType;
 };
 
 export interface IInputRecommend extends Writable<TInputRecommend> {
-  recommend: (input: string, domain: string[]) => Promise<void>;
+  recommend: (input: string) => Promise<void>;
 }
 
 export const getInputRecommend = (ctx: CmdWindowContext) => {
@@ -18,11 +23,13 @@ export const getInputRecommend = (ctx: CmdWindowContext) => {
     })
   );
   // 命令输入推荐
-  inputRecommend.recommend = async (input: string, domainNamePaths: string[]) => {
-    const { payload } = await ctx.message.send<TInputRecommend>('global', 'recommend.auto', {
-      input,
-      domainNamePaths,
-    });
+  inputRecommend.recommend = async (input: string) => {
+    const isCmdAlias = input?.[0] === keyCommand.alias.command;
+    const { payload } = await ctx.message.send<TInputRecommend>(
+      'global',
+      isCmdAlias ? 'recommend.alias' : 'recommend.auto',
+      { input }
+    );
     if (payload) {
       inputRecommend.set(payload);
     }

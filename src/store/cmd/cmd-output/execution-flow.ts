@@ -111,6 +111,10 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
           if (cmdItemResult.type === EAstTreeType.keyCommand) {
             const keyCommandResult = cmdItemResult as unknown as TKeyCommandResult;
             switch (keyCommandResult.cmd) {
+              /* case '':
+                domainPath = 'global';
+                executePath = 'cmdAlias.recommend';
+                break; */
               case 'ai':
                 domainPath = '';
                 executePath = '';
@@ -120,7 +124,7 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
                 executePath = '';
                 break;
               default:
-                throw new ScopeError('store.cmd-output', `没有该关键字命令处理程序:${keyCommandResult.cmd}`);
+                throw new ScopeError('store.cmd-output', `没有找到该关键字命令处理程序:${keyCommandResult.cmd}`);
             }
             payload = { arguments: keyCommandResult.arguments };
           }

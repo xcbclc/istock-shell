@@ -81,7 +81,7 @@
     --contextmenu-background-color: var(--color-sub-background);
     --contextmenu-box-shadow-color: var(--color-background);
     --contextmenu-border-color: var(--color-background);
-    --contextmenu-font-size: var(--font-size-smaller);
+    --contextmenu-font-size: var(--font-size-sm);
     --contextmenu-item-hover-color: var(--color-text-hover);
     --contextmenu-split-color: var(--color-background);
   }

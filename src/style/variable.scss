@@ -1,8 +1,10 @@
 :root {
   --font-size-root: 14px;
   --font-size-default: 1em;
-  --font-size-larger: 1.15em;
-  --font-size-smaller: 0.85em;
+  --font-size-xl: 1.15em;
+  --font-size-xxl: 1.2em;
+  --font-size-3xl: 1.5em;
+  --font-size-sm: 0.85em;
   --font-weight: 600;
 
   // 主色调
@@ -39,7 +41,12 @@
   --color-loading: var(--color-primary);
 
   --color-border: var(--color-text-default);
+  --gap-zero4x: 0.125em;
+  --gap-zero2x: 0.25em;
   --gap-default: 0.5em;
   --gap-2x: 1em;
-  --transition-duration: 0.15s;
+  --gap-4x: 2em;
+  --transition-duration: 0.2s;
+  --border-radius: 4px;
+  --border-color: var(--color-secondary);
 }

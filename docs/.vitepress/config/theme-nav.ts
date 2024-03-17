@@ -36,7 +36,7 @@ export default [
   {
     text: '更多',
     items: [
-      { text: '更新日志', link: 'https://gitee.com/xcbclc/istock-shell', target: '_blank' },
+      { text: '更新日志', link: 'https://gitee.com/xcbclc/istock-shell/releases', target: '_blank' },
       /*{ text: '沟通交流', link: 'https://share.istock.red/' },*/
       {
         text: '博客',

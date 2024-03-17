@@ -7,7 +7,7 @@ export class HistoryService {
     if (data.createDate) data.createDate = new Date();
     if (data.updateDate) data.updateDate = new Date();
     if (data.rowStatus) data.rowStatus = 1;
-    data.id = HistoryModel.generateId.nextId();
+    if (!data.id) data.id = HistoryModel.generateId.nextId();
     return await HistoryModel.createOne(data);
   }
 
@@ -21,6 +21,10 @@ export class HistoryService {
 
   async find(query: IQueryParamsOptions) {
     return await HistoryModel.query(query);
+  }
+
+  async findOne(id: string) {
+    return await HistoryModel.findOneById(id);
   }
 
   async batchDeleteCmd(mode: number, query: IQueryParamsOptions) {

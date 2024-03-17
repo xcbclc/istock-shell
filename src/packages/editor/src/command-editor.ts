@@ -266,7 +266,6 @@ export class CommandEditor {
    * @param str
    */
   handleCommandInputAppend(str: string) {
-    this.commandInput.focus();
     let input = this.input;
     let offsetText = this.getCursorOffsetText();
     const isInputEl = this.#cursor.getOneRange().endContainer === this.#commandInput;
