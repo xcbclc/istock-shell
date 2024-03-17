@@ -127,8 +127,8 @@
       on:contextmenu={(ev) => {
         handleBlockContextmenu.handleOpenBlockContextmenu(ev);
       }}
-      on:mouseover={(ev) => {
-        handleBlockContextmenu.handleBlockMouseOver(ev, index);
+      on:mouseenter={(ev) => {
+        handleBlockContextmenu.handleBlockMouseEnter(ev, index);
       }}
       on:click={(ev) => {
         handleBlockContextmenu.handleOnClick(ev);

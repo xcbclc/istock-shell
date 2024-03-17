@@ -4,7 +4,7 @@
  * @returns {*}
  */
 export function toFileName(str) {
-  if (!str) return;
+  if (!str) return '';
   // 使用正则表达式将驼峰命名转换为破折号分隔
   return str.replace(/[A-Z]/g, (match, index) => {
     // 如果匹配到的大写字母是字符串的首字母，则直接返回小写字母
@@ -22,7 +22,7 @@ export function toFileName(str) {
  * @returns {*}
  */
 export function toClassName(str) {
-  if (!str) return;
+  if (!str) return '';
   return str
     .split('-')
     .map((v) => {
@@ -33,11 +33,11 @@ export function toClassName(str) {
 }
 
 /**
- * m转换成模型名
+ * 转换成模型名
  * @param str
  * @returns {*}
  */
 export function toModelName(str) {
-  if (!str) return;
-  return str.replace('-', '_');
+  if (!str) return '';
+  return str.replaceAll('-', '_');
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  export let list: Array<{ value: string; description: string }> | null = [];
+  import type { TInputRecommendItem } from '@/store/domains/global/input-recommend';
+  export let list: TInputRecommendItem[] | null = [];
 
   let activeIndex: number = 0;
   let recommendWrapView: HTMLElement;
@@ -51,7 +52,7 @@
       {#if list.length}
         {#each list as item, index}
           <li class="recommend-item {activeIndex === index ? 'is-active' : ''}" role="menuitem">
-            <span>{item.value}</span>
+            <span>{item.label ?? item.value}</span>
             <span>{item.description}</span>
           </li>
         {/each}
@@ -64,7 +65,7 @@
 
 <style lang="scss">
   :root {
-    --recommend-font-size: var(--font-size-smaller);
+    --recommend-font-size: var(--font-size-sm);
     --recommend-gap: var(--gap-default);
     --recommend-radius: var(--gap-default);
     --recommend-background-color: var(--color-sub-background);

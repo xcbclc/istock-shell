@@ -23,7 +23,8 @@ export default async () => {
     {
       type: 'input',
       name: 'name',
-      message: '您期望命令相关文件名为？',
+      message: '您期望命令相关文件名为？(文件名用-符号分割)',
+
       validate: (input) => {
         if (!input) return false;
         return nameReg.test(input);
@@ -34,6 +35,7 @@ export default async () => {
   const templatePath = path.resolve(cwdPath, './src/packages/cli/src/template/cmd');
   const outputDir = path.resolve(cwdPath, `./src/worker/domains/${domain}`);
   const className = toClassName(name);
+  const instanceName = className[0].toLowerCase() + className.slice(1);
   const fileName = toFileName(name);
   const dirPath = path.resolve(outputDir, fileName);
 
@@ -60,8 +62,9 @@ export default async () => {
     const renderedContent = ejs.render(templateContent, {
       name,
       className,
+      classAlias: instanceName,
       fileName,
-      instanceName: className[0].toLowerCase() + className.slice(1),
+      instanceName,
       modelName: toModelName(name),
     });
     fs.writeFileSync(filePath, renderedContent);

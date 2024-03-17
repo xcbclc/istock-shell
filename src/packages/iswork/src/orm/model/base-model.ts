@@ -129,4 +129,12 @@ export class BaseModel implements IBaseModel {
     const rep = await this.getRepository();
     return await rep.deleteById(this, id);
   }
+
+  static async findOneById<Model extends TModelType>(
+    this: Model,
+    id: string | number
+  ): Promise<TModelData<InstanceType<Model>>> {
+    const rep = await this.getRepository();
+    return (await rep.findOneById(this, id)) as TModelData<InstanceType<Model>>;
+  }
 }

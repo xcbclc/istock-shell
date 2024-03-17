@@ -1,8 +1,10 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
+  import { ScopeError } from '@istock/util';
   import { CommandEditor, ECommandEditorEventNames } from '@istock/editor';
   import type { TCommandEditorRecommendCmdEvent } from '@istock/editor';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { EInputRecommendType } from '@/store/domains/global/input-recommend';
 
   export let windowId: number;
 
@@ -12,9 +14,19 @@
   let commandEditor: CommandEditor;
   let disabled = false;
 
-  export const handleCommandInput = (token: string = '') => {
+  export const handleCommandInput = (type: EInputRecommendType, input: string = '') => {
     if (commandEditor) {
-      commandEditor.handleCommandInputAppend(token);
+      commandEditor.commandInput.focus();
+      switch (type) {
+        case EInputRecommendType.cmd:
+          commandEditor.handleCommandInputAppend(input);
+          break;
+        case EInputRecommendType.alias:
+          commandEditor.handleCommandInput(input, input);
+          break;
+        default:
+          throw new ScopeError(`view`, `未找到推荐命令类型，推荐程序未处理`);
+      }
     }
   };
 

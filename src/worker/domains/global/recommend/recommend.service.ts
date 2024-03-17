@@ -4,6 +4,21 @@ import type { HistoryModel } from '../history/history.model';
 import type { TResponseCmdRoute } from '../cmd-route/cmd-route.service';
 import type { StockCodeModel } from '../stock-code/stock-code.model';
 
+export enum ERecommendType {
+  cmd = 'cmd',
+  alias = 'alias',
+}
+export type TRecommendDataItem = {
+  label: string;
+  value: string;
+  description: string;
+};
+export type TRecommendData = {
+  list: TRecommendDataItem[];
+  input?: string;
+  type: ERecommendType;
+};
+
 @Injectable()
 export class RecommendService {
   readonly #tokenizer = new Tokenizer();
@@ -41,7 +56,11 @@ export class RecommendService {
    * @param lastToken
    * @param otherTokens
    */
-  recommendOptionKey(cmdRoute: TResponseCmdRoute | undefined, lastToken: TToken, otherTokens: TToken[]) {
+  recommendOptionKey(
+    cmdRoute: TResponseCmdRoute | undefined,
+    lastToken: TToken,
+    otherTokens: TToken[]
+  ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     let options = cmdRoute.options ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
@@ -54,11 +73,13 @@ export class RecommendService {
       }, {});
     return options
       .map((param) => {
+        const value =
+          param.parameter.find((parameter) => {
+            return parameter.startsWith(lastToken.value);
+          }) ?? '';
         return {
-          value:
-            param.parameter.find((parameter) => {
-              return parameter.startsWith(lastToken.value);
-            }) ?? '',
+          label: value,
+          value,
           description: param.description ?? param.name,
         };
       })
@@ -79,7 +100,7 @@ export class RecommendService {
     lastToken: TToken,
     otherTokens: TToken[],
     lastNearToken: TToken
-  ) {
+  ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     let options = cmdRoute.options ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
@@ -91,6 +112,7 @@ export class RecommendService {
         .filter((stock) => stock.code.startsWith(lastToken.value))
         .map((stock) => {
           return {
+            label: stock.code,
             value: stock.code,
             description: stock.name,
           };
@@ -101,6 +123,7 @@ export class RecommendService {
         .filter((stock) => stock.name.startsWith(lastToken.value))
         .map((stock) => {
           return {
+            label: stock.name,
             value: stock.name,
             description: stock.code,
           };
@@ -113,6 +136,7 @@ export class RecommendService {
       })
       .map((choice) => {
         return {
+          label: `${choice}`,
           value: `${choice}`,
           description: '',
         };
@@ -125,7 +149,11 @@ export class RecommendService {
    * @param lastToken
    * @param otherTokens
    */
-  recommendArgument(cmdRoute: TResponseCmdRoute | undefined, lastToken: TToken, otherTokens: TToken[]) {
+  recommendArgument(
+    cmdRoute: TResponseCmdRoute | undefined,
+    lastToken: TToken,
+    otherTokens: TToken[]
+  ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     let args = cmdRoute.arguments ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
@@ -144,6 +172,7 @@ export class RecommendService {
             return `${choice}`.startsWith(lastToken.value);
           }) ?? '';
         return {
+          label: `${value}`,
           value: `${value}`,
           description: param.description ?? param.name,
         };
@@ -159,7 +188,11 @@ export class RecommendService {
    * @param lastToken
    * @param otherTokens
    */
-  recommendSubcommand(cmdRoute: TResponseCmdRoute | undefined, lastToken: TToken, otherTokens: TToken[]) {
+  recommendSubcommand(
+    cmdRoute: TResponseCmdRoute | undefined,
+    lastToken: TToken,
+    otherTokens: TToken[]
+  ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     if (!cmdRoute.subcommand) return [];
     const usedCommandRecord = otherTokens
@@ -172,6 +205,7 @@ export class RecommendService {
       .filter((command) => command.cmd.startsWith(lastToken.value) && !usedCommandRecord[command.cmd])
       .map((command) => {
         return {
+          label: command.cmd,
           value: command.cmd,
           description: command.description ?? command.name,
         };
@@ -182,14 +216,14 @@ export class RecommendService {
     payload: { input: string; domainNamePaths: string[] },
     historys: Array<TModelData<HistoryModel>>,
     cmdRoutes: TResponseCmdRoute[]
-  ) {
+  ): TRecommendData {
     const originalInput = payload.input.replace(/\n$/, '');
     // 解析成tokens，然后找到最后一个命令
     const allTokens = this.#tokenizer.parse(originalInput, false);
     const cmdTokenIndex = allTokens.findLastIndex((token) => token.type === ETokenType.command);
     const tokens = allTokens.slice(cmdTokenIndex);
     const [cmd, ...other] = tokens;
-    let list: Array<{ value: string; description: string }> = [];
+    let list: TRecommendDataItem[] = [];
     const reallyOtherTokens = other.filter(
       (token) => ![ETokenType.space, ETokenType.lineR, ETokenType.lineN].includes(token.type)
     );
@@ -218,6 +252,7 @@ export class RecommendService {
         .filter((cmdRoute) => cmdRoute.cmd.startsWith(cmd.value))
         .map((cmdRoute) => {
           return {
+            label: cmdRoute.cmd,
             value: cmdRoute.cmd,
             description: cmdRoute.description ?? cmdRoute.name,
           };
@@ -231,6 +266,7 @@ export class RecommendService {
     return {
       list,
       input,
+      type: ERecommendType.cmd,
     };
   }
 }

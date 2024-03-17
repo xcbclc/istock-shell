@@ -23,6 +23,21 @@ export type TTokenMethodResult = {
   index: number;
 };
 
+export const keyCommand = {
+  ai: {
+    command: 'ai:',
+    content: /^.$/,
+  },
+  search: {
+    command: 'ss:',
+    content: /^.$/,
+  },
+  alias: {
+    command: ':',
+    content: /^.$/,
+  },
+};
+
 export class Tokenizer {
   // 空格
   // eslint-disable-next-line no-irregular-whitespace
@@ -33,16 +48,7 @@ export class Tokenizer {
   readonly #lineR = /^\r$/;
   readonly #lineN = /^\n$/;
   // 关键词
-  readonly #keyCommand = {
-    ai: {
-      command: 'ai:',
-      content: /^[^()（）|&]$/,
-    },
-    search: {
-      command: 'ss:',
-      content: /^[^()（）|&]$/,
-    },
-  };
+  readonly #keyCommand = keyCommand;
 
   // 圆括号字符
   readonly #parenthesesLeft = /^[(（]$/;
@@ -306,10 +312,26 @@ export class Tokenizer {
    * @private
    */
   #tokenizerKeywords(tokens: TToken[], input: string, index: number): TTokenMethodResult {
-    const { ai, search } = this.#keyCommand;
+    const { ai, search, alias } = this.#keyCommand;
     let char = input[index];
+    if (index === 0 && alias.command[0] === char) {
+      tokens.push({ type: ETokenType.keyCommand, value: alias.command });
+      index += alias.command.length;
+      char = input[index];
+      if (char) {
+        let content = '';
+        while (alias.content.test(char)) {
+          content += char;
+          char = input[++index];
+        }
+        if (content) {
+          tokens.push({ type: ETokenType.keyCommandContent, value: content.trim() });
+        }
+      }
+      return { isContinue: true, index };
+    }
     // ai关键字匹配
-    if (ai.command[0] === char) {
+    if (index === 0 && ai.command[0] === char) {
       const command = input.substring(index, ai.command.length);
       if (command === ai.command) {
         tokens.push({ type: ETokenType.keyCommand, value: command });
@@ -330,7 +352,7 @@ export class Tokenizer {
     }
 
     // search关键字匹配
-    if (search.command[0] === char) {
+    if (index === 0 && search.command[0] === char) {
       const command = input.substring(index, search.command.length);
       if (command === search.command) {
         tokens.push({ type: ETokenType.keyCommand, value: command });

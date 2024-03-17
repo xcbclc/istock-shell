@@ -51,7 +51,6 @@ export class DomainController {
   async changePromptDomain(ctx: ApplicationContext, @CmdRouteArguments(0) path: string = '.') {
     const cmdInfo = ctx.cmdp.getInfo();
     const meta = ctx.cmdp.getMeta<TCmdpMeta & { domainName: string }>();
-    console.log('meta.domainName', meta.domainName);
     const currentDomainPaths = meta.domainName ? meta.domainName.split('.') : [];
     currentDomainPaths.unshift('root'); // 加入根目录
     const domains = await this.domainService.findDomainPaths(

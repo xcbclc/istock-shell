@@ -6,6 +6,7 @@
   import type { TCmdWindow } from '@/store/window';
   import CmdInfo from './CmdInfo.svelte';
   import Cmd from './Cmd.svelte';
+  import ModalAddCmdAlias from './components/modal/ModalAddCmdAlias.svelte';
 
   export let style: string;
   export let window: TCmdWindow;
@@ -41,6 +42,7 @@
     <CmdInfo windowId={window.id} />
   {/if}
   <Cmd windowId={window.id} />
+  <ModalAddCmdAlias windowId={window.id} />
 </div>
 
 <style lang="scss">
