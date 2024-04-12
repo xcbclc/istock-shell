@@ -32,7 +32,6 @@ export class DomainController {
     @CmdRouteOptions(cmdJson.应用查找.options.过滤) _filter?: string | RegExp,
     @CmdRouteOptions(cmdJson.应用查找.options.数量) _limit?: number
   ) {
-    console.log(_filter, _limit);
     const result = await this.domainService.find(ctx);
     return {
       display: 'inline',

@@ -1,6 +1,6 @@
 # 命令列表
-
 所有内置命令列表。
+
 
 ## 全局
 
@@ -13,6 +13,7 @@
 [历史](/use/command/global/history/history.cmd.html)
 
 [用户](/use/command/global/user/user.cmd.html)
+
 
 ## A股
 
@@ -27,3 +28,10 @@
 [历史行情数据](/use/command/ag/lshqsj/lshqsj.cmd.html)
 
 [实时行情数据](/use/command/ag/sshqsj/sshqsj.cmd.html)
+
+
+## wzdh
+
+[cj.cmd.ts](/use/command/wzdh/cj/cj.cmd.html)
+
+
