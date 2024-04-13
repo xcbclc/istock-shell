@@ -12,19 +12,19 @@ import { LOCAL_STORE_DOMAINS } from './cmd/cmd-prompt';
 
 // 运行初始化逻辑
 export async function initStore(ctx: CmdWindowContext) {
-  const removeOnShowCmdInfo = onShowCmdInfo(ctx);
   const removeOnInputRecommendCmd = onInputRecommendCmd(ctx);
   const removeOnPromptTexts = onPromptTexts(ctx);
   const removeOnPromptDomainChange = onPromptDomainChange(ctx);
   await initCmdRouteList(ctx);
   await initOutputHistory(ctx);
+  const removeOnShowCmdInfo = onShowCmdInfo(ctx);
   const removeOnOutputHistory = onOutputHistory(ctx);
   const removeOnSyncHistory = onSyncHistory(ctx);
   return () => {
-    removeOnShowCmdInfo();
     removeOnInputRecommendCmd();
     removeOnPromptTexts();
     removeOnPromptDomainChange();
+    removeOnShowCmdInfo();
     removeOnOutputHistory();
     removeOnSyncHistory();
   };
