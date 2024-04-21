@@ -16,5 +16,6 @@ export default {
     },
     description: '东方财富-行情报价',
     remarks: '限量: 单次返回指定股票的行情报价数据',
+    example: 'hqbj -gpmc 贵州茅台',
   },
 };

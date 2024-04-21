@@ -32,6 +32,7 @@ const cmdRoute: TControllerMethodCmdRoute = {
       ],
     },
   ],
+  example: 'cjdh 门户',
 };
 export default {
   cmdRoute,

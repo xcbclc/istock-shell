@@ -15,7 +15,6 @@
     chart = new Chart({
       container: containerElement,
     });
-    console.log('options', options);
     chart.options(options);
     await chart.render();
   });

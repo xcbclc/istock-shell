@@ -4,6 +4,7 @@ import type { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import './style.css';
 import './custom.css';
+import IStockShellDemo from '../component/istock-shell-demo.vue';
 import HomeHeroImage from '../component/home-hero-image.vue';
 import HomeHeroInfo from '../component/home-hero-info.vue';
 
@@ -16,6 +17,6 @@ export default {
     });
   },
   enhanceApp({ app, router, siteData }) {
-    // ...
+    app.component('IStockShellDemo', IStockShellDemo);
   },
 } satisfies Theme;

@@ -1,10 +1,16 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
-  import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { getQueryParam } from '@istock/util';
+  import { CmdWindowsManager, type TCmdWindowsManagerOptions } from '@/window/cmd-windows-manager';
   import { getCmdWindows, getCmdWindowStyles } from '@/store/window';
   import CmdWindow from './CmdWindow.svelte';
 
-  const cmdWindowsManager = CmdWindowsManager.getInstance();
+  const mode = getQueryParam('mode');
+  const cmdWindowsManagerOptions: TCmdWindowsManagerOptions = {};
+  if (mode) {
+    cmdWindowsManagerOptions.mode = mode;
+  }
+  const cmdWindowsManager = CmdWindowsManager.getInstance(cmdWindowsManagerOptions);
   const cmdWindows = getCmdWindows();
   const cmdWindowStyles = getCmdWindowStyles();
   const unsubscriber = cmdWindowStyles.onCmdWindowChangeUpdate();

@@ -24,6 +24,7 @@
       }
     },
     "description": "删除当前历史命令数据",
-    "remarks": ""
+    "remarks": "",
+    "example": "lssc -sl 1 -ms 0"
   }
 }

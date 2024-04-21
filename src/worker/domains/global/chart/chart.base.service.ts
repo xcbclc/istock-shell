@@ -14,7 +14,7 @@ export class ChartBaseService {
   readonly #textColor = '#958881';
   #getDefaultConfig() {
     return {
-      autoFit: true,
+      autoFit: false,
     };
   }
 
@@ -151,7 +151,7 @@ export class ChartBaseService {
    * 饼图数据转换
    */
   protected getPieChartConfig(chatData: TChartData, opt: TPieOption): TChartOptions {
-    const { y, 类别: category, 单位: unit } = opt;
+    const { 纵轴: y, 类别: category, 单位: unit } = opt;
     if (!y) return {};
     const ctx = { y, category, unit };
     const chatOptions: TChartOptions = {
@@ -192,7 +192,7 @@ export class ChartBaseService {
    * @protected
    */
   protected getBarChartConfig(chatData: TChartData, opt: TBarOption): TChartOptions {
-    const { x, y, 类别: category } = opt;
+    const { 横轴: x, 纵轴: y, 类别: category } = opt;
     if (!y) return {};
     // const ctx = { x, y, category, unit };
     const chatOptions: TChartOptions = {
@@ -215,7 +215,7 @@ export class ChartBaseService {
    * @protected
    */
   protected getLineChartConfig(chatData: TChartData, opt: TLineOption): TChartOptions {
-    const { x, y, 类别: category } = opt;
+    const { 横轴: x, 纵轴: y, 类别: category } = opt;
     if (!y) return {};
     // const ctx = { x, y, category, unit };
     const chatOptions: TChartOptions = {
@@ -247,7 +247,7 @@ export class ChartBaseService {
       },
       {}
     );
-    const { x, y1, y2 } = opt;
+    const { 横轴: x, 纵轴1: y1, 纵轴2: y2 } = opt;
     const [open, close] = y1.split(',');
     const [high, low] = y2.split(',');
     const ctx = { x, y1, y2, open, close, high, low, domainRecord };

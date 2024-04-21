@@ -18,5 +18,6 @@ export default {
     description:
       '每个交易日 16:00 提供当日数据; 如遇到数据缺失, 请使用 ak.stock_zh_a_tick_163() 接口(注意数据会有一定差异)', // 对应AKShare描述
     remarks: '限量: 单次返回最近交易日的历史分笔行情数据', // 对应AKShare提示
+    example: 'lsfbsj -gpmc 贵州茅台',
   },
 };

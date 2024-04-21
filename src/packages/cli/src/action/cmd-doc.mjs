@@ -64,6 +64,12 @@ export default async () => {
         sshqsj: '实时行情数据',
       },
     },
+    wzdh: {
+      name: '网站导航',
+      cmd: {
+        cj: '财经导航',
+      },
+    },
   };
   for (let file of cmdFiles) {
     let data;
@@ -94,16 +100,50 @@ export default async () => {
       if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath, { recursive: true });
       }
-      const templateContent = fs.readFileSync(path.resolve(cliPath, './src/template/doc/cmd/cmd.ejs'), 'utf-8');
+      const templatePath = path.resolve(cliPath, './src/template/doc/cmd/cmd.ejs');
+      const templateContent = fs.readFileSync(templatePath, 'utf-8');
       data = data.default ? data.default : data;
+      const cmdList = data.cmd ? [data] : Object.values(data);
+      const cmdRecord = cmdList.reduce((record, item) => {
+        if (record[item.cmd]) {
+          const cmdData = record[item.cmd];
+          if (item.subcommand) {
+            cmdData.subcommand = [ ...cmdData.subcommand, item.subcommand ];
+          }
+        } else {
+          if (!item.subcommand) {
+            item.subcommand = [];
+          }
+          if (Object.prototype.toString.call(item.subcommand) === '[object Object]') {
+            item.subcommand = [item.subcommand];
+          }
+          record[item.cmd] = item;
+        }
+        return record;
+      }, {});
       const renderedContent = ejs.render(templateContent, {
-        domainName: aliasRecord[domainName]?.name ?? domainName,
-        list: data.cmd ? [data] : Object.values(data),
-        replaceAllStar: (v) => {
+        isGlobalDomain: domainName === 'global',
+        domains: [{
+          viewName: aliasRecord[domainName]?.name ?? domainName,
+          name: domainName,
+        }],
+        list: Object.values(cmdRecord),
+        formatMdString: (v) => {
           if (Object.prototype.toString.call(v) !== '[object String]') return v;
-          return v.replaceAll('*', '\\*');
+          return v.replaceAll('*', '\\*').replace('\n', '<br/>');
         },
-      });
+        getIStockShellDemoHeight: (cmdData) => {
+          const cmd = cmdData.cmd;
+          const parentCmd = cmdData.parentCmd;
+          if (cmd === 'lssc') {
+            return 650;
+          }
+          if (parentCmd === 'tb' && ['bt', 'txt', 'zxt', 'gplzt'].includes(cmd)) {
+            return 800;
+          }
+          return 480;
+        }
+      }, { filename: templatePath });
       fs.writeFileSync(filePath, renderedContent);
       if (!linkRecord[domainName]) linkRecord[domainName] = [];
       linkRecord[domainName].push({

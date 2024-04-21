@@ -30,8 +30,8 @@
 [实时行情数据](/use/command/ag/sshqsj/sshqsj.cmd.html)
 
 
-## wzdh
+## 网站导航
 
-[cj.cmd.ts](/use/command/wzdh/cj/cj.cmd.html)
+[财经导航](/use/command/wzdh/cj/cj.cmd.html)
 
 

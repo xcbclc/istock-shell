@@ -128,3 +128,8 @@
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
+
+.vp-doc th,
+.vp-doc td{
+  white-space: nowrap;
+}

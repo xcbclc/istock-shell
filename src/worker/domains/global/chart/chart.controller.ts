@@ -11,7 +11,7 @@ import type {
   TStockOption,
   TStockArguments,
 } from './chart.cmd';
-import { 饼图, 条形图, 折线图, 股票蜡烛图, getChartCommand, EChartType } from './chart.cmd';
+import cmd, { EChartType } from './chart.cmd';
 
 type TViewChartPiePayload = TCmdTablePipeRequest<TPieOption, TPieArguments> | TCmdRequest<TPieOption, TPieArguments>;
 type TViewChartBarPayload = TCmdTablePipeRequest<TBarOption, TBarArguments> | TCmdRequest<TBarOption, TBarArguments>;
@@ -26,7 +26,7 @@ type TViewChartStockPayload =
 export class ChartController {
   constructor(private readonly chartService: ChartService) {}
 
-  @CmdRoute(getChartCommand(饼图))
+  @CmdRoute(cmd.饼图)
   @Method('viewPieChart')
   @Component('ShChart')
   async viewPieChart(@Payload() payload: TViewChartPiePayload) {
@@ -38,7 +38,7 @@ export class ChartController {
     return { options };
   }
 
-  @CmdRoute(getChartCommand(条形图))
+  @CmdRoute(cmd.条形图)
   @Method('viewBarChart')
   @Component('ShChart')
   async viewBarChart(@Payload() payload: TViewChartBarPayload) {
@@ -50,7 +50,7 @@ export class ChartController {
     return { options };
   }
 
-  @CmdRoute(getChartCommand(折线图))
+  @CmdRoute(cmd.折线图)
   @Method('viewLineChart')
   @Component('ShChart')
   async viewLineChart(@Payload() payload: TViewChartLinePayload) {
@@ -62,7 +62,7 @@ export class ChartController {
     return { options };
   }
 
-  @CmdRoute(getChartCommand(股票蜡烛图))
+  @CmdRoute(cmd.股票蜡烛图)
   @Method('viewStockChart')
   @Component('ShChart')
   async viewStockChart(@Payload() payload: TViewChartStockPayload) {
