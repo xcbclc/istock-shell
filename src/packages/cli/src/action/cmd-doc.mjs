@@ -108,7 +108,7 @@ export default async () => {
         if (record[item.cmd]) {
           const cmdData = record[item.cmd];
           if (item.subcommand) {
-            cmdData.subcommand = [ ...cmdData.subcommand, item.subcommand ];
+            cmdData.subcommand = [...cmdData.subcommand, item.subcommand];
           }
         } else {
           if (!item.subcommand) {
@@ -121,29 +121,35 @@ export default async () => {
         }
         return record;
       }, {});
-      const renderedContent = ejs.render(templateContent, {
-        isGlobalDomain: domainName === 'global',
-        domains: [{
-          viewName: aliasRecord[domainName]?.name ?? domainName,
-          name: domainName,
-        }],
-        list: Object.values(cmdRecord),
-        formatMdString: (v) => {
-          if (Object.prototype.toString.call(v) !== '[object String]') return v;
-          return v.replaceAll('*', '\\*').replace('\n', '<br/>');
+      const renderedContent = ejs.render(
+        templateContent,
+        {
+          isGlobalDomain: domainName === 'global',
+          domains: [
+            {
+              viewName: aliasRecord[domainName]?.name ?? domainName,
+              name: domainName,
+            },
+          ],
+          list: Object.values(cmdRecord),
+          formatMdString: (v) => {
+            if (Object.prototype.toString.call(v) !== '[object String]') return v;
+            return v.replaceAll('*', '\\*').replace('\n', '<br/>');
+          },
+          getIStockShellDemoHeight: (cmdData) => {
+            const cmd = cmdData.cmd;
+            const parentCmd = cmdData.parentCmd;
+            if (cmd === 'lssc') {
+              return 650;
+            }
+            if (parentCmd === 'tb' && ['bt', 'txt', 'zxt', 'gplzt'].includes(cmd)) {
+              return 800;
+            }
+            return 480;
+          },
         },
-        getIStockShellDemoHeight: (cmdData) => {
-          const cmd = cmdData.cmd;
-          const parentCmd = cmdData.parentCmd;
-          if (cmd === 'lssc') {
-            return 650;
-          }
-          if (parentCmd === 'tb' && ['bt', 'txt', 'zxt', 'gplzt'].includes(cmd)) {
-            return 800;
-          }
-          return 480;
-        }
-      }, { filename: templatePath });
+        { filename: templatePath }
+      );
       fs.writeFileSync(filePath, renderedContent);
       if (!linkRecord[domainName]) linkRecord[domainName] = [];
       linkRecord[domainName].push({
