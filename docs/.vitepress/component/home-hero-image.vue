@@ -13,10 +13,15 @@ const { frontmatter: fm } = useData();
 <style lang="scss" scoped>
 .product-image {
   position: relative;
-  padding: 0 10px;
+  padding: 30px 0 0;
   z-index: 10;
   img {
     border-radius: 8px;
+  }
+}
+@media (min-width: 960px) {
+  .product-image {
+    transform: translate(32px, 0); /* 修正偏移 */
   }
 }
 </style>

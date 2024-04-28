@@ -20,6 +20,10 @@ hero:
       text: Gitee
       link: https://gitee.com/xcbclc/istock-shell
 
+video:
+  src: https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4
+  poster: https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA-%E5%B0%81%E9%9D%A2.jpg
+
 features:
   - title: 简单
     details: 通过直观的命令输入，轻松查询金融数据，无需任何复杂操作；提供全面且易于理解的命令文档，确保您能快速上手。
