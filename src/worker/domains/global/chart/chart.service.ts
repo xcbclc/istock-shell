@@ -49,16 +49,16 @@ export class ChartService extends ChartBaseService {
           };
         });
     }
-    if (opt.y && type === EChartType.Pie) {
+    if (opt.纵轴 && type === EChartType.Pie) {
       config = this.getPieChartConfig(data, opt as TPieOption);
     }
-    if (opt.x && opt.y && type === EChartType.Bar) {
+    if (opt.横轴 && opt.纵轴 && type === EChartType.Bar) {
       config = this.getBarChartConfig(data, opt as TBarOption);
     }
-    if (opt.x && opt.y && type === EChartType.Line) {
+    if (opt.横轴 && opt.纵轴 && type === EChartType.Line) {
       config = this.getLineChartConfig(data, opt as TLineOption);
     }
-    if (opt.x && opt.y1 && opt.y2 && type === EChartType.Stock) {
+    if (opt.横轴 && opt.纵轴1 && opt.纵轴2 && type === EChartType.Stock) {
       config = this.getStockChartConfig(data, opt as TStockOption);
     }
     return { ...config, ...(opt.配置 ?? {}) };

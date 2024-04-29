@@ -98,7 +98,7 @@ export class LshqsjController {
   })
   async stockZhAMinute(@Payload() payload: TCmdRequest<TCmdRequestMinuteOpt>) {
     const { 股票代码, 日频, 复权 } = payload.options;
-    const query: TStockZhAMinuteQuery = { symbol: 股票代码 };
+    const query: TStockZhAMinuteQuery = { symbol: withStockCodePrefix(股票代码) };
     if (日频) query.period = 日频;
     if (复权) query.adjust = adjustRecord[复权] ?? 复权;
     return await this.lshqsjService.stockZhAMinute(query);

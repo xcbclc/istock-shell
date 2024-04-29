@@ -37,6 +37,7 @@ export default ({ mode }) => {
       },
     ],
     worker: {
+      format: 'es',
       plugins: () => [tsPlugin],
     },
     resolve: {

@@ -66,6 +66,7 @@ export default {
     arguments: [],
     description: `东方财富-沪深京A股日频率数据; 历史数据按日频率更新, 当日收盘价请在收盘后获取`,
     remarks: '限量: 单次返回指定沪深京A股上市公司、指定周期和指定日期间的历史行情日频率数据',
+    example: 'lshqsj -gpmc 贵州茅台 -ksrq 20240301 -jsrq 20240330 -sjzq daily -fq qfq',
   },
   历史行情新浪: {
     name: '历史行情新浪',
@@ -98,6 +99,7 @@ export default {
     arguments: [],
     description: `新浪财经-沪深京A股的数据, 历史数据按日频率更新;`,
     remarks: '限量: 单次返回指定沪深京A股上市公司指定日期间的历史行情日频率数据, 多次获取容易封禁 IP',
+    example: 'lshqxl -gpmc 贵州茅台 -ksrq 20240301 -jsrq 20240330 -fq qfq',
   },
   历史行情腾讯: {
     name: '历史行情腾讯',
@@ -130,6 +132,7 @@ export default {
     arguments: [],
     description: `腾讯证券-日频-股票历史数据; 历史数据按日频率更新, 当日收盘价请在收盘后获取`,
     remarks: '限量: 单次返回指定沪深京 A 股上市公司、指定周期和指定日期间的历史行情日频率数据',
+    example: 'lshqtx -gpmc 贵州茅台 -ksrq 20240301 -jsrq 20240330 -fq qfq',
   },
   分时数据新浪: {
     name: '分时数据新浪',
@@ -157,6 +160,7 @@ export default {
     arguments: [],
     description: `新浪财经-沪深京A股股票或者指数的分时数据，目前可以获取 1, 5, 15, 30, 60 分钟的数据频率, 可以指定是否复权`,
     remarks: '限量: 单次返回指定股票或指数的指定频率的最近交易日的历史分时行情数据; 注意调用频率',
+    example: 'fssjxl -gpmc 贵州茅台 -rp 5 -fq qfq',
   },
   分时数据东财: {
     name: '分时数据东财',
@@ -200,6 +204,7 @@ export default {
     description: `东方财富网-行情首页-沪深京 A 股-每日分时行情; 该接口只能获取近期的分时数据，注意时间周期的设置`,
     remarks:
       '限量: 单次返回指定股票、频率、复权调整和时间区间的分时数据, 其中 1 分钟数据只返回近 5 个交易日数据且不复权',
+    example: 'fssjdc -gpmc 贵州茅台 -ksrq 20240301 -jsrq 20240330 -rp 5 -fq qfq',
   },
   日内分时数据东财: {
     name: '日内分时数据东财',
@@ -217,6 +222,7 @@ export default {
     arguments: [],
     description: `东财财富-分时数据`,
     remarks: '限量: 单次返回指定股票最近一个交易日的分时数据, 包含盘前数据',
+    example: 'rnfssjdc -gpmc 贵州茅台',
   },
   盘前数据: {
     name: '盘前数据',
@@ -234,5 +240,6 @@ export default {
     arguments: [],
     description: `东方财富-股票行情-盘前数据`,
     remarks: '限量: 单次返回指定 symbol 的最近一个交易日的股票分钟数据, 包含盘前分钟数据',
+    example: 'pqsj -gpmc 贵州茅台',
   },
 };

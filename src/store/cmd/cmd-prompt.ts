@@ -1,5 +1,7 @@
 import { type Writable, writable } from 'svelte/store';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
+import { ECmdWindowContextMode } from '@/window/cmd-window-context';
+import { getQueryParam } from '@/packages/util';
 
 export type TPromptText = {
   text: string;
@@ -24,7 +26,14 @@ export const LOCAL_STORE_DOMAINS = 'local_store_domains';
 
 export const getCmdDynamicPrompt = (ctx: CmdWindowContext) => {
   const storeDomains = sessionStorage.getItem(`${LOCAL_STORE_DOMAINS}_${ctx.windowId}`);
-  const domains: TDomain[] = storeDomains ? JSON.parse(storeDomains) : [];
+  let domains: TDomain[] = storeDomains ? JSON.parse(storeDomains) : [];
+  if (ctx.mode === ECmdWindowContextMode.example) {
+    // demo模式覆盖默认数据
+    const queryDomains = getQueryParam('domains');
+    if (queryDomains) {
+      domains = JSON.parse(decodeURIComponent(queryDomains));
+    }
+  }
   const dynamicPrompt: ICmdPromptWritable = Object.create(
     writable<IPrompt>({
       time: new Date(),

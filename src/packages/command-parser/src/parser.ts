@@ -1,4 +1,14 @@
-import { ScopeError, isArray, isBoolean, isNil, isNumber, isRegExp, isStrRegExp, isUndefined } from '@istock/util';
+import {
+  ScopeError,
+  isArray,
+  isBoolean,
+  isNil,
+  isNumber,
+  isRegExp,
+  isStrRegExp,
+  isUndefined,
+  isPlainObject,
+} from '@istock/util';
 import { Ast, EAstTreeType, type TAstTreeItem, type TAstTreeOption, type TAstTreeParameter } from './ast';
 
 interface IArgument {
@@ -355,11 +365,22 @@ export class CmdParser {
           return number;
         }
         if (type === 'array' && !isArray(val)) {
-          return (val as string).split(/,|，/).map((v) => v.trim());
+          try {
+            return JSON.parse(val);
+          } catch (e) {
+            return (val as string).split(/,|，/).map((v) => v.trim());
+          }
         }
         if (type === 'RegExp' && !isRegExp(val)) {
           if (isStrRegExp(val)) return new RegExp(val);
           return null;
+        }
+        if (type === 'object' && !isPlainObject(val)) {
+          try {
+            return JSON.parse(val);
+          } catch (e) {
+            return val;
+          }
         }
         return val;
       })

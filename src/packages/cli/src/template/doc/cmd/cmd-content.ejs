@@ -1,0 +1,33 @@
+##<%- isSubCmd ? '#' : '' -%> <%- cmd.cmd %> <%- cmd.name %> <% if (cmd.tag) { %><Badge type="tip" text="<%- cmd.tag %>" /> <% } %>
+<%- cmd.description %>
+
+<% if (cmd.usage) { -%>
+###<%- isSubCmd ? '#' : '' -%> 用法
+
+`<%- cmd.usage -%>`
+<% } -%>
+
+<% if (cmd.arguments && cmd.arguments.length) { -%>
+###<%- isSubCmd ? '#' : '' -%> 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+<% cmd.arguments.forEach((option) => { -%>
+| <%- option.name -%> | <%- formatMdString(option.description) -%> | <%- option.parameterType.join('，') -%> | <%- option.optional -%> | <%- formatMdString(option.default) -%> | <%- option.choices -%> |
+<% }) -%>
+<% } -%>
+
+<% if (cmd.options && Object.keys(cmd.options).length) { -%>
+###<%- isSubCmd ? '#' : '' -%> 选项
+| 选项参数 | 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :--: | :-- | :--: | :--: | :--: | :--: |
+<% Object.entries(cmd.options).forEach(([key, option]) => { -%>
+| `<%- option.parameter.join('，') -%>` | <%- option.name -%> | <%- formatMdString(option.description) -%> | <%- option.parameterType.join('，') -%> | <%- option.optional -%> | <%- formatMdString(option.default) -%> | <%- option.choices -%> |
+<% }) -%>
+<% } -%>
+
+<% if (cmd.example) { -%>
+###<%- isSubCmd ? '#' : '' -%> 命令示例
+
+`<%- cmd.example -%>`
+<IStockShellDemo cmd='<%- cmd.example -%>' :domains='<%- isGlobalDomain ? "[]" : JSON.stringify(domains) -%>' :height='<%- getIStockShellDemoHeight(cmd) -%>'/>
+<% } -%>

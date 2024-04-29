@@ -100,7 +100,7 @@ export class CommandEditor {
 
   #handleFocus(_event: FocusEvent) {}
   #handleBlur(_event: FocusEvent) {
-    console.log('handleBlur', this.#cursor.getOneRange());
+    // console.log('handleBlur', this.#cursor.getOneRange());
   }
 
   /**
