@@ -14,12 +14,11 @@
 ### 项目介绍
 
 `iStock Shell`是一款用于研究和学习的金融数据查询工具，设计理念围绕着`简单性、高效率、灵活性以及可定制性展开`，技术上尽可能不依赖后端服务。它为用户提供了一个统一的平台，通过简单的命令输入，即可查询并展示来自不同数据源的金融信息。
-项目演示地址：[https://istock.red/shell](https://istock.red/shell)
 
-<video controls width="100%">
-  <source src="https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4" poster="https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA-%E5%B0%81%E9%9D%A2.jpg" type="video/mp4" />
-  您的浏览器不支持Video标签。
-</video>
+- [演示地址](https://istock.red/shell)
+- [演示视频](https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4)
+
+![效果图](./docs/public/static/效果图.jpg)
 
 #### 特性
 
@@ -35,6 +34,7 @@
 
 - [全局命令](https://istock.red/use/command/)
 - [A股命令](https://istock.red/use/command/)
+- [网站导航](https://istock.red/use/command/)
 
 ### 相关文档
 
