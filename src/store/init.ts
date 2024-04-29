@@ -1,30 +1,32 @@
 import { get } from 'svelte/store';
-import { toLocaleDateString, sleep } from '@istock/util';
-import { ECommandEditorActionTypes, type CommandEditor } from '@istock/editor';
+import { sleep, toLocaleDateString } from '@istock/util';
+import { type CommandEditor, ECommandEditorActionTypes } from '@istock/editor';
 import type { TModelData } from '@istock/iswork';
-import type { CmdWindowContext } from '@/window/cmd-window-context';
+import { type CmdWindowContext, ECmdWindowContextMode } from '@/window/cmd-window-context';
 import type { HistoryModel } from '@domains/global/history/history.model';
 import type { DomainModel } from '@domains/global/domain/domain.model';
 import type { IPrompt, TPromptText } from './cmd/cmd-prompt';
+import { LOCAL_STORE_DOMAINS } from './cmd/cmd-prompt';
 import type { TCmdRoute } from './domains/global/cmd-route';
 import type { TCmdInputNodes } from './cmd/cmd-input';
-import { LOCAL_STORE_DOMAINS } from './cmd/cmd-prompt';
 
 // 运行初始化逻辑
 export async function initStore(ctx: CmdWindowContext) {
-  const removeOnShowCmdInfo = onShowCmdInfo(ctx);
   const removeOnInputRecommendCmd = onInputRecommendCmd(ctx);
   const removeOnPromptTexts = onPromptTexts(ctx);
   const removeOnPromptDomainChange = onPromptDomainChange(ctx);
   await initCmdRouteList(ctx);
-  await initOutputHistory(ctx);
+  if (ctx.mode !== ECmdWindowContextMode.example) {
+    await initOutputHistory(ctx);
+  }
+  const removeOnShowCmdInfo = onShowCmdInfo(ctx);
   const removeOnOutputHistory = onOutputHistory(ctx);
   const removeOnSyncHistory = onSyncHistory(ctx);
   return () => {
-    removeOnShowCmdInfo();
     removeOnInputRecommendCmd();
     removeOnPromptTexts();
     removeOnPromptDomainChange();
+    removeOnShowCmdInfo();
     removeOnOutputHistory();
     removeOnSyncHistory();
   };

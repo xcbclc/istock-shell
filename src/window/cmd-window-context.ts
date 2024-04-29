@@ -6,6 +6,11 @@ import { initStore } from '@/store/init';
 import { getWorker } from '@/worker';
 import { WorkerMessage } from './worker-message';
 
+export enum ECmdWindowContextMode {
+  normal = '1',
+  example = '2',
+}
+
 export class CmdWindowContext {
   readonly #globalEvent: EventEmitter;
   readonly #windowId: number;
@@ -17,6 +22,8 @@ export class CmdWindowContext {
   readonly #cmdStore: TCmdStore;
   #storeDestroy: Function | null = null;
   readonly #handler: (event: MessageEvent) => void;
+  readonly #mode: ECmdWindowContextMode;
+  #initStoreDone: boolean = false;
 
   get globalEvent() {
     return this.#globalEvent;
@@ -50,9 +57,18 @@ export class CmdWindowContext {
     return this.#cmdStore;
   }
 
-  constructor(options: { windowId: number; globalEvent: EventEmitter }) {
+  get mode() {
+    return this.#mode;
+  }
+
+  get initStoreDone() {
+    return this.#initStoreDone;
+  }
+
+  constructor(options: { windowId: number; globalEvent: EventEmitter; mode: ECmdWindowContextMode }) {
     this.#windowId = options.windowId;
     this.#globalEvent = options.globalEvent;
+    this.#mode = options.mode;
     this.#event = new EventEmitter();
     this.#worker = getWorker();
     this.#cmdParser = new CmdParser();
@@ -73,6 +89,8 @@ export class CmdWindowContext {
    */
   async initStore() {
     this.#storeDestroy = await initStore(this);
+    this.#initStoreDone = true;
+    await this.message.emit('CmdWindowContext.initStoreDone');
   }
 
   /**

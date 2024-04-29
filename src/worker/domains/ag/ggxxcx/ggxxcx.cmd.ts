@@ -18,5 +18,6 @@ export default {
     },
     description: '东方财富-个股-股票信息',
     remarks: '限量: 单次返回指定 symbol 的个股信息',
+    example: 'ggxxcx -gpmc 贵州茅台 -dw',
   },
 };

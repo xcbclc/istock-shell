@@ -422,6 +422,7 @@ export class Tokenizer {
         let value = '';
         // 处理字符串的情况，允许字符串里面有各种字符
         if (this.#strSymbol.test(char)) {
+          // `'"符号分隔
           let symbol: string | undefined;
           while (index < input.length) {
             value += char;
@@ -435,7 +436,8 @@ export class Tokenizer {
             char = input[++index];
           }
         } else {
-          while (this.#parameter.test(char)) {
+          while (char && !this.#space.test(char)) {
+            // 空格分隔
             value += char;
             char = input[++index];
           }

@@ -4,6 +4,7 @@ import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { IPrompt, TPromptText } from '../cmd-prompt';
 import { getOutputErrorData, getCmdOutputLoading } from './default-output';
 import { sendCmdExecutionFlow } from './execution-flow';
+import { ECmdWindowContextMode } from '@/window/cmd-window-context';
 
 export interface ICmdOutputData {
   component: string;
@@ -41,6 +42,7 @@ export const getCmdOutput = (ctx: CmdWindowContext) => {
    * @param input
    */
   cmdOutput.sendCmd = async (input: string) => {
+    input = input.trim();
     if (!input) return;
     const originPrompt = get(ctx.cmdStore.cmdPrompt);
     const promptTexts = get(ctx.cmdStore.cmdPromptTexts);
@@ -80,6 +82,8 @@ export const getCmdOutput = (ctx: CmdWindowContext) => {
    * @param originPrompt
    */
   cmdOutput.saveCmdToHistory = async (cmdOutputData: ICmdOutput, originPrompt: IPrompt) => {
+    // 演示发起的命令不保存到历史记录
+    if (ctx.mode === ECmdWindowContextMode.example) return;
     const { message } = ctx;
     const payload: ICmdOutput & { cmd: string; rowStatus: number; createDate: Date } = parse(stringify(cmdOutputData));
     payload.source = 'db';

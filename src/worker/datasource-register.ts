@@ -19,6 +19,7 @@ import {
 } from '@domains/ag/lshqsj/lshqsj.model';
 import { LsfbsjModel } from '@domains/ag/lsfbsj/lsfbsj.model';
 import { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
+import { CjModel } from '@domains/wzdh/cj/cj.model';
 
 export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel];
 export const fetchDataSourceModels = [
@@ -41,7 +42,7 @@ export const fetchDataSourceModels = [
   LsfbsjModel,
   StockCodeModel,
 ];
-export const memoryDataSourceModels = [DomainModel, CmdRouteModel];
+export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
 
 export const inintDataSource = async () => {
   const indexedDataSource = new DataSource<'indexedDB'>({

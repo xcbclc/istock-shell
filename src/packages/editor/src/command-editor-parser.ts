@@ -72,7 +72,6 @@ export class CommandEditorParser {
       return text;
     };
     const text = parseDom(rootEl.childNodes).replaceAll(CommandEditorParser.spaceRegMatch, CommandEditorParser.space);
-    console.log('parseDomToText：\n', text);
     return text;
   }
 
@@ -123,7 +122,6 @@ export class CommandEditorParser {
 
     parseDom(rootEl.childNodes);
     offsetText = offsetText.replaceAll(CommandEditorParser.spaceRegMatch, CommandEditorParser.space);
-    console.log('getOffsetTextForDom：\n', offsetText);
     return offsetText;
   }
 
@@ -243,7 +241,6 @@ export class CommandEditorParser {
       }
     };
     parseDom(rootEl.childNodes, true);
-    console.log('range', range);
     return range;
   }
 }

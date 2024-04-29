@@ -57,6 +57,7 @@ export type TControllerMethodCmdRoute = {
   arguments?: TControllerMethodCmdRouteOptions[]; // 命令参数
   source?: { title?: string; url?: string };
   remarks?: string;
+  example?: string;
 };
 
 export type TControllerMethodCmdRouteMetadata = {
@@ -68,6 +69,7 @@ export type TControllerMethodCmdRouteMetadata = {
   options?: TControllerMethodCmdRouteOptions[];
   subcommand?: TControllerMethodCmdRouteMetadata;
   arguments?: TControllerMethodCmdRouteOptions[];
+  example?: string;
 };
 
 export type TControllerMethodCmdRouteOptions = {

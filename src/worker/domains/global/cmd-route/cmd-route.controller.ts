@@ -36,7 +36,7 @@ export class CmdRouteController {
       name: cmdName,
     });
     return {
-      list: cmdRoutes,
+      list: this.cmdRouteService.mergeSubcommands(cmdRoutes),
     };
   }
 }

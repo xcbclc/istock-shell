@@ -39,3 +39,6 @@ export const cmdInfo: ICmdInfo = Object.create(
 );
 
 export const showCmdInfo = Object.create(writable(false));
+
+console.log(asciiTitle);
+console.info(title, version);

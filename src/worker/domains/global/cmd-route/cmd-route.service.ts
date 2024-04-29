@@ -46,23 +46,21 @@ export class CmdRouteService {
   mergeSubcommands(list: Array<TModelData<CmdRouteModel>>): TResponseCmdRoute[] {
     const record: Record<string, TResponseCmdRoute> = {};
     list.forEach((item) => {
-      if (!record[item.cmd]) {
-        record[item.cmd] = {
-          ...item,
-          subcommand: item.subcommand
-            ? [{ ...item.subcommand, domainName: item.domainName, route: item.route, subcommand: [] }]
-            : [],
-        };
-        return;
-      }
-      if (record[item.cmd] && item.subcommand) {
-        if (!record[item.cmd].subcommand) record[item.cmd].subcommand = [];
+      if (record[item.cmd]) {
+        if (!item.subcommand) return;
         record[item.cmd].subcommand?.push({
           ...item.subcommand,
           domainName: item.domainName,
           route: item.route,
           subcommand: [],
         });
+      } else {
+        record[item.cmd] = {
+          ...item,
+          subcommand: item.subcommand
+            ? [{ ...item.subcommand, domainName: item.domainName, route: item.route, subcommand: [] }]
+            : [],
+        };
       }
     });
     return Object.values(record);
@@ -134,6 +132,7 @@ export class CmdRouteService {
             description: cmdRouteMetadata.description,
             subcommand: cmdRouteMetadata.subcommand,
             arguments: cmdRouteMetadata.arguments,
+            example: cmdRouteMetadata.example,
             route: [controllerAlias, methodAlias],
             domainName,
             domainViewName,

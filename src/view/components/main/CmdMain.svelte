@@ -3,6 +3,7 @@
   import { ETokenType } from '@istock/command-parser';
   import type { TContextmenuPosition } from '@/store/cmd/cmd-contextmenu';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { ECmdWindowContextMode } from '@/window/cmd-window-context';
   import CmdPrompt from '../prompt/CmdPrompt.svelte';
   import CmdContextmenu from './CmdContextmenu.svelte';
   import { registerOutputViewComponents } from './component-map';
@@ -49,10 +50,15 @@
     position = { ...position, ...data };
   });
 
+  // 是否是演示模式
+  const isExample = () => ctx.mode === ECmdWindowContextMode.example;
+
   // 命令输出有变动时滚动到最底部
   const scrollEnd = async () => {
     if (mainElement) {
       await tick();
+      // 演示模式不需要滚动到底部
+      if (isExample()) return;
       // 需要考虑开发时重新编译报错
       mainElement?.lastChild?.scrollIntoView?.(false);
     }
@@ -122,15 +128,19 @@
       class="cmd-block is-hidden"
       tabindex={index + 1}
       on:keydown={async (ev) => {
+        if (isExample()) return;
         await handleBlockContextmenu.handleMenuShortcutKey(ev, block);
       }}
       on:contextmenu={(ev) => {
+        if (isExample()) return;
         handleBlockContextmenu.handleOpenBlockContextmenu(ev);
       }}
       on:mouseenter={(ev) => {
+        if (isExample()) return;
         handleBlockContextmenu.handleBlockMouseEnter(ev, index);
       }}
       on:click={(ev) => {
+        if (isExample()) return;
         handleBlockContextmenu.handleOnClick(ev);
       }}
     >

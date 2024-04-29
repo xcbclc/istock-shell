@@ -1,6 +1,7 @@
 {
   "用户登录": {
     "name": "用户登录",
+    "tag": "暂未实现",
     "cmd": "yhdl",
     "usage": "yhdl [-zh <用户名|手机号>] [-mm <密码>]",
     "description": "登录指定用户账号",
@@ -21,6 +22,7 @@
         "optional": false,
         "choices": []
       }
-    }
+    },
+    "example": "yhdl -zh 15888888888 -mm 123456"
   }
 }

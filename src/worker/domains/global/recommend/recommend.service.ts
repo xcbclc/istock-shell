@@ -217,7 +217,7 @@ export class RecommendService {
     historys: Array<TModelData<HistoryModel>>,
     cmdRoutes: TResponseCmdRoute[]
   ): TRecommendData {
-    const originalInput = payload.input.replace(/\n$/, '');
+    const originalInput = payload.input.trim();
     // 解析成tokens，然后找到最后一个命令
     const allTokens = this.#tokenizer.parse(originalInput, false);
     const cmdTokenIndex = allTokens.findLastIndex((token) => token.type === ETokenType.command);

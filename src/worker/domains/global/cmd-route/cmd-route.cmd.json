@@ -15,6 +15,7 @@
       }
     },
     "description": "查找当前域下命令",
-    "remarks": ""
+    "remarks": "",
+    "example": "mlcz lshq -mc 历史"
   }
 }

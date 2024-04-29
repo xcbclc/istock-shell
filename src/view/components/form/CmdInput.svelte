@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { ScopeError } from '@istock/util';
+  import { getQueryParam, ScopeError } from '@istock/util';
   import { CommandEditor, ECommandEditorEventNames } from '@istock/editor';
   import type { TCommandEditorRecommendCmdEvent } from '@istock/editor';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { ECmdWindowContextMode } from '@/window/cmd-window-context';
   import { EInputRecommendType } from '@/store/domains/global/input-recommend';
 
   export let windowId: number;
@@ -30,6 +31,10 @@
     }
   };
 
+  const canContenteditable = () => {
+    return ctx.mode !== ECmdWindowContextMode.example;
+  };
+
   onMount(() => {
     commandEditor = new CommandEditor(cmdInputView);
     commandEditor.onMount();
@@ -54,12 +59,32 @@
     });
   });
 
+  ctx.message.once('CmdWindowContext.initStoreDone', async () => {
+    if (ctx.mode === ECmdWindowContextMode.example) {
+      console.log('ctx.initStoreDone', ctx.initStoreDone);
+      // demo演示逻辑
+      let cmd = getQueryParam('cmd');
+      if (cmd) {
+        cmd = decodeURIComponent(cmd);
+        commandEditor.handleCommandInput(cmd, cmd);
+        await cmdOutput.sendCmd(cmd);
+      }
+    }
+  });
+
   onDestroy(() => {
     commandEditor && commandEditor.destroy();
   });
 </script>
 
-<div class="cmd-input" tabindex="0" autofocus contenteditable spellcheck="false" bind:this={cmdInputView}></div>
+<div
+  class="cmd-input"
+  tabindex="0"
+  autofocus
+  contenteditable={canContenteditable()}
+  spellcheck="false"
+  bind:this={cmdInputView}
+></div>
 
 <style lang="scss">
   .cmd-input {

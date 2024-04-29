@@ -49,6 +49,9 @@ export class CmdRouteModel extends BaseModel {
   arguments?: TControllerMethodCmdRouteOptions[];
 
   @Column()
+  example?: string;
+
+  @Column()
   updateDate?: Date;
 
   @Column()

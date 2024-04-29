@@ -1,4 +1,5 @@
-import type { TControllerMethodCmdRoute } from '@/packages/iswork';
+import type { TControllerMethodCmdRoute } from '@istock/iswork';
+import { ExampleDataBt, ExampleDataTxt, ExampleDataZxt, ExampleDataGplzt } from './example-data';
 
 export enum EChartType {
   Pie = 'bt',
@@ -8,10 +9,10 @@ export enum EChartType {
 }
 export type TArguments = [EChartType];
 export type TOption = {
-  x?: string;
-  y?: string;
-  y1?: string;
-  y2?: string;
+  横轴?: string;
+  纵轴?: string;
+  纵轴1?: string;
+  纵轴2?: string;
   过滤?: string;
   类别?: string;
   单位?: string;
@@ -21,34 +22,34 @@ export type TOption = {
 
 export type TPieArguments = [EChartType.Pie];
 export type TPieOption = {
-  y: string;
+  纵轴: string;
 } & TOption;
 
 export type TBarArguments = [EChartType.Bar];
 export type TBarOption = {
-  x: string;
-  y: string;
+  横轴: string;
+  纵轴: string;
 } & TOption;
 
 export type TLineArguments = [EChartType.Line];
 export type TLineOption = {
-  x: string;
-  y: string;
+  横轴: string;
+  纵轴: string;
 } & TOption;
 
 export type TStockArguments = [EChartType.Stock];
 export type TStockOption = {
-  x: string;
-  y1: string;
-  y2: string;
-} & Omit<TOption, 'y'>;
+  横轴: string;
+  纵轴1: string;
+  纵轴2: string;
+} & Omit<TOption, '纵轴'>;
 
 const getTypeArgument = () => ({
   name: '类型',
   parameter: [],
   parameterType: ['string'],
   description: '图表的类型',
-  optional: true,
+  optional: false,
 });
 const getCommonOptions = () => {
   return {
@@ -94,14 +95,16 @@ const getCommonOptions = () => {
 };
 
 export const getChartCommand = (subcommand: TControllerMethodCmdRoute) => {
-  return {
+  const chartCommand: TControllerMethodCmdRoute = {
     name: '图表',
     cmd: 'tb',
     usage: 'tb <子命令>',
     description: '图表命令',
-    subcommand,
     options: {},
+    subcommand,
   };
+  if (chartCommand.subcommand) chartCommand.subcommand.usage = `${chartCommand.cmd} ${subcommand.usage}`;
+  return chartCommand;
 };
 
 export const 饼图: TControllerMethodCmdRoute = {
@@ -111,8 +114,8 @@ export const 饼图: TControllerMethodCmdRoute = {
   description: '把数据转换成饼图',
   options: {
     ...getCommonOptions(),
-    y: {
-      name: 'y',
+    纵轴: {
+      name: '纵轴',
       parameter: ['-y', '--纵轴'],
       parameterType: ['string'],
       description: '饼图取值字段',
@@ -120,6 +123,7 @@ export const 饼图: TControllerMethodCmdRoute = {
     },
   },
   arguments: [getTypeArgument()],
+  example: `tb bt -y 占比 -lb 产品 -sj ${JSON.stringify(ExampleDataBt)}`,
 };
 
 export const 条形图 = {
@@ -130,15 +134,15 @@ export const 条形图 = {
   description: '把数据转换成条形图',
   options: {
     ...getCommonOptions(),
-    x: {
-      name: 'x',
+    横轴: {
+      name: '横轴',
       parameter: ['-x', '--横轴'],
       parameterType: ['string'],
       description: '条形图横轴取值字段',
       optional: false,
     },
-    y: {
-      name: 'y',
+    纵轴: {
+      name: '纵轴',
       parameter: ['-y', '--纵轴'],
       parameterType: ['string'],
       description: '条形图纵轴取值字段',
@@ -146,6 +150,7 @@ export const 条形图 = {
     },
   },
   arguments: [getTypeArgument()],
+  example: `tb txt -x 年报 -y 净利润(亿元) -sj ${JSON.stringify(ExampleDataTxt)}`,
 };
 
 export const 折线图 = {
@@ -156,15 +161,15 @@ export const 折线图 = {
   description: '把数据转换成折线图',
   options: {
     ...getCommonOptions(),
-    x: {
-      name: 'x',
+    横轴: {
+      name: '横轴',
       parameter: ['-x', '--横轴'],
       parameterType: ['string'],
       description: '折线图横轴取值字段',
       optional: false,
     },
-    y: {
-      name: 'y',
+    纵轴: {
+      name: '纵轴',
       parameter: ['-y', '--纵轴'],
       parameterType: ['string'],
       description: '折线图纵轴取值字段',
@@ -172,6 +177,7 @@ export const 折线图 = {
     },
   },
   arguments: [getTypeArgument()],
+  example: `tb zxt -x 年报 -y 净利润(亿元) -sj ${JSON.stringify(ExampleDataZxt)}`,
 };
 
 export const 股票蜡烛图 = {
@@ -182,22 +188,22 @@ export const 股票蜡烛图 = {
   description: '把数据转换成股票蜡烛图',
   options: {
     ...getCommonOptions(),
-    x: {
-      name: 'x',
+    横轴: {
+      name: '横轴',
       parameter: ['-x', '--横轴'],
       parameterType: ['string'],
       description: '蜡烛图横轴取值字段',
       optional: false,
     },
-    y1: {
-      name: 'y1',
+    纵轴1: {
+      name: '纵轴1',
       parameter: ['-y1', '--纵轴1'],
       parameterType: ['string'],
       description: '设置蜡烛图纵轴开盘价收盘价的取值字段，如：开盘价,收盘价',
       optional: false,
     },
-    y2: {
-      name: 'y2',
+    纵轴2: {
+      name: '纵轴2',
       parameter: ['-y2', '--纵轴2'],
       parameterType: ['string'],
       description: '设置蜡烛图纵轴最高价最低价的取值字段，如：最高价,最低价',
@@ -205,11 +211,12 @@ export const 股票蜡烛图 = {
     },
   },
   arguments: [getTypeArgument()],
+  example: `tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低 -sj ${JSON.stringify(ExampleDataGplzt)}`,
 };
 
 export default {
-  饼图,
-  条形图,
-  折线图,
-  股票蜡烛图,
+  饼图: getChartCommand(饼图),
+  条形图: getChartCommand(条形图),
+  折线图: getChartCommand(折线图),
+  股票蜡烛图: getChartCommand(股票蜡烛图),
 };

@@ -65,6 +65,9 @@
     font-weight: bold;
     padding: 0.5em 0;
   }
+  th {
+    white-space: nowrap;
+  }
   th,
   td {
     border: 1px solid var(--ui-table-border-color);

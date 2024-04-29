@@ -1,19 +1,29 @@
 import { EventEmitter, ScopeError } from '@istock/util';
-import { CmdWindowContext } from './cmd-window-context';
+import { CmdWindowContext, ECmdWindowContextMode } from './cmd-window-context';
+
+export type TCmdWindowsManagerOptions = {
+  mode?: ECmdWindowContextMode;
+};
 
 export class CmdWindowsManager {
   static cmdWindowsManager: CmdWindowsManager;
   readonly #ctxMap = new Map<number, CmdWindowContext>();
   readonly #globalEvent: EventEmitter = new EventEmitter();
+  readonly #mode: ECmdWindowContextMode = ECmdWindowContextMode.normal;
 
   /**
    * 获取实例
+   * @param options
    */
-  static getInstance() {
-    if (!CmdWindowsManager.cmdWindowsManager) {
-      CmdWindowsManager.cmdWindowsManager = new CmdWindowsManager();
+  static getInstance(options?: TCmdWindowsManagerOptions) {
+    if (!CmdWindowsManager.cmdWindowsManager && options) {
+      CmdWindowsManager.cmdWindowsManager = new CmdWindowsManager(options);
     }
     return CmdWindowsManager.cmdWindowsManager;
+  }
+
+  constructor(options: TCmdWindowsManagerOptions) {
+    if (options.mode) this.#mode = options.mode;
   }
 
   /**
@@ -26,6 +36,7 @@ export class CmdWindowsManager {
     const newCtx: CmdWindowContext = new CmdWindowContext({
       windowId,
       globalEvent: this.#globalEvent,
+      mode: this.#mode,
     });
     this.#ctxMap.set(windowId, newCtx);
     return newCtx;

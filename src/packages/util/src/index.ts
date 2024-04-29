@@ -8,3 +8,4 @@ export * from './message-data';
 export * from './sleep';
 export * from './snow-flake';
 export * from './string';
+export * from './url';
