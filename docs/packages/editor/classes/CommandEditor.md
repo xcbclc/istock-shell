@@ -226,7 +226,7 @@ command-editor.ts:50
 
 #### Defined in
 
-command-editor.ts:363
+command-editor.ts:362
 
 ---
 
@@ -289,7 +289,7 @@ command-editor.ts:97
 
 #### Defined in
 
-command-editor.ts:336
+command-editor.ts:335
 
 ---
 
@@ -561,7 +561,7 @@ command-editor.ts:174
 
 #### Defined in
 
-command-editor.ts:308
+command-editor.ts:307
 
 ---
 
@@ -577,7 +577,7 @@ command-editor.ts:308
 
 #### Defined in
 
-command-editor.ts:377
+command-editor.ts:376
 
 ---
 
@@ -593,7 +593,7 @@ command-editor.ts:377
 
 #### Defined in
 
-command-editor.ts:296
+command-editor.ts:295
 
 ---
 
@@ -675,4 +675,4 @@ command-editor.ts:62
 
 #### Defined in
 
-command-editor.ts:287
+command-editor.ts:286

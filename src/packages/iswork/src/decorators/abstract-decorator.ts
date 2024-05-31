@@ -22,10 +22,7 @@ export abstract class AbstractDecorator implements Decorator {
  * 类装饰器抽象类
  */
 export abstract class AbstractClassDecorator<MType = unknown> extends AbstractDecorator {
-  readonly #decoratorType = EDecoratorType.Class;
-  get decoratorType() {
-    return this.#decoratorType;
-  }
+  protected readonly decoratorType = EDecoratorType.Class;
 
   protected constructor(key: symbol | string) {
     super(key);
@@ -44,10 +41,7 @@ export abstract class AbstractClassDecorator<MType = unknown> extends AbstractDe
  * 属性装饰器抽象类
  */
 export abstract class AbstractPropertyDecorator<MType = unknown> extends AbstractDecorator {
-  readonly #decoratorType = EDecoratorType.Property;
-  get decoratorType() {
-    return this.#decoratorType;
-  }
+  protected readonly decoratorType = EDecoratorType.Property;
 
   protected constructor(key: symbol | string) {
     super(key);
@@ -73,10 +67,7 @@ export abstract class AbstractPropertyDecorator<MType = unknown> extends Abstrac
  * 方法装饰器抽象类
  */
 export abstract class AbstractMethodDecorator<MType = unknown> extends AbstractDecorator {
-  readonly #decoratorType = EDecoratorType.Method;
-  get decoratorType() {
-    return this.#decoratorType;
-  }
+  protected readonly decoratorType = EDecoratorType.Method;
 
   protected constructor(key: symbol | string) {
     super(key);
@@ -95,10 +86,7 @@ export abstract class AbstractMethodDecorator<MType = unknown> extends AbstractD
  * 参数装饰器抽象类
  */
 export abstract class AbstractParameterDecorator<MType = unknown> extends AbstractDecorator {
-  readonly #decoratorType = EDecoratorType.Parameter;
-  get decoratorType() {
-    return this.#decoratorType;
-  }
+  protected readonly decoratorType = EDecoratorType.Parameter;
 
   protected constructor(key: symbol | string) {
     super(key);

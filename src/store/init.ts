@@ -22,6 +22,7 @@ export async function initStore(ctx: CmdWindowContext) {
   const removeOnShowCmdInfo = onShowCmdInfo(ctx);
   const removeOnOutputHistory = onOutputHistory(ctx);
   const removeOnSyncHistory = onSyncHistory(ctx);
+  const removenOAiContected = onAiContected(ctx);
   return () => {
     removeOnInputRecommendCmd();
     removeOnPromptTexts();
@@ -29,6 +30,7 @@ export async function initStore(ctx: CmdWindowContext) {
     removeOnShowCmdInfo();
     removeOnOutputHistory();
     removeOnSyncHistory();
+    removenOAiContected();
   };
 }
 
@@ -119,7 +121,7 @@ function onPromptTexts(ctx: CmdWindowContext) {
     cmdStore.cmdPromptTexts.set(getPromptTexts(data));
   });
 
-  // ctx.message
+  // ctx.workerMessage
   // todo 获取真实数据时更新
   cmdStore.cmdPrompt.update((prompt) => {
     prompt.username = '访客';
@@ -154,7 +156,7 @@ function onPromptDomainChange(ctx: CmdWindowContext) {
 // 从worker获取初始化路由数据
 async function initCmdRouteList(ctx: CmdWindowContext) {
   const { domainStore, cmdParser } = ctx;
-  const { payload } = await ctx.message.send<TCmdRoute[]>('global', 'cmdRoute.list', {});
+  const { payload } = await ctx.workerMessage.send<TCmdRoute[]>('global', 'cmdRoute.list', {});
   if (payload) {
     domainStore.cmdRoute.update((list) => {
       list.splice(list.length, 0, ...payload);
@@ -177,7 +179,7 @@ async function initCmdRouteList(ctx: CmdWindowContext) {
 // 从worker获取初始化历史数据
 async function initOutputHistory(ctx: CmdWindowContext) {
   const { domainStore } = ctx;
-  const { payload } = await ctx.message.send<HistoryModel[]>('global', 'history.list', {});
+  const { payload } = await ctx.workerMessage.send<HistoryModel[]>('global', 'history.list', {});
   if (payload) {
     domainStore.outputHistory.set(payload);
   }
@@ -205,11 +207,29 @@ function onSyncHistory(ctx: CmdWindowContext) {
     if (success) {
       await sleep();
       const { domainStore } = ctx;
-      const { payload } = await ctx.message.send<HistoryModel[]>('global', 'history.list', {});
+      const { payload } = await ctx.workerMessage.send<HistoryModel[]>('global', 'history.list', {});
       if (payload) {
         domainStore.outputHistory.set(payload);
       }
     }
+  };
+  ctx.event.on(eventAddress, handlerChange);
+  return () => {
+    ctx.event.off(eventAddress, handlerChange);
+  };
+}
+
+/**
+ * 监听ai消息是否已被连接
+ * @param ctx
+ */
+function onAiContected(ctx: CmdWindowContext) {
+  const { windowId, domainStore } = ctx;
+  const { username } = domainStore.user.getUserInfo();
+  const eventAddress = `event://@${username}.global:${windowId}/ai.send`;
+
+  const handlerChange = async (data: { messageId: string }) => {
+    ctx.sendMessageToChannel(data.messageId, { messageId: data.messageId });
   };
   ctx.event.on(eventAddress, handlerChange);
   return () => {

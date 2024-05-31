@@ -84,6 +84,10 @@
     void updateObserve();
   });
 
+  const onSubmit = (messageId: string, payload: any) => {
+    ctx.sendMessageToChannel(messageId, payload);
+  };
+
   onMount(() => {
     observer = new IntersectionObserver(
       function (entries) {
@@ -159,11 +163,14 @@
         </div>
       </div>
       <div class="cmd-block-output">
-        {#each block.output as output}
+        {#each block.output as output, oIndex (oIndex)}
           <svelte:component
             this={componentMap.get(output.component) || componentMap.get('ViewNotFound')}
             source={block.source}
             windowId={block.windowId}
+            on:submit={(event) => {
+              onSubmit(output.messageId, event?.detail);
+            }}
             {...output.props}
           />
         {/each}
@@ -181,12 +188,14 @@
   .cmd-main {
     flex: auto;
     overflow-y: auto;
-    /*transform: translateZ(0);*/
+    scroll-behavior: smooth;
   }
   .cmd-block {
     padding: var(--block-gap);
     border-bottom: 1px solid var(--block-border-color);
     will-change: opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     &.is-hidden {
       visibility: hidden;
       opacity: 0;

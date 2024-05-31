@@ -35,6 +35,10 @@
 - [TToken](modules.md#ttoken)
 - [TTokenMethodResult](modules.md#ttokenmethodresult)
 
+### Variables
+
+- [keyCommand](modules.md#keycommand)
+
 ## Type Aliases
 
 ### TAstTree
@@ -184,7 +188,7 @@ ast.ts:48
 
 #### Defined in
 
-parser.ts:64
+parser.ts:74
 
 ---
 
@@ -201,7 +205,7 @@ parser.ts:64
 
 #### Defined in
 
-parser.ts:54
+parser.ts:64
 
 ---
 
@@ -218,7 +222,7 @@ parser.ts:54
 
 #### Defined in
 
-parser.ts:66
+parser.ts:76
 
 ---
 
@@ -235,7 +239,7 @@ parser.ts:66
 
 #### Defined in
 
-parser.ts:59
+parser.ts:69
 
 ---
 
@@ -255,7 +259,7 @@ parser.ts:59
 
 #### Defined in
 
-parser.ts:46
+parser.ts:56
 
 ---
 
@@ -273,7 +277,7 @@ parser.ts:46
 
 #### Defined in
 
-parser.ts:40
+parser.ts:50
 
 ---
 
@@ -308,3 +312,27 @@ tokenizer.ts:16
 #### Defined in
 
 tokenizer.ts:21
+
+## Variables
+
+### keyCommand
+
+• `Const` **keyCommand**: `Object`
+
+#### Type declaration
+
+| Name             | Type                                                  |
+| :--------------- | :---------------------------------------------------- |
+| `ai`             | \{ `command`: `string` = 'ai:'; `content`: `RegExp` } |
+| `ai.command`     | `string`                                              |
+| `ai.content`     | `RegExp`                                              |
+| `alias`          | \{ `command`: `string` = ':'; `content`: `RegExp` }   |
+| `alias.command`  | `string`                                              |
+| `alias.content`  | `RegExp`                                              |
+| `search`         | \{ `command`: `string` = 'ss:'; `content`: `RegExp` } |
+| `search.command` | `string`                                              |
+| `search.content` | `RegExp`                                              |
+
+#### Defined in
+
+tokenizer.ts:26

@@ -20,9 +20,10 @@ import {
 import { LsfbsjModel } from '@domains/ag/lsfbsj/lsfbsj.model';
 import { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
 import { CjModel } from '@domains/wzdh/cj/cj.model';
+import { AiModel } from '@domains/global/ai/ai.model';
 
 export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel];
-export const fetchDataSourceModels = [
+export const akShareFetchDataSourceModels = [
   SzgpsczmModel,
   SzlbtjModel,
   SzdqjypxModel,
@@ -42,6 +43,7 @@ export const fetchDataSourceModels = [
   LsfbsjModel,
   StockCodeModel,
 ];
+export const fetchDataSourceModels = [AiModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
 
 export const inintDataSource = async () => {
@@ -54,11 +56,19 @@ export const inintDataSource = async () => {
   });
   await indexedDataSource.initialize();
 
+  const akShareFetchDataSource = new DataSource<'fetch'>({
+    name: 'fetch',
+    type: 'fetch',
+    entities: akShareFetchDataSourceModels,
+    prefixUrl: import.meta.env.VITE_AKSHARE_API ?? '/api/public',
+  });
+  await akShareFetchDataSource.initialize();
+
   const fetchDataSource = new DataSource<'fetch'>({
     name: 'fetch',
     type: 'fetch',
     entities: fetchDataSourceModels,
-    prefixUrl: import.meta.env.VITE_AKSHARE_API ?? '/api/public',
+    prefixUrl: import.meta.env.VITE_ISTOCK_API ?? '/api',
   });
   await fetchDataSource.initialize();
 

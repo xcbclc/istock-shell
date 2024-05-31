@@ -46,7 +46,7 @@
 
 #### Defined in
 
-parser.ts:88
+parser.ts:98
 
 ## Properties
 
@@ -56,7 +56,7 @@ parser.ts:88
 
 #### Defined in
 
-parser.ts:77
+parser.ts:87
 
 ---
 
@@ -66,7 +66,7 @@ parser.ts:77
 
 #### Defined in
 
-parser.ts:78
+parser.ts:88
 
 ---
 
@@ -76,7 +76,7 @@ parser.ts:78
 
 #### Defined in
 
-parser.ts:76
+parser.ts:86
 
 ---
 
@@ -86,7 +86,7 @@ parser.ts:76
 
 #### Defined in
 
-parser.ts:75
+parser.ts:85
 
 ## Accessors
 
@@ -110,7 +110,7 @@ parser.ts:75
 
 #### Defined in
 
-parser.ts:80
+parser.ts:90
 
 ---
 
@@ -124,7 +124,7 @@ parser.ts:80
 
 #### Defined in
 
-parser.ts:84
+parser.ts:94
 
 ## Methods
 
@@ -148,7 +148,7 @@ parser.ts:84
 
 #### Defined in
 
-parser.ts:267
+parser.ts:277
 
 ---
 
@@ -171,7 +171,7 @@ parser.ts:267
 
 #### Defined in
 
-parser.ts:292
+parser.ts:302
 
 ---
 
@@ -195,7 +195,7 @@ parser.ts:292
 
 #### Defined in
 
-parser.ts:211
+parser.ts:221
 
 ---
 
@@ -219,7 +219,7 @@ parser.ts:211
 
 #### Defined in
 
-parser.ts:135
+parser.ts:145
 
 ---
 
@@ -242,7 +242,7 @@ parser.ts:135
 
 #### Defined in
 
-parser.ts:336
+parser.ts:346
 
 ---
 
@@ -264,7 +264,7 @@ parser.ts:336
 
 #### Defined in
 
-parser.ts:104
+parser.ts:114
 
 ---
 
@@ -286,7 +286,7 @@ parser.ts:104
 
 #### Defined in
 
-parser.ts:112
+parser.ts:122
 
 ---
 
@@ -308,7 +308,7 @@ parser.ts:112
 
 #### Defined in
 
-parser.ts:96
+parser.ts:106
 
 ---
 
@@ -330,4 +330,4 @@ parser.ts:96
 
 #### Defined in
 
-parser.ts:120
+parser.ts:130

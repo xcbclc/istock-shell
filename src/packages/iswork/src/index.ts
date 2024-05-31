@@ -9,3 +9,4 @@ export * from './orm/index';
 export * from './application/application';
 export * from './application/context';
 export * from './constants';
+export * from './message/index';

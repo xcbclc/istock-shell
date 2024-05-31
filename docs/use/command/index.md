@@ -4,6 +4,8 @@
 
 ## 全局
 
+[Ai](/use/command/global/ai/ai.cmd.html)
+
 [图表](/use/command/global/chart/chart.cmd.html)
 
 [命令](/use/command/global/cmd-route/cmd-route.cmd.html)

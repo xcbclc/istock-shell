@@ -12,6 +12,10 @@ export const CONTROLLER_METHOD_RETURN_METADATA = Symbol('controller.method.retur
 
 export const CONTROLLER_METHOD_NAME_METADATA = Symbol('controller.method.name');
 
+export const CONTROLLER_METHOD_MESSAGE_METADATA = Symbol('controller.method.message');
+
+export const CONTROLLER_METHOD_MESSAGE_HANDLER_METADATA = Symbol('controller.method.message.handler');
+
 export const CONTROLLER_METHOD_CMDROUTE_METADATA = Symbol('controller.method.cmdRoute');
 
 export const CONTROLLER_METHOD_PARAM_FILED_METADATA = Symbol('controller.method.param.filed');

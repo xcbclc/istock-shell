@@ -60,7 +60,7 @@ export const getAddCmdAlias = (ctx: CmdWindowContext) => {
   };
   addCmdAlias.add = async () => {
     const addCmdAliasData = get(addCmdAlias);
-    const { payload } = await ctx.message.send<string | number | null>('global', 'cmdAlias.add', {
+    const { payload } = await ctx.workerMessage.send<string | number | null>('global', 'cmdAlias.add', {
       historyId: addCmdAliasData.form.historyId,
       cmd: addCmdAliasData.form.cmd.value,
       alias: addCmdAliasData.form.alias.value,

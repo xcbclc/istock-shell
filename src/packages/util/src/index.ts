@@ -9,3 +9,4 @@ export * from './sleep';
 export * from './snow-flake';
 export * from './string';
 export * from './url';
+export * from './infinite-scroll';

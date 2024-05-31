@@ -42,14 +42,6 @@
 - [快速开始](https://istock.red/use/quick-start/easy-to-use.html)
 - [开发指南](https://istock.red/develop/command/knowledge.html)
 
-### 迭代计划
-
-**04月25日-05月12日：**
-
-|  任务项目  |            描述            | 该迭代是否上线 |
-| :--------: | :------------------------: | :------------: |
-| AI命令支持 | 支持命令消息流及支持AI命令 |       是       |
-
 ### 参与贡献
 
 1.  Fork 本仓库

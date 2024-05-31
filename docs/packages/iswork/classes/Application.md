@@ -24,6 +24,8 @@
 - [#compose](Application.md##compose)
 - [#domainHandler](Application.md##domainhandler)
 - [#emit](Application.md##emit)
+- [#messageCallback](Application.md##messagecallback)
+- [#messageChannelManager](Application.md##messagechannelmanager)
 - [#options](Application.md##options)
 - [#pipeManager](Application.md##pipemanager)
 - [options](Application.md#options)
@@ -33,13 +35,16 @@
 - [allDomain](Application.md#alldomain)
 - [emit](Application.md#emit)
 - [globalMiddleware](Application.md#globalmiddleware)
+- [messageChannelManager](Application.md#messagechannelmanager)
 - [pipeFlowExecute](Application.md#pipeflowexecute)
 
 ### Methods
 
 - [#callback](Application.md##callback)
+- [#messageCallbackErrorHandler](Application.md##messagecallbackerrorhandler)
 - [close](Application.md#close)
 - [closed](Application.md#closed)
+- [getDomain](Application.md#getdomain)
 - [getPipe](Application.md#getpipe)
 - [getPipeRecord](Application.md#getpiperecord)
 - [initialized](Application.md#initialized)
@@ -75,7 +80,7 @@ ApplicationEvent.constructor
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:50
+src/packages/iswork/src/application/application.ts:60
 
 ## Properties
 
@@ -99,7 +104,7 @@ src/packages/iswork/src/application/application-event.ts:8
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:14
+src/packages/iswork/src/application/application.ts:18
 
 ---
 
@@ -109,7 +114,7 @@ src/packages/iswork/src/application/application.ts:14
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:15
+src/packages/iswork/src/application/application.ts:19
 
 ---
 
@@ -155,7 +160,7 @@ public
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:16
+src/packages/iswork/src/application/application.ts:20
 
 ---
 
@@ -165,13 +170,30 @@ src/packages/iswork/src/application/application.ts:16
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:18
+src/packages/iswork/src/application/application.ts:22
 
 ---
 
 ### #emit
 
-• `Private` `Readonly` **#emit**: `Function`
+• `Private` `Readonly` **#emit**: (`message`: `unknown`, `options?`: \{ `targetOrigin?`: `string` ; `transfer?`: `Transferable`[] }) => `void`
+
+#### Type declaration
+
+▸ (`message`, `options?`): `void`
+
+##### Parameters
+
+| Name                    | Type             |
+| :---------------------- | :--------------- |
+| `message`               | `unknown`        |
+| `options?`              | `Object`         |
+| `options.targetOrigin?` | `string`         |
+| `options.transfer?`     | `Transferable`[] |
+
+##### Returns
+
+`void`
 
 #### Inherited from
 
@@ -183,13 +205,47 @@ src/packages/iswork/src/application/application-event.ts:9
 
 ---
 
+### #messageCallback
+
+• `Private` **#messageCallback**: (`event`: `MessageEvent`\<[`TCmdpMessage`](../modules.md#tcmdpmessage)\<`any`\>\>) => `Promise`\<`void`\>
+
+#### Type declaration
+
+▸ (`event`): `Promise`\<`void`\>
+
+##### Parameters
+
+| Name    | Type                                                                    |
+| :------ | :---------------------------------------------------------------------- |
+| `event` | `MessageEvent`\<[`TCmdpMessage`](../modules.md#tcmdpmessage)\<`any`\>\> |
+
+##### Returns
+
+`Promise`\<`void`\>
+
+#### Defined in
+
+src/packages/iswork/src/application/application.ts:25
+
+---
+
+### #messageChannelManager
+
+• `Private` `Readonly` **#messageChannelManager**: `MessageChannelManager`
+
+#### Defined in
+
+src/packages/iswork/src/application/application.ts:24
+
+---
+
 ### #options
 
 • `Private` `Readonly` **#options**: [`TApplicationOptions`](../modules.md#tapplicationoptions)
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:17
+src/packages/iswork/src/application/application.ts:21
 
 ---
 
@@ -199,7 +255,7 @@ src/packages/iswork/src/application/application.ts:17
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:19
+src/packages/iswork/src/application/application.ts:23
 
 ---
 
@@ -219,25 +275,40 @@ src/packages/iswork/src/application/application-event.ts:10
 
 ### allDomain
 
-• `get` **allDomain**(): `Domain`[]
+• `get` **allDomain**(): `Domain`\<[`IDomainClass`](../interfaces/IDomainClass.md)\<`unknown`\>\>[]
 
 #### Returns
 
-`Domain`[]
+`Domain`\<[`IDomainClass`](../interfaces/IDomainClass.md)\<`unknown`\>\>[]
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:25
+src/packages/iswork/src/application/application.ts:31
 
 ---
 
 ### emit
 
-• `get` **emit**(): `Function`
+• `get` **emit**(): (`message`: `unknown`, `options?`: \{ `targetOrigin?`: `string` ; `transfer?`: `Transferable`[] }) => `void`
 
 #### Returns
 
-`Function`
+`fn`
+
+▸ (`message`, `options?`): `void`
+
+##### Parameters
+
+| Name                    | Type             |
+| :---------------------- | :--------------- |
+| `message`               | `unknown`        |
+| `options?`              | `Object`         |
+| `options.targetOrigin?` | `string`         |
+| `options.transfer?`     | `Transferable`[] |
+
+##### Returns
+
+`void`
 
 #### Inherited from
 
@@ -259,7 +330,21 @@ src/packages/iswork/src/application/application-event.ts:11
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:21
+src/packages/iswork/src/application/application.ts:27
+
+---
+
+### messageChannelManager
+
+• `get` **messageChannelManager**(): `MessageChannelManager`
+
+#### Returns
+
+`MessageChannelManager`
+
+#### Defined in
+
+src/packages/iswork/src/application/application.ts:35
 
 ---
 
@@ -287,7 +372,7 @@ src/packages/iswork/src/application/application.ts:21
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:32
+src/packages/iswork/src/application/application.ts:42
 
 ## Methods
 
@@ -321,7 +406,28 @@ src/packages/iswork/src/application/application.ts:32
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:80
+src/packages/iswork/src/application/application.ts:91
+
+---
+
+### #messageCallbackErrorHandler
+
+▸ **#messageCallbackErrorHandler**(`ctx`, `err`): `void`
+
+#### Parameters
+
+| Name  | Type                                          |
+| :---- | :-------------------------------------------- |
+| `ctx` | [`ApplicationContext`](ApplicationContext.md) |
+| `err` | `any`                                         |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+src/packages/iswork/src/application/application.ts:176
 
 ---
 
@@ -337,7 +443,7 @@ src/packages/iswork/src/application/application.ts:80
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:73
+src/packages/iswork/src/application/application.ts:84
 
 ---
 
@@ -356,6 +462,34 @@ ApplicationEvent.closed
 #### Defined in
 
 src/packages/iswork/src/application/application-event.ts:59
+
+---
+
+### getDomain
+
+▸ **getDomain**\<`T`\>(`name`): `undefined` \| `Domain`\<`T`\>
+
+获取domain
+
+#### Type parameters
+
+| Name | Type                                                             |
+| :--- | :--------------------------------------------------------------- |
+| `T`  | extends [`IDomainClass`](../interfaces/IDomainClass.md)\<`any`\> |
+
+#### Parameters
+
+| Name   | Type     |
+| :----- | :------- |
+| `name` | `string` |
+
+#### Returns
+
+`undefined` \| `Domain`\<`T`\>
+
+#### Defined in
+
+src/packages/iswork/src/application/application.ts:222
 
 ---
 
@@ -383,7 +517,7 @@ src/packages/iswork/src/application/application-event.ts:59
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:145
+src/packages/iswork/src/application/application.ts:239
 
 ---
 
@@ -399,7 +533,7 @@ src/packages/iswork/src/application/application.ts:145
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:152
+src/packages/iswork/src/application/application.ts:246
 
 ---
 
@@ -429,9 +563,9 @@ src/packages/iswork/src/application/application-event.ts:39
 
 #### Parameters
 
-| Name          | Type                                         |
-| :------------ | :------------------------------------------- |
-| `domainClass` | [`TDomainClass`](../modules.md#tdomainclass) |
+| Name          | Type                                                         |
+| :------------ | :----------------------------------------------------------- |
+| `domainClass` | [`IDomainClass`](../interfaces/IDomainClass.md)\<`unknown`\> |
 
 #### Returns
 
@@ -451,7 +585,7 @@ src/packages/iswork/src/application/application-event.ts:39
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:63
+src/packages/iswork/src/application/application.ts:73
 
 ---
 
@@ -511,7 +645,7 @@ src/packages/iswork/src/application/application-event.ts:44
 
 ### sendAppMessage
 
-▸ **sendAppMessage**(`controller`, `method`, `payload?`): `any`
+▸ **sendAppMessage**(`controller`, `method`, `payload?`): `void`
 
 发送应用级消息
 
@@ -525,7 +659,7 @@ src/packages/iswork/src/application/application-event.ts:44
 
 #### Returns
 
-`any`
+`void`
 
 #### Inherited from
 
@@ -545,9 +679,9 @@ src/packages/iswork/src/application/application-event.ts:25
 
 #### Parameters
 
-| Name          | Type                                         |
-| :------------ | :------------------------------------------- |
-| `domainClass` | [`TDomainClass`](../modules.md#tdomainclass) |
+| Name          | Type                                                         |
+| :------------ | :----------------------------------------------------------- |
+| `domainClass` | [`IDomainClass`](../interfaces/IDomainClass.md)\<`unknown`\> |
 
 #### Returns
 
@@ -555,7 +689,7 @@ src/packages/iswork/src/application/application-event.ts:25
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:128
+src/packages/iswork/src/application/application.ts:214
 
 ---
 
@@ -577,7 +711,7 @@ src/packages/iswork/src/application/application.ts:128
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:116
+src/packages/iswork/src/application/application.ts:202
 
 ---
 
@@ -600,7 +734,7 @@ src/packages/iswork/src/application/application.ts:116
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:137
+src/packages/iswork/src/application/application.ts:231
 
 ---
 
@@ -622,4 +756,4 @@ src/packages/iswork/src/application/application.ts:137
 
 #### Defined in
 
-src/packages/iswork/src/application/application.ts:41
+src/packages/iswork/src/application/application.ts:51

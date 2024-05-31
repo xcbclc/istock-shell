@@ -51,6 +51,7 @@ export default async () => {
         domain: '应用',
         history: '历史',
         user: '用户',
+        ai: 'Ai',
       },
     },
     ag: {

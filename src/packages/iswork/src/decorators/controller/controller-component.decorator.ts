@@ -14,11 +14,12 @@ export class ControllerComponentDecorator extends AbstractMethodDecorator<TContr
     super(key);
   }
 
-  handler(name: string): MethodDecorator;
+  handler(name?: string): MethodDecorator;
   handler(options: TControllerMethodComponentMetadata | TControllerMethodComponentMetadata[]): MethodDecorator;
   handler(nameOrOptions?: string | TControllerMethodComponentMetadata | TControllerMethodComponentMetadata[]) {
     return (target: object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
       let data: TControllerMethodComponentMetadata[] = [];
+      if (!nameOrOptions) nameOrOptions = 'anonymous';
       if (isString(nameOrOptions)) {
         data.push({ name: nameOrOptions });
       }
@@ -34,15 +35,14 @@ export class ControllerComponentDecorator extends AbstractMethodDecorator<TContr
   }
 
   callback(value: TControllerMethodComponentMetadata[] = []) {
-    return (_ctx: ApplicationContext, _cmdInfo: TCmdpInfo, response: unknown) => {
+    return (_ctx: ApplicationContext, cmdInfo: TCmdpInfo, response: unknown) => {
       let res: TControllerMethodComponentAccept[] = [];
       if (typeof response !== 'object' || response === null) {
         // 基础类型
         res = [{ value: response }];
       } else if (typeof response === 'object' && !isArray(response)) {
-        res = [response];
-      } else if (!isArray(response)) {
-        res = [{ value: response }];
+        // 非数组对象
+        res = [response as TControllerMethodComponentAccept];
       }
       if (isArray(response)) {
         res = res.map((item) => {
@@ -57,16 +57,17 @@ export class ControllerComponentDecorator extends AbstractMethodDecorator<TContr
       return {
         output: res.map((data, index) => {
           const meta: TControllerMethodComponentMetadata = value[index];
-          const { extra: extraData, props: propsData, ...otherProps } = data;
+          const { component, extra: extraData, props: propsData, ...otherProps } = data;
           let { extra: extraMeta, props: propsMeta } = meta;
           const extra: Object = isObject(extraData) ? extraData : {};
-          const props: Object = isObject(propsData) ? propsData : otherProps ?? {};
+          const props: Object = isObject(propsData) ? propsData : (otherProps ?? {});
           extraMeta = extraMeta ?? {};
           propsMeta = propsMeta ?? {};
           return {
-            component: meta.name,
+            component: component ?? meta.name,
             props: { ...propsMeta, ...props },
             extra: { ...extraMeta, ...extra },
+            messageId: cmdInfo.returnMeta?.messageId,
           };
         }),
       };
