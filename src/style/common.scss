@@ -17,3 +17,8 @@
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+::-webkit-scrollbar-corner {
+  /*滚动条的角*/
+  background-color: rgba(0, 0, 0, 0.2);
+}

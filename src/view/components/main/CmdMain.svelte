@@ -181,12 +181,14 @@
   .cmd-main {
     flex: auto;
     overflow-y: auto;
-    /*transform: translateZ(0);*/
+    scroll-behavior: smooth;
   }
   .cmd-block {
     padding: var(--block-gap);
     border-bottom: 1px solid var(--block-border-color);
     will-change: opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     &.is-hidden {
       visibility: hidden;
       opacity: 0;
