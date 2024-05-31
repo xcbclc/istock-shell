@@ -24,6 +24,8 @@ export const getInputRecommend = (ctx: CmdWindowContext) => {
   );
   // 命令输入推荐
   inputRecommend.recommend = async (input: string) => {
+    input = input.trim();
+    if (!input) return;
     const isCmdAlias = input?.[0] === keyCommand.alias.command;
     const { payload } = await ctx.message.send<TInputRecommend>(
       'global',
