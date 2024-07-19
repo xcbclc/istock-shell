@@ -1,6 +1,7 @@
 {
   "name": "@istock/cli",
   "version": "0.0.1",
+  "type": "module",
   "bin": {
     "istock": "./src/index.mjs"
   },
@@ -10,7 +11,10 @@
     "@types/node": "^20.11.16",
     "commander": "^12.0.0",
     "ejs": "^3.1.9",
+    "idb": "^7.1.1",
     "inquirer": "^9.2.14",
+    "qs": "^6.12.2",
+    "reflect-metadata": "^0.1.13",
     "typedoc": "^0.25.8",
     "typedoc-plugin-markdown": "^3.17.1"
   },

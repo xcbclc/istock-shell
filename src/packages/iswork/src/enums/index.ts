@@ -42,3 +42,12 @@ export enum EDecoratorCallbackType {
   MethodRequest,
   MethodResponse,
 }
+
+export enum EMessageStatus {
+  COMPLETE = 299, // 消息传输完成
+}
+
+export enum EMessageCmdAction {
+  APPEND, // 新增
+  REPLACE, // 替换
+}

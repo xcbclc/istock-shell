@@ -13,7 +13,7 @@ export class HistoryModel extends BaseModel {
   input!: string;
 
   @Column()
-  output!: Array<{ component: string; props: Record<string, any> }>;
+  output!: Array<{ messageId: string; component: string; props: Record<string, any> }>;
 
   @Column()
   source!: string;

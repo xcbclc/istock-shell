@@ -28,6 +28,7 @@
 - [createOne](BaseModel.md#createone)
 - [deleteById](BaseModel.md#deletebyid)
 - [deleteMany](BaseModel.md#deletemany)
+- [findOneById](BaseModel.md#findonebyid)
 - [getRepository](BaseModel.md#getrepository)
 - [query](BaseModel.md#query)
 - [run](BaseModel.md#run)
@@ -262,6 +263,33 @@ src/packages/iswork/src/orm/model/base-model.ts:128
 #### Defined in
 
 src/packages/iswork/src/orm/model/base-model.ts:123
+
+---
+
+### findOneById
+
+▸ **findOneById**\<`Model`\>(`this`, `id`): `Promise`\<[`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>\>
+
+#### Type parameters
+
+| Name    | Type                                       |
+| :------ | :----------------------------------------- |
+| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+
+#### Parameters
+
+| Name   | Type                 |
+| :----- | :------------------- |
+| `this` | `Model`              |
+| `id`   | `string` \| `number` |
+
+#### Returns
+
+`Promise`\<[`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>\>
+
+#### Defined in
+
+src/packages/iswork/src/orm/model/base-model.ts:133
 
 ---
 

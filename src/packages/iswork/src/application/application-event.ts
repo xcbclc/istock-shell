@@ -6,7 +6,7 @@ import { CmdpEvent } from '../cmdp';
  */
 export class ApplicationEvent {
   readonly #CmdpEvent = CmdpEvent;
-  readonly #emit: Function = () => {};
+  readonly #emit: TApplicationEventOptions['emit'] = () => {};
   options: TApplicationEventOptions;
   get emit() {
     return this.#emit;
@@ -32,7 +32,7 @@ export class ApplicationEvent {
       method,
     };
     const eventCmdp = this.#CmdpEvent.create(cmdpInfo);
-    return this.#emit(eventCmdp.getMessage(payload));
+    this.#emit(eventCmdp.getMessage(payload));
   }
 
   // 生命周期-初始化完毕

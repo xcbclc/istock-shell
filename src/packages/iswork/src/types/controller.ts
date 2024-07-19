@@ -20,6 +20,12 @@ export type TControllerMethodComponentMetadata = {
   extra?: Record<string, unknown>;
 };
 
+export type TControllerMethodMessageMetadata = {
+  message: boolean;
+};
+
+export type TControllerMethodMessageHandlerMetadata = Record<string | number, boolean>;
+
 export type TControllerMethodReturnMetadata = {
   name: string;
   args?: unknown[];
@@ -27,7 +33,7 @@ export type TControllerMethodReturnMetadata = {
 
 export type TControllerMethodComponentAccept<Props = Record<string, unknown>> =
   | Record<string, unknown>
-  | { extra?: Record<string, unknown>; props?: Props };
+  | { extra?: Record<string, unknown>; props?: Props; component?: string };
 
 export type TControllerMethodComponentOutput<Props = Record<string, unknown>> = {
   component: string;

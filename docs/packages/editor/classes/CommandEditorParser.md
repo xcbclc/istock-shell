@@ -176,7 +176,7 @@ command-editor-parser.ts:35
 
 #### Defined in
 
-command-editor-parser.ts:197
+command-editor-parser.ts:195
 
 ---
 
@@ -200,7 +200,7 @@ command-editor-parser.ts:197
 
 #### Defined in
 
-command-editor-parser.ts:85
+command-editor-parser.ts:84
 
 ---
 
@@ -244,7 +244,7 @@ command-editor-parser.ts:53
 
 #### Defined in
 
-command-editor-parser.ts:134
+command-editor-parser.ts:132
 
 ---
 
@@ -266,4 +266,4 @@ command-editor-parser.ts:134
 
 #### Defined in
 
-command-editor-parser.ts:175
+command-editor-parser.ts:173

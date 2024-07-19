@@ -3,6 +3,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_AKSHARE_API: string;
+  readonly VITE_ISTOCK_API: string;
 }
 
 interface ImportMeta {

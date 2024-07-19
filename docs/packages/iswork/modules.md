@@ -10,6 +10,8 @@
 - [EDecoratorCallbackType](enums/EDecoratorCallbackType.md)
 - [EDecoratorType](enums/EDecoratorType.md)
 - [EDriverConnectStatus](enums/EDriverConnectStatus.md)
+- [EMessageCmdAction](enums/EMessageCmdAction.md)
+- [EMessageStatus](enums/EMessageStatus.md)
 - [EMethodNameFilter](enums/EMethodNameFilter.md)
 
 ### Classes
@@ -18,6 +20,10 @@
 - [ApplicationContext](classes/ApplicationContext.md)
 - [BaseModel](classes/BaseModel.md)
 - [DataSource](classes/DataSource.md)
+- [MessageChannelAdapter](classes/MessageChannelAdapter.md)
+- [MessageIterator](classes/MessageIterator.md)
+- [MessageSSE](classes/MessageSSE.md)
+- [Observable](classes/Observable.md)
 - [QueryBuilder](classes/QueryBuilder.md)
 - [Repository](classes/Repository.md)
 - [RepositoryManager](classes/RepositoryManager.md)
@@ -27,7 +33,10 @@
 - [BaseProvider](interfaces/BaseProvider.md)
 - [IAnyClass](interfaces/IAnyClass.md)
 - [IClassProvider](interfaces/IClassProvider.md)
+- [IDomainClass](interfaces/IDomainClass.md)
 - [IFactoryProvider](interfaces/IFactoryProvider.md)
+- [IMessageHandler](interfaces/IMessageHandler.md)
+- [IObserver](interfaces/IObserver.md)
 - [IParamOption](interfaces/IParamOption.md)
 - [IParsedRequestParams](interfaces/IParsedRequestParams.md)
 - [IPartialQueryBuilderOptions](interfaces/IPartialQueryBuilderOptions.md)
@@ -63,6 +72,8 @@
 - [TControllerMethodComponentMetadata](modules.md#tcontrollermethodcomponentmetadata)
 - [TControllerMethodComponentOutput](modules.md#tcontrollermethodcomponentoutput)
 - [TControllerMethodComponentResponse](modules.md#tcontrollermethodcomponentresponse)
+- [TControllerMethodMessageHandlerMetadata](modules.md#tcontrollermethodmessagehandlermetadata)
+- [TControllerMethodMessageMetadata](modules.md#tcontrollermethodmessagemetadata)
 - [TControllerMethodMetadata](modules.md#tcontrollermethodmetadata)
 - [TControllerMethodParamFiledMetadata](modules.md#tcontrollermethodparamfiledmetadata)
 - [TControllerMethodParamMetaMetadata](modules.md#tcontrollermethodparammetametadata)
@@ -86,13 +97,16 @@
 - [TDecoratorPrimaryColumnMetadata](modules.md#tdecoratorprimarycolumnmetadata)
 - [TDecoratorPrimaryColumnOptions](modules.md#tdecoratorprimarycolumnoptions)
 - [TDeprecatedCondOperator](modules.md#tdeprecatedcondoperator)
-- [TDomainClass](modules.md#tdomainclass)
 - [TDomainControllerMetadata](modules.md#tdomaincontrollermetadata)
 - [TDomainControllerMetadataMap](modules.md#tdomaincontrollermetadatamap)
 - [TDomainMetadata](modules.md#tdomainmetadata)
 - [TDomainOptions](modules.md#tdomainoptions)
+- [TFetchSSEMessage](modules.md#tfetchssemessage)
 - [TIdAnyObject](modules.md#tidanyobject)
 - [TInjectionToken](modules.md#tinjectiontoken)
+- [TMessageIteratorData](modules.md#tmessageiteratordata)
+- [TMessageSSEIteratorData](modules.md#tmessagesseiteratordata)
+- [TMessageSSEOptions](modules.md#tmessagesseoptions)
 - [TMetadataExport](modules.md#tmetadataexport)
 - [TMetadataImport](modules.md#tmetadataimport)
 - [TMiddleware](modules.md#tmiddleware)
@@ -132,12 +146,16 @@
 - [TScanPropertyMetadata](modules.md#tscanpropertymetadata)
 - [TScanPropertyMetadataMap](modules.md#tscanpropertymetadatamap)
 - [TScanPropertyMetadataMapValue](modules.md#tscanpropertymetadatamapvalue)
+- [TSubscribeCallback](modules.md#tsubscribecallback)
+- [TUnSubscribe](modules.md#tunsubscribe)
 
 ### Variables
 
 - [CONTROLLER_METADATA](modules.md#controller_metadata)
 - [CONTROLLER_METHOD_CMDROUTE_METADATA](modules.md#controller_method_cmdroute_metadata)
 - [CONTROLLER_METHOD_COMPONENT_METADATA](modules.md#controller_method_component_metadata)
+- [CONTROLLER_METHOD_MESSAGE_HANDLER_METADATA](modules.md#controller_method_message_handler_metadata)
+- [CONTROLLER_METHOD_MESSAGE_METADATA](modules.md#controller_method_message_metadata)
 - [CONTROLLER_METHOD_METADATA](modules.md#controller_method_metadata)
 - [CONTROLLER_METHOD_NAME_METADATA](modules.md#controller_method_name_metadata)
 - [CONTROLLER_METHOD_PARAM_CMDROUTEARGUMENTS_METADATA](modules.md#controller_method_param_cmdroutearguments_metadata)
@@ -172,6 +190,8 @@
 - [Index](modules.md#index)
 - [Inject](modules.md#inject)
 - [Injectable](modules.md#injectable)
+- [Message](modules.md#message)
+- [MessageHandler](modules.md#messagehandler)
 - [Meta](modules.md#meta)
 - [Method](modules.md#method)
 - [Model](modules.md#model)
@@ -268,9 +288,9 @@ src/packages/iswork/src/types/context.ts:1
 
 #### Type declaration
 
-| Name   | Type       |
-| :----- | :--------- |
-| `emit` | `Function` |
+| Name   | Type                                                                                                         |
+| :----- | :----------------------------------------------------------------------------------------------------------- |
+| `emit` | (`message`: `unknown`, `options?`: \{ `targetOrigin?`: `string` ; `transfer?`: `Transferable`[] }) => `void` |
 
 #### Defined in
 
@@ -280,7 +300,7 @@ src/packages/iswork/src/types/application.ts:3
 
 ### TApplicationOptions
 
-Ƭ **TApplicationOptions**: \{ `domainPath`: `string` ; `emit`: `Function` ; `middlewares`: [`TMiddleware`](modules.md#tmiddleware)[] } & [`TApplicationEventOptions`](modules.md#tapplicationeventoptions)
+Ƭ **TApplicationOptions**: \{ `domainPath`: `string` ; `middlewares`: [`TMiddleware`](modules.md#tmiddleware)[] } & [`TApplicationEventOptions`](modules.md#tapplicationeventoptions)
 
 #### Defined in
 
@@ -429,7 +449,7 @@ src/packages/iswork/src/orm/types/query-builder.ts:90
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:2
+src/packages/iswork/src/types/controller.ts:3
 
 ---
 
@@ -439,15 +459,16 @@ src/packages/iswork/src/types/controller.ts:2
 
 #### Type declaration
 
-| Name         | Type                                                                                  |
-| :----------- | :------------------------------------------------------------------------------------ |
-| `alias?`     | `string` \| `string`[]                                                                |
-| `component?` | [`TControllerMethodComponentMetadata`](modules.md#tcontrollermethodcomponentmetadata) |
-| `version?`   | `string`                                                                              |
+| Name           | Type                                                                                  |
+| :------------- | :------------------------------------------------------------------------------------ |
+| `alias?`       | `string` \| `string`[]                                                                |
+| `component?`   | [`TControllerMethodComponentMetadata`](modules.md#tcontrollermethodcomponentmetadata) |
+| `middlewares?` | [`TMiddleware`](modules.md#tmiddleware)[]                                             |
+| `version?`     | `string`                                                                              |
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:4
+src/packages/iswork/src/types/controller.ts:5
 
 ---
 
@@ -462,6 +483,7 @@ src/packages/iswork/src/types/controller.ts:4
 | `arguments?`        | [`TControllerMethodCmdRouteOptions`](modules.md#tcontrollermethodcmdrouteoptions)[]                     |
 | `cmd`               | `string`                                                                                                |
 | `description?`      | `string`                                                                                                |
+| `example?`          | `string`                                                                                                |
 | `name`              | `string`                                                                                                |
 | `options?`          | `Record`\<`string`, [`TControllerMethodCmdRouteOptions`](modules.md#tcontrollermethodcmdrouteoptions)\> |
 | `remarks?`          | `string`                                                                                                |
@@ -474,7 +496,7 @@ src/packages/iswork/src/types/controller.ts:4
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:47
+src/packages/iswork/src/types/controller.ts:55
 
 ---
 
@@ -484,7 +506,7 @@ src/packages/iswork/src/types/controller.ts:47
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:86
+src/packages/iswork/src/types/controller.ts:96
 
 ---
 
@@ -499,6 +521,7 @@ src/packages/iswork/src/types/controller.ts:86
 | `arguments?`        | [`TControllerMethodCmdRouteOptions`](modules.md#tcontrollermethodcmdrouteoptions)[] |
 | `cmd`               | `string`                                                                            |
 | `description?`      | `string`                                                                            |
+| `example?`          | `string`                                                                            |
 | `name`              | `string`                                                                            |
 | `options?`          | [`TControllerMethodCmdRouteOptions`](modules.md#tcontrollermethodcmdrouteoptions)[] |
 | `shortDescription?` | `string`                                                                            |
@@ -507,7 +530,7 @@ src/packages/iswork/src/types/controller.ts:86
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:60
+src/packages/iswork/src/types/controller.ts:69
 
 ---
 
@@ -529,7 +552,7 @@ src/packages/iswork/src/types/controller.ts:60
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:71
+src/packages/iswork/src/types/controller.ts:81
 
 ---
 
@@ -539,13 +562,13 @@ src/packages/iswork/src/types/controller.ts:71
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:81
+src/packages/iswork/src/types/controller.ts:91
 
 ---
 
 ### TControllerMethodComponentAccept
 
-Ƭ **TControllerMethodComponentAccept**\<`Props`\>: `Record`\<`string`, `unknown`\> \| \{ `extra?`: `Record`\<`string`, `unknown`\> ; `props?`: `Props` }
+Ƭ **TControllerMethodComponentAccept**\<`Props`\>: `Record`\<`string`, `unknown`\> \| \{ `component?`: `string` ; `extra?`: `Record`\<`string`, `unknown`\> ; `props?`: `Props` }
 
 #### Type parameters
 
@@ -555,7 +578,7 @@ src/packages/iswork/src/types/controller.ts:81
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:26
+src/packages/iswork/src/types/controller.ts:34
 
 ---
 
@@ -573,7 +596,7 @@ src/packages/iswork/src/types/controller.ts:26
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:15
+src/packages/iswork/src/types/controller.ts:17
 
 ---
 
@@ -597,7 +620,7 @@ src/packages/iswork/src/types/controller.ts:15
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:30
+src/packages/iswork/src/types/controller.ts:38
 
 ---
 
@@ -619,7 +642,33 @@ src/packages/iswork/src/types/controller.ts:30
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:35
+src/packages/iswork/src/types/controller.ts:43
+
+---
+
+### TControllerMethodMessageHandlerMetadata
+
+Ƭ **TControllerMethodMessageHandlerMetadata**: `Record`\<`string` \| `number`, `boolean`\>
+
+#### Defined in
+
+src/packages/iswork/src/types/controller.ts:27
+
+---
+
+### TControllerMethodMessageMetadata
+
+Ƭ **TControllerMethodMessageMetadata**: `Object`
+
+#### Type declaration
+
+| Name      | Type      |
+| :-------- | :-------- |
+| `message` | `boolean` |
+
+#### Defined in
+
+src/packages/iswork/src/types/controller.ts:23
 
 ---
 
@@ -636,7 +685,7 @@ src/packages/iswork/src/types/controller.ts:35
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:10
+src/packages/iswork/src/types/controller.ts:12
 
 ---
 
@@ -646,7 +695,7 @@ src/packages/iswork/src/types/controller.ts:10
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:41
+src/packages/iswork/src/types/controller.ts:49
 
 ---
 
@@ -656,7 +705,7 @@ src/packages/iswork/src/types/controller.ts:41
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:43
+src/packages/iswork/src/types/controller.ts:51
 
 ---
 
@@ -666,7 +715,7 @@ src/packages/iswork/src/types/controller.ts:43
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:39
+src/packages/iswork/src/types/controller.ts:47
 
 ---
 
@@ -676,7 +725,7 @@ src/packages/iswork/src/types/controller.ts:39
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:45
+src/packages/iswork/src/types/controller.ts:53
 
 ---
 
@@ -693,7 +742,7 @@ src/packages/iswork/src/types/controller.ts:45
 
 #### Defined in
 
-src/packages/iswork/src/types/controller.ts:21
+src/packages/iswork/src/types/controller.ts:29
 
 ---
 
@@ -916,22 +965,6 @@ src/packages/iswork/src/orm/types/query-builder.ts:43
 
 ---
 
-### TDomainClass
-
-Ƭ **TDomainClass**\<`T`\>: [`IAnyClass`](interfaces/IAnyClass.md)\<`T`\>
-
-#### Type parameters
-
-| Name | Type      |
-| :--- | :-------- |
-| `T`  | `unknown` |
-
-#### Defined in
-
-src/packages/iswork/src/types/domain.ts:7
-
----
-
 ### TDomainControllerMetadata
 
 Ƭ **TDomainControllerMetadata**: `Object`
@@ -945,7 +978,7 @@ src/packages/iswork/src/types/domain.ts:7
 
 #### Defined in
 
-src/packages/iswork/src/types/domain.ts:26
+src/packages/iswork/src/types/domain.ts:27
 
 ---
 
@@ -955,7 +988,7 @@ src/packages/iswork/src/types/domain.ts:26
 
 #### Defined in
 
-src/packages/iswork/src/types/domain.ts:30
+src/packages/iswork/src/types/domain.ts:31
 
 ---
 
@@ -970,6 +1003,7 @@ src/packages/iswork/src/types/domain.ts:30
 | `controllers?` | [`TController`](modules.md#tcontroller)[]         |
 | `exports?`     | [`TMetadataExport`](modules.md#tmetadataexport)[] |
 | `imports?`     | [`TMetadataImport`](modules.md#tmetadataimport)[] |
+| `middlewares?` | [`TMiddleware`](modules.md#tmiddleware)[]         |
 | `name`         | `string`                                          |
 | `providers?`   | [`TProviderMeta`](modules.md#tprovidermeta)[]     |
 | `viewName`     | `string`                                          |
@@ -994,7 +1028,26 @@ src/packages/iswork/src/types/domain.ts:11
 
 #### Defined in
 
-src/packages/iswork/src/types/domain.ts:20
+src/packages/iswork/src/types/domain.ts:21
+
+---
+
+### TFetchSSEMessage
+
+Ƭ **TFetchSSEMessage**: `Object`
+
+#### Type declaration
+
+| Name     | Type     |
+| :------- | :------- |
+| `data`   | `string` |
+| `event?` | `string` |
+| `id`     | `number` |
+| `retry?` | `number` |
+
+#### Defined in
+
+src/packages/iswork/src/orm/types/driver.ts:1
 
 ---
 
@@ -1032,6 +1085,44 @@ src/packages/iswork/src/types/token.ts:4
 
 ---
 
+### TMessageIteratorData
+
+Ƭ **TMessageIteratorData**: `Record`\<`string`, `any`\> & \{ `meta?`: \{ `status?`: [`EMessageStatus`](enums/EMessageStatus.md) } }
+
+#### Defined in
+
+src/packages/iswork/src/message/message-iterator.ts:4
+
+---
+
+### TMessageSSEIteratorData
+
+Ƭ **TMessageSSEIteratorData**: `Record`\<`string`, `any`\>
+
+#### Defined in
+
+src/packages/iswork/src/message/message-sse.ts:4
+
+---
+
+### TMessageSSEOptions
+
+Ƭ **TMessageSSEOptions**: `Object`
+
+#### Type declaration
+
+| Name           | Type                                      |
+| :------------- | :---------------------------------------- |
+| `prefixUrl?`   | `string`                                  |
+| `sendHandler?` | (`message`: `any`) => `Promise`\<`void`\> |
+| `sendUrl`      | `string`                                  |
+
+#### Defined in
+
+src/packages/iswork/src/message/message-sse.ts:5
+
+---
+
 ### TMetadataExport
 
 Ƭ **TMetadataExport**: [`TProviderMeta`](modules.md#tprovidermeta) \| [`TController`](modules.md#tcontroller)
@@ -1044,7 +1135,7 @@ src/packages/iswork/src/types/domain.ts:9
 
 ### TMetadataImport
 
-Ƭ **TMetadataImport**: [`TDomainClass`](modules.md#tdomainclass)
+Ƭ **TMetadataImport**: [`IDomainClass`](interfaces/IDomainClass.md)
 
 #### Defined in
 
@@ -1054,7 +1145,7 @@ src/packages/iswork/src/types/domain.ts:8
 
 ### TMiddleware
 
-Ƭ **TMiddleware**\<`T`\>: (`ctx`: `T`, `next`: () => `unknown`) => `any`
+Ƭ **TMiddleware**\<`T`\>: (`ctx`: `T`, `next`: () => `any`) => `any`
 
 #### Type parameters
 
@@ -1068,10 +1159,10 @@ src/packages/iswork/src/types/domain.ts:8
 
 ##### Parameters
 
-| Name   | Type            |
-| :----- | :-------------- |
-| `ctx`  | `T`             |
-| `next` | () => `unknown` |
+| Name   | Type        |
+| :----- | :---------- |
+| `ctx`  | `T`         |
+| `next` | () => `any` |
 
 ##### Returns
 
@@ -1602,6 +1693,52 @@ src/packages/iswork/src/types/metadata-scanner.ts:7
 
 src/packages/iswork/src/types/metadata-scanner.ts:3
 
+---
+
+### TSubscribeCallback
+
+Ƭ **TSubscribeCallback**\<`V`\>: (`observer`: [`IObserver`](interfaces/IObserver.md)\<`V`\>) => [`TUnSubscribe`](modules.md#tunsubscribe)
+
+#### Type parameters
+
+| Name | Type      |
+| :--- | :-------- |
+| `V`  | `unknown` |
+
+#### Type declaration
+
+▸ (`observer`): [`TUnSubscribe`](modules.md#tunsubscribe)
+
+##### Parameters
+
+| Name       | Type                                          |
+| :--------- | :-------------------------------------------- |
+| `observer` | [`IObserver`](interfaces/IObserver.md)\<`V`\> |
+
+##### Returns
+
+[`TUnSubscribe`](modules.md#tunsubscribe)
+
+#### Defined in
+
+src/packages/iswork/src/message/message-observable.ts:7
+
+---
+
+### TUnSubscribe
+
+Ƭ **TUnSubscribe**: `Object`
+
+#### Type declaration
+
+| Name          | Type         |
+| :------------ | :----------- |
+| `unsubscribe` | () => `void` |
+
+#### Defined in
+
+src/packages/iswork/src/message/message-observable.ts:8
+
 ## Variables
 
 ### CONTROLLER_METADATA
@@ -1620,7 +1757,7 @@ src/packages/iswork/src/constants/decorator.ts:5
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:15
+src/packages/iswork/src/constants/decorator.ts:19
 
 ---
 
@@ -1631,6 +1768,26 @@ src/packages/iswork/src/constants/decorator.ts:15
 #### Defined in
 
 src/packages/iswork/src/constants/decorator.ts:9
+
+---
+
+### CONTROLLER_METHOD_MESSAGE_HANDLER_METADATA
+
+• `Const` **CONTROLLER_METHOD_MESSAGE_HANDLER_METADATA**: typeof [`CONTROLLER_METHOD_MESSAGE_HANDLER_METADATA`](modules.md#controller_method_message_handler_metadata)
+
+#### Defined in
+
+src/packages/iswork/src/constants/decorator.ts:17
+
+---
+
+### CONTROLLER_METHOD_MESSAGE_METADATA
+
+• `Const` **CONTROLLER_METHOD_MESSAGE_METADATA**: typeof [`CONTROLLER_METHOD_MESSAGE_METADATA`](modules.md#controller_method_message_metadata)
+
+#### Defined in
+
+src/packages/iswork/src/constants/decorator.ts:15
 
 ---
 
@@ -1660,7 +1817,7 @@ src/packages/iswork/src/constants/decorator.ts:13
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:25
+src/packages/iswork/src/constants/decorator.ts:29
 
 ---
 
@@ -1670,7 +1827,7 @@ src/packages/iswork/src/constants/decorator.ts:25
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:23
+src/packages/iswork/src/constants/decorator.ts:27
 
 ---
 
@@ -1680,7 +1837,7 @@ src/packages/iswork/src/constants/decorator.ts:23
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:17
+src/packages/iswork/src/constants/decorator.ts:21
 
 ---
 
@@ -1690,7 +1847,7 @@ src/packages/iswork/src/constants/decorator.ts:17
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:19
+src/packages/iswork/src/constants/decorator.ts:23
 
 ---
 
@@ -1700,7 +1857,7 @@ src/packages/iswork/src/constants/decorator.ts:19
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:21
+src/packages/iswork/src/constants/decorator.ts:25
 
 ---
 
@@ -1720,7 +1877,7 @@ src/packages/iswork/src/constants/decorator.ts:11
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:31
+src/packages/iswork/src/constants/decorator.ts:35
 
 ---
 
@@ -1757,7 +1914,7 @@ src/packages/iswork/src/constants/decorator.ts:3
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:18
+src/packages/iswork/src/decorators/index.ts:21
 
 ---
 
@@ -1787,7 +1944,7 @@ src/packages/iswork/src/constants/ioc-container.ts:1
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:27
+src/packages/iswork/src/constants/decorator.ts:31
 
 ---
 
@@ -1797,7 +1954,7 @@ src/packages/iswork/src/constants/decorator.ts:27
 
 #### Defined in
 
-src/packages/iswork/src/constants/decorator.ts:29
+src/packages/iswork/src/constants/decorator.ts:33
 
 ---
 
@@ -1817,7 +1974,7 @@ src/packages/iswork/src/orm/query-builder.ts:77
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:44
+src/packages/iswork/src/decorators/index.ts:47
 
 ---
 
@@ -1895,7 +2052,7 @@ src/packages/iswork/src/orm/query-builder.ts:34
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:48
+src/packages/iswork/src/decorators/index.ts:51
 
 ---
 
@@ -1929,7 +2086,7 @@ src/packages/iswork/src/decorators/index.ts:48
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:56
+src/packages/iswork/src/decorators/index.ts:59
 
 ---
 
@@ -1949,7 +2106,7 @@ src/packages/iswork/src/decorators/index.ts:56
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:52
+src/packages/iswork/src/decorators/index.ts:55
 
 ▸ **CmdRouteOptions**(`paramKey`): `ParameterDecorator`
 
@@ -1965,7 +2122,7 @@ src/packages/iswork/src/decorators/index.ts:52
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:52
+src/packages/iswork/src/decorators/index.ts:55
 
 ▸ **CmdRouteOptions**(`options`): `ParameterDecorator`
 
@@ -1981,7 +2138,7 @@ src/packages/iswork/src/decorators/index.ts:52
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:52
+src/packages/iswork/src/decorators/index.ts:55
 
 ---
 
@@ -2026,13 +2183,13 @@ src/packages/iswork/src/orm/decorators/columns/Column.ts:13
 
 ### Component
 
-▸ **Component**(`name`): `MethodDecorator`
+▸ **Component**(`name?`): `MethodDecorator`
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
-| `name` | `string` |
+| Name    | Type     |
+| :------ | :------- |
+| `name?` | `string` |
 
 #### Returns
 
@@ -2040,7 +2197,7 @@ src/packages/iswork/src/orm/decorators/columns/Column.ts:13
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:63
+src/packages/iswork/src/decorators/index.ts:66
 
 ▸ **Component**(`options`): `MethodDecorator`
 
@@ -2056,7 +2213,7 @@ src/packages/iswork/src/decorators/index.ts:63
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:63
+src/packages/iswork/src/decorators/index.ts:66
 
 ---
 
@@ -2070,7 +2227,7 @@ src/packages/iswork/src/decorators/index.ts:63
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:47
+src/packages/iswork/src/decorators/index.ts:50
 
 ▸ **Controller**(`alias`): `ClassDecorator`
 
@@ -2086,7 +2243,7 @@ src/packages/iswork/src/decorators/index.ts:47
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:47
+src/packages/iswork/src/decorators/index.ts:50
 
 ▸ **Controller**(`options`): `ClassDecorator`
 
@@ -2102,7 +2259,7 @@ src/packages/iswork/src/decorators/index.ts:47
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:47
+src/packages/iswork/src/decorators/index.ts:50
 
 ---
 
@@ -2134,7 +2291,7 @@ src/packages/iswork/src/decorators/index.ts:47
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:46
+src/packages/iswork/src/decorators/index.ts:49
 
 ---
 
@@ -2168,7 +2325,7 @@ src/packages/iswork/src/decorators/index.ts:46
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:60
+src/packages/iswork/src/decorators/index.ts:63
 
 ---
 
@@ -2194,7 +2351,7 @@ src/packages/iswork/src/decorators/index.ts:60
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:45
+src/packages/iswork/src/decorators/index.ts:48
 
 ---
 
@@ -2299,6 +2456,54 @@ src/packages/iswork/src/ioc/decorators/injectable.ts:8
 
 ---
 
+### Message
+
+▸ **Message**(`options?`): `MethodDecorator`
+
+#### Parameters
+
+| Name      | Type                                                                              |
+| :-------- | :-------------------------------------------------------------------------------- |
+| `options` | [`TControllerMethodMessageMetadata`](modules.md#tcontrollermethodmessagemetadata) |
+
+#### Returns
+
+`MethodDecorator`
+
+#### Defined in
+
+src/packages/iswork/src/decorators/index.ts:79
+
+---
+
+### MessageHandler
+
+▸ **MessageHandler**(): (`target`: `object`, `propertyKey`: `undefined` \| `string` \| `symbol`, `parameterIndex`: `number`) => `void`
+
+#### Returns
+
+`fn`
+
+▸ (`target`, `propertyKey`, `parameterIndex`): `void`
+
+##### Parameters
+
+| Name             | Type                                |
+| :--------------- | :---------------------------------- |
+| `target`         | `object`                            |
+| `propertyKey`    | `undefined` \| `string` \| `symbol` |
+| `parameterIndex` | `number`                            |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+src/packages/iswork/src/decorators/index.ts:84
+
+---
+
 ### Meta
 
 ▸ **Meta**(`field`): (`target`: `object`, `propertyKey`: `undefined` \| `string` \| `symbol`, `parameterIndex`: `number`) => `void`
@@ -2329,7 +2534,7 @@ src/packages/iswork/src/ioc/decorators/injectable.ts:8
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:61
+src/packages/iswork/src/decorators/index.ts:64
 
 ---
 
@@ -2349,7 +2554,7 @@ src/packages/iswork/src/decorators/index.ts:61
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:62
+src/packages/iswork/src/decorators/index.ts:65
 
 ▸ **Method**(`options`): `MethodDecorator`
 
@@ -2365,7 +2570,7 @@ src/packages/iswork/src/decorators/index.ts:62
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:62
+src/packages/iswork/src/decorators/index.ts:65
 
 ---
 
@@ -2432,7 +2637,7 @@ src/packages/iswork/src/orm/decorators/model/Model.ts:12
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:71
+src/packages/iswork/src/decorators/index.ts:74
 
 ---
 
@@ -2491,7 +2696,7 @@ src/packages/iswork/src/orm/decorators/columns/PrimaryColumn.ts:12
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:67
+src/packages/iswork/src/decorators/index.ts:70
 
 ▸ **Return**(`options`): `MethodDecorator`
 
@@ -2507,7 +2712,7 @@ src/packages/iswork/src/decorators/index.ts:67
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:67
+src/packages/iswork/src/decorators/index.ts:70
 
 ---
 
@@ -2657,4 +2862,4 @@ src/packages/iswork/src/orm/decorators/columns/PrimaryColumn.ts:32
 
 #### Defined in
 
-src/packages/iswork/src/decorators/index.ts:37
+src/packages/iswork/src/decorators/index.ts:40

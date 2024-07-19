@@ -1,4 +1,4 @@
-import { ScopeError, wrap, unWarp } from '@istock/util';
+import { ScopeError, wrap, unWarp, isAsyncIterableIterator } from '@istock/util';
 import type { IDomainClass } from '../interfaces';
 import type { TMiddleware, TApplicationOptions, TCmdpMessage } from '../types';
 import { compose } from '../compose';
@@ -7,6 +7,9 @@ import { PipeManager, type TPipeKey } from '../pipe';
 import { ApplicationContext } from './context';
 import { MessageHandler } from './message-handler';
 import { ApplicationEvent } from './application-event';
+import { MessageChannelManager } from './message-channel-manager';
+import { Observable } from '../message/index';
+import { EMessageStatus } from '../enums/index';
 
 /**
  * 应用框架入口
@@ -18,6 +21,8 @@ export class Application extends ApplicationEvent {
   readonly #options: TApplicationOptions;
   readonly #domainHandler: DomainHandler;
   readonly #pipeManager: PipeManager = new PipeManager();
+  readonly #messageChannelManager: MessageChannelManager = new MessageChannelManager();
+  #messageCallback: (event: MessageEvent<TCmdpMessage<any>>) => Promise<void> = async () => {};
 
   get globalMiddleware() {
     return this.#options.middlewares;
@@ -25,6 +30,10 @@ export class Application extends ApplicationEvent {
 
   get allDomain() {
     return this.#domainHandler.domainManager.domains;
+  }
+
+  get messageChannelManager() {
+    return this.#messageChannelManager;
   }
 
   /**
@@ -65,7 +74,8 @@ export class Application extends ApplicationEvent {
     this.#domainHandler.domainManager.scanDomain(domainClass);
     this.#domainHandler.addGlobalProvider();
     this.listened();
-    return this.#callback();
+    this.#messageCallback = this.#callback();
+    return this.#messageCallback;
   }
 
   /**
@@ -91,23 +101,98 @@ export class Application extends ApplicationEvent {
         const fn = this.#compose([...this.#options.middlewares, ...middlewares]);
         // 执行中间件
         await fn(ctx, async (ctx: ApplicationContext) => {
-          if (cmdpHandler) {
-            const payload = await cmdpHandler();
-            const message = ctx.cmdp.getReturnMessage(payload);
-            this.emit(wrap(message));
+          if (!cmdpHandler) return;
+          const payload = await cmdpHandler();
+          let message = ctx.cmdp.getReturnMessage(payload);
+          const wrapMessage =
+            message.payload instanceof Observable || isAsyncIterableIterator(message.payload) ? message : wrap(message);
+          const returnMeta = ctx.cmdp.getReturnMeta();
+          const messageChannelAdapter = ctx.app.messageChannelManager.getMessageChannelAdapter(
+            `${returnMeta?.messageId ?? ''}`
+          );
+          if (!messageChannelAdapter) {
+            this.emit(wrapMessage);
+            return;
+          }
+          if (returnMeta?.status === EMessageStatus.COMPLETE) {
+            await messageChannelAdapter.close(); // 关闭当前消息通道监听
+          }
+          if (messageChannelAdapter.hasOnMessageCallback) {
+            // 发送消息给port2
+            if (message.payload instanceof Observable) {
+              // 可观察对象处理
+              const subscription = message.payload.subscribe({
+                next: (value) => {
+                  message = ctx.cmdp.getReturnMessage(value ?? null);
+                  messageChannelAdapter.send(wrap(message)).catch((error) => {
+                    this.#messageCallbackErrorHandler(ctx, error);
+                  });
+                },
+                complete: (value) => {
+                  message = ctx.cmdp.getReturnMessage(value ?? null);
+                  if (!message.meta) {
+                    message.meta = {};
+                  }
+                  message.meta.status = EMessageStatus.COMPLETE;
+                  messageChannelAdapter
+                    .send(wrap(message))
+                    .catch((error) => {
+                      this.#messageCallbackErrorHandler(ctx, error);
+                    })
+                    .finally(() => {
+                      subscription.unsubscribe();
+                    });
+                },
+                error: (error) => {
+                  this.#messageCallbackErrorHandler(ctx, error);
+                },
+              });
+            } else if (isAsyncIterableIterator<TCmdpMessage>(message.payload)) {
+              // 可迭代对象
+              for await (const msg of message.payload) {
+                message = ctx.cmdp.getReturnMessage(msg ?? null);
+                await messageChannelAdapter.send(message);
+              }
+            } else {
+              await messageChannelAdapter.send(message); // 通过消息通道发送消息;
+            }
+          } else {
+            if (returnMeta?.status !== EMessageStatus.COMPLETE) {
+              messageChannelAdapter.onMessage(this.#messageCallback); // 建立监听消息通道
+            }
+            this.emit(wrapMessage, {
+              transfer: [messageChannelAdapter.instance.port2],
+            }); // 发送消息并附带消息通道port2
           }
         });
       } catch (err) {
-        if (err instanceof Error) {
-          ctx.cmdp.setReturnMeta('errorMsg', err.message ?? '请求错误');
-          ctx.cmdp.setReturnMeta('errorStack', err.stack ?? new Error().stack);
-        }
-        this.emit(ctx.cmdp.getReturnMessage({}));
-        throw err;
+        this.#messageCallbackErrorHandler(ctx, err);
       } finally {
         this.listenOutput();
       }
     };
+  }
+
+  #messageCallbackErrorHandler(ctx: ApplicationContext, err: any) {
+    if (err instanceof Error) {
+      ctx.cmdp.setReturnMeta('errorMsg', err.message ?? '请求错误');
+      ctx.cmdp.setReturnMeta('errorStack', err.stack ?? new Error().stack);
+    }
+    const returnMeta = ctx.cmdp.getReturnMeta();
+    const messageChannelAdapter = ctx.app.messageChannelManager.getMessageChannelAdapter(
+      `${returnMeta?.messageId ?? ''}`
+    );
+    const errorMessage = wrap(ctx.cmdp.getReturnMessage({}));
+    if (messageChannelAdapter) {
+      // 使用通道发送错误消息
+      messageChannelAdapter.send(errorMessage).catch((err) => {
+        throw err;
+      });
+    } else {
+      // 正常发送错误消息
+      this.emit(errorMessage);
+    }
+    throw err;
   }
 
   /**

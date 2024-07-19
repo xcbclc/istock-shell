@@ -1,7 +1,7 @@
 {
   "用户登录": {
     "name": "用户登录",
-    "tag": "暂未实现",
+    "tag": "",
     "cmd": "yhdl",
     "usage": "yhdl [-zh <用户名|手机号>] [-mm <密码>]",
     "description": "登录指定用户账号",
@@ -11,15 +11,15 @@
         "parameter": ["-zh", "--账号"],
         "parameterType": ["string"],
         "description": "指定账号，可以是账号、手机号",
-        "optional": false,
+        "optional": true,
         "choices": []
       },
       "密码": {
         "name": "密码",
         "parameter": ["-mm", "--密码"],
         "parameterType": ["string"],
-        "description": "限制展示查看菜单列表个数",
-        "optional": false,
+        "description": "账号密码",
+        "optional": true,
         "choices": []
       }
     },

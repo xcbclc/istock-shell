@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { TControllerMethodCmdRouteOptions } from '@istock/iswork';
 
-  export let headers: string[] = [];
+  export let headers: Array<{ value: string; class?: string }> = [];
   export let options: TControllerMethodCmdRouteOptions[] = [];
   export let type: number = 1;
 </script>
@@ -9,7 +9,7 @@
 <table>
   <thead>
     {#each headers as header}
-      <th scope="col">{header}</th>
+      <th scope="col" class={header.class ?? ''}>{header.value}</th>
     {/each}
   </thead>
   <tbody>
@@ -37,6 +37,7 @@
   table {
     border-collapse: collapse;
     text-align: left;
+    min-width: 960px;
   }
   th,
   td {
@@ -47,5 +48,13 @@
   th {
     font-weight: normal;
     white-space: nowrap;
+  }
+  th.is-least-sm,
+  td.is-least-sm {
+    min-width: 120px;
+  }
+  th.is-least-md,
+  td.is-least-md {
+    min-width: 240px;
   }
 </style>
