@@ -1,11 +1,12 @@
 import { get } from 'svelte/store';
-import { ScopeError } from '@istock/util';
+import { isNil, ScopeError } from '@istock/util';
 import {
   type TCommandItemResult,
   type TKeyCommandResult,
   type TCommandResult,
   EAstTreeType,
 } from '@istock/command-parser';
+import { EMessageCmdAction, EMessageStatus } from '@istock/iswork';
 import type { TAnyObject } from '@istock/iswork';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { ICmdOutput, ICmdOutputData, ICmdOutputWritable } from './store';
@@ -21,7 +22,7 @@ type TDeepOutputs = Array<ICmdOutputData[] | ICmdOutputData>;
  */
 export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICmdOutputWritable, input: string) => {
   const maxExecution = 50;
-  const { message, domainStore } = ctx;
+  const { workerMessage, domainStore } = ctx;
   const originPrompt = get(ctx.cmdStore.cmdPrompt);
   const { domains } = originPrompt;
 
@@ -116,8 +117,8 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
                 executePath = 'cmdAlias.recommend';
                 break; */
               case 'ai':
-                domainPath = '';
-                executePath = '';
+                domainPath = 'global';
+                executePath = 'ai.send';
                 break;
               case 'ss':
                 domainPath = '';
@@ -136,8 +137,6 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
               commandResult = commandResult.subCommand;
               cmds.push(commandResult.cmd);
             }
-
-            // todo 看怎么改成数据流
             const cmdpAddressInfo = domainStore.cmdRoute.getCmdpAddressInfo(cmds, domainNames);
             if (!cmdpAddressInfo) {
               throw new ScopeError('store.cmd-output', `未找该命令:${input}`);
@@ -154,9 +153,10 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
           }
           try {
             // 发送命令数据
-            const { payload: response } = await message.send<ICmdOutput>(domainPath, executePath, payload, {
+            const result = await workerMessage.send<ICmdOutput>(domainPath, executePath, payload, {
               domainName: metaDomain,
             });
+            const response = result.payload;
             if (!response) {
               throw new ScopeError('store.cmd-output', '未返回数据');
             }
@@ -164,6 +164,26 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
             outputs.push(outputData);
             outputStatus.push(true);
             if (!hasPipeSymbol) cmdOutput.updateLastOutputData(allOutputs.flat(maxExecution), 'message');
+            if (result.ports?.length && result.meta?.status !== EMessageStatus.COMPLETE) {
+              cmdOutput.closeCmdLoading(); // 关闭loading 交给通道消息处理
+              // 有消息通道，则监听消息通道的消息
+              const messageChannelAsyncIterator = ctx.getMessageChannelAsyncIterator(result);
+              for await (const message of messageChannelAsyncIterator) {
+                const { meta, payload } = message;
+                if (isNil(payload)) continue;
+                if (!meta) continue;
+                const output = payload?.output;
+                // 新增
+                if (meta.cmdAction === EMessageCmdAction.APPEND) {
+                  output && cmdOutput.updateLastOutputData(output, 'message');
+                }
+                // 替换
+                if (meta.cmdAction === EMessageCmdAction.REPLACE) {
+                  output && cmdOutput.replaceLastOutputData(output, 'message');
+                }
+                cmdOutput.closeCmdLoading(); // 每次收到通道消息关闭loading
+              }
+            }
           } catch (e) {
             // 接口请求错误
             const errorOutputData = getOutputErrorData(e as Error);

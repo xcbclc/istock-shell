@@ -27,12 +27,10 @@ export class UserService {
   }
 
   async login(username: string, password: string) {
-    const query = UserModel.createQueryBuilder().search({
-      username,
-      password,
-    });
-    const result = await UserModel.query(query.getQueryData());
-    return result && result.length > 0 ? result[0] : null;
+    const query = UserModel.createQueryBuilder().setFilter(['username', 'eq', username]);
+    const [user] = (await UserModel.query(query.getQueryData())) ?? [];
+    if (!user) return false;
+    return user.password === password;
   }
 
   async create(data: TModelCreate<UserModel>) {

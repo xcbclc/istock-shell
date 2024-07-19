@@ -271,3 +271,11 @@ export const isArrayStrings = (val: any): val is string[] => isArrayFull(val) &&
 export const isDateString = (val: any): val is string =>
   isStringFull(val) &&
   /^\d{4}-[01]\d-[0-3]\d(?:T[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[-+][0-2]\d(?::?[0-5]\d)?)?)?$/g.test(val);
+
+/**
+ * 简单判断是否是异步迭代器
+ * @param val
+ */
+export const isAsyncIterableIterator = <T = unknown>(val: any): val is AsyncIterableIterator<T> => {
+  return val != null && typeof val[Symbol.asyncIterator] === 'function';
+};

@@ -6,8 +6,15 @@
 
   export let list: Array<TModelData<CmdRouteModel>> = [];
 
-  const headers: string[] = ['名称', '描述', '类型', '是否可选', '默认值', '可选值'];
-  const optionHeaders: string[] = ['选项参数', ...headers];
+  const headers: Array<{ value: string; class?: string }> = [
+    { value: '名称' },
+    { value: '描述', class: 'is-least-md' },
+    { value: '类型' },
+    { value: '是否可选' },
+    { value: '默认值' },
+    { value: '可选值' },
+  ];
+  const optionHeaders: Array<{ value: string; class?: string }> = [{ value: '选项参数' }, ...headers];
 </script>
 
 {#if list?.length}

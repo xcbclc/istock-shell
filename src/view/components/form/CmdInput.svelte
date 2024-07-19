@@ -14,6 +14,7 @@
   let cmdInputView: HTMLElement;
   let commandEditor: CommandEditor;
   let disabled = false;
+  let canContenteditable = false;
 
   export const handleCommandInput = (type: EInputRecommendType, input: string = '') => {
     if (commandEditor) {
@@ -31,26 +32,28 @@
     }
   };
 
-  const canContenteditable = () => {
-    return ctx.mode !== ECmdWindowContextMode.example;
-  };
+  $: {
+    canContenteditable = ctx.mode !== ECmdWindowContextMode.example && !disabled;
+  }
 
   onMount(() => {
     commandEditor = new CommandEditor(cmdInputView);
     commandEditor.onMount();
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     commandEditor.commandInput.addEventListener(ECommandEditorEventNames.SendCmd, async () => {
-      try {
-        if (!disabled) {
+      if (disabled) {
+        console.error('上次命令执行未结束');
+      } else {
+        try {
           disabled = true;
           const cmdStr = commandEditor.input;
           await cmdOutput.sendCmd(cmdStr);
           // 重置
           commandEditor.syncVNodeAndHtml([]);
           await cmdInput.inputUpdate([], true);
+        } finally {
+          disabled = false;
         }
-      } finally {
-        disabled = false;
       }
     });
     commandEditor.commandInput.addEventListener(ECommandEditorEventNames.RecommendCmd, (event: Event) => {
@@ -59,9 +62,8 @@
     });
   });
 
-  ctx.message.once('CmdWindowContext.initStoreDone', async () => {
+  ctx.workerMessage.once('CmdWindowContext.initStoreDone', async () => {
     if (ctx.mode === ECmdWindowContextMode.example) {
-      console.log('ctx.initStoreDone', ctx.initStoreDone);
       // demo演示逻辑
       let cmd = getQueryParam('cmd');
       if (cmd) {
@@ -81,7 +83,7 @@
   class="cmd-input"
   tabindex="0"
   autofocus
-  contenteditable={canContenteditable()}
+  contenteditable={canContenteditable}
   spellcheck="false"
   bind:this={cmdInputView}
 ></div>

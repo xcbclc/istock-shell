@@ -1,5 +1,5 @@
-import { ScopeError, isString } from '@istock/util';
-import type { TAnyObj, TModelType } from '../../types';
+import { ScopeError, isString, isUndefined } from '@istock/util';
+import type { TAnyObj, TModelType, TFetchSSEMessage } from '../../types';
 import type { ModelMetadataMap } from '../../metadata/metadata';
 
 type Fetch = typeof fetch;
@@ -84,6 +84,8 @@ export class FetchWrap {
         const fileBlob = await response.blob();
         formData.append('file', fileBlob);
         result = formData as Return;
+      } else if (contentType.includes('text/event-stream')) {
+        result = this.#streamToAsyncGenerator(response.body as any) as Return;
       } else {
         throw new ScopeError(`iswork.${this.constructor.name}`, 'response返回类型未处理');
       }
@@ -94,6 +96,59 @@ export class FetchWrap {
     } else {
       throw new ScopeError(`iswork.${this.constructor.name}`, 'response未返回类型');
     }
+  }
+
+  /**
+   * 事件流数据转换为异步生成器函数
+   * @param stream
+   * @private
+   */
+  #streamToAsyncGenerator(stream: ReadableStream<Uint8Array>, signal?: AbortSignal | null) {
+    async function* streamToAsyncGenerator() {
+      const decoder: TextDecoder = new TextDecoder('utf-8');
+      const reader: ReadableStreamDefaultReader<Uint8Array> = stream.getReader();
+      try {
+        while (true) {
+          if (signal?.aborted) {
+            await reader.cancel();
+            break;
+          }
+          const { done, value } = await reader.read();
+          if (done) {
+            break;
+          }
+          if (value) {
+            const chunk: string = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+
+            // 解析ID和数据
+            const message: Partial<TFetchSSEMessage> = {};
+            lines.forEach((line) => {
+              console.log('line', line);
+              const [key, value] = line.split(': ');
+              if (key === 'data') {
+                message[key] = isUndefined(message[key]) ? value : message[key] + '\n' + value;
+              }
+              if (key === 'event') {
+                message[key] = value;
+              }
+              if (key === 'id') {
+                message[key] = +value || undefined;
+              }
+              if (key === 'retry') {
+                message[key] = +value || undefined;
+              }
+            });
+            yield message;
+          }
+        }
+      } catch (error: any) {
+        throw new ScopeError(`iswork.FetchWrap`, error?.message ?? '获取stream失败');
+      } finally {
+        reader.releaseLock();
+      }
+    }
+    return streamToAsyncGenerator();
   }
 
   /**

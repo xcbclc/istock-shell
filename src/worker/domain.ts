@@ -10,21 +10,21 @@ self.onerror = function (event) {
 const bootstrap = async () => {
   await inintDataSource();
   const app = new Application({
-    emit: (message: unknown) => {
+    emit: (message: unknown, options?: { targetOrigin?: string; transfer?: Transferable[] }) => {
       if (self.window) {
-        console.log(message);
+        console.debug(message, options ?? {});
       } else {
-        self.postMessage(message);
+        self.postMessage(message, options ?? {});
       }
     },
   });
-  const eventCallback = app.listen(RootDomain);
+  const messageCallback = app.listen(RootDomain);
   const pipes = getPipeAlias();
   Object.keys(pipes).forEach((key) => {
     app.usePipe(key, pipes[key]);
   });
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  self.addEventListener('message', eventCallback);
+  self.addEventListener('message', messageCallback);
 };
 
 bootstrap().catch(console.error);

@@ -25,7 +25,7 @@ export interface ICmdInputWritable extends Writable<ICmdInput> {
 }
 
 export const getCmdInput = (ctx: CmdWindowContext) => {
-  const { message } = ctx;
+  const { workerMessage } = ctx;
   const cmdInput: ICmdInputWritable = Object.create(
     writable<ICmdInput>({
       inputNodes: [],
@@ -42,7 +42,7 @@ export const getCmdInput = (ctx: CmdWindowContext) => {
   };
   cmdInput.inputMerge = async (tokenValue) => {
     const { inputNodes } = get(cmdInput);
-    const response = await message.send<TCmdInputNodes>('input', 'input.merge', {
+    const response = await workerMessage.send<TCmdInputNodes>('input', 'input.merge', {
       tokenValue,
       tokens: inputNodes,
     });

@@ -2,9 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "outDir": "./src/packages/cli/dist",
     "paths": {
       "@root/*": ["*"],
@@ -14,5 +15,11 @@
       "@domains/*": ["src/worker/domains/*"]
     }
   },
-  "include": ["./src/worker/domains/**/*.cmd.ts"]
+  "tsc-alias": {
+    "verbose": true,
+    "debug": true,
+    "resolveFullPaths": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["./src/vite-env.d.ts", "./src/worker/domains/**/*.cmd.ts"]
 }

@@ -2,12 +2,13 @@ import { EventEmitter, ScopeError, isNil, isString, FESnowflake, unWarp, wrap } 
 import type { CmdWindowContext } from './cmd-window-context';
 import { get } from 'svelte/store';
 
-export type TWorkerMessageMeta = Record<string, unknown> | null;
+export type TWorkerMessageMeta = (Record<string, unknown> & { messageId?: string }) | null;
 
 export type TWorkerMessage<T = unknown> = {
   address: string;
   meta?: TWorkerMessageMeta;
   payload?: T;
+  ports?: [MessagePort];
 };
 
 export type TWorkerMessageOptions = {

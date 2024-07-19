@@ -12,7 +12,10 @@ import { ControllerMethodDecorator } from './controller/controller-method.decora
 import { ControllerPayloadDecorator } from './controller/controller-payload.decorator';
 import { ControllerComponentDecorator } from './controller/controller-component.decorator';
 import { ControllerMethodReturnDecorator } from './controller/controller-method-return.decorator';
+import { ControllerMethodMessageDecorator } from './controller/controller-method-message.decorator';
+import { ControllerMethodMessageHandlerDecorator } from './controller/controller-method-message-handler.decorator';
 
+export type { IMessageHandler } from './controller/controller-method-message-handler.decorator';
 export * from '../ioc/decorators/index';
 
 const Decorator = {
@@ -71,4 +74,14 @@ export const Return = registerAndWrapHandler<ControllerMethodReturnDecorator>(
 export const Payload = registerAndWrapHandler<ControllerPayloadDecorator>(
   decoratorRegister,
   ControllerPayloadDecorator
+);
+
+export const Message = registerAndWrapHandler<ControllerMethodMessageDecorator>(
+  decoratorRegister,
+  ControllerMethodMessageDecorator
+);
+
+export const MessageHandler = registerAndWrapHandler<ControllerMethodMessageHandlerDecorator>(
+  decoratorRegister,
+  ControllerMethodMessageHandlerDecorator
 );

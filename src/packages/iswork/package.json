@@ -6,6 +6,7 @@
     "@istock/command-parser": "workspace:^",
     "@istock/util": "workspace:^",
     "idb": "^7.1.1",
+    "qs": "^6.12.2",
     "reflect-metadata": "^0.1.13"
   }
 }

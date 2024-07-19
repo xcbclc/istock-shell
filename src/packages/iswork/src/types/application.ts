@@ -1,11 +1,10 @@
 import type { TMiddleware } from './middleware';
 
 export type TApplicationEventOptions = {
-  emit: Function;
+  emit: (message: unknown, options?: { targetOrigin?: string; transfer?: Transferable[] }) => void;
 };
 
 export type TApplicationOptions = {
   middlewares: TMiddleware[];
-  emit: Function;
   domainPath: string;
 } & TApplicationEventOptions;

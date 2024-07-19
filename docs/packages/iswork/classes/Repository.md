@@ -20,6 +20,7 @@
 - [createOne](Repository.md#createone)
 - [deleteById](Repository.md#deletebyid)
 - [deleteMany](Repository.md#deletemany)
+- [findOneById](Repository.md#findonebyid)
 - [query](Repository.md#query)
 - [run](Repository.md#run)
 - [updateById](Repository.md#updatebyid)
@@ -138,6 +139,27 @@ src/packages/iswork/src/orm/repository/repository.ts:45
 #### Defined in
 
 src/packages/iswork/src/orm/repository/repository.ts:41
+
+---
+
+### findOneById
+
+▸ **findOneById**(`model`, `id`): `Promise`\<`unknown`\>
+
+#### Parameters
+
+| Name    | Type                               |
+| :------ | :--------------------------------- |
+| `model` | typeof [`BaseModel`](BaseModel.md) |
+| `id`    | `string` \| `number`               |
+
+#### Returns
+
+`Promise`\<`unknown`\>
+
+#### Defined in
+
+src/packages/iswork/src/orm/repository/repository.ts:51
 
 ---
 

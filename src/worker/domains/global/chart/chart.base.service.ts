@@ -51,7 +51,7 @@ export class ChartBaseService {
   protected autoToChartData(outputs: Array<TControllerMethodComponentOutput<TUiTableProps>>): TChartData | undefined {
     let chatData: TChartData | undefined;
     // 说明是管道符操作
-    const output = outputs[0];
+    const output = outputs[outputs.length - 1];
     if (output.component) {
       switch (output.component) {
         case 'ShTable':

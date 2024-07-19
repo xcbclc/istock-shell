@@ -53,13 +53,13 @@
 
 #### Defined in
 
-tokenizer.ts:55
+tokenizer.ts:61
 
 ---
 
 ### #keyCommand
 
-• `Private` `Readonly` **#keyCommand**: `Object`
+• `Private` `Readonly` **#keyCommand**: `Object` = `keyCommand`
 
 #### Type declaration
 
@@ -68,13 +68,16 @@ tokenizer.ts:55
 | `ai`             | \{ `command`: `string` = 'ai:'; `content`: `RegExp` } |
 | `ai.command`     | `string`                                              |
 | `ai.content`     | `RegExp`                                              |
+| `alias`          | \{ `command`: `string` = ':'; `content`: `RegExp` }   |
+| `alias.command`  | `string`                                              |
+| `alias.content`  | `RegExp`                                              |
 | `search`         | \{ `command`: `string` = 'ss:'; `content`: `RegExp` } |
 | `search.command` | `string`                                              |
 | `search.content` | `RegExp`                                              |
 
 #### Defined in
 
-tokenizer.ts:36
+tokenizer.ts:51
 
 ---
 
@@ -84,7 +87,7 @@ tokenizer.ts:36
 
 #### Defined in
 
-tokenizer.ts:34
+tokenizer.ts:49
 
 ---
 
@@ -94,7 +97,7 @@ tokenizer.ts:34
 
 #### Defined in
 
-tokenizer.ts:33
+tokenizer.ts:48
 
 ---
 
@@ -104,7 +107,7 @@ tokenizer.ts:33
 
 #### Defined in
 
-tokenizer.ts:60
+tokenizer.ts:66
 
 ---
 
@@ -114,7 +117,7 @@ tokenizer.ts:60
 
 #### Defined in
 
-tokenizer.ts:59
+tokenizer.ts:65
 
 ---
 
@@ -124,7 +127,7 @@ tokenizer.ts:59
 
 #### Defined in
 
-tokenizer.ts:57
+tokenizer.ts:63
 
 ---
 
@@ -134,7 +137,7 @@ tokenizer.ts:57
 
 #### Defined in
 
-tokenizer.ts:48
+tokenizer.ts:54
 
 ---
 
@@ -144,7 +147,7 @@ tokenizer.ts:48
 
 #### Defined in
 
-tokenizer.ts:49
+tokenizer.ts:55
 
 ---
 
@@ -154,7 +157,7 @@ tokenizer.ts:49
 
 #### Defined in
 
-tokenizer.ts:51
+tokenizer.ts:57
 
 ---
 
@@ -164,7 +167,7 @@ tokenizer.ts:51
 
 #### Defined in
 
-tokenizer.ts:52
+tokenizer.ts:58
 
 ---
 
@@ -174,7 +177,7 @@ tokenizer.ts:52
 
 #### Defined in
 
-tokenizer.ts:29
+tokenizer.ts:44
 
 ---
 
@@ -184,7 +187,7 @@ tokenizer.ts:29
 
 #### Defined in
 
-tokenizer.ts:62
+tokenizer.ts:68
 
 ---
 
@@ -194,7 +197,7 @@ tokenizer.ts:62
 
 #### Defined in
 
-tokenizer.ts:31
+tokenizer.ts:46
 
 ---
 
@@ -216,7 +219,7 @@ tokenizer.ts:31
 
 #### Defined in
 
-tokenizer.ts:64
+tokenizer.ts:70
 
 ## Methods
 
@@ -238,7 +241,7 @@ tokenizer.ts:64
 
 #### Defined in
 
-tokenizer.ts:158
+tokenizer.ts:164
 
 ---
 
@@ -261,7 +264,7 @@ tokenizer.ts:158
 
 #### Defined in
 
-tokenizer.ts:440
+tokenizer.ts:464
 
 ---
 
@@ -285,7 +288,7 @@ tokenizer.ts:440
 
 #### Defined in
 
-tokenizer.ts:364
+tokenizer.ts:386
 
 ---
 
@@ -309,7 +312,7 @@ tokenizer.ts:364
 
 #### Defined in
 
-tokenizer.ts:308
+tokenizer.ts:314
 
 ---
 
@@ -338,7 +341,7 @@ tokenizer.ts:308
 
 #### Defined in
 
-tokenizer.ts:263
+tokenizer.ts:269
 
 ---
 
@@ -361,4 +364,4 @@ tokenizer.ts:263
 
 #### Defined in
 
-tokenizer.ts:79
+tokenizer.ts:85

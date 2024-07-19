@@ -14,6 +14,8 @@
 
   ↳ **`IAnyClass`**
 
+  ↳↳ [`IDomainClass`](IDomainClass.md)
+
 ## Indexable
 
 ▪ [k: `string` \| `symbol`]: `any`
@@ -77,7 +79,7 @@ Function.[metadata]
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.esnext.decorators.d.ts:27
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.esnext.decorators.d.ts:27
 
 ---
 
@@ -91,7 +93,7 @@ Function.arguments
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:305
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:305
 
 ---
 
@@ -105,7 +107,7 @@ Function.caller
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:306
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:306
 
 ---
 
@@ -119,7 +121,7 @@ Function.length
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:302
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:302
 
 ---
 
@@ -135,7 +137,7 @@ Function.name
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es2015.core.d.ts:95
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es2015.core.d.ts:97
 
 ---
 
@@ -149,7 +151,7 @@ Function.prototype
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:301
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:301
 
 ## Methods
 
@@ -179,7 +181,7 @@ Function.[hasInstance]
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:164
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:164
 
 ---
 
@@ -207,7 +209,7 @@ Function.apply
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:281
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:281
 
 ---
 
@@ -236,7 +238,7 @@ Function.bind
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:296
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:296
 
 ---
 
@@ -264,7 +266,7 @@ Function.call
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:288
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:288
 
 ---
 
@@ -284,4 +286,4 @@ Function.toString
 
 #### Defined in
 
-node_modules/.pnpm/typescript@5.3.3/node_modules/typescript/lib/lib.es5.d.ts:299
+node_modules/.pnpm/typescript@5.5.3/node_modules/typescript/lib/lib.es5.d.ts:299
