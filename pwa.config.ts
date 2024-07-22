@@ -1,5 +1,5 @@
 import packageInfo from './package.json';
-import { VitePWAOptions } from 'vite-plugin-pwa/dist';
+import type { VitePWAOptions } from 'vite-plugin-pwa';
 
 export const pwaConfig: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',

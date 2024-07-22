@@ -4,7 +4,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import typescript from '@rollup/plugin-typescript';
 import eslint from 'vite-plugin-eslint';
 import { VitePWA } from 'vite-plugin-pwa';
-import { pwaConfig } from 'pwa.config';
+import { pwaConfig } from './pwa.config';
 
 const tsPlugin: PluginOption = typescript({
   include: ['src/worker/domains/**/*'],
