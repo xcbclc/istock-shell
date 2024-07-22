@@ -4,7 +4,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import typescript from '@rollup/plugin-typescript';
 import eslint from 'vite-plugin-eslint';
 import { VitePWA } from 'vite-plugin-pwa';
-import packageInfo from './package.json';
+import { pwaConfig } from 'pwa.config';
 
 const tsPlugin: PluginOption = typescript({
   include: ['src/worker/domains/**/*'],
@@ -19,31 +19,7 @@ export default ({ mode }) => {
       svelte(),
       tsPlugin,
       eslint(),
-      VitePWA({
-        manifest: {
-          name: packageInfo.title,
-          short_name: packageInfo.title,
-          theme_color: '#f26522',
-          background_color: '#181818',
-          description: '一个金融数据查询终端，它简单、高效、灵活。',
-          icons: [
-            {
-              src: './public/logo120.png',
-              sizes: '120*120',
-              type: 'image/png',
-            },
-          ],
-          screenshots: [
-            {
-              src: './public/效果图.jpg',
-              sizes: '1250*775',
-            },
-          ],
-        },
-        /*devOptions: {
-          enabled: true,
-        },*/
-      }),
+      VitePWA(pwaConfig),
       {
         name: 'html-transform',
         transformIndexHtml(html) {
