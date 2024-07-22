@@ -23,6 +23,9 @@ export default defineConfig({
   title: 'iStock Shell',
   description: '一个金融数据查询终端',
   appearance: 'dark', // 黑白主题
+  sitemap: {
+    hostname: 'https://istock.red',
+  },
   themeConfig: {
     search: {
       provider: 'local',
