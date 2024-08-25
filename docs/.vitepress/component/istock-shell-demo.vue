@@ -38,5 +38,6 @@ iframe.istock-shell-demo {
   border: 1px solid var(--vp-c-brand-soft);
   border-radius: 8px;
   background-color: transparent;
+  overflow: auto;
 }
 </style>

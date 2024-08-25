@@ -5,7 +5,7 @@ hero:
   name: iStock Shell
   version: 开发版v0.1
   text: 一个金融数据查询终端
-  tagline: 简单、高效、灵活，定制自己的金融数据查询工具。
+  tagline: 简单、高效、灵活，并可轻松定制。
   image:
     src: ./static/效果图.jpg
     alt: iStock Shell

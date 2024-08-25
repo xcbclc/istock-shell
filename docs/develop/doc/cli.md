@@ -36,4 +36,4 @@ domains
 请务必写好命令描述文件，命令描述即命令文档。在执行`istock doc cmd`命令时会根据命令描述文件去生成命令文档。
 :::
 
-执行`istock doc package`自动生成`src/packages`目录相关库的文档到`docs/packages`目录下。
+执行`istock doc package`自动生成`src/packages`目录下代码库的文档到`docs/packages`目录下。
