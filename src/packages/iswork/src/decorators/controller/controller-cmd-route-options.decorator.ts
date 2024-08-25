@@ -20,7 +20,7 @@ export class ControllerCmdRouteOptionsDecorator extends AbstractParameterDecorat
   handler(paramKey: string): ParameterDecorator;
   handler(paramKey: string[]): ParameterDecorator;
   handler(options: TControllerMethodCmdRouteOptions): ParameterDecorator;
-  handler(paramKeyOrOptions: string | string[] | TControllerMethodCmdRouteOptions) {
+  handler(paramKeyOrOptions?: string | string[] | TControllerMethodCmdRouteOptions) {
     return (target: object, propertyKey: string | symbol, parameterIndex: number) => {
       const methodNames: Array<string | symbol> =
         Reflect.getOwnMetadata(CONTROLLER_METHOD_NAME_METADATA, target, propertyKey) ?? [];
@@ -60,6 +60,7 @@ export class ControllerCmdRouteOptionsDecorator extends AbstractParameterDecorat
       }
       const { payload } = cmdInfo;
       const options = isObject(payload) ? payload.options : null;
+      if (!filedNames.length) return options;
       return filedNames
         .map((filed) => {
           return isObject(options) ? (options as TAnyObject)[filed] : undefined;
