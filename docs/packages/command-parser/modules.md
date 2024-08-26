@@ -188,7 +188,7 @@ ast.ts:48
 
 #### Defined in
 
-parser.ts:74
+parser.ts:75
 
 ---
 
@@ -205,7 +205,7 @@ parser.ts:74
 
 #### Defined in
 
-parser.ts:64
+parser.ts:65
 
 ---
 
@@ -222,7 +222,7 @@ parser.ts:64
 
 #### Defined in
 
-parser.ts:76
+parser.ts:77
 
 ---
 
@@ -239,7 +239,7 @@ parser.ts:76
 
 #### Defined in
 
-parser.ts:69
+parser.ts:70
 
 ---
 
@@ -259,7 +259,7 @@ parser.ts:69
 
 #### Defined in
 
-parser.ts:56
+parser.ts:57
 
 ---
 
@@ -277,7 +277,7 @@ parser.ts:56
 
 #### Defined in
 
-parser.ts:50
+parser.ts:51
 
 ---
 

@@ -1,39 +1,37 @@
-# 开发指南：添加命令
+# 添加命令
 
-本指南将引导您通过`AKShare`的历史分笔数据（腾讯财经）接口，为A股市场数据添加一个历史分笔数据命令。按照以下步骤进行：
+得益于NestJS框架的灵感，我们在实现`Web Worker`服务框架`@istock/iswork`时采用了类似架构。意味着如果你熟悉NestJS框架，那么上手命令开发将会非常自然且高效。
+
+下面将引导您通过对接`AKShare`的[`个股信息查询`](https://akshare.akfamily.xyz/data/stock/stock.html#id8)接口，为A股市场添加一个个股信息查询的命令。
 
 ## 步骤 1: 准备工作
 
-首先，确保您已经熟悉了AKShare接口文档。我们将使用的是`历史分笔数据(腾讯财经)`接口，您可以在[AKShare](https://akshare.akfamily.xyz/data/index.html)网站上找到这一接口的详细文档。
+首先，确保您已经熟悉了AKShare的接口文档。我们将使用的是[`个股信息查询`](https://akshare.akfamily.xyz/data/stock/stock.html#id8)接口，您可以访问它查看接口的详细文档。
 
 ## 步骤 2: 创建命令文件夹
 
-在`src/worker/domains/ag`目录下，根据命令的功能创建一个新的文件夹`lsfbsj`（历史分笔数据的拼音首字母缩写）。
+在`src/worker/domains/ag`目录下，根据命令的功能创建一个新的文件夹`ggxxcx`（个股信息查询的拼音首字母缩写）。
 
 ::: warning 注意
-文件夹命名通常采用命令分类名称的拼音首字母。
+文件夹命名通常采用命令名称的`拼音首字母`。
 :::
 
 ## 步骤 3: 定义数据模型
 
-在`lsfbsj`文件夹中，创建一个名为`lsfbsj.model.ts`的文件，并根据AKShare文档中提供的输出参数定义数据模型，需要引入模型定义装饰器`Model`。示例代码如下：
+在`ggxxcx`文件夹中，创建一个名为`ggxxcx.model.ts`的文件，并根据AKShare文档中提供的输出参数定义数据模型，需要引入模型定义装饰器`Model`。示例代码如下：
 
 ```typescript
 import { BaseModel, Model } from '@istock/iswork';
 
-@Model('lsfbsj')
-export class LsfbsjModel extends BaseModel {
-  成交时间!: string;
-  成交价格!: number; // 注意单位: 元
-  价格变动!: number; // 注意单位: 元
-  成交量!: number; // 注意单位: 手
-  成交额!: number; // 注意单位: 元
-  性质!: string; // 买卖盘标记
+@Model('ggxxcx')
+export class GgxxcxModel extends BaseModel {
+  item!: string;
+  value!: number | string;
 }
 ```
 
 ::: warning 注意
-模型文件名通常规范格式为`[文件夹名].model.ts`；命令模型和命令名保持一致。比如上面模型名是`lsfbsj`，模型类名是`[模型名]Model`，后面命令名也应该定义为`lsfbsj`。
+模型文件名称格式规范为`[文件夹名].model.ts`；命令模型和命令名保持一致。比如上面模型名是`ggxxcx`，模型类名是`[模型名]Model`，后面命令名也应该定义为`ggxxcx`。
 :::
 
 ## 步骤 4: 注册数据源
@@ -42,37 +40,37 @@ export class LsfbsjModel extends BaseModel {
 
 ```typescript
 // ...
-import { LsfbsjModel } from '@domains/ag/lsfbsj/lsfbsj.model'; // [!code ++]
+import { GgxxcxModel } from '@domains/ag/ggxxcx/ggxxcx.model.ts'; // [!code ++]
 // ...
-export const fetchDataSourceModels = [
+export const akShareFetchDataSourceModels = [
   // ...
-  LsfbsjModel, // [!code ++]
+  GgxxcxModel, // [!code ++]
   // ...
 ];
 // ...
-const fetchDataSource = new DataSource<'fetch'>({
+const akShareFetchDataSource = new DataSource<'fetch'>({
   name: 'fetch',
   type: 'fetch',
-  entities: fetchDataSourceModels,
-  prefixUrl: import.meta.env.VITE_AKSHARE_API ?? '/api/public',
+  entities: akShareFetchDataSourceModels,
+  prefixUrl: import.meta.env.VITE_AKSHARE_API ?? '/api/akshare',
 });
-await fetchDataSource.initialize();
+await akShareFetchDataSource.initialize();
 // ...
 ```
 
 ## 步骤 5: 开发服务层
 
-在`lsfbsj`文件夹下创建`lsfbsj.service.ts`文件，用于处理与AKShare接口的通信。
-根据AKShare数据接口文档，历史分笔数据(腾讯财经)接口地址为`stock_zh_a_tick_tx`，输入参数需要`symbol`，我需要引入`LsfbsjModel`模型及服务注入装饰器`Injectable`，示例代码如下：
+在`ggxxcx`文件夹下创建`ggxxcx.service.ts`文件，用于处理与AKShare接口的通信。
+根据AKShare数据接口文档，[`个股信息查询`](https://akshare.akfamily.xyz/data/stock/stock.html#id8)接口地址为`stock_individual_info_em`，输入参数需要`symbol`和`timeout`，我需要引入`GgxxcxModel`模型及服务注入装饰器`Injectable`，示例代码如下：
 
 ```typescript
 import { Injectable, type TModelData } from '@istock/iswork';
-import { LsfbsjModel } from './lsfbsj.model';
+import { GgxxcxModel } from './ggxxcx.model';
 
 @Injectable()
-export class LsfbsjService {
-  async stockZhATickTx(symbol: string) {
-    return await LsfbsjModel.run<Array<TModelData<LsfbsjModel>>>('/stock_zh_a_tick_tx', {
+export class GgxxcxService {
+  async getStockIndividualInfoEm(symbol: string) {
+    return await GgxxcxModel.run<Array<TModelData<GgxxcxModel>>>('/stock_individual_info_em', {
       method: 'get',
       query: {
         symbol,
@@ -88,27 +86,30 @@ export class LsfbsjService {
 
 ## 步骤 6: 定义命令描述
 
-接下来，我们需要为命令提供一个清晰的描述。在`lsfbsj`文件夹中创建`lsfbsj.cmd.ts`文件，并定义命令。示例代码如下：
+接下来，我们需要为命令提供一个清晰的描述。在`ggxxcx`文件夹中创建`ggxxcx.cmd.ts`命令描述文件，并定义命令。示例代码如下：
 
 ```typescript
-import { getUnitOption, getStockCode } from '@domains/@common';
+import { getUnitOption, getStockCode, getStockName } from '@/worker/common';
 
 export default {
-  历史分笔数据: {
-    name: '历史分笔数据',
-    cmd: 'lsfbsj',
-    usage: 'lsfbsj <-gpdm <股票代码>>',
+  个股信息查询: {
+    name: '个股信息查询',
+    cmd: 'ggxxcx', // 命令
+    usage: 'ggxxcx [-gpdm <股票代码>] [-gpmc <股票名称>]', // 命令用法
     options: {
-      单位: getUnitOption({}),
-      股票代码: getStockCode(),
+      单位: getUnitOption({
+        default: '*:总市值·亿，*:流通市值·亿，*:总股本·亿，*:流通股·亿',
+      }), // 单位格式化
+      股票代码: getStockCode(), // 支持传入股票代码
+      股票名称: getStockName(), // 支持传入股票名称
     },
     source: {
-      title: '历史分笔数据-腾讯财经',
-      url: 'http://gu.qq.com/sz300494/gp/detail', // 对应AKShare目标地址
+      title: '个股信息查询', // akshare标题
+      url: 'http://quote.eastmoney.com/concept/sh603777.html?from=classic', // akshare目标地址
     },
-    description:
-      '每个交易日 16:00 提供当日数据; 如遇到数据缺失, 请使用 ak.stock_zh_a_tick_163() 接口(注意数据会有一定差异)', // 对应AKShare描述
-    remarks: '限量: 单次返回最近交易日的历史分笔行情数据', // 对应AKShare提示
+    description: '东方财富-个股-股票信息', // akshare描述
+    remarks: '限量: 单次返回指定 symbol 的个股信息', // akshare备注信息
+    example: 'ggxxcx -gpmc 贵州茅台 -dw', // 示例命令
   },
 };
 ```
@@ -119,12 +120,13 @@ export default {
 export type TControllerMethodCmdRouteOptions = {
   name: string; // 参数名称
   parameter: string[]; // 参数键
-  parameterType: string[]; // 对应参数类型
+  parameterType: string[]; // 对应参数类型 string | number | boolean | array
   description?: string; // 参数描述
   default?: any; // 参数默认数据
   optional?: boolean; // 参数是否可选
   choices?: Array<string | number | boolean | null>; // 参数可选值
 };
+
 export type TControllerMethodCmdRoute = {
   name: string; // 命令名称
   cmd: string; // 命令
@@ -134,31 +136,34 @@ export type TControllerMethodCmdRoute = {
   options?: Record<string, TControllerMethodCmdRouteOptions>; // 命令参数选项
   subcommand?: TControllerMethodCmdRoute; // 子命令
   arguments?: TControllerMethodCmdRouteOptions[]; // 命令参数
+  source?: { title?: string; url?: string };
+  remarks?: string;
+  example?: string;
 };
 ```
 
 ::: warning 注意
 命令描述文件名通常为[文件夹名].cmd.ts或[文件夹名].cmd.json。
-部分选项参数可以通过通用函数方法创建，比如上面代码中的`getStockCode`、`getUnitOption`。
+部分选项参数可以通过通用函数方法创建，函数方法放在`@/worker/common`中，例如示例中的`getStockCode`、`getUnitOption`。
 :::
 
 ## 步骤 7: 创建控制器
 
-现在，将命令模型、服务、和描述绑定到一个控制器。创建`lsfbsj.controller.ts`，创建`LsfbsjController`控制器类，代码示例：
+现在，将命令模型、命令服务和命令描述绑定到命令控制器。创建`ggxxcx.controller.ts`，创建`GgxxcxController`控制器类，代码示例：
 
 ```typescript
 import { Controller } from '@istock/iswork';
-import { LsfbsjModel } from './lsfbsj.model';
-import { LsfbsjService } from './lsfbsj.service';
-import cmdJson from './lsfbsj.cmd';
+import { GgxxcxModel } from './ggxxcx.model';
+import { GgxxcxService } from './ggxxcx.service';
+import cmdJson from './ggxxcx.cmd';
 
 @Controller({
-  alias: 'lsfbsj', // 控制器别名
+  alias: 'ggxxcx', // 控制器别名
   component: { name: 'ShTable' }, // 控制器所有方法返回的数据用表格组件展示
 })
-export class LsfbsjController {
-  // 依赖注入LsfbsjService服务
-  constructor(private readonly lsfbsjService: LsfbsjService) {}
+export class GgxxcxController {
+  // 依赖注入GgxxcxService服务
+  constructor(private readonly ggxxcxService: GgxxcxService) {}
 }
 ```
 
@@ -166,32 +171,32 @@ export class LsfbsjController {
 
 ```typescript
 import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork'; // [!code ++]
-import { AKshareReturn } from '@domains/@common/decorators'; // [!code ++]
-import { LsfbsjModel } from './lsfbsj.model';
-import { LsfbsjService } from './lsfbsj.service';
-import cmdJson from './lsfbsj.cmd';
+import { AKshareReturn } from '@/worker/common'; // [!code ++]
+import { GgxxcxModel } from './ggxxcx.model';
+import { GgxxcxService } from './ggxxcx.service';
+import cmdJson from './ggxxcx.cmd';
 
 @Controller({
-  alias: 'lsfbsj', // 控制器别名
+  alias: 'ggxxcx', // 控制器别名
   component: { name: 'ShTable' }, // 控制器所有方法返回的数据用表格组件展示
 })
-export class LsfbsjController {
-  // 依赖注入LsfbsjService服务
-  constructor(private readonly lsfbsjService: LsfbsjService) {}
+export class GgxxcxController {
+  // 依赖注入GgxxcxController服务
+  constructor(private readonly ggxxcxService: GgxxcxService) {}
 
-  @CmdRoute(cmdJson.历史分笔数据) // [!code ++] 定义命令路由
+  @CmdRoute(cmdJson.个股信息查询) // [!code ++] // 定义命令路由
   @Method({
     // [!code ++]
-    alias: cmdJson.历史分笔数据.cmd, // [!code ++] 定义控制器方法别名
+    alias: cmdJson.个股信息查询.cmd, // [!code ++] // 定义控制器方法别名
   }) // [!code ++]
   @AKshareReturn({
     // [!code ++]
-    Model: LsfbsjModel, // [!code ++] 对应数据模型，方便把接口数据解析成二维数组
-    caption: cmdJson.历史分笔数据.source.title, // [!code ++] 表格显示标题
+    Model: GgxxcxModel, // [!code ++] // 对应数据模型，方便把接口数据解析成二维数组
+    caption: cmdJson.个股信息查询.source.title, // [!code ++] // 表格显示标题
   }) // [!code ++]
-  async stockZhATickTx(@CmdRouteOptions(cmdJson.历史分笔数据.options.股票代码) symbol: string) {
+  async getStockIndividualInfoEm(@CmdRouteOptions(cmdJson.个股信息查询.options.股票代码) symbol: string) {
     // [!code ++]
-    return await this.lsfbsjService.stockZhATickTx(symbol); // [!code ++]
+    return await this.ggxxcxService.getStockIndividualInfoEm(symbol); // [!code ++]
   } // [!code ++]
 }
 ```
@@ -202,34 +207,72 @@ export class LsfbsjController {
 
 ## 步骤 8: 导入命令到应用域
 
-到目前位置，`src/worker/domains/ag/lsfbsj`文件夹下应该有`lsfbsj.cmd.ts`、`lsfbsj.controller.ts`、`lsfbsj.model.ts`、`lsfbsj.service.ts`这四个文件。
-最后需要确保`lsfbsj`命令被导入到A股命令应用域下。在`src/worker/domains/ag/ag.domain.ts`中添加对应的引用。代码示例：
+到目前位置，`src/worker/domains/ag/ggxxcx`文件夹下应该有`ggxxcx.model.ts`、`ggxxcx.service.ts`、`ggxxcx.cmd.ts`、`ggxxcx.controller.ts`这四个文件。
+最后需要确保`ggxxcx`命令被导入到`ag`命令应用域下。在`src/worker/domains/ag/ag.domain.ts`中添加对应的引用。代码示例：
 
 ```typescript
-// ...
-import { LsfbsjController } from './lsfbsj/lsfbsj.controller'; // [!code ++]
-import { LsfbsjService } from './lsfbsj/lsfbsj.service'; // [!code ++]
+import { Domain } from '@istock/iswork';
+import { GgxxcxController } from './ggxxcx/ggxxcx.controller'; // [!code ++]
+import { GgxxcxService } from './ggxxcx/ggxxcx.service'; // [!code ++]
 
 @Domain({
   name: 'ag',
   viewName: 'A股',
   providers: [
-    ,
     // ...
-    LsfbsjService, // [!code ++]
+    GgxxcxService, // [!code ++]
+    // ...
   ],
   controllers: [
-    ,
-    // ..
-    LsfbsjController, // [!code ++]
+    // ...
+    GgxxcxController, // [!code ++]
+    // ...
   ],
 })
 export class AgDomain {}
 ```
 
+最后将`ag`命令应用域导入到`src/worker/domains/root.domain.ts`根命令应用域。
+
+```typescript
+// ...
+import { AgDomain } from './ag/ag.domain'; // [!code ++]
+// ...
+
+@Global()
+@Domain({
+  name: 'root',
+  viewName: '根',
+  imports: [
+    // ...
+    AgDomain, // [!code ++]
+    // ...
+  ],
+  providers: [],
+})
+export class RootDomain {}
+```
+
+至此，我们已经走完整个命令开发流程，接下来我们需要测试该命令。
+
 ## 命令测试
 
-- 输入命令`yyjr A股`以进入A股应用。
-- 输入命令`lsfbsj -gpdm 600519`测试获取贵州茅台的历史分笔数据。
+### 进入A股
 
-如果一切正常，您将看到请求的数据以表格形式展示，至此，您已成功添加了一个新命令。
+输入命令`yyjr ag`进入A股应用。
+<IStockShellDemo cmd="yyjr A股" :domains="[]" height="200"/>
+
+### 查看命令文档
+
+输入命令`mlcz ggxxcx`查询`ggxxcx`命令的文档。
+<IStockShellDemo cmd="mlcz ggxxcx" :domains="[{viewName: 'A股',name: 'ag'}]"/>
+
+### 测试命令
+
+输入命令`ggxxcx -gpmc 贵州茅台`查询`贵州茅台`的个股信息。
+<IStockShellDemo cmd="ggxxcx -gpmc 贵州茅台" :domains="[{viewName: 'A股',name: 'ag'}]"/>
+
+输入命令`ggxxcx -gpdm 600519`查询`600519（贵州茅台）`的个股信息。
+<IStockShellDemo cmd="ggxxcx -gpdm 600519" :domains="[{viewName: 'A股',name: 'ag'}]"/>
+
+如果一切顺利，您将看到请求的数据以表格形式展示，至此，您已成功添加了一个新命令。

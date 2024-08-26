@@ -15,7 +15,10 @@
   let commandEditor: CommandEditor;
   let disabled = false;
   let canContenteditable = false;
-
+  let tabindex: number;
+  if (ctx.mode !== ECmdWindowContextMode.example) {
+    tabindex = 0;
+  }
   export const handleCommandInput = (type: EInputRecommendType, input: string = '') => {
     if (commandEditor) {
       commandEditor.commandInput.focus();
@@ -81,7 +84,7 @@
 
 <div
   class="cmd-input"
-  tabindex="0"
+  {tabindex}
   autofocus
   contenteditable={canContenteditable}
   spellcheck="false"

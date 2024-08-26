@@ -3,21 +3,21 @@ import type { TMiddleware } from '../types';
 export type TController<T = unknown> = IAnyClass<T>;
 
 export type TControllerMetadata = {
-  alias?: string | string[];
-  version?: string;
-  component?: TControllerMethodComponentMetadata;
-  middlewares?: TMiddleware[];
+  alias?: string | string[]; // 控制器别名，默认值为控制器实例类名
+  version?: string; // 控制器版本
+  component?: TControllerMethodComponentMetadata; // 定义控制器返回数据的展示组件
+  middlewares?: TMiddleware[]; // 需要运行的中间件
 };
 
 export type TControllerMethodMetadata = {
-  alias?: string | string[];
-  version?: string;
+  alias?: string | string[]; // 控制器方法别名，默认值为控制器方法名
+  version?: string; // 控制器方法版本
 };
 
 export type TControllerMethodComponentMetadata = {
-  name: string;
-  props?: Record<string, unknown>;
-  extra?: Record<string, unknown>;
+  name: string; // 组件名
+  props?: Record<string, unknown>; // 组件参数
+  extra?: Record<string, unknown>; // 组件额外参数
 };
 
 export type TControllerMethodMessageMetadata = {
@@ -27,8 +27,8 @@ export type TControllerMethodMessageMetadata = {
 export type TControllerMethodMessageHandlerMetadata = Record<string | number, boolean>;
 
 export type TControllerMethodReturnMetadata = {
-  name: string;
-  args?: unknown[];
+  name: string; // 管道函数名称
+  args?: unknown[]; // 管道函数参数
 };
 
 export type TControllerMethodComponentAccept<Props = Record<string, unknown>> =

@@ -29,7 +29,7 @@
     scrollElement={tableWrapElement}
     slotHeaderSize={56}
     dataKey={getDataKey}
-    keeps={20}
+    keeps={30}
   >
     <table slot="custom" let:currentList let:startIndex let:onItemResize>
       {#if caption}

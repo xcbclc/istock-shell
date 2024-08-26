@@ -8,6 +8,7 @@ import {
   isStrRegExp,
   isUndefined,
   isPlainObject,
+  isString,
 } from '@istock/util';
 import { Ast, EAstTreeType, type TAstTreeItem, type TAstTreeOption, type TAstTreeParameter } from './ast';
 
@@ -347,6 +348,12 @@ export class CmdParser {
     return parameterType
       .map((type) => {
         if (isUndefined(val)) return val;
+        if (type === 'string' && isString(val)) {
+          if (/^["“][\s\S]*["”]$/g.test(val)) {
+            return val.substring(1, val.length - 1);
+          }
+          return val;
+        }
         if (type === 'boolean' && !isBoolean(val)) {
           if (['true', '1'].includes(val)) {
             return true;

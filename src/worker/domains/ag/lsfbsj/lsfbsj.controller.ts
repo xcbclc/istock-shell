@@ -1,5 +1,5 @@
 import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
-import { AKshareReturn } from '@/worker/common';
+import { AKshareReturn, withStockCodePrefix } from '@/worker/common';
 import { LsfbsjModel } from './lsfbsj.model';
 import { LsfbsjService } from './lsfbsj.service';
 import cmdJson from './lsfbsj.cmd';
@@ -21,6 +21,7 @@ export class LsfbsjController {
     caption: cmdJson.历史分笔数据.source.title, // 表格显示标题
   })
   async stockZhATickTx(@CmdRouteOptions(cmdJson.历史分笔数据.options.股票代码) symbol: string) {
+    symbol = withStockCodePrefix(symbol);
     return await this.lsfbsjService.stockZhATickTx(symbol);
   }
 }

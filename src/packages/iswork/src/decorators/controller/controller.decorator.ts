@@ -4,7 +4,7 @@ import { CONTROLLER_METADATA } from '../../constants';
 import { AbstractClassDecorator } from '../abstract-decorator';
 
 /**
- * 控制器类的装饰器从，定义和获取控制器类元数据
+ * 控制器类的装饰器，定义和获取控制器类元数据
  */
 export class ControllerDecorator extends AbstractClassDecorator<TControllerMetadata> {
   constructor(key: string | symbol = CONTROLLER_METADATA) {

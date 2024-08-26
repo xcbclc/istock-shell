@@ -107,4 +107,7 @@
     padding-right: var(--doc-gap);
     flex-shrink: 0;
   }
+  .content {
+    overflow-x: auto;
+  }
 </style>

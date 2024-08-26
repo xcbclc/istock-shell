@@ -9,7 +9,7 @@ export default {
     },
     {
       text: '命令',
-      items: [{ text: '命令列表', link: '/use/command/index.html' }],
+      items: [{ text: '命令文档', link: '/use/command/index.html' }],
     },
     {
       text: '深度学习',
@@ -21,7 +21,7 @@ export default {
   ],
   '/develop/': [
     {
-      text: '添加命令',
+      text: '开发命令',
       items: [
         { text: '开发前准备', link: '/develop/command/knowledge.html' },
         { text: '环境搭建', link: '/develop/command/install.html' },
@@ -29,15 +29,37 @@ export default {
       ],
     },
     {
+      text: '开发指南',
+      items: [
+        { text: '中间件', link: '/develop/guide/middleware.html' },
+        { text: '应用域', link: '/develop/guide/domain.html' },
+        { text: '控制器', link: '/develop/guide/controller.html' },
+        { text: '服务', link: '/develop/guide/service.html' },
+        { text: '模型', link: '/develop/guide/model.html' },
+      ],
+    },
+    {
       text: '开发文档',
       items: [
+        { text: '环境变量', link: '/develop/doc/env.html' },
         { text: '脚手架', link: '/develop/doc/cli.html' },
-        { text: 'API', link: '/develop/doc/api.html' },
+        { text: '添加文档', link: '/develop/doc/document.html' },
+        { text: '开发API', link: '/develop/doc/api.html' },
+      ],
+    },
+    {
+      text: '部署',
+      items: [
+        { text: '镜像部署', link: '/develop/deploy/docker.html' },
+        { text: '代理服务', link: '/develop/deploy/proxy.html' },
       ],
     },
     {
       text: '深入理解',
-      items: [{ text: '最佳实践', link: '/develop/best-practices.html' }],
+      items: [
+        { text: '基本原理', link: '/develop/base-logic.html' },
+        /*{ text: '最佳实践', link: '/develop/best-practices.html' }*/
+      ],
     },
   ],
   '/packages/': [

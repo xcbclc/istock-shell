@@ -21,6 +21,7 @@ import { LsfbsjModel } from '@domains/ag/lsfbsj/lsfbsj.model';
 import { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
 import { CjModel } from '@domains/wzdh/cj/cj.model';
 import { AiModel } from '@domains/global/ai/ai.model';
+import { KzzsssjModel } from '@domains/zq/kzzsssj/kzzsssj.model';
 
 export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel];
 export const akShareFetchDataSourceModels = [
@@ -42,6 +43,7 @@ export const akShareFetchDataSourceModels = [
   PqsjlModel,
   LsfbsjModel,
   StockCodeModel,
+  KzzsssjModel,
 ];
 export const fetchDataSourceModels = [AiModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
@@ -60,7 +62,7 @@ export const inintDataSource = async () => {
     name: 'fetch',
     type: 'fetch',
     entities: akShareFetchDataSourceModels,
-    prefixUrl: import.meta.env.VITE_AKSHARE_API ?? '/api/public',
+    prefixUrl: import.meta.env.VITE_AKSHARE_API ?? '/api/akshare',
   });
   await akShareFetchDataSource.initialize();
 

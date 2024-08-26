@@ -5,7 +5,6 @@ export default {
     name: '历史分笔数据',
     cmd: 'lsfbsj',
     usage: 'lsfbsj [-gpdm <股票代码>] [-gpmc <股票名称>]',
-    tag: '测试报错',
     options: {
       单位: getUnitOption({}),
       股票代码: getStockCode(),

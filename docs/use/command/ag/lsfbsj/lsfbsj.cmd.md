@@ -1,6 +1,6 @@
 # A股
 
-## lsfbsj 历史分笔数据 <Badge type="tip" text="测试报错" />
+## lsfbsj 历史分笔数据
 
 每个交易日 16:00 提供当日数据; 如遇到数据缺失, 请使用 ak.stock_zh_a_tick_163() 接口(注意数据会有一定差异)
 

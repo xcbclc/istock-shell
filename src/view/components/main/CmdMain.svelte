@@ -212,6 +212,7 @@
       display: inline;
     }
     .input {
+      word-break: break-all;
       color: var(--color-primary);
       .is-command {
         font-weight: var(--font-weight);
