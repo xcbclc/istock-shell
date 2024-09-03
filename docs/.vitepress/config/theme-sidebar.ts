@@ -44,7 +44,7 @@ export default {
         { text: '环境变量', link: '/develop/doc/env.html' },
         { text: '脚手架', link: '/develop/doc/cli.html' },
         { text: '添加文档', link: '/develop/doc/document.html' },
-        { text: '开发API', link: '/develop/doc/api.html' },
+        /*{ text: '开发API', link: '/develop/doc/api.html' },*/
       ],
     },
     {

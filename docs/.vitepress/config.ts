@@ -26,6 +26,7 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://istock.red',
   },
+  ignoreDeadLinks: true,
   themeConfig: {
     search: {
       provider: 'local',
