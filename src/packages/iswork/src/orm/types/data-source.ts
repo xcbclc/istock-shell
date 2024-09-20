@@ -1,4 +1,4 @@
-import type { TModelType } from '../types';
+import type { TModelType, TFetchWrapOptions } from '../types';
 
 export type TDataSourceType = 'indexedDB' | 'fetch' | 'memoryDB';
 
@@ -15,10 +15,7 @@ export type TDataSourceIndexedDBOptions = {
   version: number;
 } & TDataSourceCommonOptions;
 
-export type TDataSourceFetchOptions = {
-  prefixUrl?: string;
-} & Partial<RequestInit> &
-  TDataSourceCommonOptions;
+export type TDataSourceFetchOptions = TFetchWrapOptions & TDataSourceCommonOptions;
 
 export type TDataSourceMemoryDBOptions = {
   dbName: string;

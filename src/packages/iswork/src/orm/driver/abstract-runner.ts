@@ -7,13 +7,9 @@ import type { TIdAnyObject, TOrmQuery, TModelType, TAnyObj } from '../types';
  */
 export abstract class AbstractRunner<Connector = unknown> {
   // 连接器
-  readonly #connector: Connector;
-  get connector() {
-    return this.#connector;
-  }
-
+  readonly connector: Connector;
   constructor(connector: Connector) {
-    this.#connector = connector;
+    this.connector = connector;
   }
   /**
    * 创建Runner实例，需要子类实现

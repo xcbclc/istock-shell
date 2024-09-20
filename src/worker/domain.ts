@@ -1,14 +1,14 @@
 import { Application } from '@istock/iswork';
 import { getPipeAlias } from './common/pipes';
 import { RootDomain } from './domains/root.domain';
-import { inintDataSource } from './datasource-register';
+import { initDataSource } from './datasource-register';
 
 self.onerror = function (event) {
   console.error('Web Worker:', event);
 };
 
 const bootstrap = async () => {
-  await inintDataSource();
+  await initDataSource();
   const app = new Application({
     emit: (message: unknown, options?: { targetOrigin?: string; transfer?: Transferable[] }) => {
       if (self.window) {

@@ -41,8 +41,10 @@ export class FetchDriver extends AbstractDriver {
     this.#entities.forEach((model) => {
       this.scanModelMetadata(model);
     });
-    this.#connector = new FetchWrap(fetch, this.modelMetadataMap);
-    this.#connector.setPrefixUrl(this.options.prefixUrl);
+    this.#connector = new FetchWrap(fetch, this.modelMetadataMap, {
+      prefixUrl: this.options.prefixUrl,
+      requestOptions: this.options.requestOptions,
+    });
     this.#runner = FetchRunner.createRunner(this.#connector);
   }
 
@@ -55,7 +57,7 @@ export class FetchDriver extends AbstractDriver {
   }
 
   async reconnect(): Promise<void> {
-    if ([EDriverConnectStatus.ready, EDriverConnectStatus.disconnected].includes(this.status)) {
+    if (EDriverConnectStatus.ready === this.status || EDriverConnectStatus.disconnected === this.status) {
       // todo 重连
     }
   }

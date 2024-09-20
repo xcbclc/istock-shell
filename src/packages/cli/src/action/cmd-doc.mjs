@@ -71,6 +71,18 @@ export default async () => {
         cj: '财经导航',
       },
     },
+    zq: {
+      name: '债券',
+      cmd: {
+        kzzsssj: '可转债实时数据',
+      },
+    },
+    tzrl: {
+      name: '投资日历',
+      cmd: {
+        tzrl: '投资日历',
+      },
+    },
   };
   for (let file of cmdFiles) {
     let data;

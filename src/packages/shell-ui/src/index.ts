@@ -1,5 +1,6 @@
 export * from './chart/index';
 export * from './checkbox/index';
+export * from './calendar/index';
 export * from './data-list/index';
 export * from './dynamic-form/index';
 export * from './error/index';
