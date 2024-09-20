@@ -9,31 +9,30 @@ import type { AbstractRunner } from './abstract-runner';
 export abstract class AbstractDriver {
   abstract options: TDataSourceCommonOptions;
   abstract entities: TModelType[];
-  // 数据库名
-  readonly #dbName: string;
-  // 版本
-  readonly #version?: string | number;
+  /**
+   * 数据库名
+   */
+  readonly dbName: string;
 
-  readonly #modelMetadataMap: ModelMetadataMap = new ModelMetadataMap();
+  /**
+   * 版本
+   */
+  readonly version?: string | number;
 
-  // 连接状态
+  /**
+   * 模型上装饰器metadata数据实例
+   */
+  readonly modelMetadataMap: ModelMetadataMap = new ModelMetadataMap();
+
+  /**
+   * 连接状态
+   * @protected
+   */
   protected status: EDriverConnectStatus = EDriverConnectStatus.ready;
 
-  get dbName() {
-    return this.#dbName;
-  }
-
-  get version() {
-    return this.#version;
-  }
-
-  get modelMetadataMap() {
-    return this.#modelMetadataMap;
-  }
-
   constructor(options: TDataSourceCommonOptions) {
-    this.#dbName = options.dbName ?? options.name;
-    this.#version = options.version;
+    this.dbName = options.dbName ?? options.name;
+    this.version = options.version;
   }
 
   /**
@@ -41,7 +40,7 @@ export abstract class AbstractDriver {
    * @param model
    */
   scanModelMetadata(model: TModelType) {
-    this.#modelMetadataMap.scanMeta(model);
+    this.modelMetadataMap.scanMeta(model);
   }
 
   /**
@@ -58,18 +57,38 @@ export abstract class AbstractDriver {
     return this.status === EDriverConnectStatus.connected;
   }
 
-  // 数据连接器
+  /**
+   * 数据连接器
+   */
   abstract connector: unknown;
-  // 数据操作
+
+  /**
+   * 数据操作实例
+   */
   abstract runner: AbstractRunner;
-  // 连接前
+
+  /**
+   * 连接前执行方法
+   */
   abstract beforeConnect(): Promise<void>;
-  // 连接操作
+
+  /**
+   * 连接操作方法
+   */
   abstract connect(): Promise<void>;
-  // 连接后
+
+  /**
+   * 连接后执行方法
+   */
   abstract afterConnect(): Promise<void>;
-  // 断开连接
+
+  /**
+   * 断开连接方法
+   */
   abstract disconnect(): Promise<void>;
-  // 重新连接
+
+  /**
+   * 重新执行连接方法
+   */
   abstract reconnect(): Promise<void>;
 }

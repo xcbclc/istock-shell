@@ -4,3 +4,8 @@ export type TFetchSSEMessage = {
   event?: string;
   retry?: number;
 };
+
+export type TFetchWrapOptions = {
+  requestOptions?: RequestInit;
+  prefixUrl?: string;
+};

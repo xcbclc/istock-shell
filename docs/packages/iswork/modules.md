@@ -102,6 +102,7 @@
 - [TDomainMetadata](modules.md#tdomainmetadata)
 - [TDomainOptions](modules.md#tdomainoptions)
 - [TFetchSSEMessage](modules.md#tfetchssemessage)
+- [TFetchWrapOptions](modules.md#tfetchwrapoptions)
 - [TIdAnyObject](modules.md#tidanyobject)
 - [TInjectionToken](modules.md#tinjectiontoken)
 - [TMessageIteratorData](modules.md#tmessageiteratordata)
@@ -760,7 +761,7 @@ src/packages/iswork/src/types/controller.ts:29
 
 #### Defined in
 
-src/packages/iswork/src/orm/types/data-source.ts:27
+src/packages/iswork/src/orm/types/data-source.ts:24
 
 ---
 
@@ -786,7 +787,7 @@ src/packages/iswork/src/orm/types/data-source.ts:5
 
 ### TDataSourceFetchOptions
 
-Ƭ **TDataSourceFetchOptions**: \{ `prefixUrl?`: `string` } & `Partial`\<`RequestInit`\> & [`TDataSourceCommonOptions`](modules.md#tdatasourcecommonoptions)
+Ƭ **TDataSourceFetchOptions**: [`TFetchWrapOptions`](modules.md#tfetchwrapoptions) & [`TDataSourceCommonOptions`](modules.md#tdatasourcecommonoptions)
 
 #### Defined in
 
@@ -810,7 +811,7 @@ src/packages/iswork/src/orm/types/data-source.ts:13
 
 #### Defined in
 
-src/packages/iswork/src/orm/types/data-source.ts:23
+src/packages/iswork/src/orm/types/data-source.ts:20
 
 ---
 
@@ -1048,6 +1049,23 @@ src/packages/iswork/src/types/domain.ts:21
 #### Defined in
 
 src/packages/iswork/src/orm/types/driver.ts:1
+
+---
+
+### TFetchWrapOptions
+
+Ƭ **TFetchWrapOptions**: `Object`
+
+#### Type declaration
+
+| Name              | Type          |
+| :---------------- | :------------ |
+| `prefixUrl?`      | `string`      |
+| `requestOptions?` | `RequestInit` |
+
+#### Defined in
+
+src/packages/iswork/src/orm/types/driver.ts:8
 
 ---
 

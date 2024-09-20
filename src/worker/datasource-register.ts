@@ -22,6 +22,7 @@ import { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
 import { CjModel } from '@domains/wzdh/cj/cj.model';
 import { AiModel } from '@domains/global/ai/ai.model';
 import { KzzsssjModel } from '@domains/zq/kzzsssj/kzzsssj.model';
+import { TzrlModel } from '@domains/tzrl/tzrl/tzrl.model';
 
 export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel];
 export const akShareFetchDataSourceModels = [
@@ -45,10 +46,10 @@ export const akShareFetchDataSourceModels = [
   StockCodeModel,
   KzzsssjModel,
 ];
-export const fetchDataSourceModels = [AiModel];
+export const fetchDataSourceModels = [AiModel, TzrlModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
 
-export const inintDataSource = async () => {
+export const initDataSource = async () => {
   const indexedDataSource = new DataSource<'indexedDB'>({
     name: 'indexedDB',
     type: 'indexedDB',

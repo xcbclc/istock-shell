@@ -1,5 +1,5 @@
-import { ScopeError, isString, isUndefined } from '@istock/util';
-import type { TAnyObj, TModelType, TFetchSSEMessage } from '../../types';
+import { ScopeError, isString, isUndefined, mergeObjectDeep } from '@istock/util';
+import type { TAnyObj, TModelType, TFetchSSEMessage, TFetchWrapOptions } from '../../types';
 import type { ModelMetadataMap } from '../../metadata/metadata';
 
 type Fetch = typeof fetch;
@@ -7,19 +7,19 @@ type Fetch = typeof fetch;
 export class FetchWrap {
   fetch: Fetch;
   // 请求相关配置
-  readonly #options: RequestInit = {
+  readonly #requestOptions: RequestInit = {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  #prefixUrl: string = '';
+  readonly #prefixUrl: string = '';
   readonly #modelMetadataMap: ModelMetadataMap;
-  constructor(fetch: Fetch, modelMetadataMap: ModelMetadataMap) {
+  constructor(fetch: Fetch, modelMetadataMap: ModelMetadataMap, options: TFetchWrapOptions) {
     this.fetch = fetch;
     this.#modelMetadataMap = modelMetadataMap;
-  }
-
-  setPrefixUrl(url?: string) {
-    this.#prefixUrl = url ?? '';
+    this.#prefixUrl = options.prefixUrl ?? '';
+    if (options.requestOptions) {
+      this.#requestOptions = mergeObjectDeep<RequestInit>(this.#requestOptions, options.requestOptions);
+    }
   }
 
   /**
@@ -35,7 +35,7 @@ export class FetchWrap {
         if (queryStr) input += `?${queryStr}`;
       }
     }
-    const response = await this.fetch.call(null, input, { ...init, ...this.#options });
+    const response = await this.fetch.call(null, input, mergeObjectDeep<RequestInit>(this.#requestOptions, init ?? {}));
     return await this.#toResult<Return>(response);
   }
 

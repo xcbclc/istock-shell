@@ -60,7 +60,7 @@ export class MemoryDriver extends AbstractDriver {
   }
 
   async reconnect(): Promise<void> {
-    if ([EDriverConnectStatus.ready, EDriverConnectStatus.disconnected].includes(this.status)) {
+    if (EDriverConnectStatus.ready === this.status || EDriverConnectStatus.disconnected === this.status) {
       // todo 重连
     }
   }

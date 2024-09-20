@@ -23,7 +23,7 @@ export class FetchRunner extends AbstractRunner<TConnector> {
     input: RequestInfo | URL,
     init: RequestInit & { query?: TAnyObj } = {}
   ): Promise<Result> {
-    return await this.connector.request(input, init);
+    return (await this.connector.request(input, init)) as Result;
   }
 
   async query<Result = unknown>(model: TModelType, query: TOrmQuery): Promise<Result[]> {
