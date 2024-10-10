@@ -17,7 +17,7 @@ export class TzrlController {
   @Component('ShCalendar')
   async getCalendar(
     @CmdRouteOptions(cmdJson.投资日历.options.lx)
-    qtypeStr: string = 'newstock_apply,newbond_apply,newstock_onlist,newbond_onlist'
+    qtypeStr: string = 'newstock_apply,newbond_apply,newstock_onlist'
   ) {
     const { startOfWeek, endOfWeek } = getStartAndEndOfWeek(new Date());
     const qtypes = qtypeStr.split(',');
