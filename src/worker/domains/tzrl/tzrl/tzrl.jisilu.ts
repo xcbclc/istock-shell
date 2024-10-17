@@ -3,6 +3,7 @@ export const typeRecord: Record<string, string> = {
   newstock_onlist: '新股上市',
   newstock_apply: '新股申购',
   CNV: '可转债',
+  kzzsg: '可转债申购和上市',
   CBDIV: '正股分红',
   cnreits: 'REITs',
   FUND: '基金',
