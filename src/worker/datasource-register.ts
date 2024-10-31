@@ -21,10 +21,13 @@ import { LsfbsjModel } from '@domains/ag/lsfbsj/lsfbsj.model';
 import { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
 import { CjModel } from '@domains/wzdh/cj/cj.model';
 import { AiModel } from '@domains/global/ai/ai.model';
-import { KzzsssjModel } from '@domains/zq/kzzsssj/kzzsssj.model';
+import { KzzsssjModel } from '@domains/kzz/kzzsssj/kzzsssj.model';
+import { KzzsdModel } from '@domains/kzz/kzzsd/kzzsd.model';
+import { KzzsdResultModel } from '@domains/kzz/kzzsd/kzzsd-result.model';
 import { TzrlModel } from '@domains/tzrl/tzrl/tzrl.model';
+import { CookieModel } from '@domains/global/setting/cookie/cookie.model';
 
-export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel];
+export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel, CookieModel, KzzsdResultModel];
 export const akShareFetchDataSourceModels = [
   SzgpsczmModel,
   SzlbtjModel,
@@ -46,7 +49,7 @@ export const akShareFetchDataSourceModels = [
   StockCodeModel,
   KzzsssjModel,
 ];
-export const fetchDataSourceModels = [AiModel, TzrlModel];
+export const fetchDataSourceModels = [AiModel, TzrlModel, KzzsdModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
 
 export const initDataSource = async () => {
@@ -55,7 +58,7 @@ export const initDataSource = async () => {
     type: 'indexedDB',
     entities: indexedDataSourceModels,
     dbName: 'istock',
-    version: 5,
+    version: 7,
   });
   await indexedDataSource.initialize();
 

@@ -1,0 +1,6 @@
+
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "src/packages/cli/**", "src/packages/shell-ui/**"],
+  "include": ["src/vite-env.d.ts", "src/packages/**/*.d.ts", "src/packages/**/*.ts"]
+}

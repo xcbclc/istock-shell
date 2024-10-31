@@ -5,7 +5,7 @@ export default async () => {
     const packageCmds = ['iswork', 'command-parser', 'editor'].map((value) => {
       return {
         name: value,
-        cmd: `typedoc --plugin typedoc-plugin-markdown --out ./docs/packages/${value} ./src/packages/${value}/src/index.ts`,
+        cmd: `typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig-doc.json --out ./docs/packages/${value} ./src/packages/${value}/src/index.ts`,
       };
     });
     packageCmds.forEach((cmd) => {

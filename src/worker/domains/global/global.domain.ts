@@ -18,11 +18,13 @@ import { CmdAliasService } from './cmd-alias/cmd-alias.service';
 import { CmdAliasController } from './cmd-alias/cmd-alias.controller';
 import { AiService } from './ai/ai.service';
 import { AiController } from './ai/ai.controller';
+import { SettingDomain } from './setting/setting.domain';
 
 @Global()
 @Domain({
   name: 'global',
   viewName: '全局',
+  imports: [SettingDomain],
   providers: [
     CmdRouteService,
     DomainService,

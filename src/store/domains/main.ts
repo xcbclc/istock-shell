@@ -4,6 +4,8 @@ import { getOutputHistory, type IOutputHistory } from './global/output-history';
 import { getInputRecommend, type IInputRecommend } from './global/input-recommend';
 import { getUser, type IUserWritable } from './global/user';
 import { getAddCmdAlias, type IAddCmdAliasWritable } from './global/cmd-alias';
+import { getSearch, type ISearchWritable } from './global/search';
+import { getCookieManage, type ICookieManageUiModelWritable } from './global/cookie-manage';
 
 export type TCmdAllDomainStore = {
   cmdRoute: ICmdRouteWritable;
@@ -11,6 +13,8 @@ export type TCmdAllDomainStore = {
   inputRecommend: IInputRecommend;
   user: IUserWritable;
   addCmdAlias: IAddCmdAliasWritable;
+  search: ISearchWritable;
+  cookieManage: ICookieManageUiModelWritable;
 };
 
 export const getDomainStore = (ctx: CmdWindowContext): TCmdAllDomainStore => {
@@ -20,5 +24,7 @@ export const getDomainStore = (ctx: CmdWindowContext): TCmdAllDomainStore => {
     inputRecommend: getInputRecommend(ctx),
     user: getUser(ctx),
     addCmdAlias: getAddCmdAlias(ctx),
+    search: getSearch(ctx),
+    cookieManage: getCookieManage(ctx),
   };
 };

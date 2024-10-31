@@ -71,10 +71,11 @@ export default async () => {
         cj: '财经导航',
       },
     },
-    zq: {
-      name: '债券',
+    kzz: {
+      name: '可转债',
       cmd: {
         kzzsssj: '可转债实时数据',
+        kzzsd: '可转债双低策略',
       },
     },
     tzrl: {

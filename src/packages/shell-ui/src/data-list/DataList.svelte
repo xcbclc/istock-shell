@@ -5,17 +5,17 @@
   export let options: Array<{
     value: string | number;
     label?: string;
-    attribute?: Record<string, unknown>;
+    attributes?: Record<string, unknown>;
   }> = [];
-  export let attribute: Record<string, unknown> = {};
+  export let attributes: Record<string, unknown> = {};
 </script>
 
 <label>
   {label}
   <input list={id} bind:value />
-  <datalist {id} {...attribute}>
+  <datalist {id} {...attributes}>
     {#each options as option, index (index)}
-      <option value={option.value} {...option.attribute ?? {}}>
+      <option value={option.value} {...option.attributes ?? {}}>
         {option.label ?? option.value}
       </option>
     {/each}

@@ -68,3 +68,9 @@ export class GpsjController {
   }
 }
 ```
+
+## 装饰器
+
+### Injectable
+
+`Injectable`可注入类装饰器的主要作用是将`服务类`标记成一个可注入类，它将标记类的实例化委托给`IoC`容器，这样我们就可以很方便的在`控制类`中注入想要的`服务实例`。`Injectable`装饰器没有参数可直接在`服务类`上使用。

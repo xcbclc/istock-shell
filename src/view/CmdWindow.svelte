@@ -7,15 +7,17 @@
   import CmdInfo from './CmdInfo.svelte';
   import Cmd from './Cmd.svelte';
   import ModalAddCmdAlias from './components/modal/ModalAddCmdAlias.svelte';
+  import ModalCookieManage from './components/modal/ModalCookieManage.svelte';
+  import CmdSearchMain from './components/search/CmdSearchMain.svelte';
+  import type { TSearchListItem } from '@/store/domains/global/search';
 
-  export let style: string;
   export let window: TCmdWindow;
   export let cmdWindowsManager: CmdWindowsManager;
 
   const worker = getWorker();
   const cmdWindowCtx = cmdWindowsManager.getCmdContext(window.id);
-  const store = cmdWindowCtx.cmdStore;
-  const { showCmdInfo } = store;
+  const { search, cookieManage } = cmdWindowCtx.domainStore;
+  const { showCmdInfo, cmdWindow } = cmdWindowCtx.cmdStore;
   let canListened = false;
 
   // 等待worker监听初始化store
@@ -26,10 +28,20 @@
   };
   worker.addEventListener('message', onListened);
   $: if (canListened && cmdWindowCtx) {
-    cmdWindowCtx.initStore().catch((e) => {
+    cmdWindowCtx.initStore().catch((e: any) => {
       throw e instanceof Error ? e : new ScopeError('view', '初始化store报错');
     });
   }
+
+  const onKeydown = (ev: KeyboardEvent) => {
+    if (cmdWindowCtx.isExample) return;
+    cmdWindow.onCmdWindowKeyAction(ev, window, cmdWindowCtx);
+  };
+
+  const onSelectedSearchResult = (ev: CustomEvent<TSearchListItem>) => {
+    search.close();
+    search.runAction(ev.detail);
+  };
 
   onDestroy(() => {
     worker.removeEventListener('message', onListened);
@@ -37,12 +49,24 @@
   });
 </script>
 
-<div class="window" {style} data-window-id={window.id}>
+<div
+  class="window"
+  style={window.styleRecord[window.id]}
+  data-window-id={window.id}
+  on:keydown={onKeydown}
+  tabindex="-1"
+>
   {#if $showCmdInfo}
     <CmdInfo windowId={window.id} />
   {/if}
   <Cmd windowId={window.id} />
   <ModalAddCmdAlias windowId={window.id} />
+  {#if $search.isOpen}
+    <CmdSearchMain windowId={window.id} on:selectedSearchResult={onSelectedSearchResult} />
+  {/if}
+  {#if $cookieManage.isOpen}
+    <ModalCookieManage windowId={window.id} />
+  {/if}
 </div>
 
 <style lang="scss">

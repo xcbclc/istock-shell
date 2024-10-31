@@ -87,9 +87,9 @@ export class IndexedDBRunner extends AbstractRunner<TConnector> {
   async update(model: TModelType, updateData: TAnyObj, query: TOrmQuery): Promise<boolean> {
     const db = this.connector.idb;
     const modelName = this.connector.getModeName(model);
+    const results: TIdAnyObject[] = await this.query(model, query);
     const tx = db.transaction(modelName, 'readwrite');
     const store = tx.objectStore(modelName);
-    const results: TIdAnyObject[] = await this.query(model, query);
     let index = results.length;
     while (index--) {
       delete updateData.id; // todo 先禁用修改id

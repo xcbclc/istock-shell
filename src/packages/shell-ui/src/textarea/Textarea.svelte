@@ -1,12 +1,12 @@
 <script lang="ts">
   export let label: string = '';
   export let value: string | number | null;
-  export let attribute: Record<string, unknown> = {};
+  export let attributes: Record<string, unknown> = {};
 </script>
 
 <label class="textarea">
-  <span class="label">{label}</span>
-  <textarea bind:value {...attribute} on:input on:change on:focus on:blur />
+  {#if label}<span class="label">{label}</span>{/if}
+  <textarea bind:value {...attributes} on:input on:change on:focus on:blur />
 </label>
 
 <style lang="scss">

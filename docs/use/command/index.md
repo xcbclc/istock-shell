@@ -14,6 +14,8 @@
 
 [历史](/use/command/global/history/history.cmd.html)
 
+[search.cmd.ts](/use/command/global/search/search.cmd.html)
+
 [用户](/use/command/global/user/user.cmd.html)
 
 ## A股
@@ -30,6 +32,12 @@
 
 [实时行情数据](/use/command/ag/sshqsj/sshqsj.cmd.html)
 
+## 可转债
+
+[可转债双低策略](/use/command/kzz/kzzsd/kzzsd.cmd.html)
+
+[可转债实时数据](/use/command/kzz/kzzsssj/kzzsssj.cmd.html)
+
 ## 投资日历
 
 [投资日历](/use/command/tzrl/tzrl/tzrl.cmd.html)
@@ -37,7 +45,3 @@
 ## 网站导航
 
 [财经导航](/use/command/wzdh/cj/cj.cmd.html)
-
-## 债券
-
-[可转债实时数据](/use/command/zq/kzzsssj/kzzsssj.cmd.html)

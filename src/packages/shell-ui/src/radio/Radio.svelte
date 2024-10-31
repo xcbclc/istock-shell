@@ -2,10 +2,10 @@
   export let label: string = '';
   export let value: string | number | null;
   export let group: unknown;
-  export let attribute: Record<string, unknown> = {};
+  export let attributes: Record<string, unknown> = {};
 </script>
 
 <label>
-  <input bind:group {value} {...attribute} on:input on:change on:focus on:blur type="radio" />
+  <input bind:group {value} {...attributes} on:input on:change on:focus on:blur type="radio" />
   {label}
 </label>

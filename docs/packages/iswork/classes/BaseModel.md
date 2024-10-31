@@ -24,6 +24,7 @@
 
 - [save](BaseModel.md#save)
 - [toObject](BaseModel.md#toobject)
+- [createMany](BaseModel.md#createmany)
 - [createModel](BaseModel.md#createmodel)
 - [createOne](BaseModel.md#createone)
 - [deleteById](BaseModel.md#deletebyid)
@@ -158,6 +159,33 @@ src/packages/iswork/src/orm/model/base-model.ts:44
 
 ---
 
+### createMany
+
+▸ **createMany**\<`Model`\>(`this`, `dataOrModels`): `Promise`\<(`string` \| `number`)[]\>
+
+#### Type parameters
+
+| Name    | Type                                       |
+| :------ | :----------------------------------------- |
+| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+
+#### Parameters
+
+| Name           | Type                                                                                                                                                                                  |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `this`         | `Model`                                                                                                                                                                               |
+| `dataOrModels` | [`TModelCreate`](../modules.md#tmodelcreate)\<`InstanceType`\<`Model`\>\>[] \| [`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>[] \| `InstanceType`\<`Model`\>[] |
+
+#### Returns
+
+`Promise`\<(`string` \| `number`)[]\>
+
+#### Defined in
+
+src/packages/iswork/src/orm/model/base-model.ts:100
+
+---
+
 ### createModel
 
 ▸ **createModel**\<`Model`\>(`this`, `data`): `InstanceType`\<`Model`\>
@@ -235,7 +263,7 @@ src/packages/iswork/src/orm/model/base-model.ts:83
 
 #### Defined in
 
-src/packages/iswork/src/orm/model/base-model.ts:128
+src/packages/iswork/src/orm/model/base-model.ts:151
 
 ---
 
@@ -262,7 +290,7 @@ src/packages/iswork/src/orm/model/base-model.ts:128
 
 #### Defined in
 
-src/packages/iswork/src/orm/model/base-model.ts:123
+src/packages/iswork/src/orm/model/base-model.ts:146
 
 ---
 
@@ -289,7 +317,7 @@ src/packages/iswork/src/orm/model/base-model.ts:123
 
 #### Defined in
 
-src/packages/iswork/src/orm/model/base-model.ts:133
+src/packages/iswork/src/orm/model/base-model.ts:156
 
 ---
 
@@ -386,7 +414,7 @@ src/packages/iswork/src/orm/model/base-model.ts:73
 
 #### Defined in
 
-src/packages/iswork/src/orm/model/base-model.ts:100
+src/packages/iswork/src/orm/model/base-model.ts:123
 
 ---
 
@@ -413,7 +441,7 @@ src/packages/iswork/src/orm/model/base-model.ts:100
 
 #### Defined in
 
-src/packages/iswork/src/orm/model/base-model.ts:115
+src/packages/iswork/src/orm/model/base-model.ts:138
 
 ---
 
