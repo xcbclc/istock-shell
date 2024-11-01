@@ -33,10 +33,14 @@
   const onSelectedSearchResult = (searchResult: TSearchListItem) => {
     dispatch('selectedSearchResult', searchResult);
   };
+  const onClickMask = () => {
+    dispatch('close');
+  };
   $: currentSearchList = searchValue ? getCurrentSearchList() : searchList;
   // const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
 </script>
 
+<div class="search-main-mask" on:click={onClickMask}></div>
 <div class="search-main">
   <div class="search-input">
     <input type="text" bind:value={searchValue} on:input={onInput} on:change={onChange} />
@@ -75,6 +79,15 @@
 </div>
 
 <style lang="scss">
+  .search-main-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
   .search-main {
     position: fixed;
     display: flex;
@@ -89,7 +102,7 @@
     background-color: var(--color-sub-background);
     box-shadow: 0 3px 8px var(--color-background);
     transition: height ease-in var(--transition-duration);
-    z-index: 100;
+    z-index: 101;
   }
   .search-input {
     margin-bottom: var(--gap-default);

@@ -62,7 +62,7 @@
   <Cmd windowId={window.id} />
   <ModalAddCmdAlias windowId={window.id} />
   {#if $search.isOpen}
-    <CmdSearchMain windowId={window.id} on:selectedSearchResult={onSelectedSearchResult} />
+    <CmdSearchMain windowId={window.id} on:selectedSearchResult={onSelectedSearchResult} on:close={search.close} />
   {/if}
   {#if $cookieManage.isOpen}
     <ModalCookieManage windowId={window.id} />
