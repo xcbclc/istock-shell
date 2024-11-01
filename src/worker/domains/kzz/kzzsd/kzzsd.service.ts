@@ -13,6 +13,7 @@ export class KzzsdService {
    * 获取集思录可转债列表数据
    */
   async findJisiluCbList() {
+    // 获取集思录的cookie数据
     const cookieData = await this.cookieService.findOneByHost(this.#site);
     const jisiluData = await KzzsdModel.run<{
       data: Array<TModelData<KzzsdModel>>;
@@ -60,13 +61,13 @@ export class KzzsdService {
       .filter((item) => item);
     const lastTime = kzzsdResult[0]?.updateDate?.getTime?.() || 0;
     const hasRunDblowStrategy = Boolean(lastResult.length);
-    if (hasRunDblowStrategy && cycle * 24 * 60 * 60 * 1000 < Date.now() - lastTime) {
+    if (hasRunDblowStrategy && cycle * 24 * 60 * 60 * 1000 > Date.now() - lastTime) {
       // 已进入策略但并未到策略执行周期，直接返回上次策略执行结果
       return {
         table: this.toTableData(lastResult),
         texts: [
           {
-            type: 'info',
+            type: 'danger',
             text: '未到该策略执行周期',
           },
         ],
