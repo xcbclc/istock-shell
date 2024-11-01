@@ -55,7 +55,6 @@ export const getSearch = (ctx: CmdWindowContext) => {
     if (searchItem.action === 'setting.cookie') {
       const { cookieManage } = ctx.domainStore;
       cookieManage.open();
-      console.log('searchItemsearchItem', searchItem);
     }
   };
   return search;
