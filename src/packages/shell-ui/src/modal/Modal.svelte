@@ -11,6 +11,8 @@
   export let onCancel: (() => Promise<void>) | null = null;
   export let okText = '确定';
   export let cancelText = '取消';
+  export let hasOkBtn = true;
+  export let hasCancelBtn = true;
 
   const dispatch = createEventDispatcher();
 
@@ -80,8 +82,12 @@
         <slot />
       </div>
       <div class="modal-footer">
-        <Button on:click={handleOk} type="primary" {size}>{okText}</Button>
-        <Button on:click={handleCancel} type="secondary" {size}>{cancelText}</Button>
+        {#if hasOkBtn}
+          <Button on:click={handleOk} type="primary" {size}>{okText}</Button>
+        {/if}
+        {#if hasCancelBtn}
+          <Button on:click={handleCancel} type="secondary" {size}>{cancelText}</Button>
+        {/if}
       </div>
     </div>
   </div>

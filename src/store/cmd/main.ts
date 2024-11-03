@@ -1,5 +1,6 @@
 import type { Writable } from 'svelte/store';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
+import { getCmdWindow, type ICmdWindow } from './cmd-window';
 import {
   getCmdDynamicPrompt,
   getCmdDynamicPromptTexts,
@@ -13,6 +14,7 @@ import { getCmdContextmenu, type IContextmenuWritable } from './cmd-contextmenu'
 import { getOutputViewComponentMap, type IOutputViewComponentMapWritable } from './cmd-output-component';
 
 export type TCmdStore = {
+  cmdWindow: ICmdWindow;
   cmdPrompt: ICmdPromptWritable;
   cmdPromptTexts: ICmdPromptTextsWritable;
   cmdInput: ICmdInputWritable;
@@ -28,6 +30,7 @@ export type TCmdStore = {
  * @param ctx
  */
 export function getCmdStore(ctx: CmdWindowContext): TCmdStore {
+  const cmdWindow = getCmdWindow();
   const cmdPrompt = getCmdDynamicPrompt(ctx);
   const cmdPromptTexts = getCmdDynamicPromptTexts(ctx);
   const cmdInput = getCmdInput(ctx);
@@ -36,6 +39,7 @@ export function getCmdStore(ctx: CmdWindowContext): TCmdStore {
   const outputViewComponentMap = getOutputViewComponentMap(ctx);
 
   return {
+    cmdWindow,
     cmdPrompt,
     cmdPromptTexts,
     cmdInput,

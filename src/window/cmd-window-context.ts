@@ -63,6 +63,10 @@ export class CmdWindowContext {
     return this.#mode;
   }
 
+  get isExample() {
+    return this.mode === ECmdWindowContextMode.example;
+  }
+
   get initStoreDone() {
     return this.#initStoreDone;
   }

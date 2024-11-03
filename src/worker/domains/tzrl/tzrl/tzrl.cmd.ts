@@ -16,7 +16,7 @@ export default {
         parameter: ['-lx', '--类型'],
         parameterType: ['string'],
         description: `投资日历类型，参数说明：${lxParameterText}`,
-        default: 'newstock_apply,newbond_apply,newstock_onlist,newbond_onlist',
+        default: 'newstock_apply,newstock_onlist,kzzsg',
         optional: true,
         choices: Object.keys(typeRecord),
       },

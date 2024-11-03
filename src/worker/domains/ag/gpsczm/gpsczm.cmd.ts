@@ -7,7 +7,7 @@ export default {
     usage: 'szgpsczm',
     options: {
       单位: getUnitOption({
-        default: '*:流通股本·亿，*:总市值·亿，*:流通市值·亿，*:总股本·亿',
+        default: '*:流通股本·亿，*:总市值·万亿，*:流通市值·万亿，*:总股本·亿',
       }),
     },
     source: {
@@ -89,7 +89,7 @@ export default {
     options: {
       日期: getYYYYMMDD({ optional: false }),
       单位: getUnitOption({
-        default: '*:市价总值·千亿,*:成交量·亿,*:成交金额·亿,*:流通市值·千亿',
+        default: '*:市价总值·万亿,*:成交量·亿,*:成交金额·亿,*:流通市值·千亿',
       }),
     },
     source: {

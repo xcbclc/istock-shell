@@ -97,6 +97,29 @@ export class BaseModel implements IBaseModel {
     return await rep.createOne(this, createData as TModelCreate<InstanceType<Model>>);
   }
 
+  static async createMany<Model extends TModelType>(
+    this: Model,
+    dataOrModels:
+      | Array<TModelCreate<InstanceType<Model>>>
+      | Array<TModelData<InstanceType<Model>>>
+      | Array<InstanceType<Model>>
+  ) {
+    const rep = await this.getRepository();
+    const list = dataOrModels.map((item) => {
+      let createData;
+      if (item instanceof this) {
+        createData = item.toObject();
+      } else {
+        createData = item;
+      }
+      if (!(createData as TModelCreate<InstanceType<Model>>).id) {
+        throw new ScopeError(`iswork.${this.constructor.name}`, '模型创建没有找到id值');
+      }
+      return createData;
+    });
+    return await rep.createMany(this, list as Array<TModelCreate<InstanceType<Model>>>);
+  }
+
   static async updateById<Model extends TModelType>(
     this: Model,
     id: string | number,

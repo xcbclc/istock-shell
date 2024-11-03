@@ -124,7 +124,6 @@ export class FetchWrap {
             // 解析ID和数据
             const message: Partial<TFetchSSEMessage> = {};
             lines.forEach((line) => {
-              console.log('line', line);
               const [key, value] = line.split(': ');
               if (key === 'data') {
                 message[key] = isUndefined(message[key]) ? value : message[key] + '\n' + value;

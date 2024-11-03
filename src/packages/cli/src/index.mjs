@@ -3,6 +3,7 @@ import packageJson from '../package.json' assert { type: 'json' };
 import cmdInit from './action/cmd-init.mjs';
 import cmdDoc from './action/cmd-doc.mjs';
 import docPackage from './action/package.mjs';
+import mergeMarkdown from './action/merge-markdown.mjs';
 
 program.version(packageJson.version);
 
@@ -17,6 +18,9 @@ program
     }
     if (action === 'package') {
       await docPackage();
+    }
+    if (action === 'merge') {
+      await mergeMarkdown();
     }
   });
 

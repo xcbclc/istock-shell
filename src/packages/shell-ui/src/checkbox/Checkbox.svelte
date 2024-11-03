@@ -2,7 +2,7 @@
   export let label: string = '';
   export let value: string | number | null;
   export let group: Array<string | number | null> = [];
-  export let attribute = {
+  export let attributes = {
     checked: group.includes(value),
   };
 
@@ -21,9 +21,9 @@
 
 <label>
   <input
-    bind:checked={attribute.checked}
+    bind:checked={attributes.checked}
     {value}
-    {...attribute}
+    {...attributes}
     on:input
     on:change={onChange}
     on:change

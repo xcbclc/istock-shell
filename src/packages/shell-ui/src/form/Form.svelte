@@ -15,7 +15,6 @@
   };
   const onKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
-      console.log('formData.values', formData.values);
       dispatch('submit', formData.values);
     }
   };

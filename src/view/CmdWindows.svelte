@@ -2,7 +2,7 @@
   import { onDestroy } from 'svelte';
   import { getQueryParam } from '@istock/util';
   import { CmdWindowsManager, type TCmdWindowsManagerOptions } from '@/window/cmd-windows-manager';
-  import { getCmdWindows, getCmdWindowStyles } from '@/store/window';
+  import { getCmdWindow } from '@/store/cmd/cmd-window';
   import CmdWindow from './CmdWindow.svelte';
 
   const mode = getQueryParam('mode');
@@ -11,18 +11,13 @@
     cmdWindowsManagerOptions.mode = mode;
   }
   const cmdWindowsManager = CmdWindowsManager.getInstance(cmdWindowsManagerOptions);
-  const cmdWindows = getCmdWindows();
-  const cmdWindowStyles = getCmdWindowStyles();
-  const unsubscriber = cmdWindowStyles.onCmdWindowChangeUpdate();
-
-  onDestroy(() => {
-    unsubscriber();
-  });
+  const cmdWindow = getCmdWindow();
+  onDestroy(() => {});
 </script>
 
 <section class="window-warp">
-  {#each $cmdWindows as window, index (index)}
-    <CmdWindow {window} {cmdWindowsManager} style={$cmdWindowStyles[index]} />
+  {#each $cmdWindow as window, index (index)}
+    <CmdWindow {window} {cmdWindowsManager} />
   {/each}
 </section>
 

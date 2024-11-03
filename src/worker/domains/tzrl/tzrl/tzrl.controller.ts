@@ -17,7 +17,7 @@ export class TzrlController {
   @Component('ShCalendar')
   async getCalendar(
     @CmdRouteOptions(cmdJson.投资日历.options.lx)
-    qtypeStr: string = 'newstock_apply,newbond_apply,newstock_onlist,newbond_onlist'
+    qtypeStr: string = 'newstock_apply,newstock_onlist,kzzsg'
   ) {
     const { startOfWeek, endOfWeek } = getStartAndEndOfWeek(new Date());
     const qtypes = qtypeStr.split(',');
@@ -25,14 +25,19 @@ export class TzrlController {
     const end = `${endOfWeek.getTime()}`;
     const colors = this.tzrlService.getColor(qtypes.length);
     const promises = qtypes.map(async (qtype, index) => {
-      const result = await this.tzrlService.findJisiluCalendar(
+      let result = await this.tzrlService.findJisiluCalendar(
         {
-          qtype,
+          qtype: qtype === 'kzzsg' ? 'CNV' : qtype,
           start: start.slice(0, start.length - 3),
           end: end.slice(0, end.length - 3),
         },
         colors[index]
       );
+      if (qtype === 'kzzsg') {
+        result = result.filter(
+          (item) => item.title && (item.title.includes('申购日') || item.title.includes('上市日'))
+        );
+      }
       return result;
     });
     const list = await Promise.all(promises);
