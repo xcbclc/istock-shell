@@ -4,7 +4,7 @@ import path from 'path';
 const cwdPath = process.cwd();
 const rootPath = cwdPath;
 const docsPath = path.resolve(rootPath, './docs');
-const outPath = path.resolve(rootPath, './docs/all.md');
+const outPath = path.resolve(rootPath, './docs/.vitepress/dist/all.md');
 
 async function mergeMarkdownFiles(sourceDir, outputFile) {
   // 确保输出目录存在
@@ -36,6 +36,6 @@ async function mergeMarkdownFiles(sourceDir, outputFile) {
   console.log('Markdown文件合并成功');
 }
 
-export default async function mergeMarkdown () {
+export default async function mergeMarkdown() {
   await mergeMarkdownFiles(docsPath, outPath);
 }

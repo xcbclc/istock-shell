@@ -15,7 +15,6 @@ dev-dist
 *.local
 .vitepress/*
 docs/.vitepress/cache/*
-docs/all.md
 src/packages/cli/dist
 
 # Editor directories and files
