@@ -14,8 +14,6 @@
 
 [历史](/use/command/global/history/history.cmd.html)
 
-[search.cmd.ts](/use/command/global/search/search.cmd.html)
-
 [用户](/use/command/global/user/user.cmd.html)
 
 ## A股

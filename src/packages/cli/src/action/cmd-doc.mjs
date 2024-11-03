@@ -135,6 +135,7 @@ export default async () => {
         }
         return record;
       }, {});
+      if (!aliasRecord[domainName]?.name) continue;
       const renderedContent = ejs.render(
         templateContent,
         {
