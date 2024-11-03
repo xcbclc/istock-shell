@@ -4,6 +4,7 @@ import { DomainModel } from '@domains/global/domain/domain.model';
 import { CmdRouteModel } from '@domains/global/cmd-route/cmd-route.model';
 import { HistoryModel } from '@domains/global/history/history.model';
 import { StockCodeModel } from '@domains/global/stock-code/stock-code.model';
+import { StockCodeResultModel } from '@domains/global/stock-code/stock-code-result.model';
 import { SzgpsczmModel, SzlbtjModel, SzdqjypxModel, SzgphycjModel, SzmrgkModel } from '@domains/ag/gpsczm/gpsczm.model';
 import { GgxxcxModel } from '@domains/ag/ggxxcx/ggxxcx.model';
 import { HqbjModel } from '@domains/ag/hqbj/hqbj.model';
@@ -27,7 +28,14 @@ import { KzzsdResultModel } from '@domains/kzz/kzzsd/kzzsd-result.model';
 import { TzrlModel } from '@domains/tzrl/tzrl/tzrl.model';
 import { CookieModel } from '@domains/global/setting/cookie/cookie.model';
 
-export const indexedDataSourceModels = [UserModel, HistoryModel, CmdAliasModel, CookieModel, KzzsdResultModel];
+export const indexedDataSourceModels = [
+  UserModel,
+  HistoryModel,
+  CmdAliasModel,
+  CookieModel,
+  KzzsdResultModel,
+  StockCodeResultModel,
+];
 export const akShareFetchDataSourceModels = [
   SzgpsczmModel,
   SzlbtjModel,
