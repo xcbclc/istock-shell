@@ -12,6 +12,7 @@
   }
   const cmdWindowsManager = CmdWindowsManager.getInstance(cmdWindowsManagerOptions);
   const cmdWindow = getCmdWindow();
+  cmdWindow.onCmdWindowChangeUpdate();
   onDestroy(() => {});
 </script>
 

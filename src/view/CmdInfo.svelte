@@ -37,6 +37,7 @@
     top: 0;
     left: var(--cmd-info-gap);
     right: var(--cmd-info-gap);
+    bottom: 5em;
     padding: var(--cmd-info-gap);
     overflow: auto;
     color: var(--cmd-info-color);
