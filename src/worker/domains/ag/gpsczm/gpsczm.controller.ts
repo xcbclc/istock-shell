@@ -60,10 +60,10 @@ export class GpsczmController {
     @CmdRouteOptions(cmdJson.深证股票行业成交.options.时间段) symbol: string,
     @CmdRouteOptions(cmdJson.深证股票行业成交.options.年月) yearMonth: string
   ) {
-    return await this.gpsczmService.getStockSzseSectorSummary({
-      symbol,
-      date: yearMonth,
-    });
+    const query: { date?: string; symbol?: string } = {};
+    if (symbol) query.symbol = symbol;
+    if (yearMonth) query.date = yearMonth;
+    return await this.gpsczmService.getStockSzseSectorSummary(query);
   }
 
   @CmdRoute(cmdJson.上证每日概况)

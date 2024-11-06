@@ -30,9 +30,12 @@ export class GpsczmService {
     } else {
       delete query.date;
     }
-    return await SzgphycjModel.run<Array<TModelData<SzgphycjModel>>>('/stock_szse_sector_summary', {
+    const list = await SzgphycjModel.run<Array<TModelData<SzgphycjModel>>>('/stock_szse_sector_summary', {
       method: 'get',
       query,
+    });
+    return list.sort((v1, v2) => {
+      return v2['成交金额-人民币元'] - v1['成交金额-人民币元'];
     });
   }
 
