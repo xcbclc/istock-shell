@@ -1,4 +1,4 @@
-import { ScopeError, isString, isUndefined, mergeObjectDeep } from '@istock/util';
+import { ScopeError, isString, isUndefined, mergeObjectDeep, isObject } from '@istock/util';
 import type { TAnyObj, TModelType, TFetchSSEMessage, TFetchWrapOptions } from '../../types';
 import type { ModelMetadataMap } from '../../metadata/metadata';
 
@@ -156,7 +156,10 @@ export class FetchWrap {
    */
   #objectToQueryString(params: Record<string, any>): string {
     const queryString = Object.keys(params)
-      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+      .map(
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(isObject(params[key]) ? JSON.stringify(params[key]) : params[key])}`
+      )
       .join('&');
     return queryString;
   }
