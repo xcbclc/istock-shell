@@ -126,7 +126,6 @@
   {#each wrapOutputList($cmdOutput.list) as block, index (index)}
     <section
       class="cmd-block is-hidden"
-      tabindex={index + 1}
       on:keydown={async (ev) => {
         if (ctx.isExample) return;
         await handleBlockContextmenu.handleMenuShortcutKey(ev, block);
@@ -196,7 +195,7 @@
       visibility: hidden;
       opacity: 0;
     }
-    &:focus {
+    &:hover {
       outline: none;
       background-color: var(--block-focus-background-color);
       transition: background-color var(--transition-duration);
