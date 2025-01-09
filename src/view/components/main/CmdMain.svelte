@@ -126,7 +126,6 @@
   {#each wrapOutputList($cmdOutput.list) as block, index (index)}
     <section
       class="cmd-block is-hidden"
-      tabindex={index + 1}
       on:keydown={async (ev) => {
         if (ctx.isExample) return;
         await handleBlockContextmenu.handleMenuShortcutKey(ev, block);
@@ -179,7 +178,7 @@
   :root {
     --block-gap: var(--gap-default);
     --block-border-color: var(--color-sub-background);
-    --block-focus-background-color: var(--color-sub-background);
+    --block-focus-background-color: var(--color-background-lighter);
   }
   .cmd-main {
     flex: auto;
@@ -196,7 +195,7 @@
       visibility: hidden;
       opacity: 0;
     }
-    &:focus {
+    &:hover {
       outline: none;
       background-color: var(--block-focus-background-color);
       transition: background-color var(--transition-duration);

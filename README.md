@@ -18,7 +18,10 @@
 - [演示地址](https://istock.red/shell)
 - [演示视频](https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4)
 
+`A股查看贵州茅台股票走势：`
 ![效果图](https://istock.red/static/效果图.jpg)
+`查看成都二手房行情：`
+![成都二手房行情](https://istock.red/static/成都二手房行情.jpg)
 
 #### 特性
 
@@ -28,9 +31,12 @@
 
 ### 内置功能
 
-- [全局命令](https://istock.red/use/command/)
-- [A股命令](https://istock.red/use/command/)
-- [网站导航](https://istock.red/use/command/)
+- [全局命令](https://istock.red/use/command/#全局)
+- [A股命令](https://istock.red/use/command/#a股)
+- [成都房产](https://istock.red/use/command/#成都房产)
+- [可转债](https://istock.red/use/command/##可转债)
+- [投资日历](https://istock.red/use/command/#投资日历)
+- [网站导航](https://istock.red/use/command/#网站导航)
 
 ### 相关文档
 

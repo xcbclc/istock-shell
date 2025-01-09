@@ -3,7 +3,7 @@
   "version": "0.1.4",
   "main": "./src/index.ts",
   "dependencies": {
-    "@antv/g2": "^5.0.18",
+    "@antv/g2": "^5.2.10",
     "highlight.js": "^11.10.0",
     "marked": "^13.0.2",
     "marked-highlight": "^2.1.3",

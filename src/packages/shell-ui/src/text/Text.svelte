@@ -41,6 +41,9 @@
   .is-danger {
     color: var(--color-text-danger);
   }
+  .is-primary {
+    color: var(--color-text-primary);
+  }
   p,
   span,
   a {

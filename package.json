@@ -2,7 +2,7 @@
   "name": "istock-shell",
   "private": true,
   "title": "iStock Shell",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "type": "module",
   "engines": {
     "node": ">=16",
@@ -24,7 +24,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "@antv/g2": "^5.2.1",
+    "@antv/g2": "^5.2.10",
     "@commitlint/cli": "^18.6.1",
     "@commitlint/config-conventional": "^18.6.3",
     "@istock/cli": "workspace:^",
@@ -65,7 +65,8 @@
     "@istock/editor": "workspace:^",
     "@istock/iswork": "workspace:^",
     "@istock/shell-ui": "workspace:^",
-    "@istock/util": "workspace:^"
+    "@istock/util": "workspace:^",
+    "dayjs": "^1.11.13"
   },
   "lint-staged": {
     "src/**/*.{js,cjs,ts}": [

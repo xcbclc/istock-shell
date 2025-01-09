@@ -27,6 +27,8 @@ import { KzzsdModel } from '@domains/kzz/kzzsd/kzzsd.model';
 import { KzzsdResultModel } from '@domains/kzz/kzzsd/kzzsd-result.model';
 import { TzrlModel } from '@domains/tzrl/tzrl/tzrl.model';
 import { CookieModel } from '@domains/global/setting/cookie/cookie.model';
+import { CdfceshqsjModel } from '@domains/cdfc/cdesf/cdfceshqsj.model';
+import { CdfcjysjModel } from '@domains/cdfc/cdesf/cdfcjysj.model';
 
 export const indexedDataSourceModels = [
   UserModel,
@@ -58,6 +60,7 @@ export const akShareFetchDataSourceModels = [
   KzzsssjModel,
 ];
 export const fetchDataSourceModels = [AiModel, TzrlModel, KzzsdModel];
+export const teableDataSourceModels = [CdfceshqsjModel, CdfcjysjModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
 
 export const initDataSource = async () => {
@@ -85,6 +88,19 @@ export const initDataSource = async () => {
     prefixUrl: import.meta.env.VITE_ISTOCK_API ?? '/api',
   });
   await fetchDataSource.initialize();
+
+  const teableDataSource = new DataSource<'fetch'>({
+    name: 'fetch',
+    type: 'fetch',
+    entities: teableDataSourceModels,
+    prefixUrl: import.meta.env.VITE_ISTOCK_API ?? '/api',
+    requestOptions: {
+      headers: {
+        'x-target': import.meta.env.VITE_ISTOCK_TEABLE ?? 'https://teable.istock.red',
+      },
+    },
+  });
+  await teableDataSource.initialize();
 
   const memoryDataSource = new DataSource<'memoryDB'>({
     name: 'memoryDB',

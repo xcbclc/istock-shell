@@ -84,6 +84,12 @@ export default async () => {
         tzrl: '投资日历',
       },
     },
+    cdfc: {
+      name: '成都房产',
+      cmd: {
+        cdesf: '成都二手房行情',
+      },
+    },
   };
   for (let file of cmdFiles) {
     let data;
