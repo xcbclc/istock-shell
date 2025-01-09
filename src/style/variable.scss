@@ -4,6 +4,7 @@
   --font-size-xl: 1.15em;
   --font-size-xxl: 1.2em;
   --font-size-3xl: 1.5em;
+  --font-size-4xl: 2em;
   --font-size-sm: 0.85em;
   --font-weight: 600;
 
@@ -18,6 +19,7 @@
   // 文本颜色
   --color-text-default: #a2968d;
   --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--color-secondary);
   --color-text-hover: var(--color-primary);
 
   // 状态色

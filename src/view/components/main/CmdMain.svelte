@@ -178,7 +178,7 @@
   :root {
     --block-gap: var(--gap-default);
     --block-border-color: var(--color-sub-background);
-    --block-focus-background-color: var(--color-sub-background);
+    --block-focus-background-color: var(--color-background-lighter);
   }
   .cmd-main {
     flex: auto;

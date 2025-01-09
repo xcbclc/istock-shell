@@ -14,7 +14,7 @@ export class ChartBaseService {
   readonly #textColor = '#958881';
   #getDefaultConfig() {
     return {
-      autoFit: false,
+      autoFit: true,
     };
   }
 
@@ -25,11 +25,23 @@ export class ChartBaseService {
         view: {
           viewFill: 'transparent',
         },
+        axis: {
+          labelFill: this.#textColor,
+          titleFill: this.#textColor,
+        },
         label: {
           fill: this.#textColor,
         },
+        innerLabel: {
+          fill: this.#textColor,
+        },
         legendCategory: {
+          labelFill: this.#textColor,
           itemLabelFill: this.#textColor,
+        },
+        title: {
+          titleFill: this.#textColor,
+          subtitleFill: this.#textColor,
         },
       },
     };
