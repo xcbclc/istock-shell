@@ -18,9 +18,10 @@
 
   // 文本颜色
   --color-text-default: #a2968d;
-  --color-text-primary: var(--color-primary);
+  --color-text-primary: var(--color-primary-darker);
   --color-text-secondary: var(--color-secondary);
   --color-text-hover: var(--color-primary);
+  --color-text-primary-hover: var(--color-primary);
 
   // 状态色
   --color-text-success: var(--color-primary-green);

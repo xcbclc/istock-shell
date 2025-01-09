@@ -42,6 +42,9 @@
     transition: transform ease var(--transition-duration);
     &:hover {
       transform: scale(1.05, 1.05);
+      .card-text.is-strong .card-field-value {
+        color: var(--color-text-hover);
+      }
     }
     dl {
       margin: 0;
@@ -59,7 +62,7 @@
     &.is-strong {
       flex-direction: column;
       .card-field-value {
-        color: var(--color-text-primary);
+        color: var(--color-text-primary-hover);
         font-size: var(--font-size-4xl);
       }
     }

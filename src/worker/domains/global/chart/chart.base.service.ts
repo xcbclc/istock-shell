@@ -3,6 +3,7 @@ import type { G2Spec } from '@antv/g2';
 import { isNil, ScopeError, getMessageDataPK, EMessageDataFieldType } from '@istock/util';
 import type { TUiTableProps, TTableFilterConditionRange, TTableFilterItem } from '@/worker/common';
 import { parseFilterConditions } from '@/worker/common';
+import g2Theme from './g2-theme.json';
 import type { TBarOption, TLineOption, TPieOption, TStockOption } from './chart.cmd';
 
 export type TChartData = Array<Record<string, unknown>>;
@@ -21,10 +22,8 @@ export class ChartBaseService {
   #getThemeConfig() {
     return {
       type: this.#theme,
+      ...g2Theme,
       ...{
-        view: {
-          viewFill: 'transparent',
-        },
         axis: {
           labelFill: this.#textColor,
           titleFill: this.#textColor,
@@ -38,10 +37,6 @@ export class ChartBaseService {
         legendCategory: {
           labelFill: this.#textColor,
           itemLabelFill: this.#textColor,
-        },
-        title: {
-          titleFill: this.#textColor,
-          subtitleFill: this.#textColor,
         },
       },
     };

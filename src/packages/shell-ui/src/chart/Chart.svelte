@@ -14,7 +14,6 @@
   onMount(async () => {
     chart = new Chart({
       container: containerElement,
-      width: containerElement.offsetWidth,
     });
     chart.options(options);
     await chart.render();

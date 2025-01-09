@@ -3,7 +3,7 @@
   import ShCard from '../card/index';
   import ShChart from '../chart/index';
   export let cards: Array<{ img?: string; list: Array<{ name: string; value: string; description?: string }> }> = [];
-  export let charts: ChartOptions[] = [];
+  export let charts: Array<{ options: ChartOptions }> = [];
 </script>
 
 <div class="data-grid">
@@ -11,7 +11,9 @@
     <div class="grid-section grid-cards">
       {#each cards as card}
         <div class="grid-item grid-card">
-          <ShCard {...card} />
+          <div class="grid-item-inner">
+            <ShCard {...card} />
+          </div>
         </div>
       {/each}
     </div>
@@ -20,7 +22,9 @@
     <div class="grid-section grid-charts">
       {#each charts as chat}
         <div class="grid-item grid-chart">
-          <ShChart {...chat} />
+          <div class="grid-item-inner">
+            <ShChart {...chat} />
+          </div>
         </div>
       {/each}
     </div>
@@ -32,25 +36,33 @@
     padding: var(--gap-default);
   }
   .grid-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--gap-2x);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
     &:not(:last-child) {
       margin-bottom: var(--gap-2x);
     }
   }
-  .grid-cards {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  .grid-item-inner {
+    padding: var(--gap-default);
+    height: calc(100% - var(--gap-2x));
   }
-  .grid-charts {
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  .grid-card,
+  .grid-chart {
+    flex: 1 0 auto;
   }
-  .grid-item {
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+  .grid-card {
+    min-width: 20%;
+    max-width: 100%;
     :global(.card) {
-      height: calc(100% - var(--gap-2x));
+      height: inherit;
+    }
+  }
+  .grid-chart {
+    min-width: 50%;
+    max-width: 100%;
+    :global(.chat-container) {
+      max-width: 100%;
     }
   }
 </style>

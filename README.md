@@ -18,7 +18,10 @@
 - [演示地址](https://istock.red/shell)
 - [演示视频](https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4)
 
+`A股查看贵州茅台股票走势：`
 ![效果图](https://istock.red/static/效果图.jpg)
+`查看成都二手房行情：`
+![成都二手房行情](http://localhost:5172/static/成都二手房行情.jpg)
 
 #### 特性
 
