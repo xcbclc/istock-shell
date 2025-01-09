@@ -28,9 +28,12 @@
 
 ### 内置功能
 
-- [全局命令](https://istock.red/use/command/)
-- [A股命令](https://istock.red/use/command/)
-- [网站导航](https://istock.red/use/command/)
+- [全局命令](https://istock.red/use/command/#全局)
+- [A股命令](https://istock.red/use/command/#a股)
+- [成都房产](https://istock.red/use/command/#成都房产)
+- [可转债](https://istock.red/use/command/##可转债)
+- [投资日历](https://istock.red/use/command/#投资日历)
+- [网站导航](https://istock.red/use/command/#网站导航)
 
 ### 相关文档
 
