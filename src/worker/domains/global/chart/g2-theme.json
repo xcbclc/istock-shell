@@ -157,10 +157,7 @@
       "connectorLineWidth": 1,
       "backgroundFill": "rgba(162, 150, 141, 1)",
       "backgroundFillOpacity": 0.15,
-      "backgroundPadding": [
-        2,
-        4
-      ],
+      "backgroundPadding": [2, 4],
       "startMarkerSymbol": "circle",
       "startMarkerSize": 4,
       "endMarkerSymbol": "circle",
@@ -220,10 +217,7 @@
   },
   "axis": {
     "arrow": false,
-    "gridLineDash": [
-      3,
-      4
-    ],
+    "gridLineDash": [3, 4],
     "gridLineWidth": 0.5,
     "gridStroke": "rgba(201, 68, 0, 1)",
     "gridStrokeOpacity": 0.25,
@@ -324,10 +318,7 @@
     "itemLabelFontWeight": "normal",
     "itemMarkerFillOpacity": 1,
     "itemMarkerSize": 8,
-    "itemSpacing": [
-      8,
-      8
-    ],
+    "itemSpacing": [8, 8],
     "itemValueFill": "rgba(201, 68, 0, 1)",
     "itemValueFillOpacity": 0.65,
     "itemValueFontSize": 12,
@@ -429,12 +420,7 @@
     "handleLabelFontWeight": "normal"
   },
   "scrollbar": {
-    "padding": [
-      0,
-      0,
-      0,
-      0
-    ],
+    "padding": [0, 0, 0, 0],
     "trackSize": 6,
     "isRound": true,
     "slidable": true,
