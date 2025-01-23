@@ -24,7 +24,7 @@
         default: '',
         xs: 'btn-xs',
         sm: 'btn-sm',
-        md: '',
+        md: 'btn-md',
         lg: 'btn-lg',
         xl: 'btn-xl',
       },
@@ -60,24 +60,21 @@
         true: 'btn-block',
       },
     },
-    defaultVariants: {
-      variant: 'default' as const,
-      size: 'default' as const,
-    },
+    defaultVariants: {},
   };
   export type TButtonTag = 'a' | 'button' | 'input' | 'div';
-  export type ButtonVariant = keyof (typeof buttonVariantConfig)['variants']['variant'];
-  export type ButtonSize = keyof (typeof buttonVariantConfig)['variants']['size'];
-  export type ButtonAttributes<T extends TButtonTag> = T extends 'button'
+  export type TButtonVariant = keyof (typeof buttonVariantConfig)['variants']['variant'];
+  export type TButtonSize = keyof (typeof buttonVariantConfig)['variants']['size'];
+  export type TButtonAttributes<T extends TButtonTag> = T extends 'button'
     ? HTMLButtonAttributes
     : T extends 'input'
       ? HTMLInputAttributes
       : T extends 'a'
         ? HTMLLinkAttributes
         : HTMLBaseAttributes;
-  export type ButtonProps<T extends TButtonTag> = ButtonAttributes<T> & {
-    variant?: ButtonVariant;
-    size?: ButtonSize;
+  export type ButtonProps<T extends TButtonTag> = TButtonAttributes<T> & {
+    variant?: TButtonVariant;
+    size?: TButtonSize;
     soft?: boolean;
     outline?: boolean;
     dash?: boolean;
@@ -96,6 +93,7 @@
 <script lang="ts">
   import { tv } from 'tailwind-variants';
   import { tuc } from '@istock/util';
+  import { ShLoading } from '../loading/index';
   const {
     variant,
     size,
@@ -115,7 +113,7 @@
     class: className = '',
     ...otherProps
   }: ButtonProps<'input'> = $props(); // todo ButtonProps参数如何根据tag的值动态推算出元素的属性类型
-  export const buttonVariants = tv(buttonVariantConfig, {
+  const buttonVariants = tv(buttonVariantConfig, {
     responsiveVariants: ['size'],
   });
 </script>
@@ -130,7 +128,7 @@
   {...otherProps}
 >
   {#if loading}
-    <span class="loading loading-spinner"></span> <!-- todo 使用loading组件 -->
+    <ShLoading color={variant} {size} />
   {/if}
   {@render children?.()}
 </svelte:element>
