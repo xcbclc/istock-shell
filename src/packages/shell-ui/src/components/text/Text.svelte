@@ -27,6 +27,12 @@
         center: 'text-center',
         right: 'text-right',
       },
+      weight: {
+        light: 'font-light',
+        medium: 'font-medium',
+        semibold: 'font-semibold',
+        bold: 'font-bold',
+      },
     },
     defaultVariants: {},
   };
@@ -34,11 +40,13 @@
   export type TTextColor = keyof (typeof textVariantConfig)['variants']['color'];
   export type TTextSize = keyof (typeof textVariantConfig)['variants']['size'];
   export type TTextAlign = keyof (typeof textVariantConfig)['variants']['align'];
+  export type TWeightAlign = keyof (typeof textVariantConfig)['variants']['weight'];
   export interface ITextBaseProps {
     color?: TTextColor;
     size?: TTextSize;
     align?: TTextAlign;
     tag?: TTextTag;
+    weight?: TWeightAlign;
   }
   export interface ITextItemProps extends ITextBaseProps {
     text?: string;
@@ -57,6 +65,7 @@
     color,
     size,
     align,
+    weight,
     tag = 'p',
     texts = [],
     children,
@@ -72,7 +81,14 @@
   <svelte:element
     this={item.tag ?? tag}
     class={[
-      tuc(textVariants({ color: item.color ?? color, size: item.size ?? size, align: item.align ?? align })),
+      tuc(
+        textVariants({
+          color: item.color ?? color,
+          size: item.size ?? size,
+          align: item.align ?? align,
+          weight: item.weight ?? weight ?? weight,
+        })
+      ),
       className,
     ]}
     href={item.href}
