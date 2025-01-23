@@ -6,6 +6,7 @@ outline: [2, 3]
 footer: false
 ---
 
+## Loading
 **Loading会显示动画以指示正在加载某些内容。**
 
 ## 用法演示

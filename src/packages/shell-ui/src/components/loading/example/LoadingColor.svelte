@@ -2,7 +2,7 @@
   import Loading from '../Loading.svelte';
 </script>
 
-<div class="flex items-center justify-center m-2">
+<div class="flex items-center justify-center m-2 gap-4">
   <Loading shape="spinner" color="primary" />
   <Loading shape="spinner" color="secondary" />
   <Loading shape="spinner" color="accent" />

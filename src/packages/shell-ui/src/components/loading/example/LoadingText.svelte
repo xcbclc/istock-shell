@@ -2,7 +2,7 @@
   import Loading from '../Loading.svelte';
 </script>
 
-<div class="flex items-center justify-center flex-col m-2">
+<div class="flex items-center justify-center flex-col gap-2">
   <Loading color="primary" text="loading" />
   <Loading color="secondary">loading</Loading>
   <Loading color="accent" size="xs">loading</Loading>
