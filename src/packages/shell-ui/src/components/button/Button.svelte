@@ -1,4 +1,3 @@
-<!-- Button.svelte -->
 <script lang="ts" module>
   import type {
     HTMLButtonAttributes,
@@ -9,7 +8,7 @@
   const buttonVariantConfig = {
     base: 'btn',
     variants: {
-      variant: {
+      color: {
         default: '',
         primary: 'btn-primary',
         secondary: 'btn-secondary',
@@ -63,7 +62,7 @@
     defaultVariants: {},
   };
   export type TButtonTag = 'a' | 'button' | 'input' | 'div';
-  export type TButtonVariant = keyof (typeof buttonVariantConfig)['variants']['variant'];
+  export type TButtonColor = keyof (typeof buttonVariantConfig)['variants']['color'];
   export type TButtonSize = keyof (typeof buttonVariantConfig)['variants']['size'];
   export type TButtonAttributes<T extends TButtonTag> = T extends 'button'
     ? HTMLButtonAttributes
@@ -72,8 +71,8 @@
       : T extends 'a'
         ? HTMLLinkAttributes
         : HTMLBaseAttributes;
-  export type ButtonProps<T extends TButtonTag> = TButtonAttributes<T> & {
-    variant?: TButtonVariant;
+  export type ButtonProps<T extends TButtonTag> = Omit<TButtonAttributes<T>, 'size'> & {
+    color?: TButtonColor;
     size?: TButtonSize;
     soft?: boolean;
     outline?: boolean;
@@ -95,7 +94,7 @@
   import { tuc } from '@istock/util';
   import { ShLoading } from '../loading/index';
   const {
-    variant,
+    color,
     size,
     soft,
     outline,
@@ -122,13 +121,13 @@
   this={tag}
   {disabled}
   class={[
-    tuc(buttonVariants({ variant, size, soft, outline, dash, active, ghost, link, wide, disabled, shape, block })),
+    tuc(buttonVariants({ color, size, soft, outline, dash, active, ghost, link, wide, disabled, shape, block })),
     className,
   ]}
   {...otherProps}
 >
   {#if loading}
-    <ShLoading color={variant} {size} />
+    <ShLoading {color} {size} />
   {/if}
   {@render children?.()}
 </svelte:element>

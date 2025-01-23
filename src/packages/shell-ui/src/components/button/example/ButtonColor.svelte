@@ -2,11 +2,11 @@
   import Button from '../Button.svelte';
 </script>
 
-<Button variant="neutral">中性</Button>
-<Button variant="primary">主要</Button>
-<Button variant="secondary">次要</Button>
-<Button variant="accent">强调</Button>
-<Button variant="info">信息</Button>
-<Button variant="success">成功</Button>
-<Button variant="warning">警告</Button>
-<Button variant="error">错误</Button>
+<Button color="neutral">中性</Button>
+<Button color="primary">主要</Button>
+<Button color="secondary">次要</Button>
+<Button color="accent">强调</Button>
+<Button color="info">信息</Button>
+<Button color="success">成功</Button>
+<Button color="warning">警告</Button>
+<Button color="error">错误</Button>
