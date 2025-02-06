@@ -35,7 +35,7 @@
     position?: 'before' | 'after';
     class?: string;
   };
-  export interface CheckboxProps extends Omit<Omit<CheckboxItemProps, 'option'>, 'groupValue'> {
+  export interface CheckboxProps extends Omit<CheckboxItemProps, 'option' | 'groupValue'> {
     color?: TCheckboxItemColor;
     size?: TCheckboxItemSize;
     options?: TCheckboxItemOption[];
@@ -48,15 +48,7 @@
 <script lang="ts">
   import { tv } from 'tailwind-variants';
   import { tuc, findByKeyForValue } from '@istock/util';
-  let {
-    value = $bindable([]),
-    options = [],
-    label,
-    disabled,
-    onchange,
-    onChangeValue,
-    ...otherProps
-  }: CheckboxProps = $props();
+  let { value = $bindable([]), options = [], label, disabled, onChangeValue, ...otherProps }: CheckboxProps = $props();
   const checkedList = $derived.by(() => {
     return options.map((opt) => {
       return value.includes(opt.value);

@@ -21,6 +21,7 @@ footer: false
 <IStockShellUiExample src="./example/InputFieldset.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/InputColor.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/InputSize.svelte"></IStockShellUiExample>
+<IStockShellUiExample src="./example/InputDisabled.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/InputType.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/InputIcon.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/InputValidator.svelte"></IStockShellUiExample>

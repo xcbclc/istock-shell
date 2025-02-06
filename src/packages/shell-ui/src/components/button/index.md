@@ -6,7 +6,7 @@ outline: [2, 3]
 footer: false
 ---
 
-## Button
+## Button 按钮
 **按钮可以让用户执行命令或者作出选择。**
 
 ## 用法演示

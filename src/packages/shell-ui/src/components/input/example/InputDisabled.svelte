@@ -3,5 +3,5 @@
 </script>
 
 <div class="flex items-center justify-center gap-2">
-  <ShInput disabled />
+  <ShInput disabled placeholder="请输入" />
 </div>

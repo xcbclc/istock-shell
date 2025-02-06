@@ -4,7 +4,6 @@
     base: '',
     variants: {
       size: {
-        default: '',
         xs: 'text-xs',
         sm: 'text-sm',
         md: 'text-md',
@@ -12,7 +11,6 @@
         xl: 'text-xl',
       },
       color: {
-        default: '',
         primary: 'text-primary',
         secondary: 'text-secondary',
         accent: 'text-accent',
@@ -92,7 +90,7 @@
       className,
     ]}
     href={item.href}
-    target={item.target}
+    target={item.target ?? (tag === 'a' ? '_blank' : undefined)}
     {...otherProps}
   >
     {@render children?.()}

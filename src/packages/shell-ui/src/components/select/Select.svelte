@@ -33,7 +33,7 @@
   export type TSelectSize = keyof (typeof selectVariantConfig)['variants']['size'];
   export type TSelectVariant = keyof (typeof selectVariantConfig)['variants']['variant'];
 
-  export interface BaseSelectProps extends Omit<Omit<HTMLSelectAttributes, 'size'>, 'multiple'> {
+  export interface BaseSelectProps extends Omit<HTMLSelectAttributes, 'size' | 'multiple'> {
     color?: TSelectColor;
     size?: TSelectSize;
     variant?: TSelectVariant;
@@ -148,3 +148,5 @@
     {/if}
   {/each}
 </select>
+
+<style></style>

@@ -6,12 +6,11 @@ outline: [ 2, 3 ]
 footer: false
 ---
 
-## Radio 单选框<Badge type="tip">shell</Badge>
+## Radio 单选框
 
 **使用单选框，用户可以从多个选项中选择一个选项。**
 
 ## 用法演示
-<!-- prettier-ignore -->
 <IStockShellUiExample src="./example/RadioDefault.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/RadioSize.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/RadioColor.svelte"></IStockShellUiExample>
@@ -36,6 +35,7 @@ footer: false
 export type TRadioItemOption<T = any> = {
     label?: string | number | boolean;
     value: T;
+    disabled?: boolean;
 };
 ```
 

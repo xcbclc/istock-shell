@@ -1,4 +1,4 @@
-<script lang="ts" module>
+<script lang="ts">
   import { ShRadio } from '../index';
 
   const options = [

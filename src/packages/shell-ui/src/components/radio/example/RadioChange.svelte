@@ -1,4 +1,4 @@
-<script lang="ts" module>
+<script lang="ts">
   import { ShRadio, type TRadioItemOption } from '../index';
   let value = $state<number>();
   let opt = $state();

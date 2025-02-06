@@ -45,15 +45,7 @@
   import { tv } from 'tailwind-variants';
   import { tuc, findByKeyForValue } from '@istock/util';
 
-  let {
-    value = $bindable(),
-    options = [],
-    label,
-    disabled,
-    onchange,
-    onChangeValue,
-    ...otherProps
-  }: RadioProps = $props();
+  let { value = $bindable(), options = [], label, disabled, onChangeValue, ...otherProps }: RadioProps = $props();
   const radioLabelVariants = tv(radioLabelVariantConfig);
 
   $effect(() => {

@@ -4,7 +4,6 @@
     base: 'loading',
     variants: {
       shape: {
-        default: '',
         spinner: 'loading-spinner',
         dots: 'loading-dots',
         ring: 'loading-ring',
@@ -13,7 +12,6 @@
         infinity: 'loading-infinity',
       },
       size: {
-        default: '',
         xs: 'loading-xs',
         sm: 'loading-sm',
         md: 'loading-md',
@@ -21,7 +19,6 @@
         xl: 'loading-xl',
       },
       color: {
-        default: '',
         primary: 'text-primary',
         secondary: 'text-secondary',
         accent: 'text-accent',
@@ -84,8 +81,8 @@
   );
 </script>
 
-{#snippet loading(extrClassName: string)}
-  <span class={[tuc(loadingVariants({ shape, size, color })), className, extrClassName]} {...otherProps}></span>
+{#snippet loading(extraClassName: string)}
+  <span class={[tuc(loadingVariants({ shape, size, color })), className, extraClassName]} {...otherProps}></span>
 {/snippet}
 {#if text ?? children}
   <div class="inline-flex items-center justify-center">
