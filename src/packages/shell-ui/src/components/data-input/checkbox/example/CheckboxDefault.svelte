@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShCheckbox } from '../index';
+  import { ShCheckbox } from '@istock/shell-ui';
   let value = $state<number[]>([0]);
   const options = [
     { label: '股票', value: 0 },
@@ -8,7 +8,5 @@
   ];
 </script>
 
-<div class="flex items-center justify-center gap-2">
-  <ShCheckbox bind:value {options} />
-</div>
-{#if value.length}<p>您选择了：{value.join('、')}</p>{/if}
+<ShCheckbox bind:value {options} />
+<p>您选择了：{value.join('、')}</p>

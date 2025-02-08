@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShCheckbox } from '../index';
+  import { ShCheckbox } from '@istock/shell-ui';
   let value = $state<number[]>([0]);
   const options = [
     { label: '股票', value: 0 },
@@ -23,16 +23,14 @@
   }
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <div class="mr-4">
-    <ShCheckbox
-      bind:value={checkAll}
-      options={[{ value: true, label: '全选' }]}
-      {indeterminate}
-      onclick={() => {
-        onChangeAll(checkAll[0]);
-      }}
-    />
-  </div>
-  <ShCheckbox bind:value {options} {onChangeValue} />
+<div class="mr-4">
+  <ShCheckbox
+    bind:value={checkAll}
+    options={[{ value: true, label: '全选' }]}
+    {indeterminate}
+    onclick={() => {
+      onChangeAll(checkAll[0]);
+    }}
+  />
 </div>
+<ShCheckbox wrapClass="flex-col" bind:value {options} {onChangeValue} />

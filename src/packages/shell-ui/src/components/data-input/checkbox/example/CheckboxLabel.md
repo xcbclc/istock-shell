@@ -1,2 +1,4 @@
-### 定制label
-label位置可以通过`label`属性去调整。
+### 标签配置
+通过`label.position`配置标签方位：
+- `before`: 标签在选框左侧
+- `after`: 标签在选框右侧（默认）

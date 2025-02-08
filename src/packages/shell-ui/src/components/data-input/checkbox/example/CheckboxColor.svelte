@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShCheckbox } from '../index';
+  import { ShCheckbox } from '@istock/shell-ui';
 
   const options = [
     { label: '股票', value: 0 },
@@ -8,13 +8,11 @@
   ];
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <div class="flex gap-2"><ShCheckbox {options} color="primary" /></div>
-  <div class="flex gap-2"><ShCheckbox {options} color="secondary" /></div>
-  <div class="flex gap-2"><ShCheckbox {options} color="accent" /></div>
-  <div class="flex gap-2"><ShCheckbox {options} color="neutral" /></div>
-  <div class="flex gap-2"><ShCheckbox {options} color="info" /></div>
-  <div class="flex gap-2"><ShCheckbox {options} color="success" /></div>
-  <div class="flex gap-2"><ShCheckbox {options} color="warning" /></div>
-  <div class="flex gap-2"><ShCheckbox {options} color="error" /></div>
-</div>
+<ShCheckbox {options} color="primary" />
+<ShCheckbox {options} color="secondary" />
+<ShCheckbox {options} color="accent" />
+<ShCheckbox {options} color="neutral" />
+<ShCheckbox {options} color="info" />
+<ShCheckbox {options} color="success" />
+<ShCheckbox {options} color="warning" />
+<ShCheckbox {options} color="error" />

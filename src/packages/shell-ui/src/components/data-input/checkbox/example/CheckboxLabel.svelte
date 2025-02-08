@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShCheckbox } from '../index';
+  import { ShCheckbox } from '@istock/shell-ui';
   let value = $state<number[]>([]);
   const options = [
     { label: '股票', value: 0 },
@@ -8,7 +8,5 @@
   ];
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <div class="flex gap-2"><ShCheckbox bind:value {options} label={{ position: 'before' }} /></div>
-  <div class="flex gap-2"><ShCheckbox bind:value {options} label={{ position: 'after' }} /></div>
-</div>
+<ShCheckbox bind:value {options} label={{ position: 'before' }} />
+<ShCheckbox bind:value {options} label={{ position: 'after' }} />
