@@ -3,7 +3,7 @@
   import { getComponentConfig } from '../../../theme/config';
 
   // 从主题配置中获取按钮组件的基础配置
-  const buttonVariantConfig = getComponentConfig('button');
+  const buttonVariantConfig = getComponentConfig('Button');
 
   // 定义按钮支持的HTML标签类型
   export type ButtonTag = 'a' | 'button' | 'input' | 'div';

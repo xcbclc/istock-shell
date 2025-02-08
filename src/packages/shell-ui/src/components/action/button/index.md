@@ -1,5 +1,5 @@
 ---
-title: Button 按钮组件 - 使用指南与API文档
+title: Button 按钮组件
 description: 按钮（Button）组件提供多种交互样式，包括主要按钮、次要按钮、轮廓按钮、加载状态等，支持颜色定制、尺寸调整和禁用状态，适用于表单提交、操作触发等场景。
 keywords: [按钮组件,Svelte按钮,UI组件,交互按钮,按钮样式,按钮API]
 editLink: false
