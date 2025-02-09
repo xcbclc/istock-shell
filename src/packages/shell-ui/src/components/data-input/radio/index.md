@@ -35,6 +35,7 @@ outline: [2, 3]
 ### Radio 属性说明
 | 属性名           | 说明           | 类型                                                                                               | 默认值 |
 |---------------|--------------|--------------------------------------------------------------------------------------------------|----|
+| value         | 选中的值（双向绑定）   | `any`                                                                                          |  |
 | color         | 主题颜色       | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |    |
 | size          | 尺寸配置       | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                             |    |
 | options       | 选项配置数组       | [RadioItemOption](#radioitemoption)[]                                                            | [] |
