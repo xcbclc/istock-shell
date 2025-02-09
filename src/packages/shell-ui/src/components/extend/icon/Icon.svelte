@@ -1,46 +1,40 @@
 <script lang="ts" module>
   import type { HTMLAttributes } from 'svelte/elements';
+  import { IconVariantConfig } from '../../../theme/config';
 
-  const iconVariantConfig = {
-    base: 'icon',
-    variants: {
-      size: {
-        xs: 'icon-xs',
-        sm: 'icon-sm',
-        md: 'icon-md',
-        lg: 'icon-lg',
-        xl: 'icon-xl',
-      },
-      color: {
-        primary: 'text-primary',
-        secondary: 'text-secondary',
-        accent: 'text-accent',
-        neutral: 'text-neutral',
-        info: 'text-info',
-        success: 'text-success',
-        warning: 'text-warning',
-        error: 'text-error',
-      },
-    },
-    defaultVariants: {},
-  };
+  const iconVariantConfig = IconVariantConfig;
+
+  // 定义图标颜色类型（从配置中提取）
   export type IconColor = keyof (typeof iconVariantConfig)['variants']['color'];
+  // 定义图标尺寸类型（从配置中提取）
   export type IconSize = keyof (typeof iconVariantConfig)['variants']['size'];
 
+  // 组件属性接口（继承HTML元素属性）
   export interface IconProps extends HTMLAttributes<HTMLElement> {
-    name?: string;
-    color?: IconColor;
-    size?: IconSize;
+    name?: string; // 图标名称（对应svg文件名）
+    color?: IconColor; // 颜色主题
+    size?: IconSize; // 尺寸配置
   }
 </script>
 
 <script lang="ts">
   import { tuc } from '@istock/util';
   import { tv } from 'tailwind-variants';
-  const { name = '', color, size, class: className = '', children, ...otherProps }: IconProps = $props();
+
+  const {
+    name = '', // 图标名称
+    color, // 颜色主题
+    size, // 尺寸配置
+    class: className = '', // 自定义类名
+    children, // 子内容
+    ...otherProps // 其他原生属性
+  }: IconProps = $props();
+
+  // 创建图标样式变体生成器
   const iconVariants = tv(iconVariantConfig, {
-    responsiveVariants: ['size'],
+    responsiveVariants: ['size'], // 响应式尺寸配置
   });
+  // 动态导入SVG图标文件（构建时处理）
   const iconUrlRecord: Record<string, () => Promise<string>> = import.meta.glob<string>('./svg/**/*.svg', {
     import: 'default',
     eager: false,
@@ -58,11 +52,15 @@
   }, {});
 </script>
 
+<!-- 图标容器 -->
 <i class={[tuc(iconVariants({ color, size })), 'inline-block', className]} {...otherProps}>
   {#if children}
+    <!-- 优先渲染子内容 -->
     {@render children()}
   {:else}
+    <!-- 动态加载SVG图标 -->
     {#await iconNameRecord[name]?.() ?? '' then svg}
+      <!-- 渲染原始SVG内容 -->
       <!--eslint-disable-next-line svelte/no-at-html-tags-->
       {@html svg}
     {/await}
@@ -74,23 +72,28 @@
     width: var(--text-base);
     height: var(--text-base);
     line-height: var(--text-base--line-height);
+
     &.icon-xs {
       width: var(--text-xs);
       height: var(--text-xs);
       line-height: var(--text-xs--line-height);
     }
+
     &.icon-sm {
       width: var(--text-sm);
       height: var(--text-sm);
       line-height: var(--text-sm--line-height);
     }
+
     &.icon-md {
     }
+
     &.icon-lg {
       width: var(--text-lg);
       height: var(--text-lg);
       line-height: var(--text-lg--line-height);
     }
+
     &.icon-xl {
       width: var(--text-xl);
       height: var(--text-xl);

@@ -1,13 +1,11 @@
 <script lang="ts">
-  import { ShIcon } from '../index';
+  import { ShIcon } from '@istock/shell-ui';
   const icons = ['email', 'error', 'file', 'link', 'password', 'phone', 'question', 'right', 'search', 'user'];
 </script>
 
-<div class="flex items-center justify-center gap-4">
-  {#each icons as icon}
-    <div class="text-center">
-      <ShIcon {icon} />
-      <p>{icon}</p>
-    </div>
-  {/each}
-</div>
+{#each icons as name}
+  <div class="text-center">
+    <ShIcon {name} />
+    <p>{name}</p>
+  </div>
+{/each}
