@@ -6,7 +6,7 @@ editLink: false
 outline: [2, 3]
 ---
 
-## Text 文本<Badge type="tip">shell</Badge>
+## Text 文本组件<Badge type="tip">shell</Badge>
 
 **用于规范化的文本内容展示，支持丰富的排版样式配置和语义化标签。**
 

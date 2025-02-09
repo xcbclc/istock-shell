@@ -21,7 +21,7 @@ outline: [2, 3]
 - 支持标题(legend)和说明文本(label)双层级说明
 - 内置表单验证状态提示
 
-## 用法演示
+## 示例演示
 <IStockShellUiExample src="./example/FieldSetDefault.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/FieldSetStyle.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/FieldSetMultiple.svelte"></IStockShellUiExample>

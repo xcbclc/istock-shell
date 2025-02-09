@@ -19,7 +19,7 @@ outline: [2, 3]
 - 8种预设颜色主题配置
 - 5种尺寸选择（xs-xl）及响应式适配
 
-## 用法演示
+## 示例演示
 <IStockShellUiExample src="./example/SelectDefault.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/SelectGhost.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/SelectFieldset.svelte"></IStockShellUiExample>

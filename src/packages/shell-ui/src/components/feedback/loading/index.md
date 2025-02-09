@@ -22,7 +22,7 @@ outline: [2, 3]
 - 支持主题色定制和自定义颜色
 - 内置流畅的过渡动画效果
 
-## 用法演示
+## 示例演示
 <IStockShellUiExample src="./example/LoadingStyle.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/LoadingColor.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/LoadingText.svelte"></IStockShellUiExample>

@@ -22,7 +22,7 @@ outline: [2, 3]
 - 支持不确定状态（indeterminate）
 - 自定义开关图标和轨道样式
 
-## 用法演示
+## 示例演示
 <IStockShellUiExample src="./example/ToggleDefault.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/ToggleFieldset.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/ToggleColor.svelte"></IStockShellUiExample>
@@ -33,7 +33,7 @@ outline: [2, 3]
 <IStockShellUiExample src="./example/ToggleCustom.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/ToggleChange.svelte" layout="column"></IStockShellUiExample>
 
-## API
+## API 参考
 ### 属性说明
 | 属性名           | 说明           | 类型                                                                                            | 默认值                           |
 |---------------|--------------|-----------------------------------------------------------------------------------------------|-------------------------------|

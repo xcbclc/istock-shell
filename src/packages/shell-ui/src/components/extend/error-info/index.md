@@ -20,7 +20,7 @@ outline: [2, 3]
 - 可以显示完整堆栈信息
 
 ## 示例演示
-<IStockShellUiExample src="./example/ErrorInfoDefault.svelte"></IStockShellUiExample>
+<IStockShellUiExample src="./example/ErrorInfoDefault.svelte" layout="auto"></IStockShellUiExample>
 
 ## API 参考
 ### 属性说明

@@ -22,8 +22,7 @@ outline: [ 2, 3 ]
 - 5种尺寸选择（xs-xl）及响应式适配
 - 禁用状态
 
-## 用法演示
-
+## 示例演示
 <IStockShellUiExample src="./example/TextareaDefault.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/TextareaGhost.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/TextareaFieldset.svelte"></IStockShellUiExample>
@@ -35,6 +34,7 @@ outline: [ 2, 3 ]
 ## API 参考
 
 ### 属性说明
+除了支持原生textarea属性以外，还支持以下属性：
 
 | 属性名           | 说明                                  | 类型                                                                                               | 默认值 |
 |---------------|-------------------------------------|--------------------------------------------------------------------------------------------------|-----|
