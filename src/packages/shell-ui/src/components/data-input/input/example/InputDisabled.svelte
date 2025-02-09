@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { ShInput } from '../index';
+  import { ShInput } from '@istock/shell-ui';
 </script>
 
-<div class="flex items-center justify-center gap-2">
-  <ShInput disabled placeholder="请输入" />
-</div>
+<ShInput disabled placeholder="请输入" />

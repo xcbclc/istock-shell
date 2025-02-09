@@ -1,41 +1,20 @@
 <script lang="ts" module>
   import type { Snippet } from 'svelte';
   import type { HTMLInputAttributes } from 'svelte/elements';
+  import { getComponentConfig } from '../../../theme/config';
 
-  const inputVariantConfig = {
-    base: 'input',
-    variants: {
-      size: {
-        xs: 'input-xs',
-        sm: 'input-sm',
-        md: 'input-md',
-        lg: 'input-lg',
-        xl: 'input-xl',
-      },
-      color: {
-        primary: 'input-primary',
-        secondary: 'input-secondary',
-        accent: 'input-accent',
-        neutral: 'input-neutral',
-        info: 'input-info',
-        success: 'input-success',
-        warning: 'input-warning',
-        error: 'input-error',
-      },
-      variant: {
-        ghost: 'input-ghost',
-      },
-      validator: {
-        true: 'validator',
-      },
-    },
-    defaultVariants: {},
-  };
-  export type TInputColor = keyof (typeof inputVariantConfig)['variants']['color'];
-  export type TInputSize = keyof (typeof inputVariantConfig)['variants']['size'];
-  export type TInputVariant = keyof (typeof inputVariantConfig)['variants']['variant'];
+  // 获取输入框组件主题配置
+  const inputVariantConfig = getComponentConfig('Input');
 
-  export type TInputType =
+  // 定义输入框颜色主题类型（从配置中提取）
+  export type InputColor = keyof (typeof inputVariantConfig)['variants']['color'];
+  // 定义输入框尺寸类型（从配置中提取）
+  export type InputSize = keyof (typeof inputVariantConfig)['variants']['size'];
+  // 定义输入框变体类型（从配置中提取）
+  export type InputVariant = keyof (typeof inputVariantConfig)['variants']['variant'];
+
+  // 支持的输入类型集合
+  export type InputType =
     | 'text'
     | 'password'
     | 'email'
@@ -49,35 +28,37 @@
     | 'search'
     | 'time';
 
-  interface IInputBaseProps {
-    color?: TInputColor;
-    size?: TInputSize;
-    variant?: TInputVariant;
-    validator?: boolean;
-    prefixRender?: (opt: InputRenderOption) => ReturnType<Snippet<[InputRenderOption]>>;
-    suffixRender?: (opt: InputRenderOption) => ReturnType<Snippet<[InputRenderOption]>>;
+  interface InputBaseProps {
+    color?: InputColor; // 颜色主题
+    size?: InputSize; // 尺寸配置
+    variant?: InputVariant; // 样式变体
+    validator?: boolean; // 验证状态指示
+    prefixRender?: (opt: InputRenderOption) => ReturnType<Snippet<[InputRenderOption]>>; // 前缀渲染函数
+    suffixRender?: (opt: InputRenderOption) => ReturnType<Snippet<[InputRenderOption]>>; // 后缀渲染函数
   }
 
+  // 处理不同输入类型的属性差异
   type InputPropsUnion =
     | (Omit<HTMLInputAttributes, 'size' | 'type' | 'value'> &
-        IInputBaseProps & {
+        InputBaseProps & {
           type: 'number';
           value?: number;
-          onChangeValue?: (value?: number) => void;
+          onChangeValue?: (value?: number) => void; // 数字类型变更回调
         })
     | (Omit<HTMLInputAttributes, 'size' | 'type' | 'value'> &
-        IInputBaseProps & {
-          type?: Exclude<TInputType, 'number'>;
+        InputBaseProps & {
+          type?: Exclude<InputType, 'number'>;
           value?: string;
-          onChangeValue?: (value?: string) => void;
+          onChangeValue?: (value?: string) => void; // 文本类型变更回调
         });
 
   export type InputProps = InputPropsUnion;
 
+  // 输入框渲染选项接口（用于前后缀渲染）
   export interface InputRenderOption {
-    color?: TInputColor;
-    size?: TInputSize;
-    variant?: TInputVariant;
+    color?: InputColor; // 颜色主题
+    size?: InputSize; // 尺寸配置
+    variant?: InputVariant; // 样式变体
   }
 </script>
 
@@ -86,21 +67,25 @@
   import { tv } from 'tailwind-variants';
 
   let {
-    value = $bindable(),
-    type = 'text',
-    color,
-    size,
-    variant,
-    validator = true,
-    class: className = '',
-    prefixRender,
-    suffixRender,
-    onChangeValue,
-    ...otherProps
+    value = $bindable(), // 双向绑定的值
+    type = 'text', // 默认文本类型
+    color, // 颜色主题
+    size, // 尺寸配置
+    variant, // 样式变体
+    validator = true, // 默认开启验证
+    class: className = '', // 自定义类名
+    prefixRender, // 前缀渲染函数
+    suffixRender, // 后缀渲染函数
+    onChangeValue, // 值变更回调
+    ...otherProps // 其他原生属性
   }: InputProps = $props();
+
+  // 创建输入框样式变体生成器
   const inputVariants = tv(inputVariantConfig, {
-    responsiveVariants: ['size'],
+    responsiveVariants: ['size'], // 响应式尺寸配置
   });
+
+  // 值变化时触发onChangeValue回调
   $effect(() => {
     if (type === 'number') {
       onChangeValue?.(value === undefined ? undefined : Number(value));
@@ -111,12 +96,14 @@
 </script>
 
 {#if prefixRender ?? suffixRender}
+  <!-- 带前后缀的输入框布局 -->
   <label class={[tuc(inputVariants({ color, size, variant, validator })), className]}>
     {@render prefixRender?.({ color, size, variant })}
     <input bind:value {type} {...otherProps} />
     {@render suffixRender?.({ color, size, variant })}
   </label>
 {:else}
+  <!-- 基础输入框 -->
   <input
     bind:value
     class={[tuc(inputVariants({ color, size, variant, validator })), className]}

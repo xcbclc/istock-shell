@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { ShInput } from '../index';
+  import { ShInput } from '@istock/shell-ui';
   let value: string = $state('');
   function onChangeValue(value?: string) {
     console.log('onChangeValue', value);
   }
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <ShInput bind:value {onChangeValue} />
-  <p>输入值：{value}</p>
-</div>
+<ShInput bind:value {onChangeValue} />
+<p>当前输入值：{value}</p>

@@ -1,2 +1,5 @@
-### 输入框类型
-输入类可用于任何输入字段类型。包括`text`、`password`、`email`、`number`、`date`、`datetime-local`、`week`、`month`、`tel`、`url`、`search`、`time`。
+### 输入类型支持
+覆盖HTML5输入类型：
+- **基础类型**：text/password/email
+- **专用类型**：tel/url/search
+- **数据输入**：number/date/time

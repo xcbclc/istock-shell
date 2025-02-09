@@ -1,2 +1,5 @@
-### 输入框颜色
-输入框颜色支持`primary`（主要）、`secondary`（次要）、`accent`（强调）、`neutral`（中性）、`info`（信息）、`success`（成功）、`warning`（警告）、`error`（错误）这几种常用颜色。
+### 预定义颜色主题
+支持八种语义化颜色：
+- **系统色系**：`primary`/`secondary`/`accent`
+- **状态指示**：`info`/`success`/`warning`/`error`
+- **中性色**：`neutral`（默认）
