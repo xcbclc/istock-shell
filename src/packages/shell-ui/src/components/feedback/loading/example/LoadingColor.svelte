@@ -1,14 +1,12 @@
 <script lang="ts">
-  import Loading from '../Loading.svelte';
+  import { ShLoading } from '@istock/shell-ui';
 </script>
 
-<div class="flex items-center justify-center m-2 gap-4">
-  <Loading shape="spinner" color="primary" />
-  <Loading shape="spinner" color="secondary" />
-  <Loading shape="spinner" color="accent" />
-  <Loading shape="spinner" color="neutral" />
-  <Loading shape="spinner" color="info" />
-  <Loading shape="spinner" color="success" />
-  <Loading shape="spinner" color="warning" />
-  <Loading shape="spinner" color="error" />
-</div>
+<ShLoading shape="spinner" color="primary" />
+<ShLoading shape="spinner" color="secondary" />
+<ShLoading shape="spinner" color="accent" />
+<ShLoading shape="spinner" color="neutral" />
+<ShLoading shape="spinner" color="info" />
+<ShLoading shape="spinner" color="success" />
+<ShLoading shape="spinner" color="warning" />
+<ShLoading shape="spinner" color="error" />

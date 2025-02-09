@@ -1,103 +1,73 @@
 <script lang="ts" module>
   import type { HTMLAttributes } from 'svelte/elements';
-  const loadingVariantConfig = {
-    base: 'loading',
-    variants: {
-      shape: {
-        spinner: 'loading-spinner',
-        dots: 'loading-dots',
-        ring: 'loading-ring',
-        ball: 'loading-ball',
-        bars: 'loading-bars',
-        infinity: 'loading-infinity',
-      },
-      size: {
-        xs: 'loading-xs',
-        sm: 'loading-sm',
-        md: 'loading-md',
-        lg: 'loading-lg',
-        xl: 'loading-xl',
-      },
-      color: {
-        primary: 'text-primary',
-        secondary: 'text-secondary',
-        accent: 'text-accent',
-        neutral: 'text-neutral',
-        info: 'text-info',
-        success: 'text-success',
-        warning: 'text-warning',
-        error: 'text-error',
-      },
-    },
-    defaultVariants: {},
-  };
-  export type TLoadingShape = keyof (typeof loadingVariantConfig)['variants']['shape'];
-  export type TLoadingSize = keyof (typeof loadingVariantConfig)['variants']['size'];
-  export type TLoadingColor = keyof (typeof loadingVariantConfig)['variants']['color'];
+  import { LoadingVariantConfig, LoadingTextVariantConfig } from '../../../theme/config';
+
+  const loadingVariantConfig = LoadingVariantConfig;
+  const loadingTextVariantConfig = LoadingTextVariantConfig;
+
+  // 定义加载器形状类型（从配置中提取）
+  export type LoadingShape = keyof (typeof loadingVariantConfig)['variants']['shape'];
+  // 定义加载器尺寸类型（从配置中提取）
+  export type LoadingSize = keyof (typeof loadingVariantConfig)['variants']['size'];
+  // 定义加载器颜色主题类型（从配置中提取）
+  export type LoadingColor = keyof (typeof loadingVariantConfig)['variants']['color'];
+
+  // 组件属性接口（继承span元素属性）
   export interface LoadingProps extends HTMLAttributes<HTMLSpanElement> {
-    shape?: TLoadingShape;
-    size?: TLoadingSize;
-    color?: TLoadingColor;
-    text?: string;
+    shape?: LoadingShape; // 加载器形状
+    size?: LoadingSize; // 尺寸配置
+    color?: LoadingColor; // 颜色主题
+    text?: string; // 加载文本
   }
 </script>
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
   import { tuc } from '@istock/util';
-  const { shape, size, color, text, children, class: className = '', ...otherProps }: LoadingProps = $props(); // todo ButtonProps参数如何根据tag的值动态推算出元素的属性类型
+
+  const {
+    shape, // 加载器形状
+    size, // 尺寸配置
+    color, // 颜色主题
+    text, // 加载文本
+    children, // 子内容
+    class: className = '', // 自定义类名
+    ...otherProps // 其他原生属性
+  }: LoadingProps = $props();
+
+  // 创建加载器样式变体生成器
   const loadingVariants = tv(loadingVariantConfig, {
-    responsiveVariants: ['size'],
+    responsiveVariants: ['size'], // 响应式尺寸配置
   });
-  const loadingTextVariants = tv(
-    {
-      base: '',
-      variants: {
-        size: {
-          default: '',
-          xs: 'text-xs',
-          sm: 'text-sm',
-          md: 'text-md',
-          lg: 'text-lg',
-          xl: 'text-xl',
-        },
-        color: {
-          default: '',
-          primary: 'text-primary',
-          secondary: 'text-secondary',
-          accent: 'text-accent',
-          neutral: 'text-neutral',
-          info: 'text-info',
-          success: 'text-success',
-          warning: 'text-warning',
-          error: 'text-error',
-        },
-      },
-      defaultVariants: {},
-    },
-    {
-      responsiveVariants: ['size'],
-    }
-  );
+
+  // 创建加载文本样式变体生成器
+  const loadingTextVariants = tv(loadingTextVariantConfig, {
+    responsiveVariants: ['size'], // 响应式尺寸配置
+  });
 </script>
 
 {#snippet loading(extraClassName: string)}
+  <!-- 加载器容器 -->
   <span class={[tuc(loadingVariants({ shape, size, color })), className, extraClassName]} {...otherProps}></span>
 {/snippet}
+
 {#if text ?? children}
+  <!-- 带文本的加载器布局 -->
   <div class="inline-flex items-center justify-center">
     <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
     {@render loading('mr-2')}
+    <!-- 渲染加载器（右边距） -->
     <span class={tuc(loadingTextVariants({ size, color }))}>
       {#if text}
-        {text}
+        {text} <!-- 显示文本 -->
       {/if}
       {#if children}
-        {@render children()}
+        {@render children()} <!-- 渲染子内容 -->
       {/if}
     </span>
   </div>
 {:else}
+  <!-- 基础加载器 -->
   <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
   {@render loading('')}
 {/if}

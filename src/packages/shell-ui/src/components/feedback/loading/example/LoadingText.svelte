@@ -1,13 +1,11 @@
 <script lang="ts">
-  import Loading from '../Loading.svelte';
+  import { ShLoading } from '@istock/shell-ui';
 </script>
 
-<div class="flex items-center justify-center flex-col gap-2">
-  <Loading color="primary" text="loading" />
-  <Loading color="secondary">loading</Loading>
-  <Loading color="accent" size="xs">loading</Loading>
-  <Loading color="neutral" size="sm">loading</Loading>
-  <Loading color="info" size="md">loading</Loading>
-  <Loading color="success" size="lg">loading</Loading>
-  <Loading color="warning" size="xl">loading</Loading>
-</div>
+<ShLoading color="primary" text="加载中" />
+<ShLoading color="secondary">加载中</ShLoading>
+<ShLoading color="accent" size="xs">加载中</ShLoading>
+<ShLoading color="neutral" size="sm">加载中</ShLoading>
+<ShLoading color="info" size="md">加载中</ShLoading>
+<ShLoading color="success" size="lg">加载中</ShLoading>
+<ShLoading color="warning" size="xl">加载中</ShLoading>

@@ -1,46 +1,46 @@
 <script lang="ts">
-  import Loading from '../Loading.svelte';
+  import { ShLoading } from '@istock/shell-ui';
 </script>
 
-<div class="flex items-center justify-center m-2 gap-4">
-  <Loading shape="spinner" size="xs" />
-  <Loading shape="spinner" size="sm" />
-  <Loading shape="spinner" size="md" />
-  <Loading shape="spinner" size="lg" />
-  <Loading shape="spinner" size="xl" />
+<div class="flex items-center justify-center gap-4">
+  <ShLoading shape="spinner" size="xs" />
+  <ShLoading shape="spinner" size="sm" />
+  <ShLoading shape="spinner" size="md" />
+  <ShLoading shape="spinner" size="lg" />
+  <ShLoading shape="spinner" size="xl" />
 </div>
-<div class="flex items-center justify-center m-2 gap-4">
-  <Loading shape="dots" size="xs" />
-  <Loading shape="dots" size="sm" />
-  <Loading shape="dots" size="md" />
-  <Loading shape="dots" size="lg" />
-  <Loading shape="dots" size="xl" />
+<div class="flex items-center justify-center gap-4">
+  <ShLoading shape="dots" size="xs" />
+  <ShLoading shape="dots" size="sm" />
+  <ShLoading shape="dots" size="md" />
+  <ShLoading shape="dots" size="lg" />
+  <ShLoading shape="dots" size="xl" />
 </div>
-<div class="flex items-center justify-center m-2 gap-4">
-  <Loading shape="ring" size="xs" />
-  <Loading shape="ring" size="sm" />
-  <Loading shape="ring" size="md" />
-  <Loading shape="ring" size="lg" />
-  <Loading shape="ring" size="xl" />
+<div class="flex items-center justify-center gap-4">
+  <ShLoading shape="ring" size="xs" />
+  <ShLoading shape="ring" size="sm" />
+  <ShLoading shape="ring" size="md" />
+  <ShLoading shape="ring" size="lg" />
+  <ShLoading shape="ring" size="xl" />
 </div>
-<div class="flex items-center justify-center m-2 gap-4">
-  <Loading shape="ball" size="xs" />
-  <Loading shape="ball" size="sm" />
-  <Loading shape="ball" size="md" />
-  <Loading shape="ball" size="lg" />
-  <Loading shape="ball" size="xl" />
+<div class="flex items-center justify-center gap-4">
+  <ShLoading shape="ball" size="xs" />
+  <ShLoading shape="ball" size="sm" />
+  <ShLoading shape="ball" size="md" />
+  <ShLoading shape="ball" size="lg" />
+  <ShLoading shape="ball" size="xl" />
 </div>
-<div class="flex items-center justify-center m-2 gap-4">
-  <Loading shape="bars" size="xs" />
-  <Loading shape="bars" size="sm" />
-  <Loading shape="bars" size="md" />
-  <Loading shape="bars" size="lg" />
-  <Loading shape="bars" size="xl" />
+<div class="flex items-center justify-center gap-4">
+  <ShLoading shape="bars" size="xs" />
+  <ShLoading shape="bars" size="sm" />
+  <ShLoading shape="bars" size="md" />
+  <ShLoading shape="bars" size="lg" />
+  <ShLoading shape="bars" size="xl" />
 </div>
-<div class="flex items-center justify-center m-2 gap-4">
-  <Loading shape="infinity" size="xs" />
-  <Loading shape="infinity" size="sm" />
-  <Loading shape="infinity" size="md" />
-  <Loading shape="infinity" size="lg" />
-  <Loading shape="infinity" size="xl" />
+<div class="flex items-center justify-center gap-4">
+  <ShLoading shape="infinity" size="xs" />
+  <ShLoading shape="infinity" size="sm" />
+  <ShLoading shape="infinity" size="md" />
+  <ShLoading shape="infinity" size="lg" />
+  <ShLoading shape="infinity" size="xl" />
 </div>
