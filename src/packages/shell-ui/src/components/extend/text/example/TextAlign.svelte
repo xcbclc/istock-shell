@@ -1,9 +1,7 @@
 <script lang="ts">
-  import Text from '../Text.svelte';
+  import { ShText } from '@istock/shell-ui';
 </script>
 
-<div class="flex flex-col gap-2">
-  <Text align="left" texts={[{ text: '文字居左' }]} />
-  <Text align="center" texts={[{ text: '文字居中' }]} />
-  <Text align="right" texts={[{ text: '文字居右' }]} />
-</div>
+<ShText class="min-w-sm" align="left" texts={[{ text: '文字居左' }]} />
+<ShText class="min-w-sm" align="center" texts={[{ text: '文字居中' }]} />
+<ShText class="min-w-sm" align="right" texts={[{ text: '文字居右' }]} />

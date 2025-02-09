@@ -1,10 +1,8 @@
 <script lang="ts">
-  import Text from '../Text.svelte';
+  import { ShText } from '@istock/shell-ui';
 </script>
 
-<div class="flex flex-col gap-2">
-  <Text weight="light" texts={[{ text: '文字light' }]} />
-  <Text weight="medium" texts={[{ text: '文字medium' }]} />
-  <Text weight="semibold" texts={[{ text: '文字semibold' }]} />
-  <Text weight="bold" texts={[{ text: '文字bold' }]} />
-</div>
+<ShText weight="light" texts={[{ text: '文字light' }]} />
+<ShText weight="medium" texts={[{ text: '文字medium' }]} />
+<ShText weight="semibold" texts={[{ text: '文字semibold' }]} />
+<ShText weight="bold" texts={[{ text: '文字bold' }]} />
