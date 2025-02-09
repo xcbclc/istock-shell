@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShSelect, type TSelectItemOption } from '../index';
+  import { ShSelect, type SelectItemOption } from '@istock/shell-ui';
   let value = $state<number>();
   let opt = $state();
   const options = [
@@ -7,13 +7,11 @@
     { label: '债券', value: 1 },
     { label: '基金', value: 2 },
   ];
-  function onChangeValue<T>(value: T, option?: TSelectItemOption<T>) {
+  function onChangeValue<T>(value: T, option?: SelectItemOption<T>) {
     console.log('onChangeValue', value, option);
     opt = option;
   }
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <ShSelect bind:value {options} {onChangeValue} />
-  {#if value !== undefined}<p>您选择了：{JSON.stringify(opt)}</p>{/if}
-</div>
+<ShSelect bind:value {options} {onChangeValue} />
+<p>您选择了：{opt ? JSON.stringify(opt) : ''}</p>

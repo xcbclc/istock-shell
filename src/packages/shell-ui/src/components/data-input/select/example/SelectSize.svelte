@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShSelect } from '../index';
+  import { ShSelect } from '@istock/shell-ui';
 
   const options = [
     { label: '股票', value: 0 },
@@ -8,10 +8,8 @@
   ];
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <ShSelect {options} size="xs" />
-  <ShSelect {options} size="sm" />
-  <ShSelect {options} size="md" />
-  <ShSelect {options} size="lg" />
-  <ShSelect {options} size="xl" />
-</div>
+<ShSelect {options} size="xs" />
+<ShSelect {options} size="sm" />
+<ShSelect {options} size="md" />
+<ShSelect {options} size="lg" />
+<ShSelect {options} size="xl" />

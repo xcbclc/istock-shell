@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShSelect } from '../index';
+  import { ShSelect, ShFieldSet, ShField } from '@istock/shell-ui';
   let value = $state<number>();
   const options = [
     { label: '股票', value: 0 },
@@ -8,10 +8,10 @@
   ];
 </script>
 
-<div class="flex items-center justify-center">
-  <fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64">
-    <legend class="fieldset-legend">请选择</legend>
+<ShFieldSet title="请选择" class="p-4 bg-base-100 border border-base-300 rounded-box w-64">
+  <ShField
+    label={{ title: `选择了: ${options.find((option) => option.value === value)?.label ?? ''}`, position: 'after' }}
+  >
     <ShSelect {options} bind:value />
-    <span class="fieldset-label">Optional: {value ?? ''}</span>
-  </fieldset>
-</div>
+  </ShField>
+</ShFieldSet>
