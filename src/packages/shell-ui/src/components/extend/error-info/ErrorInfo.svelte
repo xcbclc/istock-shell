@@ -1,6 +1,6 @@
 <script lang="ts" module>
-  import type { ITextBaseProps } from '../../index';
-  export interface ErrorProps extends Omit<ITextBaseProps, 'tag'> {
+  import type { TextBaseProps } from '../../index';
+  export interface ErrorProps extends Omit<TextBaseProps, 'tag'> {
     title?: string;
     description?: string;
     stack?: string[];

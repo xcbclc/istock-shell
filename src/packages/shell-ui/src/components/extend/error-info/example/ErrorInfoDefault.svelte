@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import ErrorInfo from '../ErrorInfo.svelte';
+  import { ShErrorInfo } from '@istock/shell-ui';
   let error: Error;
   try {
     error = new Error('创建了一个错误');
@@ -14,4 +14,4 @@
   });
 </script>
 
-<ErrorInfo {...info} />
+<ShErrorInfo {...info} />
