@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShRadio } from '../index';
+  import { ShRadio } from '@istock/shell-ui';
   let value = $state<number>();
   const options = [
     { label: '股票', value: 0 },
@@ -8,7 +8,5 @@
   ];
 </script>
 
-<div class="flex items-center justify-center gap-2">
-  <ShRadio bind:value {options} />
-</div>
-{#if value !== undefined}<p>您选择了：{options[value]?.label}</p>{/if}
+<ShRadio bind:value {options} />
+<p>您选择了：{value !== undefined ? options[value]?.label : ''}</p>

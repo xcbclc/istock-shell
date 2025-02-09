@@ -8,14 +8,6 @@
   ];
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <div class="flex gap-2">
-    <ShRadio {options} disabled />
-  </div>
-  <div class="flex gap-2">
-    <ShRadio {options} />
-  </div>
-  <div class="flex gap-2">
-    <ShRadio {options} color="primary" />
-  </div>
-</div>
+<ShRadio {options} disabled />
+<ShRadio {options} />
+<ShRadio {options} color="primary" />

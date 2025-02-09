@@ -1,60 +1,49 @@
 <script lang="ts" module>
   import type { HTMLInputAttributes } from 'svelte/elements';
-  const radioItemVariantConfig = {
-    base: 'radio',
-    variants: {
-      size: {
-        xs: 'radio-xs',
-        sm: 'radio-sm',
-        md: 'radio-md',
-        lg: 'radio-lg',
-        xl: 'radio-xl',
-      },
-      color: {
-        primary: 'radio-primary',
-        secondary: 'radio-secondary',
-        accent: 'radio-accent',
-        neutral: 'radio-neutral',
-        info: 'radio-info',
-        success: 'radio-success',
-        warning: 'radio-warning',
-        error: 'radio-error',
-      },
-    },
-    defaultVariants: {},
+  import { RadioItemVariantConfig } from '../../../theme/config';
+
+  const radioItemVariantConfig = RadioItemVariantConfig;
+  export type RadioItemColor = keyof (typeof radioItemVariantConfig)['variants']['color'];
+  // 定义单选按钮尺寸类型（从配置中提取）
+  export type RadioItemSize = keyof (typeof radioItemVariantConfig)['variants']['size'];
+
+  // 单选选项类型定义（泛型支持）
+  export type RadioItemOption<T = any> = {
+    label?: string; // 显示文本
+    value: T; // 实际值
+    disabled?: boolean; // 禁用状态
   };
-  export type TRadioItemColor = keyof (typeof radioItemVariantConfig)['variants']['color'];
-  export type TRadioItemSize = keyof (typeof radioItemVariantConfig)['variants']['size'];
-  export type TRadioItemOption<T = any> = {
-    label?: string | number | boolean;
-    value: T;
-    disabled?: boolean;
-  };
+
+  // 组件属性接口（继承并扩展HTML输入属性）
   export interface RadioItemProps<T = any> extends Omit<HTMLInputAttributes, 'size'> {
-    color?: TRadioItemColor;
-    size?: TRadioItemSize;
-    groupValue?: T;
-    option?: TRadioItemOption<T>;
+    color?: RadioItemColor; // 颜色主题
+    size?: RadioItemSize; // 尺寸配置
+    groupValue?: T; // 组选中值（用于双向绑定）
+    option?: RadioItemOption<T>; // 关联选项数据
   }
 </script>
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
   import { tuc } from '@istock/util';
+
   let {
-    color,
-    size,
-    groupValue = $bindable(),
-    option,
-    children,
-    class: className = '',
-    ...otherProps
+    color, // 颜色主题
+    size, // 尺寸配置
+    groupValue = $bindable(), // 双向绑定的组值
+    option, // 关联选项
+    children, // 子内容
+    class: className = '', // 自定义类名
+    ...otherProps // 其他原生属性
   }: RadioItemProps = $props();
+
+  // 创建Tailwind变体样式生成器
   const radioVariants = tv(radioItemVariantConfig, {
-    responsiveVariants: ['size'],
+    responsiveVariants: ['size'], // 响应式尺寸变体配置
   });
 </script>
 
+<!-- 单选按钮输入元素 -->
 <input
   type="radio"
   class={[

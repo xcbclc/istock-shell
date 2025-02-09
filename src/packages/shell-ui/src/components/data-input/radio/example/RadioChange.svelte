@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShRadio, type TRadioItemOption } from '../index';
+  import { ShRadio, type RadioItemOption } from '@istock/shell-ui';
   let value = $state<number>();
   let opt = $state();
   const options = [
@@ -7,13 +7,11 @@
     { label: '债券', value: 1 },
     { label: '基金', value: 2 },
   ];
-  const onChangeValue = (value: number, option?: TRadioItemOption) => {
+  const onChangeValue = <T = number,>(value: T, option?: RadioItemOption<T>) => {
     console.log('onChangeValue', value, option);
     opt = option;
   };
 </script>
 
-<div class="flex items-center justify-center gap-2">
-  <ShRadio bind:value {options} {onChangeValue} />
-</div>
-{#if value !== undefined}<p>您选择了：{JSON.stringify(opt)}</p>{/if}
+<ShRadio bind:value {options} {onChangeValue} />
+<p>您选择了：{opt ? JSON.stringify(opt) : ''}</p>

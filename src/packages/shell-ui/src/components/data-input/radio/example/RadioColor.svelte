@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShRadio } from '../index';
+  import { ShRadio } from '@istock/shell-ui';
 
   const options = [
     { label: '股票', value: 0 },
@@ -8,13 +8,11 @@
   ];
 </script>
 
-<div class="flex items-center justify-center flex-col gap-4">
-  <div class="flex gap-2"><ShRadio {options} color="primary" /></div>
-  <div class="flex gap-2"><ShRadio {options} color="secondary" /></div>
-  <div class="flex gap-2"><ShRadio {options} color="accent" /></div>
-  <div class="flex gap-2"><ShRadio {options} color="neutral" /></div>
-  <div class="flex gap-2"><ShRadio {options} color="info" /></div>
-  <div class="flex gap-2"><ShRadio {options} color="success" /></div>
-  <div class="flex gap-2"><ShRadio {options} color="warning" /></div>
-  <div class="flex gap-2"><ShRadio {options} color="error" /></div>
-</div>
+<ShRadio {options} color="primary" />
+<ShRadio {options} color="secondary" />
+<ShRadio {options} color="accent" />
+<ShRadio {options} color="neutral" />
+<ShRadio {options} color="info" />
+<ShRadio {options} color="success" />
+<ShRadio {options} color="warning" />
+<ShRadio {options} color="error" />
