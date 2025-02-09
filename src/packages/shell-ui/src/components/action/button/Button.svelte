@@ -1,9 +1,9 @@
 <script lang="ts" module>
   import type { SvelteHTMLElements } from 'svelte/elements';
-  import { getComponentConfig } from '../../../theme/config';
+  import { ButtonVariantConfig } from '../../../theme/config';
 
   // 从主题配置中获取按钮组件的基础配置
-  const buttonVariantConfig = getComponentConfig('Button');
+  const buttonVariantConfig = ButtonVariantConfig;
 
   // 定义按钮支持的HTML标签类型
   export type ButtonTag = 'a' | 'button' | 'input' | 'div';

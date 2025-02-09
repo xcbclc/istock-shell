@@ -1,6 +1,5 @@
 <script lang="ts" module>
-  // 导入主题配置工具和CheckboxItem相关类型
-  import { getComponentConfig } from '../../../theme/config';
+  import { CheckboxVariantConfig } from '../../../theme/config';
   import type {
     CheckboxItemProps,
     CheckboxItemOption,
@@ -10,7 +9,7 @@
   import ShCheckboxItem from './CheckboxItem.svelte';
 
   // 获取Checkbox组件的主题配置
-  const checkboxLabelVariantConfig = getComponentConfig('Checkbox');
+  const checkboxLabelVariantConfig = CheckboxVariantConfig;
 
   // 定义标签类型（从主题配置中提取可用类型）
   export type CheckboxLabelType = keyof (typeof checkboxLabelVariantConfig)['variants']['type'];
@@ -35,11 +34,9 @@
 </script>
 
 <script lang="ts">
-  // 导入样式工具和工具函数
   import { tv } from 'tailwind-variants';
   import { tuc, findByKeyForValue } from '@istock/util';
 
-  // 解构props并设置默认值
   let {
     value = $bindable([]), // 双向绑定的选中值数组
     options = [], // 选项列表

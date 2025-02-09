@@ -27,7 +27,7 @@ outline: [2, 3]
 <IStockShellUiExample src="./example/FieldSetMultiple.svelte"></IStockShellUiExample>
 <IStockShellUiExample src="./example/FieldSetLogin.svelte"></IStockShellUiExample>
 
-## API
+## API 参考
 ### Fieldset属性说明
 | 属性名           | 说明    | 类型        | 默认值                  |
 |---------------|-------|-----------|-----------------------------|

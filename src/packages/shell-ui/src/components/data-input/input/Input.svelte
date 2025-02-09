@@ -1,10 +1,10 @@
 <script lang="ts" module>
   import type { Snippet } from 'svelte';
   import type { HTMLInputAttributes } from 'svelte/elements';
-  import { getComponentConfig } from '../../../theme/config';
+  import { InputVariantConfig } from '../../../theme/config';
 
   // 获取输入框组件主题配置
-  const inputVariantConfig = getComponentConfig('Input');
+  const inputVariantConfig = InputVariantConfig;
 
   // 定义输入框颜色主题类型（从配置中提取）
   export type InputColor = keyof (typeof inputVariantConfig)['variants']['color'];

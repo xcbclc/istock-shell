@@ -1,10 +1,10 @@
 <script lang="ts" module>
   // 导入HTML输入属性类型和主题配置工具
   import type { HTMLInputAttributes } from 'svelte/elements';
-  import { getComponentConfig } from '../../../theme/config';
+  import { CheckboxItemVariantConfig } from '../../../theme/config';
 
   // 获取CheckboxItem组件的主题配置
-  const checkboxItemVariantConfig = getComponentConfig('CheckboxItem');
+  const checkboxItemVariantConfig = CheckboxItemVariantConfig;
 
   // 定义颜色主题类型（从配置中提取可用颜色）
   export type CheckboxItemColor = keyof (typeof checkboxItemVariantConfig)['variants']['color'];

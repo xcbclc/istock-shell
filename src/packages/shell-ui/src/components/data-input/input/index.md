@@ -36,20 +36,20 @@ outline: [2, 3]
 <IStockShellUiExample src="./example/InputValidator.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/InputChange.svelte" layout="column"></IStockShellUiExample>
 
-## API
+## API 参考
 ### 属性说明
 除了支持原生input属性以外，还支持以下属性：
 
-| 属性名           | 说明                                  | 类型                                                                                                                                           | 默认值                           |
-|---------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|
-| type          | 输入类型                             | [`InputType`](#inputtype)                                                                                                                    |                               |
-| color         | 主题颜色                              | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error`                                             |                               |
-| size          | 尺寸配置                              | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                                                                         |                               |
-| variant       | 样式变体                              | `ghot`                                                                                                                                       |                               |
-| validator     | 验证状态                           | `boolean`                                                                                                                                    | true                          |
-| prefixRender  | 前缀插槽渲染函数                         | (opt: [`InputRenderOption`](#inputrenderoption)) => ReturnType<Snippet<[[`InputRenderOption`](#inputrenderoption)]>>                         |                               |
-| suffixRender  | 后缀插槽渲染函数                         | (opt: [`InputRenderOption`](#inputrenderoption)) => ReturnType<Snippet<[[`InputRenderOption`](#inputrenderoption)]>>                         |                               |
-| onChangeValue | 当选项值变化时的回调函数，type是number时返回number类型 | (value?: `string`                                                                                                       \| `number`) => void |    |
+| 属性名           | 说明                                  | 类型                                                                                                                                           | 默认值    |
+|---------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| type          | 输入类型                             | [`InputType`](#inputtype)                                                                                                                    | 'text' |
+| color         | 主题颜色                              | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error`                                             |        |
+| size          | 尺寸配置                              | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                                                                         |        |
+| variant       | 样式变体                              | `ghot`                                                                                                                                       |        |
+| validator     | 验证状态                           | `boolean`                                                                                                                                    | true   |
+| prefixRender  | 前缀插槽渲染函数                         | (opt: [`InputRenderOption`](#inputrenderoption)) => ReturnType<Snippet<[[`InputRenderOption`](#inputrenderoption)]>>                         |        |
+| suffixRender  | 后缀插槽渲染函数                         | (opt: [`InputRenderOption`](#inputrenderoption)) => ReturnType<Snippet<[[`InputRenderOption`](#inputrenderoption)]>>                         |        |
+| onChangeValue | 当选项值变化时的回调函数，type是number时返回number类型 | (value?: `string`                                                                                                       \| `number`) => void |        |
 
 ### InputType
 ```typescript
