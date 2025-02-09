@@ -1,42 +1,23 @@
 <script lang="ts" module>
   import type { HTMLTextareaAttributes } from 'svelte/elements';
+  import { TextareaVariantConfig } from '../../../theme/config';
 
-  const textareaVariantConfig = {
-    base: 'textarea',
-    variants: {
-      size: {
-        xs: 'textarea-xs',
-        sm: 'textarea-sm',
-        md: 'textarea-md',
-        lg: 'textarea-lg',
-        xl: 'textarea-xl',
-      },
-      color: {
-        primary: 'textarea-primary',
-        secondary: 'textarea-secondary',
-        accent: 'textarea-accent',
-        neutral: 'textarea-neutral',
-        info: 'textarea-info',
-        success: 'textarea-success',
-        warning: 'textarea-warning',
-        error: 'textarea-error',
-      },
-      variant: {
-        ghost: 'textarea-ghost',
-      },
-    },
-    defaultVariants: {},
-  };
-  export type TTextareaColor = keyof (typeof textareaVariantConfig)['variants']['color'];
-  export type TTextareaSize = keyof (typeof textareaVariantConfig)['variants']['size'];
-  export type TTextareaVariant = keyof (typeof textareaVariantConfig)['variants']['variant'];
+  const textareaVariantConfig = TextareaVariantConfig;
 
+  // 定义颜色主题类型（从配置中提取）
+  export type TextareaColor = keyof (typeof textareaVariantConfig)['variants']['color'];
+  // 定义尺寸类型（从配置中提取）
+  export type TextareaSize = keyof (typeof textareaVariantConfig)['variants']['size'];
+  // 定义变体类型（从配置中提取）
+  export type TextareaVariant = keyof (typeof textareaVariantConfig)['variants']['variant'];
+
+  // 组件属性接口（继承并调整文本域属性）
   export interface TextareaProps extends Omit<HTMLTextareaAttributes, 'size'> {
-    color?: TTextareaColor;
-    size?: TTextareaSize;
-    variant?: TTextareaVariant;
-    value?: string;
-    onChangeValue?: (value?: string) => void;
+    color?: TextareaColor; // 颜色主题
+    size?: TextareaSize; // 尺寸配置
+    variant?: TextareaVariant; // 样式变体
+    value?: string; // 文本值
+    onChangeValue?: (value?: string) => void; // 值变更回调
   }
 </script>
 
@@ -45,22 +26,27 @@
   import { tv } from 'tailwind-variants';
 
   let {
-    value = $bindable(),
-    color,
-    size,
-    variant,
-    class: className = '',
-    onChangeValue,
-    ...otherProps
+    value = $bindable(), // 双向绑定的文本值
+    color, // 颜色主题
+    size, // 尺寸配置
+    variant, // 样式变体
+    class: className = '', // 自定义类名
+    onChangeValue, // 变更回调
+    ...otherProps // 其他原生属性
   }: TextareaProps = $props();
+
+  // 创建文本域样式变体生成器
   const textareaVariants = tv(textareaVariantConfig, {
-    responsiveVariants: ['size'],
+    responsiveVariants: ['size'], // 响应式尺寸配置
   });
+
+  // 值变化时触发onChangeValue回调
   $effect(() => {
     onChangeValue?.(value);
   });
 </script>
 
+<!-- 文本域元素 -->
 <textarea bind:value class={[tuc(textareaVariants({ color, size, variant })), className]} {...otherProps}></textarea>
 
 <style></style>
