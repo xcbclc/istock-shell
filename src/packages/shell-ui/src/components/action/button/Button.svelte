@@ -30,6 +30,7 @@
     shape?: 'square' | 'circle'; // 按钮形状
     block?: boolean; // 块级显示
     loading?: boolean; // 加载状态
+    text?: string; // 按钮文本
   };
 </script>
 
@@ -55,6 +56,7 @@
     shape, // 按钮形状
     block, // 块级显示开关
     loading, // 加载状态开关
+    text,
     children, // 子内容
     class: className = '', // 自定义类名
     ...otherProps // 其他原生属性
@@ -96,8 +98,12 @@
     <ShLoading {color} {size} />
   {/if}
 
-  <!-- 渲染子内容 -->
-  {@render children?.()}
+  {#if children}
+    <!-- 渲染子内容 -->
+    {@render children()}
+  {:else}
+    {text}
+  {/if}
 </svelte:element>
 
 <style></style>
