@@ -9,5 +9,5 @@ export * from './icon/index';
 export * from './markdown/index';
 export * from './message/index';
 export * from './nav-list/index';
-export * from './not-fund/index';
+export * from './empty/index';
 export * from './text/index';
