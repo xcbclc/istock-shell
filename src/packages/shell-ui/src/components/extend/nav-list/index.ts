@@ -1,3 +1,10 @@
 import NavList from './NavList.svelte';
+import NavListItem from './NavListItem.svelte';
+import NavListItemDetail from './NavListItemDetail.svelte';
+export * from './NavList.svelte';
+export * from './NavListItem.svelte';
+export * from './NavListItemDetail.svelte';
 export const ShNavList = NavList;
+export const ShNavListItem = NavListItem;
+export const ShNavListItemDetail = NavListItemDetail;
 export default ShNavList;
