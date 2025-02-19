@@ -2,7 +2,7 @@ export * from './calendar/index';
 export * from './card/index';
 export * from './chart/index';
 export * from './data-grid';
-// export * from './data-list/index';
+export * from './data-list/index';
 export * from './error-info/index';
 export * from './icon/index';
 // export * from './list/index';
