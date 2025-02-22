@@ -1,0 +1,2437 @@
+{
+  "stats": [
+    {
+      "title": "成交均价",
+      "value": "14206元/㎡",
+      "desc": {
+        "text": [
+          {
+            "title": "新增挂牌均价",
+            "value": "16112元/㎡",
+            "tooltip": "月新增挂牌均价"
+          },
+          {
+            "title": "成挂比",
+            "value": "0.88",
+            "tooltip": "成交均价/新增挂牌均价"
+          },
+          {
+            "title": "成交均价环比",
+            "value": "-2.3%",
+            "tooltip": "成交均价/上月成交均价-1"
+          }
+        ]
+      }
+    },
+    {
+      "title": "周成交量",
+      "value": "4069套",
+      "desc": {
+        "text": [
+          {
+            "title": "周新增挂牌量",
+            "value": "9229套",
+            "tooltip": "周新增挂牌量，数据来自贝壳"
+          },
+          {
+            "title": "周成交环比",
+            "value": "41.53%",
+            "tooltip": "周成交量/上周成交量-1"
+          },
+          {
+            "title": "月成交同比",
+            "value": "84.9%",
+            "tooltip": "月成交量/去年该月成交量-1"
+          }
+        ]
+      }
+    },
+    {
+      "title": "总挂牌量",
+      "value": "14.24万套",
+      "desc": {
+        "text": [
+          {
+            "title": "成交周期",
+            "value": "210天",
+            "tooltip": "周期内从挂牌到成交所用的平均时间"
+          },
+          {
+            "title": "去化周期",
+            "value": "8.26个月",
+            "tooltip": "总挂牌量/月成交量"
+          }
+        ]
+      }
+    },
+    {
+      "title": "租金回报率",
+      "value": "2.61%",
+      "desc": {
+        "text": [
+          {
+            "title": "贷款利率",
+            "value": "3.00%",
+            "tooltip": "当前市场环境的房贷贷款利率"
+          },
+          {
+            "title": "公积金利率",
+            "value": "2.85%",
+            "tooltip": "当前市场环境的公积金贷款利率"
+          }
+        ]
+      }
+    },
+    {
+      "title": "当前人口",
+      "value": "2140.3万人",
+      "desc": {
+        "text": [
+          {
+            "title": "预期人口(2035)",
+            "value": "2350万人",
+            "tooltip": "来自《成都市国土空间总体规划2021—2035年》壳"
+          },
+          {
+            "title": "预期人口(远期)",
+            "value": "2600万人",
+            "tooltip": "预测上限数据，仅供参考"
+          },
+          {
+            "title": "净增人口(2023)",
+            "value": "13.5万人",
+            "tooltip": "最近一年净增人口"
+          }
+        ]
+      }
+    }
+  ],
+  "items": [
+    {
+      "options": {
+        "type": "view",
+        "autoFit": true,
+        "theme": {
+          "type": "dark",
+          "padding": "auto",
+          "margin": 16,
+          "size": 1,
+          "color": "rgba(201, 68, 0, 1)",
+          "category10": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)"
+          ],
+          "category20": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)",
+            "#AABA01",
+            "#BC7CFC",
+            "#237CBC",
+            "#2DE379",
+            "#CE8032",
+            "#FF7AF4",
+            "#545FD3",
+            "#AFE410",
+            "#D8C608",
+            "#FFA1E0"
+          ],
+          "enter": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "update": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "exit": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "view": {
+            "viewFill": "transparent",
+            "plotFill": "transparent",
+            "mainFill": "transparent",
+            "contentFill": "transparent"
+          },
+          "line": {
+            "line": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 1,
+              "lineCap": "round"
+            }
+          },
+          "point": {
+            "point": {
+              "r": 3,
+              "fillOpacity": 0.95,
+              "lineWidth": 0
+            },
+            "hollow": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            },
+            "plus": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 3
+            },
+            "diamond": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            }
+          },
+          "interval": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "area": {
+            "area": {
+              "fillOpacity": 0.85,
+              "lineWidth": 0
+            }
+          },
+          "polygon": {
+            "polygon": {
+              "fillOpacity": 0.95
+            }
+          },
+          "cell": {
+            "cell": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "rect": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "link": {
+            "link": {
+              "fill": "",
+              "strokeOpacity": 1
+            }
+          },
+          "vector": {
+            "vector": {
+              "fillOpacity": 1
+            }
+          },
+          "box": {
+            "box": {
+              "fillOpacity": 0.95,
+              "stroke": "rgba(201, 68, 0, 1)",
+              "lineWidth": 1
+            }
+          },
+          "text": {
+            "text": {
+              "fill": "#1D2129",
+              "fontSize": 12,
+              "lineWidth": 0,
+              "connectorStroke": "rgba(162, 150, 141, 1)",
+              "connectorStrokeOpacity": 0.45,
+              "connectorLineWidth": 1,
+              "backgroundFill": "rgba(162, 150, 141, 1)",
+              "backgroundFillOpacity": 0.15,
+              "backgroundPadding": [
+                2,
+                4
+              ],
+              "startMarkerSymbol": "circle",
+              "startMarkerSize": 4,
+              "endMarkerSymbol": "circle",
+              "endMarkerSize": 4
+            },
+            "badge": {
+              "fill": "#1D2129",
+              "fillOpacity": 0.65,
+              "lineWidth": 0,
+              "fontSize": 10,
+              "textAlign": "center",
+              "textBaseline": "middle",
+              "markerFill": "rgba(162, 150, 141, 1)",
+              "markerFillOpacity": 0.25,
+              "markerStrokeOpacity": 0
+            }
+          },
+          "lineX": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "lineY": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "rangeX": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "rangeY": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "connector": {
+            "connector": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1,
+              "connectLength1": 12,
+              "endMarker": true,
+              "endMarkerSize": 6,
+              "endMarkerFill": "rgba(162, 150, 141, 1)",
+              "endMarkerFillOpacity": 0.95
+            }
+          },
+          "axis": {
+            "labelFill": "#958881",
+            "titleFill": "#958881"
+          },
+          "axisTop": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "tickDirection": "negative",
+            "titlePosition": "top",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "middle"
+          },
+          "axisBottom": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "tickDirection": "positive",
+            "titlePosition": "bottom",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "bottom",
+            "titleTransform": "translate(0, 8)"
+          },
+          "axisLeft": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "labelSpacing": 4,
+            "tickDirection": "negative",
+            "titlePosition": "left",
+            "titleSpacing": 12,
+            "titleTextBaseline": "middle",
+            "titleDirection": "vertical",
+            "titleTransform": "rotate(-90) translate(0, -8)",
+            "titleTransformOrigin": "center"
+          },
+          "axisRight": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "labelSpacing": 4,
+            "tickDirection": "positive",
+            "titlePosition": "right",
+            "titleSpacing": 12,
+            "titleTextBaseline": "top",
+            "titleDirection": "vertical",
+            "titleTransformOrigin": "center"
+          },
+          "axisLinear": {
+            "girdClosed": true,
+            "gridConnect": "arc",
+            "gridDirection": "negative",
+            "gridType": "surround",
+            "titlePosition": "top",
+            "titleSpacing": 0
+          },
+          "axisArc": {
+            "title": false,
+            "titlePosition": "inner",
+            "line": false,
+            "tick": true,
+            "labelSpacing": 4
+          },
+          "axisRadar": {
+            "girdClosed": true,
+            "gridStrokeOpacity": 0.3,
+            "gridType": "surround",
+            "label": false,
+            "tick": false,
+            "titlePosition": "start"
+          },
+          "legendCategory": {
+            "labelFill": "#958881",
+            "itemLabelFill": "#958881"
+          },
+          "legendContinuous": {
+            "handleHeight": 12,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal",
+            "handleMarkerFill": "rgba(201, 68, 0, 1)",
+            "handleMarkerFillOpacity": 0.6,
+            "handleMarkerLineWidth": 1,
+            "handleMarkerStroke": "rgba(201, 68, 0, 1)",
+            "handleMarkerStrokeOpacity": 0.25,
+            "handleWidth": 10,
+            "labelFill": "rgba(201, 68, 0, 1)",
+            "labelFillOpacity": 0.45,
+            "labelFontSize": 12,
+            "labelFontWeight": "normal",
+            "labelSpacing": 3,
+            "tick": true,
+            "tickLength": 12,
+            "ribbonSize": 12,
+            "ribbonFill": "#aaa",
+            "handle": true,
+            "handleLabel": false,
+            "handleShape": "slider",
+            "handleIconSize": 6.666666666666666,
+            "indicator": false,
+            "titleFontSize": 12,
+            "titleSpacing": 4,
+            "titleFontWeight": "normal",
+            "titleFillOpacity": 0.9,
+            "tickStroke": "rgba(201, 68, 0, 1)",
+            "tickStrokeOpacity": 0.45
+          },
+          "label": {
+            "fill": "#958881"
+          },
+          "innerLabel": {
+            "fill": "#958881"
+          },
+          "htmlLabel": {
+            "fontSize": 12,
+            "opacity": 0.65,
+            "color": "rgba(201, 68, 0, 1)",
+            "fontWeight": "normal"
+          },
+          "slider": {
+            "trackSize": 16,
+            "trackFill": "rgba(162, 150, 141, 1)",
+            "trackFillOpacity": 1,
+            "selectionFill": "rgba(162, 150, 141, 1)",
+            "selectionFillOpacity": 0.15,
+            "handleIconSize": 10,
+            "handleIconFill": "#f7f7f7",
+            "handleIconFillOpacity": 1,
+            "handleIconStroke": "rgba(201, 68, 0, 1)",
+            "handleIconStrokeOpacity": 0.25,
+            "handleIconLineWidth": 1,
+            "handleIconRadius": 2,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal"
+          },
+          "scrollbar": {
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "trackSize": 6,
+            "isRound": true,
+            "slidable": true,
+            "scrollable": true,
+            "trackFill": "#e5e5e5",
+            "trackFillOpacity": 0,
+            "thumbFill": "#000",
+            "thumbFillOpacity": 0.15,
+            "thumbHighlightedFillOpacity": 0.2
+          },
+          "title": {
+            "spacing": 8,
+            "titleFill": "rgba(201, 68, 0, 1)",
+            "titleFillOpacity": 0.9,
+            "titleFontSize": 16,
+            "titleFontWeight": "bold",
+            "titleTextBaseline": "top",
+            "subtitleFill": "rgba(201, 68, 0, 1)",
+            "subtitleFillOpacity": 0.65,
+            "subtitleFontSize": 12,
+            "subtitleFontWeight": "normal",
+            "subtitleTextBaseline": "top"
+          },
+          "tooltip": {
+            "css": {
+              ".g2-tooltip": {
+                "font-family": "sans-serif"
+              }
+            }
+          }
+        },
+        "data": [
+          {
+            "时间": "第42周",
+            "量": 3003,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第42周",
+            "量": 7339,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第43周",
+            "量": 3782,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第43周",
+            "量": 7458,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第44周",
+            "量": 3524,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第44周",
+            "量": 7407,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第45周",
+            "量": 2952,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第45周",
+            "量": 7388,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第46周",
+            "量": 2653,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第46周",
+            "量": 7726,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第47周",
+            "量": 2359,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第47周",
+            "量": 6683,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第48周",
+            "量": 2279,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第48周",
+            "量": 6863,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第49周",
+            "量": 2161,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第49周",
+            "量": 7223,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第50周",
+            "量": 1924,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第50周",
+            "量": 6892,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第51周",
+            "量": 1829,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第51周",
+            "量": 6959,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第52周",
+            "量": 1768,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第52周",
+            "量": 7433,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第01周",
+            "量": 1691,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第01周",
+            "量": 6886,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第02周",
+            "量": 6294,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第02周",
+            "量": 1608,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第03周",
+            "量": 5703,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第03周",
+            "量": 1495,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第04周",
+            "量": 2285,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第04周",
+            "量": 777,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第05周",
+            "量": 495,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第05周",
+            "量": 27,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第06周",
+            "量": 7521,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第06周",
+            "量": 1186,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "第07周",
+            "量": 9229,
+            "数据类型": "新增挂牌量"
+          },
+          {
+            "时间": "第07周",
+            "量": 2462,
+            "数据类型": "成交量"
+          }
+        ],
+        "encode": {
+          "x": "时间",
+          "y": "量",
+          "color": "数据类型"
+        },
+        "title": {
+          "title": "周成交量/新增挂牌量走势",
+          "subtitle": "数据来源于贝壳"
+        },
+        "scale": {
+          "color": {
+            "range": [
+              "#c94400",
+              "#744f36"
+            ]
+          }
+        },
+        "height": 400,
+        "children": [
+          {
+            "type": "line",
+            "encode": {
+              "shape": "smooth"
+            }
+          },
+          {
+            "type": "point",
+            "encode": {
+              "shape": "point"
+            },
+            "tooltip": false
+          }
+        ]
+      }
+    },
+    {
+      "options": {
+        "type": "view",
+        "autoFit": true,
+        "theme": {
+          "type": "dark",
+          "padding": "auto",
+          "margin": 16,
+          "size": 1,
+          "color": "rgba(201, 68, 0, 1)",
+          "category10": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)"
+          ],
+          "category20": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)",
+            "#AABA01",
+            "#BC7CFC",
+            "#237CBC",
+            "#2DE379",
+            "#CE8032",
+            "#FF7AF4",
+            "#545FD3",
+            "#AFE410",
+            "#D8C608",
+            "#FFA1E0"
+          ],
+          "enter": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "update": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "exit": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "view": {
+            "viewFill": "transparent",
+            "plotFill": "transparent",
+            "mainFill": "transparent",
+            "contentFill": "transparent"
+          },
+          "line": {
+            "line": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 1,
+              "lineCap": "round"
+            }
+          },
+          "point": {
+            "point": {
+              "r": 3,
+              "fillOpacity": 0.95,
+              "lineWidth": 0
+            },
+            "hollow": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            },
+            "plus": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 3
+            },
+            "diamond": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            }
+          },
+          "interval": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "area": {
+            "area": {
+              "fillOpacity": 0.85,
+              "lineWidth": 0
+            }
+          },
+          "polygon": {
+            "polygon": {
+              "fillOpacity": 0.95
+            }
+          },
+          "cell": {
+            "cell": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "rect": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "link": {
+            "link": {
+              "fill": "",
+              "strokeOpacity": 1
+            }
+          },
+          "vector": {
+            "vector": {
+              "fillOpacity": 1
+            }
+          },
+          "box": {
+            "box": {
+              "fillOpacity": 0.95,
+              "stroke": "rgba(201, 68, 0, 1)",
+              "lineWidth": 1
+            }
+          },
+          "text": {
+            "text": {
+              "fill": "#1D2129",
+              "fontSize": 12,
+              "lineWidth": 0,
+              "connectorStroke": "rgba(162, 150, 141, 1)",
+              "connectorStrokeOpacity": 0.45,
+              "connectorLineWidth": 1,
+              "backgroundFill": "rgba(162, 150, 141, 1)",
+              "backgroundFillOpacity": 0.15,
+              "backgroundPadding": [
+                2,
+                4
+              ],
+              "startMarkerSymbol": "circle",
+              "startMarkerSize": 4,
+              "endMarkerSymbol": "circle",
+              "endMarkerSize": 4
+            },
+            "badge": {
+              "fill": "#1D2129",
+              "fillOpacity": 0.65,
+              "lineWidth": 0,
+              "fontSize": 10,
+              "textAlign": "center",
+              "textBaseline": "middle",
+              "markerFill": "rgba(162, 150, 141, 1)",
+              "markerFillOpacity": 0.25,
+              "markerStrokeOpacity": 0
+            }
+          },
+          "lineX": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "lineY": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "rangeX": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "rangeY": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "connector": {
+            "connector": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1,
+              "connectLength1": 12,
+              "endMarker": true,
+              "endMarkerSize": 6,
+              "endMarkerFill": "rgba(162, 150, 141, 1)",
+              "endMarkerFillOpacity": 0.95
+            }
+          },
+          "axis": {
+            "labelFill": "#958881",
+            "titleFill": "#958881"
+          },
+          "axisTop": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "tickDirection": "negative",
+            "titlePosition": "top",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "middle"
+          },
+          "axisBottom": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "tickDirection": "positive",
+            "titlePosition": "bottom",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "bottom",
+            "titleTransform": "translate(0, 8)"
+          },
+          "axisLeft": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "labelSpacing": 4,
+            "tickDirection": "negative",
+            "titlePosition": "left",
+            "titleSpacing": 12,
+            "titleTextBaseline": "middle",
+            "titleDirection": "vertical",
+            "titleTransform": "rotate(-90) translate(0, -8)",
+            "titleTransformOrigin": "center"
+          },
+          "axisRight": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "labelSpacing": 4,
+            "tickDirection": "positive",
+            "titlePosition": "right",
+            "titleSpacing": 12,
+            "titleTextBaseline": "top",
+            "titleDirection": "vertical",
+            "titleTransformOrigin": "center"
+          },
+          "axisLinear": {
+            "girdClosed": true,
+            "gridConnect": "arc",
+            "gridDirection": "negative",
+            "gridType": "surround",
+            "titlePosition": "top",
+            "titleSpacing": 0
+          },
+          "axisArc": {
+            "title": false,
+            "titlePosition": "inner",
+            "line": false,
+            "tick": true,
+            "labelSpacing": 4
+          },
+          "axisRadar": {
+            "girdClosed": true,
+            "gridStrokeOpacity": 0.3,
+            "gridType": "surround",
+            "label": false,
+            "tick": false,
+            "titlePosition": "start"
+          },
+          "legendCategory": {
+            "labelFill": "#958881",
+            "itemLabelFill": "#958881"
+          },
+          "legendContinuous": {
+            "handleHeight": 12,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal",
+            "handleMarkerFill": "rgba(201, 68, 0, 1)",
+            "handleMarkerFillOpacity": 0.6,
+            "handleMarkerLineWidth": 1,
+            "handleMarkerStroke": "rgba(201, 68, 0, 1)",
+            "handleMarkerStrokeOpacity": 0.25,
+            "handleWidth": 10,
+            "labelFill": "rgba(201, 68, 0, 1)",
+            "labelFillOpacity": 0.45,
+            "labelFontSize": 12,
+            "labelFontWeight": "normal",
+            "labelSpacing": 3,
+            "tick": true,
+            "tickLength": 12,
+            "ribbonSize": 12,
+            "ribbonFill": "#aaa",
+            "handle": true,
+            "handleLabel": false,
+            "handleShape": "slider",
+            "handleIconSize": 6.666666666666666,
+            "indicator": false,
+            "titleFontSize": 12,
+            "titleSpacing": 4,
+            "titleFontWeight": "normal",
+            "titleFillOpacity": 0.9,
+            "tickStroke": "rgba(201, 68, 0, 1)",
+            "tickStrokeOpacity": 0.45
+          },
+          "label": {
+            "fill": "#958881"
+          },
+          "innerLabel": {
+            "fill": "#958881"
+          },
+          "htmlLabel": {
+            "fontSize": 12,
+            "opacity": 0.65,
+            "color": "rgba(201, 68, 0, 1)",
+            "fontWeight": "normal"
+          },
+          "slider": {
+            "trackSize": 16,
+            "trackFill": "rgba(162, 150, 141, 1)",
+            "trackFillOpacity": 1,
+            "selectionFill": "rgba(162, 150, 141, 1)",
+            "selectionFillOpacity": 0.15,
+            "handleIconSize": 10,
+            "handleIconFill": "#f7f7f7",
+            "handleIconFillOpacity": 1,
+            "handleIconStroke": "rgba(201, 68, 0, 1)",
+            "handleIconStrokeOpacity": 0.25,
+            "handleIconLineWidth": 1,
+            "handleIconRadius": 2,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal"
+          },
+          "scrollbar": {
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "trackSize": 6,
+            "isRound": true,
+            "slidable": true,
+            "scrollable": true,
+            "trackFill": "#e5e5e5",
+            "trackFillOpacity": 0,
+            "thumbFill": "#000",
+            "thumbFillOpacity": 0.15,
+            "thumbHighlightedFillOpacity": 0.2
+          },
+          "title": {
+            "spacing": 8,
+            "titleFill": "rgba(201, 68, 0, 1)",
+            "titleFillOpacity": 0.9,
+            "titleFontSize": 16,
+            "titleFontWeight": "bold",
+            "titleTextBaseline": "top",
+            "subtitleFill": "rgba(201, 68, 0, 1)",
+            "subtitleFillOpacity": 0.65,
+            "subtitleFontSize": 12,
+            "subtitleFontWeight": "normal",
+            "subtitleTextBaseline": "top"
+          },
+          "tooltip": {
+            "css": {
+              ".g2-tooltip": {
+                "font-family": "sans-serif"
+              }
+            }
+          }
+        },
+        "data": [
+          {
+            "时间": "202301",
+            "价格": 16310,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202301",
+            "价格": 17168,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202302",
+            "价格": 16460,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202302",
+            "价格": 16944,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202303",
+            "价格": 17012,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202303",
+            "价格": 16833,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202304",
+            "价格": 17140,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202304",
+            "价格": 16826,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202305",
+            "价格": 16843,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202305",
+            "价格": 16623,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202306",
+            "价格": 16124,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202306",
+            "价格": 16959,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202307",
+            "价格": 15857,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202307",
+            "价格": 16826,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202308",
+            "价格": 15523,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202308",
+            "价格": 16917,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202309",
+            "价格": 15869,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202309",
+            "价格": 16957,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202310",
+            "价格": 15371,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202310",
+            "价格": 16644,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202311",
+            "价格": 15194,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202311",
+            "价格": 16842,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202312",
+            "价格": 14942,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202312",
+            "价格": 16820,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202401",
+            "价格": 15018,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202401",
+            "价格": 16736,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202402",
+            "价格": 13490,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202402",
+            "价格": 16295,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202403",
+            "价格": 14107,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202403",
+            "价格": 15812,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202404",
+            "价格": 14127,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202404",
+            "价格": 15959,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202405",
+            "价格": 14283,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202405",
+            "价格": 15705,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202406",
+            "价格": 14255,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202406",
+            "价格": 15848,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202407",
+            "价格": 13922,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202407",
+            "价格": 15836,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202408",
+            "价格": 13263,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202408",
+            "价格": 15701,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202409",
+            "价格": 14104,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202409",
+            "价格": 15948,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202410",
+            "价格": 14121,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202410",
+            "价格": 15742,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202411",
+            "价格": 14366,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202411",
+            "价格": 15896,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202412",
+            "价格": 14541,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202412",
+            "价格": 15656,
+            "数据类型": "新增挂牌均价"
+          },
+          {
+            "时间": "202501",
+            "价格": 14206,
+            "数据类型": "成交均价"
+          },
+          {
+            "时间": "202501",
+            "价格": 16112,
+            "数据类型": "新增挂牌均价"
+          }
+        ],
+        "encode": {
+          "x": "时间",
+          "y": "价格",
+          "color": "数据类型"
+        },
+        "title": {
+          "title": "月成交均价走势"
+        },
+        "scale": {
+          "color": {
+            "range": [
+              "#c94400",
+              "#744f36"
+            ]
+          }
+        },
+        "height": 400,
+        "children": [
+          {
+            "type": "line",
+            "encode": {
+              "shape": "smooth"
+            }
+          },
+          {
+            "type": "point",
+            "encode": {
+              "shape": "point"
+            },
+            "tooltip": false
+          }
+        ]
+      }
+    },
+    {
+      "options": {
+        "type": "view",
+        "autoFit": true,
+        "theme": {
+          "type": "dark",
+          "padding": "auto",
+          "margin": 16,
+          "size": 1,
+          "color": "rgba(201, 68, 0, 1)",
+          "category10": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)"
+          ],
+          "category20": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)",
+            "#AABA01",
+            "#BC7CFC",
+            "#237CBC",
+            "#2DE379",
+            "#CE8032",
+            "#FF7AF4",
+            "#545FD3",
+            "#AFE410",
+            "#D8C608",
+            "#FFA1E0"
+          ],
+          "enter": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "update": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "exit": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "view": {
+            "viewFill": "transparent",
+            "plotFill": "transparent",
+            "mainFill": "transparent",
+            "contentFill": "transparent"
+          },
+          "line": {
+            "line": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 1,
+              "lineCap": "round"
+            }
+          },
+          "point": {
+            "point": {
+              "r": 3,
+              "fillOpacity": 0.95,
+              "lineWidth": 0
+            },
+            "hollow": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            },
+            "plus": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 3
+            },
+            "diamond": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            }
+          },
+          "interval": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "area": {
+            "area": {
+              "fillOpacity": 0.85,
+              "lineWidth": 0
+            }
+          },
+          "polygon": {
+            "polygon": {
+              "fillOpacity": 0.95
+            }
+          },
+          "cell": {
+            "cell": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "rect": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "link": {
+            "link": {
+              "fill": "",
+              "strokeOpacity": 1
+            }
+          },
+          "vector": {
+            "vector": {
+              "fillOpacity": 1
+            }
+          },
+          "box": {
+            "box": {
+              "fillOpacity": 0.95,
+              "stroke": "rgba(201, 68, 0, 1)",
+              "lineWidth": 1
+            }
+          },
+          "text": {
+            "text": {
+              "fill": "#1D2129",
+              "fontSize": 12,
+              "lineWidth": 0,
+              "connectorStroke": "rgba(162, 150, 141, 1)",
+              "connectorStrokeOpacity": 0.45,
+              "connectorLineWidth": 1,
+              "backgroundFill": "rgba(162, 150, 141, 1)",
+              "backgroundFillOpacity": 0.15,
+              "backgroundPadding": [
+                2,
+                4
+              ],
+              "startMarkerSymbol": "circle",
+              "startMarkerSize": 4,
+              "endMarkerSymbol": "circle",
+              "endMarkerSize": 4
+            },
+            "badge": {
+              "fill": "#1D2129",
+              "fillOpacity": 0.65,
+              "lineWidth": 0,
+              "fontSize": 10,
+              "textAlign": "center",
+              "textBaseline": "middle",
+              "markerFill": "rgba(162, 150, 141, 1)",
+              "markerFillOpacity": 0.25,
+              "markerStrokeOpacity": 0
+            }
+          },
+          "lineX": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "lineY": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "rangeX": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "rangeY": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "connector": {
+            "connector": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1,
+              "connectLength1": 12,
+              "endMarker": true,
+              "endMarkerSize": 6,
+              "endMarkerFill": "rgba(162, 150, 141, 1)",
+              "endMarkerFillOpacity": 0.95
+            }
+          },
+          "axis": {
+            "labelFill": "#958881",
+            "titleFill": "#958881"
+          },
+          "axisTop": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "tickDirection": "negative",
+            "titlePosition": "top",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "middle"
+          },
+          "axisBottom": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "tickDirection": "positive",
+            "titlePosition": "bottom",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "bottom",
+            "titleTransform": "translate(0, 8)"
+          },
+          "axisLeft": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "labelSpacing": 4,
+            "tickDirection": "negative",
+            "titlePosition": "left",
+            "titleSpacing": 12,
+            "titleTextBaseline": "middle",
+            "titleDirection": "vertical",
+            "titleTransform": "rotate(-90) translate(0, -8)",
+            "titleTransformOrigin": "center"
+          },
+          "axisRight": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "labelSpacing": 4,
+            "tickDirection": "positive",
+            "titlePosition": "right",
+            "titleSpacing": 12,
+            "titleTextBaseline": "top",
+            "titleDirection": "vertical",
+            "titleTransformOrigin": "center"
+          },
+          "axisLinear": {
+            "girdClosed": true,
+            "gridConnect": "arc",
+            "gridDirection": "negative",
+            "gridType": "surround",
+            "titlePosition": "top",
+            "titleSpacing": 0
+          },
+          "axisArc": {
+            "title": false,
+            "titlePosition": "inner",
+            "line": false,
+            "tick": true,
+            "labelSpacing": 4
+          },
+          "axisRadar": {
+            "girdClosed": true,
+            "gridStrokeOpacity": 0.3,
+            "gridType": "surround",
+            "label": false,
+            "tick": false,
+            "titlePosition": "start"
+          },
+          "legendCategory": {
+            "labelFill": "#958881",
+            "itemLabelFill": "#958881"
+          },
+          "legendContinuous": {
+            "handleHeight": 12,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal",
+            "handleMarkerFill": "rgba(201, 68, 0, 1)",
+            "handleMarkerFillOpacity": 0.6,
+            "handleMarkerLineWidth": 1,
+            "handleMarkerStroke": "rgba(201, 68, 0, 1)",
+            "handleMarkerStrokeOpacity": 0.25,
+            "handleWidth": 10,
+            "labelFill": "rgba(201, 68, 0, 1)",
+            "labelFillOpacity": 0.45,
+            "labelFontSize": 12,
+            "labelFontWeight": "normal",
+            "labelSpacing": 3,
+            "tick": true,
+            "tickLength": 12,
+            "ribbonSize": 12,
+            "ribbonFill": "#aaa",
+            "handle": true,
+            "handleLabel": false,
+            "handleShape": "slider",
+            "handleIconSize": 6.666666666666666,
+            "indicator": false,
+            "titleFontSize": 12,
+            "titleSpacing": 4,
+            "titleFontWeight": "normal",
+            "titleFillOpacity": 0.9,
+            "tickStroke": "rgba(201, 68, 0, 1)",
+            "tickStrokeOpacity": 0.45
+          },
+          "label": {
+            "fill": "#958881"
+          },
+          "innerLabel": {
+            "fill": "#958881"
+          },
+          "htmlLabel": {
+            "fontSize": 12,
+            "opacity": 0.65,
+            "color": "rgba(201, 68, 0, 1)",
+            "fontWeight": "normal"
+          },
+          "slider": {
+            "trackSize": 16,
+            "trackFill": "rgba(162, 150, 141, 1)",
+            "trackFillOpacity": 1,
+            "selectionFill": "rgba(162, 150, 141, 1)",
+            "selectionFillOpacity": 0.15,
+            "handleIconSize": 10,
+            "handleIconFill": "#f7f7f7",
+            "handleIconFillOpacity": 1,
+            "handleIconStroke": "rgba(201, 68, 0, 1)",
+            "handleIconStrokeOpacity": 0.25,
+            "handleIconLineWidth": 1,
+            "handleIconRadius": 2,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal"
+          },
+          "scrollbar": {
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "trackSize": 6,
+            "isRound": true,
+            "slidable": true,
+            "scrollable": true,
+            "trackFill": "#e5e5e5",
+            "trackFillOpacity": 0,
+            "thumbFill": "#000",
+            "thumbFillOpacity": 0.15,
+            "thumbHighlightedFillOpacity": 0.2
+          },
+          "title": {
+            "spacing": 8,
+            "titleFill": "rgba(201, 68, 0, 1)",
+            "titleFillOpacity": 0.9,
+            "titleFontSize": 16,
+            "titleFontWeight": "bold",
+            "titleTextBaseline": "top",
+            "subtitleFill": "rgba(201, 68, 0, 1)",
+            "subtitleFillOpacity": 0.65,
+            "subtitleFontSize": 12,
+            "subtitleFontWeight": "normal",
+            "subtitleTextBaseline": "top"
+          },
+          "tooltip": {
+            "css": {
+              ".g2-tooltip": {
+                "font-family": "sans-serif"
+              }
+            }
+          }
+        },
+        "data": [
+          {
+            "时间": "202401",
+            "成交量": 17126,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202402",
+            "成交量": 9319,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202403",
+            "成交量": 18771,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202404",
+            "成交量": 20297,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202405",
+            "成交量": 19489,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202406",
+            "成交量": 17818,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202407",
+            "成交量": 21240,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202408",
+            "成交量": 17494,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202409",
+            "成交量": 15208,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202410",
+            "成交量": 19803,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202411",
+            "成交量": 26216,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202412",
+            "成交量": 28561,
+            "数据类型": "成交量"
+          },
+          {
+            "时间": "202501",
+            "成交量": 17231,
+            "数据类型": "成交量"
+          }
+        ],
+        "encode": {
+          "x": "时间",
+          "y": "成交量",
+          "color": "数据类型"
+        },
+        "title": {
+          "title": "月成交量走势"
+        },
+        "scale": {
+          "color": {
+            "range": [
+              "#c94400",
+              "#744f36"
+            ]
+          }
+        },
+        "height": 400,
+        "children": [
+          {
+            "type": "line",
+            "encode": {
+              "shape": "smooth"
+            }
+          },
+          {
+            "type": "point",
+            "encode": {
+              "shape": "point"
+            },
+            "tooltip": false
+          }
+        ]
+      }
+    },
+    {
+      "options": {
+        "type": "view",
+        "autoFit": true,
+        "theme": {
+          "type": "dark",
+          "padding": "auto",
+          "margin": 16,
+          "size": 1,
+          "color": "rgba(201, 68, 0, 1)",
+          "category10": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)"
+          ],
+          "category20": [
+            "rgba(201, 68, 0, 1)",
+            "rgba(116, 79, 54, 1)",
+            "rgba(89, 161, 79, 1)",
+            "rgba(225, 87, 89, 1)",
+            "rgba(78, 121, 167, 1)",
+            "rgba(118, 183, 178, 1)",
+            "rgba(237, 201, 73, 1)",
+            "rgba(175, 122, 161, 1)",
+            "#FFA8A8",
+            "rgba(242, 142, 44, 1)",
+            "#AABA01",
+            "#BC7CFC",
+            "#237CBC",
+            "#2DE379",
+            "#CE8032",
+            "#FF7AF4",
+            "#545FD3",
+            "#AFE410",
+            "#D8C608",
+            "#FFA1E0"
+          ],
+          "enter": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "update": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "exit": {
+            "duration": 300,
+            "fill": "both",
+            "delay": 0
+          },
+          "view": {
+            "viewFill": "transparent",
+            "plotFill": "transparent",
+            "mainFill": "transparent",
+            "contentFill": "transparent"
+          },
+          "line": {
+            "line": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 1,
+              "lineCap": "round"
+            }
+          },
+          "point": {
+            "point": {
+              "r": 3,
+              "fillOpacity": 0.95,
+              "lineWidth": 0
+            },
+            "hollow": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            },
+            "plus": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 3
+            },
+            "diamond": {
+              "r": 3,
+              "strokeOpacity": 0.95,
+              "lineWidth": 1
+            }
+          },
+          "interval": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "area": {
+            "area": {
+              "fillOpacity": 0.85,
+              "lineWidth": 0
+            }
+          },
+          "polygon": {
+            "polygon": {
+              "fillOpacity": 0.95
+            }
+          },
+          "cell": {
+            "cell": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "rect": {
+            "rect": {
+              "fillOpacity": 0.95
+            },
+            "hollow": {
+              "fill": "",
+              "strokeOpacity": 1,
+              "lineWidth": 2
+            }
+          },
+          "link": {
+            "link": {
+              "fill": "",
+              "strokeOpacity": 1
+            }
+          },
+          "vector": {
+            "vector": {
+              "fillOpacity": 1
+            }
+          },
+          "box": {
+            "box": {
+              "fillOpacity": 0.95,
+              "stroke": "rgba(201, 68, 0, 1)",
+              "lineWidth": 1
+            }
+          },
+          "text": {
+            "text": {
+              "fill": "#1D2129",
+              "fontSize": 12,
+              "lineWidth": 0,
+              "connectorStroke": "rgba(162, 150, 141, 1)",
+              "connectorStrokeOpacity": 0.45,
+              "connectorLineWidth": 1,
+              "backgroundFill": "rgba(162, 150, 141, 1)",
+              "backgroundFillOpacity": 0.15,
+              "backgroundPadding": [
+                2,
+                4
+              ],
+              "startMarkerSymbol": "circle",
+              "startMarkerSize": 4,
+              "endMarkerSymbol": "circle",
+              "endMarkerSize": 4
+            },
+            "badge": {
+              "fill": "#1D2129",
+              "fillOpacity": 0.65,
+              "lineWidth": 0,
+              "fontSize": 10,
+              "textAlign": "center",
+              "textBaseline": "middle",
+              "markerFill": "rgba(162, 150, 141, 1)",
+              "markerFillOpacity": 0.25,
+              "markerStrokeOpacity": 0
+            }
+          },
+          "lineX": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "lineY": {
+            "line": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1
+            }
+          },
+          "rangeX": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "rangeY": {
+            "range": {
+              "fill": "rgba(162, 150, 141, 1)",
+              "fillOpacity": 0.15,
+              "lineWidth": 0
+            }
+          },
+          "connector": {
+            "connector": {
+              "stroke": "rgba(162, 150, 141, 1)",
+              "strokeOpacity": 0.45,
+              "lineWidth": 1,
+              "connectLength1": 12,
+              "endMarker": true,
+              "endMarkerSize": 6,
+              "endMarkerFill": "rgba(162, 150, 141, 1)",
+              "endMarkerFillOpacity": 0.95
+            }
+          },
+          "axis": {
+            "labelFill": "#958881",
+            "titleFill": "#958881"
+          },
+          "axisTop": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "tickDirection": "negative",
+            "titlePosition": "top",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "middle"
+          },
+          "axisBottom": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "tickDirection": "positive",
+            "titlePosition": "bottom",
+            "titleSpacing": 12,
+            "labelSpacing": 4,
+            "titleTextBaseline": "bottom",
+            "titleTransform": "translate(0, 8)"
+          },
+          "axisLeft": {
+            "gridDirection": "positive",
+            "labelDirection": "negative",
+            "labelSpacing": 4,
+            "tickDirection": "negative",
+            "titlePosition": "left",
+            "titleSpacing": 12,
+            "titleTextBaseline": "middle",
+            "titleDirection": "vertical",
+            "titleTransform": "rotate(-90) translate(0, -8)",
+            "titleTransformOrigin": "center"
+          },
+          "axisRight": {
+            "gridDirection": "negative",
+            "labelDirection": "positive",
+            "labelSpacing": 4,
+            "tickDirection": "positive",
+            "titlePosition": "right",
+            "titleSpacing": 12,
+            "titleTextBaseline": "top",
+            "titleDirection": "vertical",
+            "titleTransformOrigin": "center"
+          },
+          "axisLinear": {
+            "girdClosed": true,
+            "gridConnect": "arc",
+            "gridDirection": "negative",
+            "gridType": "surround",
+            "titlePosition": "top",
+            "titleSpacing": 0
+          },
+          "axisArc": {
+            "title": false,
+            "titlePosition": "inner",
+            "line": false,
+            "tick": true,
+            "labelSpacing": 4
+          },
+          "axisRadar": {
+            "girdClosed": true,
+            "gridStrokeOpacity": 0.3,
+            "gridType": "surround",
+            "label": false,
+            "tick": false,
+            "titlePosition": "start"
+          },
+          "legendCategory": {
+            "labelFill": "#958881",
+            "itemLabelFill": "#958881"
+          },
+          "legendContinuous": {
+            "handleHeight": 12,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal",
+            "handleMarkerFill": "rgba(201, 68, 0, 1)",
+            "handleMarkerFillOpacity": 0.6,
+            "handleMarkerLineWidth": 1,
+            "handleMarkerStroke": "rgba(201, 68, 0, 1)",
+            "handleMarkerStrokeOpacity": 0.25,
+            "handleWidth": 10,
+            "labelFill": "rgba(201, 68, 0, 1)",
+            "labelFillOpacity": 0.45,
+            "labelFontSize": 12,
+            "labelFontWeight": "normal",
+            "labelSpacing": 3,
+            "tick": true,
+            "tickLength": 12,
+            "ribbonSize": 12,
+            "ribbonFill": "#aaa",
+            "handle": true,
+            "handleLabel": false,
+            "handleShape": "slider",
+            "handleIconSize": 6.666666666666666,
+            "indicator": false,
+            "titleFontSize": 12,
+            "titleSpacing": 4,
+            "titleFontWeight": "normal",
+            "titleFillOpacity": 0.9,
+            "tickStroke": "rgba(201, 68, 0, 1)",
+            "tickStrokeOpacity": 0.45
+          },
+          "label": {
+            "fill": "#958881"
+          },
+          "innerLabel": {
+            "fill": "#958881"
+          },
+          "htmlLabel": {
+            "fontSize": 12,
+            "opacity": 0.65,
+            "color": "rgba(201, 68, 0, 1)",
+            "fontWeight": "normal"
+          },
+          "slider": {
+            "trackSize": 16,
+            "trackFill": "rgba(162, 150, 141, 1)",
+            "trackFillOpacity": 1,
+            "selectionFill": "rgba(162, 150, 141, 1)",
+            "selectionFillOpacity": 0.15,
+            "handleIconSize": 10,
+            "handleIconFill": "#f7f7f7",
+            "handleIconFillOpacity": 1,
+            "handleIconStroke": "rgba(201, 68, 0, 1)",
+            "handleIconStrokeOpacity": 0.25,
+            "handleIconLineWidth": 1,
+            "handleIconRadius": 2,
+            "handleLabelFill": "rgba(201, 68, 0, 1)",
+            "handleLabelFillOpacity": 0.45,
+            "handleLabelFontSize": 12,
+            "handleLabelFontWeight": "normal"
+          },
+          "scrollbar": {
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "trackSize": 6,
+            "isRound": true,
+            "slidable": true,
+            "scrollable": true,
+            "trackFill": "#e5e5e5",
+            "trackFillOpacity": 0,
+            "thumbFill": "#000",
+            "thumbFillOpacity": 0.15,
+            "thumbHighlightedFillOpacity": 0.2
+          },
+          "title": {
+            "spacing": 8,
+            "titleFill": "rgba(201, 68, 0, 1)",
+            "titleFillOpacity": 0.9,
+            "titleFontSize": 16,
+            "titleFontWeight": "bold",
+            "titleTextBaseline": "top",
+            "subtitleFill": "rgba(201, 68, 0, 1)",
+            "subtitleFillOpacity": 0.65,
+            "subtitleFontSize": 12,
+            "subtitleFontWeight": "normal",
+            "subtitleTextBaseline": "top"
+          },
+          "tooltip": {
+            "css": {
+              ".g2-tooltip": {
+                "font-family": "sans-serif"
+              }
+            }
+          }
+        },
+        "data": [
+          {
+            "时间": "202405",
+            "占比": 3.47,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202405",
+            "占比": 0.16,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202406",
+            "占比": 6.33,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202406",
+            "占比": 0.31,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202407",
+            "占比": 8.79,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202407",
+            "占比": 0.35,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202408",
+            "占比": 32.14,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202408",
+            "占比": 1.25,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202409",
+            "占比": 0.32,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202409",
+            "占比": 0.07,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202410",
+            "占比": 0.27,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202410",
+            "占比": 0.1,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202411",
+            "占比": 0.36,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202411",
+            "占比": 0.15,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202412",
+            "占比": 41.62,
+            "数据类型": "降价房源占比"
+          },
+          {
+            "时间": "202412",
+            "占比": 1.9,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202501",
+            "占比": 2.79,
+            "数据类型": "涨价房源占比"
+          },
+          {
+            "时间": "202501",
+            "占比": 43.29,
+            "数据类型": "降价房源占比"
+          }
+        ],
+        "encode": {
+          "x": "时间",
+          "y": "占比",
+          "color": "数据类型"
+        },
+        "title": {
+          "title": "挂牌涨价/降价房源占比"
+        },
+        "scale": {
+          "color": {
+            "range": [
+              "#c94400",
+              "#744f36"
+            ]
+          }
+        },
+        "height": 400,
+        "children": [
+          {
+            "type": "line",
+            "encode": {
+              "shape": "smooth"
+            }
+          },
+          {
+            "type": "point",
+            "encode": {
+              "shape": "point"
+            },
+            "tooltip": false
+          }
+        ]
+      }
+    }
+  ]
+}
