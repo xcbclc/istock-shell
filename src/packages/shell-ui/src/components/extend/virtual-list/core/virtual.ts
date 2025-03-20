@@ -1,7 +1,7 @@
 import { EventEmitter } from '@istock/util';
-import { VirtualCore, type TVirtualCoreOptions, type TVirtualCoreRange } from './virtual-core';
+import { VirtualCore, type VirtualCoreOptions, type VirtualCoreRange } from './virtual-core';
 
-export enum EVirtualDirection {
+export enum VirtualDirection {
   'horizontal',
   'vertical',
 }
@@ -11,24 +11,34 @@ export type TVirtualOptions = {
   dataSources: any[];
   scrollElement?: HTMLElement;
   shepherdElement?: HTMLElement;
-  direction?: EVirtualDirection;
+  direction?: VirtualDirection;
   dataKey?: string | Function;
   topThreshold?: number;
   bottomThreshold?: number;
 };
 
+/**
+ * 虚拟滚动封装类，负责DOM交互和事件处理
+ *
+ * 主要职责：
+ * 1. 连接虚拟核心与真实DOM元素
+ * 2. 处理滚动事件和尺寸变化
+ * 3. 提供对外的事件接口
+ * 4. 实现智能滚动定位功能
+ */
 export class Virtual {
-  #virtualCore!: VirtualCore;
-  #eventEmitter!: EventEmitter;
-  #scrollElement: HTMLElement = document.body;
-  readonly #shepherdElement: HTMLElement | null = null;
-  readonly #direction: EVirtualDirection = EVirtualDirection.vertical;
-  #scrollOffsetKey!: 'scrollLeft' | 'scrollTop';
+  #virtualCore!: VirtualCore; // 虚拟滚动核心实例
+  #eventEmitter!: EventEmitter; // 事件发射器
+  #scrollElement: HTMLElement = document.body; // 滚动容器元素
+  readonly #shepherdElement: HTMLElement | null = null; // 滚动定位锚点元素
+  readonly #direction: VirtualDirection = VirtualDirection.vertical; // 滚动方向
+  #scrollOffsetKey!: 'scrollLeft' | 'scrollTop'; // 滚动位置属性名
   #dataSources: any[] = [];
   readonly #dataKey: string | Function = 'id';
-  readonly #topThreshold: number = 0;
-  readonly #bottomThreshold: number = 0;
-  constructor(options: TVirtualOptions & Partial<TVirtualCoreOptions>) {
+  #topThreshold: number = 0;
+  #bottomThreshold: number = 0;
+
+  constructor(options: TVirtualOptions & Partial<VirtualCoreOptions>) {
     const {
       keeps,
       dataSources,
@@ -44,10 +54,10 @@ export class Virtual {
     if (scrollElement) this.#scrollElement = scrollElement;
     if (shepherdElement) this.#shepherdElement = shepherdElement;
     this.#direction = direction ?? this.#direction;
-    if (this.#direction === EVirtualDirection.horizontal) {
+    if (this.#direction === VirtualDirection.horizontal) {
       this.#scrollOffsetKey = 'scrollLeft';
     }
-    if (this.#direction === EVirtualDirection.vertical) {
+    if (this.#direction === VirtualDirection.vertical) {
       this.#scrollOffsetKey = 'scrollTop';
     }
     this.#dataKey = dataKey ?? this.#dataKey;
@@ -76,8 +86,16 @@ export class Virtual {
     return this.#eventEmitter;
   }
 
-  initVirtualCore(coreOptions: TVirtualCoreOptions) {
-    this.#virtualCore = new VirtualCore(coreOptions, (range: TVirtualCoreRange) => {
+  setTopThreshold(topThreshold: number) {
+    this.#topThreshold = topThreshold;
+  }
+
+  setBottomThreshold(bottomThreshold: number) {
+    this.#bottomThreshold = bottomThreshold;
+  }
+
+  initVirtualCore(coreOptions: VirtualCoreOptions) {
+    this.#virtualCore = new VirtualCore(coreOptions, (range: VirtualCoreRange) => {
       this.onRangeChanged(range);
     });
     this.onRangeChanged(this.#virtualCore.getRange());
@@ -88,7 +106,7 @@ export class Virtual {
   }
 
   isVertical() {
-    return this.#direction === EVirtualDirection.vertical;
+    return this.#direction === VirtualDirection.vertical;
   }
 
   /**
@@ -109,12 +127,12 @@ export class Virtual {
   /**
    * 获取滚动元素容器视口的宽或高
    */
-  getClientSize() {
+  getClientSize(element: HTMLElement = this.#scrollElement) {
     let key: 'clientWidth' | 'clientHeight' = 'clientWidth';
-    if (this.#direction === EVirtualDirection.vertical) {
+    if (this.#direction === VirtualDirection.vertical) {
       key = 'clientHeight';
     }
-    return Math.ceil(this.#scrollElement[key] ?? 0);
+    return Math.ceil(element[key] ?? 0);
   }
 
   /**
@@ -122,7 +140,7 @@ export class Virtual {
    */
   getScrollSize() {
     let key: 'scrollWidth' | 'scrollHeight' = 'scrollWidth';
-    if (this.#direction === EVirtualDirection.vertical) {
+    if (this.#direction === VirtualDirection.vertical) {
       key = 'scrollHeight';
     }
     return Math.ceil(this.#scrollElement[key] ?? 0);
@@ -152,25 +170,32 @@ export class Virtual {
   }
 
   /**
-   * 设置滚动到底部
+   * 滚动到底部的智能处理
+   *
+   * 实现特点：
+   * 1. 使用递归requestAnimationFrame保证滚动到位
+   * 2. 1px容差处理防止无限循环
+   * 3. 支持锚点元素定位模式
+   *
+   * 使用场景：
+   * - 聊天消息自动滚动到底部
+   * - 实时数据追加保持可视区位置
    */
   scrollToBottom() {
-    let offset: number = 0;
-    if (this.#shepherdElement) {
-      let key: 'offsetLeft' | 'offsetTop' = 'offsetLeft';
-      if (this.#direction === EVirtualDirection.vertical) key = 'offsetTop';
-      offset = this.#shepherdElement[key];
-    } else {
-      offset = this.getScrollSize();
-    }
-    this.scrollToOffset(offset);
+    const scroll = () => {
+      // 计算目标偏移量（考虑锚点元素）
+      const offset = this.#shepherdElement
+        ? this.getScrollSize() - this.getClientSize(this.#shepherdElement) // 锚点模式
+        : this.getScrollSize(); // 直接到底模式
 
-    // 确认是否真的滚动到底部，没有再次执行滚动到底部
-    setTimeout(() => {
+      this.scrollToOffset(offset);
+
+      // 递归检测直到完全滚动到位（1px容差）
       if (this.getOffset() + this.getClientSize() + 1 < this.getScrollSize()) {
-        this.scrollToBottom();
+        requestAnimationFrame(scroll);
       }
-    }, 3);
+    };
+    requestAnimationFrame(scroll);
   }
 
   /**
@@ -183,10 +208,10 @@ export class Virtual {
       const { defaultView } = ele.ownerDocument;
       let offsetFront = 0;
       if (defaultView) {
-        if (this.#direction === EVirtualDirection.horizontal) {
+        if (this.#direction === VirtualDirection.horizontal) {
           offsetFront = rect.left + defaultView.pageXOffset;
         }
-        if (this.#direction === EVirtualDirection.vertical) {
+        if (this.#direction === VirtualDirection.vertical) {
           offsetFront = rect.top + defaultView.pageYOffset;
         }
       }
@@ -238,39 +263,57 @@ export class Virtual {
    * 触发range更新给外部使用
    * @param range
    */
-  onRangeChanged(range: TVirtualCoreRange) {
+  onRangeChanged(range: VirtualCoreRange) {
     void this.#eventEmitter.emit('syncRange', range);
   }
 
   /**
-   * 滚动事件处理
-   * @param evt
+   * 滚动事件处理中枢
+   *
+   * 处理流程：
+   * 1. 获取关键指标：偏移量、可视尺寸、滚动尺寸
+   * 2. 过滤无效滚动（iOS弹性滚动）
+   * 3. 使用RAF节流处理保证性能
+   * 4. 分发到虚拟核心计算
+   * 5. 触发阈值事件通知
    */
   onScroll(evt: Event) {
     const offset = this.getOffset();
     const clientSize = this.getClientSize();
     const scrollSize = this.getScrollSize();
 
-    // iOS滚动回弹行为会导致方向错误
+    // 过滤无效滚动（iOS弹性滚动边界值）
     if (offset < 0 || offset + clientSize > scrollSize + 1 || !scrollSize) {
       return;
     }
+
+    // 使用RAF保证渲染性能
     window.requestAnimationFrame(() => {
       this.#virtualCore.handleScroll(offset);
       this.emitEvent(offset, clientSize, scrollSize, evt);
     });
   }
 
-  // emit event in special position
+  /**
+   * 触发阈值事件
+   * @param offset - 当前滚动偏移
+   * @param clientSize - 可视区域尺寸
+   * @param scrollSize - 总滚动尺寸
+   * @param evt - 原始事件对象
+   */
   emitEvent(offset: number, clientSize: number, scrollSize: number, evt: Event) {
+    // 基础滚动事件
     void this.#eventEmitter.emit('scroll', {
       event: evt,
       range: this.#virtualCore.getRange(),
     });
 
-    if (this.#virtualCore.isFront() && Boolean(this.#dataSources.length) && offset - this.#topThreshold <= 0) {
+    // 顶部阈值触发
+    if (this.#virtualCore.isFront() && this.#dataSources.length > 0 && offset - this.#topThreshold <= 0) {
       void this.#eventEmitter.emit('scrollToTop');
-    } else if (this.#virtualCore.isBehind() && offset + clientSize + this.#bottomThreshold >= scrollSize) {
+    }
+    // 底部阈值触发
+    else if (this.#virtualCore.isBehind() && offset + clientSize + this.#bottomThreshold >= scrollSize) {
       void this.#eventEmitter.emit('scrollToBottom');
     }
   }
