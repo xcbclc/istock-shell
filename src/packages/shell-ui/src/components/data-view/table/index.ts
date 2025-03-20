@@ -1,0 +1,13 @@
+import Table from './Table.svelte';
+import TableRow from './TableRow.svelte';
+import TableTd from './TableTd.svelte';
+import TableTh from './TableTh.svelte';
+export * from './Table.svelte';
+export * from './TableRow.svelte';
+export * from './TableTd.svelte';
+export * from './TableTh.svelte';
+export const ShTable = Table;
+export const ShTableRow = TableRow;
+export const ShTableTd = TableTd;
+export const ShTableTh = TableTh;
+export default ShTable;
