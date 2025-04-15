@@ -1,3 +1,4 @@
+<!--
 <script lang="ts">
   import { getStartAndEndOfWeek, toLocaleDateString } from '@istock/util';
   type TCalendarItem = {
@@ -50,7 +51,7 @@
           <td>
             {#if eventRecord[week]}
               {#each eventRecord[week] as event}
-                <div class="calendar-event" style={getStyle(event.color)} title={event.description}>
+                <div class="icalendar" style={getStyle(event.color)} title={event.description}>
                   {#if event.url}
                     <a href={event.url} target="_blank" style={getStyle(event.color)}>{event.title}</a>
                   {:else}
@@ -68,12 +69,12 @@
 
 <style lang="scss">
   :root {
-    --ui-calendar-background-color: var(--color-background);
-    --ui-calendar-color: var(--color-text-default);
-    --ui-calendar-border-color: var(--color-text-default);
-    --ui-calendar-title-gap: var(--gap-zero2x);
-    --ui-calendar-tag-gap: var(--gap-default);
-    --ui-calendar-font-size: var(--font-size-xxl);
+    &#45;&#45;ui-calendar-background-color: var(&#45;&#45;color-background);
+    &#45;&#45;ui-calendar-color: var(&#45;&#45;color-text-default);
+    &#45;&#45;ui-calendar-border-color: var(&#45;&#45;color-text-default);
+    &#45;&#45;ui-calendar-title-gap: var(&#45;&#45;gap-zero2x);
+    &#45;&#45;ui-calendar-tag-gap: var(&#45;&#45;gap-default);
+    &#45;&#45;ui-calendar-font-size: var(&#45;&#45;font-size-xxl);
   }
   .calendar-wrap {
     max-width: 100%;
@@ -88,10 +89,10 @@
     }
   }
   .tags {
-    margin: var(--ui-calendar-title-gap) auto;
+    margin: var(&#45;&#45;ui-calendar-title-gap) auto;
   }
   .tag {
-    margin-right: var(--ui-calendar-tag-gap);
+    margin-right: var(&#45;&#45;ui-calendar-tag-gap);
     display: inline-block;
     vertical-align: middle;
     &:hover {
@@ -99,16 +100,16 @@
     }
   }
   h2 {
-    color: var(--ui-calendar-color);
-    margin: var(--ui-calendar-title-gap) auto;
+    color: var(&#45;&#45;ui-calendar-color);
+    margin: var(&#45;&#45;ui-calendar-title-gap) auto;
     text-align: center;
     line-height: 1.2;
-    font-size: var(--ui-calendar-font-size);
+    font-size: var(&#45;&#45;ui-calendar-font-size);
   }
   table {
     border-collapse: collapse;
     min-width: 100%;
-    color: var(--ui-calendar-color);
+    color: var(&#45;&#45;ui-calendar-color);
   }
   caption {
     font-weight: bold;
@@ -117,17 +118,17 @@
   thead {
     position: sticky;
     top: -2px;
-    background-color: var(--ui-calendar-background-color);
+    background-color: var(&#45;&#45;ui-calendar-background-color);
   }
   th,
   td {
-    border: 1px solid var(--ui-calendar-border-color);
+    border: 1px solid var(&#45;&#45;ui-calendar-border-color);
     padding: 0.25em 0.5em;
     white-space: nowrap;
   }
   td {
     a {
-      color: var(--ui-calendar-color);
+      color: var(&#45;&#45;ui-calendar-color);
       text-decoration: none;
       &:hover {
         opacity: 1;
@@ -135,3 +136,4 @@
     }
   }
 </style>
+-->
