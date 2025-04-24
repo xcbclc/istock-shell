@@ -1,5 +1,4 @@
-@import 'tailwindcss';
-@plugin 'daisyui';
+@import './daisyui.css';
 @import './variable.css';
 @import './scrollbar.css';
 

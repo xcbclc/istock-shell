@@ -4,7 +4,7 @@
   import type { ButtonProps } from '@istock/shell-ui';
 
   // 模态框属性接口（继承dialog元素属性）
-  interface ModalProps extends HTMLDialogAttributes {
+  export interface ModalProps extends HTMLDialogAttributes {
     title?: string; // 标题
     content?: string; // 内容
     closeButton?: boolean; // 是否显示关闭按钮

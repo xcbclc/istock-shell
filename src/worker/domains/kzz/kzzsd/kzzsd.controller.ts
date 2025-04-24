@@ -32,14 +32,14 @@ export class KzzsdController {
             texts: [
               ...data.texts,
               {
-                type: 'info',
+                color: 'info',
                 text: '该策略来自集思录-yyb凌波-转债双低轮动+沪深300波动率策略（2024），对应访问地址：',
                 tag: 'span',
               },
               {
-                type: 'info',
+                color: 'info',
                 text: 'https://www.jisilu.cn/question/489447',
-                link: 'https://www.jisilu.cn/question/489447',
+                href: 'https://www.jisilu.cn/question/489447',
                 tag: 'a',
               },
             ],

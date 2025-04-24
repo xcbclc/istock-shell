@@ -2,6 +2,7 @@
 title: Icon 图标组件
 description: 语义化的SVG图标组件库，提供200+常用图标、8种主题色和5种尺寸配置，支持自定义图标和动态交互。
 keywords: [SVG图标,图标库,语义化图标,Svelte图标组件,Icon API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

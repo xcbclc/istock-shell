@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'standard-with-typescript',
     'plugin:svelte/recommended',
+    'plugin:vue/vue3-recommended',
     'plugin:prettier/recommended',
     'plugin:svelte/prettier',
   ],
@@ -30,12 +31,27 @@ module.exports = {
       },
       rules: {
         'svelte/valid-compile': 'off',
+        '@typescript-eslint/unbound-method': 'off',
       },
     },
     {
       files: ['**/*.model.ts'], // 服务模型文件，pnpm命令抛错，先关闭
       rules: {
         indent: 'off',
+      },
+    },
+    {
+      files: ['*.vue'],
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.vue'],
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      rules: {
+        'vue/multi-word-component-names': 'off',
       },
     },
   ],

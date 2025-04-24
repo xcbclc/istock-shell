@@ -2,6 +2,7 @@
 title: Toggle 开关组件
 description: Toggle开关组件用于两种状态之间的切换操作，支持8种主题色、5种尺寸和丰富的交互样式，适用于设置开关、功能启用等场景。
 keywords: [开关组件,Svelte开关,状态切换,表单控件,Toggle API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

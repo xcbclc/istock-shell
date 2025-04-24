@@ -1,7 +1,11 @@
 <script lang="ts">
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
 
-  export let windowId: number;
+  interface Props {
+    windowId: number;
+  }
+
+  const { windowId }: Props = $props();
 
   const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
   const { cmdInfo } = ctx.cmdStore;

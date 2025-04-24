@@ -1,6 +1,27 @@
 <script lang="ts">
   import { ShIcon } from '@istock/shell-ui';
-  const icons = ['email', 'error', 'file', 'link', 'password', 'phone', 'question', 'right', 'search', 'user'];
+  const icons = [
+    'close',
+    'email',
+    'empty',
+    'error',
+    'file',
+    'goods-box',
+    'heart',
+    'info',
+    'lightning',
+    'link',
+    'operation',
+    'password',
+    'phone',
+    'play',
+    'question',
+    'right',
+    'search',
+    'success',
+    'user',
+    'warning',
+  ];
 </script>
 
 {#each icons as name}

@@ -1,5 +1,6 @@
 export * from './color';
 export * from './event/index';
+export * from './array';
 export * from './error';
 export * from './escape';
 export * from './date';
@@ -9,5 +10,6 @@ export * from './message-data';
 export * from './sleep';
 export * from './snow-flake';
 export * from './string';
+export * from './to-ui-class';
 export * from './url';
 export * from './merge-object';

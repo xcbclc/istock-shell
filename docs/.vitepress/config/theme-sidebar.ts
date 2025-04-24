@@ -62,12 +62,80 @@ export default {
       ],
     },
   ],
+  '/packages/shell-ui': [
+    {
+      text: '介绍',
+      link: '/packages/shell-ui/README.html',
+    },
+    {
+      text: '组件总览',
+      items: [
+        {
+          text: '通用',
+          items: [
+            { text: 'Icon 图标 🇸🇭', link: '/packages/shell-ui/components/extend/icon/index.html' },
+            { text: 'Text 文本 🇸🇭', link: '/packages/shell-ui/components/extend/text/index.html' },
+          ],
+        },
+        {
+          text: '动作',
+          items: [
+            { text: 'Button 按钮', link: '/packages/shell-ui/components/action/button/index.html' },
+            { text: 'Dropdown 下拉菜单', link: '/packages/shell-ui/components/action/dropdown/index.html' },
+            { text: 'Modal 对话框', link: '/packages/shell-ui/components/action/modal/index.html' },
+          ],
+        },
+        {
+          text: '数据展示',
+          items: [
+            {
+              text: 'ICalendar 日历事件 🇸🇭',
+              link: '/packages/shell-ui/components/extend/icalendar/index.html',
+            },
+            { text: 'Chart 图表 🇸🇭', link: '/packages/shell-ui/components/extend/chart/index.html' },
+            { text: 'DataGrid 数据网格 🇸🇭', link: '/packages/shell-ui/components/extend/data-grid/index.html' },
+            { text: 'Empty 空状态 🇸🇭', link: '/packages/shell-ui/components/extend/empty/index.html' },
+            { text: 'ErrorInfo 错误信息 🇸🇭', link: '/packages/shell-ui/components/extend/error-info/index.html' },
+            { text: 'Stat 统计展示', link: '/packages/shell-ui/components/data-view/stat/index.html' },
+            { text: 'List 列表', link: '/packages/shell-ui/components/data-view/list/index.html' },
+            { text: 'Markdown 🇸🇭', link: '/packages/shell-ui/components/extend/markdown/index.html' },
+            { text: 'NavList 导航列表 🇸🇭', link: '/packages/shell-ui/components/extend/nav-list/index.html' },
+            { text: 'Kbd 键盘', link: '/packages/shell-ui/components/data-view/kbd/index.html' },
+            { text: 'Table 表格', link: '/packages/shell-ui/components/data-view/table/index.html' },
+            { text: 'VirtualList 虚拟列表 🇸🇭', link: '/packages/shell-ui/components/extend/virtual-list/index.html' },
+          ],
+        },
+        {
+          text: '数据录入',
+          items: [
+            { text: 'Checkbox 复选框', link: '/packages/shell-ui/components/data-input/checkbox/index.html' },
+            { text: 'DataList 数据列表 🇸🇭', link: '/packages/shell-ui/components/extend/data-list/index.html' },
+            { text: 'FieldSet 字段集', link: '/packages/shell-ui/components/data-input/field-set/index.html' },
+            { text: 'Input 输入框', link: '/packages/shell-ui/components/data-input/input/index.html' },
+            { text: 'Radio 单选框', link: '/packages/shell-ui/components/data-input/radio/index.html' },
+            { text: 'Select 选择器', link: '/packages/shell-ui/components/data-input/select/index.html' },
+            { text: 'Textarea 多行文本', link: '/packages/shell-ui/components/data-input/textarea/index.html' },
+            { text: 'Toggle 开关', link: '/packages/shell-ui/components/data-input/toggle/index.html' },
+          ],
+        },
+        {
+          text: '反馈',
+          items: [
+            { text: 'Alert 警告', link: '/packages/shell-ui/components/feedback/alert/index.html' },
+            { text: 'Loading 加载', link: '/packages/shell-ui/components/feedback/loading/index.html' },
+            { text: 'Toast 消息框', link: '/packages/shell-ui/components/feedback/toast/index.html' },
+            { text: 'Tooltip 提示', link: '/packages/shell-ui/components/feedback/tooltip/index.html' },
+            { text: 'Message 全局消息 🇸🇭', link: '/packages/shell-ui/components/extend/message/index.html' },
+          ],
+        },
+      ],
+    },
+  ],
   '/packages/': [
     {
       text: '相关库',
       items: [
         { text: 'iswork', link: '/packages/iswork/modules.html' },
-        { text: 'shell-ui', link: '/packages/shell-ui/README.html' },
         { text: 'command-parser', link: '/packages/command-parser/modules.html' },
         { text: 'editor', link: '/packages/editor/modules.html' },
       ],

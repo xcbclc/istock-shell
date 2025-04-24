@@ -2,6 +2,7 @@
 title: List 列表组件
 description: 高度可定制的列表组件，支持图片、描述、操作按钮、自定义渲染等功能，适用于应用列表、音乐列表、消息列表、商品列表等场景。
 keywords: [列表组件,Svelte列表,数据展示,行操作,List API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---
@@ -88,7 +89,7 @@ type ListRowActionRender = (action: ListRowAction) => ReturnType<Snippet<[ListRo
 ### ListRowProps
 ```typescript
 // 列表项属性接口（继承li元素属性）
-export interface ListRowProps extends HTMLLiAttributes {
+interface ListRowProps extends HTMLLiAttributes {
   text?: string; // 主要文本
   description?: string; // 描述文本
   actions?: ListRowAction[]; // 操作按钮列表

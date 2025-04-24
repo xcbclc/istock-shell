@@ -2,6 +2,7 @@
 title: Chart 图表组件
 description: 基于AntV G2的图表组件，支持丰富的图表类型、自定义配置和响应式更新，适用于数据可视化、统计分析等场景。
 keywords: [图表组件,数据可视化,AntV G2,Svelte Chart,Chart API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

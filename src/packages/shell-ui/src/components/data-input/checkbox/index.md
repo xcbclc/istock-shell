@@ -2,6 +2,7 @@
 title: Checkbox 复选框组件
 description: 复选框（Checkbox）组件用于多选场景，支持不确定状态、禁用状态、自定义样式，适用于表单、配置选项等交互场景。提供组操作、尺寸定制和颜色主题配置。
 keywords: [ 复选框组件,Svelte复选框,表单控件,多选组件,复选框样式,复选框API ]
+aside: false
 editLink: false
 outline: [ 2, 3 ]
 ---

@@ -2,6 +2,7 @@
 title: VirtualList 虚拟列表组件
 description: 专为大数据量设计的虚拟滚动解决方案，实现万级数据流畅渲染，支持动态尺寸计算、可视区域跟踪和高效内存管理。
 keywords: [虚拟列表组件,大数据渲染,滚动优化,Svelte虚拟列表,VirtualList API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

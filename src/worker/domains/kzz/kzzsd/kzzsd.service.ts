@@ -67,7 +67,7 @@ export class KzzsdService {
         table: this.toTableData(lastResult),
         texts: [
           {
-            type: 'danger',
+            color: 'danger',
             text: '未到该策略执行周期',
           },
         ],
@@ -79,7 +79,7 @@ export class KzzsdService {
         table: this.toTableData([]),
         texts: [
           {
-            type: 'danger',
+            color: 'danger',
             text: `市场上可转债双低均值大于等于${averageDblow}，不满足进入条件`,
           },
         ],
@@ -102,7 +102,7 @@ export class KzzsdService {
         table: this.toTableData([]),
         texts: [
           {
-            type: 'danger',
+            color: 'danger',
             text: '可转债总数50只以内或可选标的小于5时，不满足标的选择条件',
           },
         ],
@@ -161,7 +161,7 @@ export class KzzsdService {
         table: this.toTableData(this.addDblowListStatus(newResult, '退')),
         texts: [
           {
-            type: 'danger',
+            color: 'danger',
             text,
           },
         ],
@@ -172,7 +172,7 @@ export class KzzsdService {
         table: this.toTableData(this.addDblowListStatus(newResult, '退')),
         texts: [
           {
-            type: 'danger',
+            color: 'danger',
             text: '双低均值大于170，已达到退出条件',
           },
         ],
@@ -183,7 +183,7 @@ export class KzzsdService {
         table: this.toTableData(this.addDblowListStatus(newResult, '减')),
         texts: [
           {
-            type: 'warning',
+            color: 'warning',
             text: '双低均值大于165，已达到减仓条件',
           },
         ],

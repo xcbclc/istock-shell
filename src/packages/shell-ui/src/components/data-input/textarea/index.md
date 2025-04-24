@@ -2,6 +2,7 @@
 title: Textarea 多行文本框
 description: 多行文本框（Textarea）组件支持自适应高度、表单验证、最大长度限制等功能，适用于长文本输入场景如评论、描述等。提供8种主题色和5种尺寸配置。
 keywords: [ 多行文本框,Svelte文本框,表单输入,文本输入框,Textarea API ]
+aside: false
 editLink: false
 outline: [ 2, 3 ]
 ---

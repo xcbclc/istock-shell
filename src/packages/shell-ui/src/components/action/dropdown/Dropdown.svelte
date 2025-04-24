@@ -1,3 +1,15 @@
+<!--
+@component
+下拉菜单组件，支持以下功能：
+- 自定义触发方式（点击/悬停）
+- 可配置菜单位置
+- 支持自定义触发元素
+- 支持完全自定义内容
+
+用法示例:
+```html
+<ShDropdown items={[{ text: '选项1' }, { text: '选项2' }]} triggerElement={{ text: '点击打开' }} />
+``` -->
 <script lang="ts" module>
   import type { Snippet } from 'svelte';
   import type { HTMLAttributes } from 'svelte/elements';
@@ -55,19 +67,6 @@
     responsiveVariants: ['size'],
   });
 </script>
-
-<!--
-@component
-下拉菜单组件，支持以下功能：
-- 自定义触发方式（点击/悬停）
-- 可配置菜单位置
-- 支持自定义触发元素
-- 支持完全自定义内容
-
-用法示例:
-```html
-<ShDropdown items={[{ text: '选项1' }, { text: '选项2' }]} triggerElement={{ text: '点击打开' }} />
-``` -->
 
 <svelte:element
   this={tag}

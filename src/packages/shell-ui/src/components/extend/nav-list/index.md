@@ -2,6 +2,7 @@
 title: NavList 导航列表组件
 description: 提供结构化导航列表组件，支持多级导航、自定义内容和响应式布局，适用于门户网站、网站导航等场景。
 keywords: [导航列表,网站导航,Svelte导航列表,多级导航,NavList API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

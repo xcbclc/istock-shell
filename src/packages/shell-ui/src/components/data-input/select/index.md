@@ -2,6 +2,7 @@
 title: Select 选择器组件
 description: 下拉选择器（Select）组件提供单选/多选功能，支持搜索过滤、异步加载、分组选项等高级特性，适用于表单选择、数据筛选等场景。
 keywords: [下拉选择器,表单选择,多选组件,Svelte选择器,Select API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

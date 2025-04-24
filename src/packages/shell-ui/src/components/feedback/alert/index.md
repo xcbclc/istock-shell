@@ -2,6 +2,7 @@
 title: Alert 警告提示组件
 description: 警告提示（Alert）组件用于展示重要的提示信息，支持多种样式变体（默认、柔和、轮廓、虚线）和不同语义类型（成功、警告、错误等），可用于系统通知、操作反馈等场景。
 keywords: [警告提示,Svelte Alert,消息通知,提示框,Alert组件]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

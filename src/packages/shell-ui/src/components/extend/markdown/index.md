@@ -2,6 +2,7 @@
 title: Markdown 渲染组件 - 文档展示指南
 description: 基于Svelte的Markdown渲染解决方案，支持语法高亮、实时预览和自定义扩展，适用于文档展示、内容管理等场景。
 keywords: [Markdown组件,Svelte文档渲染,语法高亮,内容管理,Markdown API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---
@@ -21,8 +22,7 @@ outline: [2, 3]
 - 双向数据绑定
 
 ## 示例演示
-### 基础渲染
-<IStockShellUiExample src="./example/MarkdownDefault.svelte"></IStockShellUiExample>
+<IStockShellUiExample src="./example/MarkdownDefault.svelte" raw="false"></IStockShellUiExample>
 <IStockShellUiExample src="./example/MarkdownLive.svelte" layout="column"></IStockShellUiExample>
 
 ## API 参考
@@ -53,3 +53,6 @@ import type { MarkedExtension } from 'marked';
    - 通过options添加自定义渲染器
    - 使用marked插件扩展语法
    - 集成数学公式等扩展语法
+
+
+> **提示**：参考[`marked`](https://marked.js.org/)了解更多配置   

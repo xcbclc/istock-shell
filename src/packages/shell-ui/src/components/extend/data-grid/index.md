@@ -2,6 +2,7 @@
 title: DataGrid 数据网格组件
 description: 用于组合展示统计指标、可视化图表、数据项，支持自动布局管理和响应式更新，适用于仪表盘、数据看板等场景。
 keywords: [数据网格组件,数据看板,仪表盘布局,DataGrid API,Svelte数据展示]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

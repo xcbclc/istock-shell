@@ -1,18 +1,26 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { ShText } from '@istock/shell-ui';
-  // import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import { type TSearchList, type TSearchListItem } from '@/store/domains/global/search';
-  export let windowId: number;
 
-  export let searchValue: string = '';
-  export let searchList: TSearchList = [
-    {
-      title: '设置',
-      category: 'setting',
-      list: [{ title: 'cookie管理', action: 'setting.cookie', description: '管理第三方站点的cookie' }],
-    },
-  ];
+  interface Props {
+    windowId: number;
+    searchValue?: string;
+    searchList?: TSearchList;
+  }
+
+  let {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    windowId,
+    searchValue = $bindable(''),
+    searchList = [
+      {
+        title: '设置',
+        category: 'setting',
+        list: [{ title: 'cookie管理', action: 'setting.cookie', description: '管理第三方站点的cookie' }],
+      },
+    ],
+  }: Props = $props();
   const dispatch = createEventDispatcher();
   const onInput = () => {
     dispatch('input', searchValue);
@@ -36,14 +44,13 @@
   const onClickMask = () => {
     dispatch('close');
   };
-  $: currentSearchList = searchValue ? getCurrentSearchList() : searchList;
-  // const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
+  const currentSearchList = $derived(searchValue ? getCurrentSearchList() : searchList);
 </script>
 
-<div class="search-main-mask" on:click={onClickMask}></div>
+<div class="search-main-mask" onclick={onClickMask}></div>
 <div class="search-main">
   <div class="search-input">
-    <input type="text" bind:value={searchValue} on:input={onInput} on:change={onChange} />
+    <input type="text" bind:value={searchValue} oninput={onInput} onchange={onChange} />
   </div>
   <div class="search-result">
     {#if !currentSearchList?.length}
@@ -56,7 +63,7 @@
             {#if categoryItem?.list?.length}
               {#each categoryItem.list as item}
                 <div
-                  on:click={() => {
+                  onclick={() => {
                     onSelectedSearchResult(item);
                   }}
                   class="search-result-item"

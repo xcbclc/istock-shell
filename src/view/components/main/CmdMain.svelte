@@ -8,11 +8,15 @@
   import { registerOutputViewComponents } from './component-map';
   import { handleBlockContextmenuFactory } from './block-contextmenu';
 
-  export let windowId: number;
+  interface Props {
+    windowId: number;
+  }
+
+  const { windowId }: Props = $props();
 
   const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
 
-  let mainElement: HTMLDivElement | null;
+  let mainElement: HTMLDivElement | null = $state();
   // let contextmenuElement: HTMLElement | null;
 
   const { cmdOutput, cmdContextmenu, outputViewComponentMap } = ctx.cmdStore;
@@ -35,16 +39,16 @@
 
   // 注册所有命令输出动态组件
   registerOutputViewComponents(outputViewComponentMap);
-  let componentMap = new Map();
+  let componentMap = $state(new Map());
   if (outputViewComponentMap.getMap) {
     componentMap = outputViewComponentMap.getMap();
   }
 
   // 右键菜单全局位置
-  let position: TContextmenuPosition = {
+  let position: TContextmenuPosition = $state({
     window: { width: 0, height: 0 },
     offset: { x: -1, y: -1 },
-  };
+  });
   const handleBlockContextmenu = handleBlockContextmenuFactory(ctx, windowId, (data) => {
     position = { ...position, ...data };
   });
@@ -126,19 +130,19 @@
   {#each wrapOutputList($cmdOutput.list) as block, index (index)}
     <section
       class="cmd-block is-hidden"
-      on:keydown={async (ev) => {
+      onkeydown={async (ev) => {
         if (ctx.isExample) return;
         await handleBlockContextmenu.handleMenuShortcutKey(ev, block);
       }}
-      on:contextmenu={(ev) => {
+      oncontextmenu={(ev) => {
         if (ctx.isExample) return;
         handleBlockContextmenu.handleOpenBlockContextmenu(ev);
       }}
-      on:mouseenter={(ev) => {
+      onmouseenter={(ev) => {
         if (ctx.isExample) return;
         handleBlockContextmenu.handleBlockMouseEnter(ev, index);
       }}
-      on:click={(ev) => {
+      onclick={(ev) => {
         if (ctx.isExample) return;
         handleBlockContextmenu.handleOnClick(ev);
       }}
@@ -159,8 +163,8 @@
       </div>
       <div class="cmd-block-output">
         {#each block.output as output, oIndex (oIndex)}
-          <svelte:component
-            this={componentMap.get(output.component) || componentMap.get('ViewNotFound')}
+          {@const SvelteComponent = componentMap.get(output.component) || componentMap.get('ViewNotFound')}
+          <SvelteComponent
             source={block.source}
             windowId={block.windowId}
             on:submit={(event) => {

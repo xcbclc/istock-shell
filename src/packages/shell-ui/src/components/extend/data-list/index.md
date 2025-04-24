@@ -2,6 +2,7 @@
 title: DataList 数据列表组件 - 输入建议指南
 description: 为input元素提供预设选项列表的增强组件，支持自定义选项内容、标签配置，提供灵活的数据输入建议功能。
 keywords: [数据列表组件,输入建议,预设选项,Svelte DataList,DataList API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

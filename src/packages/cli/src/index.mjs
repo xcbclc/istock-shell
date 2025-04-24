@@ -4,6 +4,7 @@ import cmdInit from './action/cmd-init.mjs';
 import cmdDoc from './action/cmd-doc.mjs';
 import docPackage from './action/package.mjs';
 import mergeMarkdown from './action/merge-markdown.mjs';
+import sellUi from './action/shell-ui.mjs';
 
 program.version(packageJson.version);
 
@@ -21,6 +22,9 @@ program
     }
     if (action === 'merge') {
       await mergeMarkdown();
+    }
+    if (action === 'ui') {
+      await sellUi();
     }
   });
 

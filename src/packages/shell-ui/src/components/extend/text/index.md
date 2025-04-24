@@ -2,6 +2,7 @@
 title: Text 文本组件
 description: 文本组件用于页面内容展示，支持多尺寸、颜色主题、排版对齐等样式配置，提供语义化标签支持。
 keywords: [文本组件,Svelte文本,文字排版,文本样式,Text API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

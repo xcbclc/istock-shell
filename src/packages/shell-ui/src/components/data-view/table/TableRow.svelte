@@ -129,7 +129,7 @@
     <!-- 动态渲染单元格 -->
     {#each list as item}
       {@const useTh = item.tag ? item.tag === 'th' : tag === 'th'}
-      {#if useTh}
+      {#if useTh || (!item.tag && !tag && type === 'thead')}
         <ShTableTh {...item} /> <!-- 表头单元格 -->
       {:else}
         <ShTableTd {...item} /> <!-- 数据单元格 -->

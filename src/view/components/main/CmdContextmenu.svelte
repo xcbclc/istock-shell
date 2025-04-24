@@ -2,15 +2,19 @@
   import { createEventDispatcher } from 'svelte';
   import type { TContextmenu, TContextmenuItem, TContextmenuPosition } from '@/store/cmd/cmd-contextmenu';
 
-  export let contextmenu: TContextmenu;
-  export let position: TContextmenuPosition;
+  interface Props {
+    contextmenu: TContextmenu;
+    position: TContextmenuPosition;
+  }
 
-  let contextmenuEl: HTMLElement;
+  const { contextmenu, position }: Props = $props();
 
-  let style: string = '';
+  let contextmenuEl: HTMLElement = $state();
+
+  let style: string = $state('');
   const dispatch = createEventDispatcher();
 
-  $: {
+  $effect(() => {
     const styles: string[] = [];
     // 计算后面需要考虑多窗口
     if (position.offset.x < 0 || position.offset.y < 0) {
@@ -31,7 +35,7 @@
       }
     }
     style = styles.join(';');
-  }
+  });
   const handleMouseenter = () => {
     dispatch('mouseStatus', true);
   };
@@ -47,8 +51,8 @@
   class="contextmenu-wrap"
   bind:this={contextmenuEl}
   {style}
-  on:mouseenter={handleMouseenter}
-  on:mouseleave={handleMouseleave}
+  onmouseenter={handleMouseenter}
+  onmouseleave={handleMouseleave}
   role="menu"
 >
   {#if contextmenu}
@@ -57,7 +61,7 @@
         {#each item.menus as menu}
           <li
             class="contextmenu-item"
-            on:click={(ev) => {
+            onclick={(ev) => {
               handleClick(ev, menu);
             }}
             role="menuitem"

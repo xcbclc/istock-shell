@@ -2,6 +2,7 @@
 title: Modal 对话框组件
 description: 对话框（Modal）组件用于展示重要信息或需要用户交互的内容，支持多种配置（遮罩层、关闭按钮、响应式布局等）和自定义内容，适用于表单提交、信息确认等场景。
 keywords: [对话框,Svelte Modal,弹窗组件,交互反馈,Modal组件]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

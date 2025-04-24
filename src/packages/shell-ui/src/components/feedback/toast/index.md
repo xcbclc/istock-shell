@@ -2,6 +2,7 @@
 title: Toast 轻提示组件
 description: 轻提示（Toast）组件用于展示简短的反馈信息，支持多个位置布局（顶部、中部、底部）和不同类型（成功、警告、错误等），可用于操作反馈、消息通知等场景。
 keywords: [轻提示,Svelte Toast,消息通知,反馈提示,Toast组件]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

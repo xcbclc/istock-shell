@@ -11,7 +11,7 @@
 
   // 标签配置接口
   export type ToggleLabel = {
-    position?: 'before' | 'after'; // 标签位置
+    placement?: 'before' | 'after'; // 标签位置
     class?: string; // 自定义类名
   };
 
@@ -54,13 +54,13 @@
 {#if label ?? children}
   <!-- 带标签的开关布局 -->
   <label class={tuc(toggleVariants({ color, size }), label?.class ?? '')}>
-    {#if label?.position === 'before'}
+    {#if label?.placement === 'before'}
       <!-- 前置标签内容 -->
       {@render children?.()}
     {/if}
     <!-- 开关输入元素 -->
     <input bind:checked={value} type="checkbox" class={[className]} {...otherProps} />
-    {#if !label?.position || label?.position === 'after'}
+    {#if !label?.placement || label?.placement === 'after'}
       <!-- 后置标签内容 -->
       {@render children?.()}
     {/if}

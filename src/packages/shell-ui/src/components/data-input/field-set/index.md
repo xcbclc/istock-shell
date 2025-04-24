@@ -2,6 +2,7 @@
 title: Fieldset 字段集组件
 description: 字段集（Fieldset）组件用于对表单控件进行逻辑分组，支持标题说明、多列布局、边框样式定制，适用于复杂表单的场景组织。提供无障碍访问支持和响应式适配。
 keywords: [表单分组组件,字段集布局,表单结构优化,Fieldset API,表单可访问性]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

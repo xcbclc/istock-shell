@@ -2,6 +2,7 @@
 title: Table 表格组件
 description: 功能强大的数据表格组件，支持多种交互模式和样式配置，提供行选择、固定列、斑马纹、悬停高亮等特性，适用于数据展示、分析报表等场景。
 keywords: [ 表格组件,Svelte表格,数据展示,行选择,固定列,Table API ]
+aside: false
 editLink: false
 outline: [ 2, 3 ]
 ---

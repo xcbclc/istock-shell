@@ -33,10 +33,21 @@ export class CdesfService {
     dayjs.extend(isoWeek);
   }
 
+  /**
+   * 获取数据单位
+   * @param list
+   * @private
+   */
   #getListDataUnit(list: Array<TModelData<CdfceshqsjModel>>) {
     return list[0]?.单位 ?? '';
   }
 
+  /**
+   * 对比或环比转百分比
+   * @param num1
+   * @param num2
+   * @private
+   */
   #toPercentageFormat(num1: number | string, num2: number | string) {
     if (!num1 || !num2) return '-';
     if (!isNumber(num1) || !isNumber(num2)) return '-';
@@ -77,6 +88,9 @@ export class CdesfService {
     return response.records.map((record) => record.fields);
   }
 
+  /**
+   * 获取整个大屏数据
+   */
   async getHouseDataGridData() {
     const [monthTradeData, monthOldHouseTradeData, weekOldHouseTradeData]: [
       Array<TModelData<CdfcjysjModel>>,
@@ -115,6 +129,12 @@ export class CdesfService {
     };
   }
 
+  /**
+   * 获取卡片数据
+   * @param monthTradeData
+   * @param monthOldHouseTradeData
+   * @param weekOldHouseTradeData
+   */
   getHouseDataGridCards(
     monthTradeData: Array<TModelData<CdfcjysjModel>>,
     monthOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>,
@@ -252,6 +272,12 @@ export class CdesfService {
     return cards;
   }
 
+  /**
+   * 获取图表数据
+   * @param monthTradeData
+   * @param monthOldHouseTradeData
+   * @param weekOldHouseTradeData
+   */
   getHouseDataGridCharts(
     monthTradeData: Array<TModelData<CdfcjysjModel>>,
     monthOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>,

@@ -37,21 +37,19 @@ export class DomainController {
     const list = result
       .map((item) => {
         return {
-          title: `${item.viewName}(${item.name})`,
-          link: '',
+          text: `${item.viewName}(${item.name})`,
         };
       })
       .filter((item) => {
         if (isString(filter)) {
-          return item.title.indexOf(filter) !== 1;
+          return item.text.indexOf(filter) !== 1;
         }
         if (isRegExp(filter)) {
-          return filter.test(item.title);
+          return filter.test(item.text);
         }
         return item;
       });
     return {
-      display: 'inline',
       list: limit ? list.slice(0, limit) : list,
     };
   }

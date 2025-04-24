@@ -3,7 +3,11 @@
   import { toLocaleDateString } from '@istock/util';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import type { TCookieManageUiModel, TCookieModel } from '@/store/domains/global/cookie-manage';
-  export let windowId: number;
+  interface Props {
+    windowId: number;
+  }
+
+  const { windowId }: Props = $props();
 
   const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
   const { cookieManage } = ctx.domainStore;
@@ -74,7 +78,7 @@
               </td>
               <td>
                 <a
-                  on:click={async () => {
+                  onclick={async () => {
                     await onSaveOrEdit(item, index);
                   }}
                   class="action-link is-secondary"
@@ -83,7 +87,7 @@
                 </a>
                 {#if item.id}
                   <a
-                    on:click={async () => {
+                    onclick={async () => {
                       await onDelete(item.id);
                     }}
                     class="action-link is-primary"
@@ -99,7 +103,7 @@
     </table>
   </div>
   {#if !$cookieManage.list?.length}
-    <ShText texts={[{ type: 'info', text: '暂无数据' }]} textAlign="center" />
+    <ShText texts={[{ type: 'info', text: '暂无数据' }]} align="center" />
   {/if}
   <div class="action">
     <ShButton on:click={onAdd} type="primary">新增</ShButton>

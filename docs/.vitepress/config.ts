@@ -1,4 +1,6 @@
 import { defineConfig } from 'vitepress';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/vite';
 import themeLocales from './config/theme-locales';
 import themeSidebar from './config/theme-sidebar';
 import themeNav from './config/theme-nav';
@@ -11,6 +13,8 @@ export default defineConfig({
     server: {
       port: 5172,
     },
+    plugins: [tailwindcss(), svelte()],
+    css: { preprocessorOptions: { scss: { api: 'modern-compiler' } } },
   },
   locales: {
     root: {

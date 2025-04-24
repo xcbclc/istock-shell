@@ -2,6 +2,7 @@
 title: Stat 统计展示组件
 description: 用于展示关键指标数据的统计组件，支持多种布局、图标配置和操作按钮，适用于仪表盘、数据看板等场景。
 keywords: [统计组件,数据展示,指标卡片,Stat API,Svelte统计]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

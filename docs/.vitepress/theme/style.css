@@ -129,7 +129,44 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+.vp-raw {
+  font-size: initial;
+  font-weight: initial;
+  line-height: 1.5;
+}
+
+/**
+ * 命令
+ */
 .vp-doc th,
 .vp-doc td {
   white-space: nowrap;
+}
+
+/**
+ * tailwindcss样式冲突
+ */
+:not(.vp-raw) .divider{
+  margin-top: 0;
+  margin-bottom: 0;
+  &:before, &:after {
+    display: none;
+  }
+}
+:not(.vp-raw) .outline{
+  outline-style: var(--vp-c-bg-soft);
+}
+.VPNavBarMenu.menu{
+  flex-direction: row;
+  padding: 0;
+  flex-wrap: nowrap;
+}
+.VPNavScreenMenu.menu{
+  width: auto;
+}
+.VPLocalNav .container{
+  max-width: unset;
+}
+.VPLocalNav .container .menu{
+  flex-direction: row;
 }

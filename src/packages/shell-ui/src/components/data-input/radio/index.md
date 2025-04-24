@@ -2,6 +2,7 @@
 title: Radio 单选框组件
 description: 单选框（Radio）组件用于在多个互斥选项中选择单个结果，支持垂直/水平布局、自定义颜色主题、禁用状态和无障碍访问，适用于表单、设置选项等场景。
 keywords: [单选按钮,表单单选,选项组组件,Svelte单选框,Radio API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

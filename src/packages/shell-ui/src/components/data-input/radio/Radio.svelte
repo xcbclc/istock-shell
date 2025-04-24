@@ -10,7 +10,7 @@
   // 标签配置接口
   export type RadioLabel = {
     type?: RadioLabelType; // 标签样式类型
-    position?: 'before' | 'after'; // 标签位置
+    placement?: 'before' | 'after'; // 标签位置
     class?: string; // 自定义类名
   };
 
@@ -33,6 +33,7 @@
     value = $bindable(), // 双向绑定的当前值
     options = [], // 选项列表
     label, // 标签配置
+    size,
     disabled, // 禁用状态
     wrapClass, // 容器类名
     onChangeValue, // 变更回调
@@ -55,22 +56,22 @@
     {#if opt.label}
       <!-- 带标签的单选项 -->
       <label class={tuc(radioLabelVariants({ type: label?.type, color: otherProps.color }), label?.class ?? '')}>
-        {#if label?.position === 'before'}
+        {#if label?.placement === 'before'}
           <!-- 前置标签 -->
-          <span class={tuc(radioLabelVariants({ disabled: itemDisabled }))}>{opt.label}</span>
+          <span class={tuc(radioLabelVariants({ size, disabled: itemDisabled }))}>{opt.label}</span>
         {/if}
 
         <!-- 单选按钮组件 -->
-        <ShRadioItem bind:groupValue={value} value={opt.value} disabled={itemDisabled} {...otherProps} />
+        <ShRadioItem bind:groupValue={value} value={opt.value} disabled={itemDisabled} {size} {...otherProps} />
 
-        {#if !label?.position || label?.position === 'after'}
+        {#if !label?.placement || label?.placement === 'after'}
           <!-- 后置标签 -->
-          <span class={tuc(radioLabelVariants({ disabled: itemDisabled }))}>{opt.label}</span>
+          <span class={tuc(radioLabelVariants({ size, disabled: itemDisabled }))}>{opt.label}</span>
         {/if}
       </label>
     {:else}
       <!-- 无标签单选按钮 -->
-      <ShRadioItem bind:groupValue={value} value={opt.value} disabled={itemDisabled} {...otherProps} />
+      <ShRadioItem bind:groupValue={value} value={opt.value} disabled={itemDisabled} {size} {...otherProps} />
     {/if}
   {/each}
 </div>

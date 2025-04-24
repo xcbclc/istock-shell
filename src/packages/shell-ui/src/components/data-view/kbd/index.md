@@ -2,6 +2,7 @@
 title: Kbd 键盘样式组件
 description: 用于显示键盘按键样式的UI组件，支持多尺寸配置、组合键展示和文本内嵌，适用于快捷键提示、操作指引等场景。
 keywords: [键盘组件,Svelte键盘组件,快捷键展示,组合键UI,Kbd API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

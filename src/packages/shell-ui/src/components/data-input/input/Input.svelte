@@ -28,7 +28,10 @@
     | 'search'
     | 'time';
 
-  interface InputBaseProps {
+  export interface InputProps extends Omit<HTMLInputAttributes, 'size' | 'value' | 'color'> {
+    type: InputType;
+    value?: any;
+    onChangeValue?: (value?: any) => void; // 数字类型变更回调
     color?: InputColor; // 颜色主题
     size?: InputSize; // 尺寸配置
     variant?: InputVariant; // 样式变体
@@ -36,23 +39,6 @@
     prefixRender?: (opt: InputRenderOption) => ReturnType<Snippet<[InputRenderOption]>>; // 前缀渲染函数
     suffixRender?: (opt: InputRenderOption) => ReturnType<Snippet<[InputRenderOption]>>; // 后缀渲染函数
   }
-
-  // 处理不同输入类型的属性差异
-  type InputPropsUnion =
-    | (Omit<HTMLInputAttributes, 'size' | 'type' | 'value'> &
-        InputBaseProps & {
-          type: 'number';
-          value?: number;
-          onChangeValue?: (value?: number) => void; // 数字类型变更回调
-        })
-    | (Omit<HTMLInputAttributes, 'size' | 'type' | 'value'> &
-        InputBaseProps & {
-          type?: Exclude<InputType, 'number'>;
-          value?: string;
-          onChangeValue?: (value?: string) => void; // 文本类型变更回调
-        });
-
-  export type InputProps = InputPropsUnion;
 
   // 输入框渲染选项接口（用于前后缀渲染）
   export interface InputRenderOption {

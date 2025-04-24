@@ -1,19 +1,27 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { TInputRecommendItem } from '@/store/domains/global/input-recommend';
-  export let list: TInputRecommendItem[] | null = [];
+  interface Props {
+    list?: TInputRecommendItem[] | null;
+  }
 
-  let activeIndex: number = 0;
-  let recommendWrapView: HTMLElement;
+  const { list = [] }: Props = $props();
+
+  let activeIndex: number = $state(0);
+  let recommendWrapView: HTMLElement = $state();
 
   const dispatch = createEventDispatcher();
 
-  $: if (list && recommendWrapView) {
-    recommendWrapView.focus();
-  }
-  $: if (!list) {
-    activeIndex = 0;
-  }
+  $effect(() => {
+    if (list && recommendWrapView) {
+      recommendWrapView.focus();
+    }
+  });
+  $effect(() => {
+    if (!list) {
+      activeIndex = 0;
+    }
+  });
 
   const onKeydown = (ev: KeyboardEvent) => {
     const { key } = ev;
@@ -42,8 +50,8 @@
 <div
   class="recommend-wrap"
   bind:this={recommendWrapView}
-  on:keydown={onKeydown}
-  on:blur={() => dispatch('close')}
+  onkeydown={onKeydown}
+  onblur={() => dispatch('close')}
   tabindex="-1"
   role="menu"
 >

@@ -142,6 +142,13 @@ export const RadioVariantConfig = {
       warning: 'text-warning',
       error: 'text-error',
     },
+    size: {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-md',
+      lg: 'text-lg',
+      xl: 'text-xl',
+    },
     disabled: {
       true: 'text-disabled',
     },
@@ -336,7 +343,6 @@ export const TextVariantConfig = {
   },
   defaultVariants: {},
 };
-
 export const IconVariantConfig = {
   base: 'icon',
   variants: {
@@ -356,6 +362,163 @@ export const IconVariantConfig = {
       success: 'text-success',
       warning: 'text-warning',
       error: 'text-error',
+    },
+  },
+  defaultVariants: {},
+};
+export const TooltipVariantConfig = {
+  base: 'tooltip',
+  variants: {
+    color: {
+      primary: 'tooltip-primary',
+      secondary: 'tooltip-secondary',
+      accent: 'tooltip-accent',
+      neutral: 'tooltip-neutral',
+      info: 'tooltip-info',
+      success: 'tooltip-success',
+      warning: 'tooltip-warning',
+      error: 'tooltip-error',
+    },
+    placement: {
+      top: 'tooltip-top',
+      bottom: 'tooltip-bottom',
+      left: 'tooltip-left',
+      right: 'tooltip-right',
+    },
+    open: {
+      true: 'tooltip-open',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const AlertVariantConfig = {
+  base: 'alert',
+  variants: {
+    color: {
+      info: 'alert-info',
+      success: 'alert-success',
+      warning: 'alert-warning',
+      error: 'alert-error',
+    },
+    soft: {
+      true: 'alert-soft',
+    },
+    outline: {
+      true: 'alert-outline',
+    },
+    dash: {
+      true: 'alert-dash',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const ToastVariantConfig = {
+  base: 'toast',
+  variants: {
+    horizontal: {
+      start: 'toast-start',
+      center: 'toast-center',
+      end: 'toast-end',
+    },
+    vertical: {
+      top: 'toast-top',
+      middle: 'toast-middle',
+      bottom: 'toast-bottom',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const DropdownVariantConfig = {
+  base: 'dropdown ',
+  variants: {
+    placement: {
+      start: 'dropdown-start',
+      center: 'dropdown-center',
+      end: 'dropdown-end',
+      top: 'dropdown-top',
+      topCenter: 'dropdown-top dropdown-center',
+      topEnd: 'dropdown-top dropdown-end',
+      bottom: 'dropdown-bottom',
+      bottomCenter: 'dropdown-bottom dropdown-center',
+      bottomEnd: 'dropdown-bottom dropdown-end',
+      left: 'dropdown-left',
+      leftCenter: 'dropdown-left dropdown-center',
+      leftEnd: 'dropdown-left dropdown-end',
+      right: 'dropdown-right',
+      rightEnd: 'dropdown-right dropdown-end',
+      rightCenter: 'dropdown-right dropdown-center',
+    },
+    trigger: {
+      click: '',
+      hover: 'dropdown-hover',
+    },
+    open: {
+      true: 'dropdown-open',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const KbdVariantConfig = {
+  base: 'kbd',
+  variants: {
+    size: {
+      xs: 'kbd-xs',
+      sm: 'kbd-sm',
+      md: 'kbd-md',
+      lg: 'kbd-lg',
+      xl: 'kbd-xl',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const StatVariantConfig = {
+  base: 'stats',
+  variants: {
+    vertical: {
+      true: 'stats-vertical',
+    },
+    shadow: {
+      true: 'shadow',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const StatTitleVariantConfig = {
+  ...TextVariantConfig,
+  base: 'stat-title',
+};
+export const StatValueVariantConfig = {
+  ...TextVariantConfig,
+  base: 'stat-value',
+};
+export const StatDescVariantConfig = {
+  ...TextVariantConfig,
+  base: 'stat-desc',
+};
+export const TableVariantConfig = {
+  base: 'table',
+  variants: {
+    size: {
+      xs: 'table-xs',
+      sm: 'table-sm',
+      md: 'table-md',
+      lg: 'table-lg',
+      xl: 'table-xl',
+    },
+    pinRows: {
+      true: 'table-pin-rows',
+    },
+    pinCols: {
+      true: 'table-pin-cols',
+    },
+    zebra: {
+      true: 'table-zebra',
     },
   },
   defaultVariants: {},

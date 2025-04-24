@@ -25,9 +25,9 @@
 
 <script lang="ts">
   import { fade } from 'svelte/transition';
+  import { tv } from 'tailwind-variants';
   import { tuc } from '@istock/util';
   import { ShAlert } from '../../index';
-  import { tv } from 'tailwind-variants';
 
   const {
     horizontal, // 水平位置

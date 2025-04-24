@@ -30,7 +30,7 @@
   export interface StatItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
     title?: string | StatTitleProps; // 标题配置
     value?: string | StatValueProps; // 数值配置
-    desc?: string | StatDescProps; // 描述配置
+    desc?: string | StatDescProps | StatDescProps[]; // 描述配置
     figure?: StatFigureProps; // 图标配置
     center?: boolean; // 是否居中
     actions?: StatActionProps[]; // 操作按钮列表
@@ -38,7 +38,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isString } from '@istock/util';
+  import { tuc, isString, isArray } from '@istock/util';
   import { ShStatAction, ShStatDesc, ShStatFigure, ShStatTitle, ShStatValue } from './index';
 
   const {
@@ -79,7 +79,13 @@
     <!-- 渲染描述 -->
     {#if desc}
       {@const descProp = isString(desc) ? { text: desc } : desc}
-      <ShStatDesc {...descProp} />
+      {#if isArray(descProp)}
+        {#each descProp as descItemProp}
+          <ShStatDesc {...descItemProp} />
+        {/each}
+      {:else}
+        <ShStatDesc {...descProp} />
+      {/if}
     {/if}
 
     <!-- 渲染操作按钮 -->

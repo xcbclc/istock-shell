@@ -2,6 +2,7 @@
 title: Dropdown 下拉菜单
 description: Dropdown是一个灵活的上下文菜单组件，支持多种触发方式和定位方式，适用于导航菜单、操作列表等场景。
 keywords: [下拉菜单, Svelte Dropdown, 上下文菜单, 操作菜单, 导航菜单]
+aside: false
 editLink: false 
 outline: [2, 3]
 ---

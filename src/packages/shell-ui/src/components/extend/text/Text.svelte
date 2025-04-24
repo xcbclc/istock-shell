@@ -14,6 +14,8 @@
   // 定义字体粗细类型（从配置中提取）
   export type TextWeight = keyof (typeof textVariantConfig)['variants']['weight'];
 
+  export type TextTarget = '_self' | '_blank' | '_parent' | '_top';
+
   // 文本基础属性接口
   export interface TextBaseProps {
     color?: TextColor; // 文本颜色
@@ -27,7 +29,7 @@
   export interface TextItemProps extends TextBaseProps {
     text?: string; // 文本内容
     href?: string; // 链接地址（当标签为a时生效）
-    target?: '_self' | '_blank' | '_parent' | '_top'; // 链接打开方式
+    target?: TextTarget; // 链接打开方式
   }
 
   // 组件主属性接口（继承HTML基础属性）

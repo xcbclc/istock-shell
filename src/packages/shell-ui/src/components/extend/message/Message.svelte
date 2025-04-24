@@ -1,7 +1,7 @@
 <script lang="ts" module>
-  import type { AlertProps } from '../../index';
+  import type { AlertProps, ToastProps } from '../../index';
 
-  export interface MessageProps {
+  export interface MessageProps extends Omit<ToastProps, 'alerts'> {
     message: string; // 消息内容
     duration?: number; // 显示持续时间（毫秒）
     onClose: () => void; // 关闭回调函数
@@ -10,15 +10,16 @@
 </script>
 
 <script lang="ts">
-  import { fade } from 'svelte/transition';
   import { tuc } from '@istock/util';
-  import { ShAlert } from '../../index';
+  import { ShAlert, ShToast } from '../../index';
 
   const {
     message, // 消息内容
     duration = 3000, // 默认显示 3 秒
     onClose, // 关闭回调
     alertProps = {}, // Alert 组件属性
+    class: className = '',
+    ...otherProps
   }: MessageProps = $props();
 
   // 自动关闭效果
@@ -32,8 +33,8 @@
   });
 </script>
 
-<div class={tuc(['fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-md'])} transition:fade={{ duration: 500 }}>
+<ShToast horizontal="center" vertical="top" {...otherProps} class={[tuc(['z-50 max-w-md']), className]}>
   <ShAlert {...alertProps} description={message} />
-</div>
+</ShToast>
 
 <style></style>

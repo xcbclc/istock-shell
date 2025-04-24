@@ -2,6 +2,7 @@
 title: Input 输入框组件
 description:  输入框（Input）组件提供多种类型输入支持，包含文本、密码、数字等12种类型，支持表单验证、前缀后缀插槽、尺寸定制和无障碍访问，适用于各类表单输入场景。
 keywords: [输入框组件,Svelte输入框,表单验证,输入框样式,Input API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

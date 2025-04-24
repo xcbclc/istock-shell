@@ -24,7 +24,7 @@
 
   // 组件属性接口
   export interface StatDescProps extends HTMLAttributes<HTMLDivElement> {
-    text?: string; // 描述文本
+    text?: string | Array<{ title: string; value: string | number; tooltip?: string }>; // 描述文本
     color?: TextBaseProps['color']; // 文本颜色
     size?: TextBaseProps['size']; // 文本尺寸
     align?: TextBaseProps['align']; // 对齐方式
@@ -33,10 +33,10 @@
 </script>
 
 <script lang="ts">
-  import { tuc } from '@istock/util';
+  import { tuc, isArray } from '@istock/util';
   import { tv } from 'tailwind-variants';
+  import { ShTooltip, ShIcon } from '../../index';
 
-  // 解构props
   const { text, color, size, align, weight, class: className = '', children, ...otherProps }: StatDescProps = $props();
 
   const statDescVariant = tv(statDescVariantConfig, {
@@ -48,8 +48,27 @@
   {#if children}
     <!-- 优先渲染自定义内容 -->
     {@render children()}
+  {:else if isArray(text)}
+    {#each text as textItemProp}
+      {@const { title, value, tooltip } = textItemProp}
+      <div class={tuc('flex items-center justify-between gap-2')}>
+        <h4 class={tuc('group')}>
+          <span class={tuc('align-middle')}>{title}</span>
+          <!-- 显示描述内容 -->
+          {#if tooltip}
+            <ShTooltip
+              dataTip={tooltip}
+              class={tuc('align-middle leading-1 invisible group-hover:visible cursor-pointer')}
+            >
+              <ShIcon name="info" />
+            </ShTooltip>
+          {/if}
+        </h4>
+        <span>{value}</span>
+      </div>
+    {/each}
   {:else}
-    {text ?? ''} <!-- 显示描述内容 -->
+    {text ?? ''}
   {/if}
 </div>
 

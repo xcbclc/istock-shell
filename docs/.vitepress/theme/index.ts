@@ -8,6 +8,7 @@ import IStockShellDemo from '../component/istock-shell-demo.vue';
 import HomeHeroImage from '../component/home-hero-image.vue';
 import HomeHeroInfo from '../component/home-hero-info.vue';
 import HomeHeroVideo from '../component/home-hero-video.vue';
+import IStockShellUiExample from '../component/istock-shell-ui-example.vue';
 
 export default {
   extends: DefaultTheme,
@@ -20,5 +21,6 @@ export default {
   },
   enhanceApp({ app, router, siteData }) {
     app.component('IStockShellDemo', IStockShellDemo);
+    app.component('IStockShellUiExample', IStockShellUiExample);
   },
 } satisfies Theme;

@@ -6,7 +6,7 @@
   // 定义标签配置类型
   export type FieldLabel = {
     title?: string; // 标签文本内容
-    position?: 'before' | 'after'; // 标签位置（内容前/后）
+    placement?: 'before' | 'after'; // 标签位置（内容前/后）
   };
 
   // 字段组件属性接口（继承div元素属性）
@@ -29,8 +29,8 @@
 
 <!-- 字段容器 -->
 <div class={[tuc('field'), className]} {...otherProps}>
-  {#if label && (isString(label) || label.position === 'before')}
-    <!-- 前置标签：当label为字符串或明确指定position为before时 -->
+  {#if label && (isString(label) || label.placement === 'before')}
+    <!-- 前置标签：当label为字符串或明确指定placement为before时 -->
     <label class={tuc('fieldset-label')}>
       {isString(label) ? label : label.title}
     </label>
@@ -39,8 +39,8 @@
   <!-- 渲染子内容（支持函数式children） -->
   {@render children?.()}
 
-  {#if label && !isString(label) && label.position === 'after'}
-    <!-- 后置标签：当label为对象且指定position为after时 -->
+  {#if label && !isString(label) && label.placement === 'after'}
+    <!-- 后置标签：当label为对象且指定placement为after时 -->
     <label class={tuc('fieldset-label')}>
       {label.title}
     </label>

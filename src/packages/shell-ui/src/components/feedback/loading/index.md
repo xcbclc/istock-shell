@@ -2,6 +2,7 @@
 title: Loading 加载指示器
 description: 用于页面或内容的加载中状态，提供8种动画类型、5种尺寸配置和主题色定制，支持流畅过渡效果。
 keywords: [加载组件,Svelte加载动画,加载状态反馈,Loading API,页面加载指示器]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

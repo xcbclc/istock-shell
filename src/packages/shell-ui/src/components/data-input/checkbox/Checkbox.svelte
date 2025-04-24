@@ -17,7 +17,7 @@
   // 标签配置接口
   export type CheckboxLabel = {
     type?: CheckboxLabelType; // 标签样式类型
-    position?: 'before' | 'after'; // 标签位置（选项前/后）
+    placement?: 'before' | 'after'; // 标签位置（选项前/后）
     class?: string; // 自定义类名
   };
 
@@ -89,7 +89,7 @@
     {#if opt.label}
       <!-- 带标签的复选框项 -->
       <label class={tuc(checkboxLabelVariants({ type: label?.type, color: otherProps.color }), label?.class ?? '')}>
-        {#if label?.position === 'before'}
+        {#if label?.placement === 'before'}
           <!-- 前置标签 -->
           <span class={tuc(checkboxLabelVariants({ disabled: itemDisabled }))}>{opt.label}</span>
         {/if}
@@ -107,7 +107,7 @@
           {...otherProps}
         />
 
-        {#if !label?.position || label?.position === 'after'}
+        {#if !label?.placement || label?.placement === 'after'}
           <!-- 后置标签 -->
           <span class={tuc(checkboxLabelVariants({ disabled: itemDisabled }))}>{opt.label}</span>
         {/if}

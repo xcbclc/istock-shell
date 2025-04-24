@@ -33,7 +33,7 @@
 </script>
 
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy, tick } from 'svelte';
   import { Chart } from '@antv/g2';
   import { tuc } from '@istock/util';
 
@@ -66,6 +66,7 @@
 
   // 组件挂载时初始化图表
   onMount(async () => {
+    await tick();
     chart = new Chart({
       container: containerElement, // 设置容器元素
     });

@@ -2,6 +2,7 @@
 title: Empty 空状态组件
 description: 用于展示无数据、搜索无结果等空状态场景，支持自定义图标、文本和内容布局，提供友好的用户反馈。
 keywords: [空状态组件,数据占位,无数据展示,Svelte Empty组件,Empty API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

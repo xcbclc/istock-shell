@@ -1,6 +1,7 @@
 <script lang="ts" module>
   import type { HTMLLiAttributes, HTMLImgAttributes } from 'svelte/elements';
   import type { Snippet } from 'svelte';
+  import type { Action } from 'svelte/action';
   import type { IconProps, ButtonProps } from '../../index';
 
   // 图片属性接口（继承img元素属性）
@@ -36,6 +37,7 @@
     contentRender?: ListRowContentRender; // 自定义内容渲染
     picture?: ListRowPicture; // 图片/图标配置
     onClickValue?: (row: ListRowProps, index: number) => void; // 点击回调
+    onRender?: (node: HTMLElement) => void;
   }
 </script>
 
@@ -50,14 +52,19 @@
     actions = [], // 操作按钮列表
     contentRender, // 自定义内容渲染函数
     actionRender, // 自定义操作渲染函数
+    onRender,
     class: className = '', // 自定义类名
     children, // 子内容
     ...otherProps // 其他原生属性
   }: ListRowProps = $props();
+
+  const render: Action<HTMLElement> = (node: HTMLElement) => {
+    onRender?.(node);
+  };
 </script>
 
 <!-- 列表项容器 -->
-<li class={[tuc('list-row'), className]} {...otherProps}>
+<li use:render class={[tuc('list-row'), className]} {...otherProps}>
   {#if text}
     <!-- 图片/图标区域 -->
     {#if picture}

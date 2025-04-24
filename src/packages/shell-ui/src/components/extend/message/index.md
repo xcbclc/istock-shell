@@ -2,6 +2,7 @@
 title: Message 全局消息提示
 description: 全局消息提示（Message）组件用于展示操作反馈信息，支持多种提示类型（成功、警告、错误等）和自定义配置，可用于表单提交反馈、操作结果通知等场景。
 keywords: [消息提示,Svelte Message,全局提示,操作反馈,Toast提示]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

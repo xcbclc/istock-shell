@@ -13,12 +13,12 @@
   export interface IconProps extends HTMLAttributes<HTMLElement> {
     name?: string; // 图标名称（对应svg文件名）
     color?: IconColor; // 颜色主题
-    size?: IconSize; // 尺寸配置
+    size?: IconSize | number; // 尺寸配置
   }
 </script>
 
 <script lang="ts">
-  import { tuc } from '@istock/util';
+  import { tuc, isNumber } from '@istock/util';
   import { tv } from 'tailwind-variants';
 
   const {
@@ -53,7 +53,12 @@
 </script>
 
 <!-- 图标容器 -->
-<i class={[tuc(iconVariants({ color, size })), 'inline-block', className]} {...otherProps}>
+<i
+  class={[tuc(iconVariants({ color, size: isNumber(size) ? undefined : size })), 'inline-block', className]}
+  {...otherProps}
+  style:width={isNumber(size) ? `${size}px` : undefined}
+  style:height={isNumber(size) ? `${size}px` : undefined}
+>
   {#if children}
     <!-- 优先渲染子内容 -->
     {@render children()}
@@ -68,33 +73,34 @@
 </i>
 
 <style>
-  .icon {
-    width: var(--text-base);
-    height: var(--text-base);
-    line-height: var(--text-base--line-height);
-
-    &.icon-xs {
+  @layer components {
+    :global(.icon) {
+      width: var(--text-base);
+      height: var(--text-base);
+      line-height: var(--text-base--line-height);
+    }
+    :global(.icon-xs) {
       width: var(--text-xs);
       height: var(--text-xs);
       line-height: var(--text-xs--line-height);
     }
 
-    &.icon-sm {
+    :global(.icon-sm) {
       width: var(--text-sm);
       height: var(--text-sm);
       line-height: var(--text-sm--line-height);
     }
 
-    &.icon-md {
+    :global(.icon-md) {
     }
 
-    &.icon-lg {
+    :global(.icon-lg) {
       width: var(--text-lg);
       height: var(--text-lg);
       line-height: var(--text-lg--line-height);
     }
 
-    &.icon-xl {
+    :global(.icon-xl) {
       width: var(--text-xl);
       height: var(--text-xl);
       line-height: var(--text-xl--line-height);

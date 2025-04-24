@@ -45,9 +45,10 @@ export const getCmdOutputInit = (id: string, input: string, promptTexts: TPrompt
  */
 export const getOutputErrorData = (e: Error): ICmdOutputData => {
   return {
-    component: 'ShError',
+    component: 'ShErrorInfo',
     props: {
-      texts: (e.stack ?? '').split('\n'),
+      title: e.message,
+      stack: (e.stack ?? '').split('\n'),
     },
     messageId: '',
   };

@@ -2,6 +2,7 @@
 title: Tooltip 文字提示
 description: Tooltip 是高效的交互提示组件，提供多种定位方式间和主题样式，适用于操作说明、表单校验等场景
 keywords: [ 'tooltip', '文字提示', '气泡提示', '悬浮提示', '位置调整', '交互提示', 'UI组件', '信息提示框' ]
+aside: false
 editLink: false
 outline: [ 2, 3 ]
 ---

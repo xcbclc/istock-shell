@@ -4,6 +4,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import typescript from '@rollup/plugin-typescript';
 import eslint from 'vite-plugin-eslint';
 import { VitePWA } from 'vite-plugin-pwa';
+import tailwindcss from '@tailwindcss/vite';
 import { pwaConfig } from './pwa.config';
 
 const tsPlugin: PluginOption = typescript({
@@ -16,6 +17,7 @@ export default ({ mode }) => {
   return defineConfig({
     base: './',
     plugins: [
+      tailwindcss(),
       svelte(),
       tsPlugin,
       eslint(),
@@ -39,6 +41,7 @@ export default ({ mode }) => {
         },
       },
     ],
+    css: { preprocessorOptions: { scss: { api: 'modern-compiler' } } },
     worker: {
       format: 'es',
       plugins: () => [tsPlugin],

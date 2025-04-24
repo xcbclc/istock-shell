@@ -2,6 +2,7 @@
 title: ErrorInfo 错误信息组件
 description: 用于页面错误信息展示，支持错误堆栈展示、状态图标、操作按钮等功能，提供清晰的异常反馈和问题诊断能力。
 keywords: [错误信息组件,异常反馈UI,错误处理,Svelte错误展示,ErrorInfo API]
+aside: false
 editLink: false
 outline: [2, 3]
 ---

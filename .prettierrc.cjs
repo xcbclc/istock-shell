@@ -7,6 +7,9 @@ module.exports = {
   endOfLine: 'lf',
   semi: true,
   trailingComma: 'es5',
-  plugins: ['prettier-plugin-svelte'],
-  overrides: [{ files: '*.svelte', options: { parser: 'svelte' } }],
+  plugins: ['prettier-plugin-svelte', 'prettier-plugin-vue'],
+  overrides: [
+    { files: '*.svelte', options: { parser: 'svelte' } },
+    { files: '*.vue', options: { parser: 'vue' } }
+  ],
 };
