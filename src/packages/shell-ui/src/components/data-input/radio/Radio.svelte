@@ -50,7 +50,7 @@
 </script>
 
 <!-- 外层容器 -->
-<div class={[tuc(['inline-flex', 'gap-2']), wrapClass ?? '']}>
+<div class={[tuc(['inline-flex flex-wrap', 'gap-2']), wrapClass ?? '']}>
   {#each options as opt}
     {@const itemDisabled = opt.disabled ?? disabled ?? undefined}
     {#if opt.label}

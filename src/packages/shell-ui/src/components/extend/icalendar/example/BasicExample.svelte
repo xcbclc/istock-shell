@@ -299,7 +299,7 @@
         { label: '央行', value: '央行' },
         { label: '财报', value: '财报' },
         { label: '交易', value: '交易' },
-        { label: '研究', value: '央行' },
+        { label: '研究', value: '研究' },
         { label: '税务', value: '税务' },
       ],
     },

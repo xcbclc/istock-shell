@@ -1,0 +1,2 @@
+### 表单布局
+支持vertical、horizontal布局，horizontal布局支持设置cols（表单列数），支持labelPlacement设置label内容位置，支持buttonPlacement设置button位置

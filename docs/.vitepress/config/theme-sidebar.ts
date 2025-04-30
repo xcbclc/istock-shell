@@ -110,6 +110,10 @@ export default {
           items: [
             { text: 'Checkbox 复选框', link: '/packages/shell-ui/components/data-input/checkbox/index.html' },
             { text: 'DataList 数据列表 🇸🇭', link: '/packages/shell-ui/components/extend/data-list/index.html' },
+            {
+              text: 'Form 表单 🇸🇭',
+              link: '/packages/shell-ui/components/extend/form/index.html',
+            },
             { text: 'FieldSet 字段集', link: '/packages/shell-ui/components/data-input/field-set/index.html' },
             { text: 'Input 输入框', link: '/packages/shell-ui/components/data-input/input/index.html' },
             { text: 'Radio 单选框', link: '/packages/shell-ui/components/data-input/radio/index.html' },

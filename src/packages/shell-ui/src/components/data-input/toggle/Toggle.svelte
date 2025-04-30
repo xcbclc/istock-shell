@@ -37,6 +37,7 @@
     class: className = '', // 自定义类名
     onChangeValue, // 变更回调
     children, // 子内容（用于标签）
+    type,
     ...otherProps // 其他原生属性
   }: ToggleProps = $props();
 

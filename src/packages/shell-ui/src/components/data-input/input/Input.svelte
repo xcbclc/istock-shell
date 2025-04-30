@@ -67,9 +67,7 @@
   }: InputProps = $props();
 
   // 创建输入框样式变体生成器
-  const inputVariants = tv(inputVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const inputVariants = tv(inputVariantConfig);
 
   // 值变化时触发onChangeValue回调
   $effect(() => {

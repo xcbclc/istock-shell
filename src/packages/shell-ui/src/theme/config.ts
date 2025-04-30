@@ -1,3 +1,4 @@
+export type VariantConfigSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export const ButtonVariantConfig = {
   base: 'btn',
   variants: {
@@ -67,6 +68,13 @@ export const CheckboxVariantConfig = {
       success: 'text-success',
       warning: 'text-warning',
       error: 'text-error',
+    },
+    size: {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-md',
+      lg: 'text-lg',
+      xl: 'text-xl',
     },
     disabled: {
       true: 'text-disabled',
@@ -522,4 +530,153 @@ export const TableVariantConfig = {
     },
   },
   defaultVariants: {},
+};
+
+export const FormItemVariantConfig = {
+  base: 'form-item',
+  variants: {
+    layout: {
+      vertical: 'flex-col',
+      horizontal: 'flex-row',
+    },
+    hasError: {
+      true: 'form-item-error',
+    },
+    size: {
+      xs: 'gap-1',
+      sm: 'gap-2',
+      md: 'gap-3',
+      lg: 'gap-4',
+      xl: 'gap-5',
+    },
+    cols: {
+      1: 'col-span-1',
+      2: 'col-span-2',
+      3: 'col-span-3',
+      4: 'col-span-4',
+      5: 'col-span-5',
+    },
+  },
+  defaultVariants: {
+    size: 'md' as VariantConfigSize,
+  },
+};
+
+// 标签样式
+export const FormItemLabelVariantConfig = {
+  base: 'form-item-label',
+  variants: {
+    layout: {
+      vertical: 'form-item-label-vertical',
+      horizontal: '',
+    },
+    required: {
+      true: 'after:content-["*"] after:ml-0.5 after:text-error',
+    },
+    hasError: {
+      true: 'text-error',
+    },
+    color: {
+      primary: 'text-primary',
+      secondary: 'text-secondary',
+      accent: 'text-accent',
+      neutral: 'text-neutral',
+      info: 'text-info',
+      success: 'text-success',
+      warning: 'text-warning',
+      error: 'text-error',
+    },
+    size: {
+      xs: 'form-item-label-xs text-xs',
+      sm: 'form-item-label-sm text-sm',
+      md: 'form-item-label-md text-md',
+      lg: 'form-item-label-lg text-lg',
+      xl: 'form-item-label-xl text-xl',
+    },
+    placement: {
+      start: 'justify-start',
+      center: 'justify-center',
+      end: 'justify-end',
+    },
+  },
+  defaultVariants: {
+    size: 'md' as VariantConfigSize,
+  },
+};
+export const FormItemFieldContentVariantConfig = {
+  base: 'form-item-content',
+  variants: {
+    layout: {
+      vertical: 'w-full',
+      horizontal: 'flex-auto',
+    },
+  },
+  defaultVariants: {},
+};
+export const FormItemFieldComponentVariantConfig = {
+  base: 'form-item-component',
+  variants: {
+    layout: {
+      vertical: 'form-item-component-vertical',
+      horizontal: 'flex-auto',
+    },
+    size: {
+      xs: 'form-item-component-xs',
+      sm: 'form-item-component-sm',
+      md: 'form-item-component-md',
+      lg: 'form-item-component-lg',
+      xl: 'form-item-component-xl',
+    },
+  },
+};
+export const FormVariantConfig = {
+  base: 'form',
+  variants: {
+    layout: {
+      vertical: '',
+      horizontal: '',
+    },
+    size: {
+      xs: 'gap-1',
+      sm: 'gap-2',
+      md: 'gap-4',
+      lg: 'gap-6',
+      xl: 'gap-8',
+    },
+    cols: {
+      1: 'grid-cols-1',
+      2: 'grid-cols-2',
+      3: 'grid-cols-3',
+      4: 'grid-cols-4',
+      5: 'grid-cols-5',
+    },
+  },
+  defaultVariants: {
+    size: 'md' as VariantConfigSize,
+  },
+};
+
+export const FormButtonVariantConfig = {
+  base: 'form-button-area',
+  variants: {
+    layout: {
+      vertical: 'flex-row',
+      horizontal: 'flex-row',
+    },
+    size: {
+      xs: 'gap-1',
+      sm: 'gap-2',
+      md: 'gap-4',
+      lg: 'gap-6',
+      xl: 'gap-8',
+    },
+    placement: {
+      start: 'justify-start',
+      center: 'justify-center',
+      end: 'justify-end',
+    },
+  },
+  defaultVariants: {
+    size: 'md' as VariantConfigSize,
+  },
 };

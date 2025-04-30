@@ -50,7 +50,7 @@
   // 根据当前value生成选中状态数组
   const checkedList = $derived.by(() => {
     return options.map((opt) => {
-      return value.includes(opt.value);
+      return (value ?? []).includes(opt.value);
     });
   });
 
@@ -81,14 +81,19 @@
 </script>
 
 <!-- 外层容器 -->
-<div class={[tuc(['inline-flex', 'gap-2']), wrapClass ?? '']}>
+<div class={[tuc(['inline-flex flex-wrap', 'gap-2']), wrapClass ?? '']}>
   {#each options as opt, index}
     {@const itemDisabled = opt.disabled ?? disabled ?? undefined}
     <!-- 计算禁用状态 -->
 
     {#if opt.label}
       <!-- 带标签的复选框项 -->
-      <label class={tuc(checkboxLabelVariants({ type: label?.type, color: otherProps.color }), label?.class ?? '')}>
+      <label
+        class={tuc(
+          checkboxLabelVariants({ type: label?.type, size: otherProps.size, color: otherProps.color }),
+          label?.class ?? ''
+        )}
+      >
         {#if label?.placement === 'before'}
           <!-- 前置标签 -->
           <span class={tuc(checkboxLabelVariants({ disabled: itemDisabled }))}>{opt.label}</span>
