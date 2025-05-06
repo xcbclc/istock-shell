@@ -675,6 +675,13 @@ export const FormButtonVariantConfig = {
       center: 'justify-center',
       end: 'justify-end',
     },
+    cols: {
+      1: 'col-span-1',
+      2: 'col-span-2',
+      3: 'col-span-3',
+      4: 'col-span-4',
+      5: 'col-span-5',
+    },
   },
   defaultVariants: {
     size: 'md' as VariantConfigSize,

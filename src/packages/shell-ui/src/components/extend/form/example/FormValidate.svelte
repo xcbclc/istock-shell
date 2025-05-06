@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { ShForm, shShowMessage } from '@istock/shell-ui';
+  import { ShForm, shShowMessage, type FormItemConfig } from '@istock/shell-ui';
 
-  const validateFormItems = [
+  const validateFormItems: FormItemConfig[] = [
     {
       name: 'username',
       label: '用户名',
@@ -97,7 +97,7 @@
     },
   ];
 
-  const dynamicValidateItems = [
+  const dynamicValidateItems: FormItemConfig[] = [
     {
       name: 'employmentStatus',
       label: '就业状态',
@@ -159,7 +159,7 @@
   };
 
   let validateValues: Record<string, any> = {};
-  let dynamicValues: Record<string, any> = {};
+  let dynamicValues: Record<string, any> = $state({});
 </script>
 
 <div class="mt-3">
@@ -167,26 +167,22 @@
   <p class="text-sm text-center mb-4">表单字段验证示例</p>
   <ShForm
     formItems={validateFormItems}
-    values={validateValues}
+    bind:values={validateValues}
     onChangeValues={(values) => (validateValues = values)}
     onSubmit={handleSubmit}
-    layout="horizontal"
     labelWidth="120px"
-    color="primary"
     initValidate={true}
   />
 </div>
 
-<div class="mt-3">
+<div class="mt-6">
   <h2 class="text-xl text-center font-semibold mb-4">动态表单验证</h2>
   <p class="text-sm text-center mb-4">根据表单值动态显示/隐藏字段</p>
   <ShForm
     formItems={dynamicValidateItems}
-    values={dynamicValues}
+    bind:values={dynamicValues}
     onChangeValues={(values) => (dynamicValues = values)}
     onSubmit={handleSubmit}
-    layout="horizontal"
     labelWidth="120px"
-    color="primary"
   />
 </div>

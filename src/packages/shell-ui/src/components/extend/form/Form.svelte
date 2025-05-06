@@ -1,3 +1,54 @@
+<!--
+@component
+表单组件，用于构建完整的表单界面，管理多个表单项。提供以下功能：
+- 支持多种表单布局（水平、垂直）
+- 支持栅格布局（1-5列）
+- 支持表单验证（必填、长度、范围、正则、自定义验证等）
+- 支持表单值的双向绑定
+- 支持表单重置和提交
+- 支持自定义按钮位置和文本
+- 支持表单项的显示/隐藏控制
+- 支持表单验证状态管理
+- 支持表单值变更和提交事件回调
+
+用法示例:
+```html
+<Form
+  formItems={[
+    {
+      name: 'username',
+      label: '用户名',
+      field: {
+        type: 'input',
+        placeholder: '请输入用户名',
+        validator: {
+          required: true,
+          minLength: 3,
+          maxLength: 20
+        }
+      }
+    },
+    {
+      name: 'password',
+      label: '密码',
+      field: {
+        type: 'input',
+        inputType: 'password',
+        validator: {
+          required: true,
+          minLength: 6
+        }
+      }
+    }
+  ]}
+  bind:values={formValues}
+  onSubmit={handleSubmit}
+  layout="vertical"
+  cols={2}
+/>
+```
+-->
+
 <script lang="ts" module>
   import type { HTMLFormAttributes } from 'svelte/elements';
   import { onMount } from 'svelte';
@@ -18,58 +69,83 @@
   const formVariantConfig = FormVariantConfig;
   const formButtonVariantConfig = FormButtonVariantConfig;
 
+  // 按钮位置类型
   export type FormButtonPlacement = keyof (typeof FormButtonVariantConfig)['variants']['placement'];
 
+  // 表单列数类型
   export type FormCols = keyof (typeof formVariantConfig)['variants']['cols'];
 
+  // 表单项配置接口，继承自FormItemProps但排除touched属性
   export interface FormItemConfig extends Omit<FormItemProps, 'touched'> {}
 
-  // 动态表单组件属性接口
+  /**
+   * 表单组件属性接口
+   * @interface FormProps
+   * @extends HTMLFormAttributes
+   * @property {FormItemConfig[]} [formItems] - 表单字段配置数组
+   * @property {Record<string, any>} [values] - 表单值对象
+   * @property {Function} [onChangeValues] - 表单值变更回调
+   * @property {Function} [onChangeValue] - 单个字段值变更回调
+   * @property {Function} [onSubmit] - 表单提交回调
+   * @property {FormItemLayout} [layout] - 表单布局
+   * @property {FormCols} [cols] - 表单的列数
+   * @property {string} [labelWidth] - 标签宽度
+   * @property {FormItemLabelPlacement} [labelPlacement] - 标签位置
+   * @property {FormButtonPlacement} [buttonPlacement] - 按钮位置
+   * @property {string} [submitText] - 提交按钮文本
+   * @property {string} [resetText] - 重置按钮文本
+   * @property {boolean} [showReset] - 是否显示重置按钮
+   * @property {boolean} [showSubmit] - 是否显示提交按钮
+   * @property {FormItemColor} [color] - 表单默认颜色主题
+   * @property {FormItemSize} [size] - 表单默认尺寸
+   * @property {string} [variant] - 表单默认变体
+   * @property {boolean} [initValidate] - 是否在初始化时进行验证
+   */
   export interface FormProps extends HTMLFormAttributes {
-    formItems?: FormItemConfig[]; // 表单字段配置数组
-    values?: Record<string, any>; // 表单值对象
-    onChangeValues?: (values: Record<string, any>, isValid: boolean) => void; // 表单值变更回调
+    formItems?: FormItemConfig[];
+    values?: Record<string, any>;
+    onChangeValues?: (values: Record<string, any>, isValid: boolean) => void;
     onChangeValue?: (name: string, value: any) => void;
-    onSubmit?: (values: Record<string, any>) => void; // 表单提交回调
-    layout?: FormItemLayout; // 表单布局
-    cols?: FormCols; // 表单的列数（用于栅格布局）
-    labelWidth?: string; // 标签宽度（仅用于水平布局）
+    onSubmit?: (values: Record<string, any>) => void;
+    layout?: FormItemLayout;
+    cols?: FormCols;
+    labelWidth?: string;
     labelPlacement?: FormItemLabelPlacement;
     buttonPlacement?: FormButtonPlacement;
-    submitText?: string; // 提交按钮文本
-    resetText?: string; // 重置按钮文本
-    showReset?: boolean; // 是否显示重置按钮
-    showSubmit?: boolean; // 是否显示提交按钮
-    color?: FormItemColor; // 表单默认颜色主题
-    size?: FormItemSize; // 表单默认尺寸
-    variant?: string; // 表单默认变体
+    submitText?: string;
+    resetText?: string;
+    showReset?: boolean;
+    showSubmit?: boolean;
+    color?: FormItemColor;
+    size?: FormItemSize;
+    variant?: string;
     initValidate?: boolean;
   }
 </script>
 
 <script lang="ts">
   let {
-    formItems = [], // 表单字段配置
-    values = $bindable({}), // 双向绑定的表单值
-    onChangeValues, // 表单值变更回调
+    formItems = [],
+    values = $bindable({}),
+    onChangeValues,
     onChangeValue,
-    onSubmit, // 表单提交回调
-    layout = 'horizontal', // 默认垂直布局
-    cols = 1, // 默认单列
-    labelWidth = '120px', // 默认标签宽度
+    onSubmit,
+    layout = 'horizontal',
+    cols = 1,
+    labelWidth = '120px',
     labelPlacement = 'end',
-    submitText = '提交', // 默认提交按钮文本
-    resetText = '重置', // 默认重置按钮文本
+    submitText = '提交',
+    resetText = '重置',
     buttonPlacement = 'end',
-    showReset = true, // 默认显示重置按钮
-    showSubmit = true, // 默认显示提交按钮
-    color, // 表单默认颜色主题
-    size = 'md', // 表单默认尺寸
-    variant, // 表单默认变体
+    showReset = true,
+    showSubmit = true,
+    color,
+    size = 'md',
+    variant,
     initValidate = false,
-    class: className = '', // 自定义类名
+    class: className = '',
     children,
-    ...otherProps // 其他原生属性
+    ...otherProps
   }: FormProps = $props();
 
   const formVariants = tv({
@@ -90,12 +166,23 @@
     },
   });
 
+  // 表单错误信息记录
   const formErrors: Record<string, string> = $state({});
+  // 表单字段触碰状态记录
   const formBlurs: Record<string, boolean> = $state({});
+  // 表单整体验证状态
   let formValidState: boolean = $state(true);
+  // 表单初始值记录
   let initialValues: Record<string, any> = {};
+  // 表单项属性记录
   const formItemPropRecord: Record<string, FormItemProps> = {};
+  // 表单项隐藏状态记录
+  const formItemHiddenRecord: Record<string, boolean> = $state({});
 
+  /**
+   * 组件挂载时初始化
+   * 设置表单初始值，并根据配置决定是否进行初始验证
+   */
   onMount(() => {
     const defaultFormValues = formItems.reduce<Record<string, any>>((acc, formItem) => {
       const { field = {}, name } = formItem;
@@ -121,8 +208,18 @@
       getFormItemProps(clone(formItem));
     });
   });
+  $effect(() => {
+    formItems.forEach((formItem) => {
+      formItemHiddenRecord[formItem.name] = isFieldHidden(formItem, values);
+    });
+  });
 
-  const isFieldHidden = (formItem: FormItemConfig): boolean => {
+  /**
+   * 判断字段是否隐藏
+   * @param formItem 表单项配置
+   * @returns 是否隐藏
+   */
+  const isFieldHidden = (formItem: FormItemConfig, values): boolean => {
     const { field = {} } = formItem;
     if (field.hidden === undefined) return false;
     if (typeof field.hidden === 'function') {
@@ -136,10 +233,20 @@
     return field.hidden;
   };
 
+  /**
+   * 获取可见的表单项配置
+   * @returns 过滤后的表单项配置数组
+   */
   const getFormItems = (): FormItemConfig[] => {
-    return formItems.filter((formItem) => !isFieldHidden(formItem));
+    return formItems.filter((formItem) => !formItemHiddenRecord[formItem.name]);
   };
 
+  /**
+   * 获取表单项属性
+   * 使用代理对象动态处理属性访问，支持默认值继承和动态计算
+   * @param formItem 表单项配置
+   * @returns 处理后的表单项属性
+   */
   const getFormItemProps = (formItem: FormItemConfig): FormItemProps => {
     const name = formItem.name;
     const {
@@ -153,7 +260,7 @@
     } = formItem;
     const { value, error, onChangeValue: onFieldChangeValue, onFieldBlur, ...otherField } = field;
 
-    // 创建基础对象
+    // 创建基础字段对象
     const baseField: FormItemField = {
       onChangeValue: (value: any) => {
         onFormItemFieldChange(name, value);
@@ -164,11 +271,12 @@
         onFieldBlur?.(value);
       },
     };
+
+    // 创建基础属性对象
     const baseProps: FormItemProps = {
       name: formItem.name,
       field: new Proxy(baseField, {
         get(target, prop, receiver) {
-          console.log('propprop', prop);
           // 如果目标对象已有该属性，直接返回
           if (prop in target) {
             return Reflect.get(target, prop, receiver);
@@ -197,7 +305,6 @@
     const handler: ProxyHandler<FormItemProps> = {
       get(target, prop, receiver) {
         // 如果目标对象已有该属性，直接返回
-        console.log('prop', prop);
         if (prop in target) {
           return Reflect.get(target, prop, receiver);
         }
@@ -218,7 +325,6 @@
           case 'touched':
             return formBlurs[name];
           default:
-            if (prop === 'label') debugger;
             if (prop in otherFormItem) {
               return otherFormItem[prop as keyof typeof otherFormItem];
             }
@@ -243,22 +349,26 @@
     return formItemPropRecord[formItem.name];
   };
 
+  /**
+   * 验证表单
+   * 遍历所有表单项进行验证，更新错误信息和验证状态
+   * @returns 表单是否验证通过
+   */
   const validateForm = (): boolean => {
     Object.keys(formErrors).forEach((key) => {
       formErrors[key] = '';
     });
-
     formItems.forEach((formItem) => {
       const { field = {} } = formItem;
-      if (isFieldHidden(formItem)) {
+      if (formItemHiddenRecord[formItem.name]) {
         return;
       }
       const fieldLabel = formItem.label || formItem.name;
       const name = formItem.name;
       const value = values[name];
-      const validator = field.validator;
+      const validator = field.validator || {};
 
-      if (!validator) return;
+      if (!Object.keys(validator).length && !field.required) return;
 
       // 必填验证
       if ((validator.required || field.required) && (value === undefined || value === null || value === '')) {
@@ -335,6 +445,11 @@
     return isValid;
   };
 
+  /**
+   * 处理表单项值变更
+   * @param name 字段名
+   * @param value 新值
+   */
   const onFormItemFieldChange = (name: string, value: any) => {
     if (JSON.stringify(values[name]) === JSON.stringify(value)) {
       return;
@@ -346,6 +461,10 @@
     onChangeValues?.(values, formValidState);
   };
 
+  /**
+   * 处理表单项失焦
+   * @param name 字段名
+   */
   const onFormItemFieldBlur = (name: string) => {
     // 仅当该字段未被标记为touched时才进行标记
     if (!formBlurs[name]) {
@@ -354,12 +473,16 @@
     validateForm();
   };
 
+  /**
+   * 处理表单提交
+   * @param event 提交事件对象
+   */
   const onFormSubmit = (event: SubmitEvent) => {
     event.preventDefault();
 
     // 标记所有字段为已触碰
     formItems.forEach((formItem) => {
-      if (!isFieldHidden(formItem)) {
+      if (!formItemHiddenRecord[formItem.name]) {
         formBlurs[formItem.name] = true;
       }
     });
@@ -371,6 +494,10 @@
     }
   };
 
+  /**
+   * 处理表单重置
+   * 重置所有字段值、错误信息和触碰状态
+   */
   const onFormReset = () => {
     const resetValues = clone(initialValues);
 
@@ -393,8 +520,10 @@
   };
 </script>
 
-<form class={[tuc(formVariants({ layout, size, cols })), className]} onsubmit={onFormSubmit} {...otherProps}>
+<!-- 表单容器 -->
+<form class={[tuc(formVariants({ layout, size, cols })), className]} {...otherProps} onsubmit={onFormSubmit}>
   {#if children}
+    <!-- 如果提供了自定义子内容，则渲染子内容 -->
     {@render children?.()}
   {:else}
     <!-- 表单内容区 -->
@@ -405,7 +534,11 @@
 
     <!-- 按钮区域 -->
     {#if showReset || showSubmit}
-      <div class={tuc(formButtonVariants({ layout, size, placement: buttonPlacement }))}>
+      <div
+        class={tuc(
+          formButtonVariants({ layout, size, cols: layout === 'vertical' ? cols : 0, placement: buttonPlacement })
+        )}
+      >
         {#if showReset}
           <ShButton {size} onclick={onFormReset} type="button">
             {resetText}

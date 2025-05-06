@@ -1,7 +1,14 @@
 <script lang="ts">
-  import { ShForm, ShButton, shShowMessage, type FormItemLayout, type FormCols } from '@istock/shell-ui';
+  import {
+    ShForm,
+    ShButton,
+    shShowMessage,
+    type FormItemConfig,
+    type FormItemLayout,
+    type FormCols,
+  } from '@istock/shell-ui';
 
-  const colsList: FormCols[] = [1, 2, 3, 4, 5];
+  const colsList: FormCols[] = [1, 2, 3]; // 1-5
   const layouts: Array<{
     layout: FormItemLayout;
     text: string;
@@ -15,7 +22,7 @@
       text: '垂直布局',
     },
   ];
-  const formItems = [
+  const formItems: FormItemConfig[] = [
     {
       name: 'name',
       label: '姓名',
@@ -59,7 +66,6 @@
     {
       name: 'address',
       label: '地址',
-      cols: 2 as const,
       field: {
         type: 'input',
         placeholder: '请输入详细地址',
@@ -68,7 +74,6 @@
     {
       name: 'description',
       label: '个人简介',
-      cols: 2 as const,
       field: {
         type: 'textarea',
         placeholder: '请输入个人简介',
@@ -83,7 +88,7 @@
   const setLayout = (value: FormItemLayout) => (layout = value);
   const setCols = (value: FormCols) => (cols = value);
 
-  const values = {};
+  let values = {};
   let layout: FormItemLayout = $state('horizontal');
   let cols: FormCols = $state(1);
 </script>
@@ -106,4 +111,13 @@
     {/each}
   </div>
 </div>
-<ShForm {formItems} {values} onSubmit={handleSubmit} {layout} {cols} buttonPlacement="end" labelWidth="120px" />
+<ShForm
+  {formItems}
+  bind:values
+  onSubmit={handleSubmit}
+  {layout}
+  {cols}
+  buttonPlacement={'center'}
+  labelPlacement={layout === 'horizontal' ? 'end' : 'start'}
+  labelWidth="120px"
+/>

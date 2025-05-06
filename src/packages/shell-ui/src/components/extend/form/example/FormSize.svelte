@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { ShForm, ShButton, shShowMessage, type FormItemSize } from '@istock/shell-ui';
+  import { ShForm, ShButton, shShowMessage, type FormItemSize, type FormItemConfig } from '@istock/shell-ui';
 
   const formSizes: FormItemSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 
-  const formItems = [
+  const formItems: FormItemConfig[] = [
     {
       name: 'username',
       label: '用户名',
@@ -34,7 +34,7 @@
     console.log('表单提交：', values);
     void shShowMessage.success('表单提交成功！');
   };
-  const values = {};
+  let values = {};
   let size: FormItemSize = 'md';
 </script>
 
@@ -45,4 +45,4 @@
     >
   {/each}
 </div>
-<ShForm {formItems} {values} onSubmit={handleSubmit} labelWidth="100px" {size} color="primary" />
+<ShForm {formItems} bind:values onSubmit={handleSubmit} {size} />
