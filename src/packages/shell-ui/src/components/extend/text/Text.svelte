@@ -55,9 +55,7 @@
   }: TextProps = $props();
 
   // 创建文本样式变体生成器
-  const textVariants = tv(textVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const textVariants = tv(textVariantConfig, {});
 </script>
 
 {#each texts as item, index (index)}

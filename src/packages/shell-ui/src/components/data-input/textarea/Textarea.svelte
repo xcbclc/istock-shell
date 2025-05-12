@@ -36,9 +36,7 @@
   }: TextareaProps = $props();
 
   // 创建文本域样式变体生成器
-  const textareaVariants = tv(textareaVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const textareaVariants = tv(textareaVariantConfig, {});
 
   // 值变化时触发onChangeValue回调
   $effect(() => {

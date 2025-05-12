@@ -39,9 +39,7 @@
 
   const { text, color, size, align, weight, class: className = '', children, ...otherProps }: StatDescProps = $props();
 
-  const statDescVariant = tv(statDescVariantConfig, {
-    responsiveVariants: ['size'],
-  });
+  const statDescVariant = tv(statDescVariantConfig, {});
 </script>
 
 <div class={[tuc(statDescVariant({ color, size, align, weight })), className]} {...otherProps}>

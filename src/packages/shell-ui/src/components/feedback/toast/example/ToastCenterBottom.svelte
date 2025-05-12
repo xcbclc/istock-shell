@@ -11,4 +11,4 @@
     { message: '消息发送成功。', type: 'success' },
   ]}
   class="absolute"
-></ShToast> 
+></ShToast>

@@ -143,6 +143,13 @@
     if (!dateTime) return '';
     return parseICalDateTime(dateTime).format('YYYY-MM-DD HH:mm');
   };
+  /**
+   * 将额外数据对象转成能浏览的数据
+   * @param value
+   */
+  const toExtraValueForView = (value: Object) => {
+    return JSON.stringify(value, null, 2);
+  };
 </script>
 
 <ShModal class={[tuc('icalendar-modal'), className]} bind:show {...otherProps}>
@@ -170,12 +177,16 @@
             {#if isVEvent(data)}
               <span
                 class={[tuc('badge badge-outline badge-sm shadow-xs transition-all'), getEventStatusColor(data.status)]}
-                >{ICalendarEventStatusTextRecord[data.status] ?? '未确认'}</span
+                >{data.status && ICalendarEventStatusTextRecord[data.status]
+                  ? ICalendarEventStatusTextRecord[data.status]
+                  : '未确认'}</span
               >
             {:else}
               <span
                 class={[tuc('badge badge-outline badge-sm shadow-xs transition-all'), getTodoStatusColor(data.status)]}
-                >{ICalendarTodoStatusTextRecord[data.status] ?? '未设置'}</span
+                >{data.status && ICalendarTodoStatusTextRecord[data.status]
+                  ? ICalendarTodoStatusTextRecord[data.status]
+                  : '未设置'}</span
               >
             {/if}
             <span
@@ -512,11 +523,9 @@
                       </div>
                       <div class={tuc('text-sm')}>
                         {#if typeof value === 'object' && value !== null}
-                          <pre class={tuc('text-xs overflow-x-auto p-1 rounded bg-base-200/50')}>{JSON.stringify(
-                              value,
-                              null,
-                              2
-                            )}</pre>
+                          <pre class={tuc('text-xs overflow-x-auto p-1 rounded bg-base-200/50')}>
+                            {toExtraValueForView(value)}
+                          </pre>
                         {:else}
                           {String(value)}
                         {/if}

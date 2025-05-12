@@ -45,9 +45,7 @@
   }: CheckboxItemProps = $props();
 
   // 创建Tailwind变体样式生成器
-  const checkboxVariants = tv(checkboxItemVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸变体配置
-  });
+  const checkboxVariants = tv(checkboxItemVariantConfig, {});
 </script>
 
 <input

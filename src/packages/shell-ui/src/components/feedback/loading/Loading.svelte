@@ -36,14 +36,10 @@
   }: LoadingProps = $props();
 
   // 创建加载器样式变体生成器
-  const loadingVariants = tv(loadingVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const loadingVariants = tv(loadingVariantConfig, {});
 
   // 创建加载文本样式变体生成器
-  const loadingTextVariants = tv(loadingTextVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const loadingTextVariants = tv(loadingTextVariantConfig, {});
 </script>
 
 {#snippet loading(extraClassName: string)}

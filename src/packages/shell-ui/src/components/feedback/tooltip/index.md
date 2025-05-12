@@ -1,10 +1,10 @@
 ---
 title: Tooltip 文字提示
 description: Tooltip 是高效的交互提示组件，提供多种定位方式间和主题样式，适用于操作说明、表单校验等场景
-keywords: [ 'tooltip', '文字提示', '气泡提示', '悬浮提示', '位置调整', '交互提示', 'UI组件', '信息提示框' ]
+keywords: ['tooltip', '文字提示', '气泡提示', '悬浮提示', '位置调整', '交互提示', 'UI组件', '信息提示框']
 aside: false
 editLink: false
-outline: [ 2, 3 ]
+outline: [2, 3]
 ---
 
 ## Tooltip 文字提示
@@ -38,11 +38,10 @@ outline: [ 2, 3 ]
 
 ### 属性说明
 
-| 属性名           | 说明      | 类型                                                                                               | 默认值 |
-|---------------|---------|--------------------------------------------------------------------------------------------------|-----|
-| position      | 提示框出现位置 | `top` \| `bottom` \| `left` \| `right`                                                           | top |
-| color         | 主题颜色    | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |     |
-| open          | 提示框是否打开 | `boolean`                                                                                        |     |
-| dataTip       | 提示文本    | `string`                                                                                         |     |
-| tooltipRender | 提示内容渲染  | `() => ReturnType<Snippet<[]>>`                                                                  |     |
-
+| 属性名        | 说明           | 类型                                                                                             | 默认值 |
+| ------------- | -------------- | ------------------------------------------------------------------------------------------------ | ------ |
+| position      | 提示框出现位置 | `top` \| `bottom` \| `left` \| `right`                                                           | top    |
+| color         | 主题颜色       | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |        |
+| open          | 提示框是否打开 | `boolean`                                                                                        |        |
+| dataTip       | 提示文本       | `string`                                                                                         |        |
+| tooltipRender | 提示内容渲染   | `() => ReturnType<Snippet<[]>>`                                                                  |        |

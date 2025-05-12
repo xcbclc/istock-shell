@@ -37,9 +37,7 @@
   }: TooltipProps = $props();
 
   // 创建工具提示样式变体生成器
-  const tooltipVariants = tv(tooltipVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const tooltipVariants = tv(tooltipVariantConfig, {});
 </script>
 
 <div class={[tuc(tooltipVariants({ color, placement, open })), className]} data-tip={dataTip ?? ''} {...otherProps}>

@@ -152,9 +152,7 @@
     });
   });
 
-  const tableVariant = tv(tableVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸变体
-  });
+  const tableVariant = tv(tableVariantConfig, {});
 
   // 全选状态数组（用于控制表头复选框）
   let selectAllRow = $state<boolean[]>([]);

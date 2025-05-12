@@ -1,10 +1,10 @@
 ---
 title: Checkbox 复选框组件
 description: 复选框（Checkbox）组件用于多选场景，支持不确定状态、禁用状态、自定义样式，适用于表单、配置选项等交互场景。提供组操作、尺寸定制和颜色主题配置。
-keywords: [ 复选框组件,Svelte复选框,表单控件,多选组件,复选框样式,复选框API ]
+keywords: [复选框组件, Svelte复选框, 表单控件, 多选组件, 复选框样式, 复选框API]
 aside: false
 editLink: false
-outline: [ 2, 3 ]
+outline: [2, 3]
 ---
 
 ## Checkbox 复选框
@@ -45,16 +45,16 @@ outline: [ 2, 3 ]
 
 ### Checkbox属性说明
 
-| 属性名           | 说明          | 类型                                                                                               | 默认值 |
-|---------------|-------------|--------------------------------------------------------------------------------------------------|-----|
-| value         | 选中的值（双向绑定）  | `array`                                                                                          | []  |
-| color         | 主题颜色        | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |     |
-| size          | 尺寸配置        | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                             |     |
-| options       | 选项数组        | [CheckboxItemOption](#checkboxitemoption)[]                                                      | []  |
-| label         | 标签相关配置      | [CheckboxLabel](#checkboxlabel)                                                                  |     |
-| disabled      | 是否禁用        | `boolean`                                                                                        |     |
-| wrapClass     | 外层容器类名设置    | `string`                                                                                         |     |
-| onChangeValue | 当选项值变化时的回调函数 | (value: T[], option?: [CheckboxItemOption](#checkboxitemoption)\<T\>) => void                    |     |
+| 属性名        | 说明                     | 类型                                                                                             | 默认值 |
+| ------------- | ------------------------ | ------------------------------------------------------------------------------------------------ | ------ |
+| value         | 选中的值（双向绑定）     | `array`                                                                                          | []     |
+| color         | 主题颜色                 | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |        |
+| size          | 尺寸配置                 | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                             |        |
+| options       | 选项数组                 | [CheckboxItemOption](#checkboxitemoption)[]                                                      | []     |
+| label         | 标签相关配置             | [CheckboxLabel](#checkboxlabel)                                                                  |        |
+| disabled      | 是否禁用                 | `boolean`                                                                                        |        |
+| wrapClass     | 外层容器类名设置         | `string`                                                                                         |        |
+| onChangeValue | 当选项值变化时的回调函数 | (value: T[], option?: [CheckboxItemOption](#checkboxitemoption)\<T\>) => void                    |        |
 
 #### CheckboxItemOption
 
@@ -77,15 +77,16 @@ export type CheckboxLabel = {
 ```
 
 ### CheckboxItem属性说明
+
 除了支持原生input属性以外，还支持以下属性：
 
-| 属性名         | 说明           | 类型                                                                                               | 默认值 |
-|-------------|--------------|--------------------------------------------------------------------------------------------------|-----|
-| color       | 颜色主题         | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |     |
-| size        | 尺寸配置         | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                             |     |
-| groupValue  | 组选中值（双向绑定）  | `array`                                                                                          | []  |
-| option      | 关联选项数据       | [CheckboxItemOption](#checkboxitemoption)                                                        |     |
-| indeterminate | 不确定状态       | `boolean`                                                                                        |     |
+| 属性名        | 说明                 | 类型                                                                                             | 默认值 |
+| ------------- | -------------------- | ------------------------------------------------------------------------------------------------ | ------ |
+| color         | 颜色主题             | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |        |
+| size          | 尺寸配置             | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                             |        |
+| groupValue    | 组选中值（双向绑定） | `array`                                                                                          | []     |
+| option        | 关联选项数据         | [CheckboxItemOption](#checkboxitemoption)                                                        |        |
+| indeterminate | 不确定状态           | `boolean`                                                                                        |        |
 
 ## 最佳实践
 

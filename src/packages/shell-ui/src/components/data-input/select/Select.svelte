@@ -56,9 +56,7 @@
   const multiple: boolean = otherProps.multiple ?? false;
 
   // 创建选择框样式生成器
-  const selectVariants = tv(selectVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const selectVariants = tv(selectVariantConfig, {});
 
   // 扁平化选项列表（处理分组）
   const allOptions = $derived.by(() => {
@@ -115,6 +113,7 @@
 </script>
 
 <!-- 选择框容器 -->
+<!-- eslint-disable no-sequences -->
 <select
   bind:value={getSelectedValue, setSelectedValue}
   class={[tuc(selectVariants({ color, size, variant })), className]}

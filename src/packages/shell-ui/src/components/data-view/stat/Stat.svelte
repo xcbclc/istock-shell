@@ -53,9 +53,7 @@
     ...otherProps // 其他原生属性
   }: StatProps = $props();
 
-  const statVariant = tv(statVariantConfig, {
-    responsiveVariants: ['size'],
-  });
+  const statVariant = tv(statVariantConfig, {});
 </script>
 
 <div

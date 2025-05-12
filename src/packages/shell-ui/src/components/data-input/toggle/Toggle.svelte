@@ -42,9 +42,7 @@
   }: ToggleProps = $props();
 
   // 创建开关样式变体生成器
-  const toggleVariants = tv(toggleVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const toggleVariants = tv(toggleVariantConfig, {});
 
   // 状态变化时触发onChangeValue回调
   $effect(() => {

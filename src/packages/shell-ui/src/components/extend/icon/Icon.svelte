@@ -31,9 +31,7 @@
   }: IconProps = $props();
 
   // 创建图标样式变体生成器
-  const iconVariants = tv(iconVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const iconVariants = tv(iconVariantConfig, {});
   // 动态导入SVG图标文件（构建时处理）
   const iconUrlRecord: Record<string, () => Promise<string>> = import.meta.glob<string>('./svg/**/*.svg', {
     import: 'default',

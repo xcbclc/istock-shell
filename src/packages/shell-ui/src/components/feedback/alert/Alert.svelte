@@ -39,9 +39,7 @@
     ...otherProps
   }: AlertProps = $props();
 
-  const alertVariants = tv(alertVariantConfig, {
-    responsiveVariants: ['size'],
-  });
+  const alertVariants = tv(alertVariantConfig, {});
 </script>
 
 <!-- Alert 组件模板 -->

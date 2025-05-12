@@ -1,16 +1,18 @@
 ---
 title: Form 表单组件
 description: 功能强大的表单组件，支持多布局模式、栅格系统、表单验证和自定义控件，为用户提供便捷的数据收集解决方案。
-keywords: [表单组件,表单验证,表单布局,数据收集,Svelte表单]
+keywords: [表单组件, 表单验证, 表单布局, 数据收集, Svelte表单]
 aside: false
 editLink: false
 outline: [2, 3]
 ---
 
 ## Form 表单组件 <Badge type="tip">shell</Badge>
+
 **强大易用的表单处理系统，提供完整的数据收集与验证解决方案。**
 
 ## 使用场景
+
 - 用户注册与登录界面
 - 数据录入与信息收集
 - 系统设置与表单配置
@@ -19,6 +21,7 @@ outline: [2, 3]
 - 需要表单布局灵活控制的场景
 
 ## 功能特性
+
 - 支持水平与垂直两种布局方式
 - 灵活的栅格系统（1-5列）配置
 - 内置丰富的表单验证规则（必填、长度、范围、正则、自定义）
@@ -30,34 +33,38 @@ outline: [2, 3]
 - 支持表单项标签位置自定义
 
 ## 示例演示
+
 <IStockShellUiExample src="./example/FormDefault.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/FormLayout.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/FormSize.svelte" layout="column"></IStockShellUiExample>
 <IStockShellUiExample src="./example/FormValidate.svelte" layout="column"></IStockShellUiExample>
 
 ## API 参考
+
 ### 属性说明
-| 参数 | 说明 | 类型 | 默认值 |
-|-----|------|-----|-------|
-| formItems | 表单字段配置数组 | [`FormItemConfig[]`](#formitemconfig) | `[]` |
-| values | 表单值对象 | `Record<string, any>` | `{}` |
-| onChangeValues | 表单值变更回调 | `(values: Record<string, any>, isValid: boolean) => void` | - |
-| onChangeValue | 单个字段值变更回调 | `(name: string, value: any) => void` | - |
-| onSubmit | 表单提交回调 | `(values: Record<string, any>) => void` | - |
-| layout | 表单布局方式 | `'horizontal' \| 'vertical'` | `'horizontal'` |
-| cols | 表单栅格列数 | `1 \| 2 \| 3 \| 4 \| 5` | `1` |
-| labelWidth | 标签宽度 | `string` | `'120px'` |
-| labelPlacement | 标签位置 | `'start' \| 'center' \| 'end'` | `'end'` |
-| buttonPlacement | 按钮位置 | `'start' \| 'center' \| 'end'` | `'end'` |
-| submitText | 提交按钮文本 | `string` | `'提交'` |
-| resetText | 重置按钮文本 | `string` | `'重置'` |
-| showReset | 是否显示重置按钮 | `boolean` | `true` |
-| showSubmit | 是否显示提交按钮 | `boolean` | `true` |
-| color | 表单主题颜色 | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` | - |
-| size | 表单控件尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` |
-| initValidate | 是否在初始化时验证 | `boolean` | `false` |
+
+| 参数            | 说明               | 类型                                                                                             | 默认值         |
+| --------------- | ------------------ | ------------------------------------------------------------------------------------------------ | -------------- |
+| formItems       | 表单字段配置数组   | [`FormItemConfig[]`](#formitemconfig)                                                            | `[]`           |
+| values          | 表单值对象         | `Record<string, any>`                                                                            | `{}`           |
+| onChangeValues  | 表单值变更回调     | `(values: Record<string, any>, isValid: boolean) => void`                                        | -              |
+| onChangeValue   | 单个字段值变更回调 | `(name: string, value: any) => void`                                                             | -              |
+| onSubmit        | 表单提交回调       | `(values: Record<string, any>) => void`                                                          | -              |
+| layout          | 表单布局方式       | `'horizontal' \| 'vertical'`                                                                     | `'horizontal'` |
+| cols            | 表单栅格列数       | `1 \| 2 \| 3 \| 4 \| 5`                                                                          | `1`            |
+| labelWidth      | 标签宽度           | `string`                                                                                         | `'120px'`      |
+| labelPlacement  | 标签位置           | `'start' \| 'center' \| 'end'`                                                                   | `'end'`        |
+| buttonPlacement | 按钮位置           | `'start' \| 'center' \| 'end'`                                                                   | `'end'`        |
+| submitText      | 提交按钮文本       | `string`                                                                                         | `'提交'`       |
+| resetText       | 重置按钮文本       | `string`                                                                                         | `'重置'`       |
+| showReset       | 是否显示重置按钮   | `boolean`                                                                                        | `true`         |
+| showSubmit      | 是否显示提交按钮   | `boolean`                                                                                        | `true`         |
+| color           | 表单主题颜色       | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` | -              |
+| size            | 表单控件尺寸       | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                                                           | `'md'`         |
+| initValidate    | 是否在初始化时验证 | `boolean`                                                                                        | `false`        |
 
 ### FormItemConfig
+
 ```typescript
 /**
  * 表单项配置接口
@@ -129,10 +136,10 @@ interface FormItemConfig {
 ```
 
 ## 最佳实践
+
 - 使用栅格系统（cols属性）优化表单布局，提高空间利用率
 - 为字段添加描述信息（description）增强用户理解
 - 结合验证规则确保数据质量（validator属性）
 - 使用hidden属性方法实现表单项的条件显示/隐藏
 - 根据数据类型选择合适的表单控件类型
 - 为关键操作提供明确的按钮文本（submitText/resetText）
-

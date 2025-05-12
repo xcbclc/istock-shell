@@ -234,7 +234,9 @@
               {dayjs(timeSlot).format('HH:00')}
             </div>
             <div class={tuc('icalendar-view-day-right')}>
+              <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderCalendarCell(getCurrentViewList(currentCalendarList, timeSlot), currentView)}
+              <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderExpandedButton(currentCalendarList, timeSlot)}
             </div>
           </div>
@@ -295,7 +297,9 @@
             ]}
           >
             <div class="flex flex-col gap-1.5 text-xs">
+              <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderCalendarCell(getCurrentViewList(currentCalendarList, day), currentView)}
+              <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderExpandedButton(currentCalendarList, day)}
             </div>
           </div>
@@ -361,7 +365,9 @@
               {dayjs(day).format('D')}
             </div>
             <div class="flex flex-col gap-0.5 text-xs">
+              <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderCalendarCell(getCurrentViewList(currentCalendarList, day), currentView)}
+              <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderExpandedButton(currentCalendarList, day)}
             </div>
           </div>

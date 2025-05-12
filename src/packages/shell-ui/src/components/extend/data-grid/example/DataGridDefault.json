@@ -271,10 +271,7 @@
               "connectorLineWidth": 1,
               "backgroundFill": "rgba(162, 150, 141, 1)",
               "backgroundFillOpacity": 0.15,
-              "backgroundPadding": [
-                2,
-                4
-              ],
+              "backgroundPadding": [2, 4],
               "startMarkerSymbol": "circle",
               "startMarkerSize": 4,
               "endMarkerSymbol": "circle",
@@ -469,12 +466,7 @@
             "handleLabelFontWeight": "normal"
           },
           "scrollbar": {
-            "padding": [
-              0,
-              0,
-              0,
-              0
-            ],
+            "padding": [0, 0, 0, 0],
             "trackSize": 6,
             "isRound": true,
             "slidable": true,
@@ -699,10 +691,7 @@
         },
         "scale": {
           "color": {
-            "range": [
-              "#c94400",
-              "#744f36"
-            ]
+            "range": ["#c94400", "#744f36"]
           }
         },
         "height": 400,
@@ -887,10 +876,7 @@
               "connectorLineWidth": 1,
               "backgroundFill": "rgba(162, 150, 141, 1)",
               "backgroundFillOpacity": 0.15,
-              "backgroundPadding": [
-                2,
-                4
-              ],
+              "backgroundPadding": [2, 4],
               "startMarkerSymbol": "circle",
               "startMarkerSize": 4,
               "endMarkerSymbol": "circle",
@@ -1085,12 +1071,7 @@
             "handleLabelFontWeight": "normal"
           },
           "scrollbar": {
-            "padding": [
-              0,
-              0,
-              0,
-              0
-            ],
+            "padding": [0, 0, 0, 0],
             "trackSize": 6,
             "isRound": true,
             "slidable": true,
@@ -1384,10 +1365,7 @@
         },
         "scale": {
           "color": {
-            "range": [
-              "#c94400",
-              "#744f36"
-            ]
+            "range": ["#c94400", "#744f36"]
           }
         },
         "height": 400,
@@ -1572,10 +1550,7 @@
               "connectorLineWidth": 1,
               "backgroundFill": "rgba(162, 150, 141, 1)",
               "backgroundFillOpacity": 0.15,
-              "backgroundPadding": [
-                2,
-                4
-              ],
+              "backgroundPadding": [2, 4],
               "startMarkerSymbol": "circle",
               "startMarkerSize": 4,
               "endMarkerSymbol": "circle",
@@ -1770,12 +1745,7 @@
             "handleLabelFontWeight": "normal"
           },
           "scrollbar": {
-            "padding": [
-              0,
-              0,
-              0,
-              0
-            ],
+            "padding": [0, 0, 0, 0],
             "trackSize": 6,
             "isRound": true,
             "slidable": true,
@@ -1884,10 +1854,7 @@
         },
         "scale": {
           "color": {
-            "range": [
-              "#c94400",
-              "#744f36"
-            ]
+            "range": ["#c94400", "#744f36"]
           }
         },
         "height": 400,
@@ -2072,10 +2039,7 @@
               "connectorLineWidth": 1,
               "backgroundFill": "rgba(162, 150, 141, 1)",
               "backgroundFillOpacity": 0.15,
-              "backgroundPadding": [
-                2,
-                4
-              ],
+              "backgroundPadding": [2, 4],
               "startMarkerSymbol": "circle",
               "startMarkerSize": 4,
               "endMarkerSymbol": "circle",
@@ -2270,12 +2234,7 @@
             "handleLabelFontWeight": "normal"
           },
           "scrollbar": {
-            "padding": [
-              0,
-              0,
-              0,
-              0
-            ],
+            "padding": [0, 0, 0, 0],
             "trackSize": 6,
             "isRound": true,
             "slidable": true,
@@ -2409,10 +2368,7 @@
         },
         "scale": {
           "color": {
-            "range": [
-              "#c94400",
-              "#744f36"
-            ]
+            "range": ["#c94400", "#744f36"]
           }
         },
         "height": 400,

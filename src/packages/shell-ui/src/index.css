@@ -1,1 +1,3 @@
-@import './style/main.css';
+@import './style/daisyui.css';
+@import './style/variable.css';
+@import './style/scrollbar.css';

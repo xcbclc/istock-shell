@@ -1,6 +1,5 @@
 import { type Component, mount } from 'svelte';
 import '../style/daisyui.css';
-import '../style/variable.css';
 
 export type TExampleAppCode = {
   code: string;

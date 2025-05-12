@@ -63,9 +63,7 @@
   }: ButtonProps<ButtonTag> = $props();
 
   // 创建按钮的Tailwind变体样式生成器（支持响应式尺寸）
-  const buttonVariants = tv(buttonVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸变体
-  });
+  const buttonVariants = tv(buttonVariantConfig, {});
 </script>
 
 <!-- 动态元素组件 -->

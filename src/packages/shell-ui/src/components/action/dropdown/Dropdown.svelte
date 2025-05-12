@@ -63,9 +63,7 @@
   }: DropdownProps = $props();
 
   // 创建下拉菜单样式变体生成器
-  const dropdownVariants = tv(dropdownVariantConfig, {
-    responsiveVariants: ['size'],
-  });
+  const dropdownVariants = tv(dropdownVariantConfig, {});
 </script>
 
 <svelte:element

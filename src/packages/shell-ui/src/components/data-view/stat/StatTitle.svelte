@@ -38,9 +38,7 @@
   // 解构props
   const { text, color, size, align, weight, class: className = '', children, ...otherProps }: StatTitleProps = $props();
 
-  const statTitleVariant = tv(statTitleVariantConfig, {
-    responsiveVariants: ['size'],
-  });
+  const statTitleVariant = tv(statTitleVariantConfig, {});
 </script>
 
 <div class={[tuc(statTitleVariant({ color, size, align, weight })), className]} {...otherProps}>

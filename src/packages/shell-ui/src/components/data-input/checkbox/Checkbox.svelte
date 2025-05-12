@@ -81,6 +81,7 @@
 </script>
 
 <!-- 外层容器 -->
+<!-- eslint-disable no-sequences -->
 <div class={[tuc(['inline-flex flex-wrap', 'gap-2']), wrapClass ?? '']}>
   {#each options as opt, index}
     {@const itemDisabled = opt.disabled ?? disabled ?? undefined}

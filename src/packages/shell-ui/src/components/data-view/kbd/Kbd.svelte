@@ -44,9 +44,7 @@
   }: KbdProps = $props();
 
   // 创建键盘样式变体生成器
-  const kbdVariant = tv(kbdVariantConfig, {
-    responsiveVariants: ['size'], // 启用尺寸的响应式配置
-  });
+  const kbdVariant = tv(kbdVariantConfig, {});
 </script>
 
 <!-- 键盘元素容器 -->

@@ -23,7 +23,7 @@
 -->
 
 <script lang="ts" module>
-  import { type HTMLAttributes } from 'svelte/elements';
+  import type { HTMLAttributes } from 'svelte/elements';
 
   // 定义空状态图标类型
   export type EmptyName = 'empty' | 'info';
@@ -60,6 +60,7 @@
 </div>
 
 <style>
+  @reference "../../../style/daisyui.css";
   .empty {
     @apply flex flex-col items-center justify-center;
   }

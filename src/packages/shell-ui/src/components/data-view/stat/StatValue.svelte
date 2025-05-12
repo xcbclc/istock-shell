@@ -38,9 +38,7 @@
   const { text, color, size, align, weight, class: className = '', children, ...otherProps }: StatValueProps = $props();
 
   // 创建样式变体生成器
-  const statValueVariant = tv(StatValueVariantConfig, {
-    responsiveVariants: ['size'], // 启用响应式尺寸
-  });
+  const statValueVariant = tv(StatValueVariantConfig, {});
 </script>
 
 <div class={[tuc(statValueVariant({ color, size, align, weight })), className]} {...otherProps}>

@@ -1,16 +1,18 @@
 ---
 title: ICalendar 日历组件 - 高度集成的日程管理解决方案
 description: 功能丰富的日历组件，支持日/周/月多视图模式、事件与待办事项管理、过滤功能和通知提醒，适用于个人应用的日程安排系统。
-keywords: [日历组件,事件管理,日程安排,待办事项,多视图日历,Svelte日历]
+keywords: [日历组件, 事件管理, 日程安排, 待办事项, 多视图日历, Svelte日历]
 aside: false
 editLink: false
 outline: [2, 3]
 ---
 
 ## ICalendar 日历组件 <Badge type="tip">shell</Badge>
+
 **集成化的日历应用界面，提供良好的日程管理体验。**
 
 ## 使用场景
+
 - 企业办公系统的日程管理模块
 - 项目管理中的团队日程协调
 - 个人事务安排与提醒系统
@@ -18,6 +20,7 @@ outline: [2, 3]
 - 会议室或资源预订系统
 
 ## 功能特性
+
 - 日/周/月三种视图模式自由切换
 - 事件与待办事项的统一管理
 - 便捷的日期导航与选择
@@ -26,22 +29,26 @@ outline: [2, 3]
 - 事件详情查看与管理
 
 ## 示例演示
+
 <IStockShellUiExample src="./example/BasicExample.svelte" layout="column"></IStockShellUiExample>
 
 ## API 参考
+
 ### 属性说明
-| 参数 | 说明 | 类型                                              | 默认值 |
-|-----|------|-------------------------------------------------|-------|
-| events | 日历事件列表 | [`ICalendarVEvent`](#icalendarvevent)[]         | `[]` |
-| todos | 待办事项列表 | [`ICalendarVTodo`](#icalendarvtodo)[]           | `[]` |
+
+| 参数        | 说明         | 类型                                            | 默认值   |
+| ----------- | ------------ | ----------------------------------------------- | -------- |
+| events      | 日历事件列表 | [`ICalendarVEvent`](#icalendarvevent)[]         | `[]`     |
+| todos       | 待办事项列表 | [`ICalendarVTodo`](#icalendarvtodo)[]           | `[]`     |
 | currentDate | 当前选中日期 | `string`                                        | 当天日期 |
 | currentView | 当前视图类型 | `'day' \| 'week' \| 'month'`                    | `'week'` |
-| filterValue | 当前过滤条件 | [`ICalendarFilterValue`](#icalendarfiltervalue) | `{}` |
-| filters | 过滤选项列表 | [`ICalendarFilterItem`](#icalendarfilteritem)   | `[]` |
-| notify | 通知配置 | [`ICalendarNotifyProps`](#icalendarnotifyprops) | `{}` |
-| notifyShow | 是否显示通知 | `boolean`                                       | `false` |
+| filterValue | 当前过滤条件 | [`ICalendarFilterValue`](#icalendarfiltervalue) | `{}`     |
+| filters     | 过滤选项列表 | [`ICalendarFilterItem`](#icalendarfilteritem)   | `[]`     |
+| notify      | 通知配置     | [`ICalendarNotifyProps`](#icalendarnotifyprops) | `{}`     |
+| notifyShow  | 是否显示通知 | `boolean`                                       | `false`  |
 
 ### ICalendarVEvent
+
 ```typescript
 /**
  * 日历事件定义（VEVENT）
@@ -127,6 +134,7 @@ interface ICalendarVEvent {
 ```
 
 ### ICalendarVTodo
+
 ```typescript
 /**
  * 日历任务定义（VTODO）
@@ -224,6 +232,7 @@ interface ICalendarVTodo {
 ```
 
 ### ICalendarFilterValue
+
 ```typescript
 interface ICalendarFilterValue {
   startDate?: string;
@@ -234,6 +243,7 @@ interface ICalendarFilterValue {
 ```
 
 ### ICalendarFilterItem
+
 ```typescript
 /**
  * 筛选项组接口
@@ -244,11 +254,11 @@ interface ICalendarFilterValue {
  * @property {ICalendarFilterOption[]} [options] - 筛选选项列表
  */
 interface ICalendarFilterItem {
-    type: string;
-    title: string;
-    multiple?: boolean;
-    // filterCallback?: () => boolean;
-    options?: ICalendarFilterOption[];
+  type: string;
+  title: string;
+  multiple?: boolean;
+  // filterCallback?: () => boolean;
+  options?: ICalendarFilterOption[];
 }
 ```
 
@@ -257,6 +267,7 @@ interface ICalendarFilterItem {
 :::
 
 ### ICalendarNotifyProps
+
 ```typescript
 interface ICalendarNotifyProps extends AlertProps {
   /** 通知显示持续时间（秒），0表示不自动隐藏 */
@@ -267,6 +278,7 @@ interface ICalendarNotifyProps extends AlertProps {
 ```
 
 ## 最佳实践
+
 - 使用ISO格式的日期字符串 (`YYYY-MM-DD`)
 - 为事件指定颜色提高可识别性
 - 合理设置优先级区分重要待办事项

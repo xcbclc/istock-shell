@@ -1,5 +1,5 @@
 import path from 'path';
-import {glob} from 'glob';
+import { glob } from 'glob';
 import fs from 'fs/promises';
 
 const cwdPath = process.cwd();
@@ -19,7 +19,7 @@ async function processMarkdown(mdContent, basePath) {
     const startTagMatch = fullMatch.match(/<IStockShellUiExample\b([^>]*)>/);
 
     const attributes = {
-      $fullMatch: fullMatch  // 完整标签字符串（含闭合部分）
+      $fullMatch: fullMatch, // 完整标签字符串（含闭合部分）
     };
 
     // 提取开始标签中的属性
@@ -67,7 +67,6 @@ async function processMarkdown(mdContent, basePath) {
       } else {
         result = result.replace(component.$fullMatch, `${exampleMdContent}\n\n::: raw\n${updatedComponent}\n:::\n`);
       }
-
     } catch (error) {
       console.warn(`无法读取示例 MD 文件: ${fullMdPath}`, error);
     }
@@ -79,12 +78,12 @@ async function processMarkdown(mdContent, basePath) {
 export default async function () {
   try {
     // 确保目标目录存在
-    await fs.mkdir(docsTargetPath, {recursive: true});
+    await fs.mkdir(docsTargetPath, { recursive: true });
 
     // 清空 components 目录
     const componentsDir = path.join(docsTargetPath, 'components');
-    await fs.rm(componentsDir, {recursive: true, force: true}); // 强制删除目录及内容
-    await fs.mkdir(componentsDir, {recursive: true}); // 重新创建空目录
+    await fs.rm(componentsDir, { recursive: true, force: true }); // 强制删除目录及内容
+    await fs.mkdir(componentsDir, { recursive: true }); // 重新创建空目录
 
     // 获取所有 MD 文件路径
     const mdPaths = await glob(path.resolve(shellUiPath, './src') + '/**/*.md');
@@ -105,7 +104,7 @@ export default async function () {
       // 只处理 README.md 和 index.md 文件
       if (fileName === 'README.md' || fileName === 'index.md') {
         // 确保目标目录存在
-        await fs.mkdir(path.dirname(targetPath), {recursive: true});
+        await fs.mkdir(path.dirname(targetPath), { recursive: true });
         await fs.writeFile(targetPath, processedContent, 'utf-8');
         console.log(`已处理并处理到: ${relativePath}`);
       }

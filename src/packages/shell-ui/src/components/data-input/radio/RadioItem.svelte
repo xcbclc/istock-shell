@@ -38,9 +38,7 @@
   }: RadioItemProps = $props();
 
   // 创建Tailwind变体样式生成器
-  const radioVariants = tv(radioItemVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸变体配置
-  });
+  const radioVariants = tv(radioItemVariantConfig, {});
 </script>
 
 <!-- 单选按钮输入元素 -->

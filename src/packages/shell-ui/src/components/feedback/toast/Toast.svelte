@@ -39,9 +39,7 @@
   }: ToastProps = $props();
 
   // 创建Toast样式变体生成器
-  const toastVariants = tv(toastVariantConfig, {
-    responsiveVariants: ['size'], // 响应式尺寸配置
-  });
+  const toastVariants = tv(toastVariantConfig, {});
 </script>
 
 <!-- Toast容器 -->
