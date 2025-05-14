@@ -1,18 +1,19 @@
-<script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+<script lang="ts" module>
   import type { TContextmenu, TContextmenuItem, TContextmenuPosition } from '@/store/cmd/cmd-contextmenu';
 
-  interface Props {
+  interface CmdContextmenuProps {
     contextmenu: TContextmenu;
     position: TContextmenuPosition;
+    onMouseStatus?: (status: boolean) => void;
+    onMenuClick?: (menu: TContextmenuItem) => void;
   }
+</script>
 
-  const { contextmenu, position }: Props = $props();
-
-  let contextmenuEl: HTMLElement = $state();
+<script lang="ts">
+  import { ShKbd } from '@istock/shell-ui';
+  const { contextmenu, position, onMouseStatus, onMenuClick }: CmdContextmenuProps = $props();
 
   let style: string = $state('');
-  const dispatch = createEventDispatcher();
 
   $effect(() => {
     const styles: string[] = [];
@@ -36,91 +37,36 @@
     }
     style = styles.join(';');
   });
-  const handleMouseenter = () => {
-    dispatch('mouseStatus', true);
-  };
-  const handleMouseleave = () => {
-    dispatch('mouseStatus', false);
-  };
-  const handleClick = (_ev: MouseEvent, menu: TContextmenuItem) => {
-    dispatch('menuClick', menu);
-  };
 </script>
 
 <div
-  class="contextmenu-wrap"
-  bind:this={contextmenuEl}
+  class="absolute top-0 left-0 z-50"
   {style}
-  onmouseenter={handleMouseenter}
-  onmouseleave={handleMouseleave}
+  onmouseenter={() => onMouseStatus?.(true)}
+  onmouseleave={() => onMouseStatus?.(false)}
   role="menu"
 >
   {#if contextmenu}
-    <ul class="contextmenu">
+    <ul class="border py-2 border-base-300 bg-base-200 shadow-md rounded-md max-w-md overflow-hidden">
       {#each contextmenu as item, index}
         {#each item.menus as menu}
           <li
-            class="contextmenu-item"
-            onclick={(ev) => {
-              handleClick(ev, menu);
-            }}
+            onclick={() => onMenuClick?.(menu)}
+            class="flex flex-nowrap items-center content-center gap-2 px-2 py-1 cursor-pointer hover:bg-base-300 active:bg-base-300 transition-colors"
             role="menuitem"
           >
-            <span>{menu.text}</span>
-            <span>{menu.shortcutKey}</span>
+            <span class="flex-1 text-sm">{menu.text}</span>
+            {#if menu.shortcutKey}
+              <ShKbd size="sm">
+                {menu.shortcutKey}
+              </ShKbd>
+            {/if}
           </li>
         {/each}
         {#if index < contextmenu.length - 1 && item.menus.length}
-          <li class="contextmenu-split"></li>
+          <li class="border-top border-base-300"></li>
         {/if}
       {/each}
     </ul>
   {/if}
 </div>
-
-<style lang="scss">
-  :root {
-    --contextmenu-gap: var(--gap-default);
-    --contextmenu-radius: var(--gap-default);
-    --contextmenu-background-color: var(--color-sub-background);
-    --contextmenu-box-shadow-color: var(--color-background);
-    --contextmenu-border-color: var(--color-background);
-    --contextmenu-font-size: var(--font-size-sm);
-    --contextmenu-item-hover-color: var(--color-text-hover);
-    --contextmenu-split-color: var(--color-background);
-  }
-  .contextmenu-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-  }
-  .contextmenu {
-    margin: 0;
-    padding: var(--contextmenu-gap) 2px;
-    border-radius: var(--contextmenu-radius);
-    background-color: var(--contextmenu-background-color);
-    box-shadow: 0 0 0.35em var(--contextmenu-box-shadow-color);
-    border: 1px solid var(--contextmenu-border-color);
-    line-height: 1;
-    transition: all var(--transition-duration);
-    overflow-y: auto;
-  }
-  .contextmenu-item,
-  .contextmenu-split {
-    font-size: var(--contextmenu-font-size);
-  }
-  .contextmenu-item {
-    padding: var(--contextmenu-gap);
-    cursor: pointer;
-    display: flex;
-    gap: 0 var(--gap-2x);
-    &:hover {
-      color: var(--contextmenu-item-hover-color);
-    }
-  }
-  .contextmenu-split {
-    height: 1px;
-    background-color: var(--contextmenu-split-color);
-  }
-</style>

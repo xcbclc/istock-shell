@@ -25,7 +25,7 @@ export class CmdRouteController {
   @Method({
     alias: cmdJson.命令查找.cmd,
   })
-  @Component('OutputDoc')
+  @Component('CmdOutputDoc')
   async findDomainList(
     @Meta('domainName') domainName: string,
     @CmdRouteArguments(0) cmd: string,

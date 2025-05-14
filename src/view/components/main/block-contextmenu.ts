@@ -17,17 +17,16 @@ export const handleBlockContextmenuFactory = (
 ) => {
   let hoverBlockIndex: number = -1;
   let isViewContextmenu = false;
-  const handleMouseStatus = (ev: CustomEvent) => {
-    isViewContextmenu = ev.detail;
+  const handleMouseStatus = (status: boolean) => {
+    isViewContextmenu = status;
   };
   const handleMenuAction = async (action: TAction, block: ICmdOutput) => {
     await contextmenuAction(ctx, action, block);
     updatePosition({ offset: { x: -1, y: -1 } });
   };
-  const handleMenuClick = async (ev: CustomEvent<TContextmenuItem>, blocks: ICmdOutput[]) => {
+  const handleMenuClick = async (contextmenuItem: TContextmenuItem, blocks: ICmdOutput[]) => {
     const block = blocks[hoverBlockIndex];
     if (!block) throw new ScopeError('iswork.handleBlockContextmenuFactory', '没有找到输出块信息');
-    const contextmenuItem = ev.detail;
     await handleMenuAction(contextmenuItem.action, block);
   };
   const handleMenuShortcutKey = async (ev: KeyboardEvent, block: ICmdOutput) => {

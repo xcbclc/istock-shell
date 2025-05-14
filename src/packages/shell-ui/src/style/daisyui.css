@@ -1,14 +1,12 @@
 @import "tailwindcss";
 @source "../";
 @plugin "daisyui";
-/*
 @plugin "daisyui/theme" {
-  name: 'luxury';
-  default: true; !* set as default *!
-  prefersdark: true; !* set as default dark mode (prefers-color-scheme:dark) *!
-  color-scheme: dark; !* color of browser-provided UI *!
+  name: 'business';
+  default: true; /* set as default */
+  prefersdark: true; /* set as default dark mode (prefers-color-scheme:dark) */
+  color-scheme: dark; /* color of browser-provided UI */
 
   --color-primary: #f26522;
-  --color-primary-content: #ff7d51;
+  --color-accent: oklch(41.703% .099 251.473);
 }
-*/

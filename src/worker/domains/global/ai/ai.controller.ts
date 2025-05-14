@@ -61,7 +61,7 @@ export class AiController {
     return {
       output: [
         {
-          component: 'OutputEvent',
+          component: 'CmdOutputEvent',
           props: {
             data: { messageId: cmdInfo.meta?.messageId },
             eventAddress: cmdInfo.address.replace('cmdp:', 'event:'),

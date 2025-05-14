@@ -22,7 +22,7 @@ export async function initStore(ctx: CmdWindowContext) {
   const removeOnShowCmdInfo = onShowCmdInfo(ctx);
   const removeOnOutputHistory = onOutputHistory(ctx);
   const removeOnSyncHistory = onSyncHistory(ctx);
-  const removenOAiContected = onAiContected(ctx);
+  const removeOnAiConnected = onAiConnected(ctx);
   return () => {
     removeOnInputRecommendCmd();
     removeOnPromptTexts();
@@ -30,7 +30,7 @@ export async function initStore(ctx: CmdWindowContext) {
     removeOnShowCmdInfo();
     removeOnOutputHistory();
     removeOnSyncHistory();
-    removenOAiContected();
+    removeOnAiConnected();
   };
 }
 
@@ -223,7 +223,7 @@ function onSyncHistory(ctx: CmdWindowContext) {
  * 监听ai消息是否已被连接
  * @param ctx
  */
-function onAiContected(ctx: CmdWindowContext) {
+function onAiConnected(ctx: CmdWindowContext) {
   const { windowId, domainStore } = ctx;
   const { username } = domainStore.user.getUserInfo();
   const eventAddress = `event://@${username}.global:${windowId}/ai.send`;

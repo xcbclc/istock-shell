@@ -48,7 +48,7 @@
   }: EmptyProps = $props();
 </script>
 
-<div class={[tuc('empty gap-2 p-20'), className]} {...otherProps}>
+<div class={[tuc('empty gap-2 p-10'), className]} {...otherProps}>
   {#if children}
     <!-- 优先渲染自定义内容 -->
     {@render children()}

@@ -1,11 +1,6 @@
-@import './daisyui.css';
-@import './variable.css';
-@import './scrollbar.css';
-
 html {
-  font-size: var(--font-size-root);
-  line-height: 1.4;
-  color: var(--color-text-default);
+  color: var(--color-base-content);
+  background-color: var(--color-base-200);
   font-family:
     Chinese Quote,
     -apple-system,
@@ -22,12 +17,9 @@ html {
 }
 body {
   margin: 0;
+  padding: 0;
   height: 100vh;
-  background-color: var(--color-background);
+  box-sizing: border-box;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-}
-p {
-  margin-top: var(--gap-default);
-  margin-bottom: var(--gap-default);
 }

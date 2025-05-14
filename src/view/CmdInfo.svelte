@@ -1,65 +1,39 @@
+<script lang="ts" module>
+  export interface CmdInfoProps {
+    windowId: number;
+  }
+</script>
+
 <script lang="ts">
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
 
-  interface Props {
-    windowId: number;
-  }
-
-  const { windowId }: Props = $props();
+  const { windowId }: CmdInfoProps = $props();
 
   const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
   const { cmdInfo } = ctx.cmdStore;
 </script>
 
-<section class="cmd-info">
-  <h1>
-    {#if $cmdInfo.title === 'iStock Shell'}
-      <pre>{$cmdInfo.asciiTitle}</pre>
-    {:else}
-      {$cmdInfo.title}
-    {/if}
-  </h1>
-  <p>版本：v{$cmdInfo.version}</p>
-  <p>免责声明：</p>
-  <div class="cmd-info-doc">
-    {#each ($cmdInfo.disclaimer || '').split('\n') as str}
-      <p>{str}</p>
-    {/each}
+<section class="card">
+  <div class="card-body p-4">
+    <h1 class="card-title justify-center text-xl text-primary flex-1">
+      {#if $cmdInfo.title === 'iStock Shell'}
+        <pre class="text-sm font-mono p-2 rounded-md">{$cmdInfo.asciiTitle}</pre>
+      {:else}
+        {$cmdInfo.title}
+      {/if}
+      <div class="badge badge-primary">
+        v{$cmdInfo.version}
+      </div>
+    </h1>
+
+    <div class="divider">免责声明</div>
+
+    <div class="prose prose-sm max-w-none">
+      <div class="bg-base-200 p-3 rounded-md">
+        {#each ($cmdInfo.disclaimer || '').split('\n') as str}
+          <p class="text-base-content my-1">{str}</p>
+        {/each}
+      </div>
+    </div>
   </div>
 </section>
-
-<style lang="scss">
-  :root {
-    --cmd-info-title: 1.4em;
-    --cmd-info-description: var(--font-size-default);
-    --cmd-info-pre: var(--font-size-sm);
-    --cmd-info-gap: var(--gap-default);
-    --cmd-info-color: var(--color-primary);
-  }
-  .cmd-info {
-    position: absolute;
-    top: 0;
-    left: var(--cmd-info-gap);
-    right: var(--cmd-info-gap);
-    bottom: 5em;
-    padding: var(--cmd-info-gap);
-    overflow: auto;
-    color: var(--cmd-info-color);
-    z-index: 0;
-  }
-  .cmd-info-doc {
-    p {
-      font-size: var(--font-size-default);
-    }
-  }
-  h1 {
-    font-size: var(--cmd-info-title);
-    font-weight: var(--font-weight);
-    pre {
-      font-size: var(--cmd-info-pre);
-    }
-  }
-  p {
-    font-size: var(--cmd-info-description);
-  }
-</style>

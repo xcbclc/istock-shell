@@ -1,3 +1,9 @@
+<script lang="ts" module>
+  export interface CmdInputProps {
+    windowId: number;
+  }
+</script>
+
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
   import { getQueryParam, ScopeError } from '@istock/util';
@@ -5,20 +11,34 @@
   import type { TCommandEditorRecommendCmdEvent } from '@istock/editor';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import { ECmdWindowContextMode } from '@/window/cmd-window-context';
-  import { EInputRecommendType } from '@/store/domains/global/input-recommend';
+  import { EInputRecommendType, type TInputRecommendItem } from '@/store/domains/global/input-recommend';
+  import CmdRecommendList from '../recommend/CmdRecommendList.svelte';
 
-  export let windowId: number;
-
+  const { windowId }: CmdInputProps = $props();
   const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
   const { cmdInput, cmdOutput } = ctx.cmdStore;
+  const { inputRecommend } = ctx.domainStore;
   let cmdInputView: HTMLElement;
   let commandEditor: CommandEditor;
   let disabled = false;
-  let canContenteditable = false;
+  let canContenteditable = $state(false);
   let tabindex: number;
   if (ctx.mode !== ECmdWindowContextMode.example) {
     tabindex = 0;
   }
+
+  const onRecommendClose = () => {
+    inputRecommend.update((data) => {
+      data.list = null;
+      return data;
+    });
+  };
+  const onRecommendSelected = (type: EInputRecommendType, inputRecommendItem?: TInputRecommendItem) => {
+    if (inputRecommendItem?.value) {
+      handleCommandInput(type, inputRecommendItem.value);
+    }
+    onRecommendClose();
+  };
   export const handleCommandInput = (type: EInputRecommendType, input: string = '') => {
     if (commandEditor) {
       commandEditor.commandInput.focus();
@@ -35,9 +55,9 @@
     }
   };
 
-  $: {
+  $effect(() => {
     canContenteditable = ctx.mode !== ECmdWindowContextMode.example && !disabled;
-  }
+  });
 
   onMount(() => {
     commandEditor = new CommandEditor(cmdInputView);
@@ -82,32 +102,32 @@
   });
 </script>
 
-<div
-  class="cmd-input"
-  {tabindex}
-  autofocus
-  contenteditable={canContenteditable}
-  spellcheck="false"
-  bind:this={cmdInputView}
-></div>
+<div class="relative">
+  <div
+    class="min-h-[2em] py-1 px-2 break-all tracking-wider outline-none text-primary font-mono rounded-md bg-base-100 shadow-xs border border-base-200/80 ring-primary/80 focus-within:border-primary/80 focus-within:ring-1"
+    {tabindex}
+    autofocus
+    contenteditable={canContenteditable}
+    spellcheck="false"
+    bind:this={cmdInputView}
+  ></div>
+  <CmdRecommendList
+    list={$inputRecommend.list}
+    {onRecommendClose}
+    onRecommendSelected={(inputRecommendItem) => onRecommendSelected($inputRecommend.type, inputRecommendItem)}
+  />
+</div>
 
-<style lang="scss">
-  .cmd-input {
-    min-height: 1.5em;
-    word-break: break-all;
-    letter-spacing: 1px;
-    outline: none;
-    caret-color: var(--color-primary-lighter);
-    color: var(--color-primary);
-    :global(span.is-command) {
-      font-weight: var(--font-weight);
-      color: var(--color-text-command);
-    }
-    :global(span.is-optionKey) {
-      color: var(--color-text-option);
-    }
-    :global(span.is-parameter) {
-      color: var(--color-text-parameter);
-    }
+<style>
+  @reference "@istock/shell-ui/src/style/daisyui.css";
+  :global(span.is-command) {
+    font-weight: 600;
+    @apply text-primary;
+  }
+  :global(span.is-optionKey) {
+    @apply text-secondary;
+  }
+  :global(span.is-parameter) {
+    @apply text-accent;
   }
 </style>

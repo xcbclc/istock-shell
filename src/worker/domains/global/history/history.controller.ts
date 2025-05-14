@@ -38,7 +38,7 @@ export class HistoryController {
 
   @CmdRoute(cmdJson.历史删除)
   @Method('batchDeleteCmd')
-  @Component('OutputEvent')
+  @Component('CmdOutputEvent')
   async batchDeleteCmd(
     ctx: ApplicationContext,
     @CmdRouteOptions(cmdJson.历史删除.options.数量) limit: number,

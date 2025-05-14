@@ -2,17 +2,16 @@ import { writable, get, type Writable } from 'svelte/store';
 import { clone } from '@istock/util';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 
+export type TAddCmdAliasField = 'historyId' | 'cmd' | 'alias' | 'description';
 export type TAddCmdAliasData = {
   modal: {
     title: string;
     visible: boolean;
   };
   form: {
-    [k in 'cmd' | 'alias' | 'description']: {
-      label: string;
-      value: string;
-    };
-  } & { historyId: string };
+    [k in TAddCmdAliasField]: string;
+  };
+  formItems?: Array<{ name: string; label?: string; field?: { type?: 'input' | 'textarea'; disabled?: boolean } }>;
 };
 export interface IAddCmdAliasWritable extends Writable<TAddCmdAliasData> {
   init: () => void;
@@ -32,19 +31,15 @@ export const getAddCmdAlias = (ctx: CmdWindowContext) => {
     },
     form: {
       historyId: '',
-      cmd: {
-        label: '命令',
-        value: '',
-      },
-      alias: {
-        label: '命令别名',
-        value: '',
-      },
-      description: {
-        label: '别名描述',
-        value: '',
-      },
+      cmd: '',
+      alias: '',
+      description: '',
     },
+    formItems: [
+      { name: 'cmd', label: '命令', field: { disabled: true } },
+      { name: 'alias', label: '命令别名' },
+      { name: 'description', label: '别名描述', field: { type: 'textarea' } },
+    ],
   };
   const addCmdAlias: IAddCmdAliasWritable = Object.create(writable(clone(initData)));
   addCmdAlias.init = () => {
@@ -53,19 +48,18 @@ export const getAddCmdAlias = (ctx: CmdWindowContext) => {
   addCmdAlias.openModal = (historyId, cmd) => {
     addCmdAlias.update((data) => {
       data.modal.visible = true;
-      data.form.cmd.value = cmd;
+      data.form.cmd = cmd;
       data.form.historyId = historyId;
       return data;
     });
   };
   addCmdAlias.add = async () => {
     const addCmdAliasData = get(addCmdAlias);
-    const { payload } = await ctx.workerMessage.send<string | number | null>('global', 'cmdAlias.add', {
-      historyId: addCmdAliasData.form.historyId,
-      cmd: addCmdAliasData.form.cmd.value,
-      alias: addCmdAliasData.form.alias.value,
-      description: addCmdAliasData.form.description.value,
-    });
+    const { payload } = await ctx.workerMessage.send<string | number | null>(
+      'global',
+      'cmdAlias.add',
+      addCmdAliasData.form
+    );
     if (payload) {
       addCmdAlias.init();
       return true;

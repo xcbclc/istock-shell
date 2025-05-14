@@ -687,3 +687,23 @@ export const FormButtonVariantConfig = {
     size: 'md' as VariantConfigSize,
   },
 };
+
+export const ModalBoxVariantConfig = {
+  base: 'modal-box',
+  variants: {
+    size: {
+      xs: 'max-w-xs w-xs',
+      sm: 'max-w-sm w-sm',
+      md: 'max-w-md w-md',
+      lg: 'max-w-lg w-lg',
+      xl: 'max-w-xl w-xl',
+      '2xl': 'max-w-2xl w-2xl',
+      '3xl': 'max-w-3xl w-3xl',
+      '4xl': 'max-w-4xl w-4xl',
+      '5xl': 'max-w-5xl w-5xl',
+      '6xl': 'max-w-6xl w-6xl',
+      '7xl': 'max-w-7xl w-7xl',
+    },
+  },
+  defaultVariants: {},
+};

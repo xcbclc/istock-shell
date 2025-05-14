@@ -1,34 +1,32 @@
+<script lang="ts" module>
+  export interface CmdMainProps {
+    windowId: number;
+  }
+</script>
+
 <script lang="ts">
-  import { onDestroy, onMount, tick } from 'svelte';
+  import { onDestroy, tick } from 'svelte';
   import { ETokenType } from '@istock/command-parser';
-  import type { TContextmenuPosition } from '@/store/cmd/cmd-contextmenu';
+  import { ShVirtualList, shShowMessage, type VirtualCoreRange } from '@istock/shell-ui';
+  import { COPY, type TContextmenuPosition } from '@/store/cmd/cmd-contextmenu';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import CmdPrompt from '../prompt/CmdPrompt.svelte';
   import CmdContextmenu from './CmdContextmenu.svelte';
   import { registerOutputViewComponents } from './component-map';
   import { handleBlockContextmenuFactory } from './block-contextmenu';
 
-  interface Props {
-    windowId: number;
-  }
-
-  const { windowId }: Props = $props();
+  const { windowId }: CmdMainProps = $props();
 
   const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
 
-  let mainElement: HTMLDivElement | null = $state();
-  // let contextmenuElement: HTMLElement | null;
+  let mainElement: HTMLDivElement | null | undefined = $state();
 
   const { cmdOutput, cmdContextmenu, outputViewComponentMap } = ctx.cmdStore;
 
-  const wrapOutputList = (list: any[]) => {
-    return list.map((item) => {
-      item.windowId = windowId;
-      return item;
-    });
-  };
+  let virtualList: ShVirtualList;
+  let range: VirtualCoreRange | undefined = $state();
 
-  const wrapOutputCmdInput = (input: string) => {
+  const getCmdInputTokens = (input: string) => {
     const tokens = ctx.cmdParser.tokenizer.parse(input);
     const lastTokens = tokens[tokens.length - 1];
     if (lastTokens && [ETokenType.lineN, ETokenType.lineR].includes(lastTokens.type)) {
@@ -55,177 +53,110 @@
 
   // 命令输出有变动时滚动到最底部
   const scrollEnd = async () => {
-    if (mainElement) {
+    if (virtualList) {
       await tick();
       // 演示模式不需要滚动到底部
       if (ctx.isExample) return;
       // 需要考虑开发时重新编译报错
-      mainElement?.lastChild?.scrollIntoView?.(false);
+      virtualList.scrollToLastChild();
     }
   };
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   const unSubscribeScroll = cmdOutput.subscribe(scrollEnd);
 
-  // 性能优化
-  let observer: IntersectionObserver | null;
-
-  const updateObserve = async () => {
-    if (mainElement) {
-      observer && observer.disconnect();
-      await tick();
-      if (observer && mainElement?.children) {
-        for (const el of mainElement.children) {
-          observer.observe(el);
-        }
-      }
-    }
-  };
-  const unSubscribe = cmdOutput.subscribe(() => {
-    void updateObserve();
-  });
-
   const onSubmit = (messageId: string, payload: any) => {
     ctx.sendMessageToChannel(messageId, payload);
   };
-
-  onMount(() => {
-    observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach((row) => {
-          const { target } = row;
-          // todo 换成数据响应驱动
-          if (row.isIntersecting) {
-            target.classList.remove('is-hidden');
-          } else {
-            if (!target.classList.contains('is-hidden')) {
-              target.classList.add('is-hidden');
-            }
-          }
-        });
-      },
-      {
-        root: mainElement,
-        rootMargin: '25% 0% 25% 0%',
-      }
-    );
-    void updateObserve();
-  });
-
   onDestroy(() => {
-    observer && observer.disconnect();
     unSubscribeScroll();
-    unSubscribe();
   });
 </script>
 
-<div class="cmd-main" bind:this={mainElement}>
+<div class="h-full" bind:this={mainElement}>
   <CmdContextmenu
     contextmenu={$cmdContextmenu}
     {position}
-    on:menuClick={async (ev) => {
-      await handleBlockContextmenu.handleMenuClick(ev, $cmdOutput.list);
+    onMenuClick={async (menu) => {
+      await handleBlockContextmenu.handleMenuClick(menu, $cmdOutput.list);
+      if ([COPY.all, COPY.input, COPY.output, COPY.prompt, COPY.link].includes(menu.action)) {
+        await shShowMessage.success('操作成功');
+      }
     }}
-    on:mouseStatus={handleBlockContextmenu.handleMouseStatus}
+    onMouseStatus={handleBlockContextmenu.handleMouseStatus}
   />
-  {#each wrapOutputList($cmdOutput.list) as block, index (index)}
-    <section
-      class="cmd-block is-hidden"
-      onkeydown={async (ev) => {
-        if (ctx.isExample) return;
-        await handleBlockContextmenu.handleMenuShortcutKey(ev, block);
-      }}
-      oncontextmenu={(ev) => {
-        if (ctx.isExample) return;
-        handleBlockContextmenu.handleOpenBlockContextmenu(ev);
-      }}
-      onmouseenter={(ev) => {
-        if (ctx.isExample) return;
-        handleBlockContextmenu.handleBlockMouseEnter(ev, index);
-      }}
-      onclick={(ev) => {
-        if (ctx.isExample) return;
-        handleBlockContextmenu.handleOnClick(ev);
-      }}
-    >
-      <div class="cmd-block-header">
-        <div class="title">
+  <ShVirtualList
+    class="h-full"
+    bind:this={virtualList}
+    list={$cmdOutput.list}
+    onRangeChange={(newRange) => (range = newRange)}
+  >
+    {#each $cmdOutput.list.slice(range?.start, range?.end + 1) as block, index (block.id)}
+      <section
+        class="p-2 border-b border-base-300/20 hover:bg-base-200 active:bg-base-200 transition-colors"
+        onkeydown={async (ev) => {
+          if (ctx.isExample) return;
+          await handleBlockContextmenu.handleMenuShortcutKey(ev, block);
+        }}
+        oncontextmenu={(ev) => {
+          if (ctx.isExample) return;
+          handleBlockContextmenu.handleOpenBlockContextmenu(ev);
+        }}
+        onmouseenter={(ev) => {
+          if (ctx.isExample) return;
+          handleBlockContextmenu.handleBlockMouseEnter(ev, index);
+        }}
+        onclick={(ev) => {
+          if (ctx.isExample) return;
+          handleBlockContextmenu.handleOnClick(ev);
+        }}
+      >
+        <div class="mb-1 flex items-start">
+          <!-- 提示符 -->
           <CmdPrompt texts={block.promptTexts} />
+          <!-- 命令输入 -->
+          <div class="font-mono text-sm flex-auto">
+            {#each getCmdInputTokens(block.input) as token, tIndex (tIndex)}
+              {#if [ETokenType.lineN, ETokenType.lineR].includes(token.type)}
+                <br />
+              {:else}
+                <span class="is-{token.type}">{token.value}</span>
+              {/if}
+            {/each}
+          </div>
         </div>
-        <div class="input">
-          {#each wrapOutputCmdInput(block.input) as token, tIndex (tIndex)}
-            {#if [ETokenType.lineN, ETokenType.lineR].includes(token.type)}
-              <br />
-            {:else}
-              <span class="is-{token.type}">{token.value}</span>
-            {/if}
-          {/each}
-        </div>
-      </div>
-      <div class="cmd-block-output">
-        {#each block.output as output, oIndex (oIndex)}
-          {@const SvelteComponent = componentMap.get(output.component) || componentMap.get('ViewNotFound')}
-          <SvelteComponent
-            source={block.source}
-            windowId={block.windowId}
-            on:submit={(event) => {
-              onSubmit(output.messageId, event?.detail);
-            }}
-            {...output.props}
-          />
-        {/each}
-      </div>
-    </section>
-  {/each}
+        <!-- 命令输出 -->
+        {#if block.output.length > 0}
+          <div class="overflow-x-auto">
+            {#each block.output as output, oIndex (oIndex)}
+              {@const SvelteComponent = componentMap.get(output.component) || componentMap.get('ShEmpty')}
+              <SvelteComponent
+                {...output.props}
+                source={block.source}
+                {windowId}
+                onsumit={(event) => {
+                  onSubmit(output.messageId, event?.detail);
+                }}
+              />
+            {/each}
+          </div>
+        {/if}
+      </section>
+    {/each}
+  </ShVirtualList>
 </div>
 
-<style lang="scss">
-  :root {
-    --block-gap: var(--gap-default);
-    --block-border-color: var(--color-sub-background);
-    --block-focus-background-color: var(--color-background-lighter);
+<style>
+  @reference "@istock/shell-ui/src/style/daisyui.css";
+  :global(.is-command) {
+    @apply text-primary;
   }
-  .cmd-main {
-    flex: auto;
-    overflow-y: auto;
-    scroll-behavior: smooth;
+  :global(.is-command-text) {
+    @apply font-semibold text-primary;
   }
-  .cmd-block {
-    padding: var(--block-gap);
-    border-bottom: 1px solid var(--block-border-color);
-    will-change: opacity;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    &.is-hidden {
-      visibility: hidden;
-      opacity: 0;
-    }
-    &:hover {
-      outline: none;
-      background-color: var(--block-focus-background-color);
-      transition: background-color var(--transition-duration);
-    }
+  :global(.is-option) {
+    @apply text-secondary;
   }
-  .cmd-block-header {
-    .title,
-    .input {
-      display: inline;
-    }
-    .input {
-      word-break: break-all;
-      color: var(--color-primary);
-      .is-command {
-        font-weight: var(--font-weight);
-        color: var(--color-text-command);
-      }
-      .is-optionKey {
-        color: var(--color-text-option);
-      }
-      .is-parameter {
-        color: var(--color-text-parameter);
-      }
-    }
-  }
-  .cmd-block-output {
-    padding: 0 0.5em;
+  :global(.is-parameter) {
+    @apply text-accent;
   }
 </style>

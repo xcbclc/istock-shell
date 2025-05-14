@@ -56,7 +56,7 @@ export class DomainController {
 
   @CmdRoute(cmdJson.应用进入)
   @Method('changePromptDomain')
-  @Component('OutputEvent')
+  @Component('CmdOutputEvent')
   async changePromptDomain(ctx: ApplicationContext, @CmdRouteArguments(0) path: string = '.') {
     const cmdInfo = ctx.cmdp.getInfo();
     const meta = ctx.cmdp.getMeta<TCmdpMeta & { domainName: string }>();

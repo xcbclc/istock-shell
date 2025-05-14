@@ -1,12 +1,18 @@
 <script lang="ts" module>
   import type { HTMLDialogAttributes } from 'svelte/elements';
-  import { tuc } from '@istock/util';
   import type { ButtonProps } from '@istock/shell-ui';
+  import type { Snippet } from 'svelte';
+  import { ModalBoxVariantConfig } from '../../../theme/config';
+
+  const modalBoxVariantConfig = ModalBoxVariantConfig;
+  export type ModalBoxSize = keyof (typeof modalBoxVariantConfig)['variants']['size'];
 
   // 模态框属性接口（继承dialog元素属性）
   export interface ModalProps extends HTMLDialogAttributes {
     title?: string; // 标题
     content?: string; // 内容
+    contentRender?: () => ReturnType<Snippet<[]>>; // 自定义内容元素渲染
+    size?: ModalBoxSize;
     closeButton?: boolean; // 是否显示关闭按钮
     show?: boolean; // 是否显示
     maskClosable?: boolean; // 点击遮罩是否可关闭
@@ -16,14 +22,18 @@
 </script>
 
 <script lang="ts">
-  import { fade } from 'svelte/transition';
   import { onMount, onDestroy } from 'svelte';
+  import { fade } from 'svelte/transition';
+  import { tv } from 'tailwind-variants';
+  import { tuc } from '@istock/util';
   import { ShButton } from '../../index';
 
   let {
     show = $bindable(false), // 显示状态（支持双向绑定）
     title, // 标题
     content, // 内容
+    contentRender,
+    size,
     closeButton, // 右上角关闭按钮
     maskClosable, // 遮罩可关闭
     actions = [], // 操作按钮
@@ -34,6 +44,8 @@
   }: ModalProps = $props();
 
   let dialog: HTMLDialogElement;
+
+  const modalBoxVariants = tv(modalBoxVariantConfig);
 
   // 处理关闭事件
   const handleClose = () => {
@@ -65,7 +77,7 @@
     {@render children?.()}
   {:else}
     <!-- 默认模态框结构 -->
-    <div class={tuc('modal-box')}>
+    <div class={tuc(modalBoxVariants({ size }))}>
       {#if closeButton}
         <!-- 关闭按钮 -->
         <form method="dialog">
@@ -79,6 +91,9 @@
       {#if content}
         <!-- 内容 -->
         <p class="py-4">{content}</p>
+      {/if}
+      {#if contentRender}
+        <div class="pt-6">{@render contentRender()}</div>
       {/if}
 
       {#if actions?.length}

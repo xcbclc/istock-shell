@@ -13,9 +13,9 @@
   };
 </script>
 
-<div class="cmd-prompt">
+<div class="flex items-center font-mono text-sm">
   {#each texts as item}
-    <span class={`cmd-prompt-text is-${item.type}`}>
+    <span class={`mr-2 is-${item.type}`}>
       {#if item.type === 'time'}
         {getTimeText(item.text)}
       {:else}
@@ -26,20 +26,19 @@
 </div>
 
 <style lang="scss">
-  :root {
-    --cmd-prompt-gap: 0.1em;
+  .is-username {
+    @apply text-secondary font-medium;
   }
-  .cmd-prompt {
-    display: inline;
-    padding-right: var(--cmd-prompt-gap);
+
+  .is-path {
+    @apply text-secondary font-medium;
   }
-  .cmd-prompt-text {
-    margin-right: var(--cmd-prompt-gap);
-    &.is-username,
-    &.is-path,
-    &.is-time,
-    &.is-split {
-      color: var(--color-prompt);
-    }
+
+  .is-time {
+    @apply text-secondary-focus;
+  }
+
+  .is-split {
+    @apply text-base-content/70;
   }
 </style>

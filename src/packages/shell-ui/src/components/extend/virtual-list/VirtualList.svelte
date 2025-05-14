@@ -205,6 +205,10 @@
       },
     };
   };
+  // 滚动到末尾
+  export const scrollToLastChild = () => {
+    scrollElement?.lastChild?.scrollIntoView?.(false);
+  };
 </script>
 
 <div bind:this={scrollElement} class={[tuc('virtual-list'), className]} {...otherProps}>

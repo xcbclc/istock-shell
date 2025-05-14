@@ -1,24 +1,28 @@
+<script lang="ts" module>
+  import type { TCmdWindow } from '@/store/cmd/cmd-window';
+  export interface CmdWindowProp {
+    window: TCmdWindow;
+    class?: string;
+  }
+</script>
+
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import { ScopeError } from '@istock/util';
   import { getWorker } from '@/worker';
-  import type { CmdWindowsManager } from '@/window/cmd-windows-manager';
-  import type { TCmdWindow } from '@/store/window';
-  import CmdInfo from './CmdInfo.svelte';
-  import Cmd from './Cmd.svelte';
-  import ModalAddCmdAlias from './components/modal/ModalAddCmdAlias.svelte';
-  import ModalCookieManage from './components/modal/ModalCookieManage.svelte';
-  import CmdSearchMain from './components/search/CmdSearchMain.svelte';
+  import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import type { TSearchListItem } from '@/store/domains/global/search';
+  import Cmd from './Cmd.svelte';
+  import CmdAddAliasModal from './components/modal/CmdAddAliasModal.svelte';
+  import CmdCookieManageModal from './components/modal/CmdCookieManageModal.svelte';
+  import CmdSearchMain from './components/search/CmdSearchMain.svelte';
 
-  export let window: TCmdWindow;
-  export let cmdWindowsManager: CmdWindowsManager;
-
+  const { window, class: className = '' }: CmdWindowProp = $props();
   const worker = getWorker();
-  const cmdWindowCtx = cmdWindowsManager.getCmdContext(window.id);
-  const { search, cookieManage } = cmdWindowCtx.domainStore;
-  const { showCmdInfo, cmdWindow } = cmdWindowCtx.cmdStore;
-  let canListened = false;
+  const cmdWindowCtx = CmdWindowsManager.cmdWindowsManager.getCmdContext(window.id);
+  const { search, cookieManage, addCmdAlias } = cmdWindowCtx.domainStore;
+  const { cmdWindow } = cmdWindowCtx.cmdStore;
+  let canListened = $state(false);
 
   // 等待worker监听初始化store
   const onListened = (event: MessageEvent) => {
@@ -27,21 +31,24 @@
     }
   };
   worker.addEventListener('message', onListened);
-  $: if (canListened && cmdWindowCtx) {
-    cmdWindowCtx.initStore().catch((e: any) => {
-      throw e instanceof Error ? e : new ScopeError('view', '初始化store报错');
-    });
-  }
 
   const onKeydown = (ev: KeyboardEvent) => {
     if (cmdWindowCtx.isExample) return;
     cmdWindow.onCmdWindowKeyAction(ev, window, cmdWindowCtx);
   };
 
-  const onSelectedSearchResult = (ev: CustomEvent<TSearchListItem>) => {
+  const onSelectedSearchResult = (data: TSearchListItem) => {
     search.close();
-    search.runAction(ev.detail);
+    search.runAction(data);
   };
+
+  $effect(() => {
+    if (canListened && cmdWindowCtx) {
+      cmdWindowCtx.initStore().catch((e: any) => {
+        throw e instanceof Error ? e : new ScopeError('view', '初始化store报错');
+      });
+    }
+  });
 
   onDestroy(() => {
     worker.removeEventListener('message', onListened);
@@ -50,36 +57,20 @@
 </script>
 
 <div
-  class="window"
+  class={`relative box-border transition-all duration-300 bg-base-100 ${className}`}
   style={window.styleRecord[window.id]}
   data-window-id={window.id}
-  on:keydown={onKeydown}
+  onkeydown={onKeydown}
   tabindex="-1"
 >
-  {#if $showCmdInfo}
-    <CmdInfo windowId={window.id} />
-  {/if}
   <Cmd windowId={window.id} />
-  <ModalAddCmdAlias windowId={window.id} />
-  {#if $search.isOpen}
-    <CmdSearchMain windowId={window.id} on:selectedSearchResult={onSelectedSearchResult} on:close={search.close} />
+  {#if $addCmdAlias.modal.visible}
+    <CmdAddAliasModal windowId={window.id} />
   {/if}
   {#if $cookieManage.isOpen}
-    <ModalCookieManage windowId={window.id} />
+    <CmdCookieManageModal windowId={window.id} />
+  {/if}
+  {#if $search.isOpen}
+    <CmdSearchMain windowId={window.id} {onSelectedSearchResult} onClose={search.close} />
   {/if}
 </div>
-
-<style lang="scss">
-  .window {
-    position: relative;
-    box-sizing: border-box;
-    padding: 0 0 var(--gap-default);
-    flex-grow: 1;
-    flex-shrink: 0;
-    transition: width 0.2s ease-in;
-    overflow: auto;
-    &:not(:last-child) {
-      border-right: 1px solid rgba(0, 0, 0, 0.2);
-    }
-  }
-</style>

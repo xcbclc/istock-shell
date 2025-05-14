@@ -1,20 +1,17 @@
 import { writable, type Writable } from 'svelte/store';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
-import type { CookieModel } from '@/worker/domains/global/setting/cookie/cookie.model';
-import type { TModelCreate, TModelData, TModelUpdate } from '@istock/iswork';
 
-export type TCookieModel = TModelData<CookieModel> & { isEdit: boolean };
-export type TNewCookieModel = TModelCreate<CookieModel> & { isEdit: boolean };
+export type TCookieModel = { id?: string; host: string; cookie: string; updateDate?: string; isEdit: boolean };
 export type TCookieManageUiModel = {
   title: string;
   isOpen: boolean;
-  list: Array<TCookieModel | TNewCookieModel>;
+  list: TCookieModel[];
 };
 export interface ICookieManageUiModelWritable extends Writable<TCookieManageUiModel> {
   open: () => void;
   close: () => void;
-  create: (data: Omit<TCookieModel, 'id'>) => Promise<void>;
-  edit: (data: TModelUpdate<TCookieModel>) => Promise<void>;
+  create: (data: TCookieModel) => Promise<void>;
+  edit: (data: TCookieModel) => Promise<void>;
   delete: (id: string) => Promise<boolean>;
   getList: (query: { host?: string }) => Promise<TCookieModel[]>;
   updateEditState: (index: number, state: boolean) => void;
@@ -41,7 +38,7 @@ export const getCookieManage = (ctx: CmdWindowContext) => {
     });
   };
   cookieManage.getList = async (query) => {
-    const { payload } = await ctx.workerMessage.send<Array<TModelData<CookieModel>>>('setting', 'cookie.list', query);
+    const { payload } = await ctx.workerMessage.send<TCookieModel[]>('setting', 'cookie.list', query);
     let list: TCookieModel[] = [];
     if (payload) {
       list = payload.map((item) => {
