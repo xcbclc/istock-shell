@@ -47,8 +47,8 @@ module.exports = {
         parser: '@typescript-eslint/parser',
         extraFileExtensions: ['.vue'],
         ecmaFeatures: {
-          jsx: true
-        }
+          jsx: true,
+        },
       },
       rules: {
         'vue/multi-word-component-names': 'off',
@@ -67,9 +67,11 @@ module.exports = {
     // vite打包时去除console和debugger
     'no-console': 'off',
     'no-debugger': 'off',
+    'no-sequences': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
+    "@typescript-eslint/no-confusing-void-expression": 'off',
   },
 };

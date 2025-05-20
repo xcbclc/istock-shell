@@ -6,6 +6,7 @@ import { getUser, type IUserWritable } from './global/user';
 import { getAddCmdAlias, type IAddCmdAliasWritable } from './global/cmd-alias';
 import { getSearch, type ISearchWritable } from './global/search';
 import { getCookieManage, type ICookieManageUiModelWritable } from './global/cookie-manage';
+import { getThemeConfig, type IThemeConfigUiModelWritable } from './global/theme';
 
 export type TCmdAllDomainStore = {
   cmdRoute: ICmdRouteWritable;
@@ -15,6 +16,7 @@ export type TCmdAllDomainStore = {
   addCmdAlias: IAddCmdAliasWritable;
   search: ISearchWritable;
   cookieManage: ICookieManageUiModelWritable;
+  themeConfig: IThemeConfigUiModelWritable;
 };
 
 export const getDomainStore = (ctx: CmdWindowContext): TCmdAllDomainStore => {
@@ -26,5 +28,6 @@ export const getDomainStore = (ctx: CmdWindowContext): TCmdAllDomainStore => {
     addCmdAlias: getAddCmdAlias(ctx),
     search: getSearch(ctx),
     cookieManage: getCookieManage(ctx),
+    themeConfig: getThemeConfig(ctx),
   };
 };

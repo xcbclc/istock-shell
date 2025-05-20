@@ -25,7 +25,7 @@
 </script>
 
 {#if list?.length}
-  <div class="space-y-6">
+  <div class="space-y-6 p-1">
     {#each list as item}
       <div class="card bg-base-100 shadow-sm">
         <div class="card-body p-4 gap-4">

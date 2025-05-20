@@ -27,41 +27,73 @@
 
 <script lang="ts" module>
   import type { StatItemProps } from '../../index';
-  import type { SvelteComponent } from 'svelte';
+  import type { SvelteComponent, Component } from 'svelte';
+
+  export type DataGridItemComponentName = 'ShChart';
 
   export interface DataGridItem {
-    component: typeof SvelteComponent;
+    component: typeof SvelteComponent | DataGridItemComponentName;
     [key: string]: any;
   }
   // 组件属性接口
   export interface DataGridProps {
     stats?: StatItemProps[]; // 统计指标配置列表
     items?: DataGridItem[]; // 数据项区域项列表
+    itemColWidth?: number | string; // 列宽
   }
 </script>
 
 <script lang="ts">
-  import { tuc } from '@istock/util';
-  import { ShStat } from '../../index';
+  import { tuc, isString, isNumber } from '@istock/util';
+  import { ShStat, ShErrorInfo } from '../../index';
 
   const {
     stats = [], // 统计指标列表，默认为空数组
     items = [], // 数据项区域项列表，默认为空数组
+    itemColWidth = 480,
   }: DataGridProps = $props();
+
+  // 组件缓存，用于异步加载组件
+  const componentRecord: Record<string, Component<Record<string, any>>> = {};
+
+  const getAsyncComponent = async (name: DataGridItemComponentName): Promise<Component<any>> => {
+    let component: Component<any>;
+    if (componentRecord[name]) return componentRecord[name];
+    switch (name) {
+      case 'ShChart':
+        component = (await import(`../../extend/chart/index`)).default;
+        break;
+    }
+    if (!component) throw new Error(`未找到${name}对应的组件`);
+    componentRecord[name] = component;
+    return component;
+  };
 </script>
 
 <!-- 数据网格容器 -->
 <div class={tuc('gird-data')}>
   <!-- 统计指标区域 -->
   <div class={tuc('gird-stats')}>
-    <ShStat class={tuc('align-top')} center list={stats} />
+    <ShStat class={tuc('w-full text-primary')} center align="start" list={stats} />
   </div>
 
   <!-- 数据项区域 -->
-  <div class={tuc('gird-items gap-2 pt-2 pb-2')}>
+  <div
+    class={tuc(
+      `gird-items grid-cols-[repeat(auto-fit,minmax(${isNumber(itemColWidth) ? itemColWidth + 'px' : itemColWidth},1fr))]`
+    )}
+  >
     {#each items as item}
       {@const { component, ...itemProps } = item}
-      {#if component}
+      {#if isString(component)}
+        {#await getAsyncComponent(component)}
+          <div class={tuc('skeleton h-4 w-full')}></div>
+        {:then Component}
+          <Component {...itemProps} />
+        {:catch error}
+          <ShErrorInfo description={error.message} />
+        {/await}
+      {:else}
         <svelte:component this={component} {...itemProps} />
       {/if}
     {/each}
@@ -69,10 +101,11 @@
 </div>
 
 <style>
+  @reference "../../../style/daisyui.css";
   @layer components {
     /* 基础容器样式 */
     :global(.gird-data) {
-      @apply w-full;
+      @apply w-full overflow-hidden;
     }
 
     /* 统计区域样式 */
@@ -82,7 +115,7 @@
 
     /* 数据项区域响应式网格布局 */
     :global(.gird-items) {
-      @apply grid grid-rows-[repeat(auto-fit,minmax(350px,1fr))] grid-cols-[repeat(auto-fit,minmax(350px,1fr))];
+      @apply grid gap-2 py-2;
     }
   }
 </style>

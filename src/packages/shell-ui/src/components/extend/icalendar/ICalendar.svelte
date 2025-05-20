@@ -53,6 +53,7 @@
     filters?: ICalendarFilterItem[]; // 过滤选项列表
     notify?: Omit<ICalendarNotifyProps, 'show'>; // 通知配置
     notifyShow?: boolean; // 是否显示通知
+    onlyView?: boolean; // 仅展示 无动作交互
   }
 </script>
 
@@ -69,6 +70,7 @@
     filters = [],
     notify = {},
     notifyShow = $bindable(false),
+    onlyView = false,
   }: ICalendarProps = $props();
 
   // 当前选中的事件或待办项，用于在模态框中显示详情
@@ -199,16 +201,18 @@
   <ShICalendarNotify {...notify} bind:show={notifyShow} />
 
   <!-- 控制面板 - 包含视图切换、日期导航和过滤器 -->
-  <div class={[tuc('icalendar-panel')]}>
-    <!-- 视图切换标签页 - 日/周/月 -->
-    <ShICalendarTab {...iCalendarTabProps} />
-    <div class={[tuc('inline-flex gap-2 align-center')]}>
-      <!-- 日期导航控件 - 前一个/后一个/今日/日期选择 -->
-      <ShICalendarDate bind:currentDate {...iCalendarDateProps} />
-      <!-- 过滤面板 - 用于筛选不同类型的事件 -->
-      <ShICalendarFilter {filters} bind:filterValue />
+  {#if !onlyView}
+    <div class={[tuc('icalendar-panel')]}>
+      <!-- 视图切换标签页 - 日/周/月 -->
+      <ShICalendarTab {...iCalendarTabProps} />
+      <div class={[tuc('inline-flex gap-2 align-center')]}>
+        <!-- 日期导航控件 - 前一个/后一个/今日/日期选择 -->
+        <ShICalendarDate bind:currentDate {...iCalendarDateProps} />
+        <!-- 过滤面板 - 用于筛选不同类型的事件 -->
+        <ShICalendarFilter {filters} bind:filterValue />
+      </div>
     </div>
-  </div>
+  {/if}
 
   <!-- 日历视图 - 主要内容区域，显示事件和待办项 -->
   <div class={[tuc('icalendar-main')]}>
@@ -223,7 +227,7 @@
   @reference "../../../style/daisyui.css";
   @layer components {
     :global(.icalendar) {
-      @apply flex flex-col gap-4 w-full max-w-5xl max-h-full overflow-auto pt-4 pb-4;
+      @apply flex flex-col gap-4 w-full max-h-full overflow-auto pt-4 pb-4;
     }
 
     :global(.icalendar-panel) {

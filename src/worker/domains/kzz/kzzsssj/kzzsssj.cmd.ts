@@ -2,18 +2,8 @@ export default {
   可转债实时数据: {
     name: '可转债实时数据',
     cmd: 'kzzsssj',
-    usage: 'kzzsssj [-c <集思录cookie>]',
-    options: {
-      cookie: {
-        name: 'cookie',
-        parameter: ['-c', '--cookie'],
-        parameterType: ['string'],
-        description: '输入您的集思录 cookie 就可以获取完整数据，否则只能返回前 30 条',
-        default: '',
-        optional: true,
-        choices: [],
-      },
-    },
+    usage: 'kzzsssj',
+    options: {},
     source: {
       title: '可转债实时数据-集思录',
       url: 'https://app.jisilu.cn/data/cbnew/#cb', // 对应AKShare目标地址

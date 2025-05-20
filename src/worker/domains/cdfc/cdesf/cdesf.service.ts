@@ -25,7 +25,11 @@ type TTableQuery = {
   orderBy?: Array<Record<string, any>>;
 };
 
-type TDataGridCard = { title: string; list: Array<{ name: string; value: string; description?: string }> };
+type TDataGridCard = {
+  title: string;
+  value: string;
+  desc: { text: Array<{ title: string; value: string; tooltip?: string }> };
+};
 
 @Injectable()
 export class CdesfService {
@@ -124,8 +128,8 @@ export class CdesfService {
       [...weekOldHouseTradeData].reverse()
     );
     return {
-      cards,
-      charts,
+      stats: cards,
+      items: charts,
     };
   }
 
@@ -212,61 +216,74 @@ export class CdesfService {
 
     const cards: TDataGridCard[] = [
       {
-        title: '价',
-        list: [
-          { name: '成交均价', value: 价.月成交均价, description: '月成交均价' },
-          { name: '新增挂牌均价', value: 价.月新增挂牌价, description: '月新增挂牌均价' },
-          { name: '成挂比', value: 价.成挂比, description: '成交均价/新增挂牌均价' },
-          { name: '成交均价环比', value: 价.成交环比, description: '成交均价/上月成交均价-1' },
-          { name: '成交均价同比', value: 价.成交同比, description: '成交均价/去年该月交均价-1' },
-          { name: '新增挂牌环比', value: 价.新增挂牌环比, description: '新增挂牌均价/上月新增挂牌均价-1' },
-          { name: '新增挂牌同比', value: 价.新增挂牌同比, description: '新增挂牌均价/去年该月新增挂牌均价-1' },
-        ],
+        title: '总挂牌量',
+        value: 周转.总挂牌量,
+        desc: {
+          text: [
+            { title: '成交周期', value: 周转.成交周期, tooltip: '从挂牌到成交所需的平均时间' },
+            {
+              title: '去化周期',
+              value: Number(((存量挂牌 * 10000) / 月成交量).toFixed(2)) + '个月',
+              tooltip: '以当前月成交量计算，消化全部挂牌房源所需时间',
+            },
+          ],
+        },
       },
       {
-        title: '量',
-        list: [
-          { name: '周成交量', value: 量.周成交量, description: '周成交量' },
-          { name: '周新增挂牌量', value: 量.周新增挂牌量, description: '周新增挂牌量，数据来自贝壳' },
-          { name: '周成交环比', value: 量.周成交环比, description: '周成交量/上周成交量-1' },
-          { name: '月成交同比', value: 量.月成交同比, description: '月成交量/去年该月成交量-1' },
-          { name: '周新增挂牌环比', value: 量.新增挂牌环比, description: '周新增挂牌量/上周新增挂牌量-1' },
-          { name: '存量挂牌量环比', value: 量.存量挂牌量环比, description: '当月存量挂牌量/上月存量挂牌量-1' },
-        ],
+        title: '成交均价',
+        value: 价.月成交均价,
+        desc: {
+          text: [
+            { title: '新增挂牌均价', value: 价.月新增挂牌价, tooltip: '本月新挂牌房源的平均价格' },
+            { title: '成挂比', value: 价.成挂比, tooltip: '成交均价与新增挂牌均价的比值，反映市场活跃度' },
+            { title: '成交均价环比', value: 价.成交环比, tooltip: '本月成交均价相较上月的变化百分比' },
+            { title: '成交均价同比', value: 价.成交同比, tooltip: '本月成交均价相较去年同月的变化百分比' },
+            { title: '新增挂牌环比', value: 价.新增挂牌环比, tooltip: '本月新增挂牌均价相较上月的变化百分比' },
+            { title: '新增挂牌同比', value: 价.新增挂牌同比, tooltip: '本月新增挂牌均价相较去年同月的变化百分比' },
+          ],
+        },
       },
       {
-        title: '周转',
-        list: [
-          {
-            name: '总挂牌量',
-            value: 周转.总挂牌量,
-            description: '二手房的总挂牌量',
-          },
-          { name: '成交周期', value: 周转.成交周期, description: '周期内从挂牌到成交所用的平均时间' },
-          {
-            name: '去化周期',
-            value: Number(((存量挂牌 * 10000) / 月成交量).toFixed(2)) + '个月',
-            description: '总挂牌量/月成交量',
-          },
-        ],
+        title: '周成交量',
+        value: 量.周成交量,
+        desc: {
+          text: [
+            { title: '周新增挂牌量', value: 量.周新增挂牌量, tooltip: '本周新挂牌房源数量，数据来源：贝壳' },
+            { title: '周成交环比', value: 量.周成交环比, tooltip: '本周成交量相较上周的变化百分比' },
+            { title: '月成交同比', value: 量.月成交同比, tooltip: '本月成交量相较去年同月的变化百分比' },
+            { title: '周新增挂牌环比', value: 量.新增挂牌环比, tooltip: '本周新增挂牌量相较上周的变化百分比' },
+            { title: '存量挂牌量环比', value: 量.存量挂牌量环比, tooltip: '本月存量挂牌量相较上月的变化百分比' },
+          ],
+        },
       },
       {
-        title: '回报',
-        list: [
-          { name: '租金回报率', value: '2.61%', description: '当前市场环境的租金回报率' },
-          { name: '贷款利率', value: '3.00%', description: '当前市场环境的房贷贷款利率' },
-          { name: '公积金利率', value: '2.85%', description: '当前市场环境的公积金贷款利率' },
-        ],
+        title: '租金回报率',
+        value: '2.36%',
+        desc: {
+          text: [
+            { title: '首套商贷利率', value: '3.00%', tooltip: '当前市场主流首套商业贷款利率' },
+            { title: '5年期以上公积金利率', value: '2.6%', tooltip: '当前市场5年期及以上公积金贷款利率' },
+            { title: '10年期国债利率', value: '1.64%', tooltip: '当前10年期国债年化利率' },
+            { title: '5年期定存利率', value: '1.30%', tooltip: '当前5年期定期存款挂牌利率' },
+            { title: '4月CPI', value: '-0.1%', tooltip: '2025年4月中国居民消费价格同比涨跌幅' },
+          ],
+        },
       },
       {
-        title: '长期人口',
-        list: [
-          { name: '当前人口', value: '2140.3万人' },
-          { name: '预期人口(2035)', value: '2350万人', description: '来自《成都市国土空间总体规划2021—2035年》' },
-          { name: '预期人口(远期)', value: '2600万人', description: '预测上限数据，仅供参考' },
-          { name: '新生人口(2023)', value: '13.92万人', description: '最近一年新生人口' },
-          { name: '净增人口(2023)', value: '13.5万人', description: '最近一年净增人口' },
-        ],
+        title: '当前人口(2024)',
+        value: '2147.4万人',
+        desc: {
+          text: [
+            {
+              title: '预期人口(2035)',
+              value: '2350万人',
+              tooltip: '《成都市国土空间总体规划2021—2035年》预测2035年人口规模',
+            },
+            { title: '预期人口(远期)', value: '2600万人', tooltip: '远期人口预测上限，仅供参考' },
+            { title: '新生人口(2024)', value: '16.81万人', tooltip: '2024年新出生人口数量' },
+            { title: '净增人口(2024)', value: '7.1万人', tooltip: '2024年人口净增数量' },
+          ],
+        },
       },
     ];
     return cards;
@@ -283,7 +300,10 @@ export class CdesfService {
     monthOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>,
     weekOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>
   ): TChartOptions[] {
-    const colorRange = ['#c94400', '#744f36'];
+    const colorRange = [
+      this.chartService.themeConfig?.variables?.['--color-primary'] ?? '#c94400',
+      this.chartService.themeConfig?.variables?.['--color-secondary'] ?? '#744f36',
+    ];
     const lineChildren = [
       { type: 'line', encode: { shape: 'smooth' } },
       { type: 'point', encode: { shape: 'point' }, tooltip: false },
@@ -390,10 +410,10 @@ export class CdesfService {
       EChartType.Line
     );
     return [
-      { options: 周量走势图表 },
-      { options: 月成交均价图表 },
-      { options: 月成交量图表 },
-      { options: 涨价降价占比图表 },
+      { component: 'ShChart', options: 周量走势图表 },
+      { component: 'ShChart', options: 月成交均价图表 },
+      { component: 'ShChart', options: 月成交量图表 },
+      { component: 'ShChart', options: 涨价降价占比图表 },
     ];
   }
 }

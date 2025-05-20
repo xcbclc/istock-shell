@@ -11,20 +11,20 @@
     dataKey?: string; // 关联数据字段键名
     unit?: {
       // 单位配置（继承自单元格）
-      text: string;
-      show: boolean;
+      text?: string;
+      show?: boolean;
     };
   }
 </script>
 
 <script lang="ts">
-  const { value = '', children, ...otherProps }: TableThProps = $props();
+  const { value = '', unit, children, ...otherProps }: TableThProps = $props();
 </script>
 
 <th {...otherProps}>
   {#if children}
     {@render children()} <!-- 自定义表头内容 -->
   {:else}
-    {value ?? ''} <!-- 显示配置值或空 -->
+    {value ?? ''}{unit?.show && unit?.text ? `（${unit.text}）` : ''}<!-- 自动拼接单位 -->
   {/if}
 </th>

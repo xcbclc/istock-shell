@@ -20,9 +20,9 @@ export class CjController {
         list: [
           {
             title: tag,
-            children: result.map((item) => {
+            items: result.map((item) => {
               return {
-                title: item.title,
+                text: item.title,
                 href: item.url,
               };
             }),
@@ -31,19 +31,19 @@ export class CjController {
       };
     }
     let tagIndex = 0;
-    const list: Array<{ title: string; children: Array<{ title: string; href: string }> }> = [];
+    const list: Array<{ title: string; items: Array<{ text: string; href: string }> }> = [];
     result.reduce<Record<string, number>>((record, data) => {
       if (record[data.tag] === undefined) {
         record[data.tag] = tagIndex;
         tagIndex++;
         list.push({
           title: data.tag,
-          children: [{ title: data.title, href: data.url }],
+          items: [{ text: data.title, href: data.url }],
         });
       } else {
         const index = record[data.tag];
-        list[index].children.push({
-          title: data.title,
+        list[index].items.push({
+          text: data.title,
           href: data.url,
         });
       }

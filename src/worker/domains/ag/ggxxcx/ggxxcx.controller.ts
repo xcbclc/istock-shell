@@ -1,5 +1,5 @@
 import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
-import { AKshareReturn } from '@/worker/common';
+import { TableReturn } from '@/worker/common';
 import { GgxxcxService } from './ggxxcx.service';
 import { GgxxcxModel } from './ggxxcx.model';
 import cmdJson from './ggxxcx.cmd';
@@ -15,7 +15,7 @@ export class GgxxcxController {
   @Method({
     alias: cmdJson.个股信息查询.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: GgxxcxModel,
     caption: '东方财富-个股-股票信息',
   })

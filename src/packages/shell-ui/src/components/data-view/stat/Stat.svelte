@@ -29,12 +29,15 @@
 
   const statVariantConfig = StatVariantConfig;
 
+  export type StatItemAlign = keyof (typeof statVariantConfig)['variants']['align'];
+
   // 组件属性接口
   export interface StatProps extends HTMLAttributes<HTMLDivElement> {
     list?: StatItemProps[]; // 统计项列表
     center?: boolean; // 是否居中显示
     shadow?: boolean; // 是否显示阴影
     vertical?: boolean; // 是否垂直布局
+    align?: StatItemAlign; // 对齐方式
   }
 </script>
 
@@ -48,6 +51,7 @@
     center = false, // 默认不居中
     shadow = true, // 默认显示阴影
     vertical = false, // 默认水平布局
+    align,
     class: className = '', // 自定义类名
     children, // 子内容
     ...otherProps // 其他原生属性
@@ -62,6 +66,7 @@
       statVariant({
         shadow,
         vertical,
+        align,
       })
     ),
     className,

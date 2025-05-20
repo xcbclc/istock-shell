@@ -46,21 +46,23 @@
 </script>
 
 <!-- 导航项容器 -->
-<dl class={[tuc('flex flex-wrap gap-2 pt-1.5 pb-1.5'), className]} {...otherProps}>
+<dl class={[tuc('flex flex-col gap-2 pt-2 pb-2'), className]} {...otherProps}>
   {#if children}
     <!-- 优先渲染自定义内容 -->
     {@render children()}
   {:else}
     <!-- 渲染分组标题 -->
     {#if title}
-      <dt class={tuc('w-full text-secondary font-semibold')}>
+      <dt class={tuc('text-secondary font-semibold')}>
         <h3>{title}</h3>
       </dt>
     {/if}
     <!-- 渲染导航项详情 -->
-    {#each items as item}
-      <ShNavListItemDetail {...item} />
-    {/each}
+    <div class={tuc('flex flex-wrap gap-x-4')}>
+      {#each items as item}
+        <ShNavListItemDetail {...item} />
+      {/each}
+    </div>
   {/if}
 </dl>
 

@@ -47,7 +47,7 @@
   role="menu"
 >
   {#if contextmenu}
-    <ul class="border py-2 border-base-300 bg-base-200 shadow-md rounded-md max-w-md overflow-hidden">
+    <ul class="py-2 border border-base-300/80 bg-base-200 shadow-md rounded-md max-w-md overflow-hidden">
       {#each contextmenu as item, index}
         {#each item.menus as menu}
           <li

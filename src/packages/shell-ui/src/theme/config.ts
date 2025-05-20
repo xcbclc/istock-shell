@@ -493,6 +493,11 @@ export const StatVariantConfig = {
     shadow: {
       true: 'shadow',
     },
+    align: {
+      start: 'items-start',
+      center: 'items-center',
+      end: 'items-end',
+    },
   },
   defaultVariants: {},
 };

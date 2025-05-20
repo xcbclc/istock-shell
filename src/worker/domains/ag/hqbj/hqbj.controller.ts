@@ -1,5 +1,5 @@
 import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
-import { AKshareReturn } from '@/worker/common';
+import { TableReturn } from '@/worker/common';
 import { HqbjService } from './hqbj.service';
 import { HqbjModel } from './hqbj.model';
 import cmdJson from './hqbj.cmd';
@@ -15,7 +15,7 @@ export class HqbjController {
   @Method({
     alias: cmdJson.行情报价.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: HqbjModel,
     caption: '东方财富-行情报价',
   })

@@ -10,11 +10,11 @@ import { CookieModel } from './cookie.model';
 export class CookieService {
   async create(data: Omit<TModelData<CookieModel>, 'id'>) {
     const cookieModel: TModelCreate<CookieModel> = {
+      ...data,
+      id: CookieModel.generateId.nextId(),
       createDate: new Date(),
       updateDate: new Date(),
       rowStatus: 1,
-      ...data,
-      id: CookieModel.generateId.nextId(),
     };
     return await CookieModel.createOne(cookieModel);
   }

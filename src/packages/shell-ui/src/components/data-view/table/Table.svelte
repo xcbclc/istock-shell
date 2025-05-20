@@ -227,7 +227,7 @@
   {:else}
     <!-- 渲染表格标题 -->
     {#if caption}
-      <caption>{caption}</caption>
+      <caption class="py-2 text-lg font-semibold">{caption}</caption>
     {/if}
 
     <!-- 渲染列配置 -->

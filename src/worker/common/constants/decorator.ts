@@ -1,1 +1,1 @@
-export const CONTROLLER_AKSHARE_RETURN_METADATA = Symbol('controller.akshare.return');
+export const CONTROLLER_TABLE_RETURN_METADATA = Symbol('controller.akshare.return');

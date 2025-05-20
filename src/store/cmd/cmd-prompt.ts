@@ -22,7 +22,7 @@ export interface ICmdPromptWritable extends Writable<IPrompt> {}
 
 export interface ICmdPromptTextsWritable extends Writable<TPromptText[]> {}
 
-export const LOCAL_STORE_DOMAINS = 'local_store_domains';
+export const LOCAL_STORE_DOMAINS = 'istock_local_store_domains';
 
 export const getCmdDynamicPrompt = (ctx: CmdWindowContext) => {
   const storeDomains = sessionStorage.getItem(`${LOCAL_STORE_DOMAINS}_${ctx.windowId}`);

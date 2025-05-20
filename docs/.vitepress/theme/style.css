@@ -146,27 +146,28 @@
 /**
  * tailwindcss样式冲突
  */
-:not(.vp-raw) .divider{
+:not(.vp-raw) .divider {
   margin-top: 0;
   margin-bottom: 0;
-  &:before, &:after {
+  &:before,
+  &:after {
     display: none;
   }
 }
-:not(.vp-raw) .outline{
+:not(.vp-raw) .outline {
   outline-style: var(--vp-c-bg-soft);
 }
-.VPNavBarMenu.menu{
+.VPNavBarMenu.menu {
   flex-direction: row;
   padding: 0;
   flex-wrap: nowrap;
 }
-.VPNavScreenMenu.menu{
+.VPNavScreenMenu.menu {
   width: auto;
 }
-.VPLocalNav .container{
+.VPLocalNav .container {
   max-width: unset;
 }
-.VPLocalNav .container .menu{
+.VPLocalNav .container .menu {
   flex-direction: row;
 }

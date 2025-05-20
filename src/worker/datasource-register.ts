@@ -29,6 +29,7 @@ import { TzrlModel } from '@domains/tzrl/tzrl/tzrl.model';
 import { CookieModel } from '@domains/global/setting/cookie/cookie.model';
 import { CdfceshqsjModel } from '@domains/cdfc/cdesf/cdfceshqsj.model';
 import { CdfcjysjModel } from '@domains/cdfc/cdesf/cdfcjysj.model';
+import { ThemeModel } from '@domains/global/setting/theme/theme.model';
 
 export const indexedDataSourceModels = [
   UserModel,
@@ -37,6 +38,7 @@ export const indexedDataSourceModels = [
   CookieModel,
   KzzsdResultModel,
   StockCodeResultModel,
+  ThemeModel,
 ];
 export const akShareFetchDataSourceModels = [
   SzgpsczmModel,
@@ -57,9 +59,8 @@ export const akShareFetchDataSourceModels = [
   PqsjlModel,
   LsfbsjModel,
   StockCodeModel,
-  KzzsssjModel,
 ];
-export const fetchDataSourceModels = [AiModel, TzrlModel, KzzsdModel];
+export const fetchDataSourceModels = [AiModel, TzrlModel, KzzsdModel, KzzsssjModel];
 export const teableDataSourceModels = [CdfceshqsjModel, CdfcjysjModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
 
@@ -69,7 +70,7 @@ export const initDataSource = async () => {
     type: 'indexedDB',
     entities: indexedDataSourceModels,
     dbName: 'istock',
-    version: 7,
+    version: 8,
   });
   await indexedDataSource.initialize();
 

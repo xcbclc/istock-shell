@@ -41,6 +41,7 @@ export class KzzsdController {
                 text: 'https://www.jisilu.cn/question/489447',
                 href: 'https://www.jisilu.cn/question/489447',
                 tag: 'a',
+                target: '_blank',
               },
             ],
           },

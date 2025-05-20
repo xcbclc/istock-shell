@@ -1,12 +1,14 @@
 import { Global, Domain } from '@istock/iswork';
 import { CookieService } from './cookie/cookie.service';
 import { CookieController } from './cookie/cookie.controller';
+import { ThemeService } from './theme/theme.service';
+import { ThemeController } from './theme/theme.controller';
 
 @Global()
 @Domain({
   name: 'setting',
   viewName: '设置',
-  providers: [CookieService],
-  controllers: [CookieController],
+  providers: [CookieService, ThemeService],
+  controllers: [CookieController, ThemeController],
 })
 export class SettingDomain {}

@@ -1,5 +1,5 @@
 import { CmdRoute, CmdRouteOptions, Controller, Method, Payload } from '@istock/iswork';
-import { AKshareReturn, type TCmdRequest, type EAdjust, withStockCodePrefix } from '@/worker/common';
+import { TableReturn, type TCmdRequest, type EAdjust, withStockCodePrefix } from '@/worker/common';
 import {
   LshqsjModel,
   LshqxlModel,
@@ -39,7 +39,7 @@ export class LshqsjController {
   @Method({
     alias: cmdJson.历史行情数据.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: LshqsjModel,
     caption: '历史行情数据-东财',
     pipe: '日期:*·格式化·AK日期',
@@ -58,7 +58,7 @@ export class LshqsjController {
   @Method({
     alias: cmdJson.历史行情新浪.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: LshqxlModel,
     caption: '历史行情数据-新浪',
   })
@@ -75,7 +75,7 @@ export class LshqsjController {
   @Method({
     alias: cmdJson.历史行情腾讯.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: LshqtxModel,
     caption: '历史行情数据-腾讯',
   })
@@ -92,7 +92,7 @@ export class LshqsjController {
   @Method({
     alias: cmdJson.分时数据新浪.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: FssjxlModel,
     caption: '分时数据-新浪',
   })
@@ -108,7 +108,7 @@ export class LshqsjController {
   @Method({
     alias: cmdJson.分时数据东财.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: FssjdcModel,
     caption: '分时数据-东财',
   })
@@ -126,7 +126,7 @@ export class LshqsjController {
   @Method({
     alias: cmdJson.日内分时数据东财.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: RnfssjdcModel,
     caption: '日内分时数据-东财',
   })
@@ -138,7 +138,7 @@ export class LshqsjController {
   @Method({
     alias: cmdJson.盘前数据.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: PqsjlModel,
     caption: '盘前数据',
   })

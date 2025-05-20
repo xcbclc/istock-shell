@@ -1,8 +1,11 @@
-import { CmdRoute, CmdRouteOptions, Component, Controller, Method, type TModelData } from '@istock/iswork';
-import { getStartAndEndOfWeek, toLocaleDateString } from '@istock/util';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import { CmdRoute, CmdRouteOptions, Component, Controller, Method } from '@istock/iswork';
+import { getStartAndEndOfWeek } from '@istock/util';
 import { TzrlService } from './tzrl.service';
-import { type TzrlModel } from './tzrl.model';
 import cmdJson from './tzrl.cmd';
+
+dayjs.extend(utc);
 
 @Controller({
   alias: 'tzrl',
@@ -14,7 +17,7 @@ export class TzrlController {
   @Method({
     alias: cmdJson.投资日历.cmd,
   })
-  @Component('ShCalendar')
+  @Component('ShICalendar')
   async getCalendar(
     @CmdRouteOptions(cmdJson.投资日历.options.lx)
     qtypeStr: string = 'newstock_apply,newstock_onlist,kzzsg'
@@ -38,21 +41,31 @@ export class TzrlController {
           (item) => item.title && (item.title.includes('申购日') || item.title.includes('上市日'))
         );
       }
-      return result;
+      return result.map((item) => {
+        item.tag = this.tzrlService.getJisiluTypeText(qtype) ?? '';
+        item.priority = this.tzrlService.getJisiluPriorityByType(qtype);
+        return item;
+      });
     });
     const list = await Promise.all(promises);
     return {
-      type: 'week',
-      eventRecord: list.flat(1).reduce<Record<string, Array<TModelData<TzrlModel>>>>((record, item) => {
-        const key = toLocaleDateString(new Date(item.start), 'YYYY-MM-DD');
-        if (!record[key]) {
-          record[key] = [];
-        }
-        record[key].push(item);
-        return record;
-      }, {}),
-      tags: qtypes.map((type, index) => {
-        return { tag: this.tzrlService.getJisiluTypeText(type), color: colors[index] };
+      currentView: 'week',
+      onlyView: true,
+      events: list.flat(1).map((item) => {
+        return {
+          uid: item.id,
+          sequence: 1,
+          summary: `${item.title}${item.tag ? '（' + item.tag + '）' : ''}`,
+          description: item.description,
+          dtStart: dayjs(item.start).format('YYYYMMDD'),
+          dtStamp: dayjs().utc().format('YYYYMMDDTHHmmss') + 'Z',
+          categories: [item.tag],
+          url: item.url,
+          priority: item.priority,
+          extra: {
+            代码: item.code,
+          },
+        };
       }),
     };
   }

@@ -141,7 +141,11 @@
    */
   const formatDateTime = (dateTime?: string) => {
     if (!dateTime) return '';
-    return parseICalDateTime(dateTime).format('YYYY-MM-DD HH:mm');
+    const day = parseICalDateTime(dateTime);
+    if (dateTime.length === 8) {
+      return day.format('YYYY-MM-DD');
+    }
+    return day.format('YYYY-MM-DD HH:mm');
   };
   /**
    * 将额外数据对象转成能浏览的数据
@@ -193,6 +197,15 @@
               class={[tuc('badge badge-outline badge-sm shadow-xs transition-all'), getPriorityColor(data.priority)]}
               >优先级: {getPriorityLevelText(data.priority)}</span
             >
+            {#if data.url}
+              <a
+                href={data.url}
+                class={[
+                  tuc('badge badge-outline badge-sm shadow-xs hover:badge-soft transition-all'),
+                  getPriorityColor(data.priority),
+                ]}>关联地址</a
+              >
+            {/if}
           </div>
         </div>
 
@@ -492,7 +505,7 @@
             <div class={tuc('icalendar-modal-field')}>
               <h3 class={tuc('icalendar-modal-field-title')}>
                 <span
-                  class={tuc('inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral/10 text-neutral')}
+                  class={tuc('inline-flex items-center justify-center w-5 h-5 rounded-full bg-accent/10 text-accent')}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

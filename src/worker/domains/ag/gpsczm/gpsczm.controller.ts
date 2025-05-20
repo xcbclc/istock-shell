@@ -2,7 +2,7 @@ import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
 import { GpsczmService } from './gpsczm.service';
 import { SzdqjypxModel, SzgphycjModel, SzmrgkModel, SzgpsczmModel, SzlbtjModel } from './gpsczm.model';
 import cmdJson from './gpsczm.cmd';
-import { AKshareReturn } from '@/worker/common';
+import { TableReturn } from '@/worker/common';
 
 @Controller({
   alias: 'gpsczm',
@@ -15,7 +15,7 @@ export class GpsczmController {
   @Method({
     alias: cmdJson.上证股票市场总貌.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: SzgpsczmModel,
     caption: '上证股票市场总貌',
     unit: '*:流通股本·亿，*:总市值·亿，*:流通市值·亿，*:总股本·亿',
@@ -28,7 +28,7 @@ export class GpsczmController {
   @Method({
     alias: cmdJson.深证类别统计.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: SzlbtjModel,
     caption: '深证类别统计',
   })
@@ -40,7 +40,7 @@ export class GpsczmController {
   @Method({
     alias: cmdJson.深证地区交易排序.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: SzdqjypxModel,
     caption: '深证地区交易排序',
   })
@@ -52,7 +52,7 @@ export class GpsczmController {
   @Method({
     alias: cmdJson.深证股票行业成交.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: SzgphycjModel,
     caption: '深证股票行业成交',
   })
@@ -70,7 +70,7 @@ export class GpsczmController {
   @Method({
     alias: cmdJson.上证每日概况.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: SzmrgkModel,
     caption: '上证每日概况',
     unit: '*:市价总值·亿,*:成交量·亿,*:成交金额·亿,*:流通市值·亿',

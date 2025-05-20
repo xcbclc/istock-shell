@@ -67,8 +67,8 @@ export class KzzsdService {
         table: this.toTableData(lastResult),
         texts: [
           {
-            color: 'danger',
-            text: '未到该策略执行周期',
+            color: 'error',
+            text: '未到该策略执行周期，无需轮回操作',
           },
         ],
       };
@@ -79,7 +79,7 @@ export class KzzsdService {
         table: this.toTableData([]),
         texts: [
           {
-            color: 'danger',
+            color: 'error',
             text: `市场上可转债双低均值大于等于${averageDblow}，不满足进入条件`,
           },
         ],
@@ -102,7 +102,7 @@ export class KzzsdService {
         table: this.toTableData([]),
         texts: [
           {
-            color: 'danger',
+            color: 'error',
             text: '可转债总数50只以内或可选标的小于5时，不满足标的选择条件',
           },
         ],
@@ -161,7 +161,7 @@ export class KzzsdService {
         table: this.toTableData(this.addDblowListStatus(newResult, '退')),
         texts: [
           {
-            color: 'danger',
+            color: 'error',
             text,
           },
         ],
@@ -172,7 +172,7 @@ export class KzzsdService {
         table: this.toTableData(this.addDblowListStatus(newResult, '退')),
         texts: [
           {
-            color: 'danger',
+            color: 'error',
             text: '双低均值大于170，已达到退出条件',
           },
         ],
@@ -269,7 +269,7 @@ export class KzzsdService {
    * @param list 可转债列表
    */
   toTableData(list: Array<TModelData<KzzsdModel>>) {
-    const headerRecord: { [k in TModelData<KzzsdModel>]: string } = {
+    const headerRecord: Record<string, string> = {
       bond_id: '转债代码',
       bond_nm: '转债名称',
       price: '转债现价',
@@ -289,20 +289,22 @@ export class KzzsdService {
     return {
       caption: '可转债双低轮动策略',
       thead: headerKeys.map((k) => {
-        return { value: headerRecord[k] };
+        return { value: headerRecord[k], dataKey: headerRecord[k] };
       }),
       tbody: list.map((item) => {
         return headerKeys.map((k) => {
+          const dataKey = headerRecord[k];
           if (k === 'bond_nm') {
             return {
               value: item[k] + (item.status ? `（${item.status?.join('、')}）` : ''),
-              style: item.status?.length ? 'color: var(--color-primary-lighter)' : '',
+              dataKey,
+              style: item.status?.length ? 'color: var(--color-primary)' : '',
             };
           }
           if (k === 'premium_rt') {
-            return { value: item[k] + '%' };
+            return { value: item[k] + '%', dataKey };
           }
-          return { value: item[k] };
+          return { value: item[k], dataKey };
         });
       }),
     };

@@ -14,6 +14,10 @@ export class TzrlService {
     return this.jisilu.typeRecord[type];
   }
 
+  getJisiluPriorityByType(type: string) {
+    return this.jisilu.priorityRecord[type];
+  }
+
   async findJisiluCalendar(query: { qtype: string; start: string; end: string }, color?: string) {
     const list = await TzrlModel.run<Array<TModelData<TzrlModel>>>('/data/calendar/get_calendar_data/', {
       method: 'get',

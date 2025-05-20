@@ -17,10 +17,6 @@ export interface ICookieManageUiModelWritable extends Writable<TCookieManageUiMo
   updateEditState: (index: number, state: boolean) => void;
 }
 
-/**
- * 获取添加命令别名store
- * @param ctx
- */
 export const getCookieManage = (ctx: CmdWindowContext) => {
   const cookieManage: ICookieManageUiModelWritable = Object.create(
     writable({ title: 'cookie管理', isOpen: false, list: [] })

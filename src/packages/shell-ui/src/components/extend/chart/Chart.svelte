@@ -48,6 +48,7 @@
   // 响应式状态
   let containerElement: HTMLElement | undefined = $state(); // 图表容器元素
   let chart: Chart | undefined = $state(); // 图表实例
+  let isInViewport: boolean = $state(false); // 是否在视区内
 
   // 响应式更新图表配置
   $effect(() => {
@@ -60,22 +61,55 @@
   // 响应式控制图表显示/隐藏
   $effect(() => {
     if (chart) {
-      show ? chart.show() : chart.hide();
+      // 只有当show为true且元素在视区内时才显示图表
+      show && isInViewport ? chart.show() : chart.hide();
     }
   });
 
-  // 组件挂载时初始化图表
+  // 创建交叉观察器实例
+  let observer: IntersectionObserver | undefined;
+
+  // 组件挂载时初始化图表和交叉观察器
   onMount(async () => {
     await tick();
+
+    // 初始化图表
     chart = new Chart({
       container: containerElement, // 设置容器元素
     });
+
+    // 创建交叉观察器
+    observer = new IntersectionObserver(
+      (entries) => {
+        // 更新元素是否在视区内的状态
+        isInViewport = entries[0].isIntersecting;
+      },
+      {
+        threshold: 0.1, // 当10%的元素可见时触发回调
+      }
+    );
+
+    // 开始观察容器元素
+    if (containerElement) {
+      observer.observe(containerElement);
+    }
   });
 
-  // 组件销毁时清理图表实例
+  // 组件销毁时清理图表实例和交叉观察器
   onDestroy(() => {
+    // 清理图表实例
     chart && chart.destroy();
+
+    // 断开交叉观察器
+    if (observer && containerElement) {
+      observer.unobserve(containerElement);
+      observer.disconnect();
+    }
   });
 </script>
 
-<div bind:this={containerElement} class={[tuc('chat'), className]} {...otherProps}></div>
+<div
+  bind:this={containerElement}
+  class={[tuc(['chat', isInViewport ? 'visible' : 'invisible']), className]}
+  {...otherProps}
+></div>

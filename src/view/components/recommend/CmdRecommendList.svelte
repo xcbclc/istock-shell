@@ -57,7 +57,9 @@
   role="menu"
 >
   {#if list}
-    <ul class="absolute left-0 bottom-[2em] z-10 overflow-hidden bg-base-200 shadow-md rounded-md max-w-md">
+    <ul
+      class="absolute left-0 bottom-[2em] z-10 overflow-hidden border border-base-300/80 bg-base-200 shadow-md rounded-md max-w-md"
+    >
       {#if list.length}
         {#each list as item, index}
           <li
@@ -68,7 +70,7 @@
               : ''}"
             onclick={() => onRecommendSelected?.(item)}
           >
-            <span class="text-primary">{item.label ?? item.value}</span>
+            <span class="text-primary whitespace-nowrap">{item.label ?? item.value}</span>
             {#if item.description}
               <span class="text-xs opacity-70">{item.description}</span>
             {/if}

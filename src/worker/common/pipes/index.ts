@@ -1,5 +1,5 @@
 import table from './table';
-import akshare from './akshare';
+import tableReturn from './table-return';
 import unit from './unit';
 import methodReturn from './return';
 import pipeArguments from './pipe-args';
@@ -7,7 +7,7 @@ import { formatAlias } from './format';
 
 export * from './table';
 export * from './unit';
-export * from './akshare';
+export * from './table-return';
 export * from './return';
 export * from './pipe-args';
 export * from './table-query';
@@ -30,8 +30,8 @@ export const getPipeAlias = (): Record<string, Function> => {
     '表格·透视': table.createPivotTable,
     '表格·格式化': table.format,
     '表格·单位': unit.withUnit,
-    'AKShare·二维表格': akshare.getTableData,
-    '返回·标准表格': methodReturn.matrixToUiTableData,
+    '表格·标准数据': tableReturn.getTableData,
+    '表格·标准返回': methodReturn.matrixToUiTableData,
     '管道参数·表格单位': pipeArguments.parseCmdInfoToUnit,
   };
 };

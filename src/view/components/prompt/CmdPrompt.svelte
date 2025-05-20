@@ -13,7 +13,7 @@
   };
 </script>
 
-<div class="flex items-center font-mono text-sm">
+<div class="flex items-center font-mono text-sm whitespace-nowrap">
   {#each texts as item}
     <span class={`mr-2 is-${item.type}`}>
       {#if item.type === 'time'}
@@ -25,20 +25,21 @@
   {/each}
 </div>
 
-<style lang="scss">
+<style>
+  @reference "@istock/shell-ui/src/style/daisyui.css";
   .is-username {
-    @apply text-secondary font-medium;
+    @apply text-accent font-semibold;
   }
 
   .is-path {
-    @apply text-secondary font-medium;
+    @apply text-accent font-semibold;
   }
 
   .is-time {
-    @apply text-secondary-focus;
+    @apply text-secondary/80 font-medium;
   }
 
   .is-split {
-    @apply text-base-content/70;
+    @apply text-base-content/60;
   }
 </style>

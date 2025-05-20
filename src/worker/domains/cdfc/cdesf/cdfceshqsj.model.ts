@@ -20,5 +20,5 @@ export class CdfceshqsjModel extends BaseModel {
 
   值!: number;
   单位!: string;
-  数据源!: '房小团' | '数据源';
+  数据源!: '房小团' | '贝壳';
 }

@@ -1,44 +1,35 @@
-import { type TControllerMethodComponentOutput } from '@istock/iswork';
-import type { G2Spec } from '@antv/g2';
+import { type TControllerMethodComponentOutput, type TModelData } from '@istock/iswork';
+import type { G2Spec, LightTheme, DarkTheme } from '@antv/g2';
 import { isNil, ScopeError, getMessageDataPK, EMessageDataFieldType } from '@istock/util';
 import type { TUiTableProps, TTableFilterConditionRange, TTableFilterItem } from '@/worker/common';
 import { parseFilterConditions } from '@/worker/common';
-import g2Theme from './g2-theme.json';
 import type { TBarOption, TLineOption, TPieOption, TStockOption } from './chart.cmd';
+import { type ThemeService } from '../setting/theme/theme.service';
+import { type ThemeModel } from '../setting/theme/theme.model';
+import { getG2Theme } from './g2-theme';
 
 export type TChartData = Array<Record<string, unknown>>;
 
 export type TChartOptions = G2Spec;
 
 export class ChartBaseService {
-  readonly #theme: 'dark' = 'dark';
-  readonly #textColor = '#958881';
+  themeConfig: TModelData<ThemeModel> | undefined;
+  constructor(readonly themeService: ThemeService) {
+    void this.themeService.getList().then(([theme]) => {
+      this.themeConfig = theme;
+    });
+  }
+
   #getDefaultConfig() {
     return {
       autoFit: true,
     };
   }
 
-  #getThemeConfig() {
+  #getThemeConfig(): LightTheme | DarkTheme {
     return {
-      type: this.#theme,
-      ...g2Theme,
-      ...{
-        axis: {
-          labelFill: this.#textColor,
-          titleFill: this.#textColor,
-        },
-        label: {
-          fill: this.#textColor,
-        },
-        innerLabel: {
-          fill: this.#textColor,
-        },
-        legendCategory: {
-          labelFill: this.#textColor,
-          itemLabelFill: this.#textColor,
-        },
-      },
+      type: (this.themeConfig?.variables?.['color-scheme'] ?? 'dark') as 'light' | 'dark',
+      ...getG2Theme(this.themeConfig?.variables),
     };
   }
 

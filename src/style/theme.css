@@ -1,0 +1,6 @@
+:root:has(input.theme-controller[value=business]:checked),
+[data-theme=business]{
+    --color-primary: oklch(67.6% 0.19 42);
+    --color-accent: oklch(41.703% .099 251.473);
+    --color-base-300: oklch(18% 0 0);
+}

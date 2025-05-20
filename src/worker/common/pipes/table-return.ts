@@ -1,17 +1,18 @@
 import { isNumber, isString } from '@istock/util';
+import type { TMatrixTable, TTableBody, TTableHeader } from '../types';
 import { NumberUnits } from '../constants';
 import { parseFilterConditions } from './table-query';
-
 /**
- * 获取akshare返回数据表格数据
+ * 获取table返回数据表格数据
  * @param response
  * @param headers
+ * @param unit
  */
 export const getTableData = (
   response: Array<Record<string, unknown>>,
   headers: string[],
   unit: string
-): unknown[][] => {
+): TMatrixTable => {
   const conditions = parseFilterConditions(unit);
   const conditionRecord = conditions.reduce<Record<string, string>>((record, condition) => {
     const { row, column, pipe } = condition;
@@ -24,12 +25,16 @@ export const getTableData = (
     return record;
   }, {});
   const columnPipeRecord: Record<string | number, string> = {};
-  const matrix: unknown[][] = response.map((item) => {
+  const thead: TTableHeader[] = headers.map((header) => ({
+    value: header,
+    dataKey: header,
+  }));
+  const tbody: TTableBody[][] = response.map((item) => {
     let rowPipe: string | null = null;
-    return headers.map((key, columnIndex) => {
-      let value: unknown = item[key];
-      if (conditionRecord[key] && !columnPipeRecord[columnIndex]) {
-        columnPipeRecord[columnIndex] = conditionRecord[key];
+    return thead.map((head, columnIndex) => {
+      let value = item[head.dataKey];
+      if (conditionRecord[head.dataKey] && !columnPipeRecord[columnIndex]) {
+        columnPipeRecord[columnIndex] = conditionRecord[head.dataKey]; // 保存列表管道
       }
       // 第一列默认为行标题，获取行管道单位
       if (columnIndex === 0) {
@@ -54,10 +59,14 @@ export const getTableData = (
           value = number.toFixed(2);
         }
       }
-      return value ?? null;
+      return {
+        value: value ?? null,
+        dataKey: head.dataKey,
+      };
     });
   });
-  return [headers, ...matrix];
+
+  return [thead, ...tbody];
 };
 
 export default {

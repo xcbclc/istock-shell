@@ -1,5 +1,5 @@
 import { CmdRoute, CmdRouteArguments, Controller, Method } from '@istock/iswork';
-import { AKshareReturn } from '@/worker/common';
+import { TableReturn } from '@/worker/common';
 import { SshqsjService } from './sshqsj.service';
 import { SshqsjModel, SshqxlModel } from './sshqsj.model';
 import cmdJson, { EDataType } from './sshqsj.cmd';
@@ -15,7 +15,7 @@ export class SshqsjController {
   @Method({
     alias: cmdJson.实时行情数据.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: SshqsjModel,
     caption: '实时行情数据-东财',
   })
@@ -27,7 +27,7 @@ export class SshqsjController {
   @Method({
     alias: cmdJson.实时行情新浪.cmd,
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: SshqxlModel,
     caption: '实时行情数据-新浪',
   })

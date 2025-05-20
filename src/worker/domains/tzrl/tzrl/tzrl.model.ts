@@ -9,4 +9,6 @@ export class TzrlModel extends BaseModel {
   title!: string;
   url!: string;
   color!: string;
+  tag!: string;
+  priority!: number;
 }

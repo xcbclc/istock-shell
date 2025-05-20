@@ -64,10 +64,23 @@
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   const unSubscribeScroll = cmdOutput.subscribe(scrollEnd);
 
+  const onSectionKeydown = (ev) => {
+    if (ctx.isExample) return;
+    const currentIndex = handleBlockContextmenu.getCurrentIndex();
+    if (currentIndex === -1) return;
+    const currentBlock = $cmdOutput.list[currentIndex];
+    if (currentBlock) {
+      void handleBlockContextmenu.handleMenuShortcutKey(ev, currentBlock);
+    }
+  };
+
   const onSubmit = (messageId: string, payload: any) => {
     ctx.sendMessageToChannel(messageId, payload);
   };
+
+  document.addEventListener('keydown', onSectionKeydown);
   onDestroy(() => {
+    document.removeEventListener('keydown', onSectionKeydown);
     unSubscribeScroll();
   });
 </script>
@@ -92,11 +105,8 @@
   >
     {#each $cmdOutput.list.slice(range?.start, range?.end + 1) as block, index (block.id)}
       <section
-        class="p-2 border-b border-base-300/20 hover:bg-base-200 active:bg-base-200 transition-colors"
-        onkeydown={async (ev) => {
-          if (ctx.isExample) return;
-          await handleBlockContextmenu.handleMenuShortcutKey(ev, block);
-        }}
+        tabindex="0"
+        class="p-2 rounded-sm border-b border-base-300/20 -outline-offset-1 outline-base-300 hover:bg-base-200 active:bg-base-200 focus-visible:outline-2 transition-colors"
         oncontextmenu={(ev) => {
           if (ctx.isExample) return;
           handleBlockContextmenu.handleOpenBlockContextmenu(ev);
@@ -104,6 +114,10 @@
         onmouseenter={(ev) => {
           if (ctx.isExample) return;
           handleBlockContextmenu.handleBlockMouseEnter(ev, index);
+        }}
+        onmouseleave={(ev) => {
+          if (ctx.isExample) return;
+          handleBlockContextmenu.handleMouseleave(ev, index);
         }}
         onclick={(ev) => {
           if (ctx.isExample) return;
@@ -114,7 +128,7 @@
           <!-- 提示符 -->
           <CmdPrompt texts={block.promptTexts} />
           <!-- 命令输入 -->
-          <div class="font-mono text-sm flex-auto">
+          <div class="font-mono text-sm flex-auto break-all">
             {#each getCmdInputTokens(block.input) as token, tIndex (tIndex)}
               {#if [ETokenType.lineN, ETokenType.lineR].includes(token.type)}
                 <br />

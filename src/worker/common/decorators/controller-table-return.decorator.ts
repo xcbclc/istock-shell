@@ -1,9 +1,9 @@
 import { type ApplicationContext, BaseModel, Decorator, type TModelType } from '@istock/iswork';
 import { ScopeError } from '@istock/util';
-import { CONTROLLER_AKSHARE_RETURN_METADATA } from '../constants';
+import { CONTROLLER_TABLE_RETURN_METADATA } from '../constants';
 import { parseFilterConditions, parseCmdInfoToUnit } from '../index';
 
-export type TAkShareReturnOptions = {
+export type TTableReturnOptions = {
   Model: TModelType;
   caption?: string;
   unit?: string; // 某些数据不是以个分位开始的，初始值需要重置单位。 列名称:行名称·单位
@@ -11,25 +11,24 @@ export type TAkShareReturnOptions = {
 };
 
 /**
- * 控制器方法装饰器，定义控制器方法返回数据，针对akshare返回的数据
+ * 控制器方法装饰器，定义控制器方法返回数据，处理成标准表格返回数据
  *
  */
-export class ControllerAKshareReturnDecorator extends Decorator.ControllerMethodReturnDecorator {
-  readonly #defaultPipeName = 'AKShare·二维表格';
+export class ControllerTableReturnDecorator extends Decorator.ControllerMethodReturnDecorator {
   constructor() {
-    super(CONTROLLER_AKSHARE_RETURN_METADATA);
+    super(CONTROLLER_TABLE_RETURN_METADATA);
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error 为了复用ControllerMethodReturnDecorator装饰器代码
-  handler(options: TAkShareReturnOptions): MethodDecorator {
+  handler(options: TTableReturnOptions): MethodDecorator {
     const { Model, caption, unit, pipe } = options;
     const filterConditions = parseFilterConditions(pipe);
     if (Model && Model.prototype instanceof BaseModel) {
       return super.handler([
         // 转成标准表格数据
         {
-          name: this.#defaultPipeName,
+          name: '表格·标准数据',
           args: [Object.keys(new Model()), unit ?? ''],
         },
         {
@@ -43,12 +42,12 @@ export class ControllerAKshareReturnDecorator extends Decorator.ControllerMethod
         },
         // 返回表格ui所需要的数据
         {
-          name: '返回·标准表格',
+          name: '表格·标准返回',
           args: [caption ?? ''],
         },
       ]);
     } else {
-      throw new ScopeError(`domains.${this.constructor.name}`, 'AKshare装饰器参数错误');
+      throw new ScopeError(`domains.${this.constructor.name}`, 'Table装饰器参数错误');
     }
   }
 }

@@ -1,5 +1,5 @@
 import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
-import { AKshareReturn, withStockCodePrefix } from '@/worker/common';
+import { TableReturn, withStockCodePrefix } from '@/worker/common';
 import { LsfbsjModel } from './lsfbsj.model';
 import { LsfbsjService } from './lsfbsj.service';
 import cmdJson from './lsfbsj.cmd';
@@ -16,7 +16,7 @@ export class LsfbsjController {
   @Method({
     alias: cmdJson.历史分笔数据.cmd, // 定义控制器方法别名
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: LsfbsjModel, // 对应数据模型，方便把接口数据解析成二维数组
     caption: cmdJson.历史分笔数据.source.title, // 表格显示标题
   })

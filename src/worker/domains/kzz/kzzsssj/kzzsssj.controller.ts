@@ -1,5 +1,5 @@
-import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
-import { AKshareReturn } from '@/worker/common';
+import { CmdRoute, Controller, Method } from '@istock/iswork';
+import { TableReturn } from '@/worker/common';
 import { KzzsssjModel } from './kzzsssj.model';
 import { KzzsssjService } from './kzzsssj.service';
 import cmdJson from './kzzsssj.cmd';
@@ -16,11 +16,12 @@ export class KzzsssjController {
   @Method({
     alias: cmdJson.可转债实时数据.cmd, // 定义控制器方法别名
   })
-  @AKshareReturn({
+  @TableReturn({
     Model: KzzsssjModel, // 对应数据模型，方便把接口数据解析成二维数组
     caption: cmdJson.可转债实时数据.source.title, // 表格显示标题
+    unit: '*:涨跌幅·%，*:正股涨跌·%，*:转股溢价率·%，*:转债流通市值占比·%，*:剩余规模·亿，*:成交额·万',
   })
-  async bondCbJsl(@CmdRouteOptions(cmdJson.可转债实时数据.options.cookie) cookie?: string) {
-    return await this.kzzsssjService.bondCbJsl(cookie);
+  async bondCbJsl() {
+    return await this.kzzsssjService.bondCbJsl();
   }
 }

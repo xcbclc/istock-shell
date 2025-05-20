@@ -20,7 +20,7 @@
   const { window, class: className = '' }: CmdWindowProp = $props();
   const worker = getWorker();
   const cmdWindowCtx = CmdWindowsManager.cmdWindowsManager.getCmdContext(window.id);
-  const { search, cookieManage, addCmdAlias } = cmdWindowCtx.domainStore;
+  const { search, cookieManage, addCmdAlias, themeConfig } = cmdWindowCtx.domainStore;
   const { cmdWindow } = cmdWindowCtx.cmdStore;
   let canListened = $state(false);
 
@@ -44,9 +44,47 @@
 
   $effect(() => {
     if (canListened && cmdWindowCtx) {
-      cmdWindowCtx.initStore().catch((e: any) => {
-        throw e instanceof Error ? e : new ScopeError('view', '初始化store报错');
-      });
+      cmdWindowCtx
+        .initStore()
+        .then(async () => {
+          const themeName = document.documentElement.getAttribute('data-theme') ?? '';
+          if (themeName) {
+            const keys = [
+              'color-scheme',
+              '--color-base-100',
+              '--color-base-200',
+              '--color-base-300',
+              '--color-base-content',
+              '--color-primary',
+              '--color-primary-content',
+              '--color-secondary',
+              '--color-secondary-content',
+              '--color-accent',
+              '--color-accent-content',
+              '--color-neutral',
+              '--color-neutral-content',
+              '--color-info',
+              '--color-info-content',
+              '--color-success',
+              '--color-success-content',
+              '--color-warning',
+              '--color-warning-content',
+              '--color-error',
+              '--color-error-content',
+            ];
+            const variables = keys.reduce<Record<string, string>>((record, key) => {
+              record[key] = getComputedStyle(document.documentElement).getPropertyValue(key);
+              return record;
+            }, {});
+            await themeConfig.createOrUpdate({
+              name: themeName,
+              variables,
+            });
+          }
+        })
+        .catch((e: any) => {
+          throw e instanceof Error ? e : new ScopeError('view', '初始化store报错');
+        });
     }
   });
 

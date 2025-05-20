@@ -15,7 +15,7 @@ export const getUnitOption = (unitOption: Partial<TControllerMethodCmdRouteOptio
     parameter: ['-dw', '--单位'],
     parameterType: ['array'],
     description: `设置表格单位，单位值支持（万亿、亿、千万、百万、十万、万、千、百、十），可带多个参数。
-      格式如：列名称:行名称·单位 或 *:行名称·单位 或 列名称:*·单位 或 列名称1:*·单位，列名称2:*·单位`,
+      格式如：1、列名称:行名称·单位 2、*:行名称·单位 3、列名称:*·单位 4、列名称1:*·单位 5、列名称2:*·单位`,
     default: '',
     optional: true,
     choices: [],

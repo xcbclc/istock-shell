@@ -10,6 +10,6 @@ module.exports = {
   plugins: ['prettier-plugin-svelte', 'prettier-plugin-vue'],
   overrides: [
     { files: '*.svelte', options: { parser: 'svelte' } },
-    { files: '*.vue', options: { parser: 'vue' } }
+    { files: '*.vue', options: { parser: 'vue' } },
   ],
 };

@@ -63,14 +63,22 @@ export const handleBlockContextmenuFactory = (
     if (isViewContextmenu) return;
     hoverBlockIndex = index;
     if (element) {
-      element.focus();
+      element.focus({
+        preventScroll: true,
+      });
     }
     updatePosition({ offset: { x: -1, y: -1 } });
+  };
+
+  const handleMouseleave = (_ev: MouseEvent, _index: number) => {
+    hoverBlockIndex = -1;
   };
 
   const handleOnClick = (_ev: MouseEvent) => {
     updatePosition({ offset: { x: -1, y: -1 } });
   };
+
+  const getCurrentIndex = () => hoverBlockIndex;
 
   return {
     handleMouseStatus,
@@ -79,5 +87,7 @@ export const handleBlockContextmenuFactory = (
     handleOpenBlockContextmenu,
     handleBlockMouseEnter,
     handleOnClick,
+    handleMouseleave,
+    getCurrentIndex,
   };
 };

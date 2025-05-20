@@ -17,6 +17,6 @@
 
 <section class="flex flex-wrap w-full h-screen bg-base-100 text-base-content overflow-hidden">
   {#each $cmdWindow as window, index (index)}
-    <CmdWindow {window} class={$cmdWindow.length > 1 ? 'border border-base-300/20 ' : ''} />
+    <CmdWindow {window} class={$cmdWindow.length > 1 ? 'border border-base-300/20' : ''} />
   {/each}
 </section>

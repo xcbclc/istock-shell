@@ -1,7 +1,7 @@
 import { decoratorRegister, registerAndWrapHandler } from '@istock/iswork';
-import { ControllerAKshareReturnDecorator } from './controller-akshare-return.decorator';
+import { ControllerTableReturnDecorator } from './controller-table-return.decorator';
 
-export const AKshareReturn = registerAndWrapHandler<ControllerAKshareReturnDecorator>(
+export const TableReturn = registerAndWrapHandler<ControllerTableReturnDecorator>(
   decoratorRegister,
-  ControllerAKshareReturnDecorator
+  ControllerTableReturnDecorator
 );

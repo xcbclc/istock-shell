@@ -1,6 +1,7 @@
 import { isUndefined } from '@istock/util';
 import type { TTableFilterConditions, TTableFilterItem } from './table-query';
 import { ETableFilterOperate } from './table-query';
+import type { TMatrixTable, TTableHeader, TTableBody } from '../types';
 
 export type TTableFormatFilter = {
   row: [number, number] | [];
@@ -9,27 +10,36 @@ export type TTableFormatFilter = {
   rowFilter: (value: unknown) => Boolean;
   columnFilter: (value: unknown) => Boolean;
 };
+
 /**
  * 转置 将表格的行变成列，列变成行。
  * @param matrix
  */
-export function transpose<T>(matrix: T[][]): T[][] {
-  return matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]));
+export function transpose<T extends TTableHeader | TTableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
+  const [headers, ...rows] = matrix;
+  const transposed: [T[], ...T[][]] = [headers, ...headers.map((_, colIndex) => rows.map((row) => row[colIndex]))];
+  return transposed;
 }
 
 /**
  * 90度旋转
  * @param matrix
  */
-export function rotate90<T>(matrix: T[][]): T[][] {
-  return matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]).reverse());
+export function rotate90<T extends TTableHeader | TTableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
+  const [headers, ...rows] = matrix;
+  const rotated: [T[], ...T[][]] = [
+    headers,
+    ...headers.map((_, colIndex) => rows.map((row) => row[colIndex]).reverse()),
+  ];
+
+  return rotated;
 }
 
 /**
  * 180度旋转
  * @param matrix
  */
-export function rotate180<T>(matrix: T[][]): T[][] {
+export function rotate180<T extends TTableHeader | TTableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
   return rotate90(rotate90(matrix));
 }
 
@@ -38,12 +48,19 @@ export function rotate180<T>(matrix: T[][]): T[][] {
  * @param matrix
  * @param columnIndex
  */
-export function sortMatrix<T>(matrix: T[][], columnIndex = 0): T[][] {
-  return matrix.slice().sort((a, b) => {
-    if (a[columnIndex] < b[columnIndex]) return -1;
-    if (a[columnIndex] > b[columnIndex]) return 1;
+export function sortMatrix<T extends TTableHeader | TTableBody>(
+  matrix: [T[], ...T[][]],
+  columnIndex = 0
+): [T[], ...T[][]] {
+  const [headers, ...rows] = matrix;
+  const sortedRows = rows.slice().sort((a, b) => {
+    const aValue: any = a[columnIndex]?.value;
+    const bValue: any = b[columnIndex]?.value;
+    if (aValue < bValue) return -1;
+    if (aValue > bValue) return 1;
     return 0;
   });
+  return [headers, ...sortedRows];
 }
 
 /**
@@ -52,8 +69,14 @@ export function sortMatrix<T>(matrix: T[][], columnIndex = 0): T[][] {
  * @param columnIndex
  * @param filterFunction
  */
-export function filterMatrix<T>(matrix: T[][], columnIndex = 0, filterFunction: (element: T) => boolean): T[][] {
-  return matrix.filter((row) => filterFunction(row[columnIndex]));
+export function filterMatrix<T extends TTableHeader | TTableBody>(
+  matrix: [T[], ...T[][]],
+  columnIndex = 0,
+  filterFunction: (element: T) => boolean
+): [T[], ...T[][]] {
+  const [headers, ...rows] = matrix;
+  const filteredRows = rows.filter((row) => filterFunction(row[columnIndex]));
+  return [headers, ...filteredRows];
 }
 
 /**
@@ -62,17 +85,28 @@ export function filterMatrix<T>(matrix: T[][], columnIndex = 0, filterFunction: 
  * @param table2
  * @param joinColumnIndex
  */
-export function joinTables<T>(table1: T[][], table2: T[][], joinColumnIndex = 0): T[][] {
-  // 简化示例，实际实现可能需要更复杂的逻辑
+export function joinTables<T extends TTableHeader | TTableBody>(
+  table1: [T[], ...T[][]],
+  table2: [T[], ...T[][]],
+  joinColumnIndex = 0
+): [T[], ...T[][]] {
+  const [headers1, ...rows1] = table1;
+  const [headers2, ...rows2] = table2;
+
+  // 合并表头
+  const joinedHeaders = [...headers1, ...headers2.filter((h) => !headers1.some((h1) => h1.value === h.value))];
+
+  // 连接行
   const result: T[][] = [];
-  for (const row1 of table1) {
-    for (const row2 of table2) {
-      if (row1[joinColumnIndex] === row2[joinColumnIndex]) {
-        result.push([...row1, ...row2]);
+  for (const row1 of rows1) {
+    for (const row2 of rows2) {
+      if (row1[joinColumnIndex]?.value === row2[joinColumnIndex]?.value) {
+        result.push([...row1, ...row2.filter((_, i) => !headers1.some((h1) => h1.value === headers2[i]?.value))]);
       }
     }
   }
-  return result;
+
+  return [joinedHeaders, ...result] as [T[], ...T[][]];
 }
 
 /**
@@ -80,8 +114,14 @@ export function joinTables<T>(table1: T[][], table2: T[][], joinColumnIndex = 0)
  * @param table1
  * @param table2
  */
-export function mergeTables<T>(table1: T[][], table2: T[][]): T[][] {
-  return [...table1, ...table2];
+export function mergeTables<T extends TTableHeader | TTableBody>(
+  table1: [T[], ...T[][]],
+  table2: [T[], ...T[][]]
+): [T[], ...T[][]] {
+  const [headers1, ...rows1] = table1;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, ...rows2] = table2; // 假设两个表格的表头相同
+  return [headers1, ...rows1, ...rows2];
 }
 
 /**
@@ -90,23 +130,30 @@ export function mergeTables<T>(table1: T[][], table2: T[][]): T[][] {
  * @param newRowCount
  * @param newColCount
  */
-export function reshape<T>(matrix: T[][], newRowCount: number, newColCount: number): T[][] {
-  if (matrix.length * matrix[0].length !== newRowCount * newColCount) {
+export function reshape<T extends TTableHeader | TTableBody>(
+  matrix: [T[], ...T[][]],
+  newRowCount: number,
+  newColCount: number
+): [T[], ...T[][]] {
+  const [headers, ...rows] = matrix;
+  const flatData: T[] = rows.flat();
+
+  if (flatData.length !== newRowCount * newColCount) {
     throw new Error('Reshape dimensions do not match original data size.');
   }
 
   const result: T[][] = [];
   let row: T[] = [];
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = 0; j < matrix[i].length; j++) {
-      row.push(matrix[i][j]);
-      if (row.length === newColCount) {
-        result.push(row);
-        row = [];
-      }
+
+  for (let i = 0; i < flatData.length; i++) {
+    row.push(flatData[i]);
+    if (row.length === newColCount) {
+      result.push(row);
+      row = [];
     }
   }
-  return result;
+
+  return [headers, ...result] as [T[], ...T[][]];
 }
 
 /**
@@ -114,8 +161,13 @@ export function reshape<T>(matrix: T[][], newRowCount: number, newColCount: numb
  * @param matrix
  * @param columnIndex
  */
-export function aggregateSum(matrix: number[][], columnIndex: number): number {
-  return matrix.reduce((sum, row) => sum + row[columnIndex], 0);
+export function aggregateSum(matrix: TMatrixTable, columnIndex: number): number {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, ...rows] = matrix;
+  return rows.reduce((sum, row) => {
+    const value = row[columnIndex]?.value;
+    return sum + (typeof value === 'number' ? value : 0);
+  }, 0);
 }
 
 /**
@@ -123,16 +175,28 @@ export function aggregateSum(matrix: number[][], columnIndex: number): number {
  * @param matrix
  * @param groupFunction
  */
-export function groupBy<T, K>(matrix: T[][], groupFunction: (row: T[]) => K): Map<K, T[][]> {
+export function groupBy<T extends TTableHeader | TTableBody, K>(
+  matrix: [T[], ...T[][]],
+  groupFunction: (row: T[]) => K
+): Map<K, [T[], ...T[][]]> {
+  const [headers, ...rows] = matrix;
   const groups = new Map<K, T[][]>();
-  matrix.forEach((row) => {
+
+  rows.forEach((row) => {
     const key = groupFunction(row);
     if (!groups.has(key)) {
       groups.set(key, []);
     }
     groups.get(key)?.push(row);
   });
-  return groups;
+
+  // 转换为 [T[], ...T[][]] 格式
+  const result = new Map<K, [T[], ...T[][]]>();
+  groups.forEach((groupRows, key) => {
+    result.set(key, [headers, ...groupRows] as [T[], ...T[][]]);
+  });
+
+  return result;
 }
 
 /**
@@ -142,14 +206,27 @@ export function groupBy<T, K>(matrix: T[][], groupFunction: (row: T[]) => K): Ma
  * @param columnIndex
  * @param valueIndex
  */
-export function createPivotTable(matrix: any[][], rowIndex: number, columnIndex: number, valueIndex: number): any {
-  const result: Record<any, any> = {};
-  matrix.forEach((row) => {
-    if (!result[row[rowIndex]]) {
-      result[row[rowIndex]] = {};
+export function createPivotTable(
+  matrix: TMatrixTable,
+  rowIndex: number,
+  columnIndex: number,
+  valueIndex: number
+): Record<string, Record<string, any>> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, ...rows] = matrix;
+  const result: Record<string, Record<string, any>> = {};
+
+  rows.forEach((row) => {
+    const rowKey = String(row[rowIndex]?.value);
+    const colKey = String(row[columnIndex]?.value);
+    const value = row[valueIndex]?.value;
+
+    if (!result[rowKey]) {
+      result[rowKey] = {};
     }
-    result[row[rowIndex]][row[columnIndex]] = row[valueIndex];
+    result[rowKey][colKey] = value;
   });
+
   return result;
 }
 
@@ -159,8 +236,12 @@ export function createPivotTable(matrix: any[][], rowIndex: number, columnIndex:
  * @param filterConditions
  * @param pipeAlias
  */
-export function format(matrix: any[][], filterConditions: TTableFilterConditions, pipeAlias: Record<string, Function>) {
-  const [headers] = matrix;
+export function format(
+  matrix: TMatrixTable,
+  filterConditions: TTableFilterConditions,
+  pipeAlias: Record<string, Function>
+) {
+  const [headers, ...rows] = matrix;
 
   // 通过列表值查找
   const findIndexByValue = (items: any[], name: string) => {
@@ -200,7 +281,7 @@ export function format(matrix: any[][], filterConditions: TTableFilterConditions
     if (isUndefined(end) && start) {
       end = start + 1;
     }
-    if (start && end) {
+    if (start !== undefined && end !== undefined) {
       return [start, end];
     } else {
       return [];
@@ -250,8 +331,13 @@ export function format(matrix: any[][], filterConditions: TTableFilterConditions
     // 没有范围
     if (!row.length || !column.length) return;
     for (let rowIndex = row[0]; rowIndex < row[1]; rowIndex++) {
-      for (let columnIndex = column[0]; columnIndex < column[1]; columnIndex++) {
-        matrix[rowIndex][columnIndex] = pipe(matrix[rowIndex][columnIndex]);
+      const currentRow = rowIndex === 0 ? headers : rows[rowIndex - 1];
+      if (currentRow) {
+        for (let columnIndex = column[0]; columnIndex < column[1]; columnIndex++) {
+          if (currentRow[columnIndex]) {
+            currentRow[columnIndex].value = pipe(currentRow[columnIndex].value);
+          }
+        }
       }
     }
   });

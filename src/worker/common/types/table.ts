@@ -4,17 +4,19 @@ import type { ENumberUnit, EPercentageUnit } from '../constants';
 
 export type TTableHeader<Key = string> = {
   value: Key;
+  dataKey: string;
   unit?: {
-    value: string;
-    show: Boolean;
+    text?: string;
+    show?: boolean;
   };
 };
 
 export type TTableBody<Value = unknown> = {
   value: Value;
+  dataKey: string;
   unit?: {
-    value: string;
-    show: Boolean;
+    text?: string;
+    show?: boolean;
   };
 };
 

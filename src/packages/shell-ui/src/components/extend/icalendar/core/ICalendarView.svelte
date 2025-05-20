@@ -443,7 +443,9 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            {parseICalDateTime(item.dtStart).format('HH:mm')}
+            {item.dtStart.length === 8
+              ? parseICalDateTime(item.dtStart).format('YYYY-MM-DD')
+              : parseICalDateTime(item.dtStart).format('HH:mm')}
           </div>
         {/if}
         <div
@@ -541,7 +543,11 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <span class="hidden sm:inline-block">{parseICalDateTime(item.dtStart).format('HH:mm')}</span>
+            <span class="hidden sm:inline-block"
+              >{item.dtStart.length === 8
+                ? parseICalDateTime(item.dtStart).format('YYYY-MM-DD')
+                : parseICalDateTime(item.dtStart).format('HH:mm')}</span
+            >
           {/if}
           <span class="truncate">
             {#if 'attendees' in item && item.attendees && item.attendees.length > 0}

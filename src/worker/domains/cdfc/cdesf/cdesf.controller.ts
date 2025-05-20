@@ -19,6 +19,7 @@ export class CdesfController {
         {
           component: 'ShDataGrid',
           props: {
+            itemColWidth: 640,
             ...dataGrid,
           },
         },
@@ -30,6 +31,7 @@ export class CdesfController {
                 color: 'warning',
                 text: '注：主要展示数据来源于成都房小团，卡片中的“周新增挂牌量”和图表中的“周成交量/新增挂牌量走势”数据来自贝壳。数据仅提供参考，不构成任何建议。',
                 tag: 'span',
+                size: 'sm',
               },
             ],
           },

@@ -17,3 +17,22 @@ export const typeRecord: Record<string, string> = {
   idxfut: '股指期货',
   idxopt: '股指期权',
 };
+
+export const priorityRecord: Record<string, number> = {
+  newstock_onlist: 9,
+  newstock_apply: 9,
+  CNV: 3,
+  kzzsg: 8,
+  CBDIV: 4,
+  cnreits: 1,
+  FUND: 3,
+  BOND: 2,
+  STOCK: 4,
+  OTHER: 1,
+  newbond_apply: 6,
+  newbond_onlist: 6,
+  diva: 4,
+  divhk: 3,
+  idxfut: 0,
+  idxopt: 0,
+};
