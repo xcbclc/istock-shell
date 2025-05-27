@@ -103,6 +103,7 @@ export default {
             { text: 'Kbd 键盘', link: '/packages/shell-ui/components/data-view/kbd/index.html' },
             { text: 'Table 表格', link: '/packages/shell-ui/components/data-view/table/index.html' },
             { text: 'VirtualList 虚拟列表 🇸🇭', link: '/packages/shell-ui/components/extend/virtual-list/index.html' },
+            { text: 'VirtualTable 虚拟表格 🇸🇭', link: '/packages/shell-ui/components/extend/virtual-table/index.html' },
           ],
         },
         {
