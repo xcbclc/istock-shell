@@ -1,4 +1,4 @@
-import { Injectable, type TModelCreate, type TModelUpdate } from '@istock/iswork';
+import { Injectable, type TModelCreate, type TModelUpdate, type TOrmQuery } from '@istock/iswork';
 import { ScopeError } from '@istock/util';
 import { UserModel } from './user.model';
 
@@ -17,9 +17,9 @@ export class UserService {
     await this.create({
       id: UserModel.generateId.nextId(),
       username: 'daoyou',
-      password: '123123',
+      password: 'Dy123123',
       phone: '18888888888',
-      nickname: '道友',
+      nickname: '星辰编程理财',
       updateDate: new Date(),
       createDate: new Date(),
       rowStatus: 1,
@@ -29,8 +29,7 @@ export class UserService {
   async login(username: string, password: string) {
     const query = UserModel.createQueryBuilder().setFilter(['username', 'eq', username]);
     const [user] = (await UserModel.query(query.getQueryData())) ?? [];
-    if (!user) return false;
-    return user.password === password;
+    return user?.password === password ? user : null;
   }
 
   async create(data: TModelCreate<UserModel>) {
@@ -41,7 +40,7 @@ export class UserService {
     return await UserModel.updateById(data.id, data);
   }
 
-  async find() {
-    return await UserModel.query({});
+  async find(query: TOrmQuery = {}) {
+    return await UserModel.query(query);
   }
 }

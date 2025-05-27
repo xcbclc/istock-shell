@@ -4,7 +4,12 @@ import type { VitePWAOptions } from 'vite-plugin-pwa';
 export const pwaConfig: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',
   injectRegister: false,
-  pwaAssets: { disabled: false, config: true, htmlPreset: '2023', overrideManifestIcons: true },
+  pwaAssets: {
+    disabled: false,
+    config: true,
+    htmlPreset: '2023',
+    overrideManifestIcons: true,
+  },
   manifest: {
     id: packageInfo.title,
     name: packageInfo.title,

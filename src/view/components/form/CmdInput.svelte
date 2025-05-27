@@ -17,7 +17,7 @@
   const { windowId }: CmdInputProps = $props();
   const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
   const { cmdInput, cmdOutput } = ctx.cmdStore;
-  const { inputRecommend } = ctx.domainStore;
+  const { inputRecommend, user } = ctx.domainStore;
   let cmdInputView: HTMLElement;
   let commandEditor: CommandEditor;
   let disabled = false;
@@ -81,7 +81,10 @@
     });
     commandEditor.commandInput.addEventListener(ECommandEditorEventNames.RecommendCmd, (event: Event) => {
       const { action, target } = (event as TCommandEditorRecommendCmdEvent).detail.data;
-      void ctx.event.emit(`event://@istock.ui:${ctx.windowId}/cmd.recommend`, { target, action });
+      void ctx.event.emit(`event://@${user.getUserInfo().username}.ui:${ctx.windowId}/cmd.recommend`, {
+        target,
+        action,
+      });
     });
   });
 

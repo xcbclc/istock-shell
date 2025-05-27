@@ -5,12 +5,14 @@ import {
   CmdRoute,
   Message,
   MessageHandler,
-  Component,
+  Cmdp,
   type TModelCreate,
   type IMessageHandler,
   type TControllerMethodComponentOutput,
+  ApplicationContext,
+  type TOrmQuery,
 } from '@istock/iswork';
-import type { IDynamicFormField, IDynamicFormData } from '@istock/shell-ui';
+import type { FormItemConfig, FormProps } from '@istock/shell-ui';
 import { UserService } from './user.service';
 import type { UserModel } from './user.model';
 import cmd from './user.cmd.json';
@@ -19,27 +21,39 @@ import cmd from './user.cmd.json';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  #getFormFieldData(field: string): IDynamicFormField<'input'> {
+  #getFormFieldData(field: string): FormItemConfig {
     if (field === cmd.用户登录.options.账号.name) {
       return {
-        componentName: 'ShInput',
         name: field,
         label: field,
-        attributes: {
-          type: 'text',
+        field: {
+          type: 'input',
+          placeholder: '请输入账号',
+          description: '仅支持账号和手机号登录',
+          required: true,
         },
-        rules: [],
       };
     }
     if (field === cmd.用户登录.options.密码.name) {
       return {
-        componentName: 'ShInput',
         name: field,
         label: field,
-        attributes: {
-          type: 'password',
+        field: {
+          type: 'input',
+          inputType: 'password',
+          placeholder: '请输入密码',
+          description: '密码必须包含大小写字母和数字，至少8位',
+          validator: {
+            required: true,
+            custom: (value: string) => {
+              if (value && value.length < 8) return '密码至少8位';
+              if (!/(?=.*[a-z])/.test(value)) return '密码必须包含小写字母';
+              if (!/(?=.*[A-Z])/.test(value)) return '密码必须包含大写字母';
+              if (!/(?=.*\d)/.test(value)) return '密码必须包含数字';
+              return true;
+            },
+          },
         },
-        rules: [],
       };
     }
     throw new Error(`未找到${field}该字段数据`);
@@ -48,51 +62,79 @@ export class UserController {
   @CmdRoute(cmd.用户登录)
   @Method('login')
   @Message()
-  @Component()
   async login(
+    ctx: ApplicationContext,
     @Payload() payload: { 账号?: string; 密码?: string; options: { 账号?: string; 密码?: string } },
     @MessageHandler() handler: IMessageHandler
   ) {
+    const cmdInfo = ctx.cmdp.getInfo();
     const username = payload.账号 ?? payload.options?.账号;
     const password = payload.密码 ?? payload.options?.密码;
     const usernameFormField = this.#getFormFieldData(cmd.用户登录.options.账号.name);
     const passwordFormField = this.#getFormFieldData(cmd.用户登录.options.密码.name);
-    const output: TControllerMethodComponentOutput<{ formData: IDynamicFormData }> = {
-      component: 'ShDynamicForm',
+    const output: TControllerMethodComponentOutput<FormProps> = {
+      component: 'ShForm',
       props: {
-        formData: {
-          fields: [],
-          values: {
-            [cmd.用户登录.options.账号.name]: username ?? '',
-            [cmd.用户登录.options.密码.name]: password ?? '',
-          },
+        class: 'inline-grid px-4 py-2',
+        layout: 'vertical',
+        labelPlacement: 'start',
+        buttonPlacement: 'center',
+        size: 'sm',
+        formItems: [],
+        values: {
+          [cmd.用户登录.options.账号.name]: username ?? '',
+          [cmd.用户登录.options.密码.name]: password ?? '',
         },
       },
+      messageId: `${cmdInfo.returnMeta?.messageId}`,
     };
     if (!username || !password) {
       if (username && !password) {
-        output.props.formData.fields = [passwordFormField];
-        return handler.cmdReplace(output);
+        output.props.formItems = [passwordFormField];
+        return { output: handler.cmdReplace(output) };
       }
       if (!username && password) {
-        output.props.formData.fields = [usernameFormField];
-        return handler.cmdReplace(output);
+        output.props.formItems = [usernameFormField];
+        return { output: handler.cmdReplace(output) };
       }
-      output.props.formData.fields = [usernameFormField, passwordFormField];
-      return handler.cmdReplace(output);
+      output.props.formItems = [usernameFormField, passwordFormField];
+      return { output: handler.cmdReplace(output) };
     }
     const result = await this.userService.login(username, password);
-    const loginOutput: TControllerMethodComponentOutput = {
-      component: 'ShText',
-      props: {
-        texts: [{ type: result ? 'success' : 'danger', text: result ? '登录成功！' : '登录失败！' }],
+    const loginOutputs: TControllerMethodComponentOutput[] = [
+      {
+        component: 'ShText',
+        props: {
+          texts: [{ color: result ? 'success' : 'error', text: result ? '登录成功！' : '登录失败！' }],
+        },
       },
-    };
-    return handler.complete(handler.cmdReplace(loginOutput));
+      {
+        component: 'CmdOutputEvent',
+        props: {
+          data: result,
+          eventAddress: Cmdp.getAddressByInfo({
+            ...cmdInfo,
+            user: 'anonymous',
+            controller: 'user',
+            method: 'login',
+          }).replace('cmdp:', 'event:'),
+        },
+      },
+    ];
+    return handler.complete(
+      handler.cmdReplace({
+        output: loginOutputs,
+      })
+    );
   }
 
   @Method('create')
   async create(@Payload() payload: TModelCreate<UserModel>) {
     return await this.userService.create(payload);
+  }
+
+  @Method('find')
+  async find(@Payload() query: TOrmQuery) {
+    return await this.userService.find(query);
   }
 }

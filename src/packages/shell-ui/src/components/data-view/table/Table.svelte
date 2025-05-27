@@ -33,13 +33,17 @@
 
 <script lang="ts" module>
   import type { HTMLAttributes, HTMLColAttributes, HTMLTableAttributes } from 'svelte/elements';
-  import { TableVariantConfig } from '../../../theme/config';
+  import type { Attachment } from 'svelte/attachments';
+  import { TableVariantConfig, TableCaptionVariantConfig } from '../../../theme/config';
   import type { TableTrProps, TableTrTh, TableTrButtonConfig, TableTrButton } from './TableRow.svelte';
 
   const tableVariantConfig = TableVariantConfig;
+  const tableCaptionVariantConfig = TableCaptionVariantConfig;
 
   /* 表格尺寸类型定义（继承自主题配置） */
   export type TableSize = keyof (typeof tableVariantConfig)['variants']['size'];
+
+  export type TableCaptionSize = keyof (typeof tableCaptionVariantConfig)['variants']['size'];
 
   /* 表格数据格式（支持多种数据结构） */
   export type TableDataList = Array<Record<string, any> | TableTrProps['list'] | TableTrProps>;
@@ -53,6 +57,8 @@
   }
 
   export type TableThead = TableTheadTr['list'] | TableTheadTr;
+
+  export type TableArea = 'header' | 'footer';
 
   /* 表格主配置接口（继承table元素属性） */
   export interface TableProps extends HTMLTableAttributes {
@@ -75,6 +81,7 @@
     onRowSelect?: <T = any>(index: number, checked: boolean, selected: T[], rawSelected: TableDataList) => void; // 行选择回调
     onRowSelectAll?: (checked: boolean) => void; // 全选回调
     onRowClick?: (data: TableDataList['0'], index: number) => void; // 行点击回调
+    onSyncAreaHeight?: (area: TableArea, height: number) => void; // 监听高度
   }
 </script>
 
@@ -105,6 +112,7 @@
     onRowSelect,
     onRowSelectAll,
     onRowClick,
+    onSyncAreaHeight,
     class: className = '',
     children,
     ...otherProps
@@ -153,6 +161,7 @@
   });
 
   const tableVariant = tv(tableVariantConfig, {});
+  const tableCaptionVariant = tv(tableCaptionVariantConfig, {});
 
   // 全选状态数组（用于控制表头复选框）
   let selectAllRow = $state<boolean[]>([]);
@@ -217,6 +226,10 @@
     // 触发行选择回调
     onRowSelect?.(index, checked, selected, rawSelectedRows);
   };
+
+  const captionAttachment: Attachment = (element: HTMLTableCaptionElement) => {
+    onSyncAreaHeight?.('header', element.offsetHeight);
+  };
 </script>
 
 <!-- 表格容器 -->
@@ -227,7 +240,9 @@
   {:else}
     <!-- 渲染表格标题 -->
     {#if caption}
-      <caption class="py-2 text-lg font-semibold">{caption}</caption>
+      <caption {@attach captionAttachment} class={tuc(['py-2 font-semibold', tableCaptionVariant({ size })])}
+        >{caption}</caption
+      >
     {/if}
 
     <!-- 渲染列配置 -->

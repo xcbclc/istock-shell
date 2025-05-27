@@ -105,6 +105,7 @@
   >
     {#each $cmdOutput.list.slice(range?.start, range?.end + 1) as block, index (block.id)}
       <section
+        data-id={block.id}
         tabindex="0"
         class="p-2 rounded-sm border-b border-base-300/20 -outline-offset-1 outline-base-300 hover:bg-base-200 active:bg-base-200 focus-visible:outline-2 transition-colors"
         oncontextmenu={(ev) => {
@@ -147,8 +148,8 @@
                 {...output.props}
                 source={block.source}
                 {windowId}
-                onsumit={(event) => {
-                  onSubmit(output.messageId, event?.detail);
+                onSubmit={(detail) => {
+                  onSubmit(output.messageId, detail);
                 }}
               />
             {/each}

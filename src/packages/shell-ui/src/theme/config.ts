@@ -536,6 +536,19 @@ export const TableVariantConfig = {
   },
   defaultVariants: {},
 };
+export const TableCaptionVariantConfig = {
+  base: '',
+  variants: {
+    size: {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-md',
+      lg: 'text-lg',
+      xl: 'text-xl',
+    },
+  },
+  defaultVariants: {},
+};
 
 export const FormItemVariantConfig = {
   base: 'form-item',

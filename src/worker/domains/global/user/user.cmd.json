@@ -3,14 +3,14 @@
     "name": "用户登录",
     "tag": "",
     "cmd": "yhdl",
-    "usage": "yhdl [-zh <用户名|手机号>] [-mm <密码>]",
+    "usage": "yhdl [-zh <用户名>] [-mm <密码>]",
     "description": "登录指定用户账号",
     "options": {
       "账号": {
         "name": "账号",
         "parameter": ["-zh", "--账号"],
         "parameterType": ["string"],
-        "description": "指定账号，可以是账号、手机号",
+        "description": "指定的用户账号",
         "optional": true,
         "choices": []
       },
@@ -23,6 +23,6 @@
         "choices": []
       }
     },
-    "example": "yhdl -zh 15888888888 -mm 123456"
+    "example": "yhdl -zh daoyou -mm Dy123123"
   }
 }

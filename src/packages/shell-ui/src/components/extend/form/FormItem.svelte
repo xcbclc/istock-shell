@@ -204,7 +204,7 @@
       onblur,
       ...otherField
     } = field ?? {};
-    const { custom, ...otherValidator } = validator;
+    const { custom, pattern, ...otherValidator } = validator;
     return {
       id: `field-${name}`,
       name,

@@ -3,6 +3,13 @@ module.exports = {
     browser: true,
     es2021: true,
   },
+  ignores: [
+    '**/*.json',
+    'src/style/**',
+    'src/assets/**',
+    'src/vite-env.d.ts',
+    'src/packages/cli/dist/**'
+  ],
   parser: '@typescript-eslint/parser',
   extends: [
     'eslint:recommended',
@@ -58,12 +65,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    project: ['./tsconfig.json'],
     extraFileExtensions: ['.svelte'],
+    tsconfigRootDir: __dirname,
   },
   rules: {
     // 解决ESLint和Prettier的switch/case缩进冲突
-    indent: ['error', 2, { SwitchCase: 1 }],
+    indent: ['error', 2, {SwitchCase: 1}],
     // vite打包时去除console和debugger
     'no-console': 'off',
     'no-debugger': 'off',

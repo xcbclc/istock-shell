@@ -5,8 +5,8 @@
   "dependencies": {
     "@istock/command-parser": "workspace:^",
     "@istock/util": "workspace:^",
-    "idb": "^7.1.1",
-    "qs": "^6.12.2",
-    "reflect-metadata": "^0.1.13"
+    "idb": "^8.0.3",
+    "qs": "^6.14.0",
+    "reflect-metadata": "^0.2.2"
   }
 }

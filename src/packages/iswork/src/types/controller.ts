@@ -39,6 +39,7 @@ export type TControllerMethodComponentOutput<Props = Record<string, unknown>> = 
   component: string;
   props: Props;
   extra?: Record<string, unknown>;
+  messageId?: string;
 };
 export type TControllerMethodComponentResponse<Props = Record<string, unknown>> = {
   output: Array<TControllerMethodComponentOutput<Props>>;

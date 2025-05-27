@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { sleep, toLocaleDateString } from '@istock/util';
+import { sleep, toLocaleDateString, type Event } from '@istock/util';
 import { type CommandEditor, ECommandEditorActionTypes } from '@istock/editor';
 import type { TModelData } from '@istock/iswork';
 import { type CmdWindowContext, ECmdWindowContextMode } from '@/window/cmd-window-context';
@@ -9,6 +9,8 @@ import type { IPrompt, TPromptText } from './cmd/cmd-prompt';
 import { LOCAL_STORE_DOMAINS } from './cmd/cmd-prompt';
 import type { TCmdRoute } from './domains/global/cmd-route';
 import type { TCmdInputNodes } from './cmd/cmd-input';
+import { type IStoreUser, LOCAL_STORE_USER_TOKEN } from '@/store/domains/global/user';
+import type { UserModel } from '@domains/global/user/user.model';
 
 // 运行初始化逻辑
 export async function initStore(ctx: CmdWindowContext) {
@@ -19,10 +21,12 @@ export async function initStore(ctx: CmdWindowContext) {
   if (ctx.mode !== ECmdWindowContextMode.example) {
     await initOutputHistory(ctx);
   }
+  await ctx.domainStore.user.initUserInfo();
   const removeOnShowCmdInfo = onShowCmdInfo(ctx);
   const removeOnOutputHistory = onOutputHistory(ctx);
   const removeOnSyncHistory = onSyncHistory(ctx);
   const removeOnAiConnected = onAiConnected(ctx);
+  const removeOnUserChange = onUserChange(ctx);
   return () => {
     removeOnInputRecommendCmd();
     removeOnPromptTexts();
@@ -31,6 +35,7 @@ export async function initStore(ctx: CmdWindowContext) {
     removeOnOutputHistory();
     removeOnSyncHistory();
     removeOnAiConnected();
+    removeOnUserChange();
   };
 }
 
@@ -46,7 +51,8 @@ function onShowCmdInfo(ctx: CmdWindowContext) {
 // 输入命令推荐
 function onInputRecommendCmd(ctx: CmdWindowContext) {
   const { cmdStore, domainStore } = ctx;
-  const eventAddress = `event://@istock.ui:${ctx.windowId}/cmd.recommend`;
+  const { user } = domainStore;
+  const eventAddress = `event://@${user.getUserInfo().username}.ui:${ctx.windowId}/cmd.recommend`;
   // 推荐算法
   const handler = async (data: { action: ECommandEditorActionTypes; target: CommandEditor }) => {
     const { action, target } = data;
@@ -121,16 +127,54 @@ function onPromptTexts(ctx: CmdWindowContext) {
     cmdStore.cmdPromptTexts.set(getPromptTexts(data));
   });
 
-  // ctx.workerMessage
-  // todo 获取真实数据时更新
-  cmdStore.cmdPrompt.update((prompt) => {
-    prompt.username = '访客';
-    return prompt;
-  });
-
   return () => {
     clearTimeout(timeoutId);
     unSubscribe();
+  };
+}
+
+function onUserChange(ctx: CmdWindowContext) {
+  const { cmdStore, domainStore, windowId } = ctx;
+  const events: Event<any>[] = [];
+  const unSubscribe = domainStore.user.subscribe((userData: IStoreUser) => {
+    if (userData.nickname) {
+      cmdStore.cmdPrompt.update((prompt) => {
+        prompt.username = userData.nickname;
+        return prompt;
+      });
+      ctx.event.events.forEach((event: Event<any>) => {
+        const { type, ...other } = event;
+        const match = type.match(/(:)([^\/]+)(\/)/);
+        const port = match ? match[2] : '';
+        if (type.indexOf('event://') === 0 && Number(port) === windowId) {
+          ctx.event.off(type, event.handler);
+          const newEvent = { ...other, type: type.replace(/@([\w]+)./, `@${userData.username}.`) };
+          events.push(newEvent);
+          if (newEvent.once) {
+            ctx.event.once(newEvent.type, newEvent.handler);
+          } else {
+            ctx.event.on(newEvent.type, newEvent.handler);
+          }
+        }
+      });
+    }
+  });
+  const eventAddress = `event://@anonymous.global:${windowId}/user.login`;
+  const handlerChange = (data: TModelData<UserModel> | null) => {
+    if (!data) return;
+    localStorage.setItem(LOCAL_STORE_USER_TOKEN, JSON.stringify(data));
+    domainStore.user.update((user) => {
+      user = Object.assign(user, data);
+      return user;
+    });
+  };
+  ctx.event.on(eventAddress, handlerChange);
+  return () => {
+    unSubscribe();
+    events.forEach((event) => {
+      ctx.event.off(event.type, event.handler);
+    });
+    ctx.event.off(eventAddress, handlerChange);
   };
 }
 

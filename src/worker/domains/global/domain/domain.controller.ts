@@ -67,6 +67,7 @@ export class DomainController {
       currentDomainPaths,
       path.replace(/\/$/, '').split('/')
     );
+    console.log('domains', domains);
     return { data: domains, eventAddress: cmdInfo.address.replace('cmdp:', 'event:') };
   }
 }

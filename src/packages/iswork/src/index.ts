@@ -10,3 +10,4 @@ export * from './application/application';
 export * from './application/context';
 export * from './constants';
 export * from './message/index';
+export * from './cmdp/index';

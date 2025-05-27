@@ -11,3 +11,4 @@ export * from './message/index';
 export * from './nav-list/index';
 export * from './text/index';
 export * from './virtual-list/index';
+export * from './virtual-table/index';

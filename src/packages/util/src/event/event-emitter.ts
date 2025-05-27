@@ -2,7 +2,7 @@
 type EventHandler<T = unknown> = (payload: T) => void | Promise<void>;
 
 // 定义事件接口
-interface Event<T = unknown> {
+export interface Event<T = unknown> {
   type: string;
   handler: EventHandler<T>;
   once?: boolean;

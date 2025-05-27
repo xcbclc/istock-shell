@@ -73,19 +73,20 @@
   onMount(async () => {
     await tick();
 
-    // 初始化图表
-    chart = new Chart({
-      container: containerElement, // 设置容器元素
-    });
-
     // 创建交叉观察器
     observer = new IntersectionObserver(
       (entries) => {
         // 更新元素是否在视区内的状态
         isInViewport = entries[0].isIntersecting;
+        if (!chart) {
+          // 初始化图表
+          chart = new Chart({
+            container: containerElement, // 设置容器元素
+          });
+        }
       },
       {
-        threshold: 0.1, // 当10%的元素可见时触发回调
+        threshold: 0.15, // 当10%的元素可见时触发回调
       }
     );
 
