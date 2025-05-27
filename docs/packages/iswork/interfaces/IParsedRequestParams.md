@@ -1,129 +1,97 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / IParsedRequestParams
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / IParsedRequestParams
 
 # Interface: IParsedRequestParams
 
-## Table of contents
-
-### Properties
-
-- [cache](IParsedRequestParams.md#cache)
-- [fields](IParsedRequestParams.md#fields)
-- [filter](IParsedRequestParams.md#filter)
-- [includeDeleted](IParsedRequestParams.md#includedeleted)
-- [join](IParsedRequestParams.md#join)
-- [limit](IParsedRequestParams.md#limit)
-- [offset](IParsedRequestParams.md#offset)
-- [or](IParsedRequestParams.md#or)
-- [page](IParsedRequestParams.md#page)
-- [search](IParsedRequestParams.md#search)
-- [sort](IParsedRequestParams.md#sort)
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:41
 
 ## Properties
 
 ### cache
 
-• **cache**: `number`
+> **cache**: `number`
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:51
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:51
-
----
+***
 
 ### fields
 
-• **fields**: [`TQueryFields`](../modules.md#tqueryfields)
+> **fields**: [`TQueryFields`](../type-aliases/TQueryFields.md)
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:42
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:42
-
----
+***
 
 ### filter
 
-• **filter**: [`TQueryFilter`](../modules.md#tqueryfilter)[]
+> **filter**: [`TQueryFilter`](../type-aliases/TQueryFilter.md)[]
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:44
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:44
-
----
+***
 
 ### includeDeleted
 
-• **includeDeleted**: `number`
+> **includeDeleted**: `number`
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:52
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:52
-
----
+***
 
 ### join
 
-• **join**: [`TQueryJoin`](../modules.md#tqueryjoin)[]
+> **join**: [`TQueryJoin`](../type-aliases/TQueryJoin.md)[]
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:46
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:46
-
----
+***
 
 ### limit
 
-• **limit**: `number`
+> **limit**: `number`
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:48
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:48
-
----
+***
 
 ### offset
 
-• **offset**: `number`
+> **offset**: `number`
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:49
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:49
-
----
+***
 
 ### or
 
-• **or**: [`TQueryFilter`](../modules.md#tqueryfilter)[]
+> **or**: [`TQueryFilter`](../type-aliases/TQueryFilter.md)[]
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:45
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:45
-
----
+***
 
 ### page
 
-• **page**: `number`
+> **page**: `number`
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:50
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:50
-
----
+***
 
 ### search
 
-• **search**: [`TSCondition`](../modules.md#tscondition)
+> **search**: [`TSCondition`](../type-aliases/TSCondition.md)
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:43
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:43
-
----
+***
 
 ### sort
 
-• **sort**: [`TQuerySort`](../modules.md#tquerysort)[]
+> **sort**: [`TQuerySort`](../type-aliases/TQuerySort.md)[]
 
-#### Defined in
-
-src/packages/iswork/src/orm/interfaces/query-builder.ts:47
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:47

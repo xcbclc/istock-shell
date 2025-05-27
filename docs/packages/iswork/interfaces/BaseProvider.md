@@ -1,37 +1,31 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / BaseProvider
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / BaseProvider
 
 # Interface: BaseProvider\<Type\>
 
+Defined in: src/packages/iswork/src/interfaces/provider.ts:5
+
 Provider基类
 
-## Type parameters
+## Extended by
 
-| Name   | Type      |
-| :----- | :-------- |
-| `Type` | `unknown` |
+- [`IClassProvider`](IClassProvider.md)
+- [`IFactoryProvider`](IFactoryProvider.md)
+- [`IValueProvider`](IValueProvider.md)
 
-## Hierarchy
+## Type Parameters
 
-- **`BaseProvider`**
+### Type
 
-  ↳ [`IClassProvider`](IClassProvider.md)
-
-  ↳ [`IFactoryProvider`](IFactoryProvider.md)
-
-  ↳ [`IValueProvider`](IValueProvider.md)
-
-## Table of contents
-
-### Properties
-
-- [provide](BaseProvider.md#provide)
+`Type` = `unknown`
 
 ## Properties
 
 ### provide
 
-• **provide**: [`TInjectionToken`](../modules.md#tinjectiontoken)\<`Type`\>
+> **provide**: [`TInjectionToken`](../type-aliases/TInjectionToken.md)\<`Type`\>
 
-#### Defined in
-
-src/packages/iswork/src/interfaces/provider.ts:6
+Defined in: src/packages/iswork/src/interfaces/provider.ts:6

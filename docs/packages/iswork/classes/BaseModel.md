@@ -1,6 +1,12 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / BaseModel
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / BaseModel
 
 # Class: BaseModel
+
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:23
 
 基础模型
 
@@ -8,110 +14,75 @@
 
 - `IBaseModel`
 
-## Table of contents
-
-### Constructors
-
-- [constructor](BaseModel.md#constructor)
-
-### Properties
-
-- [createQueryBuilder](BaseModel.md#createquerybuilder)
-- [dataSource](BaseModel.md#datasource)
-- [generateId](BaseModel.md#generateid)
-
-### Methods
-
-- [save](BaseModel.md#save)
-- [toObject](BaseModel.md#toobject)
-- [createMany](BaseModel.md#createmany)
-- [createModel](BaseModel.md#createmodel)
-- [createOne](BaseModel.md#createone)
-- [deleteById](BaseModel.md#deletebyid)
-- [deleteMany](BaseModel.md#deletemany)
-- [findOneById](BaseModel.md#findonebyid)
-- [getRepository](BaseModel.md#getrepository)
-- [query](BaseModel.md#query)
-- [run](BaseModel.md#run)
-- [updateById](BaseModel.md#updatebyid)
-- [updateMany](BaseModel.md#updatemany)
-- [useDataSource](BaseModel.md#usedatasource)
-
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new BaseModel**(): [`BaseModel`](BaseModel.md)
+> **new BaseModel**(): `BaseModel`
 
 #### Returns
 
-[`BaseModel`](BaseModel.md)
+`BaseModel`
 
 ## Properties
 
-### createQueryBuilder
+### createQueryBuilder()
 
-▪ `Static` `Readonly` **createQueryBuilder**: (`params?`: `string` \| [`IQueryParamsOptions`](../interfaces/IQueryParamsOptions.md)) => [`QueryBuilder`](QueryBuilder.md)
+> `readonly` `static` **createQueryBuilder**: (`params?`) => [`QueryBuilder`](QueryBuilder.md)
 
-#### Type declaration
-
-▸ (`params?`): [`QueryBuilder`](QueryBuilder.md)
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:25
 
 QueryBuilder工厂方法，创建一个QueryBuilder实例
 
-##### Parameters
+#### Parameters
 
-| Name      | Type                                                                      | Description  |
-| :-------- | :------------------------------------------------------------------------ | :----------- |
-| `params?` | `string` \| [`IQueryParamsOptions`](../interfaces/IQueryParamsOptions.md) | 查询参数选项 |
+##### params?
 
-##### Returns
+查询参数选项
+
+`string` | [`IQueryParamsOptions`](../interfaces/IQueryParamsOptions.md)
+
+#### Returns
 
 [`QueryBuilder`](QueryBuilder.md)
 
-#### Defined in
-
-src/packages/iswork/src/orm/model/base-model.ts:25
-
----
+***
 
 ### dataSource
 
-▪ `Static` `Protected` **dataSource**: [`DataSource`](DataSource.md)\<[`TDataSourceType`](../modules.md#tdatasourcetype)\>
+> `protected` `static` **dataSource**: [`DataSource`](DataSource.md)\<[`TDataSourceType`](../type-aliases/TDataSourceType.md)\>
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:24
 
-src/packages/iswork/src/orm/model/base-model.ts:24
-
----
+***
 
 ### generateId
 
-▪ `Static` `Readonly` **generateId**: `FESnowflake`
+> `readonly` `static` **generateId**: `FESnowflake`
 
-#### Defined in
-
-src/packages/iswork/src/orm/model/base-model.ts:26
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:26
 
 ## Methods
 
-### save
+### save()
 
-▸ **save**\<`This`\>(`this`): `Promise`\<`null` \| `string` \| `number`\>
+> **save**\<`This`\>(`this`): `Promise`\<`null` \| `string` \| `number`\>
+
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:31
 
 保存当前模型数据
 
-#### Type parameters
+#### Type Parameters
 
-| Name   | Type                                |
-| :----- | :---------------------------------- |
-| `This` | extends [`BaseModel`](BaseModel.md) |
+##### This
+
+`This` *extends* `BaseModel`
 
 #### Parameters
 
-| Name   | Type   |
-| :----- | :----- |
-| `this` | `This` |
+##### this
+
+`This`
 
 #### Returns
 
@@ -119,346 +90,346 @@ src/packages/iswork/src/orm/model/base-model.ts:26
 
 #### Implementation of
 
-IBaseModel.save
+`IBaseModel.save`
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:31
+### toObject()
 
----
+> **toObject**\<`This`\>(`this`): [`TModelData`](../type-aliases/TModelData.md)\<`This`\>
 
-### toObject
-
-▸ **toObject**\<`This`\>(`this`): [`TModelData`](../modules.md#tmodeldata)\<`This`\>
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:44
 
 模型实例转换成数据
 
-#### Type parameters
+#### Type Parameters
 
-| Name   | Type                                |
-| :----- | :---------------------------------- |
-| `This` | extends [`BaseModel`](BaseModel.md) |
+##### This
+
+`This` *extends* `BaseModel`
 
 #### Parameters
 
-| Name   | Type   |
-| :----- | :----- |
-| `this` | `This` |
+##### this
+
+`This`
 
 #### Returns
 
-[`TModelData`](../modules.md#tmodeldata)\<`This`\>
+[`TModelData`](../type-aliases/TModelData.md)\<`This`\>
 
 #### Implementation of
 
-IBaseModel.toObject
+`IBaseModel.toObject`
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:44
+### createMany()
 
----
+> `static` **createMany**\<`Model`\>(`this`, `dataOrModels`): `Promise`\<(`string` \| `number`)[]\>
 
-### createMany
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:100
 
-▸ **createMany**\<`Model`\>(`this`, `dataOrModels`): `Promise`\<(`string` \| `number`)[]\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name           | Type                                                                                                                                                                                  |
-| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `this`         | `Model`                                                                                                                                                                               |
-| `dataOrModels` | [`TModelCreate`](../modules.md#tmodelcreate)\<`InstanceType`\<`Model`\>\>[] \| [`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>[] \| `InstanceType`\<`Model`\>[] |
+##### this
+
+`Model`
+
+##### dataOrModels
+
+[`TModelCreate`](../type-aliases/TModelCreate.md)\<`InstanceType`\<`Model`\>\>[] | [`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>[] | `InstanceType`\<`Model`\>[]
 
 #### Returns
 
 `Promise`\<(`string` \| `number`)[]\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:100
+### createModel()
 
----
+> `static` **createModel**\<`Model`\>(`this`, `data`): `InstanceType`\<`Model`\>
 
-### createModel
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:60
 
-▸ **createModel**\<`Model`\>(`this`, `data`): `InstanceType`\<`Model`\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name   | Type                                                                      |
-| :----- | :------------------------------------------------------------------------ |
-| `this` | `Model`                                                                   |
-| `data` | [`TModelCreate`](../modules.md#tmodelcreate)\<`InstanceType`\<`Model`\>\> |
+##### this
+
+`Model`
+
+##### data
+
+[`TModelCreate`](../type-aliases/TModelCreate.md)\<`InstanceType`\<`Model`\>\>
 
 #### Returns
 
 `InstanceType`\<`Model`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:60
+### createOne()
 
----
+> `static` **createOne**\<`Model`\>(`this`, `dataOrModel`): `Promise`\<`null` \| `string` \| `number`\>
 
-### createOne
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:83
 
-▸ **createOne**\<`Model`\>(`this`, `dataOrModel`): `Promise`\<`null` \| `string` \| `number`\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name          | Type                                                                                                                                                                            |
-| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `this`        | `Model`                                                                                                                                                                         |
-| `dataOrModel` | `InstanceType`\<`Model`\> \| [`TModelCreate`](../modules.md#tmodelcreate)\<`InstanceType`\<`Model`\>\> \| [`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\> |
+##### this
+
+`Model`
+
+##### dataOrModel
+
+`InstanceType`\<`Model`\> | [`TModelCreate`](../type-aliases/TModelCreate.md)\<`InstanceType`\<`Model`\>\> | [`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>
 
 #### Returns
 
 `Promise`\<`null` \| `string` \| `number`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:83
+### deleteById()
 
----
+> `static` **deleteById**\<`Model`\>(`this`, `id`): `Promise`\<`boolean`\>
 
-### deleteById
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:151
 
-▸ **deleteById**\<`Model`\>(`this`, `id`): `Promise`\<`boolean`\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name   | Type                 |
-| :----- | :------------------- |
-| `this` | `Model`              |
-| `id`   | `string` \| `number` |
+##### this
+
+`Model`
+
+##### id
+
+`string` | `number`
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:151
+### deleteMany()
 
----
+> `static` **deleteMany**\<`Model`\>(`this`, `query`): `Promise`\<`boolean`\>
 
-### deleteMany
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:146
 
-▸ **deleteMany**\<`Model`\>(`this`, `query`): `Promise`\<`boolean`\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name    | Type                                   |
-| :------ | :------------------------------------- |
-| `this`  | `Model`                                |
-| `query` | [`TOrmQuery`](../modules.md#tormquery) |
+##### this
+
+`Model`
+
+##### query
+
+[`TOrmQuery`](../type-aliases/TOrmQuery.md)
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:146
+### findOneById()
 
----
+> `static` **findOneById**\<`Model`\>(`this`, `id`): `Promise`\<[`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>\>
 
-### findOneById
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:156
 
-▸ **findOneById**\<`Model`\>(`this`, `id`): `Promise`\<[`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name   | Type                 |
-| :----- | :------------------- |
-| `this` | `Model`              |
-| `id`   | `string` \| `number` |
+##### this
+
+`Model`
+
+##### id
+
+`string` | `number`
 
 #### Returns
 
-`Promise`\<[`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>\>
+`Promise`\<[`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:156
+### getRepository()
 
----
+> `static` **getRepository**(): `Promise`\<[`Repository`](Repository.md)\>
 
-### getRepository
-
-▸ **getRepository**(): `Promise`\<[`Repository`](Repository.md)\>
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:56
 
 #### Returns
 
 `Promise`\<[`Repository`](Repository.md)\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:56
+### query()
 
----
+> `static` **query**\<`Model`\>(`this`, `query`): `Promise`\<[`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>[]\>
 
-### query
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:78
 
-▸ **query**\<`Model`\>(`this`, `query`): `Promise`\<[`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>[]\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name    | Type                                   |
-| :------ | :------------------------------------- |
-| `this`  | `Model`                                |
-| `query` | [`TOrmQuery`](../modules.md#tormquery) |
+##### this
+
+`Model`
+
+##### query
+
+[`TOrmQuery`](../type-aliases/TOrmQuery.md)
 
 #### Returns
 
-`Promise`\<[`TModelData`](../modules.md#tmodeldata)\<`InstanceType`\<`Model`\>\>[]\>
+`Promise`\<[`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>[]\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:78
+### run()
 
----
+> `static` **run**\<`Result`\>(...`executeArgs`): `Promise`\<`Result`\>
 
-### run
-
-▸ **run**\<`Result`\>(`...executeArgs`): `Promise`\<`Result`\>
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:73
 
 连接器原始执行操作
 
-#### Type parameters
+#### Type Parameters
 
-| Name     | Type      |
-| :------- | :-------- |
-| `Result` | `unknown` |
+##### Result
+
+`Result` = `unknown`
 
 #### Parameters
 
-| Name             | Type        |
-| :--------------- | :---------- |
-| `...executeArgs` | `unknown`[] |
+##### executeArgs
+
+...`unknown`[]
 
 #### Returns
 
 `Promise`\<`Result`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:73
+### updateById()
 
----
+> `static` **updateById**\<`Model`\>(`this`, `id`, `dataOrModel`): `Promise`\<`boolean`\>
 
-### updateById
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:123
 
-▸ **updateById**\<`Model`\>(`this`, `id`, `dataOrModel`): `Promise`\<`boolean`\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name          | Type                                                                                                   |
-| :------------ | :----------------------------------------------------------------------------------------------------- |
-| `this`        | `Model`                                                                                                |
-| `id`          | `string` \| `number`                                                                                   |
-| `dataOrModel` | `InstanceType`\<`Model`\> \| [`TModelUpdate`](../modules.md#tmodelupdate)\<`InstanceType`\<`Model`\>\> |
+##### this
+
+`Model`
+
+##### id
+
+`string` | `number`
+
+##### dataOrModel
+
+`InstanceType`\<`Model`\> | [`TModelUpdate`](../type-aliases/TModelUpdate.md)\<`InstanceType`\<`Model`\>\>
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:123
+### updateMany()
 
----
+> `static` **updateMany**\<`Model`\>(`this`, `updateDataLists`): `Promise`\<`boolean`\>
 
-### updateMany
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:138
 
-▸ **updateMany**\<`Model`\>(`this`, `updateDataLists`): `Promise`\<`boolean`\>
+#### Type Parameters
 
-#### Type parameters
+##### Model
 
-| Name    | Type                                       |
-| :------ | :----------------------------------------- |
-| `Model` | extends typeof [`BaseModel`](BaseModel.md) |
+`Model` *extends* *typeof* `BaseModel`
 
 #### Parameters
 
-| Name              | Type                                                                        |
-| :---------------- | :-------------------------------------------------------------------------- |
-| `this`            | `Model`                                                                     |
-| `updateDataLists` | [`TModelUpdate`](../modules.md#tmodelupdate)\<`InstanceType`\<`Model`\>\>[] |
+##### this
+
+`Model`
+
+##### updateDataLists
+
+[`TModelUpdate`](../type-aliases/TModelUpdate.md)\<`InstanceType`\<`Model`\>\>[]
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/model/base-model.ts:138
+### useDataSource()
 
----
+> `static` **useDataSource**(`dataSource`): `void`
 
-### useDataSource
-
-▸ **useDataSource**(`dataSource`): `void`
+Defined in: src/packages/iswork/src/orm/model/base-model.ts:52
 
 #### Parameters
 
-| Name         | Type                                                                                |
-| :----------- | :---------------------------------------------------------------------------------- |
-| `dataSource` | [`DataSource`](DataSource.md)\<[`TDataSourceType`](../modules.md#tdatasourcetype)\> |
+##### dataSource
+
+[`DataSource`](DataSource.md)\<[`TDataSourceType`](../type-aliases/TDataSourceType.md)\>
 
 #### Returns
 
 `void`
-
-#### Defined in
-
-src/packages/iswork/src/orm/model/base-model.ts:52

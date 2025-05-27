@@ -1,260 +1,225 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / RepositoryManager
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / RepositoryManager
 
 # Class: RepositoryManager
 
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:8
+
 仓库管理
-
-## Table of contents
-
-### Constructors
-
-- [constructor](RepositoryManager.md#constructor)
-
-### Properties
-
-- [#dataSource](RepositoryManager.md##datasource)
-- [#repositoryMap](RepositoryManager.md##repositorymap)
-
-### Accessors
-
-- [connector](RepositoryManager.md#connector)
-- [runner](RepositoryManager.md#runner)
-
-### Methods
-
-- [create](RepositoryManager.md#create)
-- [delete](RepositoryManager.md#delete)
-- [getRepository](RepositoryManager.md#getrepository)
-- [query](RepositoryManager.md#query)
-- [run](RepositoryManager.md#run)
-- [update](RepositoryManager.md#update)
-- [updateMany](RepositoryManager.md#updatemany)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new RepositoryManager**(`dataSource`): [`RepositoryManager`](RepositoryManager.md)
+> **new RepositoryManager**(`dataSource`): `RepositoryManager`
+
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:20
 
 #### Parameters
 
-| Name         | Type                                                                                |
-| :----------- | :---------------------------------------------------------------------------------- |
-| `dataSource` | [`DataSource`](DataSource.md)\<[`TDataSourceType`](../modules.md#tdatasourcetype)\> |
+##### dataSource
+
+[`DataSource`](DataSource.md)\<[`TDataSourceType`](../type-aliases/TDataSourceType.md)\>
 
 #### Returns
 
-[`RepositoryManager`](RepositoryManager.md)
-
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository-manager.ts:20
-
-## Properties
-
-### #dataSource
-
-• `Private` `Readonly` **#dataSource**: [`DataSource`](DataSource.md)\<[`TDataSourceType`](../modules.md#tdatasourcetype)\>
-
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository-manager.ts:10
-
----
-
-### #repositoryMap
-
-• `Private` `Readonly` **#repositoryMap**: `Map`\<typeof [`BaseModel`](BaseModel.md), [`Repository`](Repository.md)\>
-
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository-manager.ts:9
+`RepositoryManager`
 
 ## Accessors
 
 ### connector
 
-• `get` **connector**(): `unknown`
+#### Get Signature
 
-#### Returns
+> **get** **connector**(): `unknown`
+
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:11
+
+##### Returns
 
 `unknown`
 
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository-manager.ts:11
-
----
+***
 
 ### runner
 
-• `get` **runner**(): `AbstractRunner`\<`unknown`\>
+#### Get Signature
 
-#### Returns
+> **get** **runner**(): `AbstractRunner`\<`unknown`\>
+
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:15
+
+##### Returns
 
 `AbstractRunner`\<`unknown`\>
 
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository-manager.ts:15
-
 ## Methods
 
-### create
+### create()
 
-▸ **create**(`model`, `createDatas`): `Promise`\<(`string` \| `number`)[]\>
+> **create**(`model`, `createDatas`): `Promise`\<(`string` \| `number`)[]\>
+
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:45
 
 #### Parameters
 
-| Name          | Type                                           |
-| :------------ | :--------------------------------------------- |
-| `model`       | typeof [`BaseModel`](BaseModel.md)             |
-| `createDatas` | [`TIdAnyObject`](../modules.md#tidanyobject)[] |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### createDatas
+
+[`TIdAnyObject`](../type-aliases/TIdAnyObject.md)[]
 
 #### Returns
 
 `Promise`\<(`string` \| `number`)[]\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository-manager.ts:45
+### delete()
 
----
+> **delete**(`model`, `query`): `Promise`\<`boolean`\>
 
-### delete
-
-▸ **delete**(`model`, `query`): `Promise`\<`boolean`\>
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:57
 
 #### Parameters
 
-| Name    | Type                                   |
-| :------ | :------------------------------------- |
-| `model` | typeof [`BaseModel`](BaseModel.md)     |
-| `query` | [`TOrmQuery`](../modules.md#tormquery) |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### query
+
+[`TOrmQuery`](../type-aliases/TOrmQuery.md)
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository-manager.ts:57
+### getRepository()
 
----
+> **getRepository**(`target`): [`Repository`](Repository.md)
 
-### getRepository
-
-▸ **getRepository**(`target`): [`Repository`](Repository.md)
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:28
 
 根据模型获取仓库，给数据源使用，仓管管理和数据源一对一绑定
 
 #### Parameters
 
-| Name     | Type                               |
-| :------- | :--------------------------------- |
-| `target` | typeof [`BaseModel`](BaseModel.md) |
+##### target
+
+*typeof* [`BaseModel`](BaseModel.md)
 
 #### Returns
 
 [`Repository`](Repository.md)
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository-manager.ts:28
+### query()
 
----
+> **query**\<`Result`\>(`model`, `query`): `Promise`\<`Result`[]\>
 
-### query
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:41
 
-▸ **query**\<`Result`\>(`model`, `query`): `Promise`\<`Result`[]\>
+#### Type Parameters
 
-#### Type parameters
+##### Result
 
-| Name     | Type      |
-| :------- | :-------- |
-| `Result` | `unknown` |
+`Result` = `unknown`
 
 #### Parameters
 
-| Name    | Type                                   |
-| :------ | :------------------------------------- |
-| `model` | typeof [`BaseModel`](BaseModel.md)     |
-| `query` | [`TOrmQuery`](../modules.md#tormquery) |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### query
+
+[`TOrmQuery`](../type-aliases/TOrmQuery.md)
 
 #### Returns
 
 `Promise`\<`Result`[]\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository-manager.ts:41
+### run()
 
----
+> **run**\<`Result`\>(`model`, ...`executeArgs`): `Promise`\<`Result`\>
 
-### run
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:37
 
-▸ **run**\<`Result`\>(`model`, `...executeArgs`): `Promise`\<`Result`\>
+#### Type Parameters
 
-#### Type parameters
+##### Result
 
-| Name     | Type      |
-| :------- | :-------- |
-| `Result` | `unknown` |
+`Result` = `unknown`
 
 #### Parameters
 
-| Name             | Type                               |
-| :--------------- | :--------------------------------- |
-| `model`          | typeof [`BaseModel`](BaseModel.md) |
-| `...executeArgs` | `unknown`[]                        |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### executeArgs
+
+...`unknown`[]
 
 #### Returns
 
 `Promise`\<`Result`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository-manager.ts:37
+### update()
 
----
+> **update**(`model`, `updateData`, `query`): `Promise`\<`boolean`\>
 
-### update
-
-▸ **update**(`model`, `updateData`, `query`): `Promise`\<`boolean`\>
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:49
 
 #### Parameters
 
-| Name         | Type                                   |
-| :----------- | :------------------------------------- |
-| `model`      | typeof [`BaseModel`](BaseModel.md)     |
-| `updateData` | [`TAnyObj`](../modules.md#tanyobj)     |
-| `query`      | [`TOrmQuery`](../modules.md#tormquery) |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### updateData
+
+[`TAnyObj`](../type-aliases/TAnyObj.md)
+
+##### query
+
+[`TOrmQuery`](../type-aliases/TOrmQuery.md)
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository-manager.ts:49
+### updateMany()
 
----
+> **updateMany**(`model`, `updateDataList`): `Promise`\<`boolean`\>
 
-### updateMany
-
-▸ **updateMany**(`model`, `updateDataList`): `Promise`\<`boolean`\>
+Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:53
 
 #### Parameters
 
-| Name             | Type                                 |
-| :--------------- | :----------------------------------- |
-| `model`          | typeof [`BaseModel`](BaseModel.md)   |
-| `updateDataList` | [`TAnyObj`](../modules.md#tanyobj)[] |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### updateDataList
+
+[`TAnyObj`](../type-aliases/TAnyObj.md)[]
 
 #### Returns
 
 `Promise`\<`boolean`\>
-
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository-manager.ts:53

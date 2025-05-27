@@ -209,6 +209,14 @@
   export const scrollToLastChild = () => {
     scrollElement?.lastChild?.scrollIntoView?.(false);
   };
+
+  // 滚动到指定元素
+  export const scrollToElement = (selector: string) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      element.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+  };
 </script>
 
 <div bind:this={scrollElement} class={[tuc('virtual-list'), className]} {...otherProps}>

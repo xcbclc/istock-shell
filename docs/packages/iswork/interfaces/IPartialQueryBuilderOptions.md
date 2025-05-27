@@ -1,57 +1,77 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / IPartialQueryBuilderOptions
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / IPartialQueryBuilderOptions
 
 # Interface: IPartialQueryBuilderOptions
 
-## Table of contents
-
-### Properties
-
-- [delim](IPartialQueryBuilderOptions.md#delim)
-- [delimStr](IPartialQueryBuilderOptions.md#delimstr)
-- [paramNamesMap](IPartialQueryBuilderOptions.md#paramnamesmap)
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:23
 
 ## Properties
 
-### delim
+### delim?
 
-• `Optional` **delim**: `string`
+> `optional` **delim**: `string`
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:24
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:24
+***
 
----
+### delimStr?
 
-### delimStr
+> `optional` **delimStr**: `string`
 
-• `Optional` **delimStr**: `string`
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:25
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:25
+### paramNamesMap?
 
----
+> `optional` **paramNamesMap**: `object`
 
-### paramNamesMap
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:26
 
-• `Optional` **paramNamesMap**: `Object`
+#### cache?
 
-#### Type declaration
+> `optional` **cache**: `string` \| `string`[]
 
-| Name              | Type                   |
-| :---------------- | :--------------------- |
-| `cache?`          | `string` \| `string`[] |
-| `fields?`         | `string` \| `string`[] |
-| `filter?`         | `string` \| `string`[] |
-| `includeDeleted?` | `string` \| `string`[] |
-| `join?`           | `string` \| `string`[] |
-| `limit?`          | `string` \| `string`[] |
-| `offset?`         | `string` \| `string`[] |
-| `or?`             | `string` \| `string`[] |
-| `page?`           | `string` \| `string`[] |
-| `search?`         | `string` \| `string`[] |
-| `sort?`           | `string` \| `string`[] |
+#### fields?
 
-#### Defined in
+> `optional` **fields**: `string` \| `string`[]
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:26
+#### filter?
+
+> `optional` **filter**: `string` \| `string`[]
+
+#### includeDeleted?
+
+> `optional` **includeDeleted**: `string` \| `string`[]
+
+#### join?
+
+> `optional` **join**: `string` \| `string`[]
+
+#### limit?
+
+> `optional` **limit**: `string` \| `string`[]
+
+#### offset?
+
+> `optional` **offset**: `string` \| `string`[]
+
+#### or?
+
+> `optional` **or**: `string` \| `string`[]
+
+#### page?
+
+> `optional` **page**: `string` \| `string`[]
+
+#### search?
+
+> `optional` **search**: `string` \| `string`[]
+
+#### sort?
+
+> `optional` **sort**: `string` \| `string`[]

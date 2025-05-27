@@ -1,6 +1,12 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / MessageSSE
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / MessageSSE
 
 # Class: MessageSSE
+
+Defined in: src/packages/iswork/src/message/message-sse.ts:14
 
 异步消息函数遍历处理机制
 
@@ -8,143 +14,43 @@
 
 - `AbstractMessage`\<`EventSource`\>
 
-## Table of contents
-
-### Constructors
-
-- [constructor](MessageSSE.md#constructor)
-
-### Properties
-
-- [#onErrorCallback](MessageSSE.md##onerrorcallback)
-- [#onMessageCallback](MessageSSE.md##onmessagecallback)
-- [#options](MessageSSE.md##options)
-- [instance](MessageSSE.md#instance)
-
-### Methods
-
-- [#messageAsyncGenerator](MessageSSE.md##messageasyncgenerator)
-- [close](MessageSSE.md#close)
-- [onClose](MessageSSE.md#onclose)
-- [onError](MessageSSE.md#onerror)
-- [onMessage](MessageSSE.md#onmessage)
-- [open](MessageSSE.md#open)
-- [send](MessageSSE.md#send)
-- [create](MessageSSE.md#create)
-
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new MessageSSE**(`options`): [`MessageSSE`](MessageSSE.md)
+> **new MessageSSE**(`options`): `MessageSSE`
+
+Defined in: src/packages/iswork/src/message/message-sse.ts:19
 
 #### Parameters
 
-| Name      | Type                                                     |
-| :-------- | :------------------------------------------------------- |
-| `options` | [`TMessageSSEOptions`](../modules.md#tmessagesseoptions) |
+##### options
+
+[`TMessageSSEOptions`](../type-aliases/TMessageSSEOptions.md)
 
 #### Returns
 
-[`MessageSSE`](MessageSSE.md)
-
-#### Defined in
-
-src/packages/iswork/src/message/message-sse.ts:19
+`MessageSSE`
 
 ## Properties
 
-### #onErrorCallback
-
-• `Private` **#onErrorCallback**: (`event`: `MessageEvent`\<`any`\>) => `void`
-
-#### Type declaration
-
-▸ (`event`): `void`
-
-##### Parameters
-
-| Name    | Type                    |
-| :------ | :---------------------- |
-| `event` | `MessageEvent`\<`any`\> |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-src/packages/iswork/src/message/message-sse.ts:18
-
----
-
-### #onMessageCallback
-
-• `Private` **#onMessageCallback**: (`event`: `MessageEvent`\<`any`\>) => `void`
-
-#### Type declaration
-
-▸ (`event`): `void`
-
-##### Parameters
-
-| Name    | Type                    |
-| :------ | :---------------------- |
-| `event` | `MessageEvent`\<`any`\> |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-src/packages/iswork/src/message/message-sse.ts:17
-
----
-
-### #options
-
-• `Private` `Readonly` **#options**: [`TMessageSSEOptions`](../modules.md#tmessagesseoptions)
-
-#### Defined in
-
-src/packages/iswork/src/message/message-sse.ts:16
-
----
-
 ### instance
 
-• **instance**: `EventSource`
+> **instance**: `EventSource`
+
+Defined in: src/packages/iswork/src/message/message-sse.ts:15
 
 #### Implementation of
 
-AbstractMessage.instance
-
-#### Defined in
-
-src/packages/iswork/src/message/message-sse.ts:15
+`AbstractMessage.instance`
 
 ## Methods
 
-### #messageAsyncGenerator
+### close()
 
-▸ **#messageAsyncGenerator**(): `AsyncGenerator`\<[`TMessageSSEIteratorData`](../modules.md#tmessagesseiteratordata), `void`, `unknown`\>
+> **close**(): `Promise`\<`void`\>
 
-异步消息生成器函数
-
-#### Returns
-
-`AsyncGenerator`\<[`TMessageSSEIteratorData`](../modules.md#tmessagesseiteratordata), `void`, `unknown`\>
-
-#### Defined in
-
-src/packages/iswork/src/message/message-sse.ts:70
-
----
-
-### close
-
-▸ **close**(): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-sse.ts:31
 
 #### Returns
 
@@ -152,37 +58,33 @@ src/packages/iswork/src/message/message-sse.ts:70
 
 #### Implementation of
 
-AbstractMessage.close
+`AbstractMessage.close`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-sse.ts:31
+### onClose()
 
----
+> **onClose**(): `Promise`\<`void`\>
 
-### onClose
-
-▸ **onClose**(): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-sse.ts:61
 
 #### Returns
 
 `Promise`\<`void`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-sse.ts:61
+### onError()
 
----
+> **onError**(`callback`): `Promise`\<`void`\>
 
-### onError
-
-▸ **onError**(`callback`): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-sse.ts:52
 
 #### Parameters
 
-| Name       | Type                                                                        |
-| :--------- | :-------------------------------------------------------------------------- |
-| `callback` | (`error`: `Error`, `event`: `MessageEvent`\<`any`\>) => `Promise`\<`void`\> |
+##### callback
+
+(`error`, `event`) => `Promise`\<`void`\>
 
 #### Returns
 
@@ -190,23 +92,21 @@ src/packages/iswork/src/message/message-sse.ts:61
 
 #### Implementation of
 
-AbstractMessage.onError
+`AbstractMessage.onError`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-sse.ts:52
+### onMessage()
 
----
+> **onMessage**(`callback`): `Promise`\<`void`\>
 
-### onMessage
-
-▸ **onMessage**(`callback`): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-sse.ts:43
 
 #### Parameters
 
-| Name       | Type                                      |
-| :--------- | :---------------------------------------- |
-| `callback` | (`message`: `any`) => `Promise`\<`void`\> |
+##### callback
+
+(`message`) => `Promise`\<`void`\>
 
 #### Returns
 
@@ -214,17 +114,15 @@ src/packages/iswork/src/message/message-sse.ts:52
 
 #### Implementation of
 
-AbstractMessage.onMessage
+`AbstractMessage.onMessage`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-sse.ts:43
+### open()
 
----
+> **open**(): `Promise`\<`void`\>
 
-### open
-
-▸ **open**(): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-sse.ts:24
 
 #### Returns
 
@@ -232,23 +130,21 @@ src/packages/iswork/src/message/message-sse.ts:43
 
 #### Implementation of
 
-AbstractMessage.open
+`AbstractMessage.open`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-sse.ts:24
+### send()
 
----
+> **send**(`message`): `Promise`\<`void`\>
 
-### send
-
-▸ **send**(`message`): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-sse.ts:36
 
 #### Parameters
 
-| Name      | Type  |
-| :-------- | :---- |
-| `message` | `any` |
+##### message
+
+`any`
 
 #### Returns
 
@@ -256,30 +152,24 @@ src/packages/iswork/src/message/message-sse.ts:24
 
 #### Implementation of
 
-AbstractMessage.send
+`AbstractMessage.send`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-sse.ts:36
+### create()
 
----
+> `static` **create**(`optoins`): `Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../type-aliases/TMessageSSEIteratorData.md), `void`, `unknown`\>\>
 
-### create
-
-▸ **create**(`optoins`): `Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../modules.md#tmessagesseiteratordata), `void`, `unknown`\>\>
+Defined in: src/packages/iswork/src/message/message-sse.ts:99
 
 创建一个Generator异步消息函数
 
 #### Parameters
 
-| Name      | Type                                                     |
-| :-------- | :------------------------------------------------------- |
-| `optoins` | [`TMessageSSEOptions`](../modules.md#tmessagesseoptions) |
+##### optoins
+
+[`TMessageSSEOptions`](../type-aliases/TMessageSSEOptions.md)
 
 #### Returns
 
-`Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../modules.md#tmessagesseiteratordata), `void`, `unknown`\>\>
-
-#### Defined in
-
-src/packages/iswork/src/message/message-sse.ts:99
+`Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../type-aliases/TMessageSSEIteratorData.md), `void`, `unknown`\>\>

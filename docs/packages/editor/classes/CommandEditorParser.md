@@ -1,269 +1,177 @@
-[@istock/editor](../README.md) / [Exports](../modules.md) / CommandEditorParser
+[**@istock/editor**](../README.md)
+
+***
+
+[@istock/editor](../globals.md) / CommandEditorParser
 
 # Class: CommandEditorParser
 
-## Table of contents
-
-### Constructors
-
-- [constructor](CommandEditorParser.md#constructor)
-
-### Properties
-
-- [blockTagNames](CommandEditorParser.md#blocktagnames)
-- [brTagName](CommandEditorParser.md#brtagname)
-- [lineBreak](CommandEditorParser.md#linebreak)
-- [space](CommandEditorParser.md#space)
-- [spaceRegMatch](CommandEditorParser.md#spaceregmatch)
-
-### Methods
-
-- [#getBrTagHtml](CommandEditorParser.md##getbrtaghtml)
-- [#getLineTagHtml](CommandEditorParser.md##getlinetaghtml)
-- [#getTokenTagHtml](CommandEditorParser.md##gettokentaghtml)
-- [findCursorInfoForDom](CommandEditorParser.md#findcursorinfofordom)
-- [getOffsetTextForDom](CommandEditorParser.md#getoffsettextfordom)
-- [parseDomToText](CommandEditorParser.md#parsedomtotext)
-- [parseVNodeToHtml](CommandEditorParser.md#parsevnodetohtml)
-- [parseVNodeToText](CommandEditorParser.md#parsevnodetotext)
+Defined in: command-editor-parser.ts:12
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new CommandEditorParser**(): [`CommandEditorParser`](CommandEditorParser.md)
+> **new CommandEditorParser**(): `CommandEditorParser`
 
 #### Returns
 
-[`CommandEditorParser`](CommandEditorParser.md)
+`CommandEditorParser`
 
 ## Properties
 
 ### blockTagNames
 
-▪ `Static` **blockTagNames**: `string`[]
+> `static` **blockTagNames**: `string`[]
 
-#### Defined in
+Defined in: command-editor-parser.ts:13
 
-command-editor-parser.ts:13
-
----
+***
 
 ### brTagName
 
-▪ `Static` **brTagName**: `string` = `'BR'`
+> `static` **brTagName**: `string` = `'BR'`
 
-#### Defined in
+Defined in: command-editor-parser.ts:14
 
-command-editor-parser.ts:14
-
----
+***
 
 ### lineBreak
 
-▪ `Static` **lineBreak**: `string` = `'\n'`
+> `static` **lineBreak**: `string` = `'\n'`
 
-#### Defined in
+Defined in: command-editor-parser.ts:17
 
-command-editor-parser.ts:17
-
----
+***
 
 ### space
 
-▪ `Static` **space**: `string` = `' '`
+> `static` **space**: `string` = `' '`
 
-#### Defined in
+Defined in: command-editor-parser.ts:18
 
-command-editor-parser.ts:18
-
----
+***
 
 ### spaceRegMatch
 
-▪ `Static` **spaceRegMatch**: `RegExp`
+> `static` **spaceRegMatch**: `RegExp`
 
-#### Defined in
-
-command-editor-parser.ts:16
+Defined in: command-editor-parser.ts:16
 
 ## Methods
 
-### #getBrTagHtml
+### findCursorInfoForDom()
 
-▸ **#getBrTagHtml**(`node`): `string`
+> **findCursorInfoForDom**(`rootEl`, `offsetText`): `null` \| [`TCommandEditorRangInfo`](../type-aliases/TCommandEditorRangInfo.md)
 
-获取br标签
-
-#### Parameters
-
-| Name   | Type                                                                   |
-| :----- | :--------------------------------------------------------------------- |
-| `node` | [`TCommandEditorContentNode`](../modules.md#tcommandeditorcontentnode) |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-command-editor-parser.ts:25
-
----
-
-### #getLineTagHtml
-
-▸ **#getLineTagHtml**(`node`, `value`): `string`
-
-获取一行数据
-
-#### Parameters
-
-| Name    | Type                                                                   |
-| :------ | :--------------------------------------------------------------------- |
-| `node`  | [`TCommandEditorContentNode`](../modules.md#tcommandeditorcontentnode) |
-| `value` | `string`                                                               |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-command-editor-parser.ts:45
-
----
-
-### #getTokenTagHtml
-
-▸ **#getTokenTagHtml**(`node`, `value`): `string`
-
-获取token标签
-
-#### Parameters
-
-| Name    | Type                                                                   |
-| :------ | :--------------------------------------------------------------------- |
-| `node`  | [`TCommandEditorContentNode`](../modules.md#tcommandeditorcontentnode) |
-| `value` | `string`                                                               |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-command-editor-parser.ts:35
-
----
-
-### findCursorInfoForDom
-
-▸ **findCursorInfoForDom**(`rootEl`, `offsetText`): `null` \| [`TCommandEditorRangInfo`](../modules.md#tcommandeditorranginfo)
+Defined in: command-editor-parser.ts:195
 
 根据DOM元素和光标位置之前的所有文本，获取光标的endContainer、endOffset信息
 
 #### Parameters
 
-| Name         | Type      |
-| :----------- | :-------- |
-| `rootEl`     | `Element` |
-| `offsetText` | `string`  |
+##### rootEl
+
+`Element`
+
+##### offsetText
+
+`string`
 
 #### Returns
 
-`null` \| [`TCommandEditorRangInfo`](../modules.md#tcommandeditorranginfo)
+`null` \| [`TCommandEditorRangInfo`](../type-aliases/TCommandEditorRangInfo.md)
 
-#### Defined in
+***
 
-command-editor-parser.ts:195
+### getOffsetTextForDom()
 
----
+> **getOffsetTextForDom**(`rootEl`, `offsetNode`, `offsetIndex`): `string`
 
-### getOffsetTextForDom
-
-▸ **getOffsetTextForDom**(`rootEl`, `offsetNode`, `offsetIndex?`): `string`
+Defined in: command-editor-parser.ts:84
 
 获取指定节点指定位置前面所有字符串
 
 #### Parameters
 
-| Name          | Type      | Default value | Description                 |
-| :------------ | :-------- | :------------ | :-------------------------- |
-| `rootEl`      | `Element` | `undefined`   | 包含offsetNode的元素        |
-| `offsetNode`  | `Node`    | `undefined`   | range.endContainer          |
-| `offsetIndex` | `number`  | `-1`          | range.endOffset，-1表示末尾 |
+##### rootEl
+
+`Element`
+
+包含offsetNode的元素
+
+##### offsetNode
+
+`Node`
+
+range.endContainer
+
+##### offsetIndex
+
+`number` = `-1`
+
+range.endOffset，-1表示末尾
 
 #### Returns
 
 `string`
 
-#### Defined in
+***
 
-command-editor-parser.ts:84
+### parseDomToText()
 
----
+> **parseDomToText**(`rootEl`): `string`
 
-### parseDomToText
-
-▸ **parseDomToText**(`rootEl`): `string`
+Defined in: command-editor-parser.ts:53
 
 解析元素成字符串
 
 #### Parameters
 
-| Name     | Type      |
-| :------- | :-------- |
-| `rootEl` | `Element` |
+##### rootEl
+
+`Element`
 
 #### Returns
 
 `string`
 
-#### Defined in
+***
 
-command-editor-parser.ts:53
+### parseVNodeToHtml()
 
----
+> **parseVNodeToHtml**(`vNodes`): `string`
 
-### parseVNodeToHtml
-
-▸ **parseVNodeToHtml**(`vNodes`): `string`
+Defined in: command-editor-parser.ts:132
 
 将vNode解析成html
 
 #### Parameters
 
-| Name     | Type                                                                     |
-| :------- | :----------------------------------------------------------------------- |
-| `vNodes` | [`TCommandEditorContentNode`](../modules.md#tcommandeditorcontentnode)[] |
+##### vNodes
+
+[`TCommandEditorContentNode`](../type-aliases/TCommandEditorContentNode.md)[]
 
 #### Returns
 
 `string`
 
-#### Defined in
+***
 
-command-editor-parser.ts:132
+### parseVNodeToText()
 
----
+> **parseVNodeToText**(`vNodes`): `string`
 
-### parseVNodeToText
-
-▸ **parseVNodeToText**(`vNodes`): `string`
+Defined in: command-editor-parser.ts:173
 
 将vNode解析成text
 
 #### Parameters
 
-| Name     | Type                                                                     |
-| :------- | :----------------------------------------------------------------------- |
-| `vNodes` | [`TCommandEditorContentNode`](../modules.md#tcommandeditorcontentnode)[] |
+##### vNodes
+
+[`TCommandEditorContentNode`](../type-aliases/TCommandEditorContentNode.md)[]
 
 #### Returns
 
 `string`
-
-#### Defined in
-
-command-editor-parser.ts:173

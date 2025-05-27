@@ -1,259 +1,243 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / Repository
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / Repository
 
 # Class: Repository
 
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:7
+
 仓库，可扩展基本方法，添加默认查询条件
-
-## Table of contents
-
-### Constructors
-
-- [constructor](Repository.md#constructor)
-
-### Properties
-
-- [#repositoryManager](Repository.md##repositorymanager)
-
-### Methods
-
-- [createMany](Repository.md#createmany)
-- [createOne](Repository.md#createone)
-- [deleteById](Repository.md#deletebyid)
-- [deleteMany](Repository.md#deletemany)
-- [findOneById](Repository.md#findonebyid)
-- [query](Repository.md#query)
-- [run](Repository.md#run)
-- [updateById](Repository.md#updatebyid)
-- [updateMany](Repository.md#updatemany)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Repository**(`repositoryManager`): [`Repository`](Repository.md)
+> **new Repository**(`repositoryManager`): `Repository`
+
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:10
 
 #### Parameters
 
-| Name                | Type                                        |
-| :------------------ | :------------------------------------------ |
-| `repositoryManager` | [`RepositoryManager`](RepositoryManager.md) |
+##### repositoryManager
+
+[`RepositoryManager`](RepositoryManager.md)
 
 #### Returns
 
-[`Repository`](Repository.md)
-
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository.ts:10
-
-## Properties
-
-### #repositoryManager
-
-• `Private` `Readonly` **#repositoryManager**: [`RepositoryManager`](RepositoryManager.md)
-
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository.ts:8
+`Repository`
 
 ## Methods
 
-### createMany
+### createMany()
 
-▸ **createMany**(`model`, `createDatas`): `Promise`\<(`string` \| `number`)[]\>
+> **createMany**(`model`, `createDatas`): `Promise`\<(`string` \| `number`)[]\>
+
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:27
 
 #### Parameters
 
-| Name          | Type                                           |
-| :------------ | :--------------------------------------------- |
-| `model`       | typeof [`BaseModel`](BaseModel.md)             |
-| `createDatas` | [`TIdAnyObject`](../modules.md#tidanyobject)[] |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### createDatas
+
+[`TIdAnyObject`](../type-aliases/TIdAnyObject.md)[]
 
 #### Returns
 
 `Promise`\<(`string` \| `number`)[]\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:27
+### createOne()
 
----
+> **createOne**(`model`, `createData`): `Promise`\<`null` \| `string` \| `number`\>
 
-### createOne
-
-▸ **createOne**(`model`, `createData`): `Promise`\<`null` \| `string` \| `number`\>
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:22
 
 #### Parameters
 
-| Name         | Type                                         |
-| :----------- | :------------------------------------------- |
-| `model`      | typeof [`BaseModel`](BaseModel.md)           |
-| `createData` | [`TIdAnyObject`](../modules.md#tidanyobject) |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### createData
+
+[`TIdAnyObject`](../type-aliases/TIdAnyObject.md)
 
 #### Returns
 
 `Promise`\<`null` \| `string` \| `number`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:22
+### deleteById()
 
----
+> **deleteById**(`model`, `id`): `Promise`\<`boolean`\>
 
-### deleteById
-
-▸ **deleteById**(`model`, `id`): `Promise`\<`boolean`\>
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:45
 
 #### Parameters
 
-| Name    | Type                               |
-| :------ | :--------------------------------- |
-| `model` | typeof [`BaseModel`](BaseModel.md) |
-| `id`    | `string` \| `number`               |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### id
+
+`string` | `number`
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:45
+### deleteMany()
 
----
+> **deleteMany**(`model`, `query`): `Promise`\<`boolean`\>
 
-### deleteMany
-
-▸ **deleteMany**(`model`, `query`): `Promise`\<`boolean`\>
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:41
 
 #### Parameters
 
-| Name    | Type                                   |
-| :------ | :------------------------------------- |
-| `model` | typeof [`BaseModel`](BaseModel.md)     |
-| `query` | [`TOrmQuery`](../modules.md#tormquery) |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### query
+
+[`TOrmQuery`](../type-aliases/TOrmQuery.md)
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:41
+### findOneById()
 
----
+> **findOneById**(`model`, `id`): `Promise`\<`unknown`\>
 
-### findOneById
-
-▸ **findOneById**(`model`, `id`): `Promise`\<`unknown`\>
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:51
 
 #### Parameters
 
-| Name    | Type                               |
-| :------ | :--------------------------------- |
-| `model` | typeof [`BaseModel`](BaseModel.md) |
-| `id`    | `string` \| `number`               |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### id
+
+`string` | `number`
 
 #### Returns
 
 `Promise`\<`unknown`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:51
+### query()
 
----
+> **query**\<`Result`\>(`model`, `query`): `Promise`\<`Result`[]\>
 
-### query
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:18
 
-▸ **query**\<`Result`\>(`model`, `query`): `Promise`\<`Result`[]\>
+#### Type Parameters
 
-#### Type parameters
+##### Result
 
-| Name     | Type      |
-| :------- | :-------- |
-| `Result` | `unknown` |
+`Result` = `unknown`
 
 #### Parameters
 
-| Name    | Type                                   |
-| :------ | :------------------------------------- |
-| `model` | typeof [`BaseModel`](BaseModel.md)     |
-| `query` | [`TOrmQuery`](../modules.md#tormquery) |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### query
+
+[`TOrmQuery`](../type-aliases/TOrmQuery.md)
 
 #### Returns
 
 `Promise`\<`Result`[]\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:18
+### run()
 
----
+> **run**\<`Result`\>(`model`, ...`executeArgs`): `Promise`\<`Result`\>
 
-### run
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:14
 
-▸ **run**\<`Result`\>(`model`, `...executeArgs`): `Promise`\<`Result`\>
+#### Type Parameters
 
-#### Type parameters
+##### Result
 
-| Name     | Type      |
-| :------- | :-------- |
-| `Result` | `unknown` |
+`Result` = `unknown`
 
 #### Parameters
 
-| Name             | Type                               |
-| :--------------- | :--------------------------------- |
-| `model`          | typeof [`BaseModel`](BaseModel.md) |
-| `...executeArgs` | `unknown`[]                        |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### executeArgs
+
+...`unknown`[]
 
 #### Returns
 
 `Promise`\<`Result`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:14
+### updateById()
 
----
+> **updateById**(`model`, `id`, `updateData`): `Promise`\<`boolean`\>
 
-### updateById
-
-▸ **updateById**(`model`, `id`, `updateData`): `Promise`\<`boolean`\>
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:35
 
 #### Parameters
 
-| Name         | Type                               |
-| :----------- | :--------------------------------- |
-| `model`      | typeof [`BaseModel`](BaseModel.md) |
-| `id`         | `string` \| `number`               |
-| `updateData` | [`TAnyObj`](../modules.md#tanyobj) |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### id
+
+`string` | `number`
+
+##### updateData
+
+[`TAnyObj`](../type-aliases/TAnyObj.md)
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/repository/repository.ts:35
+### updateMany()
 
----
+> **updateMany**(`model`, `updateDataList`): `Promise`\<`boolean`\>
 
-### updateMany
-
-▸ **updateMany**(`model`, `updateDataList`): `Promise`\<`boolean`\>
+Defined in: src/packages/iswork/src/orm/repository/repository.ts:31
 
 #### Parameters
 
-| Name             | Type                                           |
-| :--------------- | :--------------------------------------------- |
-| `model`          | typeof [`BaseModel`](BaseModel.md)             |
-| `updateDataList` | [`TIdAnyObject`](../modules.md#tidanyobject)[] |
+##### model
+
+*typeof* [`BaseModel`](BaseModel.md)
+
+##### updateDataList
+
+[`TIdAnyObject`](../type-aliases/TIdAnyObject.md)[]
 
 #### Returns
 
 `Promise`\<`boolean`\>
-
-#### Defined in
-
-src/packages/iswork/src/orm/repository/repository.ts:31

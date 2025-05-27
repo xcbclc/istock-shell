@@ -1,168 +1,127 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / IMessageHandler
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / IMessageHandler
 
 # Interface: IMessageHandler
 
-## Table of contents
-
-### Properties
-
-- [cmdAppend](IMessageHandler.md#cmdappend)
-- [cmdReplace](IMessageHandler.md#cmdreplace)
-- [complete](IMessageHandler.md#complete)
-- [createMessageIterator](IMessageHandler.md#createmessageiterator)
-- [createMessageSSE](IMessageHandler.md#createmessagesse)
-- [createObservable](IMessageHandler.md#createobservable)
+Defined in: src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:15
 
 ## Properties
 
-### cmdAppend
+### cmdAppend()
 
-• **cmdAppend**: (`payload`: [`TCmdpPayload`](../modules.md#tcmdppayload)) => [`TCmdpPayload`](../modules.md#tcmdppayload)
+> **cmdAppend**: (`payload`) => [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-#### Type declaration
+Defined in: src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:17
 
-▸ (`payload`): [`TCmdpPayload`](../modules.md#tcmdppayload)
+#### Parameters
 
-##### Parameters
+##### payload
 
-| Name      | Type                                         |
-| :-------- | :------------------------------------------- |
-| `payload` | [`TCmdpPayload`](../modules.md#tcmdppayload) |
+[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-##### Returns
+#### Returns
 
-[`TCmdpPayload`](../modules.md#tcmdppayload)
+[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-#### Defined in
+***
 
-src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:17
+### cmdReplace()
 
----
+> **cmdReplace**: (`payload`) => [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-### cmdReplace
+Defined in: src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:18
 
-• **cmdReplace**: (`payload`: [`TCmdpPayload`](../modules.md#tcmdppayload)) => [`TCmdpPayload`](../modules.md#tcmdppayload)
+#### Parameters
 
-#### Type declaration
+##### payload
 
-▸ (`payload`): [`TCmdpPayload`](../modules.md#tcmdppayload)
+[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-##### Parameters
+#### Returns
 
-| Name      | Type                                         |
-| :-------- | :------------------------------------------- |
-| `payload` | [`TCmdpPayload`](../modules.md#tcmdppayload) |
+[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-##### Returns
+***
 
-[`TCmdpPayload`](../modules.md#tcmdppayload)
+### complete()
 
-#### Defined in
+> **complete**: (`payload?`) => [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:18
+Defined in: src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:16
 
----
+#### Parameters
 
-### complete
+##### payload?
 
-• **complete**: (`payload?`: [`TCmdpPayload`](../modules.md#tcmdppayload)) => [`TCmdpPayload`](../modules.md#tcmdppayload)
+[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-#### Type declaration
+#### Returns
 
-▸ (`payload?`): [`TCmdpPayload`](../modules.md#tcmdppayload)
+[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-##### Parameters
+***
 
-| Name       | Type                                         |
-| :--------- | :------------------------------------------- |
-| `payload?` | [`TCmdpPayload`](../modules.md#tcmdppayload) |
+### createMessageIterator()
 
-##### Returns
+> **createMessageIterator**: (`callback`) => `AsyncIterator`\<[`TMessageIteratorData`](../type-aliases/TMessageIteratorData.md), `void`, `unknown`\>
 
-[`TCmdpPayload`](../modules.md#tcmdppayload)
-
-#### Defined in
-
-src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:16
-
----
-
-### createMessageIterator
-
-• **createMessageIterator**: (`callback`: (`messageIterator`: [`MessageIterator`](../classes/MessageIterator.md)) => `void`) => `AsyncIterator`\<[`TMessageIteratorData`](../modules.md#tmessageiteratordata), `void`, `unknown`\>
-
-#### Type declaration
-
-▸ (`callback`): `AsyncIterator`\<[`TMessageIteratorData`](../modules.md#tmessageiteratordata), `void`, `unknown`\>
+Defined in: src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:20
 
 创建一个Generator异步消息函数
 
-##### Parameters
+#### Parameters
 
-| Name       | Type                                                                              |
-| :--------- | :-------------------------------------------------------------------------------- |
-| `callback` | (`messageIterator`: [`MessageIterator`](../classes/MessageIterator.md)) => `void` |
+##### callback
 
-##### Returns
+(`messageIterator`) => `void`
 
-`AsyncIterator`\<[`TMessageIteratorData`](../modules.md#tmessageiteratordata), `void`, `unknown`\>
+#### Returns
 
-#### Defined in
+`AsyncIterator`\<[`TMessageIteratorData`](../type-aliases/TMessageIteratorData.md), `void`, `unknown`\>
 
-src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:20
+***
 
----
+### createMessageSSE()
 
-### createMessageSSE
+> **createMessageSSE**: (`optoins`) => `Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../type-aliases/TMessageSSEIteratorData.md), `void`, `unknown`\>\>
 
-• **createMessageSSE**: (`optoins`: [`TMessageSSEOptions`](../modules.md#tmessagesseoptions)) => `Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../modules.md#tmessagesseiteratordata), `void`, `unknown`\>\>
-
-#### Type declaration
-
-▸ (`optoins`): `Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../modules.md#tmessagesseiteratordata), `void`, `unknown`\>\>
+Defined in: src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:21
 
 创建一个Generator异步消息函数
 
-##### Parameters
+#### Parameters
 
-| Name      | Type                                                     |
-| :-------- | :------------------------------------------------------- |
-| `optoins` | [`TMessageSSEOptions`](../modules.md#tmessagesseoptions) |
+##### optoins
 
-##### Returns
+[`TMessageSSEOptions`](../type-aliases/TMessageSSEOptions.md)
 
-`Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../modules.md#tmessagesseiteratordata), `void`, `unknown`\>\>
+#### Returns
 
-#### Defined in
+`Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../type-aliases/TMessageSSEIteratorData.md), `void`, `unknown`\>\>
 
-src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:21
+***
 
----
+### createObservable()
 
-### createObservable
+> **createObservable**: \<`V`\>(`subscribeCallback`) => [`Observable`](../classes/Observable.md)\<`V`\>
 
-• **createObservable**: \<V\>(`subscribeCallback`: [`TSubscribeCallback`](../modules.md#tsubscribecallback)\<`V`\>) => [`Observable`](../classes/Observable.md)\<`V`\>
+Defined in: src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:19
 
-#### Type declaration
+#### Type Parameters
 
-▸ \<`V`\>(`subscribeCallback`): [`Observable`](../classes/Observable.md)\<`V`\>
+##### V
 
-##### Type parameters
+`V`
 
-| Name |
-| :--- |
-| `V`  |
+#### Parameters
 
-##### Parameters
+##### subscribeCallback
 
-| Name                | Type                                                            |
-| :------------------ | :-------------------------------------------------------------- |
-| `subscribeCallback` | [`TSubscribeCallback`](../modules.md#tsubscribecallback)\<`V`\> |
+[`TSubscribeCallback`](../type-aliases/TSubscribeCallback.md)\<`V`\>
 
-##### Returns
+#### Returns
 
 [`Observable`](../classes/Observable.md)\<`V`\>
-
-#### Defined in
-
-src/packages/iswork/src/decorators/controller/controller-method-message-handler.decorator.ts:19

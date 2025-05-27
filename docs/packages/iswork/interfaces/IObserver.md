@@ -1,89 +1,69 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / IObserver
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / IObserver
 
 # Interface: IObserver\<V\>
 
-## Type parameters
+Defined in: src/packages/iswork/src/message/message-observable.ts:1
 
-| Name | Type      |
-| :--- | :-------- |
-| `V`  | `unknown` |
+## Type Parameters
 
-## Table of contents
+### V
 
-### Properties
-
-- [complete](IObserver.md#complete)
-- [error](IObserver.md#error)
-- [next](IObserver.md#next)
+`V` = `unknown`
 
 ## Properties
 
-### complete
+### complete()
 
-• **complete**: (`value?`: `V`) => `void`
+> **complete**: (`value?`) => `void`
 
-#### Type declaration
+Defined in: src/packages/iswork/src/message/message-observable.ts:4
 
-▸ (`value?`): `void`
+#### Parameters
 
-##### Parameters
+##### value?
 
-| Name     | Type |
-| :------- | :--- |
-| `value?` | `V`  |
+`V`
 
-##### Returns
+#### Returns
 
 `void`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-observable.ts:4
+### error()
 
----
+> **error**: (`err`) => `void`
 
-### error
+Defined in: src/packages/iswork/src/message/message-observable.ts:3
 
-• **error**: (`err`: `any`) => `void`
+#### Parameters
 
-#### Type declaration
+##### err
 
-▸ (`err`): `void`
+`any`
 
-##### Parameters
-
-| Name  | Type  |
-| :---- | :---- |
-| `err` | `any` |
-
-##### Returns
+#### Returns
 
 `void`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-observable.ts:3
+### next()
 
----
+> **next**: (`value`) => `void`
 
-### next
+Defined in: src/packages/iswork/src/message/message-observable.ts:2
 
-• **next**: (`value`: `V`) => `void`
+#### Parameters
 
-#### Type declaration
+##### value
 
-▸ (`value`): `void`
+`V`
 
-##### Parameters
-
-| Name    | Type |
-| :------ | :--- |
-| `value` | `V`  |
-
-##### Returns
+#### Returns
 
 `void`
-
-#### Defined in
-
-src/packages/iswork/src/message/message-observable.ts:2

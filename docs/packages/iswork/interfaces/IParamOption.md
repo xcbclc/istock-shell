@@ -1,52 +1,41 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / IParamOption
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / IParamOption
 
 # Interface: IParamOption
 
-## Table of contents
-
-### Properties
-
-- [disabled](IParamOption.md#disabled)
-- [field](IParamOption.md#field)
-- [primary](IParamOption.md#primary)
-- [type](IParamOption.md#type)
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:15
 
 ## Properties
 
-### disabled
+### disabled?
 
-• `Optional` **disabled**: `boolean`
+> `optional` **disabled**: `boolean`
 
-#### Defined in
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:19
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:19
+***
 
----
+### field?
 
-### field
+> `optional` **field**: `string`
 
-• `Optional` **field**: `string`
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:16
 
-#### Defined in
+***
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:16
+### primary?
 
----
+> `optional` **primary**: `boolean`
 
-### primary
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:18
 
-• `Optional` **primary**: `boolean`
+***
 
-#### Defined in
+### type?
 
-src/packages/iswork/src/orm/interfaces/query-builder.ts:18
+> `optional` **type**: [`TParamOptionType`](../type-aliases/TParamOptionType.md)
 
----
-
-### type
-
-• `Optional` **type**: [`TParamOptionType`](../modules.md#tparamoptiontype)
-
-#### Defined in
-
-src/packages/iswork/src/orm/interfaces/query-builder.ts:17
+Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:17

@@ -1,74 +1,48 @@
-[@istock/editor](../README.md) / [Exports](../modules.md) / CommandEditorCursor
+[**@istock/editor**](../README.md)
+
+***
+
+[@istock/editor](../globals.md) / CommandEditorCursor
 
 # Class: CommandEditorCursor
 
+Defined in: command-editor-cursor.ts:4
+
 编辑框光标操作
-
-## Table of contents
-
-### Constructors
-
-- [constructor](CommandEditorCursor.md#constructor)
-
-### Properties
-
-- [#commandInput](CommandEditorCursor.md##commandinput)
-- [selection](CommandEditorCursor.md#selection)
-
-### Methods
-
-- [getOneRange](CommandEditorCursor.md#getonerange)
-- [moveNodeOffset](CommandEditorCursor.md#movenodeoffset)
-- [moveToEnd](CommandEditorCursor.md#movetoend)
-- [moveToStart](CommandEditorCursor.md#movetostart)
-- [moveTokenOffset](CommandEditorCursor.md#movetokenoffset)
-- [setOffset](CommandEditorCursor.md#setoffset)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new CommandEditorCursor**(`commandInput`): [`CommandEditorCursor`](CommandEditorCursor.md)
+> **new CommandEditorCursor**(`commandInput`): `CommandEditorCursor`
+
+Defined in: command-editor-cursor.ts:9
 
 #### Parameters
 
-| Name           | Type          |
-| :------------- | :------------ |
-| `commandInput` | `HTMLElement` |
+##### commandInput
+
+`HTMLElement`
 
 #### Returns
 
-[`CommandEditorCursor`](CommandEditorCursor.md)
-
-#### Defined in
-
-command-editor-cursor.ts:9
+`CommandEditorCursor`
 
 ## Properties
 
-### #commandInput
-
-• `Private` `Readonly` **#commandInput**: `HTMLElement`
-
-#### Defined in
-
-command-editor-cursor.ts:7
-
----
-
 ### selection
 
-• **selection**: `Selection`
+> **selection**: `Selection`
 
-#### Defined in
-
-command-editor-cursor.ts:5
+Defined in: command-editor-cursor.ts:5
 
 ## Methods
 
-### getOneRange
+### getOneRange()
 
-▸ **getOneRange**(): `Range`
+> **getOneRange**(): `Range`
+
+Defined in: command-editor-cursor.ts:19
 
 获取Range对象
 
@@ -76,38 +50,37 @@ command-editor-cursor.ts:5
 
 `Range`
 
-#### Defined in
+***
 
-command-editor-cursor.ts:19
+### moveNodeOffset()
 
----
+> **moveNodeOffset**(`endNode`, `endOffset`): `void`
 
-### moveNodeOffset
-
-▸ **moveNodeOffset**(`endNode`, `endOffset`): `void`
+Defined in: command-editor-cursor.ts:149
 
 移动到指定节点及对应偏移位置
 
 #### Parameters
 
-| Name        | Type                |
-| :---------- | :------------------ |
-| `endNode`   | `Node` \| `Element` |
-| `endOffset` | `number`            |
+##### endNode
+
+`Node` | `Element`
+
+##### endOffset
+
+`number`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-command-editor-cursor.ts:149
+### moveToEnd()
 
----
+> **moveToEnd**(): `void`
 
-### moveToEnd
-
-▸ **moveToEnd**(): `void`
+Defined in: command-editor-cursor.ts:104
 
 移动光标到开始位置
 
@@ -115,67 +88,60 @@ command-editor-cursor.ts:149
 
 `void`
 
-#### Defined in
+***
 
-command-editor-cursor.ts:104
+### moveTokenOffset()
 
----
+> **moveTokenOffset**(`number`, `isBefore`): `void`
 
-### moveToStart
-
-▸ **moveToStart**(): `void`
-
-移动光标到开始位置
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-command-editor-cursor.ts:91
-
----
-
-### moveTokenOffset
-
-▸ **moveTokenOffset**(`number?`, `isBefore?`): `void`
+Defined in: command-editor-cursor.ts:119
 
 光标向前或后移动指定个token位置
 
 #### Parameters
 
-| Name       | Type      | Default value |
-| :--------- | :-------- | :------------ |
-| `number`   | `number`  | `1`           |
-| `isBefore` | `boolean` | `true`        |
+##### number
+
+`number` = `1`
+
+##### isBefore
+
+`boolean` = `true`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-command-editor-cursor.ts:119
+### moveToStart()
 
----
+> **moveToStart**(): `void`
 
-### setOffset
+Defined in: command-editor-cursor.ts:91
 
-▸ **setOffset**(`offset`): `void`
+移动光标到开始位置
+
+#### Returns
+
+`void`
+
+***
+
+### setOffset()
+
+> **setOffset**(`offset`): `void`
+
+Defined in: command-editor-cursor.ts:39
 
 设置光标位置
 
 #### Parameters
 
-| Name     | Type     |
-| :------- | :------- |
-| `offset` | `number` |
+##### offset
+
+`number`
 
 #### Returns
 
 `void`
-
-#### Defined in
-
-command-editor-cursor.ts:39

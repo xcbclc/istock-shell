@@ -140,9 +140,9 @@ export default {
     {
       text: '相关库',
       items: [
-        { text: 'iswork', link: '/packages/iswork/modules.html' },
-        { text: 'command-parser', link: '/packages/command-parser/modules.html' },
-        { text: 'editor', link: '/packages/editor/modules.html' },
+        { text: 'iswork', link: '/packages/iswork/globals.html' },
+        { text: 'command-parser', link: '/packages/command-parser/globals.html' },
+        { text: 'editor', link: '/packages/editor/globals.html' },
       ],
     },
   ],

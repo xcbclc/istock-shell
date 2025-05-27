@@ -1,106 +1,75 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / Observable
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / Observable
 
 # Class: Observable\<V\>
 
-## Type parameters
+Defined in: src/packages/iswork/src/message/message-observable.ts:10
 
-| Name | Type      |
-| :--- | :-------- |
-| `V`  | `unknown` |
+## Type Parameters
 
-## Table of contents
+### V
 
-### Constructors
-
-- [constructor](Observable.md#constructor)
-
-### Properties
-
-- [#subscribeCallback](Observable.md##subscribecallback)
-
-### Methods
-
-- [subscribe](Observable.md#subscribe)
-- [create](Observable.md#create)
+`V` = `unknown`
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Observable**\<`V`\>(`subscribeCallback`): [`Observable`](Observable.md)\<`V`\>
+> **new Observable**\<`V`\>(`subscribeCallback`): `Observable`\<`V`\>
 
-#### Type parameters
-
-| Name | Type      |
-| :--- | :-------- |
-| `V`  | `unknown` |
+Defined in: src/packages/iswork/src/message/message-observable.ts:13
 
 #### Parameters
 
-| Name                | Type                                                            |
-| :------------------ | :-------------------------------------------------------------- |
-| `subscribeCallback` | [`TSubscribeCallback`](../modules.md#tsubscribecallback)\<`V`\> |
+##### subscribeCallback
+
+[`TSubscribeCallback`](../type-aliases/TSubscribeCallback.md)\<`V`\>
 
 #### Returns
 
-[`Observable`](Observable.md)\<`V`\>
-
-#### Defined in
-
-src/packages/iswork/src/message/message-observable.ts:13
-
-## Properties
-
-### #subscribeCallback
-
-• `Private` `Readonly` **#subscribeCallback**: [`TSubscribeCallback`](../modules.md#tsubscribecallback)\<`V`\>
-
-#### Defined in
-
-src/packages/iswork/src/message/message-observable.ts:11
+`Observable`\<`V`\>
 
 ## Methods
 
-### subscribe
+### subscribe()
 
-▸ **subscribe**(`observer`): [`TUnSubscribe`](../modules.md#tunsubscribe)
+> **subscribe**(`observer`): [`TUnSubscribe`](../type-aliases/TUnSubscribe.md)
 
-#### Parameters
-
-| Name       | Type                                             |
-| :--------- | :----------------------------------------------- |
-| `observer` | [`IObserver`](../interfaces/IObserver.md)\<`V`\> |
-
-#### Returns
-
-[`TUnSubscribe`](../modules.md#tunsubscribe)
-
-#### Defined in
-
-src/packages/iswork/src/message/message-observable.ts:17
-
----
-
-### create
-
-▸ **create**\<`V`\>(`subscribeCallback`): [`Observable`](Observable.md)\<`V`\>
-
-#### Type parameters
-
-| Name |
-| :--- |
-| `V`  |
+Defined in: src/packages/iswork/src/message/message-observable.ts:17
 
 #### Parameters
 
-| Name                | Type                                                            |
-| :------------------ | :-------------------------------------------------------------- |
-| `subscribeCallback` | [`TSubscribeCallback`](../modules.md#tsubscribecallback)\<`V`\> |
+##### observer
+
+[`IObserver`](../interfaces/IObserver.md)\<`V`\>
 
 #### Returns
 
-[`Observable`](Observable.md)\<`V`\>
+[`TUnSubscribe`](../type-aliases/TUnSubscribe.md)
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-observable.ts:21
+### create()
+
+> `static` **create**\<`V`\>(`subscribeCallback`): `Observable`\<`V`\>
+
+Defined in: src/packages/iswork/src/message/message-observable.ts:21
+
+#### Type Parameters
+
+##### V
+
+`V`
+
+#### Parameters
+
+##### subscribeCallback
+
+[`TSubscribeCallback`](../type-aliases/TSubscribeCallback.md)\<`V`\>
+
+#### Returns
+
+`Observable`\<`V`\>

@@ -1,124 +1,81 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / MessageIterator
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / MessageIterator
 
 # Class: MessageIterator
 
+Defined in: src/packages/iswork/src/message/message-iterator.ts:9
+
 异步消息函数遍历处理机制
-
-## Table of contents
-
-### Constructors
-
-- [constructor](MessageIterator.md#constructor)
-
-### Properties
-
-- [#event](MessageIterator.md##event)
-
-### Methods
-
-- [#messageAsyncGenerator](MessageIterator.md##messageasyncgenerator)
-- [complete](MessageIterator.md#complete)
-- [send](MessageIterator.md#send)
-- [create](MessageIterator.md#create)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new MessageIterator**(): [`MessageIterator`](MessageIterator.md)
+> **new MessageIterator**(): `MessageIterator`
 
 #### Returns
 
-[`MessageIterator`](MessageIterator.md)
-
-## Properties
-
-### #event
-
-• `Private` `Readonly` **#event**: `EventEmitter`
-
-#### Defined in
-
-src/packages/iswork/src/message/message-iterator.ts:10
+`MessageIterator`
 
 ## Methods
 
-### #messageAsyncGenerator
+### complete()
 
-▸ **#messageAsyncGenerator**(): `AsyncGenerator`\<[`TMessageIteratorData`](../modules.md#tmessageiteratordata), `void`, `unknown`\>
+> **complete**(`message`): `Promise`\<`void`\>
 
-异步消息生成器函数
-
-#### Returns
-
-`AsyncGenerator`\<[`TMessageIteratorData`](../modules.md#tmessageiteratordata), `void`, `unknown`\>
-
-#### Defined in
-
-src/packages/iswork/src/message/message-iterator.ts:15
-
----
-
-### complete
-
-▸ **complete**(`message?`): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-iterator.ts:34
 
 消息传递完成调用方法
 
 #### Parameters
 
-| Name      | Type                                                         |
-| :-------- | :----------------------------------------------------------- |
-| `message` | [`TMessageIteratorData`](../modules.md#tmessageiteratordata) |
+##### message
+
+[`TMessageIteratorData`](../type-aliases/TMessageIteratorData.md) = `{}`
 
 #### Returns
 
 `Promise`\<`void`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-iterator.ts:34
+### send()
 
----
+> **send**(`message`): `Promise`\<`void`\>
 
-### send
-
-▸ **send**(`message?`): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-iterator.ts:44
 
 发送消息
 
 #### Parameters
 
-| Name      | Type                                                         |
-| :-------- | :----------------------------------------------------------- |
-| `message` | [`TMessageIteratorData`](../modules.md#tmessageiteratordata) |
+##### message
+
+[`TMessageIteratorData`](../type-aliases/TMessageIteratorData.md) = `{}`
 
 #### Returns
 
 `Promise`\<`void`\>
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-iterator.ts:44
+### create()
 
----
+> `static` **create**(`callback`): `AsyncIterator`\<[`TMessageIteratorData`](../type-aliases/TMessageIteratorData.md), `void`, `unknown`\>
 
-### create
-
-▸ **create**(`callback`): `AsyncIterator`\<[`TMessageIteratorData`](../modules.md#tmessageiteratordata), `void`, `unknown`\>
+Defined in: src/packages/iswork/src/message/message-iterator.ts:52
 
 创建一个Generator异步消息函数
 
 #### Parameters
 
-| Name       | Type                                                                   |
-| :--------- | :--------------------------------------------------------------------- |
-| `callback` | (`messageIterator`: [`MessageIterator`](MessageIterator.md)) => `void` |
+##### callback
+
+(`messageIterator`) => `void`
 
 #### Returns
 
-`AsyncIterator`\<[`TMessageIteratorData`](../modules.md#tmessageiteratordata), `void`, `unknown`\>
-
-#### Defined in
-
-src/packages/iswork/src/message/message-iterator.ts:52
+`AsyncIterator`\<[`TMessageIteratorData`](../type-aliases/TMessageIteratorData.md), `void`, `unknown`\>

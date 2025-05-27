@@ -1,104 +1,95 @@
-[@istock/command-parser](../README.md) / [Exports](../modules.md) / Ast
+[**@istock/command-parser**](../README.md)
+
+***
+
+[@istock/command-parser](../globals.md) / Ast
 
 # Class: Ast
 
-## Table of contents
-
-### Constructors
-
-- [constructor](Ast.md#constructor)
-
-### Properties
-
-- [#tokenizer](Ast.md##tokenizer)
-
-### Accessors
-
-- [symbol](Ast.md#symbol)
-- [tokenizer](Ast.md#tokenizer)
-
-### Methods
-
-- [parse](Ast.md#parse)
+Defined in: ast.ts:55
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Ast**(): [`Ast`](Ast.md)
+> **new Ast**(): `Ast`
+
+Defined in: ast.ts:65
 
 #### Returns
 
-[`Ast`](Ast.md)
-
-#### Defined in
-
-ast.ts:65
-
-## Properties
-
-### #tokenizer
-
-• `Private` `Readonly` **#tokenizer**: [`Tokenizer`](Tokenizer.md)
-
-#### Defined in
-
-ast.ts:56
+`Ast`
 
 ## Accessors
 
 ### symbol
 
-• `get` **symbol**(): `Object`
+#### Get Signature
 
-#### Returns
+> **get** **symbol**(): `object`
 
-`Object`
+Defined in: ast.ts:57
 
-| Name               | Type       |
-| :----------------- | :--------- |
-| `options`          | `string`[] |
-| `parenthesesLeft`  | `string`[] |
-| `parenthesesRight` | `string`[] |
-| `pipe2And`         | `string`[] |
-| `pipe2Or`          | `string`[] |
-| `pipeAnd`          | `string`[] |
-| `pipeOr`           | `string`[] |
+##### Returns
 
-#### Defined in
+`object`
 
-ast.ts:57
+###### options
 
----
+> **options**: `string`[]
+
+###### parenthesesLeft
+
+> **parenthesesLeft**: `string`[]
+
+###### parenthesesRight
+
+> **parenthesesRight**: `string`[]
+
+###### pipe2And
+
+> **pipe2And**: `string`[]
+
+###### pipe2Or
+
+> **pipe2Or**: `string`[]
+
+###### pipeAnd
+
+> **pipeAnd**: `string`[]
+
+###### pipeOr
+
+> **pipeOr**: `string`[]
+
+***
 
 ### tokenizer
 
-• `get` **tokenizer**(): [`Tokenizer`](Tokenizer.md)
+#### Get Signature
 
-#### Returns
+> **get** **tokenizer**(): [`Tokenizer`](Tokenizer.md)
+
+Defined in: ast.ts:61
+
+##### Returns
 
 [`Tokenizer`](Tokenizer.md)
 
-#### Defined in
-
-ast.ts:61
-
 ## Methods
 
-### parse
+### parse()
 
-▸ **parse**(`input`): [`TAstTreeRoot`](../modules.md#tasttreeroot)
+> **parse**(`input`): [`TAstTreeRoot`](../type-aliases/TAstTreeRoot.md)
+
+Defined in: ast.ts:69
 
 #### Parameters
 
-| Name    | Type     |
-| :------ | :------- |
-| `input` | `string` |
+##### input
+
+`string`
 
 #### Returns
 
-[`TAstTreeRoot`](../modules.md#tasttreeroot)
-
-#### Defined in
-
-ast.ts:69
+[`TAstTreeRoot`](../type-aliases/TAstTreeRoot.md)

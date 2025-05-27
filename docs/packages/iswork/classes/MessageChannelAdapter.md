@@ -1,147 +1,76 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / MessageChannelAdapter
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / MessageChannelAdapter
 
 # Class: MessageChannelAdapter
+
+Defined in: src/packages/iswork/src/message/message-channel.ts:4
 
 ## Implements
 
 - `AbstractMessage`\<`MessageChannel`\>
 
-## Table of contents
-
-### Constructors
-
-- [constructor](MessageChannelAdapter.md#constructor)
-
-### Properties
-
-- [#onErrorCallback](MessageChannelAdapter.md##onerrorcallback)
-- [#onMessageCallback](MessageChannelAdapter.md##onmessagecallback)
-- [instance](MessageChannelAdapter.md#instance)
-- [options](MessageChannelAdapter.md#options)
-
-### Accessors
-
-- [hasOnMessageCallback](MessageChannelAdapter.md#hasonmessagecallback)
-
-### Methods
-
-- [close](MessageChannelAdapter.md#close)
-- [onError](MessageChannelAdapter.md#onerror)
-- [onMessage](MessageChannelAdapter.md#onmessage)
-- [open](MessageChannelAdapter.md#open)
-- [send](MessageChannelAdapter.md#send)
-
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new MessageChannelAdapter**(`options?`): [`MessageChannelAdapter`](MessageChannelAdapter.md)
+> **new MessageChannelAdapter**(`options?`): `MessageChannelAdapter`
+
+Defined in: src/packages/iswork/src/message/message-channel.ts:14
 
 #### Parameters
 
-| Name       | Type                         |
-| :--------- | :--------------------------- |
-| `options?` | `StructuredSerializeOptions` |
+##### options?
+
+`StructuredSerializeOptions`
 
 #### Returns
 
-[`MessageChannelAdapter`](MessageChannelAdapter.md)
-
-#### Defined in
-
-src/packages/iswork/src/message/message-channel.ts:14
+`MessageChannelAdapter`
 
 ## Properties
 
-### #onErrorCallback
-
-• `Private` **#onErrorCallback**: (`event`: `MessageEvent`\<`any`\>) => `void`
-
-#### Type declaration
-
-▸ (`event`): `void`
-
-##### Parameters
-
-| Name    | Type                    |
-| :------ | :---------------------- |
-| `event` | `MessageEvent`\<`any`\> |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-src/packages/iswork/src/message/message-channel.ts:8
-
----
-
-### #onMessageCallback
-
-• `Private` **#onMessageCallback**: (`event`: `MessageEvent`\<`any`\>) => `void`
-
-#### Type declaration
-
-▸ (`event`): `void`
-
-##### Parameters
-
-| Name    | Type                    |
-| :------ | :---------------------- |
-| `event` | `MessageEvent`\<`any`\> |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-src/packages/iswork/src/message/message-channel.ts:7
-
----
-
 ### instance
 
-• `Readonly` **instance**: `MessageChannel`
+> `readonly` **instance**: `MessageChannel`
+
+Defined in: src/packages/iswork/src/message/message-channel.ts:5
 
 #### Implementation of
 
-AbstractMessage.instance
+`AbstractMessage.instance`
 
-#### Defined in
-
-src/packages/iswork/src/message/message-channel.ts:5
-
----
+***
 
 ### options
 
-• `Readonly` **options**: `undefined` \| `StructuredSerializeOptions`
+> `readonly` **options**: `undefined` \| `StructuredSerializeOptions`
 
-#### Defined in
-
-src/packages/iswork/src/message/message-channel.ts:6
+Defined in: src/packages/iswork/src/message/message-channel.ts:6
 
 ## Accessors
 
 ### hasOnMessageCallback
 
-• `get` **hasOnMessageCallback**(): `boolean`
+#### Get Signature
 
-#### Returns
+> **get** **hasOnMessageCallback**(): `boolean`
+
+Defined in: src/packages/iswork/src/message/message-channel.ts:10
+
+##### Returns
 
 `boolean`
 
-#### Defined in
-
-src/packages/iswork/src/message/message-channel.ts:10
-
 ## Methods
 
-### close
+### close()
 
-▸ **close**(): `Promise`\<`void`\>
+> **close**(): `Promise`\<`void`\>
+
+Defined in: src/packages/iswork/src/message/message-channel.ts:22
 
 #### Returns
 
@@ -149,23 +78,21 @@ src/packages/iswork/src/message/message-channel.ts:10
 
 #### Implementation of
 
-AbstractMessage.close
+`AbstractMessage.close`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-channel.ts:22
+### onError()
 
----
+> **onError**(`callback`): `void`
 
-### onError
-
-▸ **onError**(`callback`): `void`
+Defined in: src/packages/iswork/src/message/message-channel.ts:43
 
 #### Parameters
 
-| Name       | Type                                                                        |
-| :--------- | :-------------------------------------------------------------------------- |
-| `callback` | (`error`: `Error`, `event`: `MessageEvent`\<`any`\>) => `Promise`\<`void`\> |
+##### callback
+
+(`error`, `event`) => `Promise`\<`void`\>
 
 #### Returns
 
@@ -173,23 +100,21 @@ src/packages/iswork/src/message/message-channel.ts:22
 
 #### Implementation of
 
-AbstractMessage.onError
+`AbstractMessage.onError`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-channel.ts:43
+### onMessage()
 
----
+> **onMessage**(`callback`): `void`
 
-### onMessage
-
-▸ **onMessage**(`callback`): `void`
+Defined in: src/packages/iswork/src/message/message-channel.ts:33
 
 #### Parameters
 
-| Name       | Type                                      |
-| :--------- | :---------------------------------------- |
-| `callback` | (`message`: `any`) => `Promise`\<`void`\> |
+##### callback
+
+(`message`) => `Promise`\<`void`\>
 
 #### Returns
 
@@ -197,17 +122,15 @@ src/packages/iswork/src/message/message-channel.ts:43
 
 #### Implementation of
 
-AbstractMessage.onMessage
+`AbstractMessage.onMessage`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-channel.ts:33
+### open()
 
----
+> **open**(): `Promise`\<`void`\>
 
-### open
-
-▸ **open**(): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-channel.ts:18
 
 #### Returns
 
@@ -215,23 +138,21 @@ src/packages/iswork/src/message/message-channel.ts:33
 
 #### Implementation of
 
-AbstractMessage.open
+`AbstractMessage.open`
 
-#### Defined in
+***
 
-src/packages/iswork/src/message/message-channel.ts:18
+### send()
 
----
+> **send**(`message`): `Promise`\<`void`\>
 
-### send
-
-▸ **send**(`message`): `Promise`\<`void`\>
+Defined in: src/packages/iswork/src/message/message-channel.ts:28
 
 #### Parameters
 
-| Name      | Type  |
-| :-------- | :---- |
-| `message` | `any` |
+##### message
+
+`any`
 
 #### Returns
 
@@ -239,8 +160,4 @@ src/packages/iswork/src/message/message-channel.ts:18
 
 #### Implementation of
 
-AbstractMessage.send
-
-#### Defined in
-
-src/packages/iswork/src/message/message-channel.ts:28
+`AbstractMessage.send`

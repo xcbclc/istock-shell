@@ -1,48 +1,41 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / IValueProvider
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / IValueProvider
 
 # Interface: IValueProvider\<Class\>
 
+Defined in: src/packages/iswork/src/interfaces/provider.ts:26
+
 value-provider
 
-## Type parameters
-
-| Name    | Type      |
-| :------ | :-------- |
-| `Class` | `unknown` |
-
-## Hierarchy
+## Extends
 
 - [`BaseProvider`](BaseProvider.md)\<`Class`\>
 
-  ↳ **`IValueProvider`**
+## Type Parameters
 
-## Table of contents
+### Class
 
-### Properties
-
-- [provide](IValueProvider.md#provide)
-- [useValue](IValueProvider.md#usevalue)
+`Class` = `unknown`
 
 ## Properties
 
 ### provide
 
-• **provide**: [`TInjectionToken`](../modules.md#tinjectiontoken)\<`Class`\>
+> **provide**: [`TInjectionToken`](../type-aliases/TInjectionToken.md)\<`Class`\>
+
+Defined in: src/packages/iswork/src/interfaces/provider.ts:6
 
 #### Inherited from
 
-[BaseProvider](BaseProvider.md).[provide](BaseProvider.md#provide)
+[`BaseProvider`](BaseProvider.md).[`provide`](BaseProvider.md#provide)
 
-#### Defined in
-
-src/packages/iswork/src/interfaces/provider.ts:6
-
----
+***
 
 ### useValue
 
-• **useValue**: `Class`
+> **useValue**: `Class`
 
-#### Defined in
-
-src/packages/iswork/src/interfaces/provider.ts:27
+Defined in: src/packages/iswork/src/interfaces/provider.ts:27

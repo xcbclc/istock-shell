@@ -1,4 +1,6 @@
-@istock/iswork / [Exports](modules.md)
+**@istock/iswork**
+
+***
 
 # @istock/iswork
 

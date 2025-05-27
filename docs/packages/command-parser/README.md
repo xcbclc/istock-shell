@@ -1,4 +1,6 @@
-@istock/command-parser / [Exports](modules.md)
+**@istock/command-parser**
+
+***
 
 # @istock/command-parser
 

@@ -1,62 +1,51 @@
-[@istock/iswork](../README.md) / [Exports](../modules.md) / IFactoryProvider
+[**@istock/iswork**](../README.md)
+
+***
+
+[@istock/iswork](../globals.md) / IFactoryProvider
 
 # Interface: IFactoryProvider\<Class\>
 
+Defined in: src/packages/iswork/src/interfaces/provider.ts:19
+
 factory-provider
 
-## Type parameters
-
-| Name    | Type      |
-| :------ | :-------- |
-| `Class` | `unknown` |
-
-## Hierarchy
+## Extends
 
 - [`BaseProvider`](BaseProvider.md)\<`Class`\>
 
-  ↳ **`IFactoryProvider`**
+## Type Parameters
 
-## Table of contents
+### Class
 
-### Properties
-
-- [provide](IFactoryProvider.md#provide)
-- [useFactory](IFactoryProvider.md#usefactory)
+`Class` = `unknown`
 
 ## Properties
 
 ### provide
 
-• **provide**: [`TInjectionToken`](../modules.md#tinjectiontoken)\<`Class`\>
+> **provide**: [`TInjectionToken`](../type-aliases/TInjectionToken.md)\<`Class`\>
+
+Defined in: src/packages/iswork/src/interfaces/provider.ts:6
 
 #### Inherited from
 
-[BaseProvider](BaseProvider.md).[provide](BaseProvider.md#provide)
+[`BaseProvider`](BaseProvider.md).[`provide`](BaseProvider.md#provide)
 
-#### Defined in
+***
 
-src/packages/iswork/src/interfaces/provider.ts:6
+### useFactory()
 
----
+> **useFactory**: (...`arg`) => `Class`
 
-### useFactory
+Defined in: src/packages/iswork/src/interfaces/provider.ts:20
 
-• **useFactory**: (...`arg`: `unknown`[]) => `Class`
+#### Parameters
 
-#### Type declaration
+##### arg
 
-▸ (`...arg`): `Class`
+...`unknown`[]
 
-##### Parameters
-
-| Name     | Type        |
-| :------- | :---------- |
-| `...arg` | `unknown`[] |
-
-##### Returns
+#### Returns
 
 `Class`
-
-#### Defined in
-
-src/packages/iswork/src/interfaces/provider.ts:20
