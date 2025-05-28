@@ -1,10 +1,18 @@
+/**
+ * 带有作用域信息的自定义错误类型。
+ * 继承自标准 Error 类，可用于区分不同模块或功能域的错误。
+ *
+ * @example
+ * throw new ScopeError('network', '请求失败');
+ */
 export class ScopeError extends Error {
   readonly name: string;
   readonly scope: string;
   /**
-   * 重写报错，附带更多错误信息
-   * @param scope
-   * @param message
+   * 创建带有作用域信息的错误实例。
+   * 
+   * @param scope - 错误所属的作用域或模块名称
+   * @param message - 可选的错误消息
    */
   constructor(scope: string, message?: string) {
     super(message);

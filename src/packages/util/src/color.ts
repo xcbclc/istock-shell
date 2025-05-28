@@ -1,6 +1,10 @@
 /**
- * Hex转Hsl
- * @param hex
+ * 将十六进制颜色字符串转换为 HSL 颜色对象。
+ * 
+ * @param hex - 十六进制颜色字符串，如 '#ff7d51'
+ * @returns HSL 颜色对象 { h, s, l }，其中 h 为色相(0-360)，s 为饱和度(0-100)，l 为亮度(0-100)
+ * @example
+ * hexToHsl('#ff7d51'); // { h: 18, s: 100, l: 66 }
  */
 function hexToHsl(hex: string): { h: number; s: number; l: number } {
   // 将 hex 转换为 RGB
@@ -37,10 +41,14 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
 }
 
 /**
- * Hsl转Hex
- * @param h
- * @param s
- * @param l
+ * 将 HSL 颜色值转换为十六进制颜色字符串。
+ * 
+ * @param h - 色相 (0-360)
+ * @param s - 饱和度 (0-100)
+ * @param l - 亮度 (0-100)
+ * @returns 十六进制颜色字符串
+ * @example
+ * hslToHex(18, 100, 66); // '#ff7d51'
  */
 function hslToHex(h: number, s: number, l: number): string {
   s /= 100;
@@ -89,9 +97,13 @@ function hslToHex(h: number, s: number, l: number): string {
 }
 
 /**
- * 生成角度，但排除绿色
- * @param startAngle
- * @param count
+ * 生成一组色相角度，排除绿色区间（90-150）。
+ * 
+ * @param startAngle - 起始角度 (0-360)
+ * @param count - 生成的角度数量
+ * @returns 色相角度数组
+ * @example
+ * generateAngles(0, 5); // [0, 72, 144, 216, 288]
  */
 function generateAngles(startAngle: number, count: number): number[] {
   const angles: number[] = [];
@@ -115,9 +127,13 @@ function generateAngles(startAngle: number, count: number): number[] {
 }
 
 /**
- * 根据基础颜色和数量生成颜色调色板
- * @param numColors
- * @param baseColor
+ * 根据基础颜色和数量生成颜色调色板。
+ *
+ * @param numColors - 需要生成的颜色数量
+ * @param baseColor - 基础颜色（十六进制），默认 '#ff7d51'
+ * @returns 颜色调色板数组
+ * @example
+ * generateColorPalette(5, '#ff7d51');
  */
 export function generateColorPalette(numColors: number, baseColor: string = '#ff7d51'): string[] {
   const baseHSL = hexToHsl(baseColor);

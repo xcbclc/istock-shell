@@ -1,5 +1,11 @@
 /**
- * 格式化日期为符串 YYYY-MM-DD hh:mm:ss
+ * 按指定格式格式化日期为字符串。
+ *
+ * @param date - 需要格式化的日期对象
+ * @param format - 格式字符串，如 'YYYY-MM-DD hh:mm:ss'
+ * @returns 格式化后的日期字符串
+ * @example
+ * toLocaleDateString(new Date(), 'YYYY-MM-DD hh:mm:ss');
  */
 export const toLocaleDateString = (date: Date, format: string): string => {
   const year = date.getFullYear().toString();
@@ -19,8 +25,12 @@ export const toLocaleDateString = (date: Date, format: string): string => {
 };
 
 /**
- * 获取一周的范围时间
- * @param today
+ * 获取指定日期所在周的起止时间。
+ *
+ * @param today - 任意一周中的某一天
+ * @returns 包含本周起止时间的对象
+ * @example
+ * getStartAndEndOfWeek(new Date());
  */
 export const getStartAndEndOfWeek = (today: Date): { startOfWeek: Date; endOfWeek: Date } => {
   const dayOfWeek = today.getDay(); // 周日为0，周一为1，依此类推

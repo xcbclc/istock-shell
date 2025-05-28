@@ -1,4 +1,7 @@
-/** Used to map characters to HTML entities. */
+/**
+ * 用于将字符映射为对应的 HTML 实体。
+ * @since 0.1.0
+ */
 const htmlEscapes: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
@@ -7,34 +10,28 @@ const htmlEscapes: Record<string, string> = {
   "'": '&#39;',
 };
 
-/** Used to match HTML entities and HTML characters. */
+/**
+ * 用于匹配 HTML 实体和 HTML 字符。
+ * @since 0.1.0
+ */
 const reUnescapedHtml = /[&<>"']/g;
 const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
 
 /**
- * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
- * corresponding HTML entities.
+ * 将字符串中的 "&"、"<"、">"、'"' 和 "'" 字符转换为对应的 HTML 实体。
  *
- * **Note:** No other characters are escaped. To escape additional
- * characters use a third-party library like [_he_](https://mths.be/he).
+ * **注意：** 仅转义上述字符，若需转义更多字符请使用第三方库如 [_he_](https://mths.be/he)。
  *
- * Though the ">" character is escaped for symmetry, characters like
- * ">" and "/" don't need escaping in HTML and have no special meaning
- * unless they're part of a tag or unquoted attribute value. See
- * [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
- * (under "semi-related fun fact") for more details.
+ * 虽然 ">" 字符也被转义以保持对称，但像 ">" 和 "/" 这样的字符在 HTML 中通常无需转义，除非它们出现在标签或未加引号的属性值中。详情可参考 [Mathias Bynens 的文章](https://mathiasbynens.be/notes/ambiguous-ampersands)。
  *
- * When working with HTML you should always
- * [quote attribute values](http://wonko.com/post/html-escaping) to reduce
- * XSS vectors.
+ * 在处理 HTML 时，建议始终 [为属性值加引号](http://wonko.com/post/html-escaping) 以减少 XSS 风险。
  *
  * @since 0.1.0
- * @category String
- * @param {string} [string=''] The string to escape.
- * @returns {string} Returns the escaped string.
+ * @category 字符串
+ * @param {string} [string=''] 需要转义的字符串。
+ * @returns {string} 返回转义后的字符串。
  * @see escapeRegExp, unescape
  * @example
- *
  * escape('fred, barney, & pebbles')
  * // => 'fred, barney, &amp; pebbles'
  */

@@ -1,7 +1,11 @@
 /**
- * 获取字符串尾部和首部的交集
- * @param str1
- * @param str2
+ * 获取两个字符串尾部和首部的最大重叠部分。
+ *
+ * @param str1 - 第一个字符串
+ * @param str2 - 第二个字符串
+ * @returns 两个字符串尾部和首部的最大重叠部分
+ * @example
+ * getEndAndStartOverlapStr('abc', 'cde'); // 'c'
  */
 export function getEndAndStartOverlapStr(str1: string, str2: string): string {
   let overlap = '';
