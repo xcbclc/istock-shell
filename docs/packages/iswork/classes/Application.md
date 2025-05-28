@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Application
+[@istock-shell/iswork](../globals.md) / Application
 
 # Class: Application
 
@@ -62,7 +62,7 @@ Defined in: src/packages/iswork/src/application/application.ts:31
 
 `Domain`\<[`IDomainClass`](../interfaces/IDomainClass.md)\<`unknown`\>\>[]
 
-***
+---
 
 ### emit
 
@@ -100,7 +100,7 @@ Defined in: src/packages/iswork/src/application/application-event.ts:11
 
 `ApplicationEvent.emit`
 
-***
+---
 
 ### globalMiddleware
 
@@ -114,7 +114,7 @@ Defined in: src/packages/iswork/src/application/application.ts:27
 
 [`TMiddleware`](../type-aliases/TMiddleware.md)[]
 
-***
+---
 
 ### messageChannelManager
 
@@ -128,7 +128,7 @@ Defined in: src/packages/iswork/src/application/application.ts:35
 
 `MessageChannelManager`
 
-***
+---
 
 ### pipeFlowExecute
 
@@ -168,7 +168,7 @@ Defined in: src/packages/iswork/src/application/application.ts:84
 
 `void`
 
-***
+---
 
 ### closed()
 
@@ -184,7 +184,7 @@ Defined in: src/packages/iswork/src/application/application-event.ts:59
 
 `ApplicationEvent.closed`
 
-***
+---
 
 ### getDomain()
 
@@ -198,7 +198,7 @@ Defined in: src/packages/iswork/src/application/application.ts:222
 
 ##### T
 
-`T` *extends* [`IDomainClass`](../interfaces/IDomainClass.md)\<`any`\>
+`T` _extends_ [`IDomainClass`](../interfaces/IDomainClass.md)\<`any`\>
 
 #### Parameters
 
@@ -210,7 +210,7 @@ Defined in: src/packages/iswork/src/application/application.ts:222
 
 `undefined` \| `Domain`\<`T`\>
 
-***
+---
 
 ### getPipe()
 
@@ -224,7 +224,7 @@ Defined in: src/packages/iswork/src/application/application.ts:239
 
 ##### Fn
 
-`Fn` *extends* `Function`
+`Fn` _extends_ `Function`
 
 #### Parameters
 
@@ -236,7 +236,7 @@ Defined in: src/packages/iswork/src/application/application.ts:239
 
 `Fn`
 
-***
+---
 
 ### getPipeRecord()
 
@@ -250,7 +250,7 @@ Defined in: src/packages/iswork/src/application/application.ts:246
 
 `Record`\<`string` \| `symbol`, `Function`\>
 
-***
+---
 
 ### initialized()
 
@@ -266,7 +266,7 @@ Defined in: src/packages/iswork/src/application/application-event.ts:39
 
 `ApplicationEvent.initialized`
 
-***
+---
 
 ### listen()
 
@@ -296,7 +296,7 @@ Defined in: src/packages/iswork/src/application/application.ts:73
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### listened()
 
@@ -312,7 +312,7 @@ Defined in: src/packages/iswork/src/application/application-event.ts:44
 
 `ApplicationEvent.listened`
 
-***
+---
 
 ### listenInput()
 
@@ -328,7 +328,7 @@ Defined in: src/packages/iswork/src/application/application-event.ts:49
 
 `ApplicationEvent.listenInput`
 
-***
+---
 
 ### listenOutput()
 
@@ -344,7 +344,7 @@ Defined in: src/packages/iswork/src/application/application-event.ts:54
 
 `ApplicationEvent.listenOutput`
 
-***
+---
 
 ### sendAppMessage()
 
@@ -376,7 +376,7 @@ Defined in: src/packages/iswork/src/application/application-event.ts:25
 
 `ApplicationEvent.sendAppMessage`
 
-***
+---
 
 ### useDomain()
 
@@ -396,7 +396,7 @@ Defined in: src/packages/iswork/src/application/application.ts:214
 
 `void`
 
-***
+---
 
 ### useMiddleware()
 
@@ -416,7 +416,7 @@ Defined in: src/packages/iswork/src/application/application.ts:202
 
 `Application`
 
-***
+---
 
 ### usePipe()
 

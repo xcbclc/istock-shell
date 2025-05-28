@@ -1,4 +1,4 @@
-import type { ApplicationContext, IDomainClass } from '@istock/iswork';
+import type { ApplicationContext, IDomainClass } from '@istock-shell/iswork';
 import type { TCmdRequest } from '@/worker/common';
 
 interface IGlobalDomain extends IDomainClass {

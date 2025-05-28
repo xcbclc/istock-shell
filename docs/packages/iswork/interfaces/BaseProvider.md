@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / BaseProvider
+[@istock-shell/iswork](../globals.md) / BaseProvider
 
 # Interface: BaseProvider\<Type\>
 

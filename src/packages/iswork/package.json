@@ -1,10 +1,10 @@
 {
-  "name": "@istock/iswork",
-  "version": "0.0.1",
+  "name": "@istock-shell/iswork",
+  "version": "0.1.1",
   "main": "./src/index.ts",
   "dependencies": {
-    "@istock/command-parser": "workspace:^",
-    "@istock/util": "workspace:^",
+    "@istock-shell/command-parser": "workspace:^",
+    "@istock-shell/util": "workspace:^",
     "idb": "^8.0.3",
     "qs": "^6.14.0",
     "reflect-metadata": "^0.2.2"

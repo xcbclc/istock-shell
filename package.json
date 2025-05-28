@@ -14,8 +14,8 @@
     "build:docker": "pnpm run build & docker build -f ./Dockerfile -t istock-shell .",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "lint": "eslint -c eslint.config.cjs",
-    "lint:fix": "eslint -c eslint.config.cjs --fix",
+    "lint": "eslint -c eslint.config.js",
+    "lint:fix": "eslint -c eslint.config.js --fix",
     "format": "prettier --write ./**/*.{ts,tsx,js,mjs,cjs,svelte,css,json,md}",
     "prepare": "husky install",
     "docs:dev": "vitepress dev docs",
@@ -27,7 +27,7 @@
     "@antv/g2": "^5.3.3",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@istock/cli": "workspace:^",
+    "@istock-shell/cli": "workspace:^",
     "@rollup/plugin-typescript": "^12.1.2",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tailwindcss/vite": "4.1.7",
@@ -73,19 +73,19 @@
     "vue-eslint-parser": "^10.1.3"
   },
   "dependencies": {
-    "@istock/command-parser": "workspace:^",
-    "@istock/editor": "workspace:^",
-    "@istock/iswork": "workspace:^",
-    "@istock/shell-ui": "workspace:^",
-    "@istock/util": "workspace:^",
+    "@istock-shell/command-parser": "workspace:^",
+    "@istock-shell/editor": "workspace:^",
+    "@istock-shell/iswork": "workspace:^",
+    "@istock-shell/ui": "workspace:^",
+    "@istock-shell/util": "workspace:^",
     "dayjs": "^1.11.13"
   },
   "lint-staged": {
-    "*.{js,mjs,cjs,ts}": [
-      "pnpm run lint",
+    "*.{js,mjs,cjs,ts,tsx,svelte,vue}": [
+      "pnpm run lint:fix",
       "pnpm run format"
     ],
-    "*.{html,css,scss,svelte,md}": [
+    "*.{html,css,scss,md}": [
       "pnpm run format"
     ]
   }

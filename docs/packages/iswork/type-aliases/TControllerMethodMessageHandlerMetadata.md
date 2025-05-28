@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TControllerMethodMessageHandlerMetadata
+[@istock-shell/iswork](../globals.md) / TControllerMethodMessageHandlerMetadata
 
 # Type Alias: TControllerMethodMessageHandlerMetadata
 

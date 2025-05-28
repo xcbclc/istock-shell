@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TController
+[@istock-shell/iswork](../globals.md) / TController
 
 # Type Alias: TController\<T\>
 

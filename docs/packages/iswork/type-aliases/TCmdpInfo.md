@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TCmdpInfo
+[@istock-shell/iswork](../globals.md) / TCmdpInfo
 
 # Type Alias: TCmdpInfo
 

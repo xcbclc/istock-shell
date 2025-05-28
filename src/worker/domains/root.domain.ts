@@ -1,4 +1,4 @@
-import { Global, Domain } from '@istock/iswork';
+import { Global, Domain } from '@istock-shell/iswork';
 import { GlobalDomain } from './global/global.domain';
 import { InputDomain } from './input/input.domain';
 import { AgDomain } from './ag/ag.domain';

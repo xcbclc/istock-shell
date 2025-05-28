@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TUnSubscribe
+[@istock-shell/iswork](../globals.md) / TUnSubscribe
 
 # Type Alias: TUnSubscribe
 

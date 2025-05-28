@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShInput, ShIcon } from '@istock/shell-ui';
+  import { ShInput, ShIcon } from '@istock-shell/ui';
   const passwordPattern = '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}';
 </script>
 

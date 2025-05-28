@@ -1,5 +1,5 @@
-import { type ApplicationContext, BaseModel, Decorator, type TModelType } from '@istock/iswork';
-import { ScopeError } from '@istock/util';
+import { type ApplicationContext, BaseModel, Decorator, type TModelType } from '@istock-shell/iswork';
+import { ScopeError } from '@istock-shell/util';
 import { CONTROLLER_TABLE_RETURN_METADATA } from '../constants';
 import { parseFilterConditions, parseCmdInfoToUnit } from '../index';
 
@@ -19,7 +19,6 @@ export class ControllerTableReturnDecorator extends Decorator.ControllerMethodRe
     super(CONTROLLER_TABLE_RETURN_METADATA);
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error 为了复用ControllerMethodReturnDecorator装饰器代码
   handler(options: TTableReturnOptions): MethodDecorator {
     const { Model, caption, unit, pipe } = options;

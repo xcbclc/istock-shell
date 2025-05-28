@@ -9,7 +9,7 @@ import {
   isNumber,
   isStringFull,
   ScopeError,
-} from '@istock/util';
+} from '@istock-shell/util';
 import { ECondOperator } from '../enums';
 import type { IParsedRequestParams, IPartialQueryBuilderOptions, IQueryParamsOptions } from './interfaces';
 import type {

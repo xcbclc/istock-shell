@@ -1,54 +1,85 @@
-import { ETokenType, type TToken } from '@istock/command-parser';
+import { TokenType, type Token } from '@istock-shell/command-parser';
 
-export type TCommandEditorContentNode = {
+/**
+ * 命令编辑器内容节点类型
+ * 扩展Token类型，添加唯一标识符
+ * @public
+ */
+export type CommandEditorContentNode = {
+  /** 节点唯一标识符 */
   id?: number;
-} & TToken;
+} & Token;
 
-export type TCommandEditorRangInfo = {
+/**
+ * 命令编辑器范围信息类型
+ * 用于描述光标或选择范围的位置信息
+ * @public
+ */
+export type CommandEditorRangInfo = {
+  /** 结束容器节点 */
   endContainer: Node;
+  /** 在结束容器中的偏移量 */
   endOffset: number;
 };
 
+/**
+ * 命令编辑器解析器类
+ * 负责虚拟节点与DOM、文本之间的转换和解析
+ * @public
+ */
 export class CommandEditorParser {
+  /** 块级标签名称数组 */
   static blockTagNames = ['DIV'];
+  /** 换行标签名称 */
   static brTagName = 'BR';
-  // eslint-disable-next-line no-irregular-whitespace
+  /** 空格字符匹配正则表达式 */
+
   static spaceRegMatch = /[\u0020\u3000' ']/g;
   static lineBreak = '\n';
+  /** 空格字符 */
   static space = ' ';
 
   /**
-   * 获取br标签
-   * @param node
+   * 生成br标签HTML
+   * 用于表示换行的空行
+   * @param node - 内容节点
+   * @returns br标签HTML字符串
    * @private
    */
-  #getBrTagHtml(node: TCommandEditorContentNode) {
+  #getBrTagHtml(node: CommandEditorContentNode) {
     return `<br data-id="${node.id}" data-type="${node.type}">`;
   }
 
   /**
-   * 获取token标签
-   * @param node
-   * @param value
+   * 生成token标签HTML
+   * 为token内容添加样式类和数据属性
+   * @param node - 内容节点
+   * @param value - 显示值
+   * @returns span标签HTML字符串
    * @private
    */
-  #getTokenTagHtml(node: TCommandEditorContentNode, value: string) {
+  #geTokenTagHtml(node: CommandEditorContentNode, value: string) {
     return `<span class="is-${node.type}" data-id="${node.id}" data-type="${node.type}">${value}</span>`;
   }
 
   /**
-   * 获取一行数据
-   * @param node
-   * @param value
+   * 生成行标签HTML
+   * 将一行内容包装在div容器中
+   * @param node - 内容节点
+   * @param value - 行内容
+   * @returns div标签HTML字符串
    * @private
    */
-  #getLineTagHtml(node: TCommandEditorContentNode, value: string) {
+  #getLineTagHtml(node: CommandEditorContentNode, value: string) {
     return `<div class="is-${node.type}" data-id="${node.id}">${value}</span></div>`;
   }
 
   /**
-   * 解析元素成字符串
-   * @param rootEl
+   * 将DOM元素解析为纯文本字符串
+   * 递归遍历DOM节点，提取文本内容并处理换行
+   * @param rootEl - 根DOM元素
+   * @returns 解析后的文本字符串
+   * @public
    */
   parseDomToText(rootEl: Element): string {
     const parseDom = (nodes: NodeListOf<Node>) => {
@@ -76,10 +107,13 @@ export class CommandEditorParser {
   }
 
   /**
-   * 获取指定节点指定位置前面所有字符串
-   * @param rootEl 包含offsetNode的元素
-   * @param offsetNode range.endContainer
-   * @param offsetIndex range.endOffset，-1表示末尾
+   * 获取指定节点和位置之前的所有文本内容
+   * 用于计算光标位置前的文本，支持复杂的DOM结构
+   * @param rootEl - 包含offsetNode的根元素
+   * @param offsetNode - 目标节点（通常是range.endContainer）
+   * @param offsetIndex - 在目标节点中的偏移量，-1表示节点末尾
+   * @returns 指定位置之前的所有文本内容
+   * @public
    */
   getOffsetTextForDom(rootEl: Element, offsetNode: Node, offsetIndex = -1): string {
     let found = false;
@@ -126,37 +160,40 @@ export class CommandEditorParser {
   }
 
   /**
-   * 将vNode解析成html
-   * @param vNodes
+   * 将虚拟节点数组解析为HTML字符串
+   * 根据token类型生成相应的HTML标签和样式
+   * @param vNodes - 虚拟节点数组
+   * @returns 生成的HTML字符串
+   * @public
    */
-  parseVNodeToHtml(vNodes: TCommandEditorContentNode[]): string {
+  parseVNodeToHtml(vNodes: CommandEditorContentNode[]): string {
     const htmls: string[] = [];
     let html = '';
     vNodes.forEach((node) => {
       // 换行
-      if ([ETokenType.lineR, ETokenType.lineN].includes(node.type)) {
+      if ([TokenType.lineR, TokenType.lineN].includes(node.type)) {
         // 放入一行后保存
         htmls.push(html ? this.#getLineTagHtml(node, html) : this.#getBrTagHtml(node));
         // 重新开始
         html = '';
       }
       // 空格
-      if (ETokenType.space === node.type) {
-        html += this.#getTokenTagHtml(node, '&nbsp;');
+      if (TokenType.space === node.type) {
+        html += this.#geTokenTagHtml(node, '&nbsp;');
       }
       // token
       if (
         [
-          ETokenType.parentheses,
-          ETokenType.command,
-          ETokenType.parameter,
-          ETokenType.optionKey,
-          ETokenType.pipe,
-          ETokenType.keyCommand,
-          ETokenType.keyCommandContent,
+          TokenType.parentheses,
+          TokenType.command,
+          TokenType.parameter,
+          TokenType.optionKey,
+          TokenType.pipe,
+          TokenType.keyCommand,
+          TokenType.keyCommandContent,
         ].includes(node.type)
       ) {
-        html += this.#getTokenTagHtml(node, node.value);
+        html += this.#geTokenTagHtml(node, node.value);
       }
     });
     // 查找是否有未闭合标签
@@ -167,19 +204,22 @@ export class CommandEditorParser {
   }
 
   /**
-   * 将vNode解析成text
-   * @param vNodes
+   * 将虚拟节点数组解析为纯文本字符串
+   * 提取虚拟节点中的文本内容，统一处理换行和空格
+   * @param vNodes - 虚拟节点数组
+   * @returns 解析后的纯文本字符串
+   * @public
    */
-  parseVNodeToText(vNodes: TCommandEditorContentNode[]): string {
+  parseVNodeToText(vNodes: CommandEditorContentNode[]): string {
     let text = '';
     vNodes.forEach((node) => {
       let value = node.value;
       // 换行
-      if ([ETokenType.lineR, ETokenType.lineN].includes(node.type)) {
+      if ([TokenType.lineR, TokenType.lineN].includes(node.type)) {
         value = CommandEditorParser.lineBreak; // 统一换行符
       }
       // 空格
-      if (ETokenType.space === node.type) {
+      if (TokenType.space === node.type) {
         value = CommandEditorParser.space; // 空格
       }
       text += value;
@@ -188,12 +228,15 @@ export class CommandEditorParser {
   }
 
   /**
-   * 根据DOM元素和光标位置之前的所有文本，获取光标的endContainer、endOffset信息
-   * @param rootEl
-   * @param offsetText
+   * 根据文本偏移量在DOM中查找对应的光标位置信息
+   * 通过遍历DOM节点匹配文本内容，确定光标应该位于的具体节点和偏移量
+   * @param rootEl - 根DOM元素
+   * @param offsetText - 光标位置前的文本内容
+   * @returns 光标位置信息，包含容器节点和偏移量，找不到时返回null
+   * @public
    */
-  findCursorInfoForDom(rootEl: Element, offsetText: string): TCommandEditorRangInfo | null {
-    let range: TCommandEditorRangInfo | null = null;
+  findCursorInfoForDom(rootEl: Element, offsetText: string): CommandEditorRangInfo | null {
+    let range: CommandEditorRangInfo | null = null;
     const parseDom = (nodes: NodeListOf<Node>, isRoot: boolean) => {
       for (const node of nodes) {
         if (range) break;

@@ -87,7 +87,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc, isArray, isFunction } from '@istock/util';
+  import { tuc, isArray, isFunction } from '@istock-shell/util';
   import ShTableRow from './TableRow.svelte';
   import { ShCheckbox, ShText } from '../../index';
   import ShTableTh from './TableTh.svelte';

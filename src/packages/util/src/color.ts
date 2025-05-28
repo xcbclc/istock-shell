@@ -1,6 +1,6 @@
 /**
  * 将十六进制颜色字符串转换为 HSL 颜色对象。
- * 
+ *
  * @param hex - 十六进制颜色字符串，如 '#ff7d51'
  * @returns HSL 颜色对象 { h, s, l }，其中 h 为色相(0-360)，s 为饱和度(0-100)，l 为亮度(0-100)
  * @example
@@ -42,7 +42,7 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
 
 /**
  * 将 HSL 颜色值转换为十六进制颜色字符串。
- * 
+ *
  * @param h - 色相 (0-360)
  * @param s - 饱和度 (0-100)
  * @param l - 亮度 (0-100)
@@ -98,7 +98,7 @@ function hslToHex(h: number, s: number, l: number): string {
 
 /**
  * 生成一组色相角度，排除绿色区间（90-150）。
- * 
+ *
  * @param startAngle - 起始角度 (0-360)
  * @param count - 生成的角度数量
  * @returns 色相角度数组

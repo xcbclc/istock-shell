@@ -1,4 +1,4 @@
-import { EventEmitter } from '@istock/util';
+import { EventEmitter } from '@istock-shell/util';
 import { EMessageStatus } from '../enums/index';
 
 export type TMessageIteratorData = Record<string, any> & { meta?: { status?: EMessageStatus } };

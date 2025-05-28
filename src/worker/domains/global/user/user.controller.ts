@@ -11,8 +11,8 @@ import {
   type TControllerMethodComponentOutput,
   ApplicationContext,
   type TOrmQuery,
-} from '@istock/iswork';
-import type { FormItemConfig, FormProps } from '@istock/shell-ui';
+} from '@istock-shell/iswork';
+import type { FormItemConfig, FormProps } from '@istock-shell/ui';
 import { UserService } from './user.service';
 import type { UserModel } from './user.model';
 import cmd from './user.cmd.json';

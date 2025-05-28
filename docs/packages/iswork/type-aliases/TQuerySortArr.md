@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TQuerySortArr
+[@istock-shell/iswork](../globals.md) / TQuerySortArr
 
 # Type Alias: TQuerySortArr
 

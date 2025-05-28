@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TControllerMethodComponentOutput
+[@istock-shell/iswork](../globals.md) / TControllerMethodComponentOutput
 
 # Type Alias: TControllerMethodComponentOutput\<Props\>
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:38
 
 Defined in: src/packages/iswork/src/types/controller.ts:39
 
-***
+---
 
 ### extra?
 
@@ -32,7 +32,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:39
 
 Defined in: src/packages/iswork/src/types/controller.ts:41
 
-***
+---
 
 ### messageId?
 
@@ -40,7 +40,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:41
 
 Defined in: src/packages/iswork/src/types/controller.ts:42
 
-***
+---
 
 ### props
 

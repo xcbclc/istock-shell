@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShDropdown, ShButton } from '@istock/shell-ui';
+  import { ShDropdown, ShButton } from '@istock-shell/ui';
 </script>
 
 <ShDropdown>

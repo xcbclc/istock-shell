@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TAnyMetadata
+[@istock-shell/iswork](../globals.md) / TAnyMetadata
 
 # Type Alias: TAnyMetadata\<T\>
 

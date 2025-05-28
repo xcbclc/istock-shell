@@ -33,7 +33,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isArray } from '@istock/util';
+  import { tuc, isArray } from '@istock-shell/util';
   import { tv } from 'tailwind-variants';
   import { ShTooltip, ShIcon } from '../../index';
 

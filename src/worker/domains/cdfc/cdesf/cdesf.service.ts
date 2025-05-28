@@ -1,5 +1,5 @@
-import { Injectable, type TModelData } from '@istock/iswork';
-import { isNumber, toLocaleDateString } from '@istock/util';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { isNumber, toLocaleDateString } from '@istock-shell/util';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { CdfcjysjModel } from './cdfcjysj.model';

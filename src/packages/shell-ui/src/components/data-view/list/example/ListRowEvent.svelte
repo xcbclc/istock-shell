@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShList, ShListRow, ShButton, ShIcon, type ListRowProps, type ListRowAction } from '@istock/shell-ui';
+  import { ShList, ShListRow, ShButton, ShIcon, type ListRowProps, type ListRowAction } from '@istock-shell/ui';
   const onActionClickValue = (name?: string, action?: ListRowAction) => {
     console.log('执行动作', name, action);
   };

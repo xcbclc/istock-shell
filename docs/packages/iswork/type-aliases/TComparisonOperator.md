@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TComparisonOperator
+[@istock-shell/iswork](../globals.md) / TComparisonOperator
 
 # Type Alias: TComparisonOperator
 

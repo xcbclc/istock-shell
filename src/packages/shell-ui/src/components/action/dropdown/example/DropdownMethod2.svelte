@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShButton, ShDropdownMenu } from '@istock/shell-ui';
+  import { ShButton, ShDropdownMenu } from '@istock-shell/ui';
 </script>
 
 <ShButton popovertarget="popover-1" style="anchor-name:--anchor-1">按钮</ShButton>

@@ -6,8 +6,8 @@
 
 <script lang="ts">
   import { onDestroy, tick } from 'svelte';
-  import { ETokenType } from '@istock/command-parser';
-  import { ShVirtualList, shShowMessage, type VirtualCoreRange } from '@istock/shell-ui';
+  import { TokenType } from '@istock-shell/command-parser';
+  import { ShVirtualList, shShowMessage, type VirtualCoreRange } from '@istock-shell/ui';
   import { COPY, type TContextmenuPosition } from '@/store/cmd/cmd-contextmenu';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import CmdPrompt from '../prompt/CmdPrompt.svelte';
@@ -26,10 +26,10 @@
   let virtualList: ShVirtualList;
   let range: VirtualCoreRange | undefined = $state();
 
-  const getCmdInputTokens = (input: string) => {
+  const getCmdInpuTokens = (input: string) => {
     const tokens = ctx.cmdParser.tokenizer.parse(input);
-    const lastTokens = tokens[tokens.length - 1];
-    if (lastTokens && [ETokenType.lineN, ETokenType.lineR].includes(lastTokens.type)) {
+    const lasTokens = tokens[tokens.length - 1];
+    if (lasTokens && [TokenType.lineN, TokenType.lineR].includes(lasTokens.type)) {
       tokens.pop();
     }
     return tokens;
@@ -51,6 +51,10 @@
     position = { ...position, ...data };
   });
 
+  const getCmdElementId = (cmdId) => {
+    return ['cmd', windowId, cmdId].join('-');
+  };
+
   // 命令输出有变动时滚动到最底部
   const scrollEnd = async () => {
     if (virtualList) {
@@ -58,10 +62,15 @@
       // 演示模式不需要滚动到底部
       if (ctx.isExample) return;
       // 需要考虑开发时重新编译报错
-      virtualList.scrollToLastChild();
+      if ($cmdOutput.list.length > 0) {
+        const lastBlock = $cmdOutput.list[$cmdOutput.list.length - 1];
+        virtualList.scrollToElement(`#${getCmdElementId(lastBlock.id)}`);
+      } else {
+        virtualList.scrollToLastChild();
+      }
     }
   };
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+
   const unSubscribeScroll = cmdOutput.subscribe(scrollEnd);
 
   const onSectionKeydown = (ev) => {
@@ -105,7 +114,8 @@
   >
     {#each $cmdOutput.list.slice(range?.start, range?.end + 1) as block, index (block.id)}
       <section
-        data-id={block.id}
+        id={['cmd', windowId, block.id].join('-')}
+        data-id={getCmdElementId(block.id)}
         tabindex="0"
         class="p-2 rounded-sm border-b border-base-300/20 -outline-offset-1 outline-base-300 hover:bg-base-200 active:bg-base-200 focus-visible:outline-2 transition-colors"
         oncontextmenu={(ev) => {
@@ -130,8 +140,8 @@
           <CmdPrompt texts={block.promptTexts} />
           <!-- 命令输入 -->
           <div class="font-mono text-sm flex-auto break-all">
-            {#each getCmdInputTokens(block.input) as token, tIndex (tIndex)}
-              {#if [ETokenType.lineN, ETokenType.lineR].includes(token.type)}
+            {#each getCmdInpuTokens(block.input) as token, tIndex (tIndex)}
+              {#if [TokenType.lineN, TokenType.lineR].includes(token.type)}
                 <br />
               {:else}
                 <span class="is-{token.type}">{token.value}</span>
@@ -161,7 +171,7 @@
 </div>
 
 <style>
-  @reference "@istock/shell-ui/src/style/daisyui.css";
+  @reference "@istock-shell/ui/src/style/daisyui.css";
   :global(.is-command) {
     @apply text-primary;
   }

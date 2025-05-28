@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TIdAnyObject
+[@istock-shell/iswork](../globals.md) / TIdAnyObject
 
 # Type Alias: TIdAnyObject\<T\>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getQueryParam } from '@istock/util';
+  import { getQueryParam } from '@istock-shell/util';
   import { CmdWindowsManager, type TCmdWindowsManagerOptions } from '@/window/cmd-windows-manager';
   import { type ECmdWindowContextMode } from '@/window/cmd-window-context';
   import { getCmdWindow } from '@/store/cmd/cmd-window';

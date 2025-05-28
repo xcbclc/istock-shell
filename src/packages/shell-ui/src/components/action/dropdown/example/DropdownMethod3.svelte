@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShDropdown } from '@istock/shell-ui';
+  import { ShDropdown } from '@istock-shell/ui';
 </script>
 
 <p class="text-xs">点击外面关闭</p>

@@ -1,4 +1,4 @@
-import { isArray, isFunction, isObject, isString } from '@istock/util';
+import { isArray, isFunction, isObject, isString } from '@istock-shell/util';
 import type { TControllerMethodReturnMetadata, TCmdpInfo } from '../../types';
 import { CONTROLLER_METHOD_RETURN_METADATA } from '../../constants';
 import { AbstractMethodDecorator } from '../abstract-decorator';

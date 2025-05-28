@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { TCmdpMeta, TCmdpPayload, TCmdpMessage, TCmdpMetaValue, TCmdpOptions, TCmdpAddressInfo } from '../types';
 import { AbstractCmdp } from './abstract-cmdp';
 

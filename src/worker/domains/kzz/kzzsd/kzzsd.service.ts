@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock/iswork';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
 import { CookieService } from '@domains/global/setting/cookie/cookie.service';
 import { KzzsdModel } from './kzzsd.model';
 import { KzzsdResultModel } from './kzzsd-result.model';

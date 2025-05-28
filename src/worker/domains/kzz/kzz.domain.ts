@@ -1,4 +1,4 @@
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { SettingDomain } from '@domains/global/setting/setting.domain';
 import { KzzsssjController } from './kzzsssj/kzzsssj.controller';
 import { KzzsssjService } from './kzzsssj/kzzsssj.service';

@@ -8,7 +8,7 @@
 
 <script lang="ts">
   import { onDestroy } from 'svelte';
-  import { ScopeError } from '@istock/util';
+  import { ScopeError } from '@istock-shell/util';
   import { getWorker } from '@/worker';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import type { TSearchListItem } from '@/store/domains/global/search';

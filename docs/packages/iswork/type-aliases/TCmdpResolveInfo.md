@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TCmdpResolveInfo
+[@istock-shell/iswork](../globals.md) / TCmdpResolveInfo
 
 # Type Alias: TCmdpResolveInfo
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:3
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:5
 
-***
+---
 
 ### method
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:5
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:6
 
-***
+---
 
 ### subDomain
 

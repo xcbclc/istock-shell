@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShDropdown } from '@istock/shell-ui';
+  import { ShDropdown } from '@istock-shell/ui';
 </script>
 
 <ShDropdown tag="details" items={[{ text: '项目 1' }, { text: '项目 2' }]}>

@@ -1,4 +1,4 @@
-import { BaseModel, Model } from '@istock/iswork';
+import { BaseModel, Model } from '@istock-shell/iswork';
 
 // 成都房产二手行情数据
 @Model('cdfceshqsj')

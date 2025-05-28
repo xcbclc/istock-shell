@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / IQueryParamsOptions
+[@istock-shell/iswork](../globals.md) / IQueryParamsOptions
 
 # Interface: IQueryParamsOptions
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:56
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:66
 
-***
+---
 
 ### fields?
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:66
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:57
 
-***
+---
 
 ### filter?
 
@@ -32,7 +32,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:57
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:59
 
-***
+---
 
 ### includeDeleted?
 
@@ -40,7 +40,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:59
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:67
 
-***
+---
 
 ### join?
 
@@ -48,7 +48,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:67
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:61
 
-***
+---
 
 ### limit?
 
@@ -56,7 +56,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:61
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:63
 
-***
+---
 
 ### offset?
 
@@ -64,7 +64,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:63
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:64
 
-***
+---
 
 ### or?
 
@@ -72,7 +72,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:64
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:60
 
-***
+---
 
 ### page?
 
@@ -80,7 +80,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:60
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:65
 
-***
+---
 
 ### search?
 
@@ -88,7 +88,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:65
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:58
 
-***
+---
 
 ### sort?
 

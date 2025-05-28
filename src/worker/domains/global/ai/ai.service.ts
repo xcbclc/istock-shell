@@ -1,4 +1,4 @@
-import { Injectable, type TModelData, type TFetchSSEMessage } from '@istock/iswork';
+import { Injectable, type TModelData, type TFetchSSEMessage } from '@istock-shell/iswork';
 import { AiModel } from './ai.model';
 
 @Injectable()

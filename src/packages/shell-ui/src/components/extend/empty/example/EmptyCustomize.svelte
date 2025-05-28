@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShEmpty, ShIcon, ShText } from '@istock/shell-ui';
+  import { ShEmpty, ShIcon, ShText } from '@istock-shell/ui';
 </script>
 
 <ShEmpty class="text-error">

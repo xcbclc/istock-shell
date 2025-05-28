@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / MessageIterator
+[@istock-shell/iswork](../globals.md) / MessageIterator
 
 # Class: MessageIterator
 
@@ -40,7 +40,7 @@ Defined in: src/packages/iswork/src/message/message-iterator.ts:34
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### send()
 
@@ -60,7 +60,7 @@ Defined in: src/packages/iswork/src/message/message-iterator.ts:44
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### create()
 

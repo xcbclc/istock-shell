@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Observable
+[@istock-shell/iswork](../globals.md) / Observable
 
 # Class: Observable\<V\>
 
@@ -50,7 +50,7 @@ Defined in: src/packages/iswork/src/message/message-observable.ts:17
 
 [`TUnSubscribe`](../type-aliases/TUnSubscribe.md)
 
-***
+---
 
 ### create()
 

@@ -1,6 +1,4 @@
-<template>
-  <iframe class="istock-shell-demo" :src="src" :style="style"></iframe>
-</template>
+<template> <iframe class="istock-shell-demo" :src="src" :style="style"></iframe> </template>
 
 <script setup lang="ts">
 import { defineProps, computed } from 'vue';
@@ -41,3 +39,4 @@ iframe.istock-shell-demo {
   overflow: auto;
 }
 </style>
+

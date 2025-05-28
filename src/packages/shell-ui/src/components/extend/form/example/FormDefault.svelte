@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShForm, shShowMessage, type FormItemConfig } from '@istock/shell-ui';
+  import { ShForm, shShowMessage, type FormItemConfig } from '@istock-shell/ui';
 
   // 表单字段配置
   const formItems: FormItemConfig[] = [

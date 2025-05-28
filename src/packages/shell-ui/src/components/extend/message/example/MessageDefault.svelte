@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShButton, shShowMessage } from '@istock/shell-ui';
+  import { ShButton, shShowMessage } from '@istock-shell/ui';
 </script>
 
 <ShButton onclick={async () => await shShowMessage.alert('这是一个普通提示')}>普通提示</ShButton>

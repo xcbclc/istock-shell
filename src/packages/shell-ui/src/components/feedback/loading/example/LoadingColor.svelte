@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShLoading } from '@istock/shell-ui';
+  import { ShLoading } from '@istock-shell/ui';
 </script>
 
 <ShLoading shape="spinner" color="primary" />

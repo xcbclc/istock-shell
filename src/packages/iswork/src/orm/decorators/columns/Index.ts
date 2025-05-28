@@ -1,4 +1,4 @@
-import { isObject } from '@istock/util';
+import { isObject } from '@istock-shell/util';
 import type { IAnyClass } from '../../../interfaces';
 import type { TDecoratorIndexMetadata, TDecoratorIndexOptions } from '../../types';
 import { ORM_INDEX } from '../constants';

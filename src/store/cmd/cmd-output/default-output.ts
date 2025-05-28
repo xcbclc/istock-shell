@@ -1,4 +1,4 @@
-import {} from '@istock/util';
+import {} from '@istock-shell/util';
 import type { TPromptText } from '../cmd-prompt';
 import type { ICmdOutput, ICmdOutputData } from './store';
 

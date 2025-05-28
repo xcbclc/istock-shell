@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / MessageSSE
+[@istock-shell/iswork](../globals.md) / MessageSSE
 
 # Class: MessageSSE
 
@@ -60,7 +60,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:31
 
 `AbstractMessage.close`
 
-***
+---
 
 ### onClose()
 
@@ -72,7 +72,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:61
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### onError()
 
@@ -94,7 +94,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:52
 
 `AbstractMessage.onError`
 
-***
+---
 
 ### onMessage()
 
@@ -116,7 +116,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:43
 
 `AbstractMessage.onMessage`
 
-***
+---
 
 ### open()
 
@@ -132,7 +132,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:24
 
 `AbstractMessage.open`
 
-***
+---
 
 ### send()
 
@@ -154,7 +154,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:36
 
 `AbstractMessage.send`
 
-***
+---
 
 ### create()
 

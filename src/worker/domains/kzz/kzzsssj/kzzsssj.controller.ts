@@ -1,4 +1,4 @@
-import { CmdRoute, Controller, Method } from '@istock/iswork';
+import { CmdRoute, Controller, Method } from '@istock-shell/iswork';
 import { TableReturn } from '@/worker/common';
 import { KzzsssjModel } from './kzzsssj.model';
 import { KzzsssjService } from './kzzsssj.service';

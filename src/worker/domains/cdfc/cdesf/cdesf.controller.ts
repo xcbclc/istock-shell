@@ -1,4 +1,4 @@
-import { CmdRoute, Controller, Method } from '@istock/iswork';
+import { CmdRoute, Controller, Method } from '@istock-shell/iswork';
 import { CdesfService } from './cdesf.service';
 import cmdJson from './cdesf.cmd';
 

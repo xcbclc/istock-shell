@@ -1,7 +1,7 @@
 <template>
-  <div class="product-image">
-    <img :src="fm.hero?.image?.src" :alt="fm.hero?.image?.alt" />
-  </div>
+
+  <div class="product-image"> <img :src="fm.hero?.image?.src" :alt="fm.hero?.image?.alt" /> </div>
+
 </template>
 
 <script setup lang="ts">
@@ -25,3 +25,4 @@ const { frontmatter: fm } = useData();
   }
 }
 </style>
+

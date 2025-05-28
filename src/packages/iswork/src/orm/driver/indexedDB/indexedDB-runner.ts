@@ -1,4 +1,4 @@
-import { isArray, isString, wrap, unWarp, isNumber } from '@istock/util';
+import { isArray, isString, wrap, unWarp, isNumber } from '@istock-shell/util';
 import type { TIdAnyObject, TOrmQuery, TModelType, TAnyObj, TQueryFilter, TQuerySortOperator } from '../../types';
 import type { IParsedRequestParams } from '../../interfaces';
 import { AbstractRunner } from '../abstract-runner';
@@ -11,7 +11,6 @@ export class IndexedDBRunner extends AbstractRunner<TConnector> {
     return new IndexedDBRunner(connector);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(connector: TConnector) {
     super(connector);
   }
@@ -22,7 +21,7 @@ export class IndexedDBRunner extends AbstractRunner<TConnector> {
 
   async run<Result = unknown>(_model: TModelType, callback: Function): Promise<Result> {
     const idb = this.connector.idb;
-    // eslint-disable-next-line no-useless-call
+
     return callback.call(null, idb);
   }
 

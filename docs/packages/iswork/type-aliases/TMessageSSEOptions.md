@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TMessageSSEOptions
+[@istock-shell/iswork](../globals.md) / TMessageSSEOptions
 
 # Type Alias: TMessageSSEOptions
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:5
 
 Defined in: src/packages/iswork/src/message/message-sse.ts:7
 
-***
+---
 
 ### sendHandler()?
 
@@ -36,7 +36,7 @@ Defined in: src/packages/iswork/src/message/message-sse.ts:8
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### sendUrl
 

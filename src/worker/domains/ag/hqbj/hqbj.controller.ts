@@ -1,4 +1,4 @@
-import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
+import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock-shell/iswork';
 import { TableReturn } from '@/worker/common';
 import { HqbjService } from './hqbj.service';
 import { HqbjModel } from './hqbj.model';

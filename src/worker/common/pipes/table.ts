@@ -1,4 +1,4 @@
-import { isUndefined } from '@istock/util';
+import { isUndefined } from '@istock-shell/util';
 import type { TTableFilterConditions, TTableFilterItem } from './table-query';
 import { ETableFilterOperate } from './table-query';
 import type { TMatrixTable, TTableHeader, TTableBody } from '../types';
@@ -119,7 +119,7 @@ export function mergeTables<T extends TTableHeader | TTableBody>(
   table2: [T[], ...T[][]]
 ): [T[], ...T[][]] {
   const [headers1, ...rows1] = table1;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [_, ...rows2] = table2; // 假设两个表格的表头相同
   return [headers1, ...rows1, ...rows2];
 }
@@ -162,7 +162,6 @@ export function reshape<T extends TTableHeader | TTableBody>(
  * @param columnIndex
  */
 export function aggregateSum(matrix: TMatrixTable, columnIndex: number): number {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, ...rows] = matrix;
   return rows.reduce((sum, row) => {
     const value = row[columnIndex]?.value;
@@ -212,7 +211,6 @@ export function createPivotTable(
   columnIndex: number,
   valueIndex: number
 ): Record<string, Record<string, any>> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, ...rows] = matrix;
   const result: Record<string, Record<string, any>> = {};
 

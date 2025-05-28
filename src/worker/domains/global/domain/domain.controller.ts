@@ -9,8 +9,8 @@ import {
   type TModelCreate,
   Component,
   type TCmdpMeta,
-} from '@istock/iswork';
-import { isString, isRegExp } from '@istock/util';
+} from '@istock-shell/iswork';
+import { isString, isRegExp } from '@istock-shell/util';
 import { DomainService } from './domain.service';
 
 import type { DomainModel } from './domain.model';
@@ -67,7 +67,6 @@ export class DomainController {
       currentDomainPaths,
       path.replace(/\/$/, '').split('/')
     );
-    console.log('domains', domains);
     return { data: domains, eventAddress: cmdInfo.address.replace('cmdp:', 'event:') };
   }
 }

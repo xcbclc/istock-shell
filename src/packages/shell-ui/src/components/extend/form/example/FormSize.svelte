@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShForm, ShButton, shShowMessage, type FormItemSize, type FormItemConfig } from '@istock/shell-ui';
+  import { ShForm, ShButton, shShowMessage, type FormItemSize, type FormItemConfig } from '@istock-shell/ui';
 
   const formSizes: FormItemSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 

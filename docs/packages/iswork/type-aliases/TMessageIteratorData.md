@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TMessageIteratorData
+[@istock-shell/iswork](../globals.md) / TMessageIteratorData
 
 # Type Alias: TMessageIteratorData
 

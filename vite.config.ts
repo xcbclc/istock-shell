@@ -20,7 +20,7 @@ export default ({ mode }) => {
       tailwindcss(),
       svelte(),
       tsPlugin,
-      eslint({ overrideConfigFile: ".eslintrc.cjs" }),
+      eslint({ overrideConfigFile: 'eslint.config.js' }),
       VitePWA(pwaConfig),
       {
         name: 'html-transform',

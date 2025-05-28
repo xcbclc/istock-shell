@@ -1,7 +1,8 @@
 {
-  "name": "@istock/cli",
-  "version": "0.0.1",
+  "name": "@istock-shell/cli",
+  "version": "0.1.1",
   "type": "module",
+  "description": "iStock Shell 命令行工具 - 用于快速开发和管理 iStock Shell 命令的 CLI 工具",
   "bin": {
     "istock": "./src/index.mjs"
   },

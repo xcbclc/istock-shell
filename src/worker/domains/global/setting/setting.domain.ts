@@ -1,4 +1,4 @@
-import { Global, Domain } from '@istock/iswork';
+import { Global, Domain } from '@istock-shell/iswork';
 import { CookieService } from './cookie/cookie.service';
 import { CookieController } from './cookie/cookie.controller';
 import { ThemeService } from './theme/theme.service';

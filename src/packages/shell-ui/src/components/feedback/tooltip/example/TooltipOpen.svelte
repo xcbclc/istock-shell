@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShTooltip, ShButton } from '@istock/shell-ui';
+  import { ShTooltip, ShButton } from '@istock-shell/ui';
 </script>
 
 <ShTooltip open dataTip="你好">

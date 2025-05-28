@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TControllerMethodComponentMetadata
+[@istock-shell/iswork](../globals.md) / TControllerMethodComponentMetadata
 
 # Type Alias: TControllerMethodComponentMetadata
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:17
 
 Defined in: src/packages/iswork/src/types/controller.ts:20
 
-***
+---
 
 ### name
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:20
 
 Defined in: src/packages/iswork/src/types/controller.ts:18
 
-***
+---
 
 ### props?
 

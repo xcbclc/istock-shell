@@ -1,10 +1,10 @@
 import { writable, type Writable, get } from 'svelte/store';
-import type { TToken } from '@istock/command-parser';
+import type { Token } from '@istock-shell/command-parser';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 
 export type TCmdInputNode = {
   id?: number;
-} & TToken;
+} & Token;
 export type TCmdInputNodes = TCmdInputNode[];
 export interface ICmdInput {
   inputNodes: TCmdInputNodes;

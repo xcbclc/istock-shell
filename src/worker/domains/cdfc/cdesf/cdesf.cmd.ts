@@ -1,4 +1,4 @@
-import { type TControllerMethodCmdRoute } from '@istock/iswork';
+import { type TControllerMethodCmdRoute } from '@istock-shell/iswork';
 
 const 成都二手房: TControllerMethodCmdRoute = {
   name: '成都二手房行情',

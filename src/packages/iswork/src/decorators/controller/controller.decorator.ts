@@ -1,4 +1,4 @@
-import { isObject } from '@istock/util';
+import { isObject } from '@istock-shell/util';
 import type { TControllerMetadata } from '../../types';
 import { CONTROLLER_METADATA } from '../../constants';
 import { AbstractClassDecorator } from '../abstract-decorator';

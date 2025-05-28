@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / RepositoryManager
+[@istock-shell/iswork](../globals.md) / RepositoryManager
 
 # Class: RepositoryManager
 
@@ -42,7 +42,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:11
 
 `unknown`
 
-***
+---
 
 ### runner
 
@@ -68,7 +68,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:45
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### createDatas
 
@@ -78,7 +78,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:45
 
 `Promise`\<(`string` \| `number`)[]\>
 
-***
+---
 
 ### delete()
 
@@ -90,7 +90,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:57
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### query
 
@@ -100,7 +100,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:57
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### getRepository()
 
@@ -114,13 +114,13 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:28
 
 ##### target
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 #### Returns
 
 [`Repository`](Repository.md)
 
-***
+---
 
 ### query()
 
@@ -138,7 +138,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:41
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### query
 
@@ -148,7 +148,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:41
 
 `Promise`\<`Result`[]\>
 
-***
+---
 
 ### run()
 
@@ -166,7 +166,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:37
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### executeArgs
 
@@ -176,7 +176,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:37
 
 `Promise`\<`Result`\>
 
-***
+---
 
 ### update()
 
@@ -188,7 +188,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:49
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### updateData
 
@@ -202,7 +202,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:49
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### updateMany()
 
@@ -214,7 +214,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository-manager.ts:53
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### updateDataList
 

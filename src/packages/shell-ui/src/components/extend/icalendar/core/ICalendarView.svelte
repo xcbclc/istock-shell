@@ -40,7 +40,7 @@
 
 <script lang="ts">
   import dayjs from 'dayjs';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
   import { ShButton } from '../../../index';
   import {
     ICalendarWeekHeaders,

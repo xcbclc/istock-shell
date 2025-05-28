@@ -1,5 +1,5 @@
-import { ScopeError } from '@istock/util';
-import { Global, Domain } from '@istock/iswork';
+import { ScopeError } from '@istock-shell/util';
+import { Global, Domain } from '@istock-shell/iswork';
 import { CmdRouteService } from './cmd-route/cmd-route.service';
 import { CmdRouteController } from './cmd-route/cmd-route.controller';
 import { DomainService } from './domain/domain.service';

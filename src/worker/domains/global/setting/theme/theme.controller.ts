@@ -1,4 +1,4 @@
-import { Controller, Method, Payload, type TModelData, type TModelUpdate } from '@istock/iswork';
+import { Controller, Method, Payload, type TModelData, type TModelUpdate } from '@istock-shell/iswork';
 import { type ThemeModel } from './theme.model';
 import { ThemeService } from './theme.service';
 

@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TFetchWrapOptions
+[@istock-shell/iswork](../globals.md) / TFetchWrapOptions
 
 # Type Alias: TFetchWrapOptions
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/driver.ts:8
 
 Defined in: src/packages/iswork/src/orm/types/driver.ts:10
 
-***
+---
 
 ### requestOptions?
 

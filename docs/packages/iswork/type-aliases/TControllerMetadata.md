@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TControllerMetadata
+[@istock-shell/iswork](../globals.md) / TControllerMetadata
 
 # Type Alias: TControllerMetadata
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:5
 
 Defined in: src/packages/iswork/src/types/controller.ts:6
 
-***
+---
 
 ### component?
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:6
 
 Defined in: src/packages/iswork/src/types/controller.ts:8
 
-***
+---
 
 ### middlewares?
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:8
 
 Defined in: src/packages/iswork/src/types/controller.ts:9
 
-***
+---
 
 ### version?
 

@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TDomainOptions
+[@istock-shell/iswork](../globals.md) / TDomainOptions
 
 # Type Alias: TDomainOptions
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/domain.ts:21
 
 Defined in: src/packages/iswork/src/types/domain.ts:22
 
-***
+---
 
 ### isRootDomain?
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/types/domain.ts:22
 
 Defined in: src/packages/iswork/src/types/domain.ts:23
 
-***
+---
 
 ### parentDomain?
 

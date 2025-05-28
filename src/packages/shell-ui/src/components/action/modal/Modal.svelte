@@ -1,6 +1,6 @@
 <script lang="ts" module>
   import type { HTMLDialogAttributes } from 'svelte/elements';
-  import type { ButtonProps } from '@istock/shell-ui';
+  import type { ButtonProps } from '@istock-shell/ui';
   import type { Snippet } from 'svelte';
   import { ModalBoxVariantConfig } from '../../../theme/config';
 
@@ -25,7 +25,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { fade } from 'svelte/transition';
   import { tv } from 'tailwind-variants';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
   import { ShButton } from '../../index';
 
   let {

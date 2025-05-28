@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / IDomainClass
+[@istock-shell/iswork](../globals.md) / IDomainClass
 
 # Interface: IDomainClass\<T\>
 
@@ -50,55 +50,55 @@ Defined in: src/packages/iswork/src/interfaces/domain.ts:3
 
 > **\[metadata\]**: `null` \| `DecoratorMetadataObject`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.esnext.decorators.d.ts:27
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.esnext.decorators.d.ts:27
 
 #### Inherited from
 
 [`IAnyClass`](IAnyClass.md).[`[metadata]`](IAnyClass.md#metadata)
 
-***
+---
 
 ### arguments
 
 > **arguments**: `any`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:305
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:305
 
 #### Inherited from
 
 [`IAnyClass`](IAnyClass.md).[`arguments`](IAnyClass.md#arguments)
 
-***
+---
 
 ### caller
 
 > **caller**: `Function`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:306
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:306
 
 #### Inherited from
 
 [`IAnyClass`](IAnyClass.md).[`caller`](IAnyClass.md#caller)
 
-***
+---
 
 ### length
 
 > `readonly` **length**: `number`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:302
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:302
 
 #### Inherited from
 
 [`IAnyClass`](IAnyClass.md).[`length`](IAnyClass.md#length)
 
-***
+---
 
 ### name
 
 > `readonly` **name**: `string`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es2015.core.d.ts:97
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es2015.core.d.ts:97
 
 Returns the name of the function. Function names are read-only and can not be changed.
 
@@ -106,13 +106,13 @@ Returns the name of the function. Function names are read-only and can not be ch
 
 [`IAnyClass`](IAnyClass.md).[`name`](IAnyClass.md#name)
 
-***
+---
 
 ### prototype
 
 > **prototype**: `any`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:301
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:301
 
 #### Inherited from
 
@@ -124,7 +124,7 @@ Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/li
 
 > **\[hasInstance\]**(`value`): `boolean`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:164
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:164
 
 Determines whether the given value inherits from this function if this function was used
 as a constructor function.
@@ -146,13 +146,13 @@ A constructor function can control which objects are recognized as its instances
 
 [`IAnyClass`](IAnyClass.md).[`[hasInstance]`](IAnyClass.md#hasinstance)
 
-***
+---
 
 ### apply()
 
 > **apply**(`this`, `thisArg`, `argArray?`): `any`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:281
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:281
 
 Calls the function, substituting the specified object for the this value of the function, and the specified array for the arguments of the function.
 
@@ -182,13 +182,13 @@ A set of arguments to be passed to the function.
 
 [`IAnyClass`](IAnyClass.md).[`apply`](IAnyClass.md#apply)
 
-***
+---
 
 ### bind()
 
 > **bind**(`this`, `thisArg`, ...`argArray`): `any`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:296
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:296
 
 For a given function, creates a bound function that has the same body as the original function.
 The this object of the bound function is associated with the specified object, and has the specified initial parameters.
@@ -219,13 +219,13 @@ A list of arguments to be passed to the new function.
 
 [`IAnyClass`](IAnyClass.md).[`bind`](IAnyClass.md#bind)
 
-***
+---
 
 ### call()
 
 > **call**(`this`, `thisArg`, ...`argArray`): `any`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:288
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:288
 
 Calls a method of an object, substituting another object for the current object.
 
@@ -255,13 +255,13 @@ A list of arguments to be passed to the method.
 
 [`IAnyClass`](IAnyClass.md).[`call`](IAnyClass.md#call)
 
-***
+---
 
 ### toString()
 
 > **toString**(): `string`
 
-Defined in: node\_modules/.pnpm/typescript@5.8.3/node\_modules/typescript/lib/lib.es5.d.ts:299
+Defined in: node_modules/.pnpm/typescript@5.8.3/node_modules/typescript/lib/lib.es5.d.ts:299
 
 Returns a string representation of a function.
 

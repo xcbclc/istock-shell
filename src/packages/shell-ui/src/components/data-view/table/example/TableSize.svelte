@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShTable, type TableDataList, type TableThead } from '@istock/shell-ui';
+  import { ShTable, type TableDataList, type TableThead } from '@istock-shell/ui';
 
   const thead: TableThead = [
     { value: '', dataKey: 'index' },

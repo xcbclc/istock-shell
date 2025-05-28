@@ -9,7 +9,6 @@ export class FetchRunner extends AbstractRunner<TConnector> {
     return new FetchRunner(connector);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(connector: TConnector) {
     super(connector);
   }

@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { AbstractMessage } from './abstract-message';
 
 export type TMessageSSEIteratorData = Record<string, any>;
@@ -77,7 +77,7 @@ export class MessageSSE implements AbstractMessage<EventSource> {
       },
       { once: true }
     );
-    // eslint-disable-next-line no-unmodified-loop-condition
+
     while (loop) {
       // 创建一个新的Promise来等待message事件
       yield await new Promise((resolve) => {

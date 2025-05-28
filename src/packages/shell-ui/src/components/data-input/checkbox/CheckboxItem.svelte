@@ -32,7 +32,7 @@
 <script lang="ts">
   // 导入样式处理工具
   import { tv } from 'tailwind-variants';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   let {
     color, // 颜色主题

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShTable, ShTableRow, ShTableTh, ShTableTd, ShButton, ShCheckbox } from '@istock/shell-ui';
+  import { ShTable, ShTableRow, ShTableTh, ShTableTd, ShButton, ShCheckbox } from '@istock-shell/ui';
   let checkAll = $state<boolean[]>([]);
   let selects: string[] = $state([]);
   const indeterminate = $derived(selects.length > 0 && selects.length < 4);

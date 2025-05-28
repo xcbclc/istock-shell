@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Cmdp
+[@istock-shell/iswork](../globals.md) / Cmdp
 
 # Class: Cmdp
 
@@ -56,7 +56,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:14
 
 `AbstractCmdp.address`
 
-***
+---
 
 ### controller
 
@@ -68,7 +68,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:12
 
 `AbstractCmdp.controller`
 
-***
+---
 
 ### domains
 
@@ -80,7 +80,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:10
 
 `AbstractCmdp.domains`
 
-***
+---
 
 ### meta
 
@@ -92,7 +92,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:9
 
 `AbstractCmdp.meta`
 
-***
+---
 
 ### method
 
@@ -104,7 +104,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:13
 
 `AbstractCmdp.method`
 
-***
+---
 
 ### payload
 
@@ -116,7 +116,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:10
 
 `AbstractCmdp.payload`
 
-***
+---
 
 ### port
 
@@ -128,7 +128,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:11
 
 `AbstractCmdp.port`
 
-***
+---
 
 ### protocol
 
@@ -140,7 +140,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:8
 
 `AbstractCmdp.protocol`
 
-***
+---
 
 ### returnMeta
 
@@ -152,7 +152,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:11
 
 `AbstractCmdp.returnMeta`
 
-***
+---
 
 ### returnPayload
 
@@ -164,7 +164,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:12
 
 `AbstractCmdp.returnPayload`
 
-***
+---
 
 ### user
 
@@ -184,7 +184,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:9
 
 Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:97
 
-检查是否是cmdp地址  例如: cmdp://@user.domain.subDomain:1/controllerName.methodName
+检查是否是cmdp地址 例如: cmdp://@user.domain.subDomain:1/controllerName.methodName
 
 #### Parameters
 
@@ -200,7 +200,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:97
 
 `AbstractCmdp.check`
 
-***
+---
 
 ### getInfo()
 
@@ -218,7 +218,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:41
 
 `AbstractCmdp.getInfo`
 
-***
+---
 
 ### getMessage()
 
@@ -252,7 +252,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:128
 
 [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
 
-***
+---
 
 ### getMeta()
 
@@ -268,7 +268,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:43
 
 ###### Return
 
-`Return` *extends* `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+`Return` _extends_ `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
 
 ##### Returns
 
@@ -288,7 +288,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:44
 
 ###### Return
 
-`Return` *extends* [`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
+`Return` _extends_ [`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
 
 ##### Parameters
 
@@ -304,7 +304,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:44
 
 `AbstractCmdp.getMeta`
 
-***
+---
 
 ### getPayload()
 
@@ -320,7 +320,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:62
 
 ###### Return
 
-`Return` *extends* [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+`Return` _extends_ [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
 ##### Returns
 
@@ -356,7 +356,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:63
 
 `AbstractCmdp.getPayload`
 
-***
+---
 
 ### getReturnMessage()
 
@@ -390,7 +390,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:142
 
 [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
 
-***
+---
 
 ### getReturnMeta()
 
@@ -406,7 +406,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:83
 
 ###### Return
 
-`Return` *extends* `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+`Return` _extends_ `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
 
 ##### Returns
 
@@ -426,7 +426,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:84
 
 ###### Return
 
-`Return` *extends* [`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
+`Return` _extends_ [`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
 
 ##### Parameters
 
@@ -442,7 +442,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:84
 
 `AbstractCmdp.getReturnMeta`
 
-***
+---
 
 ### getReturnPayload()
 
@@ -458,7 +458,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:102
 
 ###### Return
 
-`Return` *extends* [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+`Return` _extends_ [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
 ##### Returns
 
@@ -494,7 +494,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:103
 
 `AbstractCmdp.getReturnPayload`
 
-***
+---
 
 ### initByAddress()
 
@@ -518,7 +518,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:65
 
 `AbstractCmdp.initByAddress`
 
-***
+---
 
 ### parse()
 
@@ -542,7 +542,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:110
 
 `AbstractCmdp.parse`
 
-***
+---
 
 ### searchSubDomain()
 
@@ -562,7 +562,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:116
 
 `string`
 
-***
+---
 
 ### setAddressInfo()
 
@@ -586,7 +586,7 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:81
 
 `AbstractCmdp.setAddressInfo`
 
-***
+---
 
 ### setMeta()
 
@@ -636,7 +636,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:33
 
 `AbstractCmdp.setMeta`
 
-***
+---
 
 ### setPayload()
 
@@ -686,7 +686,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:52
 
 `AbstractCmdp.setPayload`
 
-***
+---
 
 ### setReturnMeta()
 
@@ -736,7 +736,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:73
 
 `AbstractCmdp.setReturnMeta`
 
-***
+---
 
 ### setReturnPayload()
 
@@ -786,7 +786,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:92
 
 `AbstractCmdp.setReturnPayload`
 
-***
+---
 
 ### create()
 
@@ -808,7 +808,7 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:14
 
 `Cmdp`
 
-***
+---
 
 ### getAddressByInfo()
 

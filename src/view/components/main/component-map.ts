@@ -1,6 +1,6 @@
 import type { SvelteComponent } from 'svelte';
 import type { IOutputViewComponentMapWritable } from '@/store/cmd/cmd-output-component';
-import * as ShellUi from '@istock/shell-ui';
+import * as ShellUi from '@istock-shell/ui';
 import CmdOutputDoc from '../output/CmdOutputDoc.svelte';
 import CmdOutputEvent from '../output/CmdOutputEvent.svelte';
 

@@ -1,4 +1,4 @@
-import { CmdRoute, CmdRouteArguments, Controller, Method } from '@istock/iswork';
+import { CmdRoute, CmdRouteArguments, Controller, Method } from '@istock-shell/iswork';
 import { TableReturn } from '@/worker/common';
 import { SshqsjService } from './sshqsj.service';
 import { SshqsjModel, SshqxlModel } from './sshqsj.model';

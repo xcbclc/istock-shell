@@ -9,10 +9,10 @@ import {
   type TControllerMethodComponentOutput,
   ApplicationContext,
   Field,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 import { AiService } from './ai.service';
 import cmdJson from './ai.cmd';
-import { isString, ScopeError } from '@istock/util';
+import { isString, ScopeError } from '@istock-shell/util';
 
 @Controller({
   alias: 'ai',

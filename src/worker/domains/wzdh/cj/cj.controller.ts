@@ -1,4 +1,4 @@
-import { CmdRoute, CmdRouteArguments, Controller, Method, Component } from '@istock/iswork';
+import { CmdRoute, CmdRouteArguments, Controller, Method, Component } from '@istock-shell/iswork';
 import { CjService } from './cj.service';
 import cmdJson from './cj.cmd';
 

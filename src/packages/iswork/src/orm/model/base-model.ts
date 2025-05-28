@@ -1,4 +1,4 @@
-import { FESnowflake, ScopeError } from '@istock/util';
+import { FESnowflake, ScopeError } from '@istock-shell/util';
 import type { DataSource } from '../data-source';
 import { QueryBuilder } from '../query-builder';
 import type {

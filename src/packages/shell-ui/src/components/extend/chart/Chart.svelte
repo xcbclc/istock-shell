@@ -35,7 +35,7 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from 'svelte';
   import { Chart } from '@antv/g2';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   // 解构props并设置默认值
   const {

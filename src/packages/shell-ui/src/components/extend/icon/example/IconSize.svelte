@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShIcon } from '@istock/shell-ui';
+  import { ShIcon } from '@istock-shell/ui';
 </script>
 
 <ShIcon name="email" size="xs" />

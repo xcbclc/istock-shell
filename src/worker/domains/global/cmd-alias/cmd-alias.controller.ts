@@ -1,4 +1,4 @@
-import { Controller, Method, Payload } from '@istock/iswork';
+import { Controller, Method, Payload } from '@istock-shell/iswork';
 
 import { CmdAliasService, type TCmdAliasData } from './cmd-alias.service';
 import { HistoryService } from '../history/history.service';

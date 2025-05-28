@@ -23,7 +23,7 @@
 创建`A股`应用域文件`ag.domain.ts`，路径为`src/worker/domains/ag/ag.domain.ts`，然后导入应用域`Domain`装饰器，我们通过`Domain`装饰器将类定义为应用域，示例代码：
 
 ```typescript
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 
 @Domain({
   name: 'ag',
@@ -54,7 +54,7 @@ export type TDomainMetadata = {
 将`A股`应用域导入到`根`应用域，代码路径`src/worker/domains/root.domain.ts`，示例代码：
 
 ```typescript
-import { Global, Domain } from '@istock/iswork';
+import { Global, Domain } from '@istock-shell/iswork';
 // ...
 import { AgDomain } from './ag/ag.domain'; // [!code ++]
 // ...

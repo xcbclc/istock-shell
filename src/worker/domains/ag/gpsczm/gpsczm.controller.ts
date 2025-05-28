@@ -1,4 +1,4 @@
-import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
+import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock-shell/iswork';
 import { GpsczmService } from './gpsczm.service';
 import { SzdqjypxModel, SzgphycjModel, SzmrgkModel, SzgpsczmModel, SzlbtjModel } from './gpsczm.model';
 import cmdJson from './gpsczm.cmd';

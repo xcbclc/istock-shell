@@ -1,5 +1,5 @@
 import { openDB, type IDBPDatabase } from 'idb';
-import { isNil, ScopeError } from '@istock/util';
+import { isNil, ScopeError } from '@istock-shell/util';
 import type {
   TDataSourceIndexedDBOptions,
   TDecoratorAllColumnMetadata,

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShButton } from '@istock/shell-ui';
+  import { ShButton } from '@istock-shell/ui';
 </script>
 
 <div class="flex items-center justify-center">

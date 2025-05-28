@@ -1,4 +1,4 @@
-import { ScopeError, wrap, unWarp, isAsyncIterableIterator } from '@istock/util';
+import { ScopeError, wrap, unWarp, isAsyncIterableIterator } from '@istock-shell/util';
 import type { IDomainClass } from '../interfaces';
 import type { TMiddleware, TApplicationOptions, TCmdpMessage } from '../types';
 import { compose } from '../compose';

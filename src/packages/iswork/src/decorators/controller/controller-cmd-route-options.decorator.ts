@@ -1,4 +1,4 @@
-import { isArray, isObject, isPlainObject, isString } from '@istock/util';
+import { isArray, isObject, isPlainObject, isString } from '@istock-shell/util';
 import type {
   TControllerMethodCmdRouteOptions,
   TControllerMethodCmdRouteOptionsMetadata,

@@ -54,7 +54,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isString } from '@istock/util';
+  import { tuc, isString } from '@istock-shell/util';
   import { Virtual } from './core/index';
 
   // 响应式状态声明
@@ -193,13 +193,11 @@
 
     return {
       update: (newId: string) => {
-        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete sizeChangeInfo[id];
         id = newId;
         update();
       },
       destroy: () => {
-        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete sizeChangeInfo[id];
         observer.disconnect();
       },

@@ -1,6 +1,6 @@
 # 添加命令
 
-得益于NestJS框架的灵感，我们在实现`Web Worker`服务框架`@istock/iswork`时采用了类似架构。意味着如果你熟悉NestJS框架，那么上手命令开发将会非常自然且高效。
+得益于NestJS框架的灵感，我们在实现`Web Worker`服务框架`@istock-shell/iswork`时采用了类似架构。意味着如果你熟悉NestJS框架，那么上手命令开发将会非常自然且高效。
 
 下面将引导您通过对接`AKShare`的[`个股信息查询`](https://akshare.akfamily.xyz/data/stock/stock.html#id8)接口，为A股市场添加一个个股信息查询的命令。
 
@@ -21,7 +21,7 @@
 在`ggxxcx`文件夹中，创建一个名为`ggxxcx.model.ts`的文件，并根据AKShare文档中提供的输出参数定义数据模型，需要引入模型定义装饰器`Model`。示例代码如下：
 
 ```typescript
-import { BaseModel, Model } from '@istock/iswork';
+import { BaseModel, Model } from '@istock-shell/iswork';
 
 @Model('ggxxcx')
 export class GgxxcxModel extends BaseModel {
@@ -64,7 +64,7 @@ await akShareFetchDataSource.initialize();
 根据AKShare数据接口文档，[`个股信息查询`](https://akshare.akfamily.xyz/data/stock/stock.html#id8)接口地址为`stock_individual_info_em`，输入参数需要`symbol`和`timeout`，我需要引入`GgxxcxModel`模型及服务注入装饰器`Injectable`，示例代码如下：
 
 ```typescript
-import { Injectable, type TModelData } from '@istock/iswork';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
 import { GgxxcxModel } from './ggxxcx.model';
 
 @Injectable()
@@ -152,7 +152,7 @@ export type TControllerMethodCmdRoute = {
 现在，将命令模型、命令服务和命令描述绑定到命令控制器。创建`ggxxcx.controller.ts`，创建`GgxxcxController`控制器类，代码示例：
 
 ```typescript
-import { Controller } from '@istock/iswork';
+import { Controller } from '@istock-shell/iswork';
 import { GgxxcxModel } from './ggxxcx.model';
 import { GgxxcxService } from './ggxxcx.service';
 import cmdJson from './ggxxcx.cmd';
@@ -170,7 +170,7 @@ export class GgxxcxController {
 接下来创建命令方法，需要使用`CmdRoute`装饰器定义命名路由、`Method`定义方法别名及相关信息、`AKshareReturn`装饰器对AKshare接口返回的数据进行标准化输出。代码示例：
 
 ```typescript
-import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork'; // [!code ++]
+import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock-shell/iswork'; // [!code ++]
 import { AKshareReturn } from '@/worker/common'; // [!code ++]
 import { GgxxcxModel } from './ggxxcx.model';
 import { GgxxcxService } from './ggxxcx.service';
@@ -211,7 +211,7 @@ export class GgxxcxController {
 最后需要确保`ggxxcx`命令被导入到`ag`命令应用域下。在`src/worker/domains/ag/ag.domain.ts`中添加对应的引用。代码示例：
 
 ```typescript
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { GgxxcxController } from './ggxxcx/ggxxcx.controller'; // [!code ++]
 import { GgxxcxService } from './ggxxcx/ggxxcx.service'; // [!code ++]
 

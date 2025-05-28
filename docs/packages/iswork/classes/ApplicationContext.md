@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / ApplicationContext
+[@istock-shell/iswork](../globals.md) / ApplicationContext
 
 # Class: ApplicationContext
 
@@ -44,7 +44,7 @@ Defined in: src/packages/iswork/src/application/context.ts:22
 
 Defined in: src/packages/iswork/src/application/context.ts:11
 
-***
+---
 
 ### message
 
@@ -66,7 +66,7 @@ Defined in: src/packages/iswork/src/application/context.ts:18
 
 [`Application`](Application.md)
 
-***
+---
 
 ### options
 

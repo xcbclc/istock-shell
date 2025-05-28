@@ -1,5 +1,5 @@
-import { Injectable, type TModelData } from '@istock/iswork';
-import { ScopeError } from '@istock/util';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { ScopeError } from '@istock-shell/util';
 import { SshqsjModel, SshqxlModel } from './sshqsj.model';
 import { EDataType } from '@domains/ag/sshqsj/sshqsj.cmd';
 

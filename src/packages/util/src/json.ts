@@ -16,7 +16,7 @@ export const stringify = (v: unknown) =>
 
 /**
  * 解析 JSON 字符串为对象。
- * 
+ *
  * @param v - JSON 字符串
  * @returns 解析后的对象
  * @example
@@ -26,7 +26,7 @@ export const parse = (v: string) => JSON.parse(v);
 
 /**
  * 深拷贝对象，基于 JSON 序列化。
- * 
+ *
  * @param v - 需要拷贝的对象
  * @returns 拷贝后的新对象
  * @example

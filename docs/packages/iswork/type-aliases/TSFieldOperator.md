@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TSFieldOperator
+[@istock-shell/iswork](../globals.md) / TSFieldOperator
 
 # Type Alias: TSFieldOperator
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:61
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:86
 
-***
+---
 
 ### $between?
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:86
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:74
 
-***
+---
 
 ### $cont?
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:74
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:70
 
-***
+---
 
 ### $contL?
 
@@ -42,7 +42,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:70
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:81
 
-***
+---
 
 ### $ends?
 
@@ -50,7 +50,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:81
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:69
 
-***
+---
 
 ### $endsL?
 
@@ -58,7 +58,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:69
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:80
 
-***
+---
 
 ### $eq?
 
@@ -66,7 +66,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:80
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:62
 
-***
+---
 
 ### $eqL?
 
@@ -74,7 +74,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:62
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:77
 
-***
+---
 
 ### $excl?
 
@@ -82,7 +82,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:77
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:71
 
-***
+---
 
 ### $exclL?
 
@@ -90,7 +90,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:71
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:82
 
-***
+---
 
 ### $gt?
 
@@ -98,7 +98,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:82
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:64
 
-***
+---
 
 ### $gte?
 
@@ -106,7 +106,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:64
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:66
 
-***
+---
 
 ### $in?
 
@@ -114,7 +114,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:66
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:72
 
-***
+---
 
 ### $inL?
 
@@ -122,7 +122,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:72
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:83
 
-***
+---
 
 ### $isnull?
 
@@ -130,7 +130,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:83
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:75
 
-***
+---
 
 ### $lt?
 
@@ -138,7 +138,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:75
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:65
 
-***
+---
 
 ### $lte?
 
@@ -146,7 +146,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:65
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:67
 
-***
+---
 
 ### $ne?
 
@@ -154,7 +154,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:67
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:63
 
-***
+---
 
 ### $neL?
 
@@ -162,7 +162,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:63
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:78
 
-***
+---
 
 ### $notin?
 
@@ -170,7 +170,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:78
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:73
 
-***
+---
 
 ### $notinL?
 
@@ -178,7 +178,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:73
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:84
 
-***
+---
 
 ### $notnull?
 
@@ -186,7 +186,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:84
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:76
 
-***
+---
 
 ### $or?
 
@@ -194,7 +194,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:76
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:85
 
-***
+---
 
 ### $starts?
 
@@ -202,7 +202,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:85
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:68
 
-***
+---
 
 ### $startsL?
 

@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock/iswork';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
 import { SzdqjypxModel, SzgpsczmModel, SzlbtjModel, SzgphycjModel, type SzmrgkModel } from './gpsczm.model';
 
 @Injectable()

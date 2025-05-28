@@ -37,7 +37,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc, findByKeyForValue } from '@istock/util';
+  import { tuc, findByKeyForValue } from '@istock-shell/util';
   import ShSelectItem from './SelectItem.svelte';
 
   let {

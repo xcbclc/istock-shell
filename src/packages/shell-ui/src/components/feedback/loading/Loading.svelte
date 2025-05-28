@@ -23,7 +23,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   const {
     shape, // 加载器形状

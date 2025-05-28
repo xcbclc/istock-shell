@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import { MetadataScanner } from '../../scanner';
 import { getModelMetadata } from '../decorators';
 import type { TModelType } from '../types';

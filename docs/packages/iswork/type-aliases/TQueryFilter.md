@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TQueryFilter
+[@istock-shell/iswork](../globals.md) / TQueryFilter
 
 # Type Alias: TQueryFilter
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:93
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:94
 
-***
+---
 
 ### operator
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:94
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:95
 
-***
+---
 
 ### value?
 

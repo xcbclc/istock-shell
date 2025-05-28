@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / ECondOperator
+[@istock-shell/iswork](../globals.md) / ECondOperator
 
 # Enumeration: ECondOperator
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/enums/index.ts:1
 
 Defined in: src/packages/iswork/src/enums/index.ts:16
 
-***
+---
 
 ### CONTAINS
 
@@ -24,15 +24,15 @@ Defined in: src/packages/iswork/src/enums/index.ts:16
 
 Defined in: src/packages/iswork/src/enums/index.ts:10
 
-***
+---
 
-### CONTAINS\_LOW
+### CONTAINS_LOW
 
-> **CONTAINS\_LOW**: `"$contL"`
+> **CONTAINS_LOW**: `"$contL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:21
 
-***
+---
 
 ### ENDS
 
@@ -40,15 +40,15 @@ Defined in: src/packages/iswork/src/enums/index.ts:21
 
 Defined in: src/packages/iswork/src/enums/index.ts:9
 
-***
+---
 
-### ENDS\_LOW
+### ENDS_LOW
 
-> **ENDS\_LOW**: `"$endsL"`
+> **ENDS_LOW**: `"$endsL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:20
 
-***
+---
 
 ### EQUALS
 
@@ -56,15 +56,15 @@ Defined in: src/packages/iswork/src/enums/index.ts:20
 
 Defined in: src/packages/iswork/src/enums/index.ts:2
 
-***
+---
 
-### EQUALS\_LOW
+### EQUALS_LOW
 
-> **EQUALS\_LOW**: `"$eqL"`
+> **EQUALS_LOW**: `"$eqL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:17
 
-***
+---
 
 ### EXCLUDES
 
@@ -72,31 +72,31 @@ Defined in: src/packages/iswork/src/enums/index.ts:17
 
 Defined in: src/packages/iswork/src/enums/index.ts:11
 
-***
+---
 
-### EXCLUDES\_LOW
+### EXCLUDES_LOW
 
-> **EXCLUDES\_LOW**: `"$exclL"`
+> **EXCLUDES_LOW**: `"$exclL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:22
 
-***
+---
 
-### GREATER\_THAN
+### GREATER_THAN
 
-> **GREATER\_THAN**: `"$gt"`
+> **GREATER_THAN**: `"$gt"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:4
 
-***
+---
 
-### GREATER\_THAN\_EQUALS
+### GREATER_THAN_EQUALS
 
-> **GREATER\_THAN\_EQUALS**: `"$gte"`
+> **GREATER_THAN_EQUALS**: `"$gte"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:6
 
-***
+---
 
 ### IN
 
@@ -104,79 +104,79 @@ Defined in: src/packages/iswork/src/enums/index.ts:6
 
 Defined in: src/packages/iswork/src/enums/index.ts:12
 
-***
+---
 
-### IN\_LOW
+### IN_LOW
 
-> **IN\_LOW**: `"$inL"`
+> **IN_LOW**: `"$inL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:23
 
-***
+---
 
-### IS\_NULL
+### IS_NULL
 
-> **IS\_NULL**: `"$isnull"`
+> **IS_NULL**: `"$isnull"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:14
 
-***
+---
 
-### LOWER\_THAN
+### LOWER_THAN
 
-> **LOWER\_THAN**: `"$lt"`
+> **LOWER_THAN**: `"$lt"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:5
 
-***
+---
 
-### LOWER\_THAN\_EQUALS
+### LOWER_THAN_EQUALS
 
-> **LOWER\_THAN\_EQUALS**: `"$lte"`
+> **LOWER_THAN_EQUALS**: `"$lte"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:7
 
-***
+---
 
-### NOT\_EQUALS
+### NOT_EQUALS
 
-> **NOT\_EQUALS**: `"$ne"`
+> **NOT_EQUALS**: `"$ne"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:3
 
-***
+---
 
-### NOT\_EQUALS\_LOW
+### NOT_EQUALS_LOW
 
-> **NOT\_EQUALS\_LOW**: `"$neL"`
+> **NOT_EQUALS_LOW**: `"$neL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:18
 
-***
+---
 
-### NOT\_IN
+### NOT_IN
 
-> **NOT\_IN**: `"$notin"`
+> **NOT_IN**: `"$notin"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:13
 
-***
+---
 
-### NOT\_IN\_LOW
+### NOT_IN_LOW
 
-> **NOT\_IN\_LOW**: `"$notinL"`
+> **NOT_IN_LOW**: `"$notinL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:24
 
-***
+---
 
-### NOT\_NULL
+### NOT_NULL
 
-> **NOT\_NULL**: `"$notnull"`
+> **NOT_NULL**: `"$notnull"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:15
 
-***
+---
 
 ### STARTS
 
@@ -184,10 +184,10 @@ Defined in: src/packages/iswork/src/enums/index.ts:15
 
 Defined in: src/packages/iswork/src/enums/index.ts:8
 
-***
+---
 
-### STARTS\_LOW
+### STARTS_LOW
 
-> **STARTS\_LOW**: `"$startsL"`
+> **STARTS_LOW**: `"$startsL"`
 
 Defined in: src/packages/iswork/src/enums/index.ts:19

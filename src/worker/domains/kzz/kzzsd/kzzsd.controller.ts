@@ -1,4 +1,4 @@
-import { CmdRoute, Controller, Method, CmdRouteOptions } from '@istock/iswork';
+import { CmdRoute, Controller, Method, CmdRouteOptions } from '@istock-shell/iswork';
 import { KzzsdService } from './kzzsd.service';
 import cmdJson from './kzzsd.cmd';
 

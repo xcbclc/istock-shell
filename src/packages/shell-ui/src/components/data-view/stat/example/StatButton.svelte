@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShStat, type StatItemProps } from '@istock/shell-ui';
+  import { ShStat, type StatItemProps } from '@istock-shell/ui';
   const list: StatItemProps[] = $state([
     {
       title: '账户余额',

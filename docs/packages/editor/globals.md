@@ -1,13 +1,13 @@
-[**@istock/editor**](README.md)
+[**@istock-shell/editor**](README.md)
 
-***
+---
 
-# @istock/editor
+# @istock-shell/editor
 
 ## Enumerations
 
-- [ECommandEditorActionTypes](enumerations/ECommandEditorActionTypes.md)
-- [ECommandEditorEventNames](enumerations/ECommandEditorEventNames.md)
+- [CommandEditorActionTypes](enumerations/CommandEditorActionTypes.md)
+- [CommandEditorEventNames](enumerations/CommandEditorEventNames.md)
 
 ## Classes
 
@@ -17,9 +17,9 @@
 
 ## Type Aliases
 
-- [TCommandEditorContentNode](type-aliases/TCommandEditorContentNode.md)
-- [TCommandEditorCustomEvent](type-aliases/TCommandEditorCustomEvent.md)
-- [TCommandEditorInputOption](type-aliases/TCommandEditorInputOption.md)
-- [TCommandEditorRangInfo](type-aliases/TCommandEditorRangInfo.md)
-- [TCommandEditorRecommendCmdData](type-aliases/TCommandEditorRecommendCmdData.md)
-- [TCommandEditorRecommendCmdEvent](type-aliases/TCommandEditorRecommendCmdEvent.md)
+- [CommandEditorContentNode](type-aliases/CommandEditorContentNode.md)
+- [CommandEditorCustomEvent](type-aliases/CommandEditorCustomEvent.md)
+- [CommandEditorInputOption](type-aliases/CommandEditorInputOption.md)
+- [CommandEditorRangInfo](type-aliases/CommandEditorRangInfo.md)
+- [CommandEditorRecommendCmdData](type-aliases/CommandEditorRecommendCmdData.md)
+- [CommandEditorRecommendCmdEvent](type-aliases/CommandEditorRecommendCmdEvent.md)

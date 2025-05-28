@@ -1,4 +1,4 @@
-import { Controller, Method, Payload, ApplicationContext } from '@istock/iswork';
+import { Controller, Method, Payload, ApplicationContext } from '@istock-shell/iswork';
 import { ERecommendType, RecommendService, type TRecommendData } from './recommend.service';
 import { CmdRouteService } from '../cmd-route/cmd-route.service';
 import { HistoryService } from '../history/history.service';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShFieldSet, ShField, ShInput } from '@istock/shell-ui';
+  import { ShFieldSet, ShField, ShInput } from '@istock-shell/ui';
 </script>
 
 <ShFieldSet title="页面标题">

@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TFetchSSEMessage
+[@istock-shell/iswork](../globals.md) / TFetchSSEMessage
 
 # Type Alias: TFetchSSEMessage
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/driver.ts:1
 
 Defined in: src/packages/iswork/src/orm/types/driver.ts:3
 
-***
+---
 
 ### event?
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/orm/types/driver.ts:3
 
 Defined in: src/packages/iswork/src/orm/types/driver.ts:4
 
-***
+---
 
 ### id
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/orm/types/driver.ts:4
 
 Defined in: src/packages/iswork/src/orm/types/driver.ts:2
 
-***
+---
 
 ### retry?
 

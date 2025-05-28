@@ -1,5 +1,5 @@
 import { writable, type Writable } from 'svelte/store';
-import { keyCommand } from '@istock/command-parser';
+import { keyCommand } from '@istock-shell/command-parser';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { ERecommendType } from '@domains/global/recommend/recommend.service';
 export { ERecommendType as EInputRecommendType } from '@domains/global/recommend/recommend.service';

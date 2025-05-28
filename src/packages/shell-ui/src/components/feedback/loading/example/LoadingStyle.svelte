@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShLoading } from '@istock/shell-ui';
+  import { ShLoading } from '@istock-shell/ui';
 </script>
 
 <div class="flex items-center justify-center gap-4">

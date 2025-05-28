@@ -1,5 +1,5 @@
 import { tick, mount, unmount } from 'svelte';
-import { isString } from '@istock/util';
+import { isString } from '@istock-shell/util';
 import type { AlertProps } from '../../index';
 import Message from './Message.svelte';
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShDataList, ShInput } from '@istock/shell-ui';
+  import { ShDataList, ShInput } from '@istock-shell/ui';
 
   const options = $state([{ value: '选项一' }, { value: '选项二' }, { value: '选项三' }]);
 </script>

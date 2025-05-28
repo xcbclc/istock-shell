@@ -109,7 +109,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isArray, clone } from '@istock/util';
+  import { tuc, isArray, clone } from '@istock-shell/util';
   import type { ButtonColor } from '@/packages/shell-ui';
 
   let {

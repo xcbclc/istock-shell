@@ -35,7 +35,7 @@ export class DecoratorRegister {
       const callbackCacheValue: TDecoratorCallbackCacheValue = {
         key: instance.metaKey,
         decoratorType: instance.decoratorType,
-        // eslint-disable-next-line @typescript-eslint/unbound-method
+
         fn: instance.callback,
         type: instance?.callbackType,
       };

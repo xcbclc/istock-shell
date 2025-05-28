@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { TDataSourceType } from '../types';
 import type { DataSource } from '../data-source';
 import { IndexedDBDriver } from './indexedDB/indexedDB-driver';
@@ -14,7 +14,7 @@ export type TAllDriver = {
 /**
  * 驱动工厂，创建驱动实例
  */
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+
 export class DriverFactory {
   static create<Type extends TDataSourceType>(dataSource: DataSource<Type>): TAllDriver[Type] {
     const { options } = dataSource;

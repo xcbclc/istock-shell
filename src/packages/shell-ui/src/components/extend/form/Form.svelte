@@ -53,7 +53,7 @@
   import type { HTMLFormAttributes } from 'svelte/elements';
   import { onMount } from 'svelte';
   import { tv } from 'tailwind-variants';
-  import { tuc, isString, clone } from '@istock/util';
+  import { tuc, isString, clone } from '@istock-shell/util';
   import type {
     FormItemProps,
     FormItemLayout,

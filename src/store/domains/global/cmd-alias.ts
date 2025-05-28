@@ -1,5 +1,5 @@
 import { writable, get, type Writable } from 'svelte/store';
-import { clone } from '@istock/util';
+import { clone } from '@istock-shell/util';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 
 export type TAddCmdAliasField = 'historyId' | 'cmd' | 'alias' | 'description';

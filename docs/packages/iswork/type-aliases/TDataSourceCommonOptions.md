@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TDataSourceCommonOptions
+[@istock-shell/iswork](../globals.md) / TDataSourceCommonOptions
 
 # Type Alias: TDataSourceCommonOptions
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/data-source.ts:5
 
 Defined in: src/packages/iswork/src/orm/types/data-source.ts:9
 
-***
+---
 
 ### entities
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/orm/types/data-source.ts:9
 
 Defined in: src/packages/iswork/src/orm/types/data-source.ts:8
 
-***
+---
 
 ### name
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/orm/types/data-source.ts:8
 
 Defined in: src/packages/iswork/src/orm/types/data-source.ts:6
 
-***
+---
 
 ### type
 
@@ -42,7 +42,7 @@ Defined in: src/packages/iswork/src/orm/types/data-source.ts:6
 
 Defined in: src/packages/iswork/src/orm/types/data-source.ts:7
 
-***
+---
 
 ### version?
 

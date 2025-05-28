@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TSFields
+[@istock-shell/iswork](../globals.md) / TSFields
 
 # Type Alias: TSFields
 
@@ -22,7 +22,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:106
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:109
 
-***
+---
 
 ### $or?
 

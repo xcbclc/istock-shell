@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShVirtualTable, type TableThead } from '@istock/shell-ui';
+  import { ShVirtualTable, type TableThead } from '@istock-shell/ui';
 
   type ListData = {
     id: string;

@@ -1,4 +1,4 @@
-import { DataSource } from '@istock/iswork';
+import { DataSource } from '@istock-shell/iswork';
 import { UserModel } from '@domains/global/user/user.model';
 import { DomainModel } from '@domains/global/domain/domain.model';
 import { CmdRouteModel } from '@domains/global/cmd-route/cmd-route.model';

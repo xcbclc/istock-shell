@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShDataList, ShInput, type DataListOptionProps } from '@istock/shell-ui';
+  import { ShDataList, ShInput, type DataListOptionProps } from '@istock-shell/ui';
 
   let options: Array<DataListOptionProps<string>> = $state([]);
   let inputValue = $state('');

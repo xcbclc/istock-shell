@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShInput, ShFieldSet, ShField } from '@istock/shell-ui';
+  import { ShInput, ShFieldSet, ShField } from '@istock-shell/ui';
 
   let value: string = $state('');
 </script>

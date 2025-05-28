@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShDataGrid, ShChart, type DataGridProps, type DataGridItem } from '@istock/shell-ui';
+  import { ShDataGrid, ShChart, type DataGridProps, type DataGridItem } from '@istock-shell/ui';
   import dataGridData from './DataGridDefault.json';
 
   const data: DataGridProps = $state({

@@ -1,4 +1,4 @@
-import { Application } from '@istock/iswork';
+import { Application } from '@istock-shell/iswork';
 import { getPipeAlias } from './common/pipes';
 import { RootDomain } from './domains/root.domain';
 import { initDataSource } from './datasource-register';
@@ -23,7 +23,7 @@ const bootstrap = async () => {
   Object.keys(pipes).forEach((key) => {
     app.usePipe(key, pipes[key]);
   });
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+
   self.addEventListener('message', messageCallback);
 };
 

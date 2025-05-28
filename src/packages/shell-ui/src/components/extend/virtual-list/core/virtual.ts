@@ -1,4 +1,4 @@
-import { EventEmitter } from '@istock/util';
+import { EventEmitter } from '@istock-shell/util';
 import { VirtualCore, type VirtualCoreOptions, type VirtualCoreRange } from './virtual-core';
 
 export enum VirtualDirection {

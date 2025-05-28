@@ -4,7 +4,7 @@ import {
   type TModelData,
   type TModelUpdate,
   type TQueryFilterArr,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 import { ThemeModel } from './theme.model';
 @Injectable()
 export class ThemeService {

@@ -141,8 +141,11 @@ export default {
       text: '相关库',
       items: [
         { text: 'iswork', link: '/packages/iswork/globals.html' },
+        { text: 'shell-ui', link: '/packages/shell-ui/README.html' },
         { text: 'command-parser', link: '/packages/command-parser/globals.html' },
         { text: 'editor', link: '/packages/editor/globals.html' },
+        { text: 'cli', link: '/packages/cli/README.html' },
+        { text: 'util', link: '/packages/util/globals.html' },
       ],
     },
   ],

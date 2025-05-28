@@ -27,7 +27,7 @@
 
 <script lang="ts">
   // 导入组件和工具
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
   import { ShIcon } from '../../index';
 
   // 解构props并设置默认值

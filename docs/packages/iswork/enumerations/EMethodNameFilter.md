@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / EMethodNameFilter
+[@istock-shell/iswork](../globals.md) / EMethodNameFilter
 
 # Enumeration: EMethodNameFilter
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/enums/index.ts:27
 
 Defined in: src/packages/iswork/src/enums/index.ts:30
 
-***
+---
 
 ### ALL
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/enums/index.ts:30
 
 Defined in: src/packages/iswork/src/enums/index.ts:28
 
-***
+---
 
 ### METHOD
 

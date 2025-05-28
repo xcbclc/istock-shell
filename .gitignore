@@ -16,7 +16,7 @@ dev-dist
 .vitepress/*
 docs/.vitepress/cache/*
 docs/all.md
-src/packages/cli/dist
+src/packages/**/dist
 
 # Editor directories and files
 .vscode/*

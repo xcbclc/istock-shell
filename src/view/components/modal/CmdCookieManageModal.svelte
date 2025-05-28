@@ -16,7 +16,7 @@
     ShTextarea,
     ShButton,
     ShEmpty,
-  } from '@istock/shell-ui';
+  } from '@istock-shell/ui';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import type { TCookieManageUiModel, TCookieModel } from '@/store/domains/global/cookie-manage';
 

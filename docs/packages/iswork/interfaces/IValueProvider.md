@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / IValueProvider
+[@istock-shell/iswork](../globals.md) / IValueProvider
 
 # Interface: IValueProvider\<Class\>
 
@@ -32,7 +32,7 @@ Defined in: src/packages/iswork/src/interfaces/provider.ts:6
 
 [`BaseProvider`](BaseProvider.md).[`provide`](BaseProvider.md#provide)
 
-***
+---
 
 ### useValue
 

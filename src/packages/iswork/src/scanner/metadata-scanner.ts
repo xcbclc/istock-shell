@@ -1,4 +1,4 @@
-import { isConstructorStr, isFunction } from '@istock/util';
+import { isConstructorStr, isFunction } from '@istock-shell/util';
 import type { TAnyObject, TScanClassMetadata, TScanPropertyMetadata, TScanPropertyMetadataMap } from '../types';
 import type { IAnyClass } from '../interfaces';
 import { EMethodNameFilter } from '../enums';
@@ -6,7 +6,7 @@ import { EMethodNameFilter } from '../enums';
 /**
  * 扫描装饰器定义的metadata数据
  */
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+
 export class MetadataScanner {
   /**
    * 获取指定类所有装饰器metadata数据
@@ -75,9 +75,7 @@ export class MetadataScanner {
         assert = assert && !descriptor?.set && !descriptor?.get && !isConstructorStr(property);
       }
       if (filter === EMethodNameFilter.ACCESSOR) {
-        assert =
-          // eslint-disable-next-line @typescript-eslint/unbound-method
-          assert && Boolean(descriptor?.set ?? descriptor?.get) && !isConstructorStr(property);
+        assert = assert && Boolean(descriptor?.set ?? descriptor?.get) && !isConstructorStr(property);
       }
       if (assert) names.push(property);
     }

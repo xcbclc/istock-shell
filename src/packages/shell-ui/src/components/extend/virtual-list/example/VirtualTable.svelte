@@ -5,7 +5,7 @@
     type VirtualListProps,
     type VirtualCoreRange,
     type TableThead,
-  } from '@istock/shell-ui';
+  } from '@istock-shell/ui';
 
   type ListData = {
     id: string;

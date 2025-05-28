@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShInput } from '@istock/shell-ui';
+  import { ShInput } from '@istock-shell/ui';
 </script>
 
 <ShInput type="text" placeholder="文本" />

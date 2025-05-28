@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TQueryJoin
+[@istock-shell/iswork](../globals.md) / TQueryJoin
 
 # Type Alias: TQueryJoin
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:28
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:29
 
-***
+---
 
 ### select?
 

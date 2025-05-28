@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TQueryBuilderOptions
+[@istock-shell/iswork](../globals.md) / TQueryBuilderOptions
 
 # Type Alias: TQueryBuilderOptions
 

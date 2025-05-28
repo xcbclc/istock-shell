@@ -6,9 +6,9 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { getQueryParam, ScopeError } from '@istock/util';
-  import { CommandEditor, ECommandEditorEventNames } from '@istock/editor';
-  import type { TCommandEditorRecommendCmdEvent } from '@istock/editor';
+  import { getQueryParam, ScopeError } from '@istock-shell/util';
+  import { CommandEditor, CommandEditorEventNames } from '@istock-shell/editor';
+  import type { CommandEditorRecommendCmdEvent } from '@istock-shell/editor';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
   import { ECmdWindowContextMode } from '@/window/cmd-window-context';
   import { EInputRecommendType, type TInputRecommendItem } from '@/store/domains/global/input-recommend';
@@ -62,8 +62,8 @@
   onMount(() => {
     commandEditor = new CommandEditor(cmdInputView);
     commandEditor.onMount();
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    commandEditor.commandInput.addEventListener(ECommandEditorEventNames.SendCmd, async () => {
+
+    commandEditor.commandInput.addEventListener(CommandEditorEventNames.SendCmd, async () => {
       if (disabled) {
         console.error('上次命令执行未结束');
       } else {
@@ -79,8 +79,8 @@
         }
       }
     });
-    commandEditor.commandInput.addEventListener(ECommandEditorEventNames.RecommendCmd, (event: Event) => {
-      const { action, target } = (event as TCommandEditorRecommendCmdEvent).detail.data;
+    commandEditor.commandInput.addEventListener(CommandEditorEventNames.RecommendCmd, (event: Event) => {
+      const { action, target } = (event as CommandEditorRecommendCmdEvent).detail.data;
       void ctx.event.emit(`event://@${user.getUserInfo().username}.ui:${ctx.windowId}/cmd.recommend`, {
         target,
         action,
@@ -122,7 +122,7 @@
 </div>
 
 <style>
-  @reference "@istock/shell-ui/src/style/daisyui.css";
+  @reference "@istock-shell/ui/src/style/daisyui.css";
   :global(span.is-command) {
     font-weight: 600;
     @apply text-primary;

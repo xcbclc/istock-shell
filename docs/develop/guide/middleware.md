@@ -26,7 +26,7 @@
 在目录`src/worker/common/middlewares`下创建`logger.ts`，然后在`logger.ts`编写日志中间件代码逻辑，示例代码：
 
 ```typescript
-import { type ApplicationContext } from '@istock/iswork';
+import { type ApplicationContext } from '@istock-shell/iswork';
 
 /**
  * 消息处理请求和响应日志
@@ -72,7 +72,7 @@ const bootstrap = async () => {
 应用域中间件可以直接参考`将股票名称转换成股票代码`的中间件实现，代码路径为`src/worker/common/middlewares/transform-stock-name.ts`，代码示例：
 
 ```typescript
-import type { ApplicationContext, IDomainClass } from '@istock/iswork';
+import type { ApplicationContext, IDomainClass } from '@istock-shell/iswork';
 import type { TCmdRequest } from '@/worker/common';
 
 interface IGlobalDomain extends IDomainClass {

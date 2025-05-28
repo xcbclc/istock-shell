@@ -53,7 +53,7 @@ outline: [2, 3]
 
 ```typescript
 import type { HTMLAttributes } from 'svelte/elements';
-import { ShNavListItemDetail, type NavListItemDetailProps } from '@istock/shell-ui';
+import { ShNavListItemDetail, type NavListItemDetailProps } from '@istock-shell/ui';
 
 // 导航项属性接口
 export interface NavListItemProps extends HTMLAttributes<HTMLDListElement> {
@@ -77,7 +77,7 @@ export interface NavListItemDetailProps extends HTMLAttributes<HTMLElement> {
 ### NavListItemDetailLink
 
 ```typescript
-import type { TextProps, TextTarget } from '@istock/shell-ui';
+import type { TextProps, TextTarget } from '@istock-shell/ui';
 
 export type NavListItemDetailLink = Omit<TextProps, 'tag'>;
 ```

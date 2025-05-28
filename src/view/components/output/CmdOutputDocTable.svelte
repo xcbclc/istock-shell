@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import type { TControllerMethodCmdRouteOptions } from '@istock/iswork';
+  import type { TControllerMethodCmdRouteOptions } from '@istock-shell/iswork';
   export interface CmdOutputDocTableHeader {
     value: string;
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -12,7 +12,7 @@
 </script>
 
 <script lang="ts">
-  import { ShTable, ShTableRow, ShTableTh, ShTableTd } from '@istock/shell-ui';
+  import { ShTable, ShTableRow, ShTableTh, ShTableTd } from '@istock-shell/ui';
   const { headers, options, type = 1 }: CmdOutputDocTableProps = $props();
 
   const getHeaderExtraClass = (headers: CmdOutputDocTableHeader) => {

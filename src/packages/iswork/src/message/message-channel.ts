@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import { type AbstractMessage } from './abstract-message';
 
 export class MessageChannelAdapter implements AbstractMessage<MessageChannel> {

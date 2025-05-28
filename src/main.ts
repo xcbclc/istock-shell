@@ -1,4 +1,4 @@
-import '@istock/shell-ui/src/index.css';
+import '@istock-shell/ui/src/index.css';
 import 'daisyui/themes.css';
 import './style/main.css';
 import { mount } from 'svelte';

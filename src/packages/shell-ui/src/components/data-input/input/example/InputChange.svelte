@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShInput } from '@istock/shell-ui';
+  import { ShInput } from '@istock-shell/ui';
   let value: string = $state('');
   function onChangeValue(value?: string) {
     console.log('onChangeValue', value);

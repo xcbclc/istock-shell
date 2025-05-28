@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TDataSourceAllOptions
+[@istock-shell/iswork](../globals.md) / TDataSourceAllOptions
 
 # Type Alias: TDataSourceAllOptions
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/data-source.ts:24
 
 Defined in: src/packages/iswork/src/orm/types/data-source.ts:26
 
-***
+---
 
 ### indexedDB
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/orm/types/data-source.ts:26
 
 Defined in: src/packages/iswork/src/orm/types/data-source.ts:25
 
-***
+---
 
 ### memoryDB
 

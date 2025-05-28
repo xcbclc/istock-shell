@@ -35,7 +35,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc, findByKeyForValue } from '@istock/util';
+  import { tuc, findByKeyForValue } from '@istock-shell/util';
 
   let {
     value = $bindable([]), // 双向绑定的选中值数组

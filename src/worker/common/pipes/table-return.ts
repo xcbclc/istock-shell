@@ -1,4 +1,4 @@
-import { isNumber, isString } from '@istock/util';
+import { isNumber, isString } from '@istock-shell/util';
 import type { TMatrixTable, TTableBody, TTableHeader } from '../types';
 import { NumberUnits } from '../constants';
 import { parseFilterConditions } from './table-query';

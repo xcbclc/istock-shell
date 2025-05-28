@@ -7,7 +7,7 @@ import {
   CmdRouteArguments,
   Meta,
   Component,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 import { CmdRouteService } from './cmd-route.service';
 import cmdJson from './cmd-route.cmd.json';
 

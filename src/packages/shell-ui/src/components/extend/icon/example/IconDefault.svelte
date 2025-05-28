@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShIcon } from '@istock/shell-ui';
+  import { ShIcon } from '@istock-shell/ui';
   const icons = [
     'close',
     'email',

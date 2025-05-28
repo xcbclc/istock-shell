@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Repository
+[@istock-shell/iswork](../globals.md) / Repository
 
 # Class: Repository
 
@@ -40,7 +40,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:27
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### createDatas
 
@@ -50,7 +50,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:27
 
 `Promise`\<(`string` \| `number`)[]\>
 
-***
+---
 
 ### createOne()
 
@@ -62,7 +62,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:22
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### createData
 
@@ -72,7 +72,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:22
 
 `Promise`\<`null` \| `string` \| `number`\>
 
-***
+---
 
 ### deleteById()
 
@@ -84,7 +84,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:45
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### id
 
@@ -94,7 +94,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:45
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### deleteMany()
 
@@ -106,7 +106,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:41
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### query
 
@@ -116,7 +116,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:41
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### findOneById()
 
@@ -128,7 +128,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:51
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### id
 
@@ -138,7 +138,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:51
 
 `Promise`\<`unknown`\>
 
-***
+---
 
 ### query()
 
@@ -156,7 +156,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:18
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### query
 
@@ -166,7 +166,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:18
 
 `Promise`\<`Result`[]\>
 
-***
+---
 
 ### run()
 
@@ -184,7 +184,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:14
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### executeArgs
 
@@ -194,7 +194,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:14
 
 `Promise`\<`Result`\>
 
-***
+---
 
 ### updateById()
 
@@ -206,7 +206,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:35
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### id
 
@@ -220,7 +220,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:35
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### updateMany()
 
@@ -232,7 +232,7 @@ Defined in: src/packages/iswork/src/orm/repository/repository.ts:31
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 ##### updateDataList
 

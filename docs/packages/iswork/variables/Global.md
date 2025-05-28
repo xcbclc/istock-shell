@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Global
+[@istock-shell/iswork](../globals.md) / Global
 
 # Variable: Global()
 

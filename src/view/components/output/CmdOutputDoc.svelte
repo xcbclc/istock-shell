@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import type { TModelData } from '@istock/iswork';
+  import type { TModelData } from '@istock-shell/iswork';
   import type { CmdRouteModel } from '@domains/global/cmd-route/cmd-route.model';
 
   export interface CmdOutputDocProps {
@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-  import { ShEmpty } from '@istock/shell-ui';
+  import { ShEmpty } from '@istock-shell/ui';
   import CmdOutputDocTable, { type CmdOutputDocTableHeader } from './CmdOutputDocTable.svelte';
 
   const { list }: CmdOutputDocProps = $props();

@@ -64,7 +64,6 @@ export class MemoryTable<Type extends TIdAnyObject> {
    * @param callback
    */
   execute(callback: Function) {
-    // eslint-disable-next-line no-useless-call
     return callback.call(null, this, this.#list);
   }
 }

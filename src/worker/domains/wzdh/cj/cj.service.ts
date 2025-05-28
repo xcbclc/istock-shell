@@ -1,4 +1,4 @@
-import { Injectable, type IQueryParamsOptions, type TModelData } from '@istock/iswork';
+import { Injectable, type IQueryParamsOptions, type TModelData } from '@istock-shell/iswork';
 import { CjModel } from './cj.model';
 
 @Injectable()
@@ -12,7 +12,6 @@ export class CjService {
         promises.push(CjModel.createOne({ id: CjModel.generateId.nextId(), ...data }));
       });
       await Promise.all(promises);
-      // eslint-disable-next-line no-useless-catch
     } catch (e) {
       throw e;
     } finally {

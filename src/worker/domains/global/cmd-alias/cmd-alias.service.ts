@@ -1,4 +1,4 @@
-import { Injectable, type TQueryFilterArr, type TModelCreate } from '@istock/iswork';
+import { Injectable, type TQueryFilterArr, type TModelCreate } from '@istock-shell/iswork';
 import { CmdAliasModel } from './cmd-alias.model';
 
 export type TCmdAliasData = {

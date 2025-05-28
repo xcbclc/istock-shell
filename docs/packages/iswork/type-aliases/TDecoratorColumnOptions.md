@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TDecoratorColumnOptions
+[@istock-shell/iswork](../globals.md) / TDecoratorColumnOptions
 
 # Type Alias: TDecoratorColumnOptions
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/decorator.ts:11
 
 Defined in: src/packages/iswork/src/orm/types/decorator.ts:16
 
-***
+---
 
 ### name?
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/orm/types/decorator.ts:16
 
 Defined in: src/packages/iswork/src/orm/types/decorator.ts:12
 
-***
+---
 
 ### primary?
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/orm/types/decorator.ts:12
 
 Defined in: src/packages/iswork/src/orm/types/decorator.ts:14
 
-***
+---
 
 ### type?
 
@@ -42,7 +42,7 @@ Defined in: src/packages/iswork/src/orm/types/decorator.ts:14
 
 Defined in: src/packages/iswork/src/orm/types/decorator.ts:13
 
-***
+---
 
 ### unique?
 

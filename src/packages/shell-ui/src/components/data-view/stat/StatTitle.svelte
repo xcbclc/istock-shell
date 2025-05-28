@@ -33,7 +33,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   // 解构props
   const { text, color, size, align, weight, class: className = '', children, ...otherProps }: StatTitleProps = $props();

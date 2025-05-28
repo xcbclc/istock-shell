@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShModal, ShButton } from '@istock/shell-ui';
+  import { ShModal, ShButton } from '@istock-shell/ui';
   let show = $state(false);
 </script>
 

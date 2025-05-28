@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShInput, ShIcon } from '@istock/shell-ui';
+  import { ShInput, ShIcon } from '@istock-shell/ui';
 </script>
 
 <ShInput type="text" prefixRender={usernameIconRender} placeholder="用户名" />

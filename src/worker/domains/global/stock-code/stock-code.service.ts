@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock/iswork';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
 import { StockCodeModel } from './stock-code.model';
 import { StockCodeResultModel } from './stock-code-result.model';
 

@@ -1,4 +1,4 @@
-import { Injectable, type TModelCreate, type TModelUpdate, type IQueryParamsOptions } from '@istock/iswork';
+import { Injectable, type TModelCreate, type TModelUpdate, type IQueryParamsOptions } from '@istock-shell/iswork';
 import { HistoryModel } from './history.model';
 
 @Injectable()

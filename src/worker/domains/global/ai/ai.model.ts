@@ -1,4 +1,4 @@
-import { BaseModel, Model } from '@istock/iswork';
+import { BaseModel, Model } from '@istock-shell/iswork';
 
 @Model('ai')
 export class AiModel extends BaseModel {

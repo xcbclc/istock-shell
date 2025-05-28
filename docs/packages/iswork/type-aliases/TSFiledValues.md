@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TSFiledValues
+[@istock-shell/iswork](../globals.md) / TSFiledValues
 
 # Type Alias: TSFiledValues
 

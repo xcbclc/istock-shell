@@ -38,7 +38,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isString, isArray } from '@istock/util';
+  import { tuc, isString, isArray } from '@istock-shell/util';
   import { ShStatAction, ShStatDesc, ShStatFigure, ShStatTitle, ShStatValue } from './index';
 
   const {

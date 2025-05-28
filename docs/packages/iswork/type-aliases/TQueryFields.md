@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TQueryFields
+[@istock-shell/iswork](../globals.md) / TQueryFields
 
 # Type Alias: TQueryFields
 

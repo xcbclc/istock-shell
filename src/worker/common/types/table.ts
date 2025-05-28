@@ -1,4 +1,4 @@
-import { type TControllerMethodComponentResponse } from '@istock/iswork';
+import { type TControllerMethodComponentResponse } from '@istock-shell/iswork';
 import type { TCmdRequest } from './cmd-request';
 import type { ENumberUnit, EPercentageUnit } from '../constants';
 

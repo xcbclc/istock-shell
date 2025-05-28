@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShForm, shShowMessage, type FormItemConfig } from '@istock/shell-ui';
+  import { ShForm, shShowMessage, type FormItemConfig } from '@istock-shell/ui';
 
   const validateFormItems: FormItemConfig[] = [
     {

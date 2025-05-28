@@ -1,5 +1,5 @@
-import { Injectable, type TModelCreate, type TModelUpdate, type TOrmQuery } from '@istock/iswork';
-import { ScopeError } from '@istock/util';
+import { Injectable, type TModelCreate, type TModelUpdate, type TOrmQuery } from '@istock-shell/iswork';
+import { ScopeError } from '@istock-shell/util';
 import { UserModel } from './user.model';
 
 @Injectable()

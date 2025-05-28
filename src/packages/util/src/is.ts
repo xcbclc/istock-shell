@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/unbound-method
 /**
  * 从 Object.prototype 中解构出 toString 方法，用于类型检测
  * @internal
@@ -54,7 +53,6 @@ export function isStrRegExp(val: any): val is string {
   if (!isString(val)) return false;
   let isReg: boolean;
   try {
-    // eslint-disable-next-line @typescript-eslint/no-implied-eval,no-new-func
     const func = new Function(`return ${val};`);
     isReg = func() instanceof RegExp;
   } catch (e) {
@@ -523,7 +521,7 @@ export const isDateString = (val: any): val is string =>
  *   yield 1;
  *   yield 2;
  * }
- * 
+ *
  * const asyncIter = asyncGenerator();
  * isAsyncIterableIterator(asyncIter); // true
  * isAsyncIterableIterator({}); // false

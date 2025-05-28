@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TProvider
+[@istock-shell/iswork](../globals.md) / TProvider
 
 # Type Alias: TProvider\<Class\>
 

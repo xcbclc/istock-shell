@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TMetadataImport
+[@istock-shell/iswork](../globals.md) / TMetadataImport
 
 # Type Alias: TMetadataImport
 

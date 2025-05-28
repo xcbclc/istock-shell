@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShFieldSet, ShField, ShInput, ShTextarea } from '@istock/shell-ui';
+  import { ShFieldSet, ShField, ShInput, ShTextarea } from '@istock-shell/ui';
 </script>
 
 <ShFieldSet title="页面详细" class="w-xs bg-base-200 border border-base-300 p-4 rounded-box">

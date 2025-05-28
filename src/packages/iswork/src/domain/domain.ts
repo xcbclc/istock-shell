@@ -1,4 +1,4 @@
-import { isObject, ScopeError } from '@istock/util';
+import { isObject, ScopeError } from '@istock-shell/util';
 import type { IDomainClass } from '../interfaces/domain';
 import type {
   TDomainMetadata,

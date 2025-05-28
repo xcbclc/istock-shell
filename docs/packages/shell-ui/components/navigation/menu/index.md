@@ -11,7 +11,6 @@ outline: [2, 3]
 
 ## 使用场景
 
-
 ## 功能特性
 
 ## 示例演示
@@ -21,8 +20,6 @@ outline: [2, 3]
 ::: raw
 <IStockShellUiExample src="./navigation/menu/example/MenuDefault.svelte" layout="column"></IStockShellUiExample>
 :::
-
-
 
 ## API 参考
 

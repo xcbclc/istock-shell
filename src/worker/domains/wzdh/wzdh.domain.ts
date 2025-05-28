@@ -1,4 +1,4 @@
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { CjController } from './cj/cj.controller';
 import { CjService } from './cj/cj.service';
 import { ScopeError } from '@/packages/util';

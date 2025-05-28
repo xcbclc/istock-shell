@@ -43,7 +43,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
   import ShStatItem from './StatItem.svelte';
 
   const {

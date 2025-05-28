@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TSubscribeCallback
+[@istock-shell/iswork](../globals.md) / TSubscribeCallback
 
 # Type Alias: TSubscribeCallback()\<V\>
 

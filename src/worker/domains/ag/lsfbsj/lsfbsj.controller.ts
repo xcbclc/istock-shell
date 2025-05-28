@@ -1,4 +1,4 @@
-import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
+import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock-shell/iswork';
 import { TableReturn, withStockCodePrefix } from '@/worker/common';
 import { LsfbsjModel } from './lsfbsj.model';
 import { LsfbsjService } from './lsfbsj.service';

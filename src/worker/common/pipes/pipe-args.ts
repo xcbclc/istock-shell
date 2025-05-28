@@ -1,4 +1,4 @@
-import type { ApplicationContext, TCmdpInfo } from '@istock/iswork';
+import type { ApplicationContext, TCmdpInfo } from '@istock-shell/iswork';
 import { parseFilterConditions, type TTableFilterConditions } from './table-query';
 import type { TCmdRequest } from '../types';
 

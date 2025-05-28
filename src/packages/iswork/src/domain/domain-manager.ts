@@ -1,4 +1,4 @@
-import { isBoolean, isFunction, ScopeError } from '@istock/util';
+import { isBoolean, isFunction, ScopeError } from '@istock-shell/util';
 import { decoratorRegister } from '../decorators';
 import type { IDomainClass } from '../interfaces';
 import type { TController, TDecoratorCallbackCacheValue, TProvider } from '../types';

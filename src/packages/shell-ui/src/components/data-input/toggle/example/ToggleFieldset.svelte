@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShFieldSet, ShField, ShToggle } from '@istock/shell-ui';
+  import { ShFieldSet, ShField, ShToggle } from '@istock-shell/ui';
 
   let value: boolean = $state(false);
 </script>

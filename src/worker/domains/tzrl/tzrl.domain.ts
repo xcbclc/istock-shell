@@ -1,4 +1,4 @@
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { TzrlController } from './tzrl/tzrl.controller';
 import { TzrlService } from './tzrl/tzrl.service';
 

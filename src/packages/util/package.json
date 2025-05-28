@@ -1,5 +1,51 @@
 {
-  "name": "@istock/util",
+  "name": "@istock-shell/util",
   "version": "0.1.1",
-  "main": "./src/index.ts"
+  "description": "一个功能丰富的 TypeScript 工具库，提供常用的工具函数和类型检测方法",
+  "main": "./src/index.ts",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "typescript",
+    "utils",
+    "utility",
+    "tools",
+    "type-check",
+    "color",
+    "date",
+    "event-emitter",
+    "snowflake",
+    "escape",
+    "json"
+  ],
+  "author": "xcbclc",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcbclc/istock-shell.git",
+    "directory": "src/packages/util"
+  },
+  "homepage": "https://github.com/xcbclc/istock-shell/tree/main/src/packages/util",
+  "bugs": {
+    "url": "https://github.com/xcbclc/istock-shell/istock-shell/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "rollup": "^3.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "rollup-plugin-dts": "^5.0.0"
+  }
 }

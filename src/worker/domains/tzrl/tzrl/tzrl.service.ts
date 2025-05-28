@@ -1,5 +1,5 @@
-import { Injectable, type TModelData } from '@istock/iswork';
-import { generateColorPalette } from '@istock/util';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { generateColorPalette } from '@istock-shell/util';
 import * as jisilu from './tzrl.jisilu';
 import { TzrlModel } from './tzrl.model';
 

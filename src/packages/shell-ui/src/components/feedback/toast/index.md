@@ -52,7 +52,7 @@ outline: [2, 3]
 ### ToastAlertItem 类型
 
 ```typescript
-import type { AlertProps } from '@istock/shell-ui';
+import type { AlertProps } from '@istock-shell/ui';
 export interface ToastAlertItem extends AlertProps {
   message: string; // 提示消息
 }

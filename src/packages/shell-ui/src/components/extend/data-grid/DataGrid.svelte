@@ -44,7 +44,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isString, isNumber } from '@istock/util';
+  import { tuc, isString, isNumber } from '@istock-shell/util';
   import { ShStat, ShErrorInfo } from '../../index';
 
   const {

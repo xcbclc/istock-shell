@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TDecoratorCallbackCacheValue
+[@istock-shell/iswork](../globals.md) / TDecoratorCallbackCacheValue
 
 # Type Alias: TDecoratorCallbackCacheValue
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/decorator-register.ts:3
 
 Defined in: src/packages/iswork/src/types/decorator-register.ts:5
 
-***
+---
 
 ### fn
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/types/decorator-register.ts:5
 
 Defined in: src/packages/iswork/src/types/decorator-register.ts:6
 
-***
+---
 
 ### key
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/types/decorator-register.ts:6
 
 Defined in: src/packages/iswork/src/types/decorator-register.ts:4
 
-***
+---
 
 ### type
 

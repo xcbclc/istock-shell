@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / DataSource
+[@istock-shell/iswork](../globals.md) / DataSource
 
 # Class: DataSource\<Type\>
 
@@ -12,7 +12,7 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:6
 
 ### Type
 
-`Type` *extends* [`TDataSourceType`](../type-aliases/TDataSourceType.md)
+`Type` _extends_ [`TDataSourceType`](../type-aliases/TDataSourceType.md)
 
 ## Constructors
 
@@ -46,7 +46,7 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:20
 
 `AbstractDriver`
 
-***
+---
 
 ### name
 
@@ -60,7 +60,7 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:12
 
 `string`
 
-***
+---
 
 ### options
 
@@ -86,7 +86,7 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:68
 
 `Promise`\<`DataSource`\<`Type`\>\>
 
-***
+---
 
 ### disconnect()
 
@@ -98,7 +98,7 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:80
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### getRepository()
 
@@ -112,13 +112,13 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:34
 
 ##### model
 
-*typeof* [`BaseModel`](BaseModel.md)
+_typeof_ [`BaseModel`](BaseModel.md)
 
 #### Returns
 
 `Promise`\<[`Repository`](Repository.md)\>
 
-***
+---
 
 ### initialize()
 
@@ -130,7 +130,7 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:51
 
 `Promise`\<`DataSource`\<`Type`\>\>
 
-***
+---
 
 ### reconnect()
 

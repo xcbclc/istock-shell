@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShChart } from '@istock/shell-ui';
+  import { ShChart } from '@istock-shell/ui';
 
   // G2图表配置
   const options = $state({

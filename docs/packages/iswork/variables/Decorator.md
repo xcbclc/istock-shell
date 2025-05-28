@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Decorator
+[@istock-shell/iswork](../globals.md) / Decorator
 
 # Variable: Decorator
 
@@ -14,48 +14,48 @@ Defined in: src/packages/iswork/src/decorators/index.ts:21
 
 ### ControllerCmdRouteArgumentsDecorator
 
-> **ControllerCmdRouteArgumentsDecorator**: *typeof* `ControllerCmdRouteArgumentsDecorator`
+> **ControllerCmdRouteArgumentsDecorator**: _typeof_ `ControllerCmdRouteArgumentsDecorator`
 
 ### ControllerCmdRouteDecorator
 
-> **ControllerCmdRouteDecorator**: *typeof* `ControllerCmdRouteDecorator`
+> **ControllerCmdRouteDecorator**: _typeof_ `ControllerCmdRouteDecorator`
 
 ### ControllerCmdRouteOptionsDecorator
 
-> **ControllerCmdRouteOptionsDecorator**: *typeof* `ControllerCmdRouteOptionsDecorator`
+> **ControllerCmdRouteOptionsDecorator**: _typeof_ `ControllerCmdRouteOptionsDecorator`
 
 ### ControllerComponentDecorator
 
-> **ControllerComponentDecorator**: *typeof* `ControllerComponentDecorator`
+> **ControllerComponentDecorator**: _typeof_ `ControllerComponentDecorator`
 
 ### ControllerDecorator
 
-> **ControllerDecorator**: *typeof* `ControllerDecorator`
+> **ControllerDecorator**: _typeof_ `ControllerDecorator`
 
 ### ControllerFieldDecorator
 
-> **ControllerFieldDecorator**: *typeof* `ControllerFieldDecorator`
+> **ControllerFieldDecorator**: _typeof_ `ControllerFieldDecorator`
 
 ### ControllerMetaDecorator
 
-> **ControllerMetaDecorator**: *typeof* `ControllerMetaDecorator`
+> **ControllerMetaDecorator**: _typeof_ `ControllerMetaDecorator`
 
 ### ControllerMethodDecorator
 
-> **ControllerMethodDecorator**: *typeof* `ControllerMethodDecorator`
+> **ControllerMethodDecorator**: _typeof_ `ControllerMethodDecorator`
 
 ### ControllerMethodReturnDecorator
 
-> **ControllerMethodReturnDecorator**: *typeof* `ControllerMethodReturnDecorator`
+> **ControllerMethodReturnDecorator**: _typeof_ `ControllerMethodReturnDecorator`
 
 ### ControllerPayloadDecorator
 
-> **ControllerPayloadDecorator**: *typeof* `ControllerPayloadDecorator`
+> **ControllerPayloadDecorator**: _typeof_ `ControllerPayloadDecorator`
 
 ### DomainDecorator
 
-> **DomainDecorator**: *typeof* `DomainDecorator`
+> **DomainDecorator**: _typeof_ `DomainDecorator`
 
 ### GlobalDomainDecorator
 
-> **GlobalDomainDecorator**: *typeof* `GlobalDomainDecorator`
+> **GlobalDomainDecorator**: _typeof_ `GlobalDomainDecorator`

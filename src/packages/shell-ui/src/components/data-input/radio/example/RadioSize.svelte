@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShRadio } from '@istock/shell-ui';
+  import { ShRadio } from '@istock-shell/ui';
 
   const options = [
     { label: '股票', value: 0 },

@@ -1,6 +1,6 @@
 /**
  * 获取当前 URL 查询参数的值。
- * 
+ *
  * @param name - 查询参数名
  * @returns 查询参数值或 null
  * @example

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import { CmdRoute, CmdRouteOptions, Component, Controller, Method } from '@istock/iswork';
-import { getStartAndEndOfWeek } from '@istock/util';
+import { CmdRoute, CmdRouteOptions, Component, Controller, Method } from '@istock-shell/iswork';
+import { getStartAndEndOfWeek } from '@istock-shell/util';
 import { TzrlService } from './tzrl.service';
 import cmdJson from './tzrl.cmd';
 
@@ -19,8 +19,7 @@ export class TzrlController {
   })
   @Component('ShICalendar')
   async getCalendar(
-    @CmdRouteOptions(cmdJson.投资日历.options.lx)
-    qtypeStr: string = 'newstock_apply,newstock_onlist,kzzsg'
+    @CmdRouteOptions(cmdJson.投资日历.options.lx) qtypeStr: string = 'newstock_apply,newstock_onlist,kzzsg'
   ) {
     const { startOfWeek, endOfWeek } = getStartAndEndOfWeek(new Date());
     const qtypes = qtypeStr.split(',');

@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { TDataSourceMemoryDBOptions, TModelType } from '../../types';
 import { EDriverConnectStatus } from '../../enums';
 import { AbstractDriver } from '../abstract-driver';

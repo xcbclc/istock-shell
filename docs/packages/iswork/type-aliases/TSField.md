@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TSField
+[@istock-shell/iswork](../globals.md) / TSField
 
 # Type Alias: TSField
 

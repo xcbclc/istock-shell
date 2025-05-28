@@ -10,7 +10,7 @@
 
 <script lang="ts">
   // 导入样式处理工具
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   // 解构props并设置默认值
   const {

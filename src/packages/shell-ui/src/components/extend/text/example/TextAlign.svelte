@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShText } from '@istock/shell-ui';
+  import { ShText } from '@istock-shell/ui';
 </script>
 
 <ShText class="min-w-sm" align="left" texts={[{ text: '文字居左' }]} />

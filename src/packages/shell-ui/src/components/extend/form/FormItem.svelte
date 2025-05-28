@@ -155,7 +155,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { isUndefined, tuc } from '@istock/util';
+  import { isUndefined, tuc } from '@istock-shell/util';
   import { ShErrorInfo } from '../../index';
 
   // 组件属性解构赋值，设置默认值

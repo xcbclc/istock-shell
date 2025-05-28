@@ -50,7 +50,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isFunction } from '@istock/util';
+  import { tuc, isFunction } from '@istock-shell/util';
   import ShTableTh from './TableTh.svelte';
   import ShTableTd from './TableTd.svelte';
   import { ShCheckbox, ShButton } from '../../index';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShTextarea } from '@istock/shell-ui';
+  import { ShTextarea } from '@istock-shell/ui';
 </script>
 
 <ShTextarea color="primary" placeholder="primary" />

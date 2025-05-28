@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import { isNil, isArray, isPlainObject } from '@istock/util';
+import { isNil, isArray, isPlainObject } from '@istock-shell/util';
 import {
   type ICalendarFilterValue,
   type ICalendarViewType,

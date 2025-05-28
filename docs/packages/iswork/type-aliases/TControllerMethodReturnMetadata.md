@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TControllerMethodReturnMetadata
+[@istock-shell/iswork](../globals.md) / TControllerMethodReturnMetadata
 
 # Type Alias: TControllerMethodReturnMetadata
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:29
 
 Defined in: src/packages/iswork/src/types/controller.ts:31
 
-***
+---
 
 ### name
 

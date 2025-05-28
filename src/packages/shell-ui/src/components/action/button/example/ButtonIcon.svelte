@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShButton, ShIcon } from '@istock/shell-ui';
+  import { ShButton, ShIcon } from '@istock-shell/ui';
 </script>
 
 <!-- 按钮icon在前面 -->

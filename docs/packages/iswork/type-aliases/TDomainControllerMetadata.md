@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TDomainControllerMetadata
+[@istock-shell/iswork](../globals.md) / TDomainControllerMetadata
 
 # Type Alias: TDomainControllerMetadata
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/domain.ts:27
 
 Defined in: src/packages/iswork/src/types/domain.ts:28
 
-***
+---
 
 ### method
 

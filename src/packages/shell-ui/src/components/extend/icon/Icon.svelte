@@ -18,7 +18,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc, isNumber } from '@istock/util';
+  import { tuc, isNumber } from '@istock-shell/util';
   import { tv } from 'tailwind-variants';
 
   const {

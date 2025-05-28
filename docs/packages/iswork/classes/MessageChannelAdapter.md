@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / MessageChannelAdapter
+[@istock-shell/iswork](../globals.md) / MessageChannelAdapter
 
 # Class: MessageChannelAdapter
 
@@ -42,7 +42,7 @@ Defined in: src/packages/iswork/src/message/message-channel.ts:5
 
 `AbstractMessage.instance`
 
-***
+---
 
 ### options
 
@@ -80,7 +80,7 @@ Defined in: src/packages/iswork/src/message/message-channel.ts:22
 
 `AbstractMessage.close`
 
-***
+---
 
 ### onError()
 
@@ -102,7 +102,7 @@ Defined in: src/packages/iswork/src/message/message-channel.ts:43
 
 `AbstractMessage.onError`
 
-***
+---
 
 ### onMessage()
 
@@ -124,7 +124,7 @@ Defined in: src/packages/iswork/src/message/message-channel.ts:33
 
 `AbstractMessage.onMessage`
 
-***
+---
 
 ### open()
 
@@ -140,7 +140,7 @@ Defined in: src/packages/iswork/src/message/message-channel.ts:18
 
 `AbstractMessage.open`
 
-***
+---
 
 ### send()
 

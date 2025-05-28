@@ -6,7 +6,7 @@
     type FormItemConfig,
     type FormItemLayout,
     type FormCols,
-  } from '@istock/shell-ui';
+  } from '@istock-shell/ui';
 
   const colsList: FormCols[] = [1, 2, 3]; // 1-5
   const layouts: Array<{

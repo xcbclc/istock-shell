@@ -1,11 +1,11 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { ApplicationContext } from './context';
 import type { DomainHandler } from '../domain/domain-handler';
 
 /**
  * 根据上下文处理消息
  */
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+
 export class MessageHandler {
   /**
    * 根据上下文及消息获取处理函数

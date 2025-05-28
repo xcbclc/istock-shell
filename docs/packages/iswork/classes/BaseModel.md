@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / BaseModel
+[@istock-shell/iswork](../globals.md) / BaseModel
 
 # Class: BaseModel
 
@@ -46,7 +46,7 @@ QueryBuilder工厂方法，创建一个QueryBuilder实例
 
 [`QueryBuilder`](QueryBuilder.md)
 
-***
+---
 
 ### dataSource
 
@@ -54,7 +54,7 @@ QueryBuilder工厂方法，创建一个QueryBuilder实例
 
 Defined in: src/packages/iswork/src/orm/model/base-model.ts:24
 
-***
+---
 
 ### generateId
 
@@ -76,7 +76,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:31
 
 ##### This
 
-`This` *extends* `BaseModel`
+`This` _extends_ `BaseModel`
 
 #### Parameters
 
@@ -92,7 +92,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:31
 
 `IBaseModel.save`
 
-***
+---
 
 ### toObject()
 
@@ -106,7 +106,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:44
 
 ##### This
 
-`This` *extends* `BaseModel`
+`This` _extends_ `BaseModel`
 
 #### Parameters
 
@@ -122,7 +122,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:44
 
 `IBaseModel.toObject`
 
-***
+---
 
 ### createMany()
 
@@ -134,7 +134,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:100
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -150,7 +150,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:100
 
 `Promise`\<(`string` \| `number`)[]\>
 
-***
+---
 
 ### createModel()
 
@@ -162,7 +162,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:60
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -178,7 +178,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:60
 
 `InstanceType`\<`Model`\>
 
-***
+---
 
 ### createOne()
 
@@ -190,7 +190,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:83
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -206,7 +206,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:83
 
 `Promise`\<`null` \| `string` \| `number`\>
 
-***
+---
 
 ### deleteById()
 
@@ -218,7 +218,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:151
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -234,7 +234,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:151
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### deleteMany()
 
@@ -246,7 +246,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:146
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -262,7 +262,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:146
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### findOneById()
 
@@ -274,7 +274,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:156
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -290,7 +290,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:156
 
 `Promise`\<[`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>\>
 
-***
+---
 
 ### getRepository()
 
@@ -302,7 +302,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:56
 
 `Promise`\<[`Repository`](Repository.md)\>
 
-***
+---
 
 ### query()
 
@@ -314,7 +314,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:78
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -330,7 +330,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:78
 
 `Promise`\<[`TModelData`](../type-aliases/TModelData.md)\<`InstanceType`\<`Model`\>\>[]\>
 
-***
+---
 
 ### run()
 
@@ -356,7 +356,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:73
 
 `Promise`\<`Result`\>
 
-***
+---
 
 ### updateById()
 
@@ -368,7 +368,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:123
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -388,7 +388,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:123
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### updateMany()
 
@@ -400,7 +400,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:138
 
 ##### Model
 
-`Model` *extends* *typeof* `BaseModel`
+`Model` _extends_ _typeof_ `BaseModel`
 
 #### Parameters
 
@@ -416,7 +416,7 @@ Defined in: src/packages/iswork/src/orm/model/base-model.ts:138
 
 `Promise`\<`boolean`\>
 
-***
+---
 
 ### useDataSource()
 

@@ -1,32 +1,57 @@
+/**
+ * @fileoverview 命令文档生成模块
+ * 自动扫描命令文件并生成对应的Markdown文档
+ * 支持TypeScript和JSON格式的命令定义文件
+ * @author iStock Shell Team
+ */
+
 import path from 'path';
 import fs from 'fs';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import ejs from 'ejs';
 
+/** @type {string} 当前工作目录路径 */
 const cwdPath = process.cwd();
+/** @type {string} 项目根目录路径 */
 const rootPath = cwdPath;
+/** @type {string} CLI包路径 */
 const cliPath = path.resolve(rootPath, './src/packages/cli');
+/** @type {string} 命令域目录路径 */
 const domainPath = path.resolve(rootPath, './src/worker/domains');
+/** @type {string} 当前文件路径 */
 const currentFilePath = fileURLToPath(import.meta.url);
 const currentDirPath = path.dirname(currentFilePath); // 当前目录
 
 /**
- * 根据文件夹查找对应文件
- * @param directoryPath
- * @param files
- * @returns {*[]}
+ * 递归查找指定目录下的所有命令文件
+ * 支持.ts和.json格式的命令定义文件
+ *
+ * @param {string} directoryPath - 要搜索的目录路径
+ * @param {string[]} [files=[]] - 累积的文件路径数组
+ * @returns {string[]} 找到的命令文件路径数组
+ *
+ * @example
+ * const cmdFiles = getAllCmdFiles('./src/worker/domains');
+ * console.log(cmdFiles); // ['./src/worker/domains/global/chart/chart.cmd.ts', ...]
  */
 function getAllCmdFiles(directoryPath, files = []) {
+  /** @type {fs.Dirent[]} 目录项列表 */
   const entries = fs.readdirSync(directoryPath, { withFileTypes: true });
 
   for (const entry of entries) {
+    /** @type {string} 完整文件路径 */
     const fullPath = path.join(directoryPath, entry.name);
+    /** @type {boolean} 是否为JSON命令文件 */
     const isJson = path.extname(entry.name) === '.json' && entry.name.indexOf('cmd.json') !== -1;
+    /** @type {boolean} 是否为TypeScript命令文件 */
     const isTs = path.extname(entry.name) === '.ts' && entry.name.indexOf('cmd.ts') !== -1;
+
     if (entry.isDirectory()) {
+      // 递归处理子目录
       getAllCmdFiles(fullPath, files);
     } else if (entry.isFile() && (isJson || isTs)) {
+      // 添加符合条件的命令文件
       files.push(fullPath);
     }
   }
@@ -34,14 +59,42 @@ function getAllCmdFiles(directoryPath, files = []) {
   return files;
 }
 
+/**
+ * 生成命令文档
+ * 编译TypeScript文件，扫描命令定义，生成对应的Markdown文档
+ * 包括命令列表页面和各个命令的详细文档页面
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} 无返回值
+ * @throws {Error} 当编译或文件操作失败时抛出错误
+ *
+ * @example
+ * // 生成所有命令的文档
+ * await cmdDoc();
+ * // 将在docs/use/command目录下生成相应的Markdown文档
+ */
 export default async () => {
+  // 编译TypeScript文件
   let output = execSync('tsc -p tsconfig-cli.json').toString();
   console.log(`ts转义执行结果:\n${output || '成功'}`);
+
+  // 处理TypeScript路径别名
   output = execSync('tsc-alias -p tsconfig-cli.json').toString();
   console.log(`ts路径替换执行结果:\n${output || '成功'}`);
+
+  // 获取所有命令文件
+  /** @type {string[]} 命令文件路径列表 */
   const cmdFiles = getAllCmdFiles(path.resolve(domainPath));
-  const linkRecord = {}; // 命令文档入口数据
-  // todo 暂时手写映射
+
+  /** @type {Object.<string, Array>} 命令文档链接记录 */
+  const linkRecord = {};
+
+  /**
+   * 命令域和命令的中文名称映射
+   * TODO: 后续考虑从配置文件中读取
+   * @type {Object.<string, {name: string, cmd: Object.<string, string>}>}
+   */
   const aliasRecord = {
     global: {
       name: '全局',
@@ -100,6 +153,7 @@ export default async () => {
       buildFileStartIndex = file.indexOf(matchPathStr);
     }
     const relativeBuildFilePath = file.substring(buildFileStartIndex).replace(matchPathStr, '');
+    // eslint-disable-next-line no-useless-escape
     const domainName = relativeBuildFilePath.split(/[\/\\]/)[0];
     if (path.extname(file) === '.ts') {
       //处理ts类型

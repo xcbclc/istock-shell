@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TSConditionAND
+[@istock-shell/iswork](../globals.md) / TSConditionAND
 
 # Type Alias: TSConditionAND
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:113
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:114
 
-***
+---
 
 ### $or?
 

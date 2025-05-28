@@ -1,4 +1,4 @@
-import { isArray, isNil, isObject, isString, ScopeError } from '@istock/util';
+import { isArray, isNil, isObject, isString, ScopeError } from '@istock-shell/util';
 import {
   Injectable,
   CONTROLLER_METADATA,
@@ -16,7 +16,7 @@ import {
   type TControllerMethodCmdRouteOptionsMetadata,
   type ApplicationContext,
   type TModelData,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 import { CmdRouteModel } from './cmd-route.model';
 
 export type TResponseSubCmdRoute = Array<

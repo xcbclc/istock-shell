@@ -7,7 +7,7 @@
     type VirtualListProps,
     type ListRowProps,
     type VirtualCoreRange,
-  } from '@istock/shell-ui';
+  } from '@istock-shell/ui';
 
   // 生成虚拟列表测试数据（10000条）
   let list: Array<ListRowProps & { id: string }> = $state(

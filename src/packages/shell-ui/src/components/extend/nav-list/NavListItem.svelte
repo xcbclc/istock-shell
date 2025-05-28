@@ -34,7 +34,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   const {
     title, // 分组标题

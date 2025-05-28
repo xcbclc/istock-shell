@@ -1,9 +1,51 @@
 {
-  "name": "@istock/editor",
-  "version": "0.0.1",
+  "name": "@istock-shell/editor",
+  "version": "0.1.1",
+  "description": "一个功能强大的命令行富文本编辑器，支持语法高亮、光标管理和事件系统",
   "main": "./src/index.ts",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && rollup -c rollup.config.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "command",
+    "editor",
+    "terminal",
+    "shell",
+    "typescript",
+    "rich-text",
+    "syntax-highlighting",
+    "cursor-management"
+  ],
+  "author": "istock-shell",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcbclc/istock-shell.git",
+    "directory": "src/packages/editor"
+  },
+  "bugs": {
+    "url": "https://github.com/xcbclc/istock-shell/issues"
+  },
+  "homepage": "https://github.com/xcbclc/istock-shell#readme",
   "dependencies": {
-    "@istock/command-parser": "workspace:^",
-    "@istock/util": "workspace:^"
+    "@istock-shell/command-parser": "workspace:^",
+    "@istock-shell/util": "workspace:^"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.6",
+    "rollup-plugin-dts": "^6.1.0",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.0.0"
   }
 }

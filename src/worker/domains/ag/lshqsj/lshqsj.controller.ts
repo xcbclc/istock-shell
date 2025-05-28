@@ -1,4 +1,4 @@
-import { CmdRoute, CmdRouteOptions, Controller, Method, Payload } from '@istock/iswork';
+import { CmdRoute, CmdRouteOptions, Controller, Method, Payload } from '@istock-shell/iswork';
 import { TableReturn, type TCmdRequest, type EAdjust, withStockCodePrefix } from '@/worker/common';
 import {
   LshqsjModel,

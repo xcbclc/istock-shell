@@ -1,4 +1,4 @@
-import { EventEmitter, ScopeError } from '@istock/util';
+import { EventEmitter, ScopeError } from '@istock-shell/util';
 import { CmdWindowContext, ECmdWindowContextMode } from './cmd-window-context';
 
 export type TCmdWindowsManagerOptions = {

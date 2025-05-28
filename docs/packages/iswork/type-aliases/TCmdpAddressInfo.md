@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TCmdpAddressInfo
+[@istock-shell/iswork](../globals.md) / TCmdpAddressInfo
 
 # Type Alias: TCmdpAddressInfo
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:22
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:27
 
-***
+---
 
 ### domains
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:27
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:25
 
-***
+---
 
 ### method
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:25
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:28
 
-***
+---
 
 ### port
 
@@ -42,7 +42,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:28
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:26
 
-***
+---
 
 ### protocol?
 
@@ -50,7 +50,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:26
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:23
 
-***
+---
 
 ### user
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShToast } from '@istock/shell-ui';
+  import { ShToast } from '@istock-shell/ui';
 </script>
 
 <!-- 注意：absolute样式名仅演示用 -->

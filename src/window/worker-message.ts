@@ -1,4 +1,4 @@
-import { EventEmitter, ScopeError, isNil, isString, FESnowflake, unWarp, wrap } from '@istock/util';
+import { EventEmitter, ScopeError, isNil, isString, FESnowflake, unWarp, wrap } from '@istock-shell/util';
 import type { CmdWindowContext } from './cmd-window-context';
 import { get } from 'svelte/store';
 

@@ -1,13 +1,13 @@
 import { get } from 'svelte/store';
-import { isNil, ScopeError } from '@istock/util';
+import { isNil, ScopeError } from '@istock-shell/util';
 import {
-  type TCommandItemResult,
-  type TKeyCommandResult,
-  type TCommandResult,
-  EAstTreeType,
-} from '@istock/command-parser';
-import { EMessageCmdAction, EMessageStatus } from '@istock/iswork';
-import type { TAnyObject } from '@istock/iswork';
+  type CommandItemResult,
+  type KeyCommandResult,
+  type CommandResult,
+  AstTreeType,
+} from '@istock-shell/command-parser';
+import { EMessageCmdAction, EMessageStatus } from '@istock-shell/iswork';
+import type { TAnyObject } from '@istock-shell/iswork';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { ICmdOutput, ICmdOutputData, ICmdOutputWritable } from './store';
 import { getOutputErrorData } from './default-output';
@@ -33,7 +33,7 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
 
   const allOutputs: TDeepOutputs = [];
 
-  const sendToWebWork = async (cmdResultList: TCommandItemResult[], outputs: TDeepOutputs) => {
+  const sendToWebWork = async (cmdResultList: CommandItemResult[], outputs: TDeepOutputs) => {
     const outputStatus: boolean[] = [];
     let index = 0;
     try {
@@ -46,7 +46,7 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
         const nextCmdItemResult = cmdResultList[index + 1];
 
         // 括号命令优先执行
-        if (cmdItemResult.type === EAstTreeType.parentheses) {
+        if (cmdItemResult.type === AstTreeType.parentheses) {
           const childrenOutputs: ICmdOutputData[] = [];
           allOutputs.push(childrenOutputs);
           const result = await sendToWebWork(cmdItemResult.children, childrenOutputs);
@@ -56,13 +56,13 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
         }
 
         // 管道符记录管道值并跳过
-        if (cmdItemResult.type === EAstTreeType.pipe) {
+        if (cmdItemResult.type === AstTreeType.pipe) {
           pipeValue = cmdItemResult.value;
           index++;
           continue;
         }
 
-        if ([EAstTreeType.keyCommand, EAstTreeType.command].includes(cmdItemResult.type)) {
+        if ([AstTreeType.keyCommand, AstTreeType.command].includes(cmdItemResult.type)) {
           let domainPath: string = '';
           let executePath: string = '';
           let payload: TAnyObject | null = null;
@@ -70,7 +70,7 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
           const previousOutput = outputs[outputs.length - 1] ?? null;
 
           // 判断下一个指令是否是管道符
-          if (nextCmdItemResult && nextCmdItemResult.type === EAstTreeType.pipe) {
+          if (nextCmdItemResult && nextCmdItemResult.type === AstTreeType.pipe) {
             hasPipeSymbol = true;
           }
 
@@ -109,8 +109,8 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
 
           // 关键字命令
           // todo 特殊请求处理
-          if (cmdItemResult.type === EAstTreeType.keyCommand) {
-            const keyCommandResult = cmdItemResult as unknown as TKeyCommandResult;
+          if (cmdItemResult.type === AstTreeType.keyCommand) {
+            const keyCommandResult = cmdItemResult as unknown as KeyCommandResult;
             switch (keyCommandResult.cmd) {
               /* case '':
                 domainPath = 'global';
@@ -130,8 +130,8 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
             payload = { arguments: keyCommandResult.arguments };
           }
           // 命令
-          if (cmdItemResult.type === EAstTreeType.command) {
-            let commandResult = cmdItemResult as unknown as TCommandResult;
+          if (cmdItemResult.type === AstTreeType.command) {
+            let commandResult = cmdItemResult as unknown as CommandResult;
             const cmds: string[] = [commandResult.cmd];
             while (commandResult?.subCommand) {
               commandResult = commandResult.subCommand;

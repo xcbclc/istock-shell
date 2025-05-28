@@ -10,7 +10,7 @@ export class ScopeError extends Error {
   readonly scope: string;
   /**
    * 创建带有作用域信息的错误实例。
-   * 
+   *
    * @param scope - 错误所属的作用域或模块名称
    * @param message - 可选的错误消息
    */

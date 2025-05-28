@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TModelMethod
+[@istock-shell/iswork](../globals.md) / TModelMethod
 
 # Type Alias: TModelMethod
 

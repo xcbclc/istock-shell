@@ -1,4 +1,4 @@
-import { Injectable } from '@istock/iswork';
+import { Injectable } from '@istock-shell/iswork';
 import { KzzsssjModel } from './kzzsssj.model';
 import { CookieService } from '@domains/global/setting/cookie/cookie.service';
 

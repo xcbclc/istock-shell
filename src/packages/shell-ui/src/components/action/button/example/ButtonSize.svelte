@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShButton } from '@istock/shell-ui';
+  import { ShButton } from '@istock-shell/ui';
 </script>
 
 <ShButton size="xs">超小尺寸按钮</ShButton>

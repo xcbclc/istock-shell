@@ -1,4 +1,4 @@
-import { Controller, Method, CmdRoute, Payload, Component } from '@istock/iswork';
+import { Controller, Method, CmdRoute, Payload, Component } from '@istock-shell/iswork';
 import type { TCmdRequest, TCmdTablePipeRequest } from '@/worker/common';
 import { ChartService } from './chart.service';
 import type {

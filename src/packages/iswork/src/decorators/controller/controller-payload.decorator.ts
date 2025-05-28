@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { TControllerMethodParamPayloadMetadata, TCmdpInfo } from '../../types';
 import { CONTROLLER_METHOD_PARAM_PAYLOAD_METADATA } from '../../constants';
 import type { ApplicationContext } from '../../application/context';

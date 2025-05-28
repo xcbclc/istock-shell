@@ -58,7 +58,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
   import type { ICalendarViewProps } from '@/packages/shell-ui';
 
   let {

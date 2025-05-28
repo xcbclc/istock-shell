@@ -1,4 +1,4 @@
-import { Controller } from '@istock/iswork';
+import { Controller } from '@istock-shell/iswork';
 import { StockCodeService } from './stock-code.service';
 
 @Controller({

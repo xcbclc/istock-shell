@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TControllerMethodCmdRoute
+[@istock-shell/iswork](../globals.md) / TControllerMethodCmdRoute
 
 # Type Alias: TControllerMethodCmdRoute
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:56
 
 Defined in: src/packages/iswork/src/types/controller.ts:64
 
-***
+---
 
 ### cmd
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:64
 
 Defined in: src/packages/iswork/src/types/controller.ts:58
 
-***
+---
 
 ### description?
 
@@ -34,7 +34,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:58
 
 Defined in: src/packages/iswork/src/types/controller.ts:61
 
-***
+---
 
 ### example?
 
@@ -42,7 +42,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:61
 
 Defined in: src/packages/iswork/src/types/controller.ts:67
 
-***
+---
 
 ### name
 
@@ -50,7 +50,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:67
 
 Defined in: src/packages/iswork/src/types/controller.ts:57
 
-***
+---
 
 ### options?
 
@@ -58,7 +58,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:57
 
 Defined in: src/packages/iswork/src/types/controller.ts:62
 
-***
+---
 
 ### remarks?
 
@@ -66,7 +66,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:62
 
 Defined in: src/packages/iswork/src/types/controller.ts:66
 
-***
+---
 
 ### shortDescription?
 
@@ -74,7 +74,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:66
 
 Defined in: src/packages/iswork/src/types/controller.ts:60
 
-***
+---
 
 ### source?
 
@@ -90,7 +90,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:65
 
 > `optional` **url**: `string`
 
-***
+---
 
 ### subcommand?
 
@@ -98,7 +98,7 @@ Defined in: src/packages/iswork/src/types/controller.ts:65
 
 Defined in: src/packages/iswork/src/types/controller.ts:63
 
-***
+---
 
 ### usage?
 

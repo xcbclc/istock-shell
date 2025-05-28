@@ -1,4 +1,4 @@
-import { isObject, ScopeError } from '@istock/util';
+import { isObject, ScopeError } from '@istock-shell/util';
 import type { TControllerMethodParamFiledMetadata, TCmdpInfo, TAnyObject } from '../../types';
 import { CONTROLLER_METHOD_PARAM_FILED_METADATA } from '../../constants';
 import type { ApplicationContext } from '../../application/context';

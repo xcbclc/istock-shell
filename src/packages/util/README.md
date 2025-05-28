@@ -1,4 +1,4 @@
-# @istock/util
+# @istock-shell/util
 
 一个功能丰富的 TypeScript 工具库，提供常用的工具函数和类型检测方法。
 
@@ -17,17 +17,17 @@
 ## 安装
 
 ```bash
-npm install @istock/util
+npm install @istock-shell/util
 # 或
-yarn add @istock/util
+yarn add @istock-shell/util
 # 或
-pnpm add @istock/util
+pnpm add @istock-shell/util
 ```
 
 ## 使用
 
 ```typescript
-import { isString, generateColorPalette, sleep, EventEmitter } from '@istock/util';
+import { isString, generateColorPalette, sleep, EventEmitter } from '@istock-shell/util';
 
 // 类型检测
 if (isString(value)) {
@@ -55,34 +55,34 @@ emitter.emit('test', 'Hello World');
 
 ```typescript
 // 基础类型检测
-isArray(value)          // 检测数组
-isString(value)         // 检测字符串
-isNumber(value)         // 检测数字
-isBoolean(value)        // 检测布尔值
-isObject(value)         // 检测对象
-isFunction(value)       // 检测函数
-isUndefined(value)      // 检测 undefined
-isNull(value)           // 检测 null
+isArray(value); // 检测数组
+isString(value); // 检测字符串
+isNumber(value); // 检测数字
+isBoolean(value); // 检测布尔值
+isObject(value); // 检测对象
+isFunction(value); // 检测函数
+isUndefined(value); // 检测 undefined
+isNull(value); // 检测 null
 
 // 复杂类型检测
-isPlainObject(value)    // 检测纯对象
-isDate(value)           // 检测日期对象
-isRegExp(value)         // 检测正则表达式
-isArrayBuffer(value)    // 检测 ArrayBuffer
-isFormData(value)       // 检测 FormData
-isFile(value)           // 检测 File 对象
-isBlob(value)           // 检测 Blob 对象
+isPlainObject(value); // 检测纯对象
+isDate(value); // 检测日期对象
+isRegExp(value); // 检测正则表达式
+isArrayBuffer(value); // 检测 ArrayBuffer
+isFormData(value); // 检测 FormData
+isFile(value); // 检测 File 对象
+isBlob(value); // 检测 Blob 对象
 
 // 浏览器环境检测
-isStandardBrowserEnv()  // 检测标准浏览器环境
-isURLSearchParams(value) // 检测 URLSearchParams
+isStandardBrowserEnv(); // 检测标准浏览器环境
+isURLSearchParams(value); // 检测 URLSearchParams
 
 // 工具类型检测
-isValue(value)          // 检测有效值（非 null/undefined）
-isNil(value)            // 检测 null 或 undefined
-hasLength(value)        // 检测是否有 length 属性
-isStringFull(value)     // 检测非空字符串
-isArrayFull(value)      // 检测非空数组
+isValue(value); // 检测有效值（非 null/undefined）
+isNil(value); // 检测 null 或 undefined
+hasLength(value); // 检测是否有 length 属性
+isStringFull(value); // 检测非空字符串
+isArrayFull(value); // 检测非空数组
 ```
 
 ### 颜色处理 (color.ts)
@@ -173,10 +173,10 @@ const copy = clone(obj);
 
 ```typescript
 class EventEmitter {
-  on<T>(type: string, handler: EventHandler<T>): void
-  once<T>(type: string, handler: EventHandler<T>): void
-  off<T>(type: string, handler?: EventHandler<T>): void
-  emit<T>(type: string, payload?: T): Promise<void>
+  on<T>(type: string, handler: EventHandler<T>): void;
+  once<T>(type: string, handler: EventHandler<T>): void;
+  off<T>(type: string, handler?: EventHandler<T>): void;
+  emit<T>(type: string, payload?: T): Promise<void>;
 }
 
 // 示例
@@ -205,8 +205,8 @@ emitter.off('userLogin');
 
 ```typescript
 class FESnowflake {
-  constructor(workerId: number, portId: number)
-  nextId(): string
+  constructor(workerId: number, portId: number);
+  nextId(): string;
 }
 
 // 示例
@@ -232,7 +232,7 @@ escape('fred, barney, & pebbles'); // 'fred, barney, &amp; pebbles'
 
 ```typescript
 class ScopeError extends Error {
-  constructor(scope: string, message?: string)
+  constructor(scope: string, message?: string);
 }
 
 // 示例

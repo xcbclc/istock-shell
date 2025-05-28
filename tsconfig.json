@@ -38,7 +38,7 @@
     "verbatimModuleSyntax": true,
     "types": ["vite/client"]
   },
-  "exclude": ["node_modules", "src/packages/cli/dist"],
+  "exclude": ["node_modules", "src/packages/**/dist"],
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

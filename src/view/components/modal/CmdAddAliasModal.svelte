@@ -5,7 +5,7 @@
 </script>
 
 <script lang="ts">
-  import { ShModal, ShForm, type ButtonProps } from '@istock/shell-ui';
+  import { ShModal, ShForm, type ButtonProps } from '@istock-shell/ui';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
 
   const { windowId }: CmdAddAliasModalProps = $props();

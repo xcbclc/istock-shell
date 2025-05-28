@@ -4,7 +4,7 @@ import {
   type TModelData,
   type TModelUpdate,
   type TQueryFilterArr,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 import { CookieModel } from './cookie.model';
 @Injectable()
 export class CookieService {

@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TCmdpMessage
+[@istock-shell/iswork](../globals.md) / TCmdpMessage
 
 # Type Alias: TCmdpMessage\<Payload\>
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:16
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:17
 
-***
+---
 
 ### meta?
 
@@ -32,7 +32,7 @@ Defined in: src/packages/iswork/src/types/cmdp.ts:17
 
 Defined in: src/packages/iswork/src/types/cmdp.ts:18
 
-***
+---
 
 ### payload?
 

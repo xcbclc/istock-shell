@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShStat } from '@istock/shell-ui';
+  import { ShStat } from '@istock-shell/ui';
   const list = $state([
     {
       title: '总页面浏览量',

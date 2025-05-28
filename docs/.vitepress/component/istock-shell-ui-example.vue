@@ -83,7 +83,7 @@
 import { defineProps, onMounted, computed, ref, shallowRef, watch } from 'vue';
 import { createHighlighter, type Highlighter, type BundledTheme } from 'shiki';
 import { useData } from 'vitepress';
-import { mountExampleApp, getExampleAppCode } from '@istock/shell-ui/src/components/example';
+import { mountExampleApp, getExampleAppCode } from '@istock-shell/ui/src/components/example';
 
 // 主题配置
 const theme: Record<'light' | 'dark', BundledTheme> = {

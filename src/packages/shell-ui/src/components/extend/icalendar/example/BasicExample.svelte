@@ -10,7 +10,7 @@
     ICalendarTodoStatus,
     ICalendarAlarmAction,
     toICalDateTime,
-  } from '@istock/shell-ui';
+  } from '@istock-shell/ui';
 
   function uid(): string {
     // 生成 12 字节的加密安全随机数（12字节 => 16位 Base64）

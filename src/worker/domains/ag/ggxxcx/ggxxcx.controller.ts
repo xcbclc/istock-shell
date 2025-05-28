@@ -1,4 +1,4 @@
-import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock/iswork';
+import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock-shell/iswork';
 import { TableReturn } from '@/worker/common';
 import { GgxxcxService } from './ggxxcx.service';
 import { GgxxcxModel } from './ggxxcx.model';

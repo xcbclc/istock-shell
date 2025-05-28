@@ -32,6 +32,8 @@ export default [
       { text: 'shell-ui', link: '/packages/shell-ui/README.html' },
       { text: 'command-parser', link: '/packages/command-parser/README.html' },
       { text: 'editor', link: '/packages/editor/README.html' },
+      { text: 'cli', link: '/packages/cli/README.html' },
+      { text: 'util', link: '/packages/util/README.html' },
     ],
   },
   {

@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TScanPropertyMetadataMapValue
+[@istock-shell/iswork](../globals.md) / TScanPropertyMetadataMapValue
 
 # Type Alias: TScanPropertyMetadataMapValue\<Value\>
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/types/metadata-scanner.ts:3
 
 Defined in: src/packages/iswork/src/types/metadata-scanner.ts:4
 
-***
+---
 
 ### list
 

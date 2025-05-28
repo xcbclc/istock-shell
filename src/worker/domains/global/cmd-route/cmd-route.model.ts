@@ -6,7 +6,7 @@ import {
   Index,
   type TControllerMethodCmdRouteOptions,
   type TControllerMethodCmdRouteMetadata,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 
 @Model('cmd-route')
 export class CmdRouteModel extends BaseModel {

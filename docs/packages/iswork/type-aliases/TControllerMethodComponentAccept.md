@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TControllerMethodComponentAccept
+[@istock-shell/iswork](../globals.md) / TControllerMethodComponentAccept
 
 # Type Alias: TControllerMethodComponentAccept\<Props\>
 

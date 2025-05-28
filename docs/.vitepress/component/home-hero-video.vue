@@ -1,13 +1,19 @@
 <template>
+
   <div class="video-demo">
+
     <div class="video-content">
+
       <h3 class="video-title">演示视频</h3>
-      <video controls>
+       <video controls>
+
         <source :src="fm?.video?.src" :poster="fm?.video?.poster" type="video/mp4" />
-        您的浏览器不支持Video标签。
-      </video>
+         您的浏览器不支持Video标签。 </video
+      >
     </div>
+
   </div>
+
 </template>
 
 <script setup lang="ts">
@@ -57,3 +63,4 @@ const { frontmatter: fm } = useData();
   }
 }
 </style>
+

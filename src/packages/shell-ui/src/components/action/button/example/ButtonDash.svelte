@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShButton } from '@istock/shell-ui';
+  import { ShButton } from '@istock-shell/ui';
 </script>
 
 <!-- start 虚线边框按钮使用示例 -->

@@ -1,4 +1,4 @@
-import { isString, isObject, ScopeError } from '@istock/util';
+import { isString, isObject, ScopeError } from '@istock-shell/util';
 import { QueryBuilder } from '../query-builder';
 import type { TIdAnyObject, TOrmQuery, TModelType, TAnyObj } from '../types';
 

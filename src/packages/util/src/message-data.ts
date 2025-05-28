@@ -14,7 +14,7 @@ export enum EMessageDataFieldType {
 
 /**
  * 生成消息数据的主键。
- * 
+ *
  * @param k - 字段名
  * @param type - 字段类型
  * @returns 主键字符串
@@ -27,7 +27,7 @@ export function getMessageDataPK(k: string, type: string | number) {
 
 /**
  * 包装对象，将其中的函数转为字符串，便于结构化克隆。
- * 
+ *
  * @param value - 需要包装的对象
  * @returns 包装后的对象
  * @example
@@ -54,7 +54,7 @@ export const wrap = <R = unknown>(value: any): R => {
 
 /**
  * 还原包装对象，将字符串还原为函数。
- * 
+ *
  * @param value - 需要还原的对象
  * @returns 还原后的对象
  * @example
@@ -66,7 +66,6 @@ export const unWarp = <R = unknown>(value: any): R => {
     Object.keys(value).forEach((k) => {
       const pkFn = getMessageDataPK(k, EMessageDataFieldType.Function);
       if (value[pkFn] !== undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-implied-eval,no-new-func
         const fn = new Function(`return ${value[k]}`)().bind(value[pkFn]);
         const fnCode = value[k].toString();
         fn.toString = () => fnCode;

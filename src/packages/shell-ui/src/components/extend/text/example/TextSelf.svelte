@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShText } from '@istock/shell-ui';
+  import { ShText } from '@istock-shell/ui';
 </script>
 
 <h3 class="font-bold mt-2 mb-2">尺寸：</h3>

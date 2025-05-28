@@ -22,7 +22,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
   import { tv } from 'tailwind-variants';
 
   let {

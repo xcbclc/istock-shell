@@ -7,7 +7,7 @@
     ShStatDesc,
     ShStatFigure,
     type StatItemProps,
-  } from '@istock/shell-ui';
+  } from '@istock-shell/ui';
   const list: StatItemProps[] = $state([
     {
       title: '总喜欢数',

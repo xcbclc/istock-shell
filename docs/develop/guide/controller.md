@@ -7,7 +7,7 @@
 创建一个基本控制器，需要使用类和装饰器。装饰器会将类与所需的元数据相关联，并将命令请求绑定到相应的控制器上。我们创建一个`股票数据`的控制器，文件名为`gpsj.controller.ts`，路径：`src/worker/domains/ag/gpsj/gpsj.controller.ts`，示例代码：
 
 ```typescript
-import { Controller } from '@istock/iswork';
+import { Controller } from '@istock-shell/iswork';
 
 @Controller({
   alias: 'gpsj',
@@ -18,7 +18,7 @@ export class GpsjController {}
 我们已创建了一个最简单的控制器，但现在它还没有任何实际作用，我们需要给它添加一个接受命令的方法。示例代码：
 
 ```typescript
-import { Controller, Method, Payload } from '@istock/iswork';
+import { Controller, Method, Payload } from '@istock-shell/iswork';
 
 @Controller({
   alias: 'gpsj',
@@ -40,7 +40,7 @@ export class GpsjController {
 添加方法后将该控制器导入到`src/worker/domains/ag/ag.domain.ts`中，示例代码：
 
 ```typescript
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { transformStockName } from '@/worker/common';
 // ...
 import { GpsjController } from './gpsj/gpsj.controller'; // [!code ++]
@@ -128,7 +128,7 @@ export type TControllerMethodMetadata = {
 命令路由装饰器`CmdRoute`，用来定义命令的详情信息，它将把命令信息与方法绑定。示例代码：
 
 ```typescript
-import { Controller, Method, CmdRoute, CmdRouteOptions } from '@istock/iswork';
+import { Controller, Method, CmdRoute, CmdRouteOptions } from '@istock-shell/iswork';
 import cmdJson from './domain.cmd.json';
 
 @Controller('domain')
@@ -190,7 +190,15 @@ export type TControllerMethodComponentMetadata = {
 使用示例代码：
 
 ```typescript
-import { Controller, Method, CmdRoute, CmdRouteOptions, CmdRouteArguments, Meta, Component } from '@istock/iswork';
+import {
+  Controller,
+  Method,
+  CmdRoute,
+  CmdRouteOptions,
+  CmdRouteArguments,
+  Meta,
+  Component,
+} from '@istock-shell/iswork';
 import cmdJson from './cmd-route.cmd.json';
 
 @Controller('cmdRoute')
@@ -237,7 +245,7 @@ export type TControllerMethodReturnMetadata = {
 payload取值装饰器可以获取`cmdp`中的payload数据，它不用传任何参数。使用示例代码：
 
 ```typescript
-import { Controller, Method, Payload } from '@istock/iswork';
+import { Controller, Method, Payload } from '@istock-shell/iswork';
 import { DomainService } from './domain.service';
 
 import type { DomainModel } from './domain.model';
@@ -270,7 +278,7 @@ import {
   MessageHandler,
   ApplicationContext,
   Field,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 import cmdJson from './ai.cmd';
 
 @Controller({
@@ -298,7 +306,15 @@ meta字段取值装饰器`Meta`可以方便获取`cmdp`的meta数据中的值，
 使用示例代码：
 
 ```typescript
-import { Controller, Method, CmdRoute, CmdRouteOptions, CmdRouteArguments, Meta, Component } from '@istock/iswork';
+import {
+  Controller,
+  Method,
+  CmdRoute,
+  CmdRouteOptions,
+  CmdRouteArguments,
+  Meta,
+  Component,
+} from '@istock-shell/iswork';
 import cmdJson from './cmd-route.cmd.json';
 
 @Controller('cmdRoute')
@@ -332,7 +348,7 @@ export class CmdRouteController {
 `CmdRouteArguments`使用示例代码：
 
 ```typescript
-import { Controller, Method, CmdRouteArguments, ApplicationContext } from '@istock/iswork';
+import { Controller, Method, CmdRouteArguments, ApplicationContext } from '@istock-shell/iswork';
 import cmdJson from './domain.cmd.json';
 
 @Controller('domain')
@@ -367,7 +383,7 @@ export type TControllerMethodCmdRouteOptions = {
 使用示例代码：
 
 ```typescript
-import { Controller, Method, CmdRoute, CmdRouteOptions } from '@istock/iswork';
+import { Controller, Method, CmdRoute, CmdRouteOptions } from '@istock-shell/iswork';
 import cmdJson from './domain.cmd.json';
 
 @Controller('domain')

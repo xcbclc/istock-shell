@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / IPartialQueryBuilderOptions
+[@istock-shell/iswork](../globals.md) / IPartialQueryBuilderOptions
 
 # Interface: IPartialQueryBuilderOptions
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:23
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:24
 
-***
+---
 
 ### delimStr?
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:24
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:25
 
-***
+---
 
 ### paramNamesMap?
 

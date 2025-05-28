@@ -1,4 +1,4 @@
-import { isDate, isNumber, isString, toLocaleDateString } from '@istock/util';
+import { isDate, isNumber, isString, toLocaleDateString } from '@istock-shell/util';
 
 export const akShareDate = (v: unknown) => {
   if (isString(v) || isNumber(v) || isDate(v)) {

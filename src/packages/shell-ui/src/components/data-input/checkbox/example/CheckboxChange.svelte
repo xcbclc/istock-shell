@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShCheckbox, type CheckboxItemOption } from '@istock/shell-ui';
+  import { ShCheckbox, type CheckboxItemOption } from '@istock-shell/ui';
   let value = $state<number[]>([]);
   let opt = $state();
   const options = [

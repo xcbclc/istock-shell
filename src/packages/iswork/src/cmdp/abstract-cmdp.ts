@@ -1,4 +1,4 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { TCmdpAddressInfo, TCmdpInfo, TCmdpMeta, TCmdpOptions, TCmdpPayload } from '../types';
 
 /**
@@ -96,7 +96,7 @@ export abstract class AbstractCmdp {
    */
   protected check(address: string): boolean {
     const protocol = this.protocol.replace('//', '');
-    // eslint-disable-next-line no-useless-escape
+
     const pattern = `^${protocol}\/\/@\\w{1,20}(\\.[\\w]{1,20}){1,5}:[0-9]{1,4}\/[\\w]{1,20}\.[\\w]{1,20}$`;
     const regExp = new RegExp(pattern);
     return regExp.test(address);

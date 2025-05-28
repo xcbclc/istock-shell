@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShText } from '@istock/shell-ui';
+  import { ShText } from '@istock-shell/ui';
 </script>
 
 <ShText color="neutral" texts={[{ text: '中性颜色文本' }]} />

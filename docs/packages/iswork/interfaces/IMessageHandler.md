@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / IMessageHandler
+[@istock-shell/iswork](../globals.md) / IMessageHandler
 
 # Interface: IMessageHandler
 
@@ -26,7 +26,7 @@ Defined in: src/packages/iswork/src/decorators/controller/controller-method-mess
 
 [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-***
+---
 
 ### cmdReplace()
 
@@ -44,7 +44,7 @@ Defined in: src/packages/iswork/src/decorators/controller/controller-method-mess
 
 [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-***
+---
 
 ### complete()
 
@@ -62,7 +62,7 @@ Defined in: src/packages/iswork/src/decorators/controller/controller-method-mess
 
 [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
 
-***
+---
 
 ### createMessageIterator()
 
@@ -82,7 +82,7 @@ Defined in: src/packages/iswork/src/decorators/controller/controller-method-mess
 
 `AsyncIterator`\<[`TMessageIteratorData`](../type-aliases/TMessageIteratorData.md), `void`, `unknown`\>
 
-***
+---
 
 ### createMessageSSE()
 
@@ -102,7 +102,7 @@ Defined in: src/packages/iswork/src/decorators/controller/controller-method-mess
 
 `Promise`\<`AsyncIterator`\<[`TMessageSSEIteratorData`](../type-aliases/TMessageSSEIteratorData.md), `void`, `unknown`\>\>
 
-***
+---
 
 ### createObservable()
 

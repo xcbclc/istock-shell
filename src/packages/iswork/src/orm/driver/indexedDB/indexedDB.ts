@@ -1,5 +1,5 @@
 import type { IDBPDatabase } from 'idb';
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 import type { ModelMetadataMap } from '../../metadata/metadata';
 import type { TModelType } from '../../types';
 

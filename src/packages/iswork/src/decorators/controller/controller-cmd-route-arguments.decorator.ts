@@ -1,4 +1,4 @@
-import { isArray, isNumber, isObject, ScopeError } from '@istock/util';
+import { isArray, isNumber, isObject, ScopeError } from '@istock-shell/util';
 import type { TControllerMethodCmdRouteArguments, TCmdpInfo } from '../../types';
 import { CONTROLLER_METHOD_PARAM_CMDROUTEARGUMENTS_METADATA } from '../../constants';
 import type { ApplicationContext } from '../../application/context';

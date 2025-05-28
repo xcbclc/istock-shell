@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Payload
+[@istock-shell/iswork](../globals.md) / Payload
 
 # Variable: Payload()
 

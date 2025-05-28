@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShRadio, type RadioItemOption } from '@istock/shell-ui';
+  import { ShRadio, type RadioItemOption } from '@istock-shell/ui';
   let value = $state<number>();
   let opt = $state();
   const options = [

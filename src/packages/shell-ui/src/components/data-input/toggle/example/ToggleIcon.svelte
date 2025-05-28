@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShToggle, ShIcon } from '@istock/shell-ui';
+  import { ShToggle, ShIcon } from '@istock-shell/ui';
 </script>
 
 <ShToggle>

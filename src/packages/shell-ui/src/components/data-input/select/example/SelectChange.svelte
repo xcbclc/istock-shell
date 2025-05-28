@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShSelect, type SelectItemOption } from '@istock/shell-ui';
+  import { ShSelect, type SelectItemOption } from '@istock-shell/ui';
   let value = $state<number>();
   let opt = $state();
   const options = [

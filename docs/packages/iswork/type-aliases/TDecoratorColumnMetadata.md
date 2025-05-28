@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TDecoratorColumnMetadata
+[@istock-shell/iswork](../globals.md) / TDecoratorColumnMetadata
 
 # Type Alias: TDecoratorColumnMetadata
 

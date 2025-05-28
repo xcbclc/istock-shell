@@ -24,8 +24,8 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc } from '@istock/util';
-  import { ShIcon } from '@istock/shell-ui';
+  import { tuc } from '@istock-shell/util';
+  import { ShIcon } from '@istock-shell/ui';
 
   const {
     soft,

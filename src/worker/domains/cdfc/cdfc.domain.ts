@@ -1,4 +1,4 @@
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { CdesfController } from './cdesf/cdesf.controller';
 import { CdesfService } from './cdesf/cdesf.service';
 

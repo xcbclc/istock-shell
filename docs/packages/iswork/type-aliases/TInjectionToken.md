@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TInjectionToken
+[@istock-shell/iswork](../globals.md) / TInjectionToken
 
 # Type Alias: TInjectionToken\<Type\>
 

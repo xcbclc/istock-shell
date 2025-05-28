@@ -1,4 +1,4 @@
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { transformStockName } from '@/worker/common';
 import { GpsczmController } from './gpsczm/gpsczm.controller';
 import { GpsczmService } from './gpsczm/gpsczm.service';

@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TQuerySort
+[@istock-shell/iswork](../globals.md) / TQuerySort
 
 # Type Alias: TQuerySort
 
@@ -18,7 +18,7 @@ Defined in: src/packages/iswork/src/orm/types/query-builder.ts:16
 
 Defined in: src/packages/iswork/src/orm/types/query-builder.ts:17
 
-***
+---
 
 ### order
 

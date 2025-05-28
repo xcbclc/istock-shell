@@ -1,4 +1,4 @@
-import { ScopeError, isString, isUndefined, mergeObjectDeep, isObject } from '@istock/util';
+import { ScopeError, isString, isUndefined, mergeObjectDeep, isObject } from '@istock-shell/util';
 import type { TAnyObj, TModelType, TFetchSSEMessage, TFetchWrapOptions } from '../../types';
 import type { ModelMetadataMap } from '../../metadata/metadata';
 

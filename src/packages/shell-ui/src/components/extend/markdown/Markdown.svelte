@@ -17,7 +17,7 @@
   import { Marked } from 'marked';
   import { markedHighlight } from 'marked-highlight';
   import hljs from 'highlight.js';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
   const {
     content = $bindable(''), // Markdown原始内容
     options = {}, // Marked解析器配置

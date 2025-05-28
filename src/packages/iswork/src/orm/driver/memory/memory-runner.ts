@@ -1,4 +1,4 @@
-import { isArray, isNumber, isString, ScopeError } from '@istock/util';
+import { isArray, isNumber, isString, ScopeError } from '@istock-shell/util';
 import type { TOrmQuery, TIdAnyObject, TModelType, TAnyObj, TQueryFilter } from '../../types';
 import type { IParsedRequestParams } from '../../interfaces';
 import { AbstractRunner } from '../abstract-runner';
@@ -11,7 +11,6 @@ export class MemoryRunner extends AbstractRunner<TConnector> {
     return new MemoryRunner(connector);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(connector: TConnector) {
     super(connector);
   }

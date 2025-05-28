@@ -1,4 +1,4 @@
-import type { TControllerMethodCmdRoute } from '@istock/iswork';
+import type { TControllerMethodCmdRoute } from '@istock-shell/iswork';
 import { ExampleDataBt, ExampleDataTxt, ExampleDataZxt, ExampleDataGplzt } from './example-data';
 
 export enum EChartType {

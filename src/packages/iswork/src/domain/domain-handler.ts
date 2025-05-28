@@ -1,4 +1,4 @@
-import { isArray, isNil, isString, isUndefined, ScopeError } from '@istock/util';
+import { isArray, isNil, isString, isUndefined, ScopeError } from '@istock-shell/util';
 import {
   CONTROLLER_METHOD_METADATA,
   DESIGN_PARAMTYPES,
@@ -194,7 +194,7 @@ export class DomainHandler {
     const designParamtypes = methodMetaMapValue.info[DESIGN_PARAMTYPES] as number[] | undefined;
     const methodParams: Function[] = new Array(designParamtypes?.length ?? 0)
       .fill(undefined)
-      // eslint-disable-next-line array-callback-return
+
       .map((_value, index) => {
         const { info } = methodMetaMapValue;
         // 参数装饰器回调信息查找

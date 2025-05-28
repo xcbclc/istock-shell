@@ -33,7 +33,7 @@
 
 <script lang="ts">
   import { tv } from 'tailwind-variants';
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   const {
     size, // 尺寸配置

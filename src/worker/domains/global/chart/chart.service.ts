@@ -1,5 +1,5 @@
-import { Injectable, type TControllerMethodComponentOutput } from '@istock/iswork';
-import { isNumber, ScopeError } from '@istock/util';
+import { Injectable, type TControllerMethodComponentOutput } from '@istock-shell/iswork';
+import { isNumber, ScopeError } from '@istock-shell/util';
 import type { TUiTableProps } from '@/worker/common';
 import {
   EChartType,

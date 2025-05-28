@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { ShErrorInfo } from '@istock/shell-ui';
+  import { ShErrorInfo } from '@istock-shell/ui';
   let error: Error;
   try {
     error = new Error('创建了一个错误');

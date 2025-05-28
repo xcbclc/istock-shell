@@ -1,5 +1,5 @@
-import { Injectable, type TModelData, type TControllerMethodCmdRouteMetadata } from '@istock/iswork';
-import { ETokenType, Tokenizer, type TToken } from '@istock/command-parser';
+import { Injectable, type TModelData, type TControllerMethodCmdRouteMetadata } from '@istock-shell/iswork';
+import { TokenType, Tokenizer, type Token } from '@istock-shell/command-parser';
 import type { HistoryModel } from '../history/history.model';
 import type { TResponseCmdRoute } from '../cmd-route/cmd-route.service';
 import type { StockCodeModel } from '../stock-code/stock-code.model';
@@ -39,10 +39,10 @@ export class RecommendService {
    */
   findSubcommandForToken(
     cmdRoute: TResponseCmdRoute,
-    otherTokens: TToken[]
+    otherTokens: Token[]
   ): Omit<TControllerMethodCmdRouteMetadata, 'subcommand'> | undefined {
     const [firstOtherToken] = otherTokens;
-    if (firstOtherToken?.type === ETokenType.parameter && cmdRoute.subcommand?.length) {
+    if (firstOtherToken?.type === TokenType.parameter && cmdRoute.subcommand?.length) {
       // 说明有子命令
       const subcommand = cmdRoute.subcommand.find((command) => command.cmd === firstOtherToken.value);
       return subcommand;
@@ -53,20 +53,20 @@ export class RecommendService {
   /**
    * 推荐选项key的值
    * @param cmdRoute
-   * @param lastToken
+   * @param lasToken
    * @param otherTokens
    */
   recommendOptionKey(
     cmdRoute: TResponseCmdRoute | undefined,
-    lastToken: TToken,
-    otherTokens: TToken[]
+    lasToken: Token,
+    otherTokens: Token[]
   ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     let options = cmdRoute.options ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
     if (subcommand) options = subcommand.options ?? [];
     const usedOptionRecord = otherTokens
-      .filter((token) => token.type === ETokenType.optionKey)
+      .filter((token) => token.type === TokenType.optionKey)
       .reduce<Record<string, boolean>>((record, token) => {
         record[token.value] = true;
         return record;
@@ -75,7 +75,7 @@ export class RecommendService {
       .map((param) => {
         const value =
           param.parameter.find((parameter) => {
-            return parameter.startsWith(lastToken.value);
+            return parameter.startsWith(lasToken.value);
           }) ?? '';
         return {
           label: value,
@@ -91,15 +91,15 @@ export class RecommendService {
   /**
    * 推荐选项的值
    * @param cmdRoute
-   * @param lastToken
+   * @param lasToken
    * @param otherTokens
    * @param lastNearToken
    */
   recommendOptionValue(
     cmdRoute: TResponseCmdRoute | undefined,
-    lastToken: TToken,
-    otherTokens: TToken[],
-    lastNearToken: TToken
+    lasToken: Token,
+    otherTokens: Token[],
+    lastNearToken: Token
   ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     let options = cmdRoute.options ?? [];
@@ -109,7 +109,7 @@ export class RecommendService {
     const option = options.find((opt) => opt.parameter.find((parameter) => parameter === lastNearToken.value));
     if (option?.name && option.name === '股票代码') {
       return this.#stockCodeList
-        .filter((stock) => stock.code.startsWith(lastToken.value))
+        .filter((stock) => stock.code.startsWith(lasToken.value))
         .map((stock) => {
           return {
             label: stock.code,
@@ -120,7 +120,7 @@ export class RecommendService {
     }
     if (option?.name && option.name === '股票名称') {
       return this.#stockCodeList
-        .filter((stock) => stock.name.startsWith(lastToken.value))
+        .filter((stock) => stock.name.startsWith(lasToken.value))
         .map((stock) => {
           return {
             label: stock.name,
@@ -132,7 +132,7 @@ export class RecommendService {
     return (option?.choices ?? [])
       .filter((choice) => {
         // 简单字符串化
-        return `${choice}`.startsWith(lastToken.value);
+        return `${choice}`.startsWith(lasToken.value);
       })
       .map((choice) => {
         return {
@@ -146,20 +146,20 @@ export class RecommendService {
   /**
    * 推荐参数值
    * @param cmdRoute
-   * @param lastToken
+   * @param lasToken
    * @param otherTokens
    */
   recommendArgument(
     cmdRoute: TResponseCmdRoute | undefined,
-    lastToken: TToken,
-    otherTokens: TToken[]
+    lasToken: Token,
+    otherTokens: Token[]
   ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     let args = cmdRoute.arguments ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
     if (subcommand) args = subcommand.arguments ?? [];
     const usedArgumentRecord = otherTokens
-      .filter((token) => token.type === ETokenType.parameter)
+      .filter((token) => token.type === TokenType.parameter)
       .reduce<Record<string, boolean>>((record, token) => {
         record[token.value] = true;
         return record;
@@ -169,7 +169,7 @@ export class RecommendService {
       .map((param) => {
         const value =
           (param.choices ?? []).find((choice) => {
-            return `${choice}`.startsWith(lastToken.value);
+            return `${choice}`.startsWith(lasToken.value);
           }) ?? '';
         return {
           label: `${value}`,
@@ -185,24 +185,24 @@ export class RecommendService {
   /**
    * 推荐子命令
    * @param cmdRoute
-   * @param lastToken
+   * @param lasToken
    * @param otherTokens
    */
   recommendSubcommand(
     cmdRoute: TResponseCmdRoute | undefined,
-    lastToken: TToken,
-    otherTokens: TToken[]
+    lasToken: Token,
+    otherTokens: Token[]
   ): TRecommendDataItem[] {
     if (!cmdRoute) return [];
     if (!cmdRoute.subcommand) return [];
     const usedCommandRecord = otherTokens
-      .filter((token) => token.type === ETokenType.parameter)
+      .filter((token) => token.type === TokenType.parameter)
       .reduce<Record<string, boolean>>((record, token) => {
         record[token.value] = true;
         return record;
       }, {});
     return cmdRoute.subcommand
-      .filter((command) => command.cmd.startsWith(lastToken.value) && !usedCommandRecord[command.cmd])
+      .filter((command) => command.cmd.startsWith(lasToken.value) && !usedCommandRecord[command.cmd])
       .map((command) => {
         return {
           label: command.cmd,
@@ -220,30 +220,30 @@ export class RecommendService {
     const originalInput = payload.input.trim();
     // 解析成tokens，然后找到最后一个命令
     const allTokens = this.#tokenizer.parse(originalInput, false);
-    const cmdTokenIndex = allTokens.findLastIndex((token) => token.type === ETokenType.command);
+    const cmdTokenIndex = allTokens.findLastIndex((token) => token.type === TokenType.command);
     const tokens = allTokens.slice(cmdTokenIndex);
     const [cmd, ...other] = tokens;
     let list: TRecommendDataItem[] = [];
     const reallyOtherTokens = other.filter(
-      (token) => ![ETokenType.space, ETokenType.lineR, ETokenType.lineN].includes(token.type)
+      (token) => ![TokenType.space, TokenType.lineR, TokenType.lineN].includes(token.type)
     );
     if (other && other.length > 0) {
       const cmdRoute = cmdRoutes.find((cmdRoute) => cmd.value === cmdRoute.cmd);
-      const [lastToken, lastNearToken] = [cmd, ...reallyOtherTokens].reverse();
-      if (lastToken.type === ETokenType.optionKey) {
+      const [lasToken, lastNearToken] = [cmd, ...reallyOtherTokens].reverse();
+      if (lasToken.type === TokenType.optionKey) {
         // 推荐选项键
-        list = this.recommendOptionKey(cmdRoute, lastToken, reallyOtherTokens);
+        list = this.recommendOptionKey(cmdRoute, lasToken, reallyOtherTokens);
       }
-      if (lastToken.type === ETokenType.parameter) {
-        if (lastNearToken?.type === ETokenType.optionKey) {
+      if (lasToken.type === TokenType.parameter) {
+        if (lastNearToken?.type === TokenType.optionKey) {
           // 推荐选项值
-          list = this.recommendOptionValue(cmdRoute, lastToken, reallyOtherTokens, lastNearToken);
-        } else if (lastNearToken?.type === ETokenType.command && cmdRoute && cmdRoute.subcommand) {
+          list = this.recommendOptionValue(cmdRoute, lasToken, reallyOtherTokens, lastNearToken);
+        } else if (lastNearToken?.type === TokenType.command && cmdRoute && cmdRoute.subcommand) {
           // 子命令
-          list = this.recommendSubcommand(cmdRoute, lastToken, reallyOtherTokens);
+          list = this.recommendSubcommand(cmdRoute, lasToken, reallyOtherTokens);
         } else {
           // 推荐参数
-          list = this.recommendArgument(cmdRoute, lastToken, reallyOtherTokens);
+          list = this.recommendArgument(cmdRoute, lasToken, reallyOtherTokens);
         }
       }
     } else {

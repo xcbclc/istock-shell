@@ -1,4 +1,4 @@
-import { type TControllerMethodCmdRouteOptions } from '@istock/iswork';
+import { type TControllerMethodCmdRouteOptions } from '@istock-shell/iswork';
 
 export enum EAdjust {
   QFQ = 'qfq', // 前复权

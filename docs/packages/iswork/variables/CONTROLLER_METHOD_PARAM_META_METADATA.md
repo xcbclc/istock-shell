@@ -1,11 +1,11 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / CONTROLLER\_METHOD\_PARAM\_META\_METADATA
+[@istock-shell/iswork](../globals.md) / CONTROLLER_METHOD_PARAM_META_METADATA
 
-# Variable: CONTROLLER\_METHOD\_PARAM\_META\_METADATA
+# Variable: CONTROLLER_METHOD_PARAM_META_METADATA
 
-> `const` **CONTROLLER\_METHOD\_PARAM\_META\_METADATA**: *typeof* `CONTROLLER_METHOD_PARAM_META_METADATA`
+> `const` **CONTROLLER_METHOD_PARAM_META_METADATA**: _typeof_ `CONTROLLER_METHOD_PARAM_META_METADATA`
 
 Defined in: src/packages/iswork/src/constants/decorator.ts:23

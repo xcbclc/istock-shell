@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / Column
+[@istock-shell/iswork](../globals.md) / Column
 
 # Function: Column()
 

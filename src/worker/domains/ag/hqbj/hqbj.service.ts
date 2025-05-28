@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock/iswork';
+import { Injectable, type TModelData } from '@istock-shell/iswork';
 import { HqbjModel } from './hqbj.model';
 
 @Injectable()

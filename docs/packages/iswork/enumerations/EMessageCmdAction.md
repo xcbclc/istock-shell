@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / EMessageCmdAction
+[@istock-shell/iswork](../globals.md) / EMessageCmdAction
 
 # Enumeration: EMessageCmdAction
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/enums/index.ts:50
 
 Defined in: src/packages/iswork/src/enums/index.ts:51
 
-***
+---
 
 ### REPLACE
 

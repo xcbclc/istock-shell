@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / IParamOption
+[@istock-shell/iswork](../globals.md) / IParamOption
 
 # Interface: IParamOption
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:15
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:19
 
-***
+---
 
 ### field?
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:19
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:16
 
-***
+---
 
 ### primary?
 
@@ -32,7 +32,7 @@ Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:16
 
 Defined in: src/packages/iswork/src/orm/interfaces/query-builder.ts:18
 
-***
+---
 
 ### type?
 

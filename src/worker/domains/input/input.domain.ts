@@ -1,4 +1,4 @@
-import { Global, Domain } from '@istock/iswork';
+import { Global, Domain } from '@istock-shell/iswork';
 import { InputController } from './input.controller';
 import { InputService } from './input.service';
 

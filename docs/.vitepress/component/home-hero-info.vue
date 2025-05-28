@@ -1,10 +1,18 @@
 <template>
+
   <h1 v-if="fm.hero?.name" class="name">
-    <span v-html="fm.hero?.name" class="clip"></span>
-    <Badge v-if="fm.hero?.version" class="badge" type="danger" :text="fm.hero?.version" />
+     <span v-html="fm.hero?.name" class="clip"></span> <Badge
+      v-if="fm.hero?.version"
+      class="badge"
+      type="danger"
+      :text="fm.hero?.version"
+    />
   </h1>
+
   <p v-if="fm.hero?.text" v-html="fm.hero?.text" class="text"></p>
+
   <p v-if="fm.hero?.tagline" v-html="fm.hero?.tagline" class="tagline"></p>
+
 </template>
 
 <script setup lang="ts">
@@ -100,3 +108,4 @@ const { frontmatter: fm } = useData();
   }
 }
 </style>
+

@@ -1,11 +1,19 @@
 /**
- * 编辑框光标操作
+ * 命令编辑器光标操作类
+ * 提供光标定位、移动、范围选择等功能
+ * @public
  */
 export class CommandEditorCursor {
+  /** 浏览器选择对象 */
   selection: Selection;
-  // 定义组件的变量和方法
+  /** 命令输入DOM元素 */
   readonly #commandInput: HTMLElement;
 
+  /**
+   * 构造函数
+   * @param commandInput - 命令输入DOM元素
+   * @throws 当无法获取到selection对象时抛出错误
+   */
   constructor(commandInput: HTMLElement) {
     this.#commandInput = commandInput;
     const selection = window.getSelection();
@@ -14,7 +22,10 @@ export class CommandEditorCursor {
   }
 
   /**
-   * 获取Range对象
+   * 获取当前有效的Range对象
+   * 如果当前选择在命令输入元素内，返回当前Range；否则创建一个默认Range
+   * @returns 当前有效的Range对象
+   * @public
    */
   getOneRange() {
     const selection = this.selection;
@@ -33,8 +44,10 @@ export class CommandEditorCursor {
   }
 
   /**
-   * 设置光标位置
-   * @param offset
+   * 根据文本偏移量设置光标位置
+   * 自动处理边界情况，超出范围时移动到开始或结束位置
+   * @param offset - 文本偏移量（字符数）
+   * @public
    */
   setOffset(offset: number): void {
     const maxOffset = this.#commandInput.textContent?.length ?? 0;
@@ -86,7 +99,8 @@ export class CommandEditorCursor {
   }
 
   /**
-   * 移动光标到开始位置
+   * 移动光标到输入框的开始位置
+   * @public
    */
   moveToStart(): void {
     const range = this.getOneRange();
@@ -99,7 +113,8 @@ export class CommandEditorCursor {
   }
 
   /**
-   * 移动光标到开始位置
+   * 移动光标到输入框的结束位置
+   * @public
    */
   moveToEnd(): void {
     const range = this.getOneRange();
@@ -112,9 +127,11 @@ export class CommandEditorCursor {
   }
 
   /**
-   * 光标向前或后移动指定个token位置
-   * @param number
-   * @param isBefore
+   * 按token单位移动光标位置
+   * 根据data-id属性查找token元素并移动光标
+   * @param number - 移动的token数量，默认为1
+   * @param isBefore - 是否向前移动，true为向前，false为向后
+   * @public
    */
   moveTokenOffset(number: number = 1, isBefore = true): void {
     const range = this.getOneRange();
@@ -142,9 +159,11 @@ export class CommandEditorCursor {
   }
 
   /**
-   * 移动到指定节点及对应偏移位置
-   * @param endNode
-   * @param endOffset
+   * 移动光标到指定节点的指定偏移位置
+   * 精确控制光标在DOM节点中的位置
+   * @param endNode - 目标节点
+   * @param endOffset - 在目标节点中的偏移量
+   * @public
    */
   moveNodeOffset(endNode: Node | Element, endOffset: number) {
     const range = this.getOneRange();

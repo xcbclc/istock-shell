@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TSCondition
+[@istock-shell/iswork](../globals.md) / TSCondition
 
 # Type Alias: TSCondition
 

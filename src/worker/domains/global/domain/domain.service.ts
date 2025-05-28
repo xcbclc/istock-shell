@@ -1,11 +1,11 @@
-import { ScopeError, isObject } from '@istock/util';
+import { ScopeError, isObject } from '@istock-shell/util';
 import {
   Injectable,
   type TModelData,
   type ApplicationContext,
   type TModelCreate,
   type TModelUpdate,
-} from '@istock/iswork';
+} from '@istock-shell/iswork';
 import { DomainModel } from './domain.model';
 
 @Injectable()

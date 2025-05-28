@@ -1,5 +1,5 @@
 import { get, writable, type Writable } from 'svelte/store';
-import { isArray, toLocaleDateString, clone } from '@istock/util';
+import { isArray, toLocaleDateString, clone } from '@istock-shell/util';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { IPrompt, TPromptText } from '../cmd-prompt';
 import {
@@ -95,7 +95,7 @@ export const getCmdOutput = (ctx: CmdWindowContext) => {
     // 演示发起的命令不保存到历史记录
     if (ctx.mode === ECmdWindowContextMode.example) return;
     const { workerMessage } = ctx;
-    const payload: ICmdOutput & { cmd: string; rowStatus: number; createDate: Date } = clone(cmdOutputData);
+    const payload: ICmdOutput & { cmd?: string; rowStatus?: number; createDate?: Date } = clone(cmdOutputData);
     payload.source = 'db';
     payload.cmd = ''; // todo 单命令需要保存方便搜索
     payload.promptTexts = payload.promptTexts.map((text) => {

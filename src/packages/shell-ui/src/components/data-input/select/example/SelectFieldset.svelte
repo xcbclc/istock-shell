@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShSelect, ShFieldSet, ShField } from '@istock/shell-ui';
+  import { ShSelect, ShFieldSet, ShField } from '@istock-shell/ui';
   let value = $state<number>();
   const options = [
     { label: '股票', value: 0 },

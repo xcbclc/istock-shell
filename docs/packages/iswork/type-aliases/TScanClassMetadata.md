@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TScanClassMetadata
+[@istock-shell/iswork](../globals.md) / TScanClassMetadata
 
 # Type Alias: TScanClassMetadata\<Value\>
 

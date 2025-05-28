@@ -36,7 +36,6 @@ outline: [2, 3]
 - 支持多种提示类型（info/success/warning/error）
 - 可以自定义提示内容
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastDefault.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
 :::
@@ -48,7 +47,6 @@ outline: [2, 3]
 - 水平位置：start（左侧）
 - 垂直位置：top（顶部）
 - 支持多条消息同时展示
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastTopStart.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
@@ -62,7 +60,6 @@ outline: [2, 3]
 - 垂直位置：top（顶部）
 - 默认的位置配置
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastTopCenter.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
 :::
@@ -74,7 +71,6 @@ outline: [2, 3]
 - 水平位置：end（右侧）
 - 垂直位置：top（顶部）
 - 适合展示系统通知
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastTopEnd.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
@@ -88,7 +84,6 @@ outline: [2, 3]
 - 垂直位置：middle（中部）
 - 适合特定区域的提示
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastStartMiddle.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
 :::
@@ -100,7 +95,6 @@ outline: [2, 3]
 - 水平位置：center（居中）
 - 垂直位置：middle（中部）
 - 适合重要信息展示
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastCenterMiddle.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
@@ -114,7 +108,6 @@ outline: [2, 3]
 - 垂直位置：middle（中部）
 - 适合辅助信息展示
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastEndMiddle.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
 :::
@@ -126,7 +119,6 @@ outline: [2, 3]
 - 水平位置：start（左侧）
 - 垂直位置：bottom（底部）
 - 不影响主要内容阅读
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastStartBottom.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
@@ -140,7 +132,6 @@ outline: [2, 3]
 - 垂直位置：bottom（底部）
 - 适合操作反馈信息
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastCenterBottom.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
 :::
@@ -153,11 +144,9 @@ outline: [2, 3]
 - 垂直位置：bottom（底部）
 - 适合次要信息展示
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/toast/example/ToastEndBottom.svelte" demoStyle="min-height:300px"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 
@@ -172,7 +161,7 @@ outline: [2, 3]
 ### ToastAlertItem 类型
 
 ```typescript
-import type { AlertProps } from '@istock/shell-ui';
+import type { AlertProps } from '@istock-shell/ui';
 export interface ToastAlertItem extends AlertProps {
   message: string; // 提示消息
 }

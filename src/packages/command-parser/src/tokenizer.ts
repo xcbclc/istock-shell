@@ -1,178 +1,338 @@
-import { ScopeError } from '@istock/util';
+import { ScopeError } from '@istock-shell/util';
 
-export enum ETokenType {
+/**
+ * Token 类型枚举
+ *
+ * 定义了词法分析过程中可能产生的所有 Token 类型。
+ * 每种类型代表命令行输入中的不同语法元素。
+ *
+ * @public
+ */
+export enum TokenType {
+  /** 空格字符 */
   space = 'space',
-  lineR = 'lineR', // r换行符
-  lineN = 'lineN', // n换行符
+  /** 回车符 (\r) */
+  lineR = 'lineR',
+  /** 换行符 (\n) */
+  lineN = 'lineN',
+  /** 圆括号字符（包括左右圆括号） */
   parentheses = 'parentheses',
+  /** 普通命令 */
   command = 'command',
+  /** 参数值 */
   parameter = 'parameter',
+  /** 选项键（如 -v、--help 等） */
   optionKey = 'optionKey',
+  /** 管道操作符（如 |、&、||、&& 等） */
   pipe = 'pipe',
+  /** 关键字命令（如 ai:、ss: 等） */
   keyCommand = 'keyCommand',
+  /** 关键字命令的内容部分 */
   keyCommandContent = 'keyCommandContent',
 }
 
-export type TToken = {
-  type: ETokenType;
+/**
+ * Token 数据结构
+ *
+ * 表示词法分析过程中产生的最小语法单元
+ *
+ * @public
+ */
+export type Token = {
+  /** Token 的类型 */
+  type: TokenType;
+  /** Token 的值 */
   value: string;
 };
 
-export type TTokenMethodResult = {
+/**
+ * Token 方法执行结果
+ *
+ * 用于内部方法返回处理状态和索引位置
+ *
+ * @internal
+ */
+export type TokenMethodResult = {
+  /** 是否应该继续处理下一个字符 */
   isContinue: boolean;
+  /** 当前处理到的字符索引 */
   index: number;
 };
 
+/**
+ * 关键字命令配置
+ *
+ * 定义了支持的关键字命令及其匹配规则
+ *
+ * @public
+ */
 export const keyCommand = {
+  /** AI 助手命令配置 */
   ai: {
+    /** 命令前缀 */
     command: 'ai:',
+    /** 内容匹配正则表达式 */
     content: /^.$/,
   },
+  /** 搜索命令配置 */
   search: {
+    /** 命令前缀 */
     command: 'ss:',
+    /** 内容匹配正则表达式 */
     content: /^.$/,
   },
+  /** 别名命令配置 */
   alias: {
+    /** 命令前缀 */
     command: ':',
+    /** 内容匹配正则表达式 */
     content: /^.$/,
   },
 };
 
+/**
+ * 词法分析器类
+ *
+ * 负责将输入的命令行字符串分解为 Token 序列。
+ * 该类是命令解析流程的第一步，将连续的字符串转换为
+ * 具有语义的词法单元，为后续的语法分析做准备。
+ *
+ * 支持的语法元素包括：
+ * - 普通命令和参数
+ * - 选项键（如 -v、--help）
+ * - 管道操作符（|、&、||、&&）
+ * - 圆括号分组
+ * - 关键字命令（ai:、ss:、:）
+ * - 字符串字面量（支持单引号、双引号、反引号）
+ *
+ * @example
+ * ```typescript
+ * const tokenizer = new Tokenizer();
+ * const tokens = tokenizer.parse('ls -la | grep test');
+ * console.log(tokens);
+ * ```
+ *
+ * @public
+ */
 export class Tokenizer {
-  // 空格
-  // eslint-disable-next-line no-irregular-whitespace
-  readonly #space = /^[\u0020\u3000' ']$/;
-  // 所有空白字符
+  /** 空格字符正则表达式（包括普通空格、全角空格等） */
+
+  readonly #space = /^[\u0020\u3000' ']$/;
+
+  /** 所有空白字符正则表达式 */
   readonly #whitespace = /^\s$/;
-  // 换行符
+
+  /** 回车符正则表达式 */
   readonly #lineR = /^\r$/;
+
+  /** 换行符正则表达式 */
   readonly #lineN = /^\n$/;
-  // 关键词
+
+  /** 关键字命令配置 */
   readonly #keyCommand = keyCommand;
 
-  // 圆括号字符
+  /** 左圆括号正则表达式（支持中英文圆括号） */
   readonly #parenthesesLeft = /^[(（]$/;
+
+  /** 右圆括号正则表达式（支持中英文圆括号） */
   readonly #parenthesesRight = /^[)）]$/;
-  // 管道
+
+  /** AND 管道操作符正则表达式 */
   readonly #pipeAnd = /^&$/;
+
+  /** OR 管道操作符正则表达式 */
   readonly #pipeOr = /^\|$/;
 
-  // 命令
+  /** 命令名称正则表达式（仅支持字母开头） */
   readonly #command = /^[a-zA-Z]$/;
-  // 参数
-  readonly #parameter = /^[^()（）|&\s]$/;
-  // 选项
-  readonly #optionKeyPrefix = /^-$/;
-  readonly #optionKey = /^[-a-zA-Z0-9\u4E00-\u9FA5]$/;
-  // 字符串符号
-  readonly #strSymbol = /^['"`]$/;
 
+  /** 参数值正则表达式（排除特殊字符） */
+  readonly #parameter = /^[^()（）|&\s]$/;
+
+  /** 选项键前缀正则表达式 */
+  readonly #optionKeyPrefix = /^-$/;
+
+  /** 选项键正则表达式（支持字母、数字、中文） */
+  readonly #optionKey = /^[-a-zA-Z0-9\u4E00-\u9FA5]$/;
+
+  /** 字符串引号正则表达式（支持单引号、双引号、反引号） */
+  readonly #strSymbol = /^['"\`]$/;
+
+  /**
+   * 符号配置对象
+   *
+   * 定义了各种操作符和分隔符的具体值及其语义
+   */
   symbol = {
+    /** 左圆括号符号列表 */
     parenthesesLeft: ['(', '（'],
+    /** 右圆括号符号列表 */
     parenthesesRight: [')', '）'],
-    pipeOr: ['|'], // 无论第一个命令是否错误，都会执行第二个命令，只显示第二个命令输出
-    pipeAnd: ['&'], // 无论第一个命令是否错误，都会显示第一个命令和第二个命令的输出
-    pipe2Or: ['||'], // 第一个命令正确，显示第一命令输出。第一个命令错误，显示第二个命令输出。
-    pipe2And: ['&&'], // 第一个命令正确，第一个和第二个命令的输出都会显示。第一个命令错误，不执行第二个命令。
+    /** OR 管道符号列表 - 无论第一个命令是否错误，都会执行第二个命令，只显示第二个命令输出 */
+    pipeOr: ['|'],
+    /** AND 管道符号列表 - 无论第一个命令是否错误，都会显示第一个命令和第二个命令的输出 */
+    pipeAnd: ['&'],
+    /** 条件 OR 管道符号列表 - 第一个命令正确，显示第一命令输出。第一个命令错误，显示第二个命令输出 */
+    pipe2Or: ['||'],
+    /** 条件 AND 管道符号列表 - 第一个命令正确，第一个和第二个命令的输出都会显示。第一个命令错误，不执行第二个命令 */
+    pipe2And: ['&&'],
+    /** 选项前缀符号列表 */
     options: ['-'],
   };
 
   /**
-   * 把输入字符串解析成token
-   * @param input
-   * @param isCheck
+   * 解析输入字符串为 Token 序列
+   *
+   * 这是词法分析的主要方法，将输入的命令行字符串逐字符解析，
+   * 识别各种语法元素并生成对应的 Token。解析过程包括：
+   *
+   * 1. 逐字符扫描输入字符串
+   * 2. 识别空白字符并处理行列位置
+   * 3. 识别关键字命令（如 ai:、ss: 等）
+   * 4. 识别普通命令、参数、选项等
+   * 5. 进行语法检查，确保括号匹配、管道符使用正确等
+   *
+   * @param input - 要解析的命令行字符串
+   * @param isCheck - 是否进行语法检查，默认为 true
+   * @returns Token 序列数组
+   *
+   * @example
+   * ```typescript
+   * const tokenizer = new Tokenizer();
+   *
+   * // 解析简单命令
+   * const tokens1 = tokenizer.parse('ls -la');
+   * console.log(tokens1);
+   * // 输出: [{type: 'command', value: 'ls'}, {type: 'space', value: ' '}, {type: 'optionKey', value: '-la'}]
+   *
+   * // 解析带管道的命令
+   * const tokens2 = tokenizer.parse('ls | grep test');
+   * // 输出包含命令、管道和参数的 Token 序列
+   *
+   * // 解析关键字命令
+   * const tokens3 = tokenizer.parse('ai: help me');
+   * // 输出包含关键字命令和内容的 Token 序列
+   *
+   * // 跳过语法检查
+   * const tokens4 = tokenizer.parse('incomplete command', false);
+   * ```
+   *
+   * @throws {ScopeError} 当遇到无法识别的字符或语法错误时抛出
+   *
+   * @public
    */
   parse(input: string, isCheck = true) {
+    /** 当前处理的字符索引位置 */
     let currentIndex = 0;
-    const tokens: TToken[] = [];
+    /** 生成的 Token 序列数组 */
+    const tokens: Token[] = [];
 
+    // 逐字符扫描输入字符串
     while (currentIndex < input.length) {
       const char = input[currentIndex];
 
+      // 处理空白字符（空格、制表符、换行符等）
       const whiteSpaceResult = this.#whiteSpaceSymbol(tokens, input, currentIndex);
       currentIndex = whiteSpaceResult.index;
       if (whiteSpaceResult.isContinue) continue;
 
-      // 处理左圆括号
+      // 处理左圆括号（支持中英文圆括号）
       if (this.#parenthesesLeft.test(char)) {
         tokens.push({
-          type: ETokenType.parentheses,
+          type: TokenType.parentheses,
           value: char,
         });
         currentIndex++;
         continue;
       }
 
-      // 处理右圆括号
+      // 处理右圆括号（支持中英文圆括号）
       if (this.#parenthesesRight.test(char)) {
         tokens.push({
-          type: ETokenType.parentheses,
+          type: TokenType.parentheses,
           value: char,
         });
         currentIndex++;
         continue;
       }
 
-      // 处理and管道操作符
+      // 处理 AND 管道操作符（& 和 &&）
       if (this.#pipeAnd.test(char)) {
         let value = char;
         currentIndex++;
+        // 检查是否为双字符操作符 &&
         if (this.#pipeAnd.test(input[currentIndex])) {
           value += input[currentIndex];
           currentIndex++;
         }
-        tokens.push({ type: ETokenType.pipe, value });
+        tokens.push({ type: TokenType.pipe, value });
         continue;
       }
 
-      // 处理or管道操作符
+      // 处理 OR 管道操作符（| 和 ||）
       if (this.#pipeOr.test(char)) {
         let value = char;
         currentIndex++;
+        // 检查是否为双字符操作符 ||
         if (this.#pipeOr.test(input[currentIndex])) {
           value += input[currentIndex];
           currentIndex++;
         }
-        tokens.push({ type: ETokenType.pipe, value });
+        tokens.push({ type: TokenType.pipe, value });
         continue;
       }
 
-      // 关键词命令
+      // 尝试解析关键字命令（如 ai:、ss:、: 等）
       const keywordsResult = this.#tokenizerKeywords(tokens, input, currentIndex);
       currentIndex = keywordsResult.index;
       if (keywordsResult.isContinue) continue;
 
-      // 命令处理
+      // 尝试解析普通命令、参数、选项等
       const commandResult = this.#tokenizerCommand(tokens, input, currentIndex);
       currentIndex = commandResult.index;
       if (commandResult.isContinue) continue;
 
-      // 容错处理，如果我们什么都没有匹配到，说明这个token不在我们的解析范围内
-      throw new ScopeError(`command.${this.constructor.name}`, `解析第${currentIndex + 1}个字符${char}失败`);
+      // 容错处理：如果无法识别当前字符，抛出错误
+      throw new ScopeError(
+        `command.${this.constructor.name}`,
+        `解析第${currentIndex + 1}个字符'${char}'失败，该字符不在支持的语法范围内`
+      );
     }
 
+    // 根据参数决定是否进行语法检查
     if (isCheck) this.#checkSyntax(tokens);
 
     return tokens;
   }
 
   /**
-   * 检查是否有格式错误
-   * @param tokens
+   * 检查 Token 序列的语法正确性
+   *
+   * 对生成的 Token 序列进行语法检查，确保命令行语法的正确性。
+   * 检查项目包括：
+   *
+   * 1. 圆括号匹配检查 - 确保左右圆括号数量匹配且顺序正确
+   * 2. 管道符使用检查 - 确保管道符不在开头/结尾，不连续出现
+   * 3. 关键字命令检查 - 确保关键字命令后有相应参数
+   * 4. 普通命令检查 - 确保命令语法结构正确
+   *
+   * @param tokens - 要检查的 Token 序列
+   * @throws {ScopeError} 当发现语法错误时抛出详细的错误信息
+   *
    * @private
    */
-  #checkSyntax(tokens: TToken[]) {
+  #checkSyntax(tokens: Token[]) {
     // 过滤掉无意义的符号
     tokens = tokens.filter((token) => {
-      return ![ETokenType.space, ETokenType.lineN, ETokenType.lineR].includes(token.type);
+      return ![TokenType.space, TokenType.lineN, TokenType.lineR].includes(token.type);
     });
     let index = 0;
     const symbol = this.symbol;
 
     const check: () => void = () => {
-      let token: TToken = tokens[index];
+      let token: Token = tokens[index];
       // 左括号匹配校验
-      if (token.type === ETokenType.parentheses && symbol.parenthesesLeft.includes(token.value)) {
+      if (token.type === TokenType.parentheses && symbol.parenthesesLeft.includes(token.value)) {
         token = tokens[++index];
         if (!token) {
           throw new ScopeError(
@@ -180,20 +340,20 @@ export class Tokenizer {
             `左圆括号后面需要有命令，位置"${this.#getErrorPosition(tokens, index)}"`
           );
         }
-        if (token.type === ETokenType.pipe) {
+        if (token.type === TokenType.pipe) {
           throw new ScopeError(
             `command.${this.constructor.name}`,
             `左圆括号身后不能有操作符，位置"${this.#getErrorPosition(tokens, index)}"`
           );
         }
-        if (token.type === ETokenType.parentheses && symbol.parenthesesRight.includes(token.value)) {
+        if (token.type === TokenType.parentheses && symbol.parenthesesRight.includes(token.value)) {
           throw new ScopeError(
             `command.${this.constructor.name}`,
             `圆括号里面没有命令，位置"${this.#getErrorPosition(tokens, index)}"`
           );
         }
 
-        while (token.type !== ETokenType.parentheses || !symbol.parenthesesRight.includes(token.value)) {
+        while (token.type !== TokenType.parentheses || !symbol.parenthesesRight.includes(token.value)) {
           check();
           token = tokens[index];
           if (!token) {
@@ -208,7 +368,7 @@ export class Tokenizer {
         return;
       }
       // 右括号匹配校验
-      if (token.type === ETokenType.parentheses && symbol.parenthesesRight.includes(token.value)) {
+      if (token.type === TokenType.parentheses && symbol.parenthesesRight.includes(token.value)) {
         throw new ScopeError(
           `command.${this.constructor.name}`,
           `未匹配到左圆括号，位置"${this.#getErrorPosition(tokens, index)}"`
@@ -221,12 +381,12 @@ export class Tokenizer {
         symbol.pipeAnd.includes(token.value) ||
         symbol.pipe2Or.includes(token.value) ||
         symbol.pipe2And.includes(token.value);
-      if (token.type === ETokenType.pipe && isPipe) {
+      if (token.type === TokenType.pipe && isPipe) {
         const afterToken = tokens[index + 1];
         if (
           !afterToken ||
-          ![ETokenType.command, ETokenType.keyCommand, ETokenType.parentheses].includes(afterToken.type) ||
-          (ETokenType.parentheses === afterToken.type && !symbol.parenthesesLeft.includes(afterToken.value))
+          ![TokenType.command, TokenType.keyCommand, TokenType.parentheses].includes(afterToken.type) ||
+          (TokenType.parentheses === afterToken.type && !symbol.parenthesesLeft.includes(afterToken.value))
         ) {
           throw new ScopeError(
             `command.${this.constructor.name}`,
@@ -236,9 +396,9 @@ export class Tokenizer {
       }
 
       // 关键字命令校验
-      if (token.type === ETokenType.keyCommand) {
+      if (token.type === TokenType.keyCommand) {
         const afterToken = tokens[index + 1];
-        if (!afterToken || afterToken.type !== ETokenType.keyCommandContent) {
+        if (!afterToken || afterToken.type !== TokenType.keyCommandContent) {
           throw new ScopeError(
             `command.${this.constructor.name}`,
             `关键字命令后面需要有内容，位置"${this.#getErrorPosition(tokens, index)}"`
@@ -247,7 +407,7 @@ export class Tokenizer {
       }
 
       // 命令校验
-      if (token.type === ETokenType.command) {
+      if (token.type === TokenType.command) {
         /* empty */
       }
 
@@ -260,19 +420,25 @@ export class Tokenizer {
   }
 
   /**
-   * 符号分析
-   * @param tokens token数组
-   * @param input 输入字符串
-   * @param index 当前索引
+   * 处理空白字符
+   *
+   * 检查当前字符是否为空白字符（空格、制表符、换行符等），
+   * 如果是则跳过该字符，继续处理下一个字符。
+   *
+   * @param tokens - Token 序列数组
+   * @param input - 输入字符串
+   * @param index - 当前字符索引
+   * @returns 包含更新后索引和是否继续处理标志的对象
+   *
    * @private
    */
-  #whiteSpaceSymbol(tokens: TToken[], input: string, index: number) {
+  #whiteSpaceSymbol(tokens: Token[], input: string, index: number) {
     const char = input[index];
     const firstIndex = index;
     // 空格
     if (this.#space.test(char)) {
       tokens.push({
-        type: ETokenType.space,
+        type: TokenType.space,
         value: char,
       });
       index++;
@@ -281,7 +447,7 @@ export class Tokenizer {
     // \r
     if (this.#lineR.test(char)) {
       tokens.push({
-        type: ETokenType.lineR,
+        type: TokenType.lineR,
         value: char,
       });
       index++;
@@ -290,7 +456,7 @@ export class Tokenizer {
     // \n
     if (this.#lineN.test(char)) {
       tokens.push({
-        type: ETokenType.lineN,
+        type: TokenType.lineN,
         value: char,
       });
       index++;
@@ -305,17 +471,23 @@ export class Tokenizer {
   }
 
   /**
-   * 分析每一条关键字语句命令
-   * @param tokens token数组
-   * @param input 输入字符串
-   * @param index 当前索引
+   * 解析关键字命令
+   *
+   * 尝试匹配当前位置是否为关键字命令（如 ai:、ss:、: 等）。
+   * 关键字命令是特殊的命令前缀，用于标识特定类型的操作。
+   *
+   * @param tokens - Token 序列数组，用于添加识别到的关键字命令 Token
+   * @param input - 输入字符串
+   * @param index - 当前字符索引
+   * @returns 包含更新后索引和是否继续处理标志的对象
+   *
    * @private
    */
-  #tokenizerKeywords(tokens: TToken[], input: string, index: number): TTokenMethodResult {
+  #tokenizerKeywords(tokens: Token[], input: string, index: number): TokenMethodResult {
     const { ai, search, alias } = this.#keyCommand;
     let char = input[index];
     if (index === 0 && alias.command[0] === char) {
-      tokens.push({ type: ETokenType.keyCommand, value: alias.command });
+      tokens.push({ type: TokenType.keyCommand, value: alias.command });
       index += alias.command.length;
       char = input[index];
       if (char) {
@@ -325,7 +497,7 @@ export class Tokenizer {
           char = input[++index];
         }
         if (content) {
-          tokens.push({ type: ETokenType.keyCommandContent, value: content.trim() });
+          tokens.push({ type: TokenType.keyCommandContent, value: content.trim() });
         }
       }
       return { isContinue: true, index };
@@ -334,7 +506,7 @@ export class Tokenizer {
     if (index === 0 && ai.command[0] === char) {
       const command = input.substring(index, ai.command.length);
       if (command === ai.command) {
-        tokens.push({ type: ETokenType.keyCommand, value: command });
+        tokens.push({ type: TokenType.keyCommand, value: command });
         index += ai.command.length;
         char = input[index];
         if (char) {
@@ -344,7 +516,7 @@ export class Tokenizer {
             char = input[++index];
           }
           if (content) {
-            tokens.push({ type: ETokenType.keyCommandContent, value: content.trim() });
+            tokens.push({ type: TokenType.keyCommandContent, value: content.trim() });
           }
         }
         return { isContinue: true, index };
@@ -355,7 +527,7 @@ export class Tokenizer {
     if (index === 0 && search.command[0] === char) {
       const command = input.substring(index, search.command.length);
       if (command === search.command) {
-        tokens.push({ type: ETokenType.keyCommand, value: command });
+        tokens.push({ type: TokenType.keyCommand, value: command });
         index += search.command.length;
         char = input[index];
         if (char) {
@@ -365,7 +537,7 @@ export class Tokenizer {
             char = input[++index];
           }
           if (content) {
-            tokens.push({ type: ETokenType.keyCommandContent, value: content.trim() });
+            tokens.push({ type: TokenType.keyCommandContent, value: content.trim() });
           }
         }
         return { isContinue: true, index };
@@ -377,13 +549,22 @@ export class Tokenizer {
   }
 
   /**
-   * 分析每一条命令
-   * @param tokens token数组
-   * @param input 输入字符串
-   * @param index 当前索引
+   * 解析命令、参数、选项等
+   *
+   * 这是词法分析的核心方法之一，负责识别和解析：
+   * - 选项键（以 - 开头的参数，如 -v、--help）
+   * - 普通命令（以字母开头的命令名）
+   * - 字符串字面量（用引号包围的参数）
+   * - 普通参数（其他非特殊字符组成的参数）
+   *
+   * @param tokens - Token 序列数组，用于添加识别到的 Token
+   * @param input - 输入字符串
+   * @param index - 当前字符索引
+   * @returns 包含更新后索引和是否继续处理标志的对象
+   *
    * @private
    */
-  #tokenizerCommand(tokens: TToken[], input: string, index: number): TTokenMethodResult {
+  #tokenizerCommand(tokens: Token[], input: string, index: number): TokenMethodResult {
     let acceptParameterToken = false;
     const commandFirstIndex = index;
 
@@ -401,7 +582,7 @@ export class Tokenizer {
           value += char;
           char = input[++index];
         }
-        tokens.push({ type: ETokenType.optionKey, value });
+        tokens.push({ type: TokenType.optionKey, value });
         continue;
       }
 
@@ -412,7 +593,7 @@ export class Tokenizer {
           value += char;
           char = input[++index];
         }
-        tokens.push({ type: ETokenType.command, value });
+        tokens.push({ type: TokenType.command, value });
         acceptParameterToken = true;
         continue;
       }
@@ -442,7 +623,7 @@ export class Tokenizer {
             char = input[++index];
           }
         }
-        tokens.push({ type: ETokenType.parameter, value });
+        tokens.push({ type: TokenType.parameter, value });
         continue;
       }
 
@@ -456,12 +637,18 @@ export class Tokenizer {
   }
 
   /**
-   * 获取错误位置
-   * @param tokens
-   * @param currentIndex
+   * 获取指定索引位置的错误上下文信息
+   *
+   * 用于错误报告和调试，返回指定位置前后的 Token 值，
+   * 帮助用户定位语法错误的具体位置。
+   *
+   * @param tokens - Token 序列数组
+   * @param currentIndex - 当前 Token 索引
+   * @returns 包含前后上下文的错误位置字符串
+   *
    * @private
    */
-  #getErrorPosition(tokens: TToken[], currentIndex: number): string {
+  #getErrorPosition(tokens: Token[], currentIndex: number): string {
     const beforeToken = tokens[currentIndex - 1];
     const token = tokens[currentIndex];
     const afterToken = tokens[currentIndex + 1];
@@ -471,24 +658,3 @@ export class Tokenizer {
       .join(' ');
   }
 }
-
-/* const tokenizer = new Tokenizer();
-function log (input: string) {
-  let result: any;
-  try {
-    result = tokenizer.parse(input);
-  } catch (e) {
-    result = e;
-  } finally {
-    console.log(result);
-  }
-}
-log('(aaa bbb -dd');
-log('aaa bbb -dd)');
-log('ai:');
-log('(ai');
-log('ping a -a ||');
-log('ping a -a &');
-log('ping a -a && (npm run | docker run');
-log('ping a -a && npm run | docker run)');
-log('ping a -a && (npm run | docker run)'); */

@@ -1,6 +1,6 @@
-import { type TControllerMethodComponentOutput, type TModelData } from '@istock/iswork';
+import { type TControllerMethodComponentOutput, type TModelData } from '@istock-shell/iswork';
 import type { G2Spec, LightTheme, DarkTheme } from '@antv/g2';
-import { isNil, ScopeError, getMessageDataPK, EMessageDataFieldType } from '@istock/util';
+import { isNil, ScopeError, getMessageDataPK, EMessageDataFieldType } from '@istock-shell/util';
 import type { TUiTableProps, TTableFilterConditionRange, TTableFilterItem } from '@/worker/common';
 import { parseFilterConditions } from '@/worker/common';
 import type { TBarOption, TLineOption, TPieOption, TStockOption } from './chart.cmd';

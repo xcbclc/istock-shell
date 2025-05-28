@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / IFactoryProvider
+[@istock-shell/iswork](../globals.md) / IFactoryProvider
 
 # Interface: IFactoryProvider\<Class\>
 
@@ -32,7 +32,7 @@ Defined in: src/packages/iswork/src/interfaces/provider.ts:6
 
 [`BaseProvider`](BaseProvider.md).[`provide`](BaseProvider.md#provide)
 
-***
+---
 
 ### useFactory()
 

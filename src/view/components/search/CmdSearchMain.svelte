@@ -12,10 +12,9 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { ShInput, ShEmpty } from '@istock/shell-ui';
+  import { ShInput, ShEmpty } from '@istock-shell/ui';
 
   let {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     windowId,
     searchValue = $bindable(''),
     searchList = [

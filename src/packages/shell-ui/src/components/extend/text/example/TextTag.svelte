@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShText } from '@istock/shell-ui';
+  import { ShText } from '@istock-shell/ui';
 </script>
 
 <ShText tag="p" texts={[{ text: 'p标签' }]} />

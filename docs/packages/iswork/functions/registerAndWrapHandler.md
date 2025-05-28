@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / registerAndWrapHandler
+[@istock-shell/iswork](../globals.md) / registerAndWrapHandler
 
 # Function: registerAndWrapHandler()
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/decorators/index.ts:40
 
 ### Decorator
 
-`Decorator` *extends* `AbstractDecorator`
+`Decorator` _extends_ `AbstractDecorator`
 
 ## Parameters
 

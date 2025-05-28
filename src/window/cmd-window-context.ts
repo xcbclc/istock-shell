@@ -1,6 +1,6 @@
-import { EventEmitter, ScopeError } from '@istock/util';
-import { EMessageStatus } from '@istock/iswork';
-import { CmdParser } from '@istock/command-parser';
+import { EventEmitter, ScopeError } from '@istock-shell/util';
+import { EMessageStatus } from '@istock-shell/iswork';
+import { CmdParser } from '@istock-shell/command-parser';
 import { getCmdStore, type TCmdStore } from '@/store/cmd/main';
 import { getDomainStore, type TCmdAllDomainStore } from '@/store/domains/main';
 import { initStore } from '@/store/init';

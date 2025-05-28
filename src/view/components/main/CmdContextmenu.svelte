@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-  import { ShKbd } from '@istock/shell-ui';
+  import { ShKbd } from '@istock-shell/ui';
   const { contextmenu, position, onMouseStatus, onMenuClick }: CmdContextmenuProps = $props();
 
   let style: string = $state('');

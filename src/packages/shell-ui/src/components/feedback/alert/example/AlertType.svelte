@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShAlert } from '@istock/shell-ui';
+  import { ShAlert } from '@istock-shell/ui';
 </script>
 
 <ShAlert type="info" description="新的软件更新可用。"></ShAlert>

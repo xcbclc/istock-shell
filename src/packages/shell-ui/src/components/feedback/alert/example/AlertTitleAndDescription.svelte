@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShAlert, ShButton, ShIcon } from '@istock/shell-ui';
+  import { ShAlert, ShButton, ShIcon } from '@istock-shell/ui';
 </script>
 
 <ShAlert>

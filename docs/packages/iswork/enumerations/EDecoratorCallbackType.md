@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / EDecoratorCallbackType
+[@istock-shell/iswork](../globals.md) / EDecoratorCallbackType
 
 # Enumeration: EDecoratorCallbackType
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/enums/index.ts:40
 
 Defined in: src/packages/iswork/src/enums/index.ts:42
 
-***
+---
 
 ### MethodResponse
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/enums/index.ts:42
 
 Defined in: src/packages/iswork/src/enums/index.ts:43
 
-***
+---
 
 ### None
 

@@ -1,4 +1,4 @@
-import { isArray, isNil, isString, ScopeError } from '@istock/util';
+import { isArray, isNil, isString, ScopeError } from '@istock-shell/util';
 import type { TControllerMethodMetadata } from '../../types';
 import { CONTROLLER_METHOD_METADATA, CONTROLLER_METHOD_NAME_METADATA } from '../../constants';
 import { AbstractMethodDecorator } from '../abstract-decorator';

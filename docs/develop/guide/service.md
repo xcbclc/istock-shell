@@ -7,7 +7,7 @@
 创建一个基本服务，需要使用类和`Injectable`可注入类装饰器。`Injectable`装饰器会将类定义为可注入类，方面我们在控制器类中注入。我们创建一个`股票数据`的服务，文件名为`gpsj.service.ts`，路径：`src/worker/domains/ag/gpsj/gpsj.service.ts`，示例代码：
 
 ```typescript
-import { Injectable } from '@istock/iswork';
+import { Injectable } from '@istock-shell/iswork';
 
 @Injectable()
 export class GpsjService {
@@ -20,7 +20,7 @@ export class GpsjService {
 将服务导入到`A股`应用域，以便后续`gpsj.controller.ts`控制器使用，示例代码：
 
 ```typescript
-import { Domain } from '@istock/iswork';
+import { Domain } from '@istock-shell/iswork';
 import { transformStockName } from '@/worker/common';
 // ...
 import { GpsjController } from './gpsj/gpsj.controller';
@@ -48,7 +48,7 @@ export class AgDomain {}
 将服务提供给`gpsj.controller.ts`控制器使用，示例代码：
 
 ```typescript
-import { Controller, Method, Payload } from '@istock/iswork';
+import { Controller, Method, Payload } from '@istock-shell/iswork';
 import { GpsjService } from './gpsj.service'; // [!code ++]
 
 @Controller({

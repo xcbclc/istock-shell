@@ -1,1 +1,1 @@
-src/packages/cli/dist/**
+src/packages/**/dist/**

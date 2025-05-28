@@ -1,4 +1,4 @@
-import { BaseModel, Column, Index, Model, PrimaryColumn } from '@istock/iswork';
+import { BaseModel, Column, Index, Model, PrimaryColumn } from '@istock-shell/iswork';
 
 @Model('theme')
 export class ThemeModel extends BaseModel {

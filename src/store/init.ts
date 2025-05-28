@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
-import { sleep, toLocaleDateString, type Event } from '@istock/util';
-import { type CommandEditor, ECommandEditorActionTypes } from '@istock/editor';
-import type { TModelData } from '@istock/iswork';
+import { sleep, toLocaleDateString, type Event } from '@istock-shell/util';
+import { type CommandEditor, CommandEditorActionTypes } from '@istock-shell/editor';
+import type { TModelData } from '@istock-shell/iswork';
 import { type CmdWindowContext, ECmdWindowContextMode } from '@/window/cmd-window-context';
 import type { HistoryModel } from '@domains/global/history/history.model';
 import type { DomainModel } from '@domains/global/domain/domain.model';
@@ -54,18 +54,18 @@ function onInputRecommendCmd(ctx: CmdWindowContext) {
   const { user } = domainStore;
   const eventAddress = `event://@${user.getUserInfo().username}.ui:${ctx.windowId}/cmd.recommend`;
   // 推荐算法
-  const handler = async (data: { action: ECommandEditorActionTypes; target: CommandEditor }) => {
+  const handler = async (data: { action: CommandEditorActionTypes; target: CommandEditor }) => {
     const { action, target } = data;
     let input = target.input;
-    if ([ECommandEditorActionTypes.Up, ECommandEditorActionTypes.Down].includes(action)) {
+    if ([CommandEditorActionTypes.Up, CommandEditorActionTypes.Down].includes(action)) {
       let inputNodes!: TCmdInputNodes;
       let { list, historyIndex } = get(cmdStore.cmdOutput);
       if (historyIndex === -1) {
         // 初始值
         historyIndex = list.length;
       }
-      if (action === ECommandEditorActionTypes.Up) historyIndex--;
-      if (action === ECommandEditorActionTypes.Down) historyIndex++;
+      if (action === CommandEditorActionTypes.Up) historyIndex--;
+      if (action === CommandEditorActionTypes.Down) historyIndex++;
       if (historyIndex >= list.length) {
         const { editInputNodes } = get(cmdStore.cmdInput);
         inputNodes = editInputNodes;
@@ -86,7 +86,7 @@ function onInputRecommendCmd(ctx: CmdWindowContext) {
         });
       }
     }
-    if (action === ECommandEditorActionTypes.Auto) {
+    if (action === CommandEditorActionTypes.Auto) {
       await domainStore.inputRecommend.recommend(input);
     }
   };

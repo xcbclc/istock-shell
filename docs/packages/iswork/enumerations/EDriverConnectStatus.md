@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / EDriverConnectStatus
+[@istock-shell/iswork](../globals.md) / EDriverConnectStatus
 
 # Enumeration: EDriverConnectStatus
 
@@ -16,7 +16,7 @@ Defined in: src/packages/iswork/src/orm/enums/index.ts:2
 
 Defined in: src/packages/iswork/src/orm/enums/index.ts:5
 
-***
+---
 
 ### connecting
 
@@ -24,7 +24,7 @@ Defined in: src/packages/iswork/src/orm/enums/index.ts:5
 
 Defined in: src/packages/iswork/src/orm/enums/index.ts:4
 
-***
+---
 
 ### disconnected
 
@@ -32,7 +32,7 @@ Defined in: src/packages/iswork/src/orm/enums/index.ts:4
 
 Defined in: src/packages/iswork/src/orm/enums/index.ts:6
 
-***
+---
 
 ### ready
 

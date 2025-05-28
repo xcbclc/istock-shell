@@ -45,4 +45,4 @@ cmdp://@guest.global:1/cmdRoute.list
 
 ## 协议实现
 
-请参考`@istock/iswork`库里面的cmdp实现，具体源码路径在`iswork/src/cmdp`。
+请参考`@istock-shell/iswork`库里面的cmdp实现，具体源码路径在`iswork/src/cmdp`。

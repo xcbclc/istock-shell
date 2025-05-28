@@ -8,8 +8,8 @@ import {
   CmdRoute,
   Component,
   CmdRouteOptions,
-} from '@istock/iswork';
-import { isString } from '@istock/util';
+} from '@istock-shell/iswork';
+import { isString } from '@istock-shell/util';
 import { HistoryService } from './history.service';
 import type { HistoryModel } from './history.model';
 import cmdJson from './history.cmd.json';

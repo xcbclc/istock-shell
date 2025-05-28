@@ -1,8 +1,54 @@
 {
-  "name": "@istock/command-parser",
-  "version": "0.0.1",
+  "name": "@istock-shell/command-parser",
+  "version": "0.1.1",
+  "description": "一个功能强大且易于使用的命令行解析库，专为现代 TypeScript/JavaScript 应用程序设计",
   "main": "./src/index.ts",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsc && rollup -c",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "command",
+    "parser",
+    "cli",
+    "command-line",
+    "typescript",
+    "javascript",
+    "shell",
+    "ast",
+    "tokenizer",
+    "pipe",
+    "istock-shell"
+  ],
+  "author": "istock-shell",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcbclc/istock-shell.git",
+    "directory": "src/packages/command-parser"
+  },
+  "homepage": "https://github.com/xcbclc/istock-shell#readme",
+  "bugs": {
+    "url": "https://github.com/xcbclc/istock-shell/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
-    "@istock/util": "workspace:^"
+    "@istock-shell/util": "workspace:^"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.6",
+    "rollup-plugin-dts": "^6.1.0",
+    "typescript": "^5.3.3"
   }
 }

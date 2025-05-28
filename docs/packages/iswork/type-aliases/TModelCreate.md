@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TModelCreate
+[@istock-shell/iswork](../globals.md) / TModelCreate
 
 # Type Alias: TModelCreate\<Model\>
 
@@ -14,4 +14,4 @@ Defined in: src/packages/iswork/src/orm/types/model.ts:15
 
 ### Model
 
-`Model` *extends* [`BaseModel`](../classes/BaseModel.md)
+`Model` _extends_ [`BaseModel`](../classes/BaseModel.md)

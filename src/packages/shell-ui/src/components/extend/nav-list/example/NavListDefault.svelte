@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShNavList, type NavListProps } from '@istock/shell-ui';
+  import { ShNavList, type NavListProps } from '@istock-shell/ui';
 
   const list: NavListProps['list'] = [
     {

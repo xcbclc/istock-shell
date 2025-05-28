@@ -1,7 +1,7 @@
 <script lang="ts" module>
   // 导入HTML元素属性和类型校验工具
   import type { HTMLAttributes } from 'svelte/elements';
-  import { isString } from '@istock/util';
+  import { isString } from '@istock-shell/util';
 
   // 定义标签配置类型
   export type FieldLabel = {
@@ -17,7 +17,7 @@
 
 <script lang="ts">
   // 导入样式工具函数
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   const {
     label, // 标签配置

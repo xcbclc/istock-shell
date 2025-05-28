@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / TModelCreateNoId
+[@istock-shell/iswork](../globals.md) / TModelCreateNoId
 
 # Type Alias: TModelCreateNoId\<Model\>
 
@@ -14,4 +14,4 @@ Defined in: src/packages/iswork/src/orm/types/model.ts:12
 
 ### Model
 
-`Model` *extends* [`BaseModel`](../classes/BaseModel.md)
+`Model` _extends_ [`BaseModel`](../classes/BaseModel.md)

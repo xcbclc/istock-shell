@@ -23,7 +23,7 @@
 </script>
 
 <script lang="ts">
-  import { tuc } from '@istock/util';
+  import { tuc } from '@istock-shell/util';
 
   const { items = [], class: className = '', children, ...otherProps }: DropdownMenuProps = $props();
 </script>

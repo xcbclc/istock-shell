@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { toLocaleDateString } from '@istock/util';
+  import { toLocaleDateString } from '@istock-shell/util';
   import type { TPromptText } from '@/store/cmd/cmd-prompt';
   export let texts: TPromptText[] = [];
 
@@ -26,7 +26,7 @@
 </div>
 
 <style>
-  @reference "@istock/shell-ui/src/style/daisyui.css";
+  @reference "@istock-shell/ui/src/style/daisyui.css";
   .is-username {
     @apply text-accent font-semibold;
   }

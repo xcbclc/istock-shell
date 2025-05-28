@@ -1,5 +1,5 @@
 import { writable, type Writable, get } from 'svelte/store';
-import type { TModelData } from '@istock/iswork';
+import type { TModelData } from '@istock-shell/iswork';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { UserModel } from '@domains/global/user/user.model';
 

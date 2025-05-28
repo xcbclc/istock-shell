@@ -1,8 +1,8 @@
-[**@istock/iswork**](../README.md)
+[**@istock-shell/iswork**](../README.md)
 
-***
+---
 
-[@istock/iswork](../globals.md) / QueryBuilder
+[@istock-shell/iswork](../globals.md) / QueryBuilder
 
 # Class: QueryBuilder
 
@@ -58,7 +58,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:172
 
 `Partial`\<[`IParsedRequestParams`](../interfaces/IParsedRequestParams.md)\>
 
-***
+---
 
 ### query()
 
@@ -80,7 +80,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:160
 
 `string`
 
-***
+---
 
 ### resetCache()
 
@@ -94,7 +94,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:285
 
 `this`
 
-***
+---
 
 ### search()
 
@@ -114,7 +114,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:194
 
 `QueryBuilder`
 
-***
+---
 
 ### select()
 
@@ -136,7 +136,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:180
 
 `this`
 
-***
+---
 
 ### setFilter()
 
@@ -158,7 +158,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:205
 
 `this`
 
-***
+---
 
 ### setIncludeDeleted()
 
@@ -176,7 +176,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:290
 
 `this`
 
-***
+---
 
 ### setJoin()
 
@@ -198,7 +198,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:223
 
 `this`
 
-***
+---
 
 ### setLimit()
 
@@ -218,7 +218,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:259
 
 `this`
 
-***
+---
 
 ### setOffset()
 
@@ -238,7 +238,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:268
 
 `this`
 
-***
+---
 
 ### setOr()
 
@@ -260,7 +260,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:214
 
 `this`
 
-***
+---
 
 ### setPage()
 
@@ -280,7 +280,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:277
 
 `this`
 
-***
+---
 
 ### sortBy()
 
@@ -302,7 +302,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:241
 
 `this`
 
-***
+---
 
 ### create()
 
@@ -324,7 +324,7 @@ QueryBuilder工厂方法，创建一个QueryBuilder实例
 
 `QueryBuilder`
 
-***
+---
 
 ### getOptions()
 
@@ -340,7 +340,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:120
 
 IPartialQueryBuilderOptions QueryBuilder选项
 
-***
+---
 
 ### setOptions()
 
