@@ -44,11 +44,9 @@ outline: [2, 3]
 - **通知系统**: 显示重要市场信息的提醒
 - **详情查看**: 点击事件或任务可查看详细信息
 
-
 ::: raw
 <IStockShellUiExample src="./extend/icalendar/example/BasicExample.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

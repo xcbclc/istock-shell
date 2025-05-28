@@ -35,7 +35,6 @@ outline: [2, 3]
 - 默认尺寸为`md`（中）
 - 支持即时状态反馈
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -48,7 +47,6 @@ outline: [2, 3]
 - 支持组合表单验证
 - 保持样式继承一致性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleFieldset.svelte"></IStockShellUiExample>
 :::
@@ -60,7 +58,6 @@ outline: [2, 3]
 - **系统色系**：`primary`（主色）/`secondary`（辅色）/`accent`（强调色）
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleColor.svelte"></IStockShellUiExample>
@@ -76,7 +73,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleSize.svelte"></IStockShellUiExample>
 :::
@@ -85,7 +81,6 @@ outline: [2, 3]
 
 设置`disabled`属性启用禁用状态。
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleDisabled.svelte"></IStockShellUiExample>
 :::
@@ -93,7 +88,6 @@ outline: [2, 3]
 ### 半选状态实现
 
 `indeterminate`属性的应用，表示部分选中状态。
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleIndeterminate.svelte"></IStockShellUiExample>
@@ -107,7 +101,6 @@ outline: [2, 3]
 - 自定义SVG/组件
 - 保持图标交互一致性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleIcon.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -120,7 +113,6 @@ outline: [2, 3]
 - 自定义边框色（border-\*）
 - 自定义选中状态样式（checked:\*）
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleCustom.svelte"></IStockShellUiExample>
 :::
@@ -132,11 +124,9 @@ outline: [2, 3]
 - 实时获取开关状态变化
 - 支持状态同步到父组件
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/toggle/example/ToggleChange.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

@@ -37,7 +37,6 @@ outline: [2, 3]
 - 默认水平流式布局
 - 适用于基础数据指标场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/stat/example/StatDefault.svelte"></IStockShellUiExample>
 :::
@@ -49,7 +48,6 @@ outline: [2, 3]
 - 支持图标/图片双模式
 - 图标支持颜色/尺寸配置
 - 图标/图片支持自定义
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/stat/example/StatIconOrImage.svelte"></IStockShellUiExample>
@@ -64,7 +62,6 @@ outline: [2, 3]
 - 突出核心数据展示
 - 保持数值与描述的视觉平衡
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/stat/example/StatCenter.svelte"></IStockShellUiExample>
 :::
@@ -78,7 +75,6 @@ outline: [2, 3]
 - 支持长文本内容展示
 - 适用于空间受限场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/stat/example/StatVertical.svelte"></IStockShellUiExample>
 :::
@@ -86,7 +82,6 @@ outline: [2, 3]
 ### 响应式布局统计
 
 通过样式实现水平/垂直布局根据容器宽度切换。
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/stat/example/StatResponsive.svelte"></IStockShellUiExample>
@@ -100,11 +95,9 @@ outline: [2, 3]
 - 支持自定义按钮颜色/文本
 - 适用于需要快捷操作的统计场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/stat/example/StatButton.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

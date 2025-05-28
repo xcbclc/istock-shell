@@ -38,7 +38,6 @@ outline: [2, 3]
 - 使用 bind:show 控制显示状态
 - 通过 actions 配置操作按钮
 
-
 ::: raw
 <IStockShellUiExample src="./action/modal/example/ModalDefault.svelte"></IStockShellUiExample>
 :::
@@ -51,7 +50,6 @@ outline: [2, 3]
 - 通过 maskClosable 属性控制
 - 提供更灵活的关闭方式
 - 适用于非关键操作场景
-
 
 ::: raw
 <IStockShellUiExample src="./action/modal/example/ModalMaskClosable.svelte"></IStockShellUiExample>
@@ -66,7 +64,6 @@ outline: [2, 3]
 - 点击按钮自动关闭对话框
 - 保持简洁的交互方式
 
-
 ::: raw
 <IStockShellUiExample src="./action/modal/example/ModalCloseButton.svelte"></IStockShellUiExample>
 :::
@@ -80,7 +77,6 @@ outline: [2, 3]
 - 可自定义宽度和最大宽度
 - 灵活的样式定制能力
 
-
 ::: raw
 <IStockShellUiExample src="./action/modal/example/ModalCustom.svelte"></IStockShellUiExample>
 :::
@@ -92,11 +88,9 @@ outline: [2, 3]
 - 小屏幕时底部显示
 - 中等屏幕时居中显示
 
-
 ::: raw
 <IStockShellUiExample src="./action/modal/example/ModalResponsive.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

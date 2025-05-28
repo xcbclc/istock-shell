@@ -35,7 +35,6 @@ outline: [2, 3]
 - `options`: 可选项配置数组
 - 支持通过`bind:value`实现数据绑定
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/radio/example/RadioDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -50,7 +49,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/radio/example/RadioSize.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -63,7 +61,6 @@ outline: [2, 3]
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/radio/example/RadioColor.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -74,7 +71,6 @@ outline: [2, 3]
 
 - 全局禁用：设置组件`disabled`属性
 - 单项禁用：在options数组中设置`disabled: true`
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/radio/example/RadioDisabled.svelte" layout="column"></IStockShellUiExample>
@@ -88,7 +84,6 @@ outline: [2, 3]
 - 自定义边框色（border-\*）
 - 自定义选中状态样式（checked:\*）
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/radio/example/RadioCustomColor.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -99,7 +94,6 @@ outline: [2, 3]
 
 - `before`: 标签在选框左侧
 - `after`: 标签在选框右侧（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/radio/example/RadioLabel.svelte" layout="column"></IStockShellUiExample>
@@ -113,11 +107,9 @@ outline: [2, 3]
 - 同步接收选中的完整选项对象
 - 适用于表单选项同步场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/radio/example/RadioChange.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

@@ -36,7 +36,6 @@ outline: [2, 3]
 - 支持纯文本描述
 - 自动带有提示图标
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/alert/example/AlertDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -50,7 +49,6 @@ outline: [2, 3]
 - `warning`: 警告提示
 - `error`: 错误提示
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/alert/example/AlertType.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -62,7 +60,6 @@ outline: [2, 3]
 - 浅色背景效果
 - 柔和的视觉层次
 - 适用于次要信息展示
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/alert/example/AlertSoft.svelte" layout="column"></IStockShellUiExample>
@@ -76,7 +73,6 @@ outline: [2, 3]
 - 透明背景设计
 - 适用于卡片内部展示
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/alert/example/AlertOutline.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -88,7 +84,6 @@ outline: [2, 3]
 - 虚线边框效果
 - 轻量化视觉呈现
 - 适用于临时性提示
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/alert/example/AlertDash.svelte" layout="column"></IStockShellUiExample>
@@ -102,7 +97,6 @@ outline: [2, 3]
 - 内容区域弹性伸缩
 - 按钮组自动换行
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/alert/example/AlertResponsive.svelte"></IStockShellUiExample>
 :::
@@ -115,11 +109,9 @@ outline: [2, 3]
 - 支持自定义操作按钮
 - 灵活的内容布局结构
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/alert/example/AlertTitleAndDescription.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

@@ -31,7 +31,6 @@ outline: [2, 3]
 
 - `bind:value` 实现双向数据绑定
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/textarea/example/TextareaDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -44,7 +43,6 @@ outline: [2, 3]
 - 适用于沉浸式编辑场景
 - 保持焦点状态高亮
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/textarea/example/TextareaGhost.svelte"></IStockShellUiExample>
 :::
@@ -55,7 +53,6 @@ outline: [2, 3]
 
 - 实现表单分组语义化
 - 保持样式继承一致性
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/textarea/example/TextareaFieldset.svelte"></IStockShellUiExample>
@@ -68,7 +65,6 @@ outline: [2, 3]
 - **系统色系**：`primary`（主色）/`secondary`（辅色）/`accent`（强调色）
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/textarea/example/TextareaColor.svelte" layout="column"></IStockShellUiExample>
@@ -84,7 +80,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/textarea/example/TextareaSize.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -92,7 +87,6 @@ outline: [2, 3]
 ### 禁用状态控制
 
 设置`disabled`属性启用禁用。
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/textarea/example/TextareaDisabled.svelte"></IStockShellUiExample>
@@ -102,11 +96,9 @@ outline: [2, 3]
 
 通过`onChangeValue`回调实现实时获取输入内容变化。
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/textarea/example/TextareaChange.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

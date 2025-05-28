@@ -35,7 +35,6 @@ outline: [2, 3]
 - 通过`<ShEmpty />`快速创建空状态
 - 内置默认占位图标和文案
 
-
 ::: raw
 <IStockShellUiExample src="./extend/empty/example/EmptyDefault.svelte" layout="auto"></IStockShellUiExample>
 :::
@@ -49,11 +48,9 @@ outline: [2, 3]
 - 配合`ShText`定制文本样式
 - 使用`class`控制主题颜色
 
-
 ::: raw
 <IStockShellUiExample src="./extend/empty/example/EmptyCustomize.svelte" layout="auto"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

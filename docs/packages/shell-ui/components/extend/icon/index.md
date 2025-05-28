@@ -36,7 +36,6 @@ outline: [2, 3]
 - 系统图标：search/user等
 - 适用于导航栏/按钮等场景
 
-
 ::: raw
 <IStockShellUiExample src="./extend/icon/example/IconDefault.svelte"></IStockShellUiExample>
 :::
@@ -48,7 +47,6 @@ outline: [2, 3]
 - **系统色系**：`primary`（主色）/`secondary`（辅色）/`accent`（强调色）
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./extend/icon/example/IconColor.svelte"></IStockShellUiExample>
@@ -64,7 +62,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./extend/icon/example/IconSize.svelte"></IStockShellUiExample>
 :::
@@ -76,11 +73,9 @@ outline: [2, 3]
 - 通过插槽插入SVG代码
 - 引用外部图标资源
 
-
 ::: raw
 <IStockShellUiExample src="./extend/icon/example/IconCustom.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

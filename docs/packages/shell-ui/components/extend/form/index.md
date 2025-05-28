@@ -44,7 +44,6 @@ outline: [2, 3]
 - 统一的表单提交与重置处理
 - 适用于用户信息收集场景
 
-
 ::: raw
 <IStockShellUiExample src="./extend/form/example/FormDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -58,7 +57,6 @@ outline: [2, 3]
 - 标签位置灵活配置（labelPlacement）
 - 按钮位置自定义（buttonPlacement）
 - 适用于复杂信息分组展示
-
 
 ::: raw
 <IStockShellUiExample src="./extend/form/example/FormLayout.svelte" layout="column"></IStockShellUiExample>
@@ -74,7 +72,6 @@ outline: [2, 3]
 - 按钮尺寸联动变化
 - 适用于不同密度信息展示需求
 
-
 ::: raw
 <IStockShellUiExample src="./extend/form/example/FormSize.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -87,11 +84,9 @@ outline: [2, 3]
 - 实时验证与提交验证双模式
 - 适用于复杂业务表单与向导场景
 
-
 ::: raw
 <IStockShellUiExample src="./extend/form/example/FormValidate.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

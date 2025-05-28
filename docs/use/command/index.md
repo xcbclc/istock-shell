@@ -1,6 +1,6 @@
 # 命令列表
-所有内置命令列表。
 
+所有内置命令列表。
 
 ## 全局
 
@@ -16,7 +16,6 @@
 
 [用户](/use/command/global/user/user.cmd.html)
 
-
 ## A股
 
 [个股信息查询](/use/command/ag/ggxxcx/ggxxcx.cmd.html)
@@ -31,11 +30,9 @@
 
 [实时行情数据](/use/command/ag/sshqsj/sshqsj.cmd.html)
 
-
 ## 成都房产
 
 [成都二手房行情](/use/command/cdfc/cdesf/cdesf.cmd.html)
-
 
 ## 可转债
 
@@ -43,14 +40,10 @@
 
 [可转债实时数据](/use/command/kzz/kzzsssj/kzzsssj.cmd.html)
 
-
 ## 投资日历
 
 [投资日历](/use/command/tzrl/tzrl/tzrl.cmd.html)
 
-
 ## 网站导航
 
 [财经导航](/use/command/wzdh/cj/cj.cmd.html)
-
-

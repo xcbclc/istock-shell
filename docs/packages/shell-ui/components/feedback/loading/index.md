@@ -40,7 +40,6 @@ outline: [2, 3]
   - `lg`: 大
   - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/loading/example/LoadingStyle.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -52,7 +51,6 @@ outline: [2, 3]
 - **系统色系**：`primary`（主色）/`secondary`（辅色）/`accent`（强调色）
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/loading/example/LoadingColor.svelte"></IStockShellUiExample>
@@ -66,11 +64,9 @@ outline: [2, 3]
 - 通过插槽自定义内容
 - 适用于进度提示场景
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/loading/example/LoadingText.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

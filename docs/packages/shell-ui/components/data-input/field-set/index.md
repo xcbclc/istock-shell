@@ -34,7 +34,6 @@ outline: [2, 3]
 - 配合`<legend>`元素增强语义化
 - 支持与各类表单控件组合使用
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/field-set/example/FieldSetDefault.svelte"></IStockShellUiExample>
 :::
@@ -46,7 +45,6 @@ outline: [2, 3]
 - 添加背景色（bg-base-\*）
 - 设置容器边框（border-\*）
 - 调整圆角尺寸（rounded-\*）
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/field-set/example/FieldSetStyle.svelte"></IStockShellUiExample>
@@ -60,7 +58,6 @@ outline: [2, 3]
 - 支持混合输入类型（文本框/文本域）
 - 保持视觉样式统一性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/field-set/example/FieldSetMultiple.svelte"></IStockShellUiExample>
 :::
@@ -73,11 +70,9 @@ outline: [2, 3]
 - 集成表单验证提示
 - 搭配提交按钮使用
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/field-set/example/FieldSetLogin.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

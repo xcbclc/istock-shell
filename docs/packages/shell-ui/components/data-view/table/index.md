@@ -32,7 +32,6 @@ outline: [2, 3]
 
 通过`thead`/`tbody`数据驱动，适用于常规数据展示场景。
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableDefault.svelte"></IStockShellUiExample>
 :::
@@ -40,7 +39,6 @@ outline: [2, 3]
 ### 表格样式控制
 
 通过`Tailwind CSS`控制表格样式。
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableStyle.svelte"></IStockShellUiExample>
@@ -54,7 +52,6 @@ outline: [2, 3]
 - 支持多行同时激活
 - 适用于需要行级交互的数据表格
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableActive.svelte"></IStockShellUiExample>
 :::
@@ -66,7 +63,6 @@ outline: [2, 3]
 - 行悬停背景色变化
 - 与激活状态样式协同
 - 适用于需要增强交互体验的表格
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableHover.svelte"></IStockShellUiExample>
@@ -81,7 +77,6 @@ outline: [2, 3]
 - 增强长表格可读性
 - 适用于金融数据展示场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableZebra.svelte"></IStockShellUiExample>
 :::
@@ -94,7 +89,6 @@ outline: [2, 3]
 - 覆盖默认渲染逻辑
 - 适用于复杂表格定制需求
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableCustom.svelte"></IStockShellUiExample>
 :::
@@ -106,7 +100,6 @@ outline: [2, 3]
 - 支持xs/sm/md/lg/xl种尺寸
 - 全局字体大小适配
 - 适用于不同信息密度的场景
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableSize.svelte"></IStockShellUiExample>
@@ -121,7 +114,6 @@ outline: [2, 3]
 - 支持表头表尾双固定
 - 适用于大数据量表格
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TablePinned.svelte" demoStyle="max-height:unset"></IStockShellUiExample>
 :::
@@ -129,7 +121,6 @@ outline: [2, 3]
 ### 表格事件处理
 
 `onRowClick`、`onRowSelect`、`onRowSelectAll`的事件处理案例。
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableEvent.svelte"></IStockShellUiExample>
@@ -145,11 +136,9 @@ outline: [2, 3]
 - 支持按钮样式全局配置(buttonConfig)
 - 适用于需要行级操作的业务场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/table/example/TableButton.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

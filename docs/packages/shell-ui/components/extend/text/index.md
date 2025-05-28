@@ -39,7 +39,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./extend/text/example/TextSize.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -51,7 +50,6 @@ outline: [2, 3]
 - **系统色系**：`primary`（主色）/`secondary`（辅色）/`accent`（强调色）
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./extend/text/example/TextColor.svelte" layout="column"></IStockShellUiExample>
@@ -67,7 +65,6 @@ outline: [2, 3]
 | `semibold` | 600 | 标题文本 |
 | `bold` | 700 | 重要提示文本 |
 
-
 ::: raw
 <IStockShellUiExample src="./extend/text/example/TextWeight.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -79,7 +76,6 @@ outline: [2, 3]
 - **基础标签**：`p`/`span`/`a`
 - **语义标签**：`i`/`em`/`strong`
 - 默认使用`p`标签
-
 
 ::: raw
 <IStockShellUiExample src="./extend/text/example/TextTag.svelte" layout="column"></IStockShellUiExample>
@@ -96,7 +92,6 @@ outline: [2, 3]
 > [!WARNING]
 > 对齐属性需配合容器宽度使用
 
-
 ::: raw
 <IStockShellUiExample src="./extend/text/example/TextAlign.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -109,11 +104,9 @@ outline: [2, 3]
 - 覆盖全局样式配置
 - 适用于复杂排版场景
 
-
 ::: raw
 <IStockShellUiExample src="./extend/text/example/TextSelf.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

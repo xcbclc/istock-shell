@@ -35,7 +35,6 @@ outline: [2, 3]
 - `bind:value` 实现双向数据绑定
 - 默认类型为`text`
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -47,7 +46,6 @@ outline: [2, 3]
 - `prefixRender`: 前置内容
 - `suffixRender`: 后置内容
 - 支持组合表单控件
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputSlot.svelte" layout="column"></IStockShellUiExample>
@@ -61,7 +59,6 @@ outline: [2, 3]
 - 适用于沉浸式输入场景
 - 保持焦点状态可见性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputGhost.svelte"></IStockShellUiExample>
 :::
@@ -74,7 +71,6 @@ outline: [2, 3]
 - 支持组合表单验证
 - 保持样式继承一致性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputFieldset.svelte"></IStockShellUiExample>
 :::
@@ -86,7 +82,6 @@ outline: [2, 3]
 - **系统色系**：`primary`/`secondary`/`accent`
 - **状态指示**：`info`/`success`/`warning`/`error`
 - **中性色**：`neutral`（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputColor.svelte" layout="column"></IStockShellUiExample>
@@ -102,7 +97,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputSize.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -110,7 +104,6 @@ outline: [2, 3]
 ### 禁用状态控制
 
 设置`disabled`属性实现禁用模式。
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputDisabled.svelte"></IStockShellUiExample>
@@ -124,7 +117,6 @@ outline: [2, 3]
 - **专用类型**：tel/url/search
 - **数据输入**：number/date/time
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputType.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -137,7 +129,6 @@ outline: [2, 3]
 - 适配不同输入类型
 - 保持图标交互一致性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputIcon.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -148,7 +139,6 @@ outline: [2, 3]
 
 - HTML5原生验证（required/pattern）
 - 自定义验证规则
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputValidator.svelte" layout="column"></IStockShellUiExample>
@@ -161,11 +151,9 @@ outline: [2, 3]
 - 实时获取输入值变化
 - 适用于表单即时验证场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/input/example/InputChange.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

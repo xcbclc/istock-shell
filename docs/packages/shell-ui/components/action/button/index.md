@@ -34,7 +34,6 @@ outline: [2, 3]
 
 基础按钮样式，不包含任何特殊样式参数。当不设置`color`属性时，默认采用中性色（neutral）作为主色调，适合作为其他按钮变体的基础模板。
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonDefault.svelte"></IStockShellUiExample>
 :::
@@ -51,7 +50,6 @@ outline: [2, 3]
 | `lg`       | 重点操作     |
 | `xl`       | 全屏弹窗操作 |
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonSize.svelte"></IStockShellUiExample>
 :::
@@ -59,7 +57,6 @@ outline: [2, 3]
 ### 响应式适配
 
 通过Tailwind断点系统实现自适应。
-
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonResponsive.svelte"></IStockShellUiExample>
@@ -78,7 +75,6 @@ outline: [2, 3]
 - `neutral` - 中性操作
 - `info` - 信息提示
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonColor.svelte"></IStockShellUiExample>
 :::
@@ -86,7 +82,6 @@ outline: [2, 3]
 ### 柔和变体
 
 通过`soft`布尔属性启用低饱和度背景，这样可以创建视觉层次结构，减少高对比度带来的视觉疲劳。
-
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonSoft.svelte"></IStockShellUiExample>
@@ -100,7 +95,6 @@ outline: [2, 3]
 - 深色背景环境
 - 需要降低按钮视觉权重时
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonOutline.svelte"></IStockShellUiExample>
 :::
@@ -108,7 +102,6 @@ outline: [2, 3]
 ### 虚线边框按钮
 
 用于特殊场景的边框样式按钮，通过`dash`属性为`true`添加虚线边框样式。该属性为布尔类型，默认值为`false`。
-
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonDash.svelte"></IStockShellUiExample>
@@ -118,7 +111,6 @@ outline: [2, 3]
 
 **通过`active`属性实现按钮的交互状态反馈**，用于表示当前选中或需要强提示的操作场景。
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonActive.svelte"></IStockShellUiExample>
 :::
@@ -126,7 +118,6 @@ outline: [2, 3]
 ### 幽灵、链接按钮
 
 幽灵按钮和链接按钮分别使用`ghost`、`link`属性定义。
-
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonTextAndLink.svelte"></IStockShellUiExample>
@@ -136,7 +127,6 @@ outline: [2, 3]
 
 比普通按钮稍微再宽一些的按钮，使用`wide`属性定义宽按钮。
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonWide.svelte"></IStockShellUiExample>
 :::
@@ -144,7 +134,6 @@ outline: [2, 3]
 ### 自定义标签
 
 使用`tag`属性可以灵活的自定义元素标签名，提供`a`、`button`、`input`、`div`标签的支持。
-
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonTag.svelte"></IStockShellUiExample>
@@ -158,7 +147,6 @@ outline: [2, 3]
 - 阻止所有交互事件
 - 保持原有布局占位
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonDisabled.svelte"></IStockShellUiExample>
 :::
@@ -166,7 +154,6 @@ outline: [2, 3]
 ### 图标按钮
 
 支持通过插槽嵌入SVG图标，可配合`ShIcon`组件使用。
-
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonIcon.svelte"></IStockShellUiExample>
@@ -176,7 +163,6 @@ outline: [2, 3]
 
 块级按钮（Block Button）是表单和操作场景中的核心交互元素，通过`block`布尔属性控制按钮宽度，使其撑满父容器。
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonBlock.svelte"></IStockShellUiExample>
 :::
@@ -184,7 +170,6 @@ outline: [2, 3]
 ### 加载状态
 
 通过`loading`布尔属性启用加载指示器。
-
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonLoading.svelte"></IStockShellUiExample>
@@ -201,11 +186,9 @@ outline: [2, 3]
 | Facebook | `bg-[#1A77F2] text-white`   | #1A77F2/#FFFFFF |
 | Apple    | `bg-black text-white`       | #000000/#FFFFFF |
 
-
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonLogins.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

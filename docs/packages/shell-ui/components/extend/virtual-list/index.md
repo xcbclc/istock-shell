@@ -37,7 +37,6 @@ outline: [2, 3]
 - 可视区域智能渲染（range计算）
 - 适用于长列表性能优化场景
 
-
 ::: raw
 <IStockShellUiExample src="./extend/virtual-list/example/VirtualListDefault.svelte"></IStockShellUiExample>
 :::
@@ -49,11 +48,9 @@ outline: [2, 3]
 - 大数据量表格渲染优化
 - 固定表头滚动（pinRows）
 
-
 ::: raw
 <IStockShellUiExample src="./extend/virtual-list/example/VirtualTable.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

@@ -34,7 +34,6 @@ outline: [2, 3]
 
 最简单的数据列表使用方式，展示基础的输入建议功能。通过`options`属性配置预设选项。
 
-
 ::: raw
 <IStockShellUiExample src="./extend/data-list/example/DataListDefault.svelte"></IStockShellUiExample>
 :::
@@ -42,7 +41,6 @@ outline: [2, 3]
 ### 自定义渲染
 
 展示如何自定义选项的渲染内容，可以包含图标、标签等额外信息。
-
 
 ::: raw
 <IStockShellUiExample src="./extend/data-list/example/DataListCustom.svelte"></IStockShellUiExample>
@@ -52,11 +50,9 @@ outline: [2, 3]
 
 展示如何根据输入内容动态更新选项列表，实现搜索建议功能。
 
-
 ::: raw
 <IStockShellUiExample src="./extend/data-list/example/DataListDynamic.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

@@ -32,7 +32,6 @@ outline: [2, 3]
 - `bind:value` 实现双向数据绑定
 - `options` 设置可选项数组
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/select/example/SelectDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -45,7 +44,6 @@ outline: [2, 3]
 - 适用于沉浸式选择场景
 - 保持焦点状态可见性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/select/example/SelectGhost.svelte"></IStockShellUiExample>
 :::
@@ -56,7 +54,6 @@ outline: [2, 3]
 
 - 实现表单分组语义化
 - 保持样式继承一致性
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/select/example/SelectFieldset.svelte"></IStockShellUiExample>
@@ -72,7 +69,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/select/example/SelectSize.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -85,7 +81,6 @@ outline: [2, 3]
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/select/example/SelectColor.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -96,7 +91,6 @@ outline: [2, 3]
 
 - 全局禁用：设置`disabled`属性
 - 单项禁用：在options数组中设置`disabled: true`
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/select/example/SelectDisabled.svelte" layout="column"></IStockShellUiExample>
@@ -110,11 +104,9 @@ outline: [2, 3]
 - 支持异步数据更新
 - 适用于动态表单更新场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/select/example/SelectChange.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

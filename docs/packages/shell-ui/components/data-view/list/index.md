@@ -38,7 +38,6 @@ outline: [2, 3]
 - 集成`actions`快捷操作按钮
 - 适用于标准数据列表场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/list/example/ListDefault.svelte"></IStockShellUiExample>
 :::
@@ -51,7 +50,6 @@ outline: [2, 3]
 - 通过`list-col-grow`控制列宽
 - 灵活的按钮操作配置
 - 适用于复杂布局定制场景
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/list/example/ListRow.svelte"></IStockShellUiExample>
@@ -66,7 +64,6 @@ outline: [2, 3]
 - 保持操作按钮固定位置
 - 适用于详细信息展示场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/list/example/ListColWrap.svelte"></IStockShellUiExample>
 :::
@@ -80,11 +77,9 @@ outline: [2, 3]
 - 支持行点击和按钮点击事件隔离
 - 适用于复杂交互场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/list/example/ListRowEvent.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

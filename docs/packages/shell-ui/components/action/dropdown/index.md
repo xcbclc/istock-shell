@@ -36,11 +36,9 @@ outline: [2, 3]
 - 默认向下弹出
 - 支持文本菜单项
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownDefault.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
-
 
 ### 打开方式
 
@@ -50,7 +48,6 @@ outline: [2, 3]
 
 - 使用原生 details 元素
 - 语义化标记结构
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownMethod1.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -65,7 +62,6 @@ outline: [2, 3]
 - 可集成复杂交互逻辑
 - 适用于高级定制场景
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownMethod2.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -74,11 +70,9 @@ outline: [2, 3]
 
 当按钮聚焦时，内容会显示出来。
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownMethod3.svelte" demoStyle="padding: 100px 0" layout="column"></IStockShellUiExample>
 :::
-
 
 ### 位置
 
@@ -87,7 +81,6 @@ outline: [2, 3]
 展示起始对齐的下拉菜单：
 
 - 弹出位置：start（起始位置）
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownStart.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -100,7 +93,6 @@ outline: [2, 3]
 - 弹出位置：end（右侧）
 - 菜单与触发元素右对齐
 - 适合有限水平空间
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownEnd.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -115,7 +107,6 @@ outline: [2, 3]
 - 适合重要操作提示
 - 需要足够垂直空间
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownCenter.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -126,7 +117,6 @@ outline: [2, 3]
 
 - 弹出位置：top（顶部）
 - 适合底部触发场景
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownTop.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -141,7 +131,6 @@ outline: [2, 3]
 - 适合导航栏下拉场景
 - 保持对称视觉效果
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownTopCenter.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -154,7 +143,6 @@ outline: [2, 3]
 - 菜单与触发元素右对齐
 - 适合右上角操作菜单
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownTopEnd.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -165,7 +153,6 @@ outline: [2, 3]
 
 - 弹出位置：bottom（底部）
 - 适合顶部触发场景
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownBottom.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -180,7 +167,6 @@ outline: [2, 3]
 - 适合对称布局需求
 - 保持视觉平衡性
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownBottomCenter.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -192,7 +178,6 @@ outline: [2, 3]
 - 弹出位置：bottomEnd（底部右侧）
 - 菜单与触发元素右对齐
 - 适合有限水平空间
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownBottomEnd.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -207,7 +192,6 @@ outline: [2, 3]
 - 与触发元素左对齐
 - 需要足够水平空间
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownLeft.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -220,7 +204,6 @@ outline: [2, 3]
 - 垂直方向居中显示
 - 适合侧边导航场景
 - 保持菜单可见性
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownLeftCenter.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -235,7 +218,6 @@ outline: [2, 3]
 - 适合长列表展示
 - 防止顶部空间不足
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownLeftEnd.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -248,7 +230,6 @@ outline: [2, 3]
 - 适合左侧空间不足场景
 - 与触发元素右对齐
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownRight.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -260,7 +241,6 @@ outline: [2, 3]
 - 弹出位置：rightEnd（右侧底部）
 - 菜单底部对齐触发器
 - 适合表格操作菜单
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownRightEnd.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -275,11 +255,9 @@ outline: [2, 3]
 - 适合长内容展示
 - 保持视觉平衡性
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownRightCenter.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
-
 
 ### 悬停触发
 
@@ -289,7 +267,6 @@ outline: [2, 3]
 - 移出后自动关闭
 - 适合导航菜单场景
 - 保持菜单可见性控制
-
 
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownHover.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
@@ -304,7 +281,6 @@ outline: [2, 3]
 - 适用于教程/引导场景
 - 可结合条件渲染使用
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownOpen.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
@@ -317,11 +293,9 @@ outline: [2, 3]
 - 支持任意HTML内容
 - 完全控制样式和交互
 
-
 ::: raw
 <IStockShellUiExample src="./action/dropdown/example/DropdownCustomize.svelte" demoStyle="padding: 100px 0"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

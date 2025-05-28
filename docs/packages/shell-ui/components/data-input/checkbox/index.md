@@ -39,7 +39,6 @@ outline: [2, 3]
 - `options`: 可选项配置数组
 - 支持通过`bind:value`实现数据双向绑定
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -51,7 +50,6 @@ outline: [2, 3]
 - 适用于表单分组场景
 - `ShFieldSet`可以添加分组标题
 - 支持与其他表单元素组合使用
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckBoxFieldset.svelte"></IStockShellUiExample>
@@ -67,7 +65,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxSize.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -79,7 +76,6 @@ outline: [2, 3]
 - **系统色系**：primary（主色）、secondary（辅色）、accent（强调色）
 - **状态色系**：info（信息）、success（成功）、warning（警告）、error（错误）
 - **中性色**：neutral（中性灰）
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxColor.svelte" layout="column"></IStockShellUiExample>
@@ -93,7 +89,6 @@ outline: [2, 3]
 - 单项禁用：在options数组中设置`disabled: true`
 - 禁用时保持样式可见性
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxDisabled.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -105,7 +100,6 @@ outline: [2, 3]
 - 实现「全选/全不选」功能
 - 表示部分选中状态
 - 需配合派生状态（derived state）使用
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxIndeterminate.svelte" layout="column"></IStockShellUiExample>
@@ -119,7 +113,6 @@ outline: [2, 3]
 - 自定义边框色（border-\*）
 - 自定义选中状态样式（checked:\*）
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxCustomColor.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -130,7 +123,6 @@ outline: [2, 3]
 
 - `before`: 标签在选框左侧
 - `after`: 标签在选框右侧（默认）
-
 
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxLabel.svelte" layout="column"></IStockShellUiExample>
@@ -144,11 +136,9 @@ outline: [2, 3]
 - 获取对应的完整选项对象数组
 - 适用于实时同步选中状态到父组件的场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-input/checkbox/example/CheckboxChange.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

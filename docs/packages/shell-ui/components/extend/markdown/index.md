@@ -36,7 +36,6 @@ outline: [2, 3]
 - 实时渲染HTML内容
 - 适用于文档展示/内容管理场景
 
-
 <IStockShellUiExample src="./extend/markdown/example/MarkdownDefault.svelte" raw="false"></IStockShellUiExample>
 
 ### 实时编辑与预览
@@ -47,11 +46,9 @@ outline: [2, 3]
 - 输入内容即时渲染为HTML
 - 支持代码块实时语法高亮（` ```language `）
 
-
 ::: raw
 <IStockShellUiExample src="./extend/markdown/example/MarkdownLive.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

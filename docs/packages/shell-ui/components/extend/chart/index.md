@@ -34,11 +34,9 @@ outline: [2, 3]
 
 通过G2图表配置`type: 'interval'`及相关配置声明柱状图。
 
-
 ::: raw
 <IStockShellUiExample src="./extend/chart/example/ChartDefault.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

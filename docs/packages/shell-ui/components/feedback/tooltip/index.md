@@ -35,7 +35,6 @@ outline: [2, 3]
 - 默认悬停触发显示
 - 适用于简单信息提示场景
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/tooltip/example/TooltipDefault.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -47,7 +46,6 @@ outline: [2, 3]
 - 支持HTML/组件内容
 - 可添加动画效果
 - 自定义样式类配置
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/tooltip/example/TooltipCustomizeContent.svelte" layout="column"></IStockShellUiExample>
@@ -61,7 +59,6 @@ outline: [2, 3]
 - 可编程控制显示/隐藏
 - 适用于引导提示场景
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/tooltip/example/TooltipOpen.svelte" layout="column"></IStockShellUiExample>
 :::
@@ -72,7 +69,6 @@ outline: [2, 3]
 
 - 支持四个方位：`top`/`right`/`bottom`/`left`
 - 自动调整显示位置
-
 
 ::: raw
 <IStockShellUiExample src="./feedback/tooltip/example/TooltipPosition.svelte" layout="column" gap="xl"></IStockShellUiExample>
@@ -86,7 +82,6 @@ outline: [2, 3]
 - **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
 - **中性色**：`neutral`（默认）
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/tooltip/example/TooltipColor.svelte" layout="column" gap="xl"></IStockShellUiExample>
 :::
@@ -95,11 +90,9 @@ outline: [2, 3]
 
 通过`class`属性使用Tailwind CSS的`lg:tooltip`等响应类完成响应式布局适配。
 
-
 ::: raw
 <IStockShellUiExample src="./feedback/tooltip/example/TooltipResponsive.svelte" layout="column"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

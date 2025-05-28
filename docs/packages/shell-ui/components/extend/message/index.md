@@ -36,11 +36,9 @@ outline: [2, 3]
 - 点击按钮触发对应类型的消息
 - 默认 3 秒后自动关闭
 
-
 ::: raw
 <IStockShellUiExample src="./extend/message/example/MessageDefault.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

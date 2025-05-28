@@ -31,11 +31,9 @@ outline: [2, 3]
 
 通过`stats`和`items`属性可以实现统计卡片与可视化图表混合布局。
 
-
 ::: raw
 <IStockShellUiExample src="./extend/data-grid/example/DataGridDefault.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 

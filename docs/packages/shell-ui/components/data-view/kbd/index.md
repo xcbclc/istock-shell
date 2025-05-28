@@ -38,7 +38,6 @@ outline: [2, 3]
 - 自动应用键盘样式
 - 适用于快捷键提示场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/kbd/example/KbdDefault.svelte"></IStockShellUiExample>
 :::
@@ -53,7 +52,6 @@ outline: [2, 3]
 - `lg`: 大
 - `xl`: 超大
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/kbd/example/KbdSize.svelte"></IStockShellUiExample>
 :::
@@ -66,7 +64,6 @@ outline: [2, 3]
 - 自动保持垂直对齐
 - 适用于操作指引文档
 - 可结合说明文本使用
-
 
 ::: raw
 <IStockShellUiExample src="./data-view/kbd/example/KbdText.svelte"></IStockShellUiExample>
@@ -81,11 +78,9 @@ outline: [2, 3]
 - 保持视觉样式一致性
 - 适用于快捷键说明场景
 
-
 ::: raw
 <IStockShellUiExample src="./data-view/kbd/example/KbdCombination.svelte"></IStockShellUiExample>
 :::
-
 
 ## API 参考
 
