@@ -1,12 +1,12 @@
 <script lang="ts" module>
-  import type { TControllerMethodCmdRouteOptions } from '@istock-shell/iswork';
+  import type { ControllerMethodCmdRouteOptions } from '@istock-shell/iswork';
   export interface CmdOutputDocTableHeader {
     value: string;
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   }
   export interface CmdOutputDocTableProps {
     headers: CmdOutputDocTableHeader[];
-    options: TControllerMethodCmdRouteOptions[];
+    options: ControllerMethodCmdRouteOptions[];
     type: 1 | 2;
   }
 </script>

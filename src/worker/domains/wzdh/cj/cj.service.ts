@@ -1,4 +1,4 @@
-import { Injectable, type IQueryParamsOptions, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type QueryParamsOptions, type ModelData } from '@istock-shell/iswork';
 import { CjModel } from './cj.model';
 
 @Injectable()
@@ -19,12 +19,12 @@ export class CjService {
     }
   }
 
-  async getSiteList(tag?: string): Promise<Array<TModelData<CjModel>>> {
+  async getSiteList(tag?: string): Promise<Array<ModelData<CjModel>>> {
     if (!this.#isInit) {
       await new Promise((resolve) => setTimeout(resolve, 20));
       return await this.getSiteList(tag);
     }
-    const query: IQueryParamsOptions = {};
+    const query: QueryParamsOptions = {};
     if (tag) {
       query.filter = ['tag', 'eq', tag];
     }

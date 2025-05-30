@@ -6,11 +6,11 @@ import {
   Message,
   MessageHandler,
   Cmdp,
-  type TModelCreate,
+  type ModelCreate,
   type IMessageHandler,
-  type TControllerMethodComponentOutput,
+  type ControllerMethodComponentOutput,
   ApplicationContext,
-  type TOrmQuery,
+  type OrmQuery,
 } from '@istock-shell/iswork';
 import type { FormItemConfig, FormProps } from '@istock-shell/ui';
 import { UserService } from './user.service';
@@ -72,7 +72,7 @@ export class UserController {
     const password = payload.密码 ?? payload.options?.密码;
     const usernameFormField = this.#getFormFieldData(cmd.用户登录.options.账号.name);
     const passwordFormField = this.#getFormFieldData(cmd.用户登录.options.密码.name);
-    const output: TControllerMethodComponentOutput<FormProps> = {
+    const output: ControllerMethodComponentOutput<FormProps> = {
       component: 'ShForm',
       props: {
         class: 'inline-grid px-4 py-2',
@@ -101,7 +101,7 @@ export class UserController {
       return { output: handler.cmdReplace(output) };
     }
     const result = await this.userService.login(username, password);
-    const loginOutputs: TControllerMethodComponentOutput[] = [
+    const loginOutputs: ControllerMethodComponentOutput[] = [
       {
         component: 'ShText',
         props: {
@@ -129,12 +129,12 @@ export class UserController {
   }
 
   @Method('create')
-  async create(@Payload() payload: TModelCreate<UserModel>) {
+  async create(@Payload() payload: ModelCreate<UserModel>) {
     return await this.userService.create(payload);
   }
 
   @Method('find')
-  async find(@Payload() query: TOrmQuery) {
+  async find(@Payload() query: OrmQuery) {
     return await this.userService.find(query);
   }
 }

@@ -1,4 +1,9 @@
-import { stringify, parse } from 'qs';
+/**
+ * @fileoverview ORM 查询构建器
+ * @description 提供灵活的查询构建功能，支持字段选择、过滤、排序、分页、连接等操作
+ */
+
+import { parse, stringify } from 'qs';
 import {
   isObject,
   isString,
@@ -10,52 +15,62 @@ import {
   isStringFull,
   ScopeError,
 } from '@istock-shell/util';
-import { ECondOperator } from '../enums';
-import type { IParsedRequestParams, IPartialQueryBuilderOptions, IQueryParamsOptions } from './interfaces';
+import { CondOperator } from '../enums';
+import type { ParsedRequestParams, PartialQueryBuilderOptions, QueryParamsOptions } from './interfaces';
 import type {
-  TQueryFields,
-  TQueryFilter,
-  TQueryFilterArr,
-  TQueryJoin,
-  TQueryJoinArr,
-  TQuerySort,
-  TQuerySortArr,
-  TSCondition,
+  QueryFields,
+  QueryFilter,
+  QueryFilterArr,
+  QueryJoin,
+  QueryJoinArr,
+  QuerySort,
+  QuerySortArr,
+  SearchCondition,
 } from './types';
 
-// QueryBuilder的选项数据
-export type TQueryBuilderOptions = Required<IPartialQueryBuilderOptions> & {
-  paramNamesMap: Required<IPartialQueryBuilderOptions['paramNamesMap']>;
+/**
+ * 查询构建器选项类型
+ * @description QueryBuilder 的完整选项配置类型
+ */
+export type QueryBuilderOptions = Required<PartialQueryBuilderOptions> & {
+  paramNamesMap: Required<PartialQueryBuilderOptions['paramNamesMap']>;
 };
 
-// paramNamesMap的key数据
-export type TQueryBuilderOptionsKeys = keyof IQueryParamsOptions;
-
-export const sortOrdersList = ['ASC', 'DESC'];
 /**
- * eq (=, equal)
- * ne (!=, not equal)
- * gt (>, greater than)
- * lt (<, lower that)
- * gte (>=, greater than or equal)
- * lte (<=, lower than or equal)
- * starts (LIKE val%, starts with)
- * ends (LIKE %val, ends with)
- * cont (LIKE %val%, contains)
- * excl (NOT LIKE %val%, not contains)
- * in (IN, in range, accepts multiple values)
- * notin (NOT IN, not in range, accepts multiple values)
- * isnull (IS NULL, is NULL, doesn't accept value)
- * notnull (IS NOT NULL, not NULL, doesn't accept value)
- * between (BETWEEN, between, accepts two values)
- * eqL (LOWER(field) =, equal)
- * neL (LOWER(field) !=, not equal)
- * startsL (LIKE|ILIKE val%)
- * endsL (LIKE|ILIKE %val, ends with)
- * contL (LIKE|ILIKE %val%, contains)
- * exclL (NOT LIKE|ILIKE %val%, not contains)
- * inL (LOWER(field) IN, in range, accepts multiple values)
- * notinL (LOWER(field) NOT IN, not in range, accepts multiple values)
+ * 查询构建器选项键类型
+ * @description paramNamesMap 的键类型
+ */
+export type QueryBuilderOptionsKeys = keyof QueryParamsOptions;
+
+/** 排序方向列表 */
+export const sortOrdersList = ['ASC', 'DESC'];
+
+/**
+ * 比较操作符列表
+ * @description 支持的比较操作符：
+ * - eq (=, equal) - 等于
+ * - ne (!=, not equal) - 不等于
+ * - gt (>, greater than) - 大于
+ * - lt (<, lower that) - 小于
+ * - gte (>=, greater than or equal) - 大于等于
+ * - lte (<=, lower than or equal) - 小于等于
+ * - starts (LIKE val%, starts with) - 以...开始
+ * - ends (LIKE %val, ends with) - 以...结束
+ * - cont (LIKE %val%, contains) - 包含
+ * - excl (NOT LIKE %val%, not contains) - 不包含
+ * - in (IN, in range, accepts multiple values) - 在范围内
+ * - notin (NOT IN, not in range, accepts multiple values) - 不在范围内
+ * - isnull (IS NULL, is NULL, doesn't accept value) - 为空
+ * - notnull (IS NOT NULL, not NULL, doesn't accept value) - 不为空
+ * - between (BETWEEN, between, accepts two values) - 在两值之间
+ * - eqL (LOWER(field) =, equal) - 小写等于
+ * - neL (LOWER(field) !=, not equal) - 小写不等于
+ * - startsL (LIKE|ILIKE val%) - 小写以...开始
+ * - endsL (LIKE|ILIKE %val, ends with) - 小写以...结束
+ * - contL (LIKE|ILIKE %val%, contains) - 小写包含
+ * - exclL (NOT LIKE|ILIKE %val%, not contains) - 小写不包含
+ * - inL (LOWER(field) IN, in range, accepts multiple values) - 小写在范围内
+ * - notinL (LOWER(field) NOT IN, not in range, accepts multiple values) - 小写不在范围内
  */
 export const deprecatedComparisonOperatorsList = [
   'eq',
@@ -74,13 +89,31 @@ export const deprecatedComparisonOperatorsList = [
   'notnull',
   'between',
 ];
+
+/** 完整的比较操作符列表 */
 export const comparisonOperatorsList = [
   ...deprecatedComparisonOperatorsList,
-  ...Object.values(ECondOperator).map((n) => n),
+  ...Object.values(CondOperator).map((n) => n),
 ];
 
+/**
+ * 查询构建器类
+ * @description 提供链式调用的查询构建功能，支持字段选择、过滤、排序、分页等操作
+ * @example
+ * ```typescript
+ * const qb = QueryBuilder.create()
+ *   .select(['id', 'name', 'email'])
+ *   .where({ name: { $cont: 'john' } })
+ *   .sort([{ field: 'createdAt', order: 'DESC' }])
+ *   .limit(10)
+ *   .offset(0);
+ *
+ * const queryString = qb.query();
+ * // 输出: fields=id,name,email&filter=name||$cont||john&sort=createdAt,DESC&limit=10&offset=0
+ * ```
+ */
 export class QueryBuilder {
-  static #options: TQueryBuilderOptions = {
+  static #options: QueryBuilderOptions = {
     delim: '||',
     delimStr: ',',
     paramNamesMap: {
@@ -102,7 +135,7 @@ export class QueryBuilder {
    * 设置参数
    * @param options QueryBuilder选项
    */
-  static setOptions(options: IPartialQueryBuilderOptions) {
+  static setOptions(options: PartialQueryBuilderOptions) {
     QueryBuilder.#options = {
       ...QueryBuilder.#options,
       ...options,
@@ -115,9 +148,9 @@ export class QueryBuilder {
 
   /**
    * 获取参数
-   * @return IPartialQueryBuilderOptions QueryBuilder选项
+   * @return PartialQueryBuilderOptions QueryBuilder选项
    */
-  static getOptions(): IPartialQueryBuilderOptions {
+  static getOptions(): PartialQueryBuilderOptions {
     return QueryBuilder.#options;
   }
 
@@ -125,26 +158,26 @@ export class QueryBuilder {
    * QueryBuilder工厂方法，创建一个QueryBuilder实例
    * @param params 查询参数选项
    */
-  static create(params?: IQueryParamsOptions | string): QueryBuilder {
+  static create(params?: QueryParamsOptions | string): QueryBuilder {
     const qb = new QueryBuilder(params);
     return qb;
   }
 
   #queryString: string = '';
 
-  #queryObject: Partial<IParsedRequestParams> = {};
+  #queryObject: Partial<ParsedRequestParams> = {};
 
   /**
    * 获取参数
    */
-  get options(): TQueryBuilderOptions {
+  get options(): QueryBuilderOptions {
     return QueryBuilder.#options;
   }
 
   /**
    * @param params 查询字符串
    */
-  constructor(params?: string | IQueryParamsOptions) {
+  constructor(params?: string | QueryParamsOptions) {
     if (params && isString(params)) {
       this.#createFromParams(parse(params));
     }
@@ -177,7 +210,7 @@ export class QueryBuilder {
    * 选择字段
    * @param fields 数组字段名
    */
-  select(fields: TQueryFields): this {
+  select(fields: QueryFields): this {
     if (isArrayFull(fields)) {
       if (!isArrayStrings(fields)) {
         throw new ScopeError(`iswork.${this.constructor.name}`, 'fields字段应该为字符串数组');
@@ -191,7 +224,7 @@ export class QueryBuilder {
    * 设置搜索条件
    * @param 条件类型参数
    */
-  search(s: TSCondition) {
+  search(s: SearchCondition) {
     if (!isNil(s) && isObject(s)) {
       this.#queryObject.search = s;
     }
@@ -202,7 +235,7 @@ export class QueryBuilder {
    * 设置过滤
    * @param f 过滤条件
    */
-  setFilter(f: TQueryFilter | TQueryFilterArr | Array<TQueryFilter | TQueryFilterArr>): this {
+  setFilter(f: QueryFilter | QueryFilterArr | Array<QueryFilter | QueryFilterArr>): this {
     this.#setCondition(f, 'filter');
     return this;
   }
@@ -211,7 +244,7 @@ export class QueryBuilder {
    * 设置或逻辑
    * @param f 过滤条件
    */
-  setOr(f: TQueryFilter | TQueryFilterArr | Array<TQueryFilter | TQueryFilterArr>): this {
+  setOr(f: QueryFilter | QueryFilterArr | Array<QueryFilter | QueryFilterArr>): this {
     this.#setCondition(f, 'or');
     return this;
   }
@@ -220,11 +253,11 @@ export class QueryBuilder {
    * 设置联表查询
    * @param j 联表查询选项
    */
-  setJoin(j: TQueryJoin | TQueryJoinArr | Array<TQueryJoin | TQueryJoinArr>): this {
+  setJoin(j: QueryJoin | QueryJoinArr | Array<QueryJoin | QueryJoinArr>): this {
     if (!isNil(j)) {
       const join = this.#queryObject.join ?? [];
-      let newJoin: TQueryJoin[] = [];
-      if (this.#assertNestCond<Array<TQueryJoin | TQueryJoinArr>>(j)) {
+      let newJoin: QueryJoin[] = [];
+      if (this.#assertNestCond<Array<QueryJoin | QueryJoinArr>>(j)) {
         newJoin = j.map((arr) => this.#parseJoin(arr));
       } else {
         newJoin = [this.#parseJoin(j)];
@@ -238,11 +271,11 @@ export class QueryBuilder {
    * 设置排序
    * @param s 排序参数条件
    */
-  sortBy(s: TQuerySort | TQuerySortArr | Array<TQuerySort | TQuerySortArr>): this {
+  sortBy(s: QuerySort | QuerySortArr | Array<QuerySort | QuerySortArr>): this {
     if (!isNil(s)) {
       const sort = this.#queryObject.sort ?? [];
-      let newSort: TQuerySort[] = [];
-      if (this.#assertNestCond<Array<TQuerySort | TQuerySortArr>>(s)) {
+      let newSort: QuerySort[] = [];
+      if (this.#assertNestCond<Array<QuerySort | QuerySortArr>>(s)) {
         newSort = s.map((o) => this.#parseSortBy(o));
       } else {
         newSort = [this.#parseSortBy(s)];
@@ -297,7 +330,7 @@ export class QueryBuilder {
    * @param params
    * @private
    */
-  #createFromParams(params: IQueryParamsOptions): this {
+  #createFromParams(params: QueryParamsOptions): this {
     params.fields && this.select(params.fields);
     params.search && this.search(params.search);
     params.filter && this.setFilter(params.filter);
@@ -320,7 +353,7 @@ export class QueryBuilder {
    * @param _cond
    * @private
    */
-  #cond(f: TQueryFilter | TQueryFilterArr, _cond: 'filter' | 'or' | 'search' = 'search'): TQueryFilter {
+  #cond(f: QueryFilter | QueryFilterArr, _cond: 'filter' | 'or' | 'search' = 'search'): QueryFilter {
     const filter = Array.isArray(f) ? { field: f[0], operator: f[1], value: f[2] } : f;
     if (!isObject(filter) || !isStringFull(filter.field)) {
       throw new ScopeError(`iswork.${this.constructor.name}`, '字段field值应该为字符串');
@@ -340,7 +373,7 @@ export class QueryBuilder {
    * @param j
    * @private
    */
-  #parseJoin(j: TQueryJoin | TQueryJoinArr): TQueryJoin {
+  #parseJoin(j: QueryJoin | QueryJoinArr): QueryJoin {
     const join = Array.isArray(j) ? { field: j[0], select: j[1] } : j;
     if (!isObject(join) || !isStringFull(join.field)) {
       throw new ScopeError(`iswork.${this.constructor.name}`, '字段field应该为字符串');
@@ -356,7 +389,7 @@ export class QueryBuilder {
    * @param s
    * @private
    */
-  #parseSortBy(s: TQuerySort | TQuerySortArr): TQuerySort {
+  #parseSortBy(s: QuerySort | QuerySortArr): QuerySort {
     const sort = Array.isArray(s) ? { field: s[0], order: s[1] } : s;
     if (!isObject(sort) || !isStringFull(sort.field)) {
       throw new ScopeError(`iswork.${this.constructor.name}`, '字段field应为字符串');
@@ -373,14 +406,11 @@ export class QueryBuilder {
    * @param cond
    * @private
    */
-  #setCondition(
-    f: TQueryFilter | TQueryFilterArr | Array<TQueryFilter | TQueryFilterArr>,
-    cond: 'filter' | 'or'
-  ): void {
+  #setCondition(f: QueryFilter | QueryFilterArr | Array<QueryFilter | QueryFilterArr>, cond: 'filter' | 'or'): void {
     if (!isNil(f)) {
       const condValue = this.#queryObject[cond] ?? [];
-      let newCondValue: TQueryFilter[] = [];
-      if (this.#assertNestCond<Array<TQueryFilter | TQueryFilterArr>>(f)) {
+      let newCondValue: QueryFilter[] = [];
+      if (this.#assertNestCond<Array<QueryFilter | QueryFilterArr>>(f)) {
         newCondValue = f.map((o) => this.#cond(o, cond));
       } else {
         newCondValue = [this.#cond(f, cond)];

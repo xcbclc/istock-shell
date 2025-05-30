@@ -1,4 +1,4 @@
-import { type TControllerMethodComponentResponse } from '@istock-shell/iswork';
+import { type ControllerMethodComponentResponse } from '@istock-shell/iswork';
 import type { TCmdRequest } from './cmd-request';
 import type { ENumberUnit, EPercentageUnit } from '../constants';
 
@@ -31,6 +31,6 @@ export type TUiTableProps = {
 export type TCmdTablePipeRequest<Opt = unknown, Args = unknown[]> = TCmdRequest<
   Opt,
   Args,
-  TControllerMethodComponentResponse<TUiTableProps>
+  ControllerMethodComponentResponse<TUiTableProps>
 >;
 export type TTableUnit = ENumberUnit | EPercentageUnit | string;

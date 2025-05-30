@@ -1,5 +1,5 @@
 import { EventEmitter, ScopeError } from '@istock-shell/util';
-import { EMessageStatus } from '@istock-shell/iswork';
+import { MessageStatus } from '@istock-shell/iswork';
 import { CmdParser } from '@istock-shell/command-parser';
 import { getCmdStore, type TCmdStore } from '@/store/cmd/main';
 import { getDomainStore, type TCmdAllDomainStore } from '@/store/domains/main';
@@ -144,7 +144,7 @@ export class CmdWindowContext {
           'message',
           (event: MessageEvent<TWorkerMessage<Payload>>) => {
             const newMessage = event.data;
-            if (newMessage?.meta?.status === EMessageStatus.COMPLETE) {
+            if (newMessage?.meta?.status === MessageStatus.COMPLETE) {
               this.#messageBaseInfoCache.delete(`${meta.messageId}`);
               loop = false;
             }
@@ -179,7 +179,7 @@ export class CmdWindowContext {
     this.#messageBaseInfoCache.set(meta.messageId, message);
     const eventHandler = (event: MessageEvent) => {
       const message = event.data;
-      if (message?.meta?.status === EMessageStatus.COMPLETE) {
+      if (message?.meta?.status === MessageStatus.COMPLETE) {
         this.#messageBaseInfoCache.delete(`${meta.messageId}`);
         port2.removeEventListener('message', eventHandler);
         port2.removeEventListener('messageerror', errorHandler);

@@ -1,7 +1,11 @@
 import { ScopeError, isString, isUndefined, mergeObjectDeep, isObject } from '@istock-shell/util';
-import type { TAnyObj, TModelType, TFetchSSEMessage, TFetchWrapOptions } from '../../types';
+import type { AnyObj, ModelType, FetchSSEMessage, FetchWrapOptions } from '../../types';
 import type { ModelMetadataMap } from '../../metadata/metadata';
 
+/**
+ * Fetch 函数类型
+ * @description 标准 fetch 函数的类型别名
+ */
 type Fetch = typeof fetch;
 
 export class FetchWrap {
@@ -13,7 +17,7 @@ export class FetchWrap {
 
   readonly #prefixUrl: string = '';
   readonly #modelMetadataMap: ModelMetadataMap;
-  constructor(fetch: Fetch, modelMetadataMap: ModelMetadataMap, options: TFetchWrapOptions) {
+  constructor(fetch: Fetch, modelMetadataMap: ModelMetadataMap, options: FetchWrapOptions) {
     this.fetch = fetch;
     this.#modelMetadataMap = modelMetadataMap;
     this.#prefixUrl = options.prefixUrl ?? '';
@@ -27,7 +31,7 @@ export class FetchWrap {
    * @param input
    * @param init
    */
-  async request<Return = unknown>(input: RequestInfo | URL, init?: RequestInit & { query?: TAnyObj }) {
+  async request<Return = unknown>(input: RequestInfo | URL, init?: RequestInit & { query?: AnyObj }) {
     if (isString(input) && input.includes('/')) {
       input = this.#prefixUrl + input;
       if (init?.query) {
@@ -45,7 +49,7 @@ export class FetchWrap {
    * @param init
    * @param suffixUrl
    */
-  async requestModel<Return = unknown>(model: TModelType, init: RequestInit, suffixUrl: string = '') {
+  async requestModel<Return = unknown>(model: ModelType, init: RequestInit, suffixUrl: string = '') {
     const metadata = this.#modelMetadataMap.get(model);
     if (!metadata) throw new ScopeError(`iswork.${this.constructor.name}`, '未获取到模型元数据实例');
     return await this.request<Return>(`${this.#prefixUrl}/${metadata.name}${suffixUrl}`, init);
@@ -122,7 +126,7 @@ export class FetchWrap {
             const lines = chunk.split('\n');
 
             // 解析ID和数据
-            const message: Partial<TFetchSSEMessage> = {};
+            const message: Partial<FetchSSEMessage> = {};
             lines.forEach((line) => {
               const [key, value] = line.split(': ');
               if (key === 'data') {

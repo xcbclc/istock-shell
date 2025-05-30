@@ -1,4 +1,4 @@
-import { Injectable, type TModelData, type TFetchSSEMessage } from '@istock-shell/iswork';
+import { Injectable, type ModelData, type FetchSSEMessage } from '@istock-shell/iswork';
 import { AiModel } from './ai.model';
 
 @Injectable()
@@ -17,8 +17,8 @@ export class AiService {
   }
 
   // 命令服务方法
-  async send(data: TModelData<AiModel>) {
-    const messageAsyncGenerator = await AiModel.run<AsyncGenerator<TFetchSSEMessage, void, unknown>>('/ai/send', {
+  async send(data: ModelData<AiModel>) {
+    const messageAsyncGenerator = await AiModel.run<AsyncGenerator<FetchSSEMessage, void, unknown>>('/ai/send', {
       method: 'post',
       body: JSON.stringify(data),
     });

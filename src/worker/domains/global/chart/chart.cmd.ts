@@ -1,4 +1,4 @@
-import type { TControllerMethodCmdRoute } from '@istock-shell/iswork';
+import type { ControllerMethodCmdRoute } from '@istock-shell/iswork';
 import { ExampleDataBt, ExampleDataTxt, ExampleDataZxt, ExampleDataGplzt } from './example-data';
 
 export enum EChartType {
@@ -94,8 +94,8 @@ const getCommonOptions = () => {
   };
 };
 
-export const getChartCommand = (subcommand: TControllerMethodCmdRoute) => {
-  const chartCommand: TControllerMethodCmdRoute = {
+export const getChartCommand = (subcommand: ControllerMethodCmdRoute) => {
+  const chartCommand: ControllerMethodCmdRoute = {
     name: '图表',
     cmd: 'tb',
     usage: 'tb <子命令>',
@@ -107,7 +107,7 @@ export const getChartCommand = (subcommand: TControllerMethodCmdRoute) => {
   return chartCommand;
 };
 
-export const 饼图: TControllerMethodCmdRoute = {
+export const 饼图: ControllerMethodCmdRoute = {
   name: '饼图',
   cmd: 'bt',
   usage: 'bt <-y <饼图取值字段>> [-gl <过滤条件>] [-lb <图表项类别>] [-pz <配置数据>] [-sj <表格数据>]',

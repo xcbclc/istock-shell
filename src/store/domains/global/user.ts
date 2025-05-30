@@ -1,9 +1,9 @@
 import { writable, type Writable, get } from 'svelte/store';
-import type { TModelData } from '@istock-shell/iswork';
+import type { ModelData } from '@istock-shell/iswork';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { UserModel } from '@domains/global/user/user.model';
 
-export interface IStoreUser extends TModelData<UserModel> {}
+export interface IStoreUser extends ModelData<UserModel> {}
 
 export interface IUserWritable extends Writable<IStoreUser> {
   initUserInfo(): Promise<void>;
@@ -23,7 +23,7 @@ export const getUser = (ctx: CmdWindowContext) => {
     }
     let userInfo: Partial<IStoreUser> = defaultUserInfo;
     if (username) {
-      const { payload: userList } = await ctx.workerMessage.send<TModelData<UserModel>[]>('global', 'user.find', {
+      const { payload: userList } = await ctx.workerMessage.send<ModelData<UserModel>[]>('global', 'user.find', {
         filter: ['username', 'eq', username],
       });
       if (userList && userList.length) {

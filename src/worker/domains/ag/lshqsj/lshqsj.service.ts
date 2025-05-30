@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { type EAdjust } from '@/worker/common';
 import {
   LshqsjModel,
@@ -29,49 +29,49 @@ export type TStockZhAMinuteQuery = {
 @Injectable()
 export class LshqsjService {
   async stockZhAHist(query: TStockZhAQuery) {
-    return await LshqsjModel.run<Array<TModelData<LshqsjModel>>>('/stock_zh_a_hist', {
+    return await LshqsjModel.run<Array<ModelData<LshqsjModel>>>('/stock_zh_a_hist', {
       method: 'get',
       query,
     });
   }
 
   async stockZhADaily(query: TStockZhAQuery) {
-    return await LshqxlModel.run<Array<TModelData<LshqxlModel>>>('/stock_zh_a_daily', {
+    return await LshqxlModel.run<Array<ModelData<LshqxlModel>>>('/stock_zh_a_daily', {
       method: 'get',
       query,
     });
   }
 
   async stockZhAHistTx(query: TStockZhAQuery) {
-    return await LshqtxModel.run<Array<TModelData<LshqtxModel>>>('/stock_zh_a_hist_tx', {
+    return await LshqtxModel.run<Array<ModelData<LshqtxModel>>>('/stock_zh_a_hist_tx', {
       method: 'get',
       query,
     });
   }
 
   async stockZhAMinute(query: TStockZhAMinuteQuery) {
-    return await FssjxlModel.run<Array<TModelData<FssjxlModel>>>('/stock_zh_a_minute', {
+    return await FssjxlModel.run<Array<ModelData<FssjxlModel>>>('/stock_zh_a_minute', {
       method: 'get',
       query,
     });
   }
 
   async stockZhAHistMinEm(query: TStockZhAMinuteQuery) {
-    return await FssjdcModel.run<Array<TModelData<FssjdcModel>>>('/stock_zh_a_hist_min_em', {
+    return await FssjdcModel.run<Array<ModelData<FssjdcModel>>>('/stock_zh_a_hist_min_em', {
       method: 'get',
       query,
     });
   }
 
   async stockIntradayEm(symbol: string) {
-    return await RnfssjdcModel.run<Array<TModelData<RnfssjdcModel>>>('/stock_intraday_em', {
+    return await RnfssjdcModel.run<Array<ModelData<RnfssjdcModel>>>('/stock_intraday_em', {
       method: 'get',
       query: { symbol },
     });
   }
 
   async stockZhAHistPreMinEm(symbol: string) {
-    return await PqsjlModel.run<Array<TModelData<PqsjlModel>>>('/stock_zh_a_hist_pre_min_em', {
+    return await PqsjlModel.run<Array<ModelData<PqsjlModel>>>('/stock_zh_a_hist_pre_min_em', {
       method: 'get',
       query: { symbol },
     });

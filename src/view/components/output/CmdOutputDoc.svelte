@@ -1,9 +1,9 @@
 <script lang="ts" module>
-  import type { TModelData } from '@istock-shell/iswork';
+  import type { ModelData } from '@istock-shell/iswork';
   import type { CmdRouteModel } from '@domains/global/cmd-route/cmd-route.model';
 
   export interface CmdOutputDocProps {
-    list: Array<TModelData<CmdRouteModel>>;
+    list: Array<ModelData<CmdRouteModel>>;
   }
 </script>
 

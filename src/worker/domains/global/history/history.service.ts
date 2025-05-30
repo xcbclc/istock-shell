@@ -1,9 +1,9 @@
-import { Injectable, type TModelCreate, type TModelUpdate, type IQueryParamsOptions } from '@istock-shell/iswork';
+import { Injectable, type ModelCreate, type ModelUpdate, type QueryParamsOptions } from '@istock-shell/iswork';
 import { HistoryModel } from './history.model';
 
 @Injectable()
 export class HistoryService {
-  async create(data: TModelCreate<HistoryModel>) {
+  async create(data: ModelCreate<HistoryModel>) {
     if (data.createDate) data.createDate = new Date();
     if (data.updateDate) data.updateDate = new Date();
     if (data.rowStatus) data.rowStatus = 1;
@@ -11,15 +11,15 @@ export class HistoryService {
     return await HistoryModel.createOne(data);
   }
 
-  async update(data: TModelUpdate<HistoryModel>) {
+  async update(data: ModelUpdate<HistoryModel>) {
     return await HistoryModel.updateById(data.id, data);
   }
 
-  async query(query: IQueryParamsOptions) {
+  async query(query: QueryParamsOptions) {
     return await HistoryModel.query(query);
   }
 
-  async find(query: IQueryParamsOptions) {
+  async find(query: QueryParamsOptions) {
     return await HistoryModel.query(query);
   }
 
@@ -27,7 +27,7 @@ export class HistoryService {
     return await HistoryModel.findOneById(id);
   }
 
-  async batchDeleteCmd(mode: number, query: IQueryParamsOptions) {
+  async batchDeleteCmd(mode: number, query: QueryParamsOptions) {
     let historys = await HistoryModel.query({
       sort: {
         field: 'createDate',

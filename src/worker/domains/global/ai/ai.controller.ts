@@ -6,7 +6,7 @@ import {
   Message,
   MessageHandler,
   type IMessageHandler,
-  type TControllerMethodComponentOutput,
+  type ControllerMethodComponentOutput,
   ApplicationContext,
   Field,
 } from '@istock-shell/iswork';
@@ -34,7 +34,7 @@ export class AiController {
       const content = this.aiService.getMessageContent(messageId);
       if (!content) throw new ScopeError(`iswork.${this.constructor.name}`, '未找到消息内容');
       const messageAsyncGenerator = await this.aiService.send({ content });
-      const output: TControllerMethodComponentOutput<{ content: string; options: Record<string, any> }> = {
+      const output: ControllerMethodComponentOutput<{ content: string; options: Record<string, any> }> = {
         component: 'ShMarkdown',
         props: {
           content: '',

@@ -1,10 +1,10 @@
 import { ScopeError, isObject } from '@istock-shell/util';
 import {
   Injectable,
-  type TModelData,
+  type ModelData,
   type ApplicationContext,
-  type TModelCreate,
-  type TModelUpdate,
+  type ModelCreate,
+  type ModelUpdate,
 } from '@istock-shell/iswork';
 import { DomainModel } from './domain.model';
 
@@ -40,11 +40,11 @@ export class DomainService {
     return domainList;
   }
 
-  async create(data: TModelCreate<DomainModel>) {
+  async create(data: ModelCreate<DomainModel>) {
     return await DomainModel.createOne(data);
   }
 
-  async update(data: TModelUpdate<DomainModel>) {
+  async update(data: ModelUpdate<DomainModel>) {
     return await DomainModel.updateById(data.id, data);
   }
 
@@ -60,7 +60,7 @@ export class DomainService {
   async findDomainPaths(ctx: ApplicationContext, currentPaths: string[], paths: string[]) {
     const commonErrorMessage = `当前路径：${currentPaths.join('/')}，操作路径：${paths.join('/')}`;
     const domains = await this.getAllDomain(ctx);
-    const domainRecord = domains.reduce<Record<string, TModelData<DomainModel>>>((record, domain) => {
+    const domainRecord = domains.reduce<Record<string, ModelData<DomainModel>>>((record, domain) => {
       record[domain.name] = domain;
       record[`_${domain.viewName}`] = domain;
       return record;
@@ -75,7 +75,7 @@ export class DomainService {
       }
       return domain;
     });
-    const domainPaths = paths.map((path): TModelData<DomainModel> | string => {
+    const domainPaths = paths.map((path): ModelData<DomainModel> | string => {
       return domainRecord[path] ?? domainRecord[`_${path}`] ?? path;
     });
     domainPaths.forEach((domain, index) => {

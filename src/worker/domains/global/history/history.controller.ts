@@ -3,8 +3,8 @@ import {
   Controller,
   Method,
   Payload,
-  type TModelCreate,
-  type IQueryParamsOptions,
+  type ModelCreate,
+  type QueryParamsOptions,
   CmdRoute,
   Component,
   CmdRouteOptions,
@@ -18,7 +18,7 @@ import cmdJson from './history.cmd.json';
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
   @Method('add')
-  async add(ctx: ApplicationContext, @Payload() data: TModelCreate<HistoryModel>) {
+  async add(ctx: ApplicationContext, @Payload() data: ModelCreate<HistoryModel>) {
     const { port, meta } = ctx.cmdp.getInfo();
     if (!port) throw new Error('创建命令历史记录失败，port没有值');
     data.port = String(port);
@@ -27,7 +27,7 @@ export class HistoryController {
   }
 
   @Method('list')
-  async list(ctx: ApplicationContext, @Payload() query: IQueryParamsOptions) {
+  async list(ctx: ApplicationContext, @Payload() query: QueryParamsOptions) {
     const { port } = ctx.cmdp.getInfo();
     query.filter = [
       ['port', 'eq', String(port)],

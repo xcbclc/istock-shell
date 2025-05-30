@@ -1,7 +1,7 @@
-import type { ApplicationContext, IDomainClass } from '@istock-shell/iswork';
+import type { ApplicationContext, DomainClassBase } from '@istock-shell/iswork';
 import type { TCmdRequest } from '@/worker/common';
 
-interface IGlobalDomain extends IDomainClass {
+interface IGlobalDomain extends DomainClassBase {
   getStockCodeList: () => Promise<Array<{ name: string; code: string }>>;
 }
 

@@ -4,8 +4,8 @@ import {
   PrimaryColumn,
   Column,
   Index,
-  type TControllerMethodCmdRouteOptions,
-  type TControllerMethodCmdRouteMetadata,
+  type ControllerMethodCmdRouteOptions,
+  type ControllerMethodCmdRouteMetadata,
 } from '@istock-shell/iswork';
 
 @Model('cmd-route')
@@ -40,13 +40,13 @@ export class CmdRouteModel extends BaseModel {
   description?: string;
 
   @Column()
-  options?: TControllerMethodCmdRouteOptions[];
+  options?: ControllerMethodCmdRouteOptions[];
 
   @Column()
-  subcommand?: TControllerMethodCmdRouteMetadata;
+  subcommand?: ControllerMethodCmdRouteMetadata;
 
   @Column()
-  arguments?: TControllerMethodCmdRouteOptions[];
+  arguments?: ControllerMethodCmdRouteOptions[];
 
   @Column()
   example?: string;

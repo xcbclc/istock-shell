@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { sleep, toLocaleDateString, type Event } from '@istock-shell/util';
 import { type CommandEditor, CommandEditorActionTypes } from '@istock-shell/editor';
-import type { TModelData } from '@istock-shell/iswork';
+import type { ModelData } from '@istock-shell/iswork';
 import { type CmdWindowContext, ECmdWindowContextMode } from '@/window/cmd-window-context';
 import type { HistoryModel } from '@domains/global/history/history.model';
 import type { DomainModel } from '@domains/global/domain/domain.model';
@@ -160,7 +160,7 @@ function onUserChange(ctx: CmdWindowContext) {
     }
   });
   const eventAddress = `event://@anonymous.global:${windowId}/user.login`;
-  const handlerChange = (data: TModelData<UserModel> | null) => {
+  const handlerChange = (data: ModelData<UserModel> | null) => {
     if (!data) return;
     localStorage.setItem(LOCAL_STORE_USER_TOKEN, JSON.stringify(data));
     domainStore.user.update((user) => {
@@ -183,7 +183,7 @@ function onPromptDomainChange(ctx: CmdWindowContext) {
   const { cmdStore, domainStore, windowId } = ctx;
   const { username } = domainStore.user.getUserInfo();
   const eventAddress = `event://@${username}.global:${windowId}/domain.changePromptDomain`;
-  const handlerChange = (data: Array<TModelData<DomainModel>>) => {
+  const handlerChange = (data: Array<ModelData<DomainModel>>) => {
     cmdStore.cmdPrompt.update((prompt) => {
       data.shift(); // 去掉根目录
       prompt.domains = data.map((item) => ({ viewName: item.viewName, name: item.name }));

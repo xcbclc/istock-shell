@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { CookieService } from '@domains/global/setting/cookie/cookie.service';
 import { KzzsdModel } from './kzzsd.model';
 import { KzzsdResultModel } from './kzzsd-result.model';
@@ -16,7 +16,7 @@ export class KzzsdService {
     // 获取集思录的cookie数据
     const cookieData = await this.cookieService.findOneByHost(this.#site);
     const jisiluData = await KzzsdModel.run<{
-      data: Array<TModelData<KzzsdModel>>;
+      data: Array<ModelData<KzzsdModel>>;
       prompt: string;
     }>('/webapi/cb/list/', {
       method: 'get',
@@ -36,7 +36,7 @@ export class KzzsdService {
    * 按照双低值从低到高排序
    * @param list 可转债列表
    */
-  sortByDblow(list: Array<TModelData<KzzsdModel>>) {
+  sortByDblow(list: Array<ModelData<KzzsdModel>>) {
     return list.sort((v1, v2) => {
       return v1.dblow - v2.dblow;
     });
@@ -50,11 +50,11 @@ export class KzzsdService {
   async dblowStrategy(averageDblow: number, cycle: number) {
     const jisiluList = this.sortByDblow(await this.findJisiluCbList());
     const kzzsdResult = await KzzsdResultModel.query({ filter: ['rowStatus', 'eq', 1] });
-    const jisiluListRecord = jisiluList.reduce<Record<string, TModelData<KzzsdModel>>>((record, item) => {
+    const jisiluListRecord = jisiluList.reduce<Record<string, ModelData<KzzsdModel>>>((record, item) => {
       record[item.bond_id] = item;
       return record;
     }, {});
-    const lastResult: Array<TModelData<KzzsdModel>> = kzzsdResult
+    const lastResult: Array<ModelData<KzzsdModel>> = kzzsdResult
       .map((item) => {
         return jisiluListRecord[item.bond_id];
       })
@@ -87,7 +87,7 @@ export class KzzsdService {
     }
     // 获取排除条件后的结果
     const filterResult = this.filterList(jisiluList);
-    let newResult: Array<TModelData<KzzsdModel>> = [];
+    let newResult: Array<ModelData<KzzsdModel>> = [];
     let text: string = '';
     if (jisiluList.length < 50 || filterResult.length < 5) {
       if (hasRunDblowStrategy) {
@@ -200,7 +200,7 @@ export class KzzsdService {
    * @param list 可转债列表
    * @param maxValue 判断最大值
    */
-  assertDblowStrategy(list: Array<TModelData<KzzsdModel>>, maxValue: number): Boolean {
+  assertDblowStrategy(list: Array<ModelData<KzzsdModel>>, maxValue: number): Boolean {
     const total = list.reduce<number>((number, item) => {
       number += item.dblow;
       return number;
@@ -213,7 +213,7 @@ export class KzzsdService {
    * 排除条件
    * @param list 可转债列表
    */
-  filterList(list: Array<TModelData<KzzsdModel>>): Array<TModelData<KzzsdModel>> {
+  filterList(list: Array<ModelData<KzzsdModel>>): Array<ModelData<KzzsdModel>> {
     return list.filter((item) => {
       // 1. 已触发强赎
       if (!['C'].includes(item.btype)) return false;
@@ -239,12 +239,12 @@ export class KzzsdService {
    * @param count 获取个数
    */
   replaceDblow(
-    list: Array<TModelData<KzzsdModel>>,
-    filterResult: Array<TModelData<KzzsdModel>>,
-    lastResult: Array<TModelData<KzzsdModel>>,
+    list: Array<ModelData<KzzsdModel>>,
+    filterResult: Array<ModelData<KzzsdModel>>,
+    lastResult: Array<ModelData<KzzsdModel>>,
     count: number
   ) {
-    const newResult: Array<TModelData<KzzsdModel>> = [];
+    const newResult: Array<ModelData<KzzsdModel>> = [];
     const index = Math.round(list.length * 0.2); // 前20%
     const offsetDblow = list[index].dblow;
     const lastResultIds = lastResult.map((item) => item.bond_id);
@@ -268,7 +268,7 @@ export class KzzsdService {
    * 将结果数据转换成界面需要的表格数据
    * @param list 可转债列表
    */
-  toTableData(list: Array<TModelData<KzzsdModel>>) {
+  toTableData(list: Array<ModelData<KzzsdModel>>) {
     const headerRecord: Record<string, string> = {
       bond_id: '转债代码',
       bond_nm: '转债名称',
@@ -285,7 +285,7 @@ export class KzzsdService {
       sprice: '正股价格',
       force_redeem_price: '强赎价价格',
     };
-    const headerKeys = Object.keys(headerRecord) as Array<keyof TModelData<KzzsdModel>>;
+    const headerKeys = Object.keys(headerRecord) as Array<keyof ModelData<KzzsdModel>>;
     return {
       caption: '可转债双低轮动策略',
       thead: headerKeys.map((k) => {
@@ -315,7 +315,7 @@ export class KzzsdService {
    * @param list
    * @param addStatus
    */
-  addDblowListStatus(list: Array<TModelData<KzzsdModel>>, addStatus: string | string[]) {
+  addDblowListStatus(list: Array<ModelData<KzzsdModel>>, addStatus: string | string[]) {
     let status: string[] = [];
     if (isString(addStatus)) {
       status = [addStatus];

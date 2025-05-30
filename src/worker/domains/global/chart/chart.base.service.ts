@@ -1,4 +1,4 @@
-import { type TControllerMethodComponentOutput, type TModelData } from '@istock-shell/iswork';
+import { type ControllerMethodComponentOutput, type ModelData } from '@istock-shell/iswork';
 import type { G2Spec, LightTheme, DarkTheme } from '@antv/g2';
 import { isNil, ScopeError, getMessageDataPK, EMessageDataFieldType } from '@istock-shell/util';
 import type { TUiTableProps, TTableFilterConditionRange, TTableFilterItem } from '@/worker/common';
@@ -13,7 +13,7 @@ export type TChartData = Array<Record<string, unknown>>;
 export type TChartOptions = G2Spec;
 
 export class ChartBaseService {
-  themeConfig: TModelData<ThemeModel> | undefined;
+  themeConfig: ModelData<ThemeModel> | undefined;
   constructor(readonly themeService: ThemeService) {
     void this.themeService.getList().then(([theme]) => {
       this.themeConfig = theme;
@@ -38,7 +38,7 @@ export class ChartBaseService {
    * @param output
    * @private
    */
-  protected isUiTableOutput(output: unknown): output is Array<TControllerMethodComponentOutput<TUiTableProps>> {
+  protected isUiTableOutput(output: unknown): output is Array<ControllerMethodComponentOutput<TUiTableProps>> {
     return !isNil(output);
   }
 
@@ -46,7 +46,7 @@ export class ChartBaseService {
    * 自动转换成图表需要的标准数据
    * @param outputs
    */
-  protected autoToChartData(outputs: Array<TControllerMethodComponentOutput<TUiTableProps>>): TChartData | undefined {
+  protected autoToChartData(outputs: Array<ControllerMethodComponentOutput<TUiTableProps>>): TChartData | undefined {
     let chatData: TChartData | undefined;
     // 说明是管道符操作
     const output = outputs[outputs.length - 1];
@@ -62,7 +62,7 @@ export class ChartBaseService {
   /**
    * 表格组件数据转图表标准数据
    */
-  protected uiTableDataToChartData(output: TControllerMethodComponentOutput<TUiTableProps>): TChartData {
+  protected uiTableDataToChartData(output: ControllerMethodComponentOutput<TUiTableProps>): TChartData {
     const { thead, tbody } = output.props;
     return tbody.map((row) => {
       const newRow: Record<string, unknown> = {};

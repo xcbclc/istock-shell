@@ -1,15 +1,15 @@
 import {
   Injectable,
-  type TModelCreate,
-  type TModelData,
-  type TModelUpdate,
-  type TQueryFilterArr,
+  type ModelCreate,
+  type ModelData,
+  type ModelUpdate,
+  type QueryFilterArr,
 } from '@istock-shell/iswork';
 import { CookieModel } from './cookie.model';
 @Injectable()
 export class CookieService {
-  async create(data: Omit<TModelData<CookieModel>, 'id'>) {
-    const cookieModel: TModelCreate<CookieModel> = {
+  async create(data: Omit<ModelData<CookieModel>, 'id'>) {
+    const cookieModel: ModelCreate<CookieModel> = {
       ...data,
       id: CookieModel.generateId.nextId(),
       createDate: new Date(),
@@ -19,8 +19,8 @@ export class CookieService {
     return await CookieModel.createOne(cookieModel);
   }
 
-  async update(data: TModelUpdate<CookieModel>) {
-    const cookieModel: TModelUpdate<CookieModel> = {
+  async update(data: ModelUpdate<CookieModel>) {
+    const cookieModel: ModelUpdate<CookieModel> = {
       ...data,
       updateDate: new Date(),
     };
@@ -32,7 +32,7 @@ export class CookieService {
   }
 
   async getList(host?: string, limit: number = 1000) {
-    const query: { filter: TQueryFilterArr[] } = { filter: [['rowStatus', 'eq', 1]] };
+    const query: { filter: QueryFilterArr[] } = { filter: [['rowStatus', 'eq', 1]] };
     if (host && query.filter) {
       query.filter.push(['host', 'cont', host]);
     }

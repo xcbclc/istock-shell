@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { generateColorPalette } from '@istock-shell/util';
 import * as jisilu from './tzrl.jisilu';
 import { TzrlModel } from './tzrl.model';
@@ -19,7 +19,7 @@ export class TzrlService {
   }
 
   async findJisiluCalendar(query: { qtype: string; start: string; end: string }, color?: string) {
-    const list = await TzrlModel.run<Array<TModelData<TzrlModel>>>('/data/calendar/get_calendar_data/', {
+    const list = await TzrlModel.run<Array<ModelData<TzrlModel>>>('/data/calendar/get_calendar_data/', {
       method: 'get',
       query: { ...query, _: Date.now() },
       headers: { 'x-target': this.jisilu.site },

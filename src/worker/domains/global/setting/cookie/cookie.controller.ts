@@ -1,4 +1,4 @@
-import { Controller, Method, Payload, type TModelData, type TModelUpdate } from '@istock-shell/iswork';
+import { Controller, Method, Payload, type ModelData, type ModelUpdate } from '@istock-shell/iswork';
 import { type CookieModel } from './cookie.model';
 import { CookieService } from './cookie.service';
 
@@ -10,12 +10,12 @@ export class CookieController {
 
   // 命令控制器方法
   @Method('create')
-  async create(@Payload() data: Omit<TModelData<CookieModel>, 'id'>) {
+  async create(@Payload() data: Omit<ModelData<CookieModel>, 'id'>) {
     return await this.cookieService.create(data);
   }
 
   @Method('update')
-  async update(@Payload() data: TModelUpdate<CookieModel>) {
+  async update(@Payload() data: ModelUpdate<CookieModel>) {
     return await this.cookieService.update(data);
   }
 

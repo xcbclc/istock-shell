@@ -1,4 +1,4 @@
-import { type TControllerMethodCmdRouteOptions } from '@istock-shell/iswork';
+import { type ControllerMethodCmdRouteOptions } from '@istock-shell/iswork';
 
 export enum EAdjust {
   QFQ = 'qfq', // 前复权
@@ -9,7 +9,7 @@ export enum EAdjust {
  * 获取单位选项模版数据
  * @param unitOption
  */
-export const getUnitOption = (unitOption: Partial<TControllerMethodCmdRouteOptions> = {}) => {
+export const getUnitOption = (unitOption: Partial<ControllerMethodCmdRouteOptions> = {}) => {
   return {
     name: '单位',
     parameter: ['-dw', '--单位'],
@@ -27,7 +27,7 @@ export const getUnitOption = (unitOption: Partial<TControllerMethodCmdRouteOptio
  * 获取日期选项模版数据
  * @param option
  */
-export const getYYYYMMDD = (option: Partial<TControllerMethodCmdRouteOptions> = {}, type?: number) => {
+export const getYYYYMMDD = (option: Partial<ControllerMethodCmdRouteOptions> = {}, type?: number) => {
   const recordTypeText: Record<string, string> = {
     1: '开始',
     2: '结束',
@@ -48,7 +48,7 @@ export const getYYYYMMDD = (option: Partial<TControllerMethodCmdRouteOptions> = 
  * 获取年月选项模版数据
  * @param option
  */
-export const getYYYYMM = (option: Partial<TControllerMethodCmdRouteOptions> = {}) => {
+export const getYYYYMM = (option: Partial<ControllerMethodCmdRouteOptions> = {}) => {
   return {
     name: '年月',
     parameter: ['-ny', '--年月'],
@@ -65,7 +65,7 @@ export const getYYYYMM = (option: Partial<TControllerMethodCmdRouteOptions> = {}
  * 获取股票代码配置
  * @param option
  */
-export const getStockCode = (option: Partial<TControllerMethodCmdRouteOptions> = {}) => {
+export const getStockCode = (option: Partial<ControllerMethodCmdRouteOptions> = {}) => {
   return {
     name: '股票代码',
     parameter: ['-gpdm', '--股票代码'],
@@ -82,7 +82,7 @@ export const getStockCode = (option: Partial<TControllerMethodCmdRouteOptions> =
  * 获取股票名称配置
  * @param option
  */
-export const getStockName = (option: Partial<TControllerMethodCmdRouteOptions> = {}) => {
+export const getStockName = (option: Partial<ControllerMethodCmdRouteOptions> = {}) => {
   return {
     name: '股票名称',
     parameter: ['-gpmc', '--股票名称'],
@@ -98,7 +98,7 @@ export const getStockName = (option: Partial<TControllerMethodCmdRouteOptions> =
 /**
  * 获取复权选项配置
  */
-export const getFQ = (option: Partial<TControllerMethodCmdRouteOptions> = {}) => {
+export const getFQ = (option: Partial<ControllerMethodCmdRouteOptions> = {}) => {
   return {
     name: '复权',
     parameter: ['-fq', '--复权'],

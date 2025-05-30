@@ -5,34 +5,34 @@ import {
   CONTROLLER_METHOD_CMDROUTE_METADATA,
   CONTROLLER_METHOD_METADATA,
   CONTROLLER_METHOD_PARAM_CMDROUTEOPTIONS_METADATA,
-  type TOrmQuery,
-  type TModelCreate,
-  type TModelUpdate,
-  type TControllerMetadata,
-  type TControllerMethodMetadata,
-  type TControllerMethodCmdRouteMetadata,
-  type TModelCreateNoId,
-  type TControllerMethodCmdRouteOptions,
-  type TControllerMethodCmdRouteOptionsMetadata,
+  type OrmQuery,
+  type ModelCreate,
+  type ModelUpdate,
+  type ControllerMetadata,
+  type ControllerMethodMetadata,
+  type ControllerMethodCmdRouteMetadata,
+  type ModelCreateNoId,
+  type ControllerMethodCmdRouteOptions,
+  type ControllerMethodCmdRouteOptionsMetadata,
   type ApplicationContext,
-  type TModelData,
+  type ModelData,
 } from '@istock-shell/iswork';
 import { CmdRouteModel } from './cmd-route.model';
 
 export type TResponseSubCmdRoute = Array<
-  Omit<TControllerMethodCmdRouteMetadata, 'subcommand'> & {
+  Omit<ControllerMethodCmdRouteMetadata, 'subcommand'> & {
     route: string[];
     domainName: string;
     subcommand?: TResponseSubCmdRoute;
   }
 >;
-export type TResponseCmdRoute = Omit<TModelData<CmdRouteModel>, 'subcommand'> & {
+export type TResponseCmdRoute = Omit<ModelData<CmdRouteModel>, 'subcommand'> & {
   subcommand?: TResponseSubCmdRoute;
 };
 
 @Injectable()
 export class CmdRouteService {
-  newCmdRoute(id: number | string, data: TModelCreateNoId<CmdRouteModel>) {
+  newCmdRoute(id: number | string, data: ModelCreateNoId<CmdRouteModel>) {
     const cmdRoute = CmdRouteModel.createModel(
       Object.assign(data, { id, updateDate: new Date(), createDate: new Date() })
     );
@@ -43,7 +43,7 @@ export class CmdRouteService {
    * 合并子命令
    * @param list
    */
-  mergeSubcommands(list: Array<TModelData<CmdRouteModel>>): TResponseCmdRoute[] {
+  mergeSubcommands(list: Array<ModelData<CmdRouteModel>>): TResponseCmdRoute[] {
     const record: Record<string, TResponseCmdRoute> = {};
     list.forEach((item) => {
       if (record[item.cmd]) {
@@ -82,7 +82,7 @@ export class CmdRouteService {
       for (const controller of domain.controllers) {
         const metaInfo = domain.controllerMetadataCache.get(controller);
         if (!metaInfo) continue;
-        const metadata = metaInfo.class.get(CONTROLLER_METADATA) as TControllerMetadata;
+        const metadata = metaInfo.class.get(CONTROLLER_METADATA) as ControllerMetadata;
         if (!metadata) continue;
         let controllerAlias: string;
         if (isArray(metadata.alias)) {
@@ -94,7 +94,7 @@ export class CmdRouteService {
         const methodEntries = metaInfo.method.entries();
         for (const [propertyKey, metaMapValue] of methodEntries) {
           const { info } = metaMapValue;
-          const methodMetadata = (info[CONTROLLER_METHOD_METADATA] as TControllerMethodMetadata) ?? {};
+          const methodMetadata = (info[CONTROLLER_METHOD_METADATA] as ControllerMethodMetadata) ?? {};
           let methodAlias: string | undefined;
           if (isArray(methodMetadata.alias)) {
             methodAlias = methodMetadata.alias[0];
@@ -109,20 +109,20 @@ export class CmdRouteService {
             throw new ScopeError(`global.${this.constructor.name}`, '未找到方法别名');
           }
           const cmdRouteMetadata = info[CONTROLLER_METHOD_CMDROUTE_METADATA] as
-            | TControllerMethodCmdRouteMetadata
+            | ControllerMethodCmdRouteMetadata
             | undefined;
           // 单独定义的选项参数
           const cmdRouteParamMetadata = info[CONTROLLER_METHOD_PARAM_CMDROUTEOPTIONS_METADATA] as
-            | TControllerMethodCmdRouteOptionsMetadata
+            | ControllerMethodCmdRouteOptionsMetadata
             | undefined;
           if (!cmdRouteMetadata) continue;
-          let options: TControllerMethodCmdRouteOptions[] = [];
+          let options: ControllerMethodCmdRouteOptions[] = [];
           if (cmdRouteMetadata.options) {
             options = cmdRouteMetadata.options;
           } else if (cmdRouteParamMetadata) {
             options = Object.values(cmdRouteParamMetadata).filter((param) => {
               return isObject(param);
-            }) as Array<Required<TControllerMethodCmdRouteOptions>>;
+            }) as Array<Required<ControllerMethodCmdRouteOptions>>;
           }
           const cmdRoute = this.newCmdRoute(CmdRouteModel.generateId.nextId(), {
             name: cmdRouteMetadata.name,
@@ -148,7 +148,7 @@ export class CmdRouteService {
   }
 
   async getDomainCmdRoute(domainName: string, filter: { cmd: string; name: string }) {
-    const query: TOrmQuery = { filter: [] };
+    const query: OrmQuery = { filter: [] };
     if (domainName && isArray(query.filter)) {
       query.filter.push(['domainName', 'eq', domainName]);
     }
@@ -161,11 +161,11 @@ export class CmdRouteService {
     return await CmdRouteModel.query(query);
   }
 
-  async create(data: TModelCreate<CmdRouteModel>) {
+  async create(data: ModelCreate<CmdRouteModel>) {
     return await CmdRouteModel.createOne(data);
   }
 
-  async update(data: TModelUpdate<CmdRouteModel>) {
+  async update(data: ModelUpdate<CmdRouteModel>) {
     return await CmdRouteModel.updateById(data.id, data);
   }
 

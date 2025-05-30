@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { isNumber, toLocaleDateString } from '@istock-shell/util';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
@@ -10,13 +10,13 @@ import { EChartType } from '@domains/global/chart/chart.cmd';
 
 type TCdfcjysjResponse = {
   records: Array<{
-    fields: TModelData<CdfcjysjModel>;
+    fields: ModelData<CdfcjysjModel>;
   }>;
 };
 
 type TCdfceshqsjResponse = {
   records: Array<{
-    fields: TModelData<CdfceshqsjModel>;
+    fields: ModelData<CdfceshqsjModel>;
   }>;
 };
 
@@ -42,7 +42,7 @@ export class CdesfService {
    * @param list
    * @private
    */
-  #getListDataUnit(list: Array<TModelData<CdfceshqsjModel>>) {
+  #getListDataUnit(list: Array<ModelData<CdfceshqsjModel>>) {
     return list[0]?.单位 ?? '';
   }
 
@@ -97,9 +97,9 @@ export class CdesfService {
    */
   async getHouseDataGridData() {
     const [monthTradeData, monthOldHouseTradeData, weekOldHouseTradeData]: [
-      Array<TModelData<CdfcjysjModel>>,
-      Array<TModelData<CdfceshqsjModel>>,
-      Array<TModelData<CdfceshqsjModel>>,
+      Array<ModelData<CdfcjysjModel>>,
+      Array<ModelData<CdfceshqsjModel>>,
+      Array<ModelData<CdfceshqsjModel>>,
     ] = await Promise.all([
       this.getHouseTradeData({
         filter: {
@@ -140,17 +140,17 @@ export class CdesfService {
    * @param weekOldHouseTradeData
    */
   getHouseDataGridCards(
-    monthTradeData: Array<TModelData<CdfcjysjModel>>,
-    monthOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>,
-    weekOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>
+    monthTradeData: Array<ModelData<CdfcjysjModel>>,
+    monthOldHouseTradeData: Array<ModelData<CdfceshqsjModel>>,
+    weekOldHouseTradeData: Array<ModelData<CdfceshqsjModel>>
   ): TDataGridCard[] {
     /**
      * 价
      */
-    const 月成交均价列表: Array<TModelData<CdfceshqsjModel>> = [];
-    const 新增挂牌均价列表: Array<TModelData<CdfceshqsjModel>> = [];
-    const 存量挂牌列表: Array<TModelData<CdfceshqsjModel>> = [];
-    const 成交周期列表: Array<TModelData<CdfceshqsjModel>> = [];
+    const 月成交均价列表: Array<ModelData<CdfceshqsjModel>> = [];
+    const 新增挂牌均价列表: Array<ModelData<CdfceshqsjModel>> = [];
+    const 存量挂牌列表: Array<ModelData<CdfceshqsjModel>> = [];
+    const 成交周期列表: Array<ModelData<CdfceshqsjModel>> = [];
     monthOldHouseTradeData.forEach((item) => {
       if (item.数据类型 === '成交均价') {
         月成交均价列表.push(item);
@@ -296,9 +296,9 @@ export class CdesfService {
    * @param weekOldHouseTradeData
    */
   getHouseDataGridCharts(
-    monthTradeData: Array<TModelData<CdfcjysjModel>>,
-    monthOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>,
-    weekOldHouseTradeData: Array<TModelData<CdfceshqsjModel>>
+    monthTradeData: Array<ModelData<CdfcjysjModel>>,
+    monthOldHouseTradeData: Array<ModelData<CdfceshqsjModel>>,
+    weekOldHouseTradeData: Array<ModelData<CdfceshqsjModel>>
   ): TChartOptions[] {
     const colorRange = [
       this.chartService.themeConfig?.variables?.['--color-primary'] ?? '#c94400',

@@ -1,10 +1,10 @@
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { StockCodeModel } from './stock-code.model';
 import { StockCodeResultModel } from './stock-code-result.model';
 
 @Injectable()
 export class StockCodeService {
-  #list: Array<TModelData<StockCodeModel>> = [];
+  #list: Array<ModelData<StockCodeModel>> = [];
   async getStockCodeList() {
     if (this.#list.length) return this.#list;
     const localList = await StockCodeResultModel.query({ filter: ['rowStatus', 'eq', 1] });

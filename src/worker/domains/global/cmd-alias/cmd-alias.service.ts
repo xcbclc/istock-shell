@@ -1,4 +1,4 @@
-import { Injectable, type TQueryFilterArr, type TModelCreate } from '@istock-shell/iswork';
+import { Injectable, type QueryFilterArr, type ModelCreate } from '@istock-shell/iswork';
 import { CmdAliasModel } from './cmd-alias.model';
 
 export type TCmdAliasData = {
@@ -12,7 +12,7 @@ export type TCmdAliasData = {
 @Injectable()
 export class CmdAliasService {
   async createData(data: Omit<TCmdAliasData, 'historyId'>) {
-    const cmdAlias: TModelCreate<CmdAliasModel> = {
+    const cmdAlias: ModelCreate<CmdAliasModel> = {
       id: CmdAliasModel.generateId.nextId(),
       createDate: new Date(),
       updateDate: new Date(),
@@ -24,7 +24,7 @@ export class CmdAliasService {
   }
 
   async findRecommend(alias: string) {
-    const query: { filter: TQueryFilterArr[] } = { filter: [['rowStatus', 'eq', 1]] };
+    const query: { filter: QueryFilterArr[] } = { filter: [['rowStatus', 'eq', 1]] };
     if (alias && query.filter) {
       query.filter.push(['alias', 'cont', alias]);
     }

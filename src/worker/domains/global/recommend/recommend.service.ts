@@ -1,4 +1,4 @@
-import { Injectable, type TModelData, type TControllerMethodCmdRouteMetadata } from '@istock-shell/iswork';
+import { Injectable, type ModelData, type ControllerMethodCmdRouteMetadata } from '@istock-shell/iswork';
 import { TokenType, Tokenizer, type Token } from '@istock-shell/command-parser';
 import type { HistoryModel } from '../history/history.model';
 import type { TResponseCmdRoute } from '../cmd-route/cmd-route.service';
@@ -22,13 +22,13 @@ export type TRecommendData = {
 @Injectable()
 export class RecommendService {
   readonly #tokenizer = new Tokenizer();
-  #stockCodeList: Array<TModelData<StockCodeModel>> = [];
+  #stockCodeList: Array<ModelData<StockCodeModel>> = [];
 
   /**
    * 设置股票代码列表数据
    * @param list
    */
-  setStockCodeList(list: Array<TModelData<StockCodeModel>>) {
+  setStockCodeList(list: Array<ModelData<StockCodeModel>>) {
     this.#stockCodeList = list;
   }
 
@@ -40,7 +40,7 @@ export class RecommendService {
   findSubcommandForToken(
     cmdRoute: TResponseCmdRoute,
     otherTokens: Token[]
-  ): Omit<TControllerMethodCmdRouteMetadata, 'subcommand'> | undefined {
+  ): Omit<ControllerMethodCmdRouteMetadata, 'subcommand'> | undefined {
     const [firstOtherToken] = otherTokens;
     if (firstOtherToken?.type === TokenType.parameter && cmdRoute.subcommand?.length) {
       // 说明有子命令
@@ -214,7 +214,7 @@ export class RecommendService {
 
   autoRecommend(
     payload: { input: string; domainNamePaths: string[] },
-    historys: Array<TModelData<HistoryModel>>,
+    historys: Array<ModelData<HistoryModel>>,
     cmdRoutes: TResponseCmdRoute[]
   ): TRecommendData {
     const originalInput = payload.input.trim();

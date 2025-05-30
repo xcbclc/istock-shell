@@ -1,4 +1,4 @@
-import { Injectable, type TControllerMethodComponentOutput } from '@istock-shell/iswork';
+import { Injectable, type ControllerMethodComponentOutput } from '@istock-shell/iswork';
 import { isNumber, ScopeError } from '@istock-shell/util';
 import type { TUiTableProps } from '@/worker/common';
 import {
@@ -31,8 +31,8 @@ export class ChartService extends ChartBaseService {
     opt: Opt,
     type: EChartType,
     preOutput?:
-      | Array<TControllerMethodComponentOutput<TUiTableProps>>
-      | Array<TControllerMethodComponentOutput<Record<string, unknown>>>
+      | Array<ControllerMethodComponentOutput<TUiTableProps>>
+      | Array<ControllerMethodComponentOutput<Record<string, unknown>>>
   ): TChartOptions {
     // 解析上一个命令的数据
     let data: TChartData | undefined = this.isUiTableOutput(preOutput) ? this.autoToChartData(preOutput) : opt.数据;

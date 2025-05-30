@@ -1,45 +1,98 @@
+/**
+ * @fileoverview 领域管理器
+ * @description 提供领域模块的管理功能，包括领域注册、扫描、缓存等
+ */
 import { isBoolean, isFunction, ScopeError } from '@istock-shell/util';
 import { decoratorRegister } from '../decorators';
-import type { IDomainClass } from '../interfaces';
-import type { TController, TDecoratorCallbackCacheValue, TProvider } from '../types';
+import type { DomainClassBase } from '../interfaces';
+import type { ControllerBase, DecoratorCallbackCacheValue, Provider } from '../types';
 import { MetadataScanner } from '../scanner';
-import { EDecoratorType } from '../enums';
+import { DecoratorType } from '../enums';
 import { DomainCache } from './domain-cache';
 import { Domain } from './domain';
 
+/**
+ * 领域管理器类
+ * @description 负责管理所有领域模块，提供领域注册、扫描、缓存和装饰器回调管理功能
+ * @example
+ * ```typescript
+ * const manager = DomainManager.create();
+ *
+ * // 注册领域
+ * manager.register(MyDomainClass);
+ *
+ * // 获取所有领域
+ * const domains = manager.domains;
+ *
+ * // 获取装饰器回调
+ * const callbacks = manager.decoratorCallbacks;
+ * ```
+ */
 export class DomainManager {
+  /** 元数据扫描器 */
   static readonly #scanner: typeof MetadataScanner = MetadataScanner;
+  /** 领域缓存实例 */
   static readonly #domainCache: DomainCache = DomainCache.create();
+  /** 装饰器注册器实例 */
   static readonly #decoratorRegister = decoratorRegister;
+
+  /**
+   * 创建领域管理器实例
+   * @description 创建并返回新的领域管理器实例
+   * @returns 领域管理器实例
+   * @static
+   */
   static create() {
     return new this();
   }
 
+  /**
+   * 获取所有领域实例
+   * @description 返回当前缓存中的所有领域实例数组
+   * @returns 领域实例数组
+   */
   get domains() {
     return Array.from(DomainManager.#domainCache.values());
   }
 
+  /**
+   * 获取装饰器注册器
+   * @description 返回装饰器注册器实例
+   * @returns 装饰器注册器实例
+   */
   get decoratorRegister() {
     return DomainManager.#decoratorRegister;
   }
 
+  /**
+   * 获取分类的装饰器回调
+   * @description 将装饰器回调按类型分类返回
+   * @returns 包含不同类型装饰器回调的对象
+   * @throws {ScopeError} 当遇到未知装饰器类型时抛出错误
+   * @example
+   * ```typescript
+   * const callbacks = manager.decoratorCallbacks;
+   * console.log('类装饰器:', callbacks.classs);
+   * console.log('方法装饰器:', callbacks.methods);
+   * ```
+   */
   get decoratorCallbacks() {
-    const classs: TDecoratorCallbackCacheValue[] = [];
-    const propertys: TDecoratorCallbackCacheValue[] = [];
-    const methods: TDecoratorCallbackCacheValue[] = [];
-    const parameters: TDecoratorCallbackCacheValue[] = [];
+    const classs: DecoratorCallbackCacheValue[] = [];
+    const propertys: DecoratorCallbackCacheValue[] = [];
+    const methods: DecoratorCallbackCacheValue[] = [];
+    const parameters: DecoratorCallbackCacheValue[] = [];
     for (const cacheValue of this.decoratorRegister.decoratorCallbacks) {
       switch (cacheValue.decoratorType) {
-        case EDecoratorType.Class:
+        case DecoratorType.Class:
           classs.push(cacheValue);
           break;
-        case EDecoratorType.Property:
+        case DecoratorType.Property:
           propertys.push(cacheValue);
           break;
-        case EDecoratorType.Method:
+        case DecoratorType.Method:
           methods.push(cacheValue);
           break;
-        case EDecoratorType.Parameter:
+        case DecoratorType.Parameter:
           parameters.push(cacheValue);
           break;
         default:
@@ -53,9 +106,9 @@ export class DomainManager {
    * 扫描domain包含的所有信息并存入缓存
    * @param domainClass
    */
-  scanDomain(domainClass: IDomainClass, previousDomain?: Domain): void;
-  scanDomain(domainClass: IDomainClass, isRootDomain?: boolean): void;
-  scanDomain(domainClass: IDomainClass, rootOrPrevious?: Domain | boolean): void {
+  scanDomain(domainClass: DomainClassBase, previousDomain?: Domain): void;
+  scanDomain(domainClass: DomainClassBase, isRootDomain?: boolean): void;
+  scanDomain(domainClass: DomainClassBase, rootOrPrevious?: Domain | boolean): void {
     if (DomainManager.#domainCache.has(domainClass)) {
       // 已被扫描
       return;
@@ -81,10 +134,10 @@ export class DomainManager {
       if (parentDomain.exports) {
         // 导出可以是控制器和提供者，遍历导出列表添加控制器和提供者
         parentDomain.exports.forEach((domainExport) => {
-          if (parentDomain.controllers.includes(domainExport as TController)) {
-            parentDomain.addController(domainExport as TController);
+          if (parentDomain.controllers.includes(domainExport as ControllerBase)) {
+            parentDomain.addController(domainExport as ControllerBase);
           }
-          if (parentDomain.providers.includes(domainExport as TProvider)) {
+          if (parentDomain.providers.includes(domainExport as Provider)) {
             parentDomain.addProvider(domainExport);
           }
         });
@@ -103,7 +156,7 @@ export class DomainManager {
    * 获取Controller所有元数据
    * @param Controller
    */
-  scanControllerMeta(Controller: TController) {
+  scanControllerMeta(Controller: ControllerBase) {
     return DomainManager.#scanner.scanClassMetadata(Controller);
   }
 
@@ -111,7 +164,7 @@ export class DomainManager {
    * 获取Controller所有方法所有元数据
    * @param Controller
    */
-  scanControllerMethodMeta(Controller: TController) {
+  scanControllerMethodMeta(Controller: ControllerBase) {
     return DomainManager.#scanner.scanMethodMetadata(Controller);
   }
 
@@ -126,7 +179,7 @@ export class DomainManager {
   /**
    * 根据名称获取domain
    */
-  getDomain<T extends IDomainClass>(name: string) {
+  getDomain<T extends DomainClassBase>(name: string) {
     return this.domains.find<Domain<T>>((domain): domain is Domain<T> => {
       return domain.name === name;
     });

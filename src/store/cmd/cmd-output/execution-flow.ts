@@ -6,8 +6,8 @@ import {
   type CommandResult,
   AstTreeType,
 } from '@istock-shell/command-parser';
-import { EMessageCmdAction, EMessageStatus } from '@istock-shell/iswork';
-import type { TAnyObject } from '@istock-shell/iswork';
+import { MessageCmdAction, MessageStatus } from '@istock-shell/iswork';
+import type { AnyObject } from '@istock-shell/iswork';
 import type { CmdWindowContext } from '@/window/cmd-window-context';
 import type { ICmdOutput, ICmdOutputData, ICmdOutputWritable } from './store';
 import { getOutputErrorData } from './default-output';
@@ -65,7 +65,7 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
         if ([AstTreeType.keyCommand, AstTreeType.command].includes(cmdItemResult.type)) {
           let domainPath: string = '';
           let executePath: string = '';
-          let payload: TAnyObject | null = null;
+          let payload: AnyObject | null = null;
           let hasPipeSymbol = false;
           const previousOutput = outputs[outputs.length - 1] ?? null;
 
@@ -164,7 +164,7 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
             outputs.push(outputData);
             outputStatus.push(true);
             if (!hasPipeSymbol) cmdOutput.updateLastOutputData(allOutputs.flat(maxExecution), 'message');
-            if (result.ports?.length && result.meta?.status !== EMessageStatus.COMPLETE) {
+            if (result.ports?.length && result.meta?.status !== MessageStatus.COMPLETE) {
               cmdOutput.closeCmdLoading(); // 关闭loading 交给通道消息处理
               // 有消息通道，则监听消息通道的消息
               const messageChannelAsyncIterator = ctx.getMessageChannelAsyncIterator(result);
@@ -174,11 +174,11 @@ export const sendCmdExecutionFlow = async (ctx: CmdWindowContext, cmdOutput: ICm
                 if (!meta) continue;
                 const output = payload?.output;
                 // 新增
-                if (meta.cmdAction === EMessageCmdAction.APPEND) {
+                if (meta.cmdAction === MessageCmdAction.APPEND) {
                   output && cmdOutput.updateLastOutputData(output, 'message');
                 }
                 // 替换
-                if (meta.cmdAction === EMessageCmdAction.REPLACE) {
+                if (meta.cmdAction === MessageCmdAction.REPLACE) {
                   output && cmdOutput.replaceLastOutputData(output, 'message');
                 }
                 cmdOutput.closeCmdLoading(); // 每次收到通道消息关闭loading

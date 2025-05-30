@@ -6,7 +6,7 @@
  */
 
 import { execSync } from 'child_process';
-import { copyFileSync, mkdirSync } from 'fs';
+import { copyFileSync, mkdirSync, cpSync, existsSync } from 'fs';
 import { dirname } from 'path';
 
 /**
@@ -49,6 +49,24 @@ export default async () => {
       console.log('CLI包README.md文件已成功拷贝到文档目录');
     } catch (copyError) {
       console.error('拷贝CLI包README.md文件时发生错误:', copyError.message);
+    }
+
+    // 拷贝iswork包的docs目录到文档目录
+    try {
+      const sourceDocsDir = './src/packages/iswork/docs';
+      const targetDocsDir = './docs/packages/iswork';
+      // 检查源目录是否存在
+      if (existsSync(sourceDocsDir)) {
+        // 确保目标目录存在
+        mkdirSync(dirname(targetDocsDir), { recursive: true });
+        // 拷贝整个docs目录
+        cpSync(sourceDocsDir, targetDocsDir, { recursive: true, force: true });
+        console.log('iswork包docs目录已成功拷贝到文档目录');
+      } else {
+        console.warn('iswork包docs目录不存在，跳过拷贝');
+      }
+    } catch (copyError) {
+      console.error('拷贝iswork包docs目录时发生错误:', copyError.message);
     }
     // 执行每个包的文档生成命令
     packageCmds.forEach((cmd) => {

@@ -1,23 +1,23 @@
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { SzdqjypxModel, SzgpsczmModel, SzlbtjModel, SzgphycjModel, type SzmrgkModel } from './gpsczm.model';
 
 @Injectable()
 export class GpsczmService {
   async getStockSummary() {
-    return await SzgpsczmModel.run<Array<TModelData<SzgpsczmModel>>>('/stock_sse_summary', {
+    return await SzgpsczmModel.run<Array<ModelData<SzgpsczmModel>>>('/stock_sse_summary', {
       method: 'get',
     });
   }
 
   async getStockSzseSummary(date: string) {
-    return await SzlbtjModel.run<Array<TModelData<SzlbtjModel>>>('/stock_szse_summary', {
+    return await SzlbtjModel.run<Array<ModelData<SzlbtjModel>>>('/stock_szse_summary', {
       method: 'get',
       query: { date },
     });
   }
 
   async getStockSzseAreaSummary(date: string) {
-    return await SzdqjypxModel.run<Array<TModelData<SzdqjypxModel>>>('/stock_szse_area_summary', {
+    return await SzdqjypxModel.run<Array<ModelData<SzdqjypxModel>>>('/stock_szse_area_summary', {
       method: 'get',
       query: { date },
     });
@@ -30,7 +30,7 @@ export class GpsczmService {
     } else {
       delete query.date;
     }
-    const list = await SzgphycjModel.run<Array<TModelData<SzgphycjModel>>>('/stock_szse_sector_summary', {
+    const list = await SzgphycjModel.run<Array<ModelData<SzgphycjModel>>>('/stock_szse_sector_summary', {
       method: 'get',
       query,
     });
@@ -40,7 +40,7 @@ export class GpsczmService {
   }
 
   async getStockSseDealDaily(date: string) {
-    return await SzgpsczmModel.run<Array<TModelData<SzmrgkModel>>>('/stock_sse_deal_daily', {
+    return await SzgpsczmModel.run<Array<ModelData<SzmrgkModel>>>('/stock_sse_deal_daily', {
       method: 'get',
       query: { date },
     });

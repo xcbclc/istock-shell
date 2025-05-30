@@ -1,6 +1,6 @@
-import { type TControllerMethodCmdRoute } from '@istock-shell/iswork';
+import { type ControllerMethodCmdRoute } from '@istock-shell/iswork';
 
-const cmdRoute: TControllerMethodCmdRoute = {
+const cmdRoute: ControllerMethodCmdRoute = {
   name: '财经导航',
   cmd: 'cjdh',
   usage: 'cjdh [标签]',

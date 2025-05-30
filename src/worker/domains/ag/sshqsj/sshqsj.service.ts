@@ -1,4 +1,4 @@
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { ScopeError } from '@istock-shell/util';
 import { SshqsjModel, SshqxlModel } from './sshqsj.model';
 import { EDataType } from '@domains/ag/sshqsj/sshqsj.cmd';
@@ -31,13 +31,13 @@ export class SshqsjService {
         break;
     }
     if (!path) throw new ScopeError(`ag.${this.constructor.name}`, '未找到对应请求地址');
-    return await SshqsjModel.run<Array<TModelData<SshqsjModel>>>(path, {
+    return await SshqsjModel.run<Array<ModelData<SshqsjModel>>>(path, {
       method: 'get',
     });
   }
 
   async stockZhASpot() {
-    return await SshqxlModel.run<Array<TModelData<SshqxlModel>>>('/stock_zh_a_spot', {
+    return await SshqxlModel.run<Array<ModelData<SshqxlModel>>>('/stock_zh_a_spot', {
       method: 'get',
     });
   }

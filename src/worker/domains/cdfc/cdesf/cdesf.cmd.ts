@@ -1,6 +1,6 @@
-import { type TControllerMethodCmdRoute } from '@istock-shell/iswork';
+import { type ControllerMethodCmdRoute } from '@istock-shell/iswork';
 
-const 成都二手房: TControllerMethodCmdRoute = {
+const 成都二手房: ControllerMethodCmdRoute = {
   name: '成都二手房行情',
   cmd: 'cdesfhq',
   usage: 'cdesfhq',

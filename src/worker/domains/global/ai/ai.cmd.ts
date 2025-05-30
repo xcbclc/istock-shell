@@ -1,6 +1,6 @@
-import { type TControllerMethodCmdRoute } from '@istock-shell/iswork';
+import { type ControllerMethodCmdRoute } from '@istock-shell/iswork';
 
-const cmdRoute: TControllerMethodCmdRoute = {
+const cmdRoute: ControllerMethodCmdRoute = {
   name: 'Ai',
   cmd: 'ai',
   usage: 'ai:<消息内容>',

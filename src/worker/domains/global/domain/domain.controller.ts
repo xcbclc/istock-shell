@@ -6,9 +6,9 @@ import {
   CmdRouteOptions,
   CmdRouteArguments,
   ApplicationContext,
-  type TModelCreate,
+  type ModelCreate,
   Component,
-  type TCmdpMeta,
+  type CmdpMeta,
 } from '@istock-shell/iswork';
 import { isString, isRegExp } from '@istock-shell/util';
 import { DomainService } from './domain.service';
@@ -21,7 +21,7 @@ export class DomainController {
   constructor(private readonly domainService: DomainService) {}
 
   @Method('create')
-  async create(@Payload() payload: TModelCreate<DomainModel>) {
+  async create(@Payload() payload: ModelCreate<DomainModel>) {
     return await this.domainService.create(payload);
   }
 
@@ -59,7 +59,7 @@ export class DomainController {
   @Component('CmdOutputEvent')
   async changePromptDomain(ctx: ApplicationContext, @CmdRouteArguments(0) path: string = '.') {
     const cmdInfo = ctx.cmdp.getInfo();
-    const meta = ctx.cmdp.getMeta<TCmdpMeta & { domainName: string }>();
+    const meta = ctx.cmdp.getMeta<CmdpMeta & { domainName: string }>();
     const currentDomainPaths = meta.domainName ? meta.domainName.split('.') : [];
     currentDomainPaths.unshift('root'); // 加入根目录
     const domains = await this.domainService.findDomainPaths(

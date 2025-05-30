@@ -1,10 +1,10 @@
-import { type ApplicationContext, BaseModel, Decorator, type TModelType } from '@istock-shell/iswork';
+import { type ApplicationContext, BaseModel, Decorator, type ModelType } from '@istock-shell/iswork';
 import { ScopeError } from '@istock-shell/util';
 import { CONTROLLER_TABLE_RETURN_METADATA } from '../constants';
 import { parseFilterConditions, parseCmdInfoToUnit } from '../index';
 
 export type TTableReturnOptions = {
-  Model: TModelType;
+  Model: ModelType;
   caption?: string;
   unit?: string; // 某些数据不是以个分位开始的，初始值需要重置单位。 列名称:行名称·单位
   pipe?: string; // 某些数据不是想要的格式，需要重新格式化。  列名称:行名称·单位

@@ -1,4 +1,4 @@
-import { Injectable, type TModelCreate, type TModelUpdate, type TOrmQuery } from '@istock-shell/iswork';
+import { Injectable, type ModelCreate, type ModelUpdate, type OrmQuery } from '@istock-shell/iswork';
 import { ScopeError } from '@istock-shell/util';
 import { UserModel } from './user.model';
 
@@ -32,15 +32,15 @@ export class UserService {
     return user?.password === password ? user : null;
   }
 
-  async create(data: TModelCreate<UserModel>) {
+  async create(data: ModelCreate<UserModel>) {
     return await UserModel.createOne(data);
   }
 
-  async update(data: TModelUpdate<UserModel>) {
+  async update(data: ModelUpdate<UserModel>) {
     return await UserModel.updateById(data.id, data);
   }
 
-  async find(query: TOrmQuery = {}) {
+  async find(query: OrmQuery = {}) {
     return await UserModel.query(query);
   }
 }

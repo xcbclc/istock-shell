@@ -1,4 +1,4 @@
-import type { ApplicationContext, TCmdpInfo } from '@istock-shell/iswork';
+import type { ApplicationContext, CmdpInfo } from '@istock-shell/iswork';
 import { parseFilterConditions, type TTableFilterConditions } from './table-query';
 import type { TCmdRequest } from '../types';
 
@@ -10,7 +10,7 @@ import type { TCmdRequest } from '../types';
  */
 export const parseCmdInfoToUnit = (
   _ctx: ApplicationContext,
-  cmdInfo: TCmdpInfo,
+  cmdInfo: CmdpInfo,
   optionName = '单位'
 ): TTableFilterConditions => {
   const payload = cmdInfo.payload as TCmdRequest<Record<string, unknown>>;
