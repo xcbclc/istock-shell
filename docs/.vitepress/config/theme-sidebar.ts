@@ -124,6 +124,10 @@ export default {
           ],
         },
         {
+          text: '导航',
+          items: [{ text: 'Menu 菜单', link: '/packages/shell-ui/components/navigation/menu/index.html' }],
+        },
+        {
           text: '反馈',
           items: [
             { text: 'Alert 警告', link: '/packages/shell-ui/components/feedback/alert/index.html' },

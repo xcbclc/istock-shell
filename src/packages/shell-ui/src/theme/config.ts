@@ -725,3 +725,50 @@ export const ModalBoxVariantConfig = {
   },
   defaultVariants: {},
 };
+
+export const MenuVariantConfig = {
+  base: 'menu bg-base-200 rounded-box',
+  variants: {
+    layout: {
+      vertical: 'menu-vertical',
+      horizontal: 'menu-horizontal',
+    },
+    size: {
+      xs: 'menu-xs',
+      sm: 'menu-sm',
+      md: 'menu-md',
+      lg: 'menu-lg',
+      xl: 'menu-xl',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const MenuItemVariantConfig = {
+  base: '',
+  variants: {
+    disabled: {
+      true: 'menu-disabled',
+    },
+    title: {
+      true: 'menu-title',
+    },
+  },
+  defaultVariants: {},
+};
+
+export const MenuItemTextVariantConfig = {
+  base: '',
+  variants: {
+    active: {
+      true: 'menu-active',
+    },
+    focus: {
+      true: 'menu-focus',
+    },
+    title: {
+      true: 'menu-title',
+    },
+  },
+  defaultVariants: {},
+};
