@@ -28,12 +28,12 @@ export default [
   {
     text: '相关库',
     items: [
-      { text: 'iswork', link: '/packages/iswork/README.html' },
-      { text: 'shell-ui', link: '/packages/shell-ui/README.html' },
-      { text: 'command-parser', link: '/packages/command-parser/README.html' },
-      { text: 'editor', link: '/packages/editor/README.html' },
-      { text: 'cli', link: '/packages/cli/README.html' },
-      { text: 'util', link: '/packages/util/README.html' },
+      { text: '@istock-shell/iswork', link: '/packages/iswork/README.html' },
+      { text: '@istock-shell/ui', link: '/packages/shell-ui/README.html' },
+      { text: '@istock-shell/command-parser', link: '/packages/command-parser/README.html' },
+      { text: '@istock-shell/editor', link: '/packages/editor/README.html' },
+      { text: '@istock-shell/cli', link: '/packages/cli/README.html' },
+      { text: '@istock-shell/util', link: '/packages/util/README.html' },
     ],
   },
   {

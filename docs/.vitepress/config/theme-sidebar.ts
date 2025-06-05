@@ -125,7 +125,10 @@ export default {
         },
         {
           text: '导航',
-          items: [{ text: 'Menu 菜单', link: '/packages/shell-ui/components/navigation/menu/index.html' }],
+          items: [
+            { text: 'Menu 菜单', link: '/packages/shell-ui/components/navigation/menu/index.html' },
+            { text: 'Breadcrumbs 面包屑导航', link: '/packages/shell-ui/components/navigation/breadcrumbs/index.html' },
+          ],
         },
         {
           text: '反馈',
