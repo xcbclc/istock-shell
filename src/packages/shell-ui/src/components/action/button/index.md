@@ -82,24 +82,24 @@ npm install @istock-shell/ui
 
 ### 属性说明
 
-| 属性名     | 类型                          | 默认值   | 说明               |
-| ---------- | ----------------------------- | -------- | ------------------ |
-| `color`    | [`ButtonColor`](#buttoncolor) | -        | 按钮的主题颜色     |
-| `size`     | [`ButtonSize`](#buttonsize)   | `md`     | 按钮的尺寸大小     |
-| `soft`     | `boolean`                     | `false`  | 是否使用柔和样式   |
-| `outline`  | `boolean`                     | `false`  | 是否使用轮廓样式   |
-| `dash`     | `boolean`                     | `false`  | 是否使用虚线边框   |
-| `active`   | `boolean`                     | `false`  | 是否为激活状态     |
-| `ghost`    | `boolean`                     | `false`  | 是否使用幽灵样式   |
-| `link`     | `boolean`                     | `false`  | 是否使用链接样式   |
-| `wide`     | `boolean`                     | `false`  | 是否使用加宽样式   |
-| `tag`      | [`ButtonTag`](#buttontag)     | `button` | 渲染的HTML标签类型 |
-| `disabled` | `boolean`                     | `false`  | 是否禁用按钮       |
-| `shape`    | [`ButtonShape`](#buttonshape) | -        | 按钮的形状         |
-| `block`    | `boolean`                     | `false`  | 是否为块级按钮     |
-| `loading`  | `boolean`                     | `false`  | 是否显示加载状态   |
-| `text`     | `string`                      | -        | 按钮文本内容       |
-| `class`    | `string`                      | -        | 自定义CSS类名      |
+| 属性名     | 类型                          | 默认值     | 说明               |
+| ---------- | ----------------------------- | ---------- | ------------------ |
+| `color`    | [`ButtonColor`](#buttoncolor) | -          | 按钮的主题颜色     |
+| `size`     | [`ButtonSize`](#buttonsize)   | `'md'`     | 按钮的尺寸大小     |
+| `soft`     | `boolean`                     | `false`    | 是否使用柔和样式   |
+| `outline`  | `boolean`                     | `false`    | 是否使用轮廓样式   |
+| `dash`     | `boolean`                     | `false`    | 是否使用虚线边框   |
+| `active`   | `boolean`                     | `false`    | 是否为激活状态     |
+| `ghost`    | `boolean`                     | `false`    | 是否使用幽灵样式   |
+| `link`     | `boolean`                     | `false`    | 是否使用链接样式   |
+| `wide`     | `boolean`                     | `false`    | 是否使用加宽样式   |
+| `tag`      | [`ButtonTag`](#buttontag)     | `'button'` | 渲染的HTML标签类型 |
+| `disabled` | `boolean`                     | `false`    | 是否禁用按钮       |
+| `shape`    | [`ButtonShape`](#buttonshape) | -          | 按钮的形状         |
+| `block`    | `boolean`                     | `false`    | 是否为块级按钮     |
+| `loading`  | `boolean`                     | `false`    | 是否显示加载状态   |
+| `text`     | `string`                      | -          | 按钮文本内容       |
+| `class`    | `string`                      | -          | 自定义CSS类名      |
 
 ### 代码片段插入位置
 
