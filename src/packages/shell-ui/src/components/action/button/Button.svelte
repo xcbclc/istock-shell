@@ -1,72 +1,130 @@
+<!--
+  ShButton 按钮组件
+
+  一个功能丰富的按钮组件，支持多种样式变体、状态和交互效果。
+  基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
+
+  示例用法：
+  ```svelte
+  <ShButton>基础按钮</ShButton>
+
+  <ShButton color="primary" size="lg">带颜色和尺寸的按钮</ShButton>
+
+  <ShButton outline color="secondary">轮廓按钮</ShButton>
+
+  <ShButton loading>加载状态按钮...</ShButton>
+
+  <ShButton tag="a" href="/link">自定义标签按钮</ShButton>
+  ```
+
+  功能特性：
+  - 支持多种颜色主题（primary, secondary, success, warning, error 等）
+  - 提供多种尺寸规格（xs, sm, md, lg, xl）
+  - 支持多种样式变体（outline, soft, ghost, link, dash）
+  - 内置加载状态和禁用状态
+  - 支持自定义 HTML 标签（button, a, input, div）
+  - 支持图标和文本组合
+  - 完整的响应式设计支持
+  - TypeScript 类型安全
+-->
 <script lang="ts" module>
   import type { SvelteHTMLElements } from 'svelte/elements';
   import { ButtonVariantConfig } from '../../../theme/config';
 
-  // 从主题配置中获取按钮组件的基础配置
   const buttonVariantConfig = ButtonVariantConfig;
 
-  // 定义按钮支持的HTML标签类型
+  /**
+   * 按钮支持的HTML标签类型
+   * @typedef {'a' | 'button' | 'input' | 'div'} ButtonTag
+   */
   export type ButtonTag = 'a' | 'button' | 'input' | 'div';
 
-  // 定义按钮颜色类型（从配置中提取可用颜色）
+  /**
+   * 按钮颜色类型（从主题配置中动态提取）
+   * @typedef {keyof ButtonVariantConfig['variants']['color']} ButtonColor
+   */
   export type ButtonColor = keyof (typeof buttonVariantConfig)['variants']['color'];
 
-  // 定义按钮尺寸类型（从配置中提取可用尺寸）
+  /**
+   * 按钮尺寸类型（从主题配置中动态提取）
+   * @typedef {keyof ButtonVariantConfig['variants']['size']} ButtonSize
+   */
   export type ButtonSize = keyof (typeof buttonVariantConfig)['variants']['size'];
 
-  // 按钮组件属性类型定义
+  /**
+   * 按钮组件属性类型定义
+   * 继承指定HTML标签的所有原生属性，并扩展按钮特有的样式和行为属性
+   *
+   * @template Tag - HTML标签类型，限制为ButtonTag中的值
+   * @typedef {SvelteHTMLElements[Tag] & ButtonPropsExtension} ButtonProps
+   */
   export type ButtonProps<Tag extends ButtonTag> = SvelteHTMLElements[Tag] & {
-    color?: ButtonColor; // 按钮颜色
-    size?: ButtonSize; // 按钮尺寸
-    soft?: boolean; // 柔和视觉效果
-    outline?: boolean; // 轮廓样式
-    dash?: boolean; // 虚线边框
-    active?: boolean; // 激活状态
-    ghost?: boolean; // 幽灵按钮样式
-    link?: boolean; // 链接样式
-    wide?: boolean; // 加宽按钮
-    tag?: Tag; // 使用的HTML标签
-    disabled?: boolean; // 禁用状态
-    shape?: 'square' | 'circle'; // 按钮形状
-    block?: boolean; // 块级显示
-    loading?: boolean; // 加载状态
-    text?: string; // 按钮文本
+    /** 按钮颜色主题，支持多种预设颜色 */
+    color?: ButtonColor;
+    /** 按钮尺寸规格，从 xs 到 xl */
+    size?: ButtonSize;
+    /** 柔和视觉效果，降低背景饱和度 @default false */
+    soft?: boolean;
+    /** 轮廓样式，仅显示边框和文字 @default false */
+    outline?: boolean;
+    /** 虚线边框样式 @default false */
+    dash?: boolean;
+    /** 激活状态，用于表示当前选中或活跃状态 @default false */
+    active?: boolean;
+    /** 幽灵按钮样式，透明背景 @default false */
+    ghost?: boolean;
+    /** 链接样式，去除背景和边框 @default false */
+    link?: boolean;
+    /** 加宽按钮，增加水平内边距 @default false */
+    wide?: boolean;
+    /** 使用的HTML标签类型 @default 'button' */
+    tag?: Tag;
+    /** 禁用状态，阻止交互并显示禁用样式 @default false */
+    disabled?: boolean;
+    /** 按钮形状，支持方形和圆形 */
+    shape?: 'square' | 'circle';
+    /** 块级显示，占满父容器宽度 @default false */
+    block?: boolean;
+    /** 加载状态，显示加载指示器 @default false */
+    loading?: boolean;
+    /** 按钮文本内容，当没有子内容时显示 */
+    text?: string;
   };
 </script>
 
 <script lang="ts">
-  // 导入样式处理工具
   import { tv } from 'tailwind-variants';
   import { tuc } from '@istock-shell/util';
   import { ShLoading } from '../../index';
 
-  // 解构组件属性并设置默认值
   const {
-    color, // 按钮颜色
+    color, // 按钮颜色主题
     size, // 按钮尺寸
-    soft, // 柔和样式开关
-    outline, // 轮廓样式开关
-    dash, // 虚线边框开关
-    active, // 激活状态开关
-    ghost, // 幽灵样式开关
-    link, // 链接样式开关
-    wide, // 加宽开关
-    tag = 'button', // 默认使用button标签
-    disabled, // 禁用状态
+    soft = false, // 柔和效果
+    outline = false, // 轮廓样式
+    dash = false, // 虚线边框
+    active = false, // 激活状态
+    ghost = false, // 幽灵样式
+    link = false, // 链接样式
+    wide = false, // 加宽样式
+    tag = 'button', // HTML标签类型
+    disabled = false, // 禁用状态
     shape, // 按钮形状
-    block, // 块级显示开关
-    loading, // 加载状态开关
-    text,
-    children, // 子内容
-    class: className = '', // 自定义类名
-    ...otherProps // 其他原生属性
+    block = false, // 块级显示
+    loading = false, // 加载状态
+    text, // 按钮文本
+    children, // 子内容插槽
+    class: className = '', // 自定义CSS类名
+    ...otherProps // 其他HTML属性
   }: ButtonProps<ButtonTag> = $props();
 
-  // 创建按钮的Tailwind变体样式生成器（支持响应式尺寸）
+  /**
+   * 创建按钮的Tailwind变体样式生成器
+   * 基于配置生成响应式样式类名
+   */
   const buttonVariants = tv(buttonVariantConfig, {});
 </script>
 
-<!-- 动态元素组件 -->
 <svelte:element
   this={tag}
   {disabled}
@@ -92,14 +150,27 @@
   {...otherProps}
 >
   {#if loading}
-    <!-- 加载状态显示加载指示器 -->
+    <!--
+      加载状态渲染
+      当 loading 为 true 时显示加载指示器
+      传递颜色和尺寸属性保持视觉一致性
+    -->
     <ShLoading {color} {size} />
   {/if}
 
   {#if children}
-    <!-- 渲染子内容 -->
+    <!--
+      子内容插槽渲染
+      优先渲染通过插槽传入的子内容
+      支持图标、文本或其他复杂内容的组合
+    -->
     {@render children()}
   {:else}
+    <!--
+      文本内容渲染
+      当没有子内容时，显示 text 属性的值
+      适用于简单的纯文本按钮
+    -->
     {text}
   {/if}
 </svelte:element>
