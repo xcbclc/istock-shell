@@ -8,4 +8,16 @@
     show = true;
   }}>打开对话框</ShButton
 >
-<ShModal bind:show title="你好！" content="按ESC键或单击下面的按钮关闭" closeButton></ShModal>
+<ShModal
+  bind:show
+  title="你好！"
+  content="按ESC键或单击下面的按钮关闭"
+  actions={[
+    {
+      text: '关闭',
+      onclick: () => {
+        show = false;
+      },
+    },
+  ]}
+></ShModal>

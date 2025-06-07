@@ -8,4 +8,4 @@
     show = true;
   }}>打开对话框</ShButton
 >
-<ShModal bind:show title="你好！" content="按ESC键或单击✕按钮关闭" maskClosable></ShModal>
+<ShModal bind:show title="你好！" content="按ESC键或单击外面遮罩层关闭" maskClosable></ShModal>
