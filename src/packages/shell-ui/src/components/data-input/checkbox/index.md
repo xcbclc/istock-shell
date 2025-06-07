@@ -85,7 +85,7 @@ npm install @istock-shell/ui
 
 ### 属性说明
 
-#### Checkbox 组件属性
+#### Checkbox 属性
 
 | 属性名          | 类型                                                      | 默认值  | 说明                     |
 | --------------- | --------------------------------------------------------- | ------- | ------------------------ |
@@ -99,7 +99,7 @@ npm install @istock-shell/ui
 | `onChangeValue` | `(value: T[], options?: CheckboxItemOption<T>[]) => void` | -       | 值变化时的回调函数       |
 | `class`         | `string`                                                  | -       | 自定义CSS类名            |
 
-#### CheckboxItem 组件属性
+#### CheckboxItem 属性
 
 除了支持原生 `input` 元素的所有属性外，还支持以下扩展属性：
 

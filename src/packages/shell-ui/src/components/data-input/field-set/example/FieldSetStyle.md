@@ -1,7 +1,3 @@
 ### 样式定制方案
 
-通过`class`属性应用TailwindCSS类实现：
-
-- 添加背景色（bg-base-\*）
-- 设置容器边框（border-\*）
-- 调整圆角尺寸（rounded-\*）
+演示如何通过 `class` 属性应用 TailwindCSS 类来自定义字段集的外观样式。示例中使用了背景色（bg-base-200）、边框样式（border border-base-300）、内边距（p-4）和圆角效果（rounded-box）来创建具有视觉层次感的表单分组，适用于需要突出显示或区分不同表单区域的设计场景。
