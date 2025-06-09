@@ -1,7 +1,3 @@
 ### 输入类型支持
 
-覆盖HTML5输入类型：
-
-- **基础类型**：text/password/email
-- **专用类型**：tel/url/search
-- **数据输入**：number/date/time
+演示输入框组件对12种HTML5输入类型的全面支持，包括基础类型（text、password、email）、专用类型（tel、url、search）和数据输入类型（number、date、time等）。每种输入类型都会触发相应的虚拟键盘和验证机制，如邮箱类型会显示@符号键盘，数字类型会显示数字键盘，日期类型会弹出日期选择器，确保用户在不同设备上都能获得最佳的输入体验。

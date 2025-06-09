@@ -113,7 +113,7 @@ npm install @istock-shell/ui
 </svelte:element>
 ```
 
-### Events 事件
+### 事件
 
 继承所有原生HTML元素事件，如：
 

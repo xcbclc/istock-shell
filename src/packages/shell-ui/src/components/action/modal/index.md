@@ -114,7 +114,7 @@ npm install @istock-shell/ui
 </dialog>
 ```
 
-### Events 事件
+### 事件
 
 继承所有原生 HTML dialog 元素事件，如：
 

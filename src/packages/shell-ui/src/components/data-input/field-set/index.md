@@ -126,7 +126,7 @@ npm install @istock-shell/ui
 </div>
 ```
 
-### Events 事件
+### 事件
 
 #### FieldSet 事件
 
