@@ -8,5 +8,5 @@
   ];
 </script>
 
-<ShRadio bind:value {options} label={{ position: 'before' }} />
-<ShRadio bind:value {options} label={{ position: 'after' }} />
+<ShRadio bind:value {options} label={{ placement: 'before' }} />
+<ShRadio bind:value {options} label={{ placement: 'after' }} />

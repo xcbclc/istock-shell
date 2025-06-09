@@ -1,7 +1,3 @@
-### 预定义颜色主题
+### 颜色主题示例
 
-支持八种语义化颜色：
-
-- **系统色系**：`primary`（主色）/`secondary`（辅色）/`accent`（强调色）
-- **状态指示**：`info`（信息）/`success`（成功）/`warning`（警告）/`error`（错误）
-- **中性色**：`neutral`（默认）
+展示单选框组件支持的8种语义化颜色主题，包括系统色系（primary、secondary、accent）、状态指示色（info、success、warning、error）和中性色（neutral）。不同颜色适用于不同的使用场景，如主要选择使用 primary，确认操作使用 success，警告选择使用 warning 等，帮助用户快速理解选项的重要性和语义。
