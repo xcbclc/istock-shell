@@ -1,10 +1,20 @@
 <script lang="ts">
-  import { ShList, ShListRow, ShButton, ShIcon, type ListRowProps, type ListRowAction } from '@istock-shell/ui';
+  import {
+    ShList,
+    ShListRow,
+    ShButton,
+    ShIcon,
+    shShowMessage,
+    type ListRowProps,
+    type ListRowAction,
+  } from '@istock-shell/ui';
   const onActionClickValue = (name?: string, action?: ListRowAction) => {
     console.log('执行动作', name, action);
+    shShowMessage.info(`执行动作：${name}`);
   };
   const oRowClickAction = (row: ListRowProps) => {
     console.log('点击行', row);
+    shShowMessage.info(`点击行：${row.text}`);
   };
   const actions: ListRowAction[] = [
     {
@@ -78,7 +88,7 @@
     {#each list as row}
       <ShListRow
         onclick={() => {
-          console.log('点击行', row);
+          oRowClickAction(row);
         }}
       >
         <div><img class="size-10 rounded-box" src={row.picture?.img?.src} /></div>
@@ -93,7 +103,7 @@
             {...action}
             onclick={(event: Event) => {
               event.stopPropagation();
-              console.log('执行动作', action.name, action);
+              onActionClickValue(action.name, action);
             }}
           >
             <ShIcon {...action.icon} />
