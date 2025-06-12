@@ -123,30 +123,30 @@ npm install @istock-shell/ui
 - `mouseenter` - 鼠标进入事件
 - `mouseleave` - 鼠标离开事件
 
-## 类型定义
+### 类型定义
 
-### ButtonColor
+#### ButtonColor
 
 ```typescript
 // 按钮颜色类型
 type ButtonColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
 ```
 
-### ButtonSize
+#### ButtonSize
 
 ```typescript
 // 按钮尺寸类型
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 ```
 
-### ButtonTag
+#### ButtonTag
 
 ```typescript
 // 按钮标签类型
 type ButtonTag = 'button' | 'a' | 'input' | 'div';
 ```
 
-### ButtonShape
+#### ButtonShape
 
 ```typescript
 // 按钮形状类型

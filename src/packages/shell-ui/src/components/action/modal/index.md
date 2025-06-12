@@ -124,9 +124,9 @@ npm install @istock-shell/ui
 - `focus` - 获得焦点事件
 - `blur` - 失去焦点事件
 
-## 类型定义
+### 类型定义
 
-### ModalBoxSize
+#### ModalBoxSize
 
 ```typescript
 // 对话框尺寸类型（从主题配置中动态提取）

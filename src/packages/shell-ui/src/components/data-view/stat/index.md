@@ -99,7 +99,7 @@ npm install @istock-shell/ui
 
 ## API 参考
 
-### 属性说明
+### Stat API
 
 #### Stat 属性
 
@@ -111,6 +111,20 @@ npm install @istock-shell/ui
 | `vertical` | `boolean`                           | `false` | 是否使用垂直布局模式           |
 | `align`    | [`StatItemAlign`](#statitemalign)   | -       | 统计项的对齐方式               |
 | `class`    | `string`                            | -       | 自定义CSS类名                  |
+
+#### Stat 代码片段插入位置
+
+- `children`：
+
+```svelte
+<div class="stats">
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</div>
+```
+
+### StatItem API
 
 #### StatItem 属性
 
@@ -124,12 +138,30 @@ npm install @istock-shell/ui
 | `center`  | `boolean`                                       | `false` | 是否居中对齐   |
 | `class`   | `string`                                        | -       | 自定义CSS类名  |
 
+#### StatItem 代码片段插入位置
+
+- `children`：
+
+```svelte
+<div class="stat">
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</div>
+```
+
+### StatFigure API
+
 #### StatFigure 属性
 
 | 属性名  | 类型                                       | 默认值 | 说明                             |
 | ------- | ------------------------------------------ | ------ | -------------------------------- |
 | `icon`  | [`IconProps`](../../extend/icon/#属性说明) | -      | 图标配置，继承图标组件的所有属性 |
 | `class` | `string`                                   | -      | 自定义CSS类名                    |
+
+#### StatFigure 代码片段插入位置
+
+### StatTitle API
 
 #### StatTitle 属性
 
@@ -142,6 +174,20 @@ npm install @istock-shell/ui
 | `weight` | [`TextBaseProps`](#textbaseprops)['weight'] | -      | 文本粗细      |
 | `class`  | `string`                                    | -      | 自定义CSS类名 |
 
+#### StatTitle 代码片段插入位置
+
+- `children`：
+
+```svelte
+<div>
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</div>
+```
+
+### StatValue API
+
 #### StatValue 属性
 
 | 属性名   | 类型                                        | 默认值 | 说明          |
@@ -152,6 +198,20 @@ npm install @istock-shell/ui
 | `align`  | [`TextBaseProps`](#textbaseprops)['align']  | -      | 文本对齐方式  |
 | `weight` | [`TextBaseProps`](#textbaseprops)['weight'] | -      | 文本粗细      |
 | `class`  | `string`                                    | -      | 自定义CSS类名 |
+
+#### StatValue 代码片段插入位置
+
+- `children`：
+
+```svelte
+<div>
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</div>
+```
+
+### StatDesc API
 
 #### StatDesc 属性
 
@@ -164,61 +224,23 @@ npm install @istock-shell/ui
 | `weight` | [`TextBaseProps`](#textbaseprops)['weight']                                   | -      | 文本粗细           |
 | `class`  | `string`                                                                      | -      | 自定义CSS类名      |
 
+#### StatDesc 代码片段插入位置
+
+- `children`：
+
+```svelte
+<div>
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</div>
+```
+
+### StatAction API
+
 #### StatAction 属性
 
 继承自按钮组件 [`ButtonProps`](../../action/button/#属性说明) 的所有属性。
-
-### 代码片段插入位置
-
-- `Stat` 的 `children`：
-
-```svelte
-<div class="stats">
-  <!-- ...code -->
-  {@render children()}
-  <!-- ...code -->
-</div>
-```
-
-- `StatItem` 的 `children`：
-
-```svelte
-<div class="stat">
-  <!-- ...code -->
-  {@render children()}
-  <!-- ...code -->
-</div>
-```
-
-- `StatTitle` 的 `children`：
-
-```svelte
-<div>
-  <!-- ...code -->
-  {@render children()}
-  <!-- ...code -->
-</div>
-```
-
-- `StatValue` 的 `children`：
-
-```svelte
-<div>
-  <!-- ...code -->
-  {@render children()}
-  <!-- ...code -->
-</div>
-```
-
-- `StatDesc` 的 `children`：
-
-```svelte
-<div>
-  <!-- ...code -->
-  {@render children()}
-  <!-- ...code -->
-</div>
-```
 
 ### 类型定义
 

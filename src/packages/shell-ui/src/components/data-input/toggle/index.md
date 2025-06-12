@@ -120,23 +120,23 @@ npm install @istock-shell/ui
 - `blur` - 失去焦点事件
 - `click` - 点击事件
 
-## 类型定义
+### 类型定义
 
-### ToggleColor
+#### ToggleColor
 
 ```typescript
 // 开关颜色类型
 type ToggleColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
 ```
 
-### ToggleSize
+#### ToggleSize
 
 ```typescript
 // 开关尺寸类型
 type ToggleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 ```
 
-### ToggleLabel
+#### ToggleLabel
 
 ```typescript
 // 标签配置类型

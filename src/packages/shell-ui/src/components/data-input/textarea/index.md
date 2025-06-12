@@ -106,23 +106,23 @@ npm install @istock-shell/ui
 - `keydown` - 键盘按下事件
 - `keyup` - 键盘抬起事件
 
-## 类型定义
+### 类型定义
 
-### TextareaColor
+#### TextareaColor
 
 ```typescript
 // 文本框颜色类型
 type TextareaColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
 ```
 
-### TextareaSize
+#### TextareaSize
 
 ```typescript
 // 文本框尺寸类型
 type TextareaSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 ```
 
-### TextareaVariant
+#### TextareaVariant
 
 ```typescript
 // 文本框样式变体类型

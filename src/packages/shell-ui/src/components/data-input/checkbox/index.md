@@ -10,7 +10,8 @@ outline: [2, 4]
 
 # Checkbox 复选框组件
 
-复选框是用户界面中重要的表单控件，用于实现多选操作和状态切换。IStock Shell UI 的 Checkbox 组件基于 Tailwind CSS 和 DaisyUI 构建，提供了丰富的配置选项和优秀的用户体验。
+复选框是用户界面中重要的表单控件，用于实现多选操作和状态切换。IStock Shell UI 的 Checkbox 组件基于 Tailwind CSS 和 DaisyUI
+构建，提供了丰富的配置选项和优秀的用户体验。
 
 ## 快速开始
 
@@ -83,7 +84,7 @@ npm install @istock-shell/ui
 
 ## API 参考
 
-### 属性说明
+### Checkbox API
 
 #### Checkbox 属性
 
@@ -99,6 +100,20 @@ npm install @istock-shell/ui
 | `onChangeValue` | `(value: T[], options?: CheckboxItemOption<T>[]) => void` | -       | 值变化时的回调函数       |
 | `class`         | `string`                                                  | -       | 自定义CSS类名            |
 
+#### Checkbox 代码片段插入位置
+
+- `children`：
+
+```svelte
+<div>
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</div>
+```
+
+### CheckboxItem API
+
 #### CheckboxItem 属性
 
 除了支持原生 `input` 元素的所有属性外，还支持以下扩展属性：
@@ -110,18 +125,6 @@ npm install @istock-shell/ui
 | `groupValue`    | `T[]`                                       | `[]`    | 组选中值，支持双向绑定 |
 | `option`        | [`CheckboxItemOption`](#checkboxitemoption) | -       | 关联的选项数据         |
 | `indeterminate` | `boolean`                                   | `false` | 是否为不确定状态       |
-
-### 代码片段插入位置
-
-- `Checkbox`的`children`：
-
-```svelte
-<div>
-  <!-- ...code -->
-  {@render children()}
-  <!-- ...code -->
-</div>
-```
 
 ### 类型定义
 

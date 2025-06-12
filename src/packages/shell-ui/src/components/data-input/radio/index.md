@@ -79,7 +79,7 @@ npm install @istock-shell/ui
 
 ## API 参考
 
-### 属性说明
+### Radio API
 
 #### Radio 属性
 
@@ -94,6 +94,20 @@ npm install @istock-shell/ui
 | `wrapClass`     | `string`                                             | -       | 外层容器的自定义CSS类名 |
 | `onChangeValue` | `<T>(value: T, option?: RadioItemOption<T>) => void` | -       | 值变更回调函数          |
 | `class`         | `string`                                             | -       | 自定义CSS类名           |
+
+#### Radio 代码片段插入位置
+
+- `children`：
+
+```svelte
+<div class="radio-group">
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</div>
+```
+
+### RadioItem API
 
 #### RadioItem 属性
 
@@ -123,19 +137,7 @@ npm install @istock-shell/ui
 - `onblur` - 失去焦点事件
 - 以及其他所有 `HTMLInputAttributes` 中定义的属性
 
-### 代码片段插入位置
-
-- `Radio` 的 `children`：
-
-```svelte
-<div class="radio-group">
-  <!-- ...code -->
-  {@render children()}
-  <!-- ...code -->
-</div>
-```
-
-### 事件
+#### RadioItem 事件
 
 `RadioItem` 组件继承所有原生HTML input元素事件，如：
 
@@ -144,37 +146,37 @@ npm install @istock-shell/ui
 - `blur` - 失去焦点事件
 - `click` - 点击事件
 
-## 类型定义
+### 类型定义
 
-### RadioColor
+#### RadioColor
 
 ```typescript
 // 单选框颜色类型
 type RadioColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
 ```
 
-### RadioSize
+#### RadioSize
 
 ```typescript
 // 单选框尺寸类型
 type RadioSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 ```
 
-### RadioItemColor
+#### RadioItemColor
 
 ```typescript
 // 单选按钮项颜色类型
 type RadioItemColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
 ```
 
-### RadioItemSize
+#### RadioItemSize
 
 ```typescript
 // 单选按钮项尺寸类型
 type RadioItemSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 ```
 
-### RadioItemOption
+#### RadioItemOption
 
 ```typescript
 // 单选项选项数据接口
@@ -188,7 +190,7 @@ export interface RadioItemOption<T = any> {
 }
 ```
 
-### RadioLabel
+#### RadioLabel
 
 ```typescript
 // 标签配置接口

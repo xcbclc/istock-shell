@@ -21,7 +21,8 @@ outline: [2, 4]
 
 # FieldSet 字段集组件
 
-字段集组件是表单组织的基础容器，通过语义化的分组方式提升表单的可读性和可访问性。基于原生 HTML fieldset 元素构建，提供标题显示和灵活的内容布局支持。
+字段集组件是表单组织的基础容器，通过语义化的分组方式提升表单的可读性和可访问性。基于原生 HTML fieldset
+元素构建，提供标题显示和灵活的内容布局支持。
 
 ## 快速开始
 
@@ -86,7 +87,7 @@ npm install @istock-shell/ui
 
 ## API 参考
 
-### 属性说明
+### FieldSet API
 
 #### FieldSet 属性
 
@@ -95,16 +96,9 @@ npm install @istock-shell/ui
 | `title` | `string` | -      | 字段集标题，将显示为 legend 元素 |
 | `class` | `string` | -      | 自定义CSS类名                    |
 
-#### Field 属性
+#### FieldSet 代码片段插入位置
 
-| 属性名  | 类型                                    | 默认值 | 说明          |
-| ------- | --------------------------------------- | ------ | ------------- |
-| `label` | `string` \| [`FieldLabel`](#fieldlabel) | -      | 字段标签配置  |
-| `class` | `string`                                | -      | 自定义CSS类名 |
-
-### 代码片段插入位置
-
-- `FieldSet`的`children`：
+- `children`：
 
 ```svelte
 <fieldset>
@@ -114,6 +108,25 @@ npm install @istock-shell/ui
   <!-- ...code -->
 </fieldset>
 ```
+
+#### FieldSet 事件
+
+继承所有原生 fieldset 元素事件，如：
+
+- `focus` - 获得焦点事件
+- `blur` - 失去焦点事件
+- `click` - 点击事件
+
+### Field API
+
+#### Field 属性
+
+| 属性名  | 类型                                    | 默认值 | 说明          |
+| ------- | --------------------------------------- | ------ | ------------- |
+| `label` | `string` \| [`FieldLabel`](#fieldlabel) | -      | 字段标签配置  |
+| `class` | `string`                                | -      | 自定义CSS类名 |
+
+#### Field 代码片段插入位置
 
 - `Field`的`children`：
 
@@ -126,16 +139,6 @@ npm install @istock-shell/ui
 </div>
 ```
 
-### 事件
-
-#### FieldSet 事件
-
-继承所有原生 fieldset 元素事件，如：
-
-- `focus` - 获得焦点事件
-- `blur` - 失去焦点事件
-- `click` - 点击事件
-
 #### Field 事件
 
 继承所有原生 div 元素事件，如：
@@ -144,9 +147,9 @@ npm install @istock-shell/ui
 - `mouseenter` - 鼠标进入事件
 - `mouseleave` - 鼠标离开事件
 
-## 类型定义
+### 类型定义
 
-### FieldLabel
+#### FieldLabel
 
 ```typescript
 // 字段标签配置类型

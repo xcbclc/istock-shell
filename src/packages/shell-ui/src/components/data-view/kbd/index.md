@@ -116,9 +116,9 @@ npm install @istock-shell/ui
 - `mouseenter` - 鼠标进入事件
 - `mouseleave` - 鼠标离开事件
 
-## 类型定义
+### 类型定义
 
-### KbdSize
+#### KbdSize
 
 ```typescript
 export type KbdSize =

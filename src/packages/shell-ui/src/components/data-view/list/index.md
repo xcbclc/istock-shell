@@ -22,7 +22,8 @@ outline: [2, 4]
 
 # List 列表组件
 
-列表组件是用户界面中最重要的数据展示组件，用于展示结构化的数据集合和操作选项。IStock Shell UI 的 List 组件采用数据驱动设计，提供了灵活的配置系统和丰富的自定义选项，满足各种复杂的数据展示需求。
+列表组件是用户界面中最重要的数据展示组件，用于展示结构化的数据集合和操作选项。IStock Shell UI 的 List
+组件采用数据驱动设计，提供了灵活的配置系统和丰富的自定义选项，满足各种复杂的数据展示需求。
 
 ## 快速开始
 
@@ -86,7 +87,7 @@ npm install @istock-shell/ui
 
 ## API 参考
 
-### 属性说明
+### List API
 
 #### List 属性
 
@@ -96,6 +97,48 @@ npm install @istock-shell/ui
 | `prefixRender` | `() => ReturnType<Snippet<[]>>`   | -      | 前缀内容渲染函数，在列表开始位置插入自定义内容 |
 | `suffixRender` | `() => ReturnType<Snippet<[]>>`   | -      | 后缀内容渲染函数，在列表结束位置插入自定义内容 |
 | `class`        | `string`                          | `''`   | 自定义CSS类名                                  |
+
+#### List 代码片段插入位置
+
+- `prefixRender`、`children`、`suffixRender`：
+
+```svelte
+<ul class="list">
+  {@render prefixRender?.()}
+  {@render children()}
+  {@render suffixRender?.()}
+</ul>
+```
+
+- `contentRender`：
+
+```svelte
+<li class="list-row">
+  <!-- ...图片/图标展示区域 code -->
+  {@render contentRender?.()}
+  <!-- ...操作按钮区域 code -->
+</li>
+```
+
+- `actionRender`：
+
+```svelte
+<li class="list-row">
+  <!-- ...图片/图标展示区域 code -->
+  <!-- ...主要内容区域 code -->
+  {@render actionRender?.(action)}
+</li>
+```
+
+#### List 事件
+
+`List`继承所有原生HTML元素事件，主要包括：
+
+- `click` - 列表项点击事件
+- `keydown` - 键盘按下事件
+- `keyup` - 键盘释放事件
+
+### ListRow API
 
 #### ListRow 属性
 
@@ -111,19 +154,9 @@ npm install @istock-shell/ui
 | `onRender`      | `(node: HTMLElement) => void`                                     | -      | 元素渲染完成回调函数                 |
 | `class`         | `string`                                                          | `''`   | 自定义CSS类名                        |
 
-### 代码片段插入位置
+#### ListRow 代码片段插入位置
 
-- `List`的`prefixRender`、`children`、`suffixRender`位置：
-
-```svelte
-<ul class="list">
-  {@render prefixRender?.()}
-  {@render children()}
-  {@render suffixRender?.()}
-</ul>
-```
-
-- `ListRow`的`children`位置：
+- `children`位置：
 
 ```svelte
 <li class="list-row">
@@ -131,29 +164,9 @@ npm install @istock-shell/ui
 </li>
 ```
 
-- `ListRow`的`contentRender`位置：
+#### ListRow 事件
 
-```svelte
-<li class="list-row">
-  <!-- ...图片/图标展示区域 code -->
-  {@render contentRender?.()}
-  <!-- ...操作按钮区域 code -->
-</li>
-```
-
-- `ListRow`的`actionRender`位置：
-
-```svelte
-<li class="list-row">
-  <!-- ...图片/图标展示区域 code -->
-  <!-- ...主要内容区域 code -->
-  {@render actionRender?.(action)}
-</li>
-```
-
-### 事件
-
-`List`和`ListRow`继承所有原生HTML元素事件，主要包括：
+`ListRow`继承所有原生HTML元素事件，主要包括：
 
 - `click` - 列表项点击事件
 - `keydown` - 键盘按下事件

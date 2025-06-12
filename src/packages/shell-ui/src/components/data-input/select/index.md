@@ -95,7 +95,7 @@ npm install @istock-shell/ui
 
 ## API 参考
 
-### 属性说明
+### Select API
 
 #### Select 属性
 
@@ -111,16 +111,7 @@ npm install @istock-shell/ui
 | `disabled`      | `boolean`                                                                                 | `false` | 是否禁用选择器                     |
 | `onChangeValue` | `<T>(value: T \| T[], options?: Array<[SelectItemOption](#selectitemoption)<T>>) => void` | -       | 值变更时的回调函数，多选时值为数组 |
 
-#### SelectItemOption 属性
-
-| 属性名     | 类型                         | 默认值  | 说明                                 |
-| ---------- | ---------------------------- | ------- | ------------------------------------ |
-| `label`    | `string`                     | -       | 显示给用户的文本标签                 |
-| `value`    | `T`                          | -       | 选项的实际值，用于表单提交和数据绑定 |
-| `disabled` | `boolean`                    | `false` | 是否禁用此选项                       |
-| `children` | `Array<SelectItemOption<T>>` | -       | 子选项列表，用于支持分组选项功能     |
-
-### 代码片段插入位置
+#### Select 代码片段插入位置
 
 - `children`：
 
@@ -132,7 +123,7 @@ npm install @istock-shell/ui
 </select>
 ```
 
-### 事件
+#### Select 事件
 
 `Select`继承所有原生 HTML select 元素事件，如：
 
@@ -143,30 +134,41 @@ npm install @istock-shell/ui
 - `keydown` - 键盘按下事件
 - `keyup` - 键盘释放事件
 
-## 类型定义
+### SelectItemOption API
 
-### SelectColor
+#### SelectItemOption 属性
+
+| 属性名     | 类型                         | 默认值  | 说明                                 |
+| ---------- | ---------------------------- | ------- | ------------------------------------ |
+| `label`    | `string`                     | -       | 显示给用户的文本标签                 |
+| `value`    | `T`                          | -       | 选项的实际值，用于表单提交和数据绑定 |
+| `disabled` | `boolean`                    | `false` | 是否禁用此选项                       |
+| `children` | `Array<SelectItemOption<T>>` | -       | 子选项列表，用于支持分组选项功能     |
+
+### 类型定义
+
+#### SelectColor
 
 ```typescript
 // 选择器颜色类型
 type SelectColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
 ```
 
-### SelectSize
+#### SelectSize
 
 ```typescript
 // 选择器尺寸类型
 type SelectSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 ```
 
-### SelectVariant
+#### SelectVariant
 
 ```typescript
 // 选择器样式变体类型
 type SelectVariant = 'ghost';
 ```
 
-### SelectItemOption
+#### SelectItemOption
 
 ```typescript
 // 选择项选项数据类型

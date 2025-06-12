@@ -100,7 +100,7 @@ npm install @istock-shell/ui
 
 ## API 参考
 
-### 属性说明
+### Dropdown API
 
 #### Dropdown 属性
 
@@ -116,22 +116,9 @@ npm install @istock-shell/ui
 | `tag`                  | `'div' \| 'details'`                                   | `'div'`   | 容器HTML标签类型       |
 | `class`                | `string`                                               | -         | 自定义CSS类名          |
 
-#### DropdownMenu 属性
+#### Dropdown 代码片段插入位置
 
-| 属性名 | 类型                                                   | 默认值 | 说明       |
-| ------ | ------------------------------------------------------ | ------ | ---------- |
-| items  | [`DropdownMenuItemProps`](#dropdownmenuitem属性说明)[] | `[]`   | 菜单项文本 |
-
-#### DropdownMenuItem 属性
-
-| 属性名    | 类型                   | 默认值 | 说明            |
-| --------- | ---------------------- | ------ | --------------- |
-| text      | `string`               | -      | 触发器文本      |
-| linkAttrs | `HTMLAnchorAttributes` | -      | 触发器a标签属性 |
-
-### 代码片段插入位置
-
-- `Dropdown`的`children`：
+- `children`：
 
 ```svelte
 <svelte:element this={tag}>
@@ -141,7 +128,17 @@ npm install @istock-shell/ui
 </svelte:element>
 ```
 
-- `DropdownMenu`的`children`：
+### DropdownMenu API
+
+#### DropdownMenu 属性
+
+| 属性名 | 类型                                                   | 默认值 | 说明       |
+| ------ | ------------------------------------------------------ | ------ | ---------- |
+| items  | [`DropdownMenuItemProps`](#dropdownmenuitem属性说明)[] | `[]`   | 菜单项文本 |
+
+#### Dropdown 代码片段插入位置
+
+- children`：
 
 ```svelte
 <ul>
@@ -151,7 +148,18 @@ npm install @istock-shell/ui
 </ul>
 ```
 
-- `DropdownMenuItem`的`children`：
+### DropdownMenuItem API
+
+#### DropdownMenuItem 属性
+
+| 属性名    | 类型                   | 默认值 | 说明            |
+| --------- | ---------------------- | ------ | --------------- |
+| text      | `string`               | -      | 触发器文本      |
+| linkAttrs | `HTMLAnchorAttributes` | -      | 触发器a标签属性 |
+
+#### DropdownMenuItem 代码片段插入位置
+
+- `children`：
 
 ```svelte
 <li>
@@ -161,9 +169,9 @@ npm install @istock-shell/ui
 </li>
 ```
 
-## 类型定义
+### 类型定义
 
-### DropdownPlacement
+#### DropdownPlacement
 
 ```typescript
 // 下拉菜单定位类型
@@ -185,14 +193,14 @@ type DropdownPlacement =
   | 'rightEnd'; // 右侧底部弹出
 ```
 
-### DropdownTrigger
+#### DropdownTrigger
 
 ```typescript
 // 触发方式类型
 type DropdownTrigger = 'click' | 'hover';
 ```
 
-### DropdownTriggerElement
+#### DropdownTriggerElement
 
 ```typescript
 // 触发器元素配置
