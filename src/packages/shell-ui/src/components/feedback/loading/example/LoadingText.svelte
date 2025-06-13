@@ -3,9 +3,9 @@
 </script>
 
 <ShLoading color="primary" text="加载中" />
-<ShLoading color="secondary">加载中</ShLoading>
-<ShLoading color="accent" size="xs">加载中</ShLoading>
-<ShLoading color="neutral" size="sm">加载中</ShLoading>
-<ShLoading color="info" size="md">加载中</ShLoading>
-<ShLoading color="success" size="lg">加载中</ShLoading>
-<ShLoading color="warning" size="xl">加载中</ShLoading>
+<ShLoading color="secondary" text="加载中" />
+<ShLoading color="accent" size="xs" text="加载中" />
+<ShLoading color="neutral" size="sm" text="加载中" />
+<ShLoading color="info" size="md" text="加载中" />
+<ShLoading color="success" size="lg" text="加载中" />
+<ShLoading color="warning" size="xl" text="加载中" />
