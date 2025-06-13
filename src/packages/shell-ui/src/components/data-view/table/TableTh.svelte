@@ -1,48 +1,49 @@
 <!--
-  @component ShTableTh 表格表头单元格组件
+@component
+ShTableTh 表格表头单元格组件
 
-  一个功能丰富的表格表头单元格组件，基于原生 HTML th 元素构建。
-  支持表头文本显示、数据字段关联和完全自定义的表头内容渲染。
+一个功能丰富的表格表头单元格组件，基于原生 HTML th 元素构建。
+支持表头文本显示、数据字段关联和完全自定义的表头内容渲染。
 
-  功能特性：
-  - 基于原生 th 元素，保持最佳性能和语义化
-  - 支持表头显示值的自动渲染
-  - 支持数据字段键名关联，便于数据绑定
-  - 内置单位文本显示功能（继承自数据单元格）
-  - 支持完全自定义的表头内容
-  - 继承所有原生 th 元素属性
-  - 完整的 TypeScript 类型安全
-  - 灵活的表头展示方式
+功能特性：
+- 基于原生 th 元素，保持最佳性能和语义化
+- 支持表头显示值的自动渲染
+- 支持数据字段键名关联，便于数据绑定
+- 内置单位文本显示功能（继承自数据单元格）
+- 支持完全自定义的表头内容
+- 继承所有原生 th 元素属性
+- 完整的 TypeScript 类型安全
+- 灵活的表头展示方式
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShTableTh } from '@istock-shell/ui';
-  </script>
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShTableTh } from '@istock-shell/ui';
+</script>
 
-  <p>基础表头单元格</p>
-  <ShTableTh value="姓名" />
+<p>基础表头单元格</p>
+<ShTableTh value="姓名" />
 
-  <p>带数据键的表头</p>
-  <ShTableTh 
-    value="用户名" 
-    dataKey="username"
-  />
+<p>带数据键的表头</p>
+<ShTableTh
+  value="用户名"
+  dataKey="username"
+/>
 
-  <p>带单位的表头</p>
-  <ShTableTh 
-    value="金额" 
-    unit={{ text: '元', show: true }}
-  />
+<p>带单位的表头</p>
+<ShTableTh
+  value="金额"
+  unit={{ text: '元', show: true }}
+/>
 
-  <p>自定义表头内容</p>
-  <ShTableTh class="text-center">
-    <div class="flex items-center gap-2">
-      <Icon name="user" />
-      <span>用户信息</span>
-    </div>
-  </ShTableTh>
-  ```
+<p>自定义表头内容</p>
+<ShTableTh class="text-center">
+  <div class="flex items-center gap-2">
+    <Icon name="user" />
+    <span>用户信息</span>
+  </div>
+</ShTableTh>
+```
 -->
 <script lang="ts" module>
   import type { HTMLThAttributes } from 'svelte/elements';

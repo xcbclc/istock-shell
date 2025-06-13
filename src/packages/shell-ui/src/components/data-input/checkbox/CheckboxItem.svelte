@@ -1,48 +1,49 @@
 <!--
-  ShCheckboxItem 复选框项组件
+@component
+ShCheckboxItem 复选框项组件
 
-  一个基础的复选框输入组件，作为复选框组的基本单元。
-  基于原生 HTML input[type="checkbox"] 元素构建，提供完整的类型安全和样式定制。
+一个基础的复选框输入组件，作为复选框组的基本单元。
+基于原生 HTML input[type="checkbox"] 元素构建，提供完整的类型安全和样式定制。
 
-  功能特性：
-  - 支持多种颜色主题和尺寸规格
-  - 支持组选择模式的双向数据绑定
-  - 支持不确定状态（indeterminate）
-  - 继承所有原生 input 元素属性
-  - 完整的 TypeScript 类型安全
-  - 基于 Tailwind CSS 的响应式样式
-  - 支持自定义样式类名
+功能特性：
+- 支持多种颜色主题和尺寸规格
+- 支持组选择模式的双向数据绑定
+- 支持不确定状态（indeterminate）
+- 继承所有原生 input 元素属性
+- 完整的 TypeScript 类型安全
+- 基于 Tailwind CSS 的响应式样式
+- 支持自定义样式类名
 
-  示例用法：
-  ```svelte
-  <p>基础复选框项</p>
-  <ShCheckboxItem
-    bind:groupValue={selectedValues}
-    value="option1"
-  />
+示例用法：
+```svelte
+<p>基础复选框项</p>
+<ShCheckboxItem
+  bind:groupValue={selectedValues}
+  value="option1"
+/>
 
-  <p>带颜色和尺寸的复选框项</p>
-  <ShCheckboxItem
-    color="primary"
-    size="lg"
-    bind:groupValue={groupValues}
-    value="large-option"
-  />
+<p>带颜色和尺寸的复选框项</p>
+<ShCheckboxItem
+  color="primary"
+  size="lg"
+  bind:groupValue={groupValues}
+  value="large-option"
+/>
 
-  <p>不确定状态的复选框项</p>
-  <ShCheckboxItem
-    indeterminate={true}
-    bind:groupValue={mixedValues}
-    value="mixed-option"
-  />
+<p>不确定状态的复选框项</p>
+<ShCheckboxItem
+  indeterminate={true}
+  bind:groupValue={mixedValues}
+  value="mixed-option"
+/>
 
-  <p>禁用状态的复选框项</p>
-  <ShCheckboxItem
-    disabled
-    bind:groupValue={disabledValues}
-    value="disabled-option"
-  />
-  ```
+<p>禁用状态的复选框项</p>
+<ShCheckboxItem
+  disabled
+  bind:groupValue={disabledValues}
+  value="disabled-option"
+/>
+```
 -->
 <script lang="ts" module>
   // 导入HTML输入属性类型和主题配置工具

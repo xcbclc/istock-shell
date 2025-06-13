@@ -1,44 +1,45 @@
 <!--
-  @component ShTableTd 表格数据单元格组件
+@component
+ShTableTd 表格数据单元格组件
 
-  一个功能丰富的表格数据单元格组件，基于原生 HTML td 元素构建。
-  支持自动数据绑定、单位显示和完全自定义的内容渲染。
+一个功能丰富的表格数据单元格组件，基于原生 HTML td 元素构建。
+支持自动数据绑定、单位显示和完全自定义的内容渲染。
 
-  功能特性：
-  - 基于原生 td 元素，保持最佳性能和语义化
-  - 支持自动数据键值绑定和显示
-  - 内置单位文本显示功能
-  - 支持完全自定义的单元格内容
-  - 继承所有原生 td 元素属性
-  - 完整的 TypeScript 类型安全
-  - 灵活的数据展示方式
+功能特性：
+- 基于原生 td 元素，保持最佳性能和语义化
+- 支持自动数据键值绑定和显示
+- 内置单位文本显示功能
+- 支持完全自定义的单元格内容
+- 继承所有原生 td 元素属性
+- 完整的 TypeScript 类型安全
+- 灵活的数据展示方式
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShTableTd } from '@istock-shell/ui';
-  </script>
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShTableTd } from '@istock-shell/ui';
+</script>
 
-  <p>基础数据单元格</p>
-  <ShTableTd value="张三" />
+<p>基础数据单元格</p>
+<ShTableTd value="张三" />
 
-  <p>带单位的数据单元格</p>
-  <ShTableTd
-    value={1234}
-    unit={{ text: '元', show: true }}
-  />
+<p>带单位的数据单元格</p>
+<ShTableTd
+  value={1234}
+  unit={{ text: '元', show: true }}
+/>
 
-  <p>自定义内容单元格</p>
-  <ShTableTd class="text-center">
-    <span class="badge badge-success">已完成</span>
-  </ShTableTd>
+<p>自定义内容单元格</p>
+<ShTableTd class="text-center">
+  <span class="badge badge-success">已完成</span>
+</ShTableTd>
 
-  <p>数据键绑定单元格</p>
-  <ShTableTd
-    value={userData.name}
-    dataKey="name"
-  />
-  ```
+<p>数据键绑定单元格</p>
+<ShTableTd
+  value={userData.name}
+  dataKey="name"
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLTdAttributes } from 'svelte/elements';

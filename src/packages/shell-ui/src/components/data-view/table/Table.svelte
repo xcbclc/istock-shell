@@ -1,79 +1,80 @@
 <!--
-  @component ShTable 表格组件
+@component
+ShTable 表格组件
 
-  一个功能完整的数据表格组件，基于原生 HTML table 元素构建。
-  支持多种数据格式、行选择、操作按钮、自定义渲染等丰富功能。
-  提供完整的表格结构（caption、colgroup、thead、tbody、tfoot）和响应式设计。
+一个功能完整的数据表格组件，基于原生 HTML table 元素构建。
+支持多种数据格式、行选择、操作按钮、自定义渲染等丰富功能。
+提供完整的表格结构（caption、colgroup、thead、tbody、tfoot）和响应式设计。
 
-  功能特性：
-  - 基于原生 table 元素，保持最佳性能和语义化
-  - 支持多种数据格式（对象数组、二维数组、嵌套结构）
-  - 支持行选择功能（单选/多选/全选）
-  - 支持自定义列配置和单元格渲染
-  - 支持操作按钮列和事件处理
-  - 支持表格标题、描述和空状态显示
-  - 支持表头、表体、表脚的完整结构
-  - 支持响应式设计和自适应布局
-  - 支持行点击事件和悬停效果
-  - 支持区域高度同步和滚动联动
-  - 继承所有原生 table 元素属性
-  - 完整的 TypeScript 类型安全
-  - 灵活的样式定制和主题支持
+功能特性：
+- 基于原生 table 元素，保持最佳性能和语义化
+- 支持多种数据格式（对象数组、二维数组、嵌套结构）
+- 支持行选择功能（单选/多选/全选）
+- 支持自定义列配置和单元格渲染
+- 支持操作按钮列和事件处理
+- 支持表格标题、描述和空状态显示
+- 支持表头、表体、表脚的完整结构
+- 支持响应式设计和自适应布局
+- 支持行点击事件和悬停效果
+- 支持区域高度同步和滚动联动
+- 继承所有原生 table 元素属性
+- 完整的 TypeScript 类型安全
+- 灵活的样式定制和主题支持
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShTable } from '@istock-shell/ui';
-  </script>
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShTable } from '@istock-shell/ui';
+</script>
 
-  <p>基础数据表格</p>
-  <ShTable
-    data={[
-      { name: '张三', age: 25, email: 'zhangsan@example.com' },
-      { name: '李四', age: 30, email: 'lisi@example.com' }
-    ]}
-    cols={[
-      { key: 'name', title: '姓名' },
-      { key: 'age', title: '年龄' },
-      { key: 'email', title: '邮箱' }
-    ]}
-  />
+<p>基础数据表格</p>
+<ShTable
+  data={[
+    { name: '张三', age: 25, email: 'zhangsan@example.com' },
+    { name: '李四', age: 30, email: 'lisi@example.com' }
+  ]}
+  cols={[
+    { key: 'name', title: '姓名' },
+    { key: 'age', title: '年龄' },
+    { key: 'email', title: '邮箱' }
+  ]}
+/>
 
-  <p>带选择功能的表格</p>
-  <ShTable
-    data={tableData}
-    cols={columns}
-    selection={true}
-    bind:selected={selectedRows}
-    rowKey="id"
-    onRowSelectAll={handleSelectAll}
-    onRowSelect={handleRowSelect}
-  />
+<p>带选择功能的表格</p>
+<ShTable
+  data={tableData}
+  cols={columns}
+  selection={true}
+  bind:selected={selectedRows}
+  rowKey="id"
+  onRowSelectAll={handleSelectAll}
+  onRowSelect={handleRowSelect}
+/>
 
-  <p>带操作按钮的表格</p>
-  <ShTable
-    data={tableData}
-    cols={columns}
-    buttons={[
-      { text: '编辑', color: 'primary', onClickValue: handleEdit },
-      { text: '删除', color: 'error', onClickValue: handleDelete }
-    ]}
-    buttonConfig={{ columnTitle: '操作' }}
-  />
+<p>带操作按钮的表格</p>
+<ShTable
+  data={tableData}
+  cols={columns}
+  buttons={[
+    { text: '编辑', color: 'primary', onClickValue: handleEdit },
+    { text: '删除', color: 'error', onClickValue: handleDelete }
+  ]}
+  buttonConfig={{ columnTitle: '操作' }}
+/>
 
-  <p>完整功能表格</p>
-  <ShTable
-    caption={{ title: '用户列表', description: '系统中的所有用户信息' }}
-    data={tableData}
-    cols={columns}
-    selection={true}
-    buttons={actionButtons}
-    emptyText="暂无数据"
-    size="md"
-    hover={true}
-    onRowClick={handleRowClick}
-  />
-  ```
+<p>完整功能表格</p>
+<ShTable
+  caption={{ title: '用户列表', description: '系统中的所有用户信息' }}
+  data={tableData}
+  cols={columns}
+  selection={true}
+  buttons={actionButtons}
+  emptyText="暂无数据"
+  size="md"
+  hover={true}
+  onRowClick={handleRowClick}
+/>
+```
 -->
 
 <script lang="ts" module>

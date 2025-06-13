@@ -1,62 +1,62 @@
 <!--
-  @component
-  ShStatItem 统计项组件
+@component
+ShStatItem 统计项组件
 
-  一个功能完整的统计数据项组件，支持快速配置和完全自定义两种使用模式。
-  基于 div 元素构建，提供完整的类型安全和响应式支持。
+一个功能完整的统计数据项组件，支持快速配置和完全自定义两种使用模式。
+基于 div 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持快速配置模式（通过直接属性配置）
-  - 支持完全自定义模式（通过子组件组合）
-  - 集成多种统计子组件（图标、标题、数值、描述、操作）
-  - 支持不同的对齐方式配置
-  - 支持响应式布局和主题
-  - 继承所有原生 div 元素属性
-  - 完整的 TypeScript 类型安全
-  - 无障碍访问支持
+功能特性：
+- 支持快速配置模式（通过直接属性配置）
+- 支持完全自定义模式（通过子组件组合）
+- 集成多种统计子组件（图标、标题、数值、描述、操作）
+- 支持不同的对齐方式配置
+- 支持响应式布局和主题
+- 继承所有原生 div 元素属性
+- 完整的 TypeScript 类型安全
+- 无障碍访问支持
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShStatItem } from '@istock-shell/ui';
-  </script>
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShStatItem } from '@istock-shell/ui';
+</script>
 
-  <p>快速配置模式</p>
-  <ShStatItem
-    title="总用户数"
-    value="1,234"
-    desc="较上月增长12%"
-    figure={{ icon: { name: 'user' } }}
-    actions={[{ text: '管理用户' }]}
-  />
+<p>快速配置模式</p>
+<ShStatItem
+  title="总用户数"
+  value="1,234"
+  desc="较上月增长12%"
+  figure={{ icon: { name: 'user' } }}
+  actions={[{ text: '管理用户' }]}
+/>
 
-  <p>居中对齐的统计项</p>
-  <ShStatItem
-    title="销售额"
-    value="¥89,400"
-    desc="本月目标完成率 89%"
-    center
-    figure={{ icon: { name: 'chart-bar' } }}
-  />
+<p>居中对齐的统计项</p>
+<ShStatItem
+  title="销售额"
+  value="¥89,400"
+  desc="本月目标完成率 89%"
+  center
+  figure={{ icon: { name: 'chart-bar' } }}
+/>
 
-  <p>完全自定义模式</p>
-  <ShStatItem>
-    <ShStatFigure icon={{ name: 'chart' }} />
-    <ShStatTitle text="自定义统计项" color="primary" />
-    <ShStatValue text="2,468" size="lg" />
-    <ShStatDesc text="详细描述信息" />
-  </ShStatItem>
+<p>完全自定义模式</p>
+<ShStatItem>
+  <ShStatFigure icon={{ name: 'chart' }} />
+  <ShStatTitle text="自定义统计项" color="primary" />
+  <ShStatValue text="2,468" size="lg" />
+  <ShStatDesc text="详细描述信息" />
+</ShStatItem>
 
-  <p>多个描述的统计项</p>
-  <ShStatItem
-    title="订单统计"
-    value="156"
-    desc={[
-      { text: '今日新增: 23', color: 'success' },
-      { text: '待处理: 8', color: 'warning' }
-    ]}
-  />
-  ```
+<p>多个描述的统计项</p>
+<ShStatItem
+  title="订单统计"
+  value="156"
+  desc={[
+    { text: '今日新增: 23', color: 'success' },
+    { text: '待处理: 8', color: 'warning' }
+  ]}
+/>
+```
 -->
 
 <script lang="ts" module>

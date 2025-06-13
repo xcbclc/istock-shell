@@ -1,48 +1,49 @@
 <!--
-  ShTextarea 文本域组件
+@component
+ShTextarea 文本域组件
 
-  一个功能丰富的多行文本输入组件，支持多种样式变体、尺寸和颜色主题。
-  基于原生 HTML textarea 元素构建，提供完整的类型安全和响应式支持。
+一个功能丰富的多行文本输入组件，支持多种样式变体、尺寸和颜色主题。
+基于原生 HTML textarea 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种颜色主题（从主题配置中动态提取）
-  - 提供多种尺寸规格（从主题配置中动态提取）
-  - 支持多种样式变体（从主题配置中动态提取）
-  - 支持双向数据绑定
-  - 内置值变化监听和回调
-  - 完整的原生 textarea 属性支持
-  - TypeScript 类型安全
-  - 响应式设计支持
+功能特性：
+- 支持多种颜色主题（从主题配置中动态提取）
+- 提供多种尺寸规格（从主题配置中动态提取）
+- 支持多种样式变体（从主题配置中动态提取）
+- 支持双向数据绑定
+- 内置值变化监听和回调
+- 完整的原生 textarea 属性支持
+- TypeScript 类型安全
+- 响应式设计支持
 
-  示例用法：
-  ```svelte
-  <p>基础文本域</p>
-  <ShTextarea placeholder="请输入内容" />
+示例用法：
+```svelte
+<p>基础文本域</p>
+<ShTextarea placeholder="请输入内容" />
 
-  <p>带颜色主题的文本域</p>
-  <ShTextarea
-    color="primary"
-    size="lg"
-    placeholder="主要样式文本域"
-  />
+<p>带颜色主题的文本域</p>
+<ShTextarea
+  color="primary"
+  size="lg"
+  placeholder="主要样式文本域"
+/>
 
-  <p>双向绑定的文本域</p>
-  <ShTextarea
-    bind:value={content}
-    variant="bordered"
-    onChangeValue={handleChange}
-    placeholder="输入您的评论"
-  />
+<p>双向绑定的文本域</p>
+<ShTextarea
+  bind:value={content}
+  variant="bordered"
+  onChangeValue={handleChange}
+  placeholder="输入您的评论"
+/>
 
-  <p>自定义样式的文本域</p>
-  <ShTextarea
-    class="min-h-32 resize-none"
-    color="secondary"
-    size="sm"
-    rows={5}
-    placeholder="固定高度文本域"
-  />
-  ```
+<p>自定义样式的文本域</p>
+<ShTextarea
+  class="min-h-32 resize-none"
+  color="secondary"
+  size="sm"
+  rows={5}
+  placeholder="固定高度文本域"
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLTextareaAttributes } from 'svelte/elements';

@@ -1,70 +1,71 @@
 <!--
-  ShSelect 选择框组件
+@component
+ShSelect 选择框组件
 
-  一个功能丰富的选择框组件，支持单选、多选、分组选项和多种样式配置。
-  基于原生 HTML select 元素构建，提供完整的类型安全和响应式支持。
+一个功能丰富的选择框组件，支持单选、多选、分组选项和多种样式配置。
+基于原生 HTML select 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持单选和多选两种模式
-  - 支持多种颜色主题和尺寸规格
-  - 支持选项分组显示（optgroup）
-  - 可配置选项数据源，快速生成选择列表
-  - 支持占位符文本显示
-  - 支持双向数据绑定，轻松获取和设置选中值
-  - 提供值变更回调函数
-  - 完整的响应式设计支持
-  - TypeScript 类型安全
+功能特性：
+- 支持单选和多选两种模式
+- 支持多种颜色主题和尺寸规格
+- 支持选项分组显示（optgroup）
+- 可配置选项数据源，快速生成选择列表
+- 支持占位符文本显示
+- 支持双向数据绑定，轻松获取和设置选中值
+- 提供值变更回调函数
+- 完整的响应式设计支持
+- TypeScript 类型安全
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShSelect } from '@istock-shell/ui';
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShSelect } from '@istock-shell/ui';
 
-    let selectedValue = $state('');
-    let multipleValues = $state([]);
+  let selectedValue = $state('');
+  let multipleValues = $state([]);
 
-    const options = [
-      { label: '选项一', value: 'option1' },
-      { label: '选项二', value: 'option2' },
-      {
-        label: '分组选项',
-        value: 'group',
-        children: [
-          { label: '子选项1', value: 'child1' },
-          { label: '子选项2', value: 'child2' }
-        ]
-      }
-    ];
-
-    function handleValueChange(value, option) {
-      console.log('选中值:', value, '选项:', option);
+  const options = [
+    { label: '选项一', value: 'option1' },
+    { label: '选项二', value: 'option2' },
+    {
+      label: '分组选项',
+      value: 'group',
+      children: [
+        { label: '子选项1', value: 'child1' },
+        { label: '子选项2', value: 'child2' }
+      ]
     }
-  </script>
+  ];
 
-  <p>基础单选选择框</p>
-  <ShSelect
-    options={options}
-    bind:value={selectedValue}
-    placeholder="请选择选项"
-    onChangeValue={handleValueChange}
-  />
+  function handleValueChange(value, option) {
+    console.log('选中值:', value, '选项:', option);
+  }
+</script>
 
-  <p>多选选择框</p>
-  <ShSelect
-    options={options}
-    bind:value={multipleValues}
-    multiple
-    size="lg"
-  />
+<p>基础单选选择框</p>
+<ShSelect
+  options={options}
+  bind:value={selectedValue}
+  placeholder="请选择选项"
+  onChangeValue={handleValueChange}
+/>
 
-  <p>带样式变体的选择框</p>
-  <ShSelect
-    options={options}
-    bind:value={selectedValue}
-    color="primary"
-    variant="bordered"
-  />
-  ```
+<p>多选选择框</p>
+<ShSelect
+  options={options}
+  bind:value={multipleValues}
+  multiple
+  size="lg"
+/>
+
+<p>带样式变体的选择框</p>
+<ShSelect
+  options={options}
+  bind:value={selectedValue}
+  color="primary"
+  variant="bordered"
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLSelectAttributes } from 'svelte/elements';

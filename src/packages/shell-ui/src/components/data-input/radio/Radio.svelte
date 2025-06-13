@@ -1,59 +1,60 @@
 <!--
-  ShRadio 单选按钮组组件
+@component
+ShRadio 单选按钮组组件
 
-  一个功能丰富的单选按钮组组件，支持多种样式配置和灵活的标签布局。
-  基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
+一个功能丰富的单选按钮组组件，支持多种样式配置和灵活的标签布局。
+基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种颜色主题和尺寸规格
-  - 灵活的标签配置（前置/后置位置，自定义样式）
-  - 支持选项级别的禁用状态控制
-  - 双向数据绑定，支持响应式值变更
-  - 完整的 TypeScript 类型安全
-  - 基于选项数据源的动态渲染
-  - 支持值变更回调函数
-  - 响应式设计支持
+功能特性：
+- 支持多种颜色主题和尺寸规格
+- 灵活的标签配置（前置/后置位置，自定义样式）
+- 支持选项级别的禁用状态控制
+- 双向数据绑定，支持响应式值变更
+- 完整的 TypeScript 类型安全
+- 基于选项数据源的动态渲染
+- 支持值变更回调函数
+- 响应式设计支持
 
-  示例用法：
-  ```svelte
-  <p>基础单选按钮组</p>
-  <ShRadio
-    bind:value={selectedValue}
-    options={[
-      { value: 'option1', label: '选项1' },
-      { value: 'option2', label: '选项2' },
-      { value: 'option3', label: '选项3' }
-    ]}
-  />
+示例用法：
+```svelte
+<p>基础单选按钮组</p>
+<ShRadio
+  bind:value={selectedValue}
+  options={[
+    { value: 'option1', label: '选项1' },
+    { value: 'option2', label: '选项2' },
+    { value: 'option3', label: '选项3' }
+  ]}
+/>
 
-  <p>带颜色和尺寸的单选按钮组</p>
-  <ShRadio
-    bind:value={selectedValue}
-    color="primary"
-    size="lg"
-    options={radioOptions}
-    label={{ type: 'bordered', placement: 'after' }}
-  />
+<p>带颜色和尺寸的单选按钮组</p>
+<ShRadio
+  bind:value={selectedValue}
+  color="primary"
+  size="lg"
+  options={radioOptions}
+  label={{ type: 'bordered', placement: 'after' }}
+/>
 
-  <p>自定义样式的单选按钮组</p>
-  <ShRadio
-    bind:value={selectedValue}
-    options={radioOptions}
-    label={{ type: 'soft', placement: 'before', class: 'custom-label' }}
-    wrapClass="custom-wrapper"
-    onChangeValue={(value, option) => console.log('选中:', value, option)}
-  />
+<p>自定义样式的单选按钮组</p>
+<ShRadio
+  bind:value={selectedValue}
+  options={radioOptions}
+  label={{ type: 'soft', placement: 'before', class: 'custom-label' }}
+  wrapClass="custom-wrapper"
+  onChangeValue={(value, option) => console.log('选中:', value, option)}
+/>
 
-  <p>部分禁用的单选按钮组</p>
-  <ShRadio
-    bind:value={selectedValue}
-    options={[
-      { value: 'option1', label: '可选项1' },
-      { value: 'option2', label: '禁用项', disabled: true },
-      { value: 'option3', label: '可选项3' }
-    ]}
-  />
-  ```
+<p>部分禁用的单选按钮组</p>
+<ShRadio
+  bind:value={selectedValue}
+  options={[
+    { value: 'option1', label: '可选项1' },
+    { value: 'option2', label: '禁用项', disabled: true },
+    { value: 'option3', label: '可选项3' }
+  ]}
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLInputAttributes } from 'svelte/elements';

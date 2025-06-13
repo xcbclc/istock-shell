@@ -1,50 +1,51 @@
 <!--
-  ShSelectItem 选择项组件
+@component
+ShSelectItem 选择项组件
 
-  用于渲染选择框中的单个选项，基于原生 HTML option 元素构建。
-  支持泛型类型，提供完整的类型安全和灵活的数据结构。
+用于渲染选择框中的单个选项，基于原生 HTML option 元素构建。
+支持泛型类型，提供完整的类型安全和灵活的数据结构。
 
-  功能特性：
-  - 基于原生 option 元素，保持最佳性能和兼容性
-  - 支持泛型类型，适应不同的值类型
-  - 支持禁用状态和选中状态控制
-  - 支持分组选项的嵌套结构
-  - 自动处理显示文本和实际值的映射
-  - 完整的 TypeScript 类型安全
+功能特性：
+- 基于原生 option 元素，保持最佳性能和兼容性
+- 支持泛型类型，适应不同的值类型
+- 支持禁用状态和选中状态控制
+- 支持分组选项的嵌套结构
+- 自动处理显示文本和实际值的映射
+- 完整的 TypeScript 类型安全
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShSelectItem } from '@istock-shell/ui';
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShSelectItem } from '@istock-shell/ui';
 
-    const option = {
-      label: '选项一',
-      value: 'option1',
-      disabled: false
-    };
-  </script>
+  const option = {
+    label: '选项一',
+    value: 'option1',
+    disabled: false
+  };
+</script>
 
-  <p>基础选择项</p>
-  <ShSelectItem {option} selected={false} />
+<p>基础选择项</p>
+<ShSelectItem {option} selected={false} />
 
-  <p>禁用的选择项</p>
-  <ShSelectItem 
-    option={{ label: '禁用选项', value: 'disabled', disabled: true }}
-    selected={false}
-  />
+<p>禁用的选择项</p>
+<ShSelectItem
+  option={{ label: '禁用选项', value: 'disabled', disabled: true }}
+  selected={false}
+/>
 
-  <p>带分组的选择项</p>
-  <ShSelectItem 
-    option={{
-      label: '分组选项',
-      value: 'group',
-      children: [
-        { label: '子选项1', value: 'child1' },
-        { label: '子选项2', value: 'child2' }
-      ]
-    }}
-  />
-  ```
+<p>带分组的选择项</p>
+<ShSelectItem
+  option={{
+    label: '分组选项',
+    value: 'group',
+    children: [
+      { label: '子选项1', value: 'child1' },
+      { label: '子选项2', value: 'child2' }
+    ]
+  }}
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLOptionAttributes } from 'svelte/elements';

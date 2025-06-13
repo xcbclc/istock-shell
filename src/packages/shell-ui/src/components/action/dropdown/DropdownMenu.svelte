@@ -1,40 +1,41 @@
 <!--
-  ShDropdownMenu 下拉菜单内容组件
+@component
+ShDropdownMenu 下拉菜单内容组件
 
-  用于渲染下拉菜单的内容区域，支持菜单项列表和自定义内容。
-  基于无序列表（ul）元素构建，提供标准的菜单样式和交互。
+用于渲染下拉菜单的内容区域，支持菜单项列表和自定义内容。
+基于无序列表（ul）元素构建，提供标准的菜单样式和交互。
 
-   功能特性：
-  - 渲染菜单项列表，支持文本和链接属性
-  - 支持完全自定义菜单内容
-  - 内置标准菜单样式（背景、圆角、阴影等）
-  - 支持所有原生 ul 元素的属性和事件
-  - 自动处理菜单项的渲染和布局
+ 功能特性：
+- 渲染菜单项列表，支持文本和链接属性
+- 支持完全自定义菜单内容
+- 内置标准菜单样式（背景、圆角、阴影等）
+- 支持所有原生 ul 元素的属性和事件
+- 自动处理菜单项的渲染和布局
 
-  示例用法：
-  ```svelte
-  <p>基础菜单项列表</p>
-  <ShDropdownMenu
-    items={[
-      { text: "菜单项1" },
-      { text: "菜单项2", linkAttrs: { href: "/page2" } }
-    ]}
-  />
+示例用法：
+```svelte
+<p>基础菜单项列表</p>
+<ShDropdownMenu
+  items={[
+    { text: "菜单项1" },
+    { text: "菜单项2", linkAttrs: { href: "/page2" } }
+  ]}
+/>
 
-  <p>带自定义样式的菜单</p>
-  <ShDropdownMenu
-    class="w-64 bg-white"
-    items={menuItems}
-  />
+<p>带自定义样式的菜单</p>
+<ShDropdownMenu
+  class="w-64 bg-white"
+  items={menuItems}
+/>
 
-  <p>完全自定义内容的菜单</p>
-  <ShDropdownMenu>
-    <li><a href="/profile">个人资料</a></li>
-    <li><a href="/settings">设置</a></li>
-    <li class="divider"></li>
-    <li><a href="/logout">退出登录</a></li>
-  </ShDropdownMenu>
-  ```
+<p>完全自定义内容的菜单</p>
+<ShDropdownMenu>
+  <li><a href="/profile">个人资料</a></li>
+  <li><a href="/settings">设置</a></li>
+  <li class="divider"></li>
+  <li><a href="/logout">退出登录</a></li>
+</ShDropdownMenu>
+```
 -->
 <script lang="ts" module>
   import type { HTMLAttributes } from 'svelte/elements';

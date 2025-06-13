@@ -1,68 +1,69 @@
 <!--
-  @component ShTableRow 表格行组件
+@component
+ShTableRow 表格行组件
 
-  一个功能丰富的表格行组件，基于原生 HTML tr 元素构建。
-  支持行选择、自定义单元格渲染、操作按钮列和丰富的交互功能。
-  适用于表头、表体和表脚的统一行渲染。
+一个功能丰富的表格行组件，基于原生 HTML tr 元素构建。
+支持行选择、自定义单元格渲染、操作按钮列和丰富的交互功能。
+适用于表头、表体和表脚的统一行渲染。
 
-  功能特性：
-  - 基于原生 tr 元素，保持最佳性能和语义化
-  - 支持行选择功能（复选框单选/多选）
-  - 支持自定义单元格内容渲染
-  - 支持操作按钮列配置和事件处理
-  - 支持行点击事件和悬停效果
-  - 支持表头、表体、表脚的统一渲染
-  - 支持行唯一标识和选择状态管理
-  - 继承所有原生 tr 元素属性
-  - 完整的 TypeScript 类型安全
-  - 灵活的行数据展示方式
+功能特性：
+- 基于原生 tr 元素，保持最佳性能和语义化
+- 支持行选择功能（复选框单选/多选）
+- 支持自定义单元格内容渲染
+- 支持操作按钮列配置和事件处理
+- 支持行点击事件和悬停效果
+- 支持表头、表体、表脚的统一渲染
+- 支持行唯一标识和选择状态管理
+- 继承所有原生 tr 元素属性
+- 完整的 TypeScript 类型安全
+- 灵活的行数据展示方式
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShTableRow } from '@istock-shell/ui';
-  </script>
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShTableRow } from '@istock-shell/ui';
+</script>
 
-  <p>基础表格行</p>
-  <ShTableRow
-    list={[
-      { value: '张三', dataKey: 'name' },
-      { value: 25, dataKey: 'age' },
-      { value: 'zhangsan@example.com', dataKey: 'email' }
-    ]}
-  />
+<p>基础表格行</p>
+<ShTableRow
+  list={[
+    { value: '张三', dataKey: 'name' },
+    { value: 25, dataKey: 'age' },
+    { value: 'zhangsan@example.com', dataKey: 'email' }
+  ]}
+/>
 
-  <p>带选择功能的行</p>
-  <ShTableRow
-    list={rowData}
-    selection={true}
-    bind:selected={selectedRows}
-    rowKey="id"
-    onRowSelectChange={handleRowSelect}
-  />
+<p>带选择功能的行</p>
+<ShTableRow
+  list={rowData}
+  selection={true}
+  bind:selected={selectedRows}
+  rowKey="id"
+  onRowSelectChange={handleRowSelect}
+/>
 
-  <p>带操作按钮的行</p>
-  <ShTableRow
-    list={rowData}
-    buttons={[
-      { text: '编辑', color: 'primary', onClickValue: handleEdit },
-      { text: '删除', color: 'error', onClickValue: handleDelete }
-    ]}
-    buttonConfig={{ columnTitle: '操作' }}
-  />
+<p>带操作按钮的行</p>
+<ShTableRow
+  list={rowData}
+  buttons={[
+    { text: '编辑', color: 'primary', onClickValue: handleEdit },
+    { text: '删除', color: 'error', onClickValue: handleDelete }
+  ]}
+  buttonConfig={{ columnTitle: '操作' }}
+/>
 
-  <p>表头行</p>
-  <ShTableRow
-    type="thead"
-    list={[
-      { value: '姓名', dataKey: 'name' },
-      { value: '年龄', dataKey: 'age' },
-      { value: '邮箱', dataKey: 'email' }
-    ]}
-    selection={true}
-    selectionRender={customSelectionRender}
-  />
-  ```
+<p>表头行</p>
+<ShTableRow
+  type="thead"
+  list={[
+    { value: '姓名', dataKey: 'name' },
+    { value: '年龄', dataKey: 'age' },
+    { value: '邮箱', dataKey: 'email' }
+  ]}
+  selection={true}
+  selectionRender={customSelectionRender}
+/>
+```
 -->
 
 <script lang="ts" module>

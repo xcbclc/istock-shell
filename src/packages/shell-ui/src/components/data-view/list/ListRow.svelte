@@ -1,69 +1,70 @@
 <!--
-  ShListRow 列表项组件
+@component
+ShListRow 列表项组件
 
-  一个功能丰富的列表项组件，支持图片/图标展示、操作按钮、自定义内容渲染等功能。
-  基于原生 HTML li 元素构建，提供完整的类型安全和响应式支持。
+一个功能丰富的列表项组件，支持图片/图标展示、操作按钮、自定义内容渲染等功能。
+基于原生 HTML li 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持图片和图标展示，可单独或组合使用
-  - 提供操作按钮列表，支持自定义按钮样式和事件
-  - 支持自定义内容和操作按钮渲染函数
-  - 内置文本和描述信息显示
-  - 支持点击事件和自定义回调函数
-  - 继承所有原生 li 元素的属性和事件
-  - 完整的 TypeScript 类型安全
-  - 响应式设计支持
+功能特性：
+- 支持图片和图标展示，可单独或组合使用
+- 提供操作按钮列表，支持自定义按钮样式和事件
+- 支持自定义内容和操作按钮渲染函数
+- 内置文本和描述信息显示
+- 支持点击事件和自定义回调函数
+- 继承所有原生 li 元素的属性和事件
+- 完整的 TypeScript 类型安全
+- 响应式设计支持
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShListRow } from '@istock-shell/ui';
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShListRow } from '@istock-shell/ui';
 
-    const actions = [
-      { name: 'edit', text: '编辑', icon: { name: 'edit' } },
-      { name: 'delete', text: '删除', icon: { name: 'delete' } }
-    ];
+  const actions = [
+    { name: 'edit', text: '编辑', icon: { name: 'edit' } },
+    { name: 'delete', text: '删除', icon: { name: 'delete' } }
+  ];
 
-    function handleRowClick(row, index) {
-      console.log('点击了列表项:', row.text);
-    }
+  function handleRowClick(row, index) {
+    console.log('点击了列表项:', row.text);
+  }
 
-    function handleActionClick(name, action) {
-      console.log('点击了操作按钮:', name);
-    }
-  </script>
+  function handleActionClick(name, action) {
+    console.log('点击了操作按钮:', name);
+  }
+</script>
 
-  <p>基础列表项</p>
-  <ShListRow text="列表项标题" description="列表项描述" />
+<p>基础列表项</p>
+<ShListRow text="列表项标题" description="列表项描述" />
 
-  <p>带图标的列表项</p>
-  <ShListRow 
-    text="用户信息" 
-    description="管理员用户"
-    picture={{ icon: { name: 'user' } }}
-  />
+<p>带图标的列表项</p>
+<ShListRow
+  text="用户信息"
+  description="管理员用户"
+  picture={{ icon: { name: 'user' } }}
+/>
 
-  <p>带操作按钮的列表项</p>
-  <ShListRow 
-    text="文档标题" 
-    description="文档描述信息"
-    actions={actions.map(action => ({ 
-      ...action, 
-      onClickValue: handleActionClick 
-    }))}
-    onClickValue={handleRowClick}
-  />
+<p>带操作按钮的列表项</p>
+<ShListRow
+  text="文档标题"
+  description="文档描述信息"
+  actions={actions.map(action => ({
+    ...action,
+    onClickValue: handleActionClick
+  }))}
+  onClickValue={handleRowClick}
+/>
 
-  <p>自定义内容列表项</p>
-  <ShListRow 
-    contentRender={() => (
-      <div>
-        <h3>自定义标题</h3>
-        <p>自定义内容区域</p>
-      </div>
-    )}
-  />
-  ```
+<p>自定义内容列表项</p>
+<ShListRow
+  contentRender={() => (
+    <div>
+      <h3>自定义标题</h3>
+      <p>自定义内容区域</p>
+    </div>
+  )}
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLLiAttributes, HTMLImgAttributes } from 'svelte/elements';

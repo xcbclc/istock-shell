@@ -1,59 +1,60 @@
 <!--
-  ShInput 输入框组件
+@component
+ShInput 输入框组件
 
-  一个功能丰富的输入框组件，支持多种输入类型、样式变体和前后缀渲染。
-  基于原生 HTML input 元素构建，提供完整的类型安全和响应式支持。
+一个功能丰富的输入框组件，支持多种输入类型、样式变体和前后缀渲染。
+基于原生 HTML input 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种输入类型（文本、密码、邮箱、数字、日期等）
-  - 提供多种颜色主题和尺寸规格
-  - 支持多种样式变体（边框、填充、轮廓等）
-  - 内置验证状态指示
-  - 支持前缀和后缀自定义渲染
-  - 支持双向数据绑定
-  - 数字类型自动转换和回调
-  - TypeScript 类型安全
+功能特性：
+- 支持多种输入类型（文本、密码、邮箱、数字、日期等）
+- 提供多种颜色主题和尺寸规格
+- 支持多种样式变体（边框、填充、轮廓等）
+- 内置验证状态指示
+- 支持前缀和后缀自定义渲染
+- 支持双向数据绑定
+- 数字类型自动转换和回调
+- TypeScript 类型安全
 
-  示例用法：
-  ```svelte
-  <p>基础文本输入框</p>
-  <ShInput type="text" bind:value={textValue} placeholder="请输入文本" />
+示例用法：
+```svelte
+<p>基础文本输入框</p>
+<ShInput type="text" bind:value={textValue} placeholder="请输入文本" />
 
-  <p>带颜色主题的输入框</p>
-  <ShInput
-    type="email"
-    color="primary"
-    size="lg"
-    bind:value={emailValue}
-    placeholder="请输入邮箱"
-  />
+<p>带颜色主题的输入框</p>
+<ShInput
+  type="email"
+  color="primary"
+  size="lg"
+  bind:value={emailValue}
+  placeholder="请输入邮箱"
+/>
 
-  <p>数字输入框带回调</p>
-  <ShInput
-    type="number"
-    variant="bordered"
-    bind:value={numberValue}
-    onChangeValue={handleNumberChange}
-    placeholder="请输入数字"
-  />
+<p>数字输入框带回调</p>
+<ShInput
+  type="number"
+  variant="bordered"
+  bind:value={numberValue}
+  onChangeValue={handleNumberChange}
+  placeholder="请输入数字"
+/>
 
-  <p>带前后缀的输入框</p>
-  <ShInput
-    type="text"
-    bind:value={searchValue}
-    prefixRender={({ color, size }) => `<Icon name="search" {color} {size} />`}
-    suffixRender={({ color, size }) => `<Button {color} {size}>搜索</Button>`}
-  />
+<p>带前后缀的输入框</p>
+<ShInput
+  type="text"
+  bind:value={searchValue}
+  prefixRender={({ color, size }) => `<Icon name="search" {color} {size} />`}
+  suffixRender={({ color, size }) => `<Button {color} {size}>搜索</Button>`}
+/>
 
-  <p>验证状态输入框</p>
-  <ShInput
-    type="password"
-    color="error"
-    validator={false}
-    bind:value={passwordValue}
-    placeholder="密码格式不正确"
-  />
-  ```
+<p>验证状态输入框</p>
+<ShInput
+  type="password"
+  color="error"
+  validator={false}
+  bind:value={passwordValue}
+  placeholder="密码格式不正确"
+/>
+```
 -->
 <script lang="ts" module>
   import type { Snippet } from 'svelte';

@@ -1,48 +1,49 @@
 <!--
-  ShDropdown 下拉菜单组件
+@component
+ShDropdown 下拉菜单组件
 
-  一个功能丰富的下拉菜单组件，支持多种触发方式和自定义配置。
-  基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
+一个功能丰富的下拉菜单组件，支持多种触发方式和自定义配置。
+基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持点击和悬停两种触发方式
-  - 可配置菜单显示位置（上下左右等多个方向）
-  - 支持自定义触发元素或使用默认按钮
-  - 支持完全自定义内容渲染
-  - 可使用 div 或 details 标签作为容器
-  - 内置菜单项列表渲染
+功能特性：
+- 支持点击和悬停两种触发方式
+- 可配置菜单显示位置（上下左右等多个方向）
+- 支持自定义触发元素或使用默认按钮
+- 支持完全自定义内容渲染
+- 可使用 div 或 details 标签作为容器
+- 内置菜单项列表渲染
 
-  示例用法：
-  ```svelte
-  <p>基础下拉菜单</p>
-  <ShDropdown
-    items={[{ text: '选项1' }, { text: '选项2' }]}
-    triggerElement={{ text: '点击打开' }}
-  />
+示例用法：
+```svelte
+<p>基础下拉菜单</p>
+<ShDropdown
+  items={[{ text: '选项1' }, { text: '选项2' }]}
+  triggerElement={{ text: '点击打开' }}
+/>
 
-  <p>悬停触发的下拉菜单</p>
-  <ShDropdown
-    trigger="hover"
-    placement="bottom-end"
-    items={menuItems}
-    triggerElement={{ text: '悬停显示', color: 'primary' }}
-  />
+<p>悬停触发的下拉菜单</p>
+<ShDropdown
+  trigger="hover"
+  placement="bottom-end"
+  items={menuItems}
+  triggerElement={{ text: '悬停显示', color: 'primary' }}
+/>
 
-  <p>使用 details 标签的下拉菜单</p>
-  <ShDropdown
-    tag="details"
-    open={isOpen}
-    items={menuItems}
-  />
+<p>使用 details 标签的下拉菜单</p>
+<ShDropdown
+  tag="details"
+  open={isOpen}
+  items={menuItems}
+/>
 
-  <p>完全自定义内容的下拉菜单</p>
-  <ShDropdown>
-    {#snippet triggerElementRender()}
-      <button class="custom-trigger">自定义触发器</button>
-    {/snippet}
-    <div class="custom-menu">自定义菜单内容</div>
-  </ShDropdown>
-  ```
+<p>完全自定义内容的下拉菜单</p>
+<ShDropdown>
+  {#snippet triggerElementRender()}
+    <button class="custom-trigger">自定义触发器</button>
+  {/snippet}
+  <div class="custom-menu">自定义菜单内容</div>
+</ShDropdown>
+```
 -->
 <script lang="ts" module>
   import type { Snippet } from 'svelte';

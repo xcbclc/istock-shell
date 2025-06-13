@@ -1,55 +1,56 @@
 <!--
-  ShList 列表组件
+@component
+ShList 列表组件
 
-  一个灵活的列表容器组件，支持数据驱动渲染和自定义内容插槽。
-  基于原生 HTML ul 元素构建，提供完整的类型安全和响应式支持。
+一个灵活的列表容器组件，支持数据驱动渲染和自定义内容插槽。
+基于原生 HTML ul 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持数据驱动的列表项渲染
-  - 提供前缀和后缀内容插槽
-  - 支持自定义列表项内容
-  - 继承所有原生 ul 元素的属性和事件
-  - 完整的 TypeScript 类型安全
-  - 响应式设计支持
+功能特性：
+- 支持数据驱动的列表项渲染
+- 提供前缀和后缀内容插槽
+- 支持自定义列表项内容
+- 继承所有原生 ul 元素的属性和事件
+- 完整的 TypeScript 类型安全
+- 响应式设计支持
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShList } from '@istock-shell/ui';
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShList } from '@istock-shell/ui';
 
-    const listData = [
-      { text: '列表项1', description: '描述信息1' },
-      { text: '列表项2', description: '描述信息2' },
-      { text: '列表项3', description: '描述信息3' }
-    ];
+  const listData = [
+    { text: '列表项1', description: '描述信息1' },
+    { text: '列表项2', description: '描述信息2' },
+    { text: '列表项3', description: '描述信息3' }
+  ];
 
-    function handleRowClick(row, index) {
-      console.log('点击了第', index + 1, '项:', row.text);
-    }
-  </script>
+  function handleRowClick(row, index) {
+    console.log('点击了第', index + 1, '项:', row.text);
+  }
+</script>
 
-  <p>基础数据列表</p>
-  <ShList list={listData} />
+<p>基础数据列表</p>
+<ShList list={listData} />
 
-  <p>带点击事件的列表</p>
-  <ShList
-    list={listData.map(item => ({ ...item, onClickValue: handleRowClick }))}
-  />
+<p>带点击事件的列表</p>
+<ShList
+  list={listData.map(item => ({ ...item, onClickValue: handleRowClick }))}
+/>
 
-  <p>带前缀后缀的列表</p>
-  <ShList
-    list={listData}
-    prefixRender={() => <li class="list-header">列表标题</li>}
-    suffixRender={() => <li class="list-footer">列表底部</li>}
-  />
+<p>带前缀后缀的列表</p>
+<ShList
+  list={listData}
+  prefixRender={() => <li class="list-header">列表标题</li>}
+  suffixRender={() => <li class="list-footer">列表底部</li>}
+/>
 
-  <p>自定义内容列表</p>
-  <ShList>
-    <li>自定义列表项1</li>
-    <li>自定义列表项2</li>
-    <li>自定义列表项3</li>
-  </ShList>
-  ```
+<p>自定义内容列表</p>
+<ShList>
+  <li>自定义列表项1</li>
+  <li>自定义列表项2</li>
+  <li>自定义列表项3</li>
+</ShList>
+```
 -->
 <script lang="ts" module>
   import type { Snippet } from 'svelte';

@@ -1,47 +1,48 @@
 <!--
-  ShDropdownMenuItem 下拉菜单项组件
+@component
+ShDropdownMenuItem 下拉菜单项组件
 
-  用于渲染下拉菜单中的单个菜单项，支持文本显示和链接跳转。
-  基于列表项（li）元素构建，内部可包含链接（a）或纯文本。
+用于渲染下拉菜单中的单个菜单项，支持文本显示和链接跳转。
+基于列表项（li）元素构建，内部可包含链接（a）或纯文本。
 
-  功能特性：
-  - 渲染菜单项文本内容
-  - 支持链接跳转功能（通过 linkAttrs 配置）
-  - 自动处理链接和纯文本的渲染逻辑
-  - 内置标准菜单项样式和交互效果
-  - 支持所有原生 li 和 a 元素的属性和事件
+功能特性：
+- 渲染菜单项文本内容
+- 支持链接跳转功能（通过 linkAttrs 配置）
+- 自动处理链接和纯文本的渲染逻辑
+- 内置标准菜单项样式和交互效果
+- 支持所有原生 li 和 a 元素的属性和事件
 
-  示例用法：
-  ```svelte
-  <p>纯文本菜单项</p>
-  <ShDropdownMenuItem text="菜单项" />
+示例用法：
+```svelte
+<p>纯文本菜单项</p>
+<ShDropdownMenuItem text="菜单项" />
 
-  <p>链接菜单项</p>
-  <ShDropdownMenuItem
-    text="个人资料"
-    linkAttrs={{ href: "/profile" }}
-  />
+<p>链接菜单项</p>
+<ShDropdownMenuItem
+  text="个人资料"
+  linkAttrs={{ href: "/profile" }}
+/>
 
-  <p>带自定义样式的菜单项</p>
-  <ShDropdownMenuItem
-    text="设置"
-    class="text-blue-600"
-    linkAttrs={{
-      href: "/settings",
-      class: "hover:bg-blue-50"
-    }}
-  />
+<p>带自定义样式的菜单项</p>
+<ShDropdownMenuItem
+  text="设置"
+  class="text-blue-600"
+  linkAttrs={{
+    href: "/settings",
+    class: "hover:bg-blue-50"
+  }}
+/>
 
-  <p>外部链接菜单项</p>
-  <ShDropdownMenuItem
-    text="帮助文档"
-    linkAttrs={{
-      href: "https://docs.example.com",
-      target: "_blank",
-      rel: "noopener noreferrer"
-    }}
-  />
-  ```
+<p>外部链接菜单项</p>
+<ShDropdownMenuItem
+  text="帮助文档"
+  linkAttrs={{
+    href: "https://docs.example.com",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }}
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLAttributes, HTMLAnchorAttributes } from 'svelte/elements';

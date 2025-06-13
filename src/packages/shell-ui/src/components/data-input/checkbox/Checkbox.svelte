@@ -1,55 +1,56 @@
 <!--
-  ShCheckbox 复选框组件
+@component
+ShCheckbox 复选框组件
 
-  一个功能丰富的复选框组件，支持多选、标签配置和自定义样式。
-  基于 Tailwind CSS和DaisyUi 构建，提供完整的类型安全和响应式支持。
+一个功能丰富的复选框组件，支持多选、标签配置和自定义样式。
+基于 Tailwind CSS和DaisyUi 构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种颜色主题和尺寸规格
-  - 支持选项列表批量渲染
-  - 可配置标签位置（前置/后置）和样式
-  - 支持双向数据绑定
-  - 支持单个或批量禁用状态
-  - 内置值变更回调机制
-  - 完整的 TypeScript 类型安全
-  - 响应式设计支持
+功能特性：
+- 支持多种颜色主题和尺寸规格
+- 支持选项列表批量渲染
+- 可配置标签位置（前置/后置）和样式
+- 支持双向数据绑定
+- 支持单个或批量禁用状态
+- 内置值变更回调机制
+- 完整的 TypeScript 类型安全
+- 响应式设计支持
 
-  示例用法：
-  ```svelte
-  <p>基础复选框组</p>
-  <ShCheckbox
-    options={[
-      { label: '选项1', value: 'option1' },
-      { label: '选项2', value: 'option2' },
-      { label: '选项3', value: 'option3' }
-    ]}
-    bind:value={selectedValues}
-  />
+示例用法：
+```svelte
+<p>基础复选框组</p>
+<ShCheckbox
+  options={[
+    { label: '选项1', value: 'option1' },
+    { label: '选项2', value: 'option2' },
+    { label: '选项3', value: 'option3' }
+  ]}
+  bind:value={selectedValues}
+/>
 
-  <p>带颜色和尺寸的复选框</p>
-  <ShCheckbox
-    color="primary"
-    size="lg"
-    options={colorOptions}
-    bind:value={colorValues}
-    onChangeValue={(values, options) => console.log('选中:', values)}
-  />
+<p>带颜色和尺寸的复选框</p>
+<ShCheckbox
+  color="primary"
+  size="lg"
+  options={colorOptions}
+  bind:value={colorValues}
+  onChangeValue={(values, options) => console.log('选中:', values)}
+/>
 
-  <p>前置标签的复选框</p>
-  <ShCheckbox
-    options={labelOptions}
-    label={{ placement: 'before', type: 'primary' }}
-    bind:value={labelValues}
-  />
+<p>前置标签的复选框</p>
+<ShCheckbox
+  options={labelOptions}
+  label={{ placement: 'before', type: 'primary' }}
+  bind:value={labelValues}
+/>
 
-  <p>自定义样式的复选框</p>
-  <ShCheckbox
-    options={customOptions}
-    wrapClass="grid grid-cols-2 gap-4"
-    label={{ class: 'font-bold text-blue-600' }}
-    bind:value={customValues}
-  />
-  ```
+<p>自定义样式的复选框</p>
+<ShCheckbox
+  options={customOptions}
+  wrapClass="grid grid-cols-2 gap-4"
+  label={{ class: 'font-bold text-blue-600' }}
+  bind:value={customValues}
+/>
+```
 -->
 <script lang="ts" module>
   import { CheckboxVariantConfig } from '../../../theme/config';

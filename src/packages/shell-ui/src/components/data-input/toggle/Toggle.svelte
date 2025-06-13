@@ -1,48 +1,49 @@
 <!--
-  ShToggle 开关组件
+@component
+ShToggle 开关组件
 
-  一个功能丰富的开关切换组件，支持多种样式变体和标签配置。
-  基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
+一个功能丰富的开关切换组件，支持多种样式变体和标签配置。
+基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种颜色主题（从主题配置中动态提取）
-  - 提供多种尺寸规格（从主题配置中动态提取）
-  - 支持标签文本的前置或后置显示
-  - 内置状态变更回调机制
-  - 支持双向数据绑定
-  - 继承所有原生 input[type="checkbox"] 属性
-  - 完整的响应式设计支持
-  - TypeScript 类型安全
-  
-  示例用法：
-  ```svelte
-  <p>基础开关</p>
-  <ShToggle bind:value={isEnabled} />
-  
-  <p>带颜色主题的开关</p>
-  <ShToggle 
-    color="primary" 
-    size="lg"
-    bind:value={isPrimary}
-    onChangeValue={handleChange}
-  />
-  
-  <p>带前置标签的开关</p>
-  <ShToggle 
-    bind:value={isActive}
-    label={{ placement: 'before', class: 'text-sm' }}
-  >
-    启用功能
-  </ShToggle>
-  
-  <p>带后置标签的开关</p>
-  <ShToggle 
-    bind:value={isVisible}
-    label={{ placement: 'after' }}
-  >
-    显示内容
-  </ShToggle>
-  ```
+功能特性：
+- 支持多种颜色主题（从主题配置中动态提取）
+- 提供多种尺寸规格（从主题配置中动态提取）
+- 支持标签文本的前置或后置显示
+- 内置状态变更回调机制
+- 支持双向数据绑定
+- 继承所有原生 input[type="checkbox"] 属性
+- 完整的响应式设计支持
+- TypeScript 类型安全
+
+示例用法：
+```svelte
+<p>基础开关</p>
+<ShToggle bind:value={isEnabled} />
+
+<p>带颜色主题的开关</p>
+<ShToggle
+  color="primary"
+  size="lg"
+  bind:value={isPrimary}
+  onChangeValue={handleChange}
+/>
+
+<p>带前置标签的开关</p>
+<ShToggle
+  bind:value={isActive}
+  label={{ placement: 'before', class: 'text-sm' }}
+>
+  启用功能
+</ShToggle>
+
+<p>带后置标签的开关</p>
+<ShToggle
+  bind:value={isVisible}
+  label={{ placement: 'after' }}
+>
+  显示内容
+</ShToggle>
+```
 -->
 <script lang="ts" module>
   import type { HTMLInputAttributes } from 'svelte/elements';

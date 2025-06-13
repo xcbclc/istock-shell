@@ -1,40 +1,41 @@
 <!--
-  ShKbd 键盘按键组件
+@component
+ShKbd 键盘按键组件
 
-  一个用于显示键盘按键样式的组件，模拟真实键盘按键的视觉效果。
-  基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
+一个用于显示键盘按键样式的组件，模拟真实键盘按键的视觉效果。
+基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种尺寸规格（从主题配置中动态提取）
-  - 支持自定义按键文本内容
-  - 支持子内容插槽，可渲染复杂的按键内容
-  - 继承所有原生 HTML 元素的属性和事件
-  - 完整的响应式设计支持
-  - TypeScript 类型安全
-  - 模拟真实键盘按键的视觉效果
+功能特性：
+- 支持多种尺寸规格（从主题配置中动态提取）
+- 支持自定义按键文本内容
+- 支持子内容插槽，可渲染复杂的按键内容
+- 继承所有原生 HTML 元素的属性和事件
+- 完整的响应式设计支持
+- TypeScript 类型安全
+- 模拟真实键盘按键的视觉效果
 
-  示例用法：
-  ```svelte
-  <p>基础按键</p>
-  <ShKbd text="Enter" />
+示例用法：
+```svelte
+<p>基础按键</p>
+<ShKbd text="Enter" />
 
-  <p>功能键组合</p>
-  <ShKbd text="⌘" size="sm" />
-  <ShKbd text="Shift" size="md" />
-  <ShKbd text="Ctrl" size="lg" />
+<p>功能键组合</p>
+<ShKbd text="⌘" size="sm" />
+<ShKbd text="Shift" size="md" />
+<ShKbd text="Ctrl" size="lg" />
 
-  <p>自定义内容的按键</p>
-  <ShKbd size="md">
-    <span class="text-xs font-bold">Space</span>
-  </ShKbd>
+<p>自定义内容的按键</p>
+<ShKbd size="md">
+  <span class="text-xs font-bold">Space</span>
+</ShKbd>
 
-  <p>可交互的按键</p>
-  <ShKbd 
-    text="Esc" 
-    onclick={handleEscapeKey}
-    class="cursor-pointer hover:bg-gray-100"
-  />
-  ```
+<p>可交互的按键</p>
+<ShKbd
+  text="Esc"
+  onclick={handleEscapeKey}
+  class="cursor-pointer hover:bg-gray-100"
+/>
+```
 -->
 <script lang="ts" module>
   import type { HTMLAttributes } from 'svelte/elements';

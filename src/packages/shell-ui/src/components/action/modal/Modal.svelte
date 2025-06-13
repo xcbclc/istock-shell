@@ -1,60 +1,61 @@
 <!--
-  ShModal 模态框组件
+@component
+ShModal 模态框组件
 
-  一个功能丰富的模态框组件，支持多种尺寸、自定义内容和操作按钮。
-  基于原生 HTML dialog 元素构建，提供完整的类型安全和响应式支持。
+一个功能丰富的模态框组件，支持多种尺寸、自定义内容和操作按钮。
+基于原生 HTML dialog 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种尺寸规格（从主题配置中动态提取）
-  - 支持标题、内容文本和自定义内容渲染
-  - 可配置关闭按钮和遮罩点击关闭
-  - 支持自定义操作按钮配置
-  - 内置淡入淡出动画效果
-  - 支持双向绑定显示状态
-  - 完整的事件回调支持
-  - TypeScript 类型安全
+功能特性：
+- 支持多种尺寸规格（从主题配置中动态提取）
+- 支持标题、内容文本和自定义内容渲染
+- 可配置关闭按钮和遮罩点击关闭
+- 支持自定义操作按钮配置
+- 内置淡入淡出动画效果
+- 支持双向绑定显示状态
+- 完整的事件回调支持
+- TypeScript 类型安全
 
-  示例用法：
-  ```svelte
-  <p>基础模态框</p>
-  <ShModal bind:show={isVisible} title="提示" content="这是一个基础模态框" />
+示例用法：
+```svelte
+<p>基础模态框</p>
+<ShModal bind:show={isVisible} title="提示" content="这是一个基础模态框" />
 
-  <p>带操作按钮的模态框</
-  <ShModal 
-    bind:show={showConfirm}
-    title="确认操作"
-    content="您确定要执行此操作吗？"
-    actions={[
-      { text: '取消', color: 'secondary' },
-      { text: '确认', color: 'primary' }
-    ]}
-    onClose={onCloseHandler}
-  />
+<p>带操作按钮的模态框</
+<ShModal
+  bind:show={showConfirm}
+  title="确认操作"
+  content="您确定要执行此操作吗？"
+  actions={[
+    { text: '取消', color: 'secondary' },
+    { text: '确认', color: 'primary' }
+  ]}
+  onClose={onCloseHandler}
+/>
 
-  <p>大尺寸带关闭按钮的模态框</p
-  <ShModal 
-    bind:show={showLarge}
-    size="lg"
-    title="详细信息"
-    closeButton
-    maskClosable
-  >
-    <div class="custom-content">
-      <p>这里是自定义内容</p>
+<p>大尺寸带关闭按钮的模态框</p
+<ShModal
+  bind:show={showLarge}
+  size="lg"
+  title="详细信息"
+  closeButton
+  maskClosable
+>
+  <div class="custom-content">
+    <p>这里是自定义内容</p>
+  </div>
+</ShModal>
+
+<p>完全自定义内容的模态框</p>
+<ShModal bind:show={showCustom}>
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">自定义模态框</h3>
+    <p class="py-4">完全自定义的模态框内容</p>
+    <div class="modal-action">
+      <button class="btn" onclick={() => showCustom = false}>关闭</button>
     </div>
-  </ShModal>
-
-  <p>完全自定义内容的模态框</p>
-  <ShModal bind:show={showCustom}>
-    <div class="modal-box">
-      <h3 class="font-bold text-lg">自定义模态框</h3>
-      <p class="py-4">完全自定义的模态框内容</p>
-      <div class="modal-action">
-        <button class="btn" onclick={() => showCustom = false}>关闭</button>
-      </div>
-    </div>
-  </ShModal>
-  ```
+  </div>
+</ShModal>
+```
 -->
 <script lang="ts" module>
   import type { HTMLDialogAttributes } from 'svelte/elements';

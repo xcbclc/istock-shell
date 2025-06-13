@@ -1,44 +1,45 @@
 <!--
-  ShButton 按钮组件
+@component
+ShButton 按钮组件
 
-  一个功能丰富的按钮组件，支持多种样式变体、状态和交互效果。
-  基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
+一个功能丰富的按钮组件，支持多种样式变体、状态和交互效果。
+基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种颜色主题（primary, secondary, success, warning, error 等）
-  - 提供多种尺寸规格（xs, sm, md, lg, xl）
-  - 支持多种样式变体（outline, soft, ghost, link, dash）
-  - 内置加载状态和禁用状态
-  - 支持自定义 HTML 标签（button, a, input, div）
-  - 支持图标和文本组合
-  - 完整的响应式设计支持
-  - TypeScript 类型安全
-  
-  示例用法：
-  ```svelte
-  <p>基础按钮</p>
-  <ShButton>点击我</ShButton>
-  
-  <p>主要按钮</p>
-  <ShButton color="primary" size="lg">
-    主要按钮
-  </ShButton>
-  
-  <p>轮廓次要按钮</p>
-  <ShButton 
-    variant="outline" 
-    color="secondary"
-    disabled={isLoading}
-    onclick={handleClick}
-  >
-    次要按钮
-  </ShButton>
-  
-  <p>链接形式的按钮</p>
-  <ShButton tag="a" href="/home">
-    链接按钮
-  </ShButton>
-  ```
+功能特性：
+- 支持多种颜色主题（primary, secondary, success, warning, error 等）
+- 提供多种尺寸规格（xs, sm, md, lg, xl）
+- 支持多种样式变体（outline, soft, ghost, link, dash）
+- 内置加载状态和禁用状态
+- 支持自定义 HTML 标签（button, a, input, div）
+- 支持图标和文本组合
+- 完整的响应式设计支持
+- TypeScript 类型安全
+
+示例用法：
+```svelte
+<p>基础按钮</p>
+<ShButton>点击我</ShButton>
+
+<p>主要按钮</p>
+<ShButton color="primary" size="lg">
+  主要按钮
+</ShButton>
+
+<p>轮廓次要按钮</p>
+<ShButton
+  variant="outline"
+  color="secondary"
+  disabled={isLoading}
+  onclick={handleClick}
+>
+  次要按钮
+</ShButton>
+
+<p>链接形式的按钮</p>
+<ShButton tag="a" href="/home">
+  链接按钮
+</ShButton>
+```
 -->
 <script lang="ts" module>
   import type { SvelteHTMLElements } from 'svelte/elements';

@@ -1,37 +1,38 @@
 <!--
-  ShRadioItem 单选按钮项组件
+@component
+ShRadioItem 单选按钮项组件
 
-  一个基础的单选按钮项组件，用于构建单选按钮组。
-  基于原生 HTML input[type="radio"] 元素构建，提供完整的类型安全和响应式支持。
+一个基础的单选按钮项组件，用于构建单选按钮组。
+基于原生 HTML input[type="radio"] 元素构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持多种颜色主题和尺寸规格
-  - 支持双向数据绑定，轻松获取和设置选中值
-  - 内置禁用状态处理
-  - 完整的响应式设计支持
-  - TypeScript 类型安全
-  - 支持泛型值类型，适配各种数据类型
+功能特性：
+- 支持多种颜色主题和尺寸规格
+- 支持双向数据绑定，轻松获取和设置选中值
+- 内置禁用状态处理
+- 完整的响应式设计支持
+- TypeScript 类型安全
+- 支持泛型值类型，适配各种数据类型
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShRadioItem } from '@istock-shell/ui';
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShRadioItem } from '@istock-shell/ui';
 
-    let selectedValue = $state('option1');
-  </script>
+  let selectedValue = $state('option1');
+</script>
 
-  <p>基础单选按钮</p>
-  <ShRadioItem bind:groupValue={selectedValue} value="option1" />
+<p>基础单选按钮</p>
+<ShRadioItem bind:groupValue={selectedValue} value="option1" />
 
-  <p>带颜色主题的单选按钮</p>
-  <ShRadioItem bind:groupValue={selectedValue} value="option2" color="primary" />
+<p>带颜色主题的单选按钮</p>
+<ShRadioItem bind:groupValue={selectedValue} value="option2" color="primary" />
 
-  <p>大尺寸单选按钮</p>
-  <ShRadioItem bind:groupValue={selectedValue} value="option3" size="lg" />
+<p>大尺寸单选按钮</p>
+<ShRadioItem bind:groupValue={selectedValue} value="option3" size="lg" />
 
-  <p>禁用状态的单选按钮</p>
-  <ShRadioItem bind:groupValue={selectedValue} value="option4" disabled />
-  ```
+<p>禁用状态的单选按钮</p>
+<ShRadioItem bind:groupValue={selectedValue} value="option4" disabled />
+```
 -->
 <script lang="ts" module>
   import type { HTMLInputAttributes } from 'svelte/elements';

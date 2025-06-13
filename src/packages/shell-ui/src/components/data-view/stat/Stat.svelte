@@ -1,50 +1,51 @@
 <!--
-  @component ShStat 统计卡片组件
+@component
+ShStat 统计卡片组件
 
-  一个功能丰富的统计数据展示组件，支持多种布局模式和样式配置。
-  基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
+一个功能丰富的统计数据展示组件，支持多种布局模式和样式配置。
+基于 Tailwind CSS 构建，提供完整的类型安全和响应式支持。
 
-  功能特性：
-  - 支持统计项列表的批量渲染
-  - 提供垂直和水平两种布局模式
-  - 内置阴影效果和对齐方式配置
-  - 支持完全自定义的子内容渲染
-  - 自动管理统计项的布局和样式
-  - 继承所有原生 div 元素属性
-  - 完整的响应式设计支持
-  - TypeScript 类型安全
+功能特性：
+- 支持统计项列表的批量渲染
+- 提供垂直和水平两种布局模式
+- 内置阴影效果和对齐方式配置
+- 支持完全自定义的子内容渲染
+- 自动管理统计项的布局和样式
+- 继承所有原生 div 元素属性
+- 完整的响应式设计支持
+- TypeScript 类型安全
 
-  示例用法：
-  ```svelte
-  <script lang="ts">
-    import { ShStat } from '@istock-shell/ui';
-  </script>
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShStat } from '@istock-shell/ui';
+</script>
 
-  <p>基础统计卡片</p>
-  <ShStat
-    list={[
-      { title: '总用户', value: '1,234', desc: '较上月增长12%' },
-      { title: '活跃用户', value: '567', desc: '在线用户' }
-    ]}
-  />
+<p>基础统计卡片</p>
+<ShStat
+  list={[
+    { title: '总用户', value: '1,234', desc: '较上月增长12%' },
+    { title: '活跃用户', value: '567', desc: '在线用户' }
+  ]}
+/>
 
-  <p>垂直布局无阴影</p>
-  <ShStat 
-    vertical 
-    shadow={false}
-    align="start"
-  >
-    <ShStatItem title="收入" value="¥12,345" />
-    <ShStatItem title="支出" value="¥8,901" />
-  </ShStat>
+<p>垂直布局无阴影</p>
+<ShStat
+  vertical
+  shadow={false}
+  align="start"
+>
+  <ShStatItem title="收入" value="¥12,345" />
+  <ShStatItem title="支出" value="¥8,901" />
+</ShStat>
 
-  <p>居中对齐的统计卡片</p>
-  <ShStat 
-    center
-    list={statisticsData}
-    class="bg-base-200 rounded-lg"
-  />
-  ```
+<p>居中对齐的统计卡片</p>
+<ShStat
+  center
+  list={statisticsData}
+  class="bg-base-200 rounded-lg"
+/>
+```
 -->
 
 <script lang="ts" module>
