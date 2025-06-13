@@ -107,7 +107,7 @@ npm install @istock-shell/ui
 - `children`：
 
 ```svelte
-<div class="toast-container">
+<div class="toast">
   <!-- ...code -->
   {@render children()}
   <!-- ...code -->

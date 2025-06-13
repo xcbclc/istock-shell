@@ -109,7 +109,7 @@ ShLoading 加载指示器组件
     当存在文本内容或子内容时，使用水平布局显示加载器和文本
     采用inline-flex布局，垂直居中对齐
   -->
-  <div class="inline-flex items-center justify-center">
+  <div class={tuc('inline-flex items-center justify-center')}>
     {#if children}
       {@render children()}
     {:else}
