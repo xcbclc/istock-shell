@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShMenu, type MenuItemProps } from '@istock-shell/ui';
+  import { ShMenu, shShowMessage, type MenuItemProps } from '@istock-shell/ui';
   const submenuItems: MenuItemProps[] = [
     {
       text: 'Item 1',
@@ -32,6 +32,7 @@
   ];
   const onMenuItemClick = (item: MenuItemProps) => {
     console.log('onMenuItemClick', item.key, item);
+    shShowMessage.info('onMenuItemClick：' + item.key);
   };
 </script>
 

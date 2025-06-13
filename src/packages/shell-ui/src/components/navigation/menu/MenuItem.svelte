@@ -1,20 +1,36 @@
 <!--
 @component
-菜单项组件 - 单个菜单项的完整实现
-支持图标、文本、工具提示、子菜单、激活状态、禁用状态等功能
-提供两种切换模式：下拉菜单模式和详情展开模式
+ShMenuItem 菜单项组件
 
-@example
-基础菜单项：
+一个功能丰富的菜单项组件，作为菜单系统的核心构建块。
+支持图标、文本、工具提示、子菜单、激活状态、禁用状态等完整功能。
+基于原生 HTML li 元素构建，提供两种切换模式和灵活的自定义选项。
+
+功能特性：
+- 支持图标和文本的组合显示，提供丰富的视觉表现
+- 内置工具提示功能，支持字符串和对象两种配置方式
+- 支持多级子菜单，可无限嵌套
+- 提供两种切换模式：下拉菜单模式和详情展开模式
+- 支持激活、禁用、聚焦等多种交互状态
+- 支持自定义图标渲染函数，满足特殊需求
+- 支持标题项模式，用于菜单分组
+- 完整的事件处理机制，包括点击和状态变更
+- 继承所有原生 li 元素的属性和事件
+- 完整的 TypeScript 类型安全
+- 响应式设计支持
+
+示例用法：
 ```svelte
-<script>
+<script lang="ts">
   import { ShMenuItem } from '@istock-shell/shell-ui';
 
   function handleClick(item, key, collapsed) {
     console.log('菜单项点击:', { item, key, collapsed });
+    // 处理路由跳转或业务逻辑
   }
 </script>
 
+<p>基础菜单项</p>
 <ShMenuItem
   key="home"
   text="首页"
@@ -27,61 +43,47 @@
 带工具提示的菜单项：
 ```svelte
 <ShMenuItem
-  text="设置"
+  key="settings"
+  text="系统设置"
   iconName="settings"
-  tooltip="系统设置"
+  tooltip="点击进入系统设置页面"
   disabled={false}
+  onMenuItemClick={handleClick}
+/>
+```
+
+复杂工具提示配置：
+```svelte
+<ShMenuItem
+  text="高级设置"
+  iconName="cog"
+  tooltip={{
+    dataTip: "高级系统配置选项",
+    placement: "right",
+    delay: 500
+  }}
 />
 ```
 
 带子菜单的菜单项（下拉模式）：
 ```svelte
 <ShMenuItem
+  key="products"
   text="产品管理"
   iconName="package"
   toggleType={1}
   canToggle={true}
   subItem={{
     items: [
-      { key: 'add-product', text: '添加产品' },
-      { key: 'list-products', text: '产品列表' }
+      { key: 'add-product', text: '添加产品', iconName: 'plus' },
+      { key: 'list-products', text: '产品列表', iconName: 'list' },
+      { key: 'categories', text: '分类管理', iconName: 'folder' }
     ]
   }}
+  onMenuItemClick={handleClick}
 />
 ```
 
-带子菜单的菜单项（详情展开模式）：
-```svelte
-<ShMenuItem
-  text="用户管理"
-  toggleType={2}
-  subItem={{
-    items: [
-      { key: 'users', text: '用户列表' },
-      { key: 'roles', text: '角色管理' }
-    ]
-  }}
-/>
-```
-
-自定义图标渲染：
-```svelte
-<ShMenuItem
-  text="自定义图标"
-  iconRender={() => {
-    return `<svg>...</svg>`;
-  }}
-/>
-```
-
-标题项（分组标题）：
-```svelte
-<ShMenuItem
-  text="系统管理"
-  isTitle={true}
-  disabled={true}
-/>
-```
 -->
 
 <script lang="ts" module>
@@ -94,23 +96,42 @@
   const menuItemVariantConfig = MenuItemVariantConfig;
   const menuItemTextVariantConfig = MenuItemTextVariantConfig;
 
-  // 菜单项属性接口
+  /**
+   * 菜单项组件属性接口
+   * 继承所有原生 li 元素的 HTML 属性，并扩展菜单项特有的功能属性
+   * @typedef {HTMLAttributes<HTMLLIElement> & MenuItemPropsExtension} MenuItemProps
+   */
   export interface MenuItemProps extends HTMLAttributes<HTMLLIElement> {
-    key?: string; // 菜单项唯一标识，用于激活状态管理
-    text?: string; // 菜单项显示文本
-    isTitle?: boolean; // 是否为标题项（通常用于分组标题）
-    active?: boolean; // 是否处于激活状态
-    disabled?: boolean; // 是否禁用状态
-    focus?: boolean; // 是否处于聚焦状态
-    collapsed?: boolean; // 子菜单是否折叠（双向绑定）
-    canToggle?: boolean; // 是否允许切换折叠状态
-    itemAttr?: HTMLAnchorAttributes; // 内部链接元素的HTML属性配置
-    tooltip?: string | TooltipProps; // 工具提示配置（字符串或完整配置对象）
-    toggleType?: 1 | 2; // 切换模式：1-下拉菜单，2-详情展开
-    subItem?: MenuProps; // 子菜单配置
-    iconName?: string; // 图标名称（使用ShIcon组件）
-    onMenuItemClick?: (item: MenuItemProps, key?: string, collapsed?: boolean) => void; // 点击事件回调
-    iconRender?: () => ReturnType<Snippet<[]>>; // 自定义图标渲染函数
+    /** 菜单项唯一标识符，用于激活状态管理和路由导航 */
+    key?: string;
+    /** 菜单项显示文本内容，支持纯文本显示 */
+    text?: string;
+    /** 是否为标题项，用于菜单分组和视觉分隔 @default false */
+    isTitle?: boolean;
+    /** 是否处于激活状态，影响视觉样式和用户体验 @default false */
+    active?: boolean;
+    /** 是否禁用状态，禁用时不响应用户交互 @default false */
+    disabled?: boolean;
+    /** 是否处于聚焦状态，用于键盘导航和无障碍访问 @default false */
+    focus?: boolean;
+    /** 子菜单是否折叠状态，支持双向绑定 @default false */
+    collapsed?: boolean;
+    /** 是否允许切换折叠状态，控制子菜单的交互行为 @default true */
+    canToggle?: boolean;
+    /** 内部链接元素的HTML属性配置，支持href、target等链接属性 */
+    itemAttr?: HTMLAnchorAttributes;
+    /** 工具提示配置，支持字符串快捷配置或完整的TooltipProps对象 */
+    tooltip?: string | TooltipProps;
+    /** 切换模式类型：1-下拉菜单模式，2-详情展开模式 @default 1 */
+    toggleType?: 1 | 2;
+    /** 子菜单配置对象，包含子菜单的完整属性和菜单项列表 */
+    subItem?: MenuProps;
+    /** 图标名称，使用ShIcon组件渲染预定义图标 */
+    iconName?: string;
+    /** 菜单项点击事件回调函数，传递菜单项数据、唯一标识和折叠状态 */
+    onMenuItemClick?: (item: MenuItemProps, key?: string, collapsed?: boolean) => void;
+    /** 自定义图标渲染函数，用于渲染复杂或自定义的图标内容 */
+    iconRender?: () => ReturnType<Snippet<[]>>;
   }
 </script>
 
@@ -119,6 +140,7 @@
   import { tv } from 'tailwind-variants';
   import { tuc, isString } from '@istock-shell/util';
 
+  // 解构组件属性，设置默认值和双向绑定
   let { collapsed = $bindable(false), ...menuItemProps }: MenuItemProps = $props();
   const {
     key, // 菜单项唯一标识
@@ -142,16 +164,17 @@
   const menuItemVariants = tv(menuItemVariantConfig, {});
   const menuItemTextVariants = tv(menuItemTextVariantConfig, {});
 
-  // 从上下文获取菜单通用属性
+  // 从上下文获取菜单通用属性，用于子菜单继承和状态同步
   const menuCommonProps = getContext<MenuProps>(MENU_COMMON_PROPS);
 
   /**
    * 获取工具提示属性配置
-   * 支持字符串和完整配置对象两种形式
+   * 支持字符串快捷配置和完整TooltipProps对象配置两种形式
    * @param tooltip 工具提示配置
    * @returns 标准化的工具提示属性对象
    */
   const getTooltipProps = (tooltip: string | TooltipProps): TooltipProps => {
+    // 如果是字符串，转换为标准的工具提示配置对象
     return isString(tooltip) ? { dataTip: tooltip } : tooltip;
   };
 
@@ -174,23 +197,23 @@
   };
 </script>
 
-<!-- 菜单项容器 -->
+<!-- 菜单项根容器，使用li元素提供语义化的列表项结构 -->
 <li class={[tuc(menuItemVariants({ disabled, title: isTitle && !Boolean(subItem) })), className]} {...otherProps}>
   {#if children}
     <!-- 渲染自定义子内容插槽 -->
     {@render children()}
   {:else if toggleType === 1 || !Boolean(subItem) || !canToggle}
     {#if tooltip}
-      <!-- 带工具提示的菜单项 -->
+      <!-- 带工具提示的菜单项：使用ShTooltip组件包装，提供悬停提示功能 -->
       <ShTooltip {...getTooltipProps(tooltip)}>
         {@render renderItem()}
       </ShTooltip>
     {:else}
-      <!-- 普通菜单项 -->
+      <!-- 无工具提示的菜单项：直接渲染链接内容，减少DOM层级 -->
       {@render renderItem()}
     {/if}
     {#if subItem}
-      <!-- 渲染子菜单 -->
+      <!-- 子菜单渲染区域：根据折叠状态和切换模式渲染子菜单 -->
       {@const { class: className = '', ...otherSubItem } = subItem ?? {}}
       <ShMenu
         {...menuCommonProps}
@@ -205,7 +228,7 @@
       />
     {/if}
   {:else if toggleType === 2 && Boolean(subItem)}
-    <!-- 详情展开模式 - 使用HTML details元素 -->
+    <!-- 详情展开模式：使用HTML details元素提供原生的折叠展开功能 -->
     {#if collapsed}
       <details>
         <summary>{text}</summary>
