@@ -7,11 +7,15 @@ export class ThemeModel extends BaseModel {
   id!: string;
 
   @Index()
+  @PrimaryColumn()
   @Column()
   name!: string;
 
   @Column()
   variables!: Record<string, string>;
+
+  @Column()
+  active!: boolean;
 
   @Column()
   rowStatus!: number;

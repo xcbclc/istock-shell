@@ -23,4 +23,9 @@ export class ThemeController {
   async getList() {
     return await this.themeService.getList();
   }
+
+  @Method('getActiveTheme')
+  async getActiveTheme() {
+    return await this.themeService.getActiveTheme();
+  }
 }
