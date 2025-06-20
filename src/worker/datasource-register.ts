@@ -70,7 +70,7 @@ export const initDataSource = async () => {
     type: 'indexedDB',
     entities: indexedDataSourceModels,
     dbName: 'istock',
-    version: 8,
+    version: 9,
   });
   await indexedDataSource.initialize();
 

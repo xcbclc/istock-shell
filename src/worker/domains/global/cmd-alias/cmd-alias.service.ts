@@ -1,25 +1,20 @@
 import { Injectable, type QueryFilterArr, type ModelCreate } from '@istock-shell/iswork';
 import { CmdAliasModel } from './cmd-alias.model';
 
-export type TCmdAliasData = {
-  historyId: string;
-  cmd: string;
-  alias: string;
-  domainName: string;
-  description?: string;
-};
-
 @Injectable()
 export class CmdAliasService {
-  async createData(data: Omit<TCmdAliasData, 'historyId'>) {
-    const cmdAlias: ModelCreate<CmdAliasModel> = {
-      id: CmdAliasModel.generateId.nextId(),
-      createDate: new Date(),
-      updateDate: new Date(),
-      rowStatus: 1,
-      description: '',
-      ...data,
-    };
+  async createData(data: ModelCreate<CmdAliasModel>) {
+    const { id: _id, ...newData } = data;
+    const cmdAlias: ModelCreate<CmdAliasModel> = Object.assign(
+      {
+        id: CmdAliasModel.generateId.nextId(),
+        createDate: new Date(),
+        updateDate: new Date(),
+        rowStatus: 1,
+        description: '',
+      },
+      newData
+    );
     return await CmdAliasModel.createOne(cmdAlias);
   }
 

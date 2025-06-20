@@ -13,9 +13,6 @@ export class CmdAliasModel extends BaseModel {
   alias!: string;
 
   @Column()
-  domainName!: string;
-
-  @Column()
   description!: string;
 
   @Column()
