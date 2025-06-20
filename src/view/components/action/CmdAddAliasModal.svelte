@@ -5,19 +5,19 @@
 </script>
 
 <script lang="ts">
-  import { ShModal, ShForm, type ButtonProps } from '@istock-shell/ui';
+  import { ShModal, ShForm, shShowMessage, type ButtonProps } from '@istock-shell/ui';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
 
   const { windowId }: CmdAddAliasModalProps = $props();
 
-  const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
-  const { addCmdAlias } = ctx.domainStore;
+  const cmdWindow = CmdWindowsManager.cmdWindowsManager.getCmdWindow();
+  const { cmdAlias } = cmdWindow.store;
   const actions: Array<ButtonProps<'button'>> = [
     {
       text: '取消',
       size: 'sm',
       onclick: () => {
-        addCmdAlias.init();
+        cmdAlias.resetCmdAlias();
       },
     },
     {
@@ -25,17 +25,20 @@
       color: 'primary',
       size: 'sm',
       onclick: async () => {
-        await addCmdAlias.add();
+        if (!this.form.alias) {
+          return shShowMessage.error('请填写命令别名');
+        }
+        await cmdAlias.addCmdAlias();
       },
     },
   ];
 </script>
 
-<ShModal show={$addCmdAlias.modal.visible} title={$addCmdAlias.modal.title} {actions} maskClosable={true} size="md">
+<ShModal show={cmdAlias.modal.show} title={cmdAlias.modal.title} {actions} maskClosable={true} size="md">
   {#snippet contentRender()}
     <ShForm
-      bind:values={$addCmdAlias.form}
-      formItems={$addCmdAlias.formItems}
+      bind:values={cmdAlias.form}
+      formItems={cmdAlias.formItems}
       showReset={false}
       showSubmit={false}
       labelWidth="80px"

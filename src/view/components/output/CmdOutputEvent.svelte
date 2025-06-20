@@ -12,6 +12,6 @@
   const { windowId, data, eventAddress, source }: CmdOutputEventProps = $props();
   if (source === 'message' && eventAddress) {
     const ctx = CmdWindowsManager.getInstance().getCmdContext(windowId);
-    void ctx.event.emit(eventAddress, data);
+    void ctx.message.emit(eventAddress, data);
   }
 </script>

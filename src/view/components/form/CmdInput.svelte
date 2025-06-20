@@ -10,7 +10,7 @@
   import { CommandEditor, CommandEditorEventNames } from '@istock-shell/editor';
   import type { CommandEditorRecommendCmdEvent } from '@istock-shell/editor';
   import { CmdWindowsManager } from '@/window/cmd-windows-manager';
-  import { ECmdWindowContextMode } from '@/window/cmd-window-context';
+  import { CmdWindowMode } from '@/window/cmd-window-context';
   import { EInputRecommendType, type TInputRecommendItem } from '@/store/domains/global/input-recommend';
   import CmdRecommendList from '../recommend/CmdRecommendList.svelte';
 
@@ -23,7 +23,7 @@
   let disabled = false;
   let canContenteditable = $state(false);
   let tabindex: number;
-  if (ctx.mode !== ECmdWindowContextMode.example) {
+  if (ctx.mode !== CmdWindowMode.example) {
     tabindex = 0;
   }
 
@@ -56,7 +56,7 @@
   };
 
   $effect(() => {
-    canContenteditable = ctx.mode !== ECmdWindowContextMode.example && !disabled;
+    canContenteditable = ctx.mode !== CmdWindowMode.example && !disabled;
   });
 
   onMount(() => {
@@ -81,15 +81,15 @@
     });
     commandEditor.commandInput.addEventListener(CommandEditorEventNames.RecommendCmd, (event: Event) => {
       const { action, target } = (event as CommandEditorRecommendCmdEvent).detail.data;
-      void ctx.event.emit(`event://@${user.getUserInfo().username}.ui:${ctx.windowId}/cmd.recommend`, {
+      void ctx.message.emit(`event://@${user.getUserInfo().username}.ui:${ctx.windowId}/cmd.recommend`, {
         target,
         action,
       });
     });
   });
 
-  ctx.workerMessage.once('CmdWindowContext.initStoreDone', async () => {
-    if (ctx.mode === ECmdWindowContextMode.example) {
+  ctx.message.once('CmdWindowContext.initStoreDone', async () => {
+    if (ctx.mode === CmdWindowMode.example) {
       // demo演示逻辑
       let cmd = getQueryParam('cmd');
       if (cmd) {

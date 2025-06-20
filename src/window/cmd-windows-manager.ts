@@ -1,18 +1,25 @@
-import { EventEmitter, ScopeError } from '@istock-shell/util';
-import { CmdWindowContext, ECmdWindowContextMode } from './cmd-window-context';
+import { ScopeError } from '@istock-shell/util';
+import { CmdWindow } from './cmd-window.svelte';
+import { CmdWindowContext, CmdWindowMode } from './cmd-window-context';
 
 export type TCmdWindowsManagerOptions = {
-  mode?: ECmdWindowContextMode;
+  mode?: CmdWindowMode;
 };
 
 export class CmdWindowsManager {
   static cmdWindowsManager: CmdWindowsManager;
   readonly #ctxMap = new Map<number, CmdWindowContext>();
-  readonly #globalEvent: EventEmitter = new EventEmitter();
-  readonly #mode: ECmdWindowContextMode = ECmdWindowContextMode.normal;
+  readonly #mode: CmdWindowMode = CmdWindowMode.normal;
+  readonly #cmdWindow: CmdWindow;
+
+  constructor(options: TCmdWindowsManagerOptions) {
+    this.#cmdWindow = new CmdWindow(this, {
+      mode: options.mode,
+    });
+  }
 
   /**
-   * 获取实例
+   * 获取自身实例
    * @param options
    */
   static getInstance(options?: TCmdWindowsManagerOptions) {
@@ -22,8 +29,11 @@ export class CmdWindowsManager {
     return CmdWindowsManager.cmdWindowsManager;
   }
 
-  constructor(options: TCmdWindowsManagerOptions) {
-    if (options.mode) this.#mode = options.mode;
+  /**
+   * 获取当前页面CmdWindow对象实例
+   */
+  getCmdWindow(): CmdWindow {
+    return this.#cmdWindow;
   }
 
   /**
@@ -33,9 +43,8 @@ export class CmdWindowsManager {
   getCmdContext(windowId: number): CmdWindowContext {
     const ctx = this.#ctxMap.get(windowId);
     if (ctx) return ctx;
-    const newCtx: CmdWindowContext = new CmdWindowContext({
+    const newCtx: CmdWindowContext = new CmdWindowContext(this.getCmdWindow(), {
       windowId,
-      globalEvent: this.#globalEvent,
       mode: this.#mode,
     });
     this.#ctxMap.set(windowId, newCtx);

@@ -27,7 +27,7 @@
   let range: VirtualCoreRange | undefined = $state();
 
   const getCmdInpuTokens = (input: string) => {
-    const tokens = ctx.cmdParser.tokenizer.parse(input);
+    const tokens = ctx.cmdWindow.cmdParser.tokenizer.parse(input);
     const lasTokens = tokens[tokens.length - 1];
     if (lasTokens && [TokenType.lineN, TokenType.lineR].includes(lasTokens.type)) {
       tokens.pop();
@@ -84,7 +84,7 @@
   };
 
   const onSubmit = (messageId: string, payload: any) => {
-    ctx.sendMessageToChannel(messageId, payload);
+    ctx.message.sendMessageToChannel(messageId, payload);
   };
 
   document.addEventListener('keydown', onSectionKeydown);
