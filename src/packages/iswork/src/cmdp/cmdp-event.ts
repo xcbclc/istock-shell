@@ -54,7 +54,7 @@ export class CmdpEvent extends Cmdp {
    * ```
    */
   constructor(msgOrInfo: CmdpMessage | CmdpInfo) {
-    super(msgOrInfo, { protocol: 'event://' });
+    super(msgOrInfo, { protocol: 'event:' });
   }
 }
 // Event

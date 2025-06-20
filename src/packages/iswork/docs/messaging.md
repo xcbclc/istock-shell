@@ -38,8 +38,6 @@ cmdp://user@my-app.example.com:8080/UserController.getUser?id=123&include=posts#
 
   - `cmdp`：命令协议，用于业务操作
   - `event`：事件协议，用于事件通知
-  - `query`：查询协议，用于数据查询
-  - `stream`：流协议，用于数据流传输
 
 - **user**：用户标识（可选）
 
@@ -112,7 +110,7 @@ class AddressParser {
     const url = new URL(address);
 
     return {
-      protocol: url.protocol.slice(0, -1), // 移除末尾的':'
+      protocol: url.protocol, // 移除末尾的':'
       user: url.username || undefined,
       domain: url.hostname,
       port: url.port ? parseInt(url.port) : 8080,
@@ -134,9 +132,9 @@ class AddressParser {
   }
 
   static build(parts: Partial<ParsedAddress>): string {
-    const { protocol = 'cmdp', user, domain = 'localhost', port = 8080, path = '', query = {}, fragment } = parts;
+    const { protocol = 'cmdp:', user, domain = 'localhost', port = 8080, path = '', query = {}, fragment } = parts;
 
-    let address = `${protocol}://`;
+    let address = `${protocol}//`;
 
     if (user) {
       address += `${user}@`;

@@ -128,11 +128,11 @@ export type CmdpInfo = {
  * @example
  * ```typescript
  * const options: CmdpOptions = {
- *   protocol: 'https'
+ *   protocol: 'https:'
  * };
  * ```
  */
 export type CmdpOptions = {
-  /** 协议类型，如 'http' 或 'https' */
+  /** 协议类型，如 'http:' 或 'https:' */
   protocol?: string;
 };

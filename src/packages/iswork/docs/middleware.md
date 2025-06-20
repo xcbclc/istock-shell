@@ -1148,7 +1148,7 @@ class MiddlewareTestHelper {
         },
       },
       parsedAddress: {
-        protocol: 'cmdp',
+        protocol: 'cmdp:',
         domain: 'test.app',
         port: 8080,
         path: 'TestController.testMethod',

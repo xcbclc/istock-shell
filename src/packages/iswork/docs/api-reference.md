@@ -701,7 +701,7 @@ class AddressParser {
 const parsed = AddressParser.parse('cmdp://user@app.example.com:8080/UserController.getUser?id=123');
 console.log(parsed);
 // {
-//   protocol: 'cmdp',
+//   protocol: 'cmdp:',
 //   user: 'user',
 //   domain: 'app.example.com',
 //   port: 8080,
@@ -710,7 +710,7 @@ console.log(parsed);
 // }
 
 const address = AddressParser.build({
-  protocol: 'cmdp',
+  protocol: 'cmdp:',
   domain: 'app.example.com',
   path: 'UserController.createUser',
 });

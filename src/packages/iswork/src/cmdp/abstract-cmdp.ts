@@ -31,8 +31,8 @@ import type { CmdpAddressInfo, CmdpInfo, CmdpMeta, CmdpOptions, CmdpPayload } fr
  * ```
  */
 export abstract class AbstractCmdp {
-  /** CMDP 协议标识符，默认为 'cmdp://' */
-  protected protocol: string = 'cmdp://';
+  /** CMDP 协议标识符，默认为 'cmdp:' */
+  protected protocol: string = 'cmdp:';
 
   /** 用户名 */
   protected user!: string;
@@ -73,7 +73,7 @@ export abstract class AbstractCmdp {
    * @example
    * ```typescript
    * const info: CmdpAddressInfo = {
-   *   protocol: 'cmdp://',
+   *   protocol: 'cmdp:',
    *   user: 'admin',
    *   domains: ['example', 'com'],
    *   port: '8080',
@@ -86,7 +86,69 @@ export abstract class AbstractCmdp {
    */
   static getAddressByInfo(info: CmdpAddressInfo) {
     const { protocol, user, domains, port, controller, method } = info;
-    return `${protocol}@${user}.${domains.join('.')}:${port}/${controller}.${method}`;
+    return `${protocol}//@${user}.${domains.join('.')}:${port}/${controller}.${method}`;
+  }
+
+  /**
+   * 解析 CMDP 地址字符串
+   * @description 将 CMDP 地址字符串解析为结构化的地址信息对象
+   * @param address 要解析的 CMDP 地址字符串
+   * @returns 解析后的 CMDP 信息对象
+   * @static
+   * @example
+   * ```typescript
+   * const address = 'cmdp://@admin.example.com:8080/UserController.getUser';
+   * const info = AbstractCmdp.parse(address);
+   * // 返回:
+   * // {
+   * //   address: 'cmdp://@admin.example.com:8080/UserController.getUser',
+   * //   protocol: 'cmdp:',
+   * //   user: 'admin',
+   * //   domains: ['example', 'com'],
+   * //   port: '8080',
+   * //   controller: 'UserController',
+   * //   method: 'getUser'
+   * // }
+   * ```
+   */
+  static parseAddress(address: string): CmdpInfo {
+    const { protocol } = new URL(address);
+    const [mainAddress, command] = address.replace(protocol + '//', '').split('/');
+    const [controller, method] = command.split('.');
+    const [userOrDomain, port] = mainAddress.split(':');
+    const [user, domain] = userOrDomain.split('.');
+    return {
+      address,
+      protocol,
+      user: user.replace('@', ''),
+      domains: domain.split('.'),
+      port,
+      controller,
+      method,
+    };
+  }
+
+  /**
+   * 检查地址格式是否正确
+   * @description 验证传入的地址字符串是否符合 CMDP 协议格式
+   * @param address 待检查的地址字符串
+   * @param protocol 待检查的地址协议
+   * @returns 如果地址格式正确返回 true，否则返回 false
+   * @protected
+   * @example
+   * ```typescript
+   * // 正确格式示例: cmdp://@user.domain.subDomain:1/controllerName.methodName
+   * const isValid = AbstractCmdp.check('cmdp://@admin.example.com:8080/UserController.getUser');
+   * console.log(isValid); // true
+   *
+   * const isInvalid = AbstractCmdp.check('invalid-address');
+   * console.log(isInvalid); // false
+   * ```
+   */
+  static check(address: string, protocol: string = 'cmdp:'): boolean {
+    const pattern = `^${protocol}\/\/@\\w{1,20}(\\.[\\w]{1,20}){1,5}:[0-9]{1,4}\/[\\w]{1,20}\.[\\w]{1,20}$`;
+    const regExp = new RegExp(pattern);
+    return regExp.test(address);
   }
 
   /**
@@ -101,14 +163,14 @@ export abstract class AbstractCmdp {
    *
    * // 使用地址信息对象初始化
    * const info: CmdpAddressInfo = {
-   *   protocol: 'cmdp://',
+   *   protocol: 'cmdp:',
    *   user: 'admin',
    *   domains: ['example', 'com'],
    *   port: '8080',
    *   controller: 'UserController',
    *   method: 'getUser'
    * };
-   * const cmdp2 = new MyCmdp(info, { protocol: 'custom://' });
+   * const cmdp2 = new MyCmdp(info, { protocol: 'custom:' });
    * ```
    */
   constructor(addOrInfo: CmdpAddressInfo | string, options?: CmdpOptions) {
@@ -129,7 +191,7 @@ export abstract class AbstractCmdp {
    * ```typescript
    * const cmdp = new MyCmdp('cmdp://@admin.example.com:8080/UserController.getUser');
    * const info = cmdp.getInfo();
-   * console.log(info.protocol); // 'cmdp://'
+   * console.log(info.protocol); // 'cmdp:'
    * console.log(info.user); // 'admin'
    * console.log(info.domains); // ['example', 'com']
    * console.log(info.controller); // 'UserController'
@@ -169,13 +231,13 @@ export abstract class AbstractCmdp {
    * ```
    */
   protected initByAddress(address: string) {
-    if (!this.check(address)) {
+    if (!AbstractCmdp.check(address, this.protocol)) {
       throw new ScopeError(
         `iswork.${this.constructor.name}`,
         `校验地址失败，请传入正确的"${this.protocol}"协议地址，地址：${address}`
       );
     }
-    const info = this.parse(address);
+    const info = AbstractCmdp.parseAddress(address);
     this.address = address;
     this.setAddressInfo(info);
   }
@@ -188,7 +250,7 @@ export abstract class AbstractCmdp {
    * @example
    * ```typescript
    * const info: CmdpAddressInfo = {
-   *   protocol: 'cmdp://',
+   *   protocol: 'cmdp:',
    *   user: 'admin',
    *   domains: ['example', 'com'],
    *   port: '8080',
@@ -207,68 +269,6 @@ export abstract class AbstractCmdp {
     this.controller = controller;
     this.method = method;
     this.address = AbstractCmdp.getAddressByInfo(this.getInfo());
-  }
-
-  /**
-   * 检查地址格式是否正确
-   * @description 验证传入的地址字符串是否符合 CMDP 协议格式
-   * @param address 待检查的地址字符串
-   * @returns 如果地址格式正确返回 true，否则返回 false
-   * @protected
-   * @example
-   * ```typescript
-   * // 正确格式示例: cmdp://@user.domain.subDomain:1/controllerName.methodName
-   * const isValid = this.check('cmdp://@admin.example.com:8080/UserController.getUser');
-   * console.log(isValid); // true
-   *
-   * const isInvalid = this.check('invalid-address');
-   * console.log(isInvalid); // false
-   * ```
-   */
-  protected check(address: string): boolean {
-    const protocol = this.protocol.replace('//', '');
-
-    const pattern = `^${protocol}\/\/@\\w{1,20}(\\.[\\w]{1,20}){1,5}:[0-9]{1,4}\/[\\w]{1,20}\.[\\w]{1,20}$`;
-    const regExp = new RegExp(pattern);
-    return regExp.test(address);
-  }
-
-  /**
-   * 解析 CMDP 地址字符串
-   * @description 将 CMDP 地址字符串解析为结构化的地址信息对象
-   * @param address 要解析的 CMDP 地址字符串
-   * @returns 解析后的 CMDP 信息对象
-   * @protected
-   * @example
-   * ```typescript
-   * const address = 'cmdp://@admin.example.com:8080/UserController.getUser';
-   * const info = this.parse(address);
-   * // 返回:
-   * // {
-   * //   address: 'cmdp://@admin.example.com:8080/UserController.getUser',
-   * //   protocol: 'cmdp://',
-   * //   user: 'admin',
-   * //   domains: ['example', 'com'],
-   * //   port: '8080',
-   * //   controller: 'UserController',
-   * //   method: 'getUser'
-   * // }
-   * ```
-   */
-  protected parse(address: string): CmdpInfo {
-    const [mainAddress, command] = address.replace(this.protocol, '').split('/');
-    const [controller, method] = command.split('.');
-    const [userOrDomain, port] = mainAddress.split(':');
-    const [user, domain] = userOrDomain.split('.');
-    return {
-      address,
-      protocol: this.protocol,
-      user: user.replace('@', ''),
-      domains: domain.split('.'),
-      port,
-      controller,
-      method,
-    };
   }
 
   /**

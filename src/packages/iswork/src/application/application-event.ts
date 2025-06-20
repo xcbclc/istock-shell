@@ -72,7 +72,7 @@ export class ApplicationEvent {
    */
   protected sendAppMessage(controller: string, method: string, payload: CmdpPayload = true) {
     const cmdpInfo: CmdpAddressInfo = {
-      protocol: 'event://',
+      protocol: 'event:',
       user: 'istock',
       domains: ['application'],
       port: '0',

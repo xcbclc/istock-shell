@@ -241,7 +241,7 @@ interface CmdpMessage {
 
 ### 地址格式说明
 
-- `protocol`：协议类型，通常为 `cmdp` 或 `event`
+- `protocol`：协议类型，通常为 `cmdp:` 或 `event:`
 - `user`：用户标识，通常为控制器别名
 - `domain`：域名，对应应用的 domainPath
 - `port`：端口号，通常为 8080
