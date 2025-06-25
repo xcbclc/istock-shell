@@ -394,7 +394,12 @@ export class CmdParser {
    * @public
    */
   public addCommand(command: Command): this {
-    this.#commands.push(command);
+    const index = this.#commands.findIndex((item) => item.cmd === command.cmd);
+    if (index === -1) {
+      this.#commands.push(command);
+    } else {
+      this.#commands.splice(index, 1, command);
+    }
     return this;
   }
 
