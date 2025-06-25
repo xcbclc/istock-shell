@@ -22,7 +22,7 @@ import { useData } from 'vitepress';
 const { frontmatter: fm } = useData();
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .video-demo {
   padding: 24px 24px 0;
 }

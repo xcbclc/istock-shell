@@ -4,8 +4,8 @@ layout: home
 hero:
   name: iStock Shell
   version: 开发版v0.1
-  text: 一个金融数据查询终端
-  tagline: 简单、高效、灵活，并可轻松定制。
+  text: 下一代金融数据查询终端
+  tagline: 以AI智能分析为核心的专业金融数据分析平台，简单、高效、灵活，并可轻松定制。
   image:
     src: ./static/效果图.jpg
     alt: iStock Shell
@@ -14,11 +14,11 @@ hero:
       text: 快速上手
       link: /use/quick-start/easy-to-use.html
     - theme: alt
-      text: 演示
+      text: 在线演示
       link: https://istock.red/shell
     - theme: alt
-      text: Gitee
-      link: https://gitee.com/xcbclc/istock-shell
+      text: GitHub
+      link: https://github.com/xcbclc/istock-shell
 
 video:
   src: https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4
@@ -37,4 +37,8 @@ features:
     details: 提供丰富的命令参数选择，满足您对数据展示的多样需求；支持使用管道命令，为您的数据查询提供无限可能。
     icon:
       src: ./static/灵活.svg
+  - title: 智能分析
+    details: 集成AI智能分析引擎，提供基于大语言模型的数据自动解读、投资策略建议和风险评估；支持自然语言查询，让数据分析更加智能化和个性化。
+    icon:
+      src: ./static/智能.svg
 ---

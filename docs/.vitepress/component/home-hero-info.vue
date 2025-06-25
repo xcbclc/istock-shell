@@ -21,7 +21,7 @@ import { useData } from 'vitepress';
 const { frontmatter: fm } = useData();
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .badge {
   vertical-align: top;
 }

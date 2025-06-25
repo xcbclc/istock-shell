@@ -29,7 +29,7 @@ const style = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style>
 iframe.istock-shell-demo {
   width: 100%;
   height: 480px;

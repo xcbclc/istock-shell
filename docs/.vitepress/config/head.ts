@@ -1,7 +1,11 @@
 import { loadEnv, type HeadConfig } from 'vitepress';
 
 const env = loadEnv('', process.cwd());
-let head: HeadConfig[] = [['link', { rel: 'icon', href: '/favicon.ico' }]];
+let head: HeadConfig[] = [
+  ['link', { rel: 'icon', href: '/favicon.ico' }],
+  // 主题初始化脚本 - 防止主题闪烁
+  ['script', { src: '/theme-init.js' }],
+];
 
 if (env.VITE_SITE_BAIDU_ANALYSIS === 'true') {
   head = [
