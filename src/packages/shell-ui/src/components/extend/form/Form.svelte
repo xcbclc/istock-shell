@@ -1,6 +1,11 @@
 <!--
 @component
-表单组件，用于构建完整的表单界面，管理多个表单项。提供以下功能：
+ShForm 表单组件
+
+一个功能完整的表单组件，用于构建复杂的表单界面，管理多个表单项。
+基于原生 HTML form 元素构建，提供完整的类型安全和响应式支持。
+
+功能特性：
 - 支持多种表单布局（水平、垂直）
 - 支持栅格布局（1-5列）
 - 支持表单验证（必填、长度、范围、正则、自定义验证等）
@@ -10,11 +15,16 @@
 - 支持表单项的显示/隐藏控制
 - 支持表单验证状态管理
 - 支持表单值变更和提交事件回调
+- 继承所有原生 form 元素的属性和事件
+- 完整的 TypeScript 类型安全
+- 响应式设计支持
 
-用法示例:
-```html
-<Form
-  formItems={[
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShForm } from '@istock-shell/ui';
+
+  const formItems = [
     {
       name: 'username',
       label: '用户名',
@@ -40,11 +50,48 @@
         }
       }
     }
-  ]}
+  ];
+
+  let formValues = {};
+
+  function handleSubmit(values) {
+    console.log('表单提交:', values);
+  }
+
+  function handleValueChange(name, value) {
+    console.log('字段变更:', name, value);
+  }
+</script>
+
+<p>基础表单</p>
+<ShForm
+  {formItems}
   bind:values={formValues}
   onSubmit={handleSubmit}
   layout="vertical"
   cols={2}
+/>
+
+<p>水平布局表单</p>
+<ShForm
+  {formItems}
+  bind:values={formValues}
+  onSubmit={handleSubmit}
+  onChangeValue={handleValueChange}
+  layout="horizontal"
+  labelWidth="100px"
+  buttonPlacement="center"
+/>
+
+<p>自定义按钮表单</p>
+<ShForm
+  {formItems}
+  bind:values={formValues}
+  onSubmit={handleSubmit}
+  submitText="保存"
+  resetText="清空"
+  showReset={true}
+  initValidate={true}
 />
 ```
 -->
@@ -69,13 +116,26 @@
   const formVariantConfig = FormVariantConfig;
   const formButtonVariantConfig = FormButtonVariantConfig;
 
-  // 按钮位置类型
+  /**
+   * 表单按钮位置类型（从主题配置中动态提取）
+   * 支持的位置包括：start（开始）、center（居中）、end（结束）等
+   * @typedef {keyof FormButtonVariantConfig['variants']['placement']} FormButtonPlacement
+   */
   export type FormButtonPlacement = keyof (typeof FormButtonVariantConfig)['variants']['placement'];
 
-  // 表单列数类型
+  /**
+   * 表单列数类型（从主题配置中动态提取）
+   * 支持的列数包括：1、2、3、4、5等
+   * @typedef {keyof FormVariantConfig['variants']['cols']} FormCols
+   */
   export type FormCols = keyof (typeof formVariantConfig)['variants']['cols'];
 
-  // 表单项配置接口，继承自FormItemProps但排除touched属性
+  /**
+   * 表单项配置接口
+   * 继承自FormItemProps但排除touched属性，因为touched状态由表单组件内部管理
+   * @interface FormItemConfig
+   * @extends Omit<FormItemProps, 'touched'>
+   */
   export interface FormItemConfig extends Omit<FormItemProps, 'touched'> {}
 
   /**
@@ -125,26 +185,47 @@
 
 <script lang="ts">
   let {
+    /** 表单字段配置数组，定义表单中的所有字段 */
     formItems = [],
+    /** 表单值对象，支持双向绑定，存储所有字段的值 */
     values = $bindable({}),
+    /** 表单值变更回调函数，当任意字段值变更时触发 */
     onChangeValues,
+    /** 单个字段值变更回调函数，当特定字段值变更时触发 */
     onChangeValue,
+    /** 表单提交回调函数，表单验证通过后触发 */
     onSubmit,
+    /** 表单布局方式，控制标签和字段的排列方式 */
     layout = 'horizontal',
+    /** 表单列数，控制表单的栅格布局 */
     cols = 1,
+    /** 标签宽度，统一设置所有标签的宽度 */
     labelWidth = '120px',
+    /** 标签位置，统一设置所有标签的对齐方式 */
     labelPlacement = 'end',
+    /** 提交按钮文本 */
     submitText = '提交',
+    /** 重置按钮文本 */
     resetText = '重置',
+    /** 按钮位置，控制按钮区域的对齐方式 */
     buttonPlacement = 'end',
+    /** 是否显示重置按钮 */
     showReset = true,
+    /** 是否显示提交按钮 */
     showSubmit = true,
+    /** 表单默认颜色主题 */
     color,
+    /** 表单默认尺寸 */
     size = 'md',
+    /** 表单默认变体 */
     variant,
+    /** 是否在初始化时进行验证 */
     initValidate = false,
+    /** 自定义CSS类名 */
     class: className = '',
+    /** 子内容插槽，用于完全自定义表单内容 */
     children,
+    /** 其他原生form元素属性 */
     ...otherProps
   }: FormProps = $props();
 
@@ -166,17 +247,18 @@
     },
   });
 
-  // 表单错误信息记录
+  // 表单状态管理
+  /** 表单错误信息记录，键为字段名，值为错误消息 */
   const formErrors: Record<string, string> = $state({});
-  // 表单字段触碰状态记录
+  /** 表单字段触碰状态记录，键为字段名，值为是否已触碰 */
   const formBlurs: Record<string, boolean> = $state({});
-  // 表单整体验证状态
+  /** 表单整体验证状态，true表示验证通过 */
   let formValidState: boolean = $state(true);
-  // 表单初始值记录
+  /** 表单初始值记录，用于重置表单时恢复初始状态 */
   let initialValues: Record<string, any> = {};
-  // 表单项属性记录
+  /** 表单项属性记录，缓存每个字段的属性对象 */
   const formItemPropRecord: Record<string, FormItemProps> = {};
-  // 表单项隐藏状态记录
+  /** 表单项隐藏状态记录，键为字段名，值为是否隐藏 */
   const formItemHiddenRecord: Record<string, boolean> = $state({});
 
   /**
@@ -186,6 +268,7 @@
   onMount(() => {
     const defaultFormValues = formItems.reduce<Record<string, any>>((acc, formItem) => {
       const { field = {}, name } = formItem;
+      // 优先级：字段默认值 > 传入的values > null
       if (field.defaultValue !== undefined) {
         acc[name] = field.defaultValue;
       } else if (values[name] !== undefined) {
@@ -196,18 +279,29 @@
       return acc;
     }, {});
 
+    // 保存初始值的深拷贝，用于表单重置
     initialValues = clone(defaultFormValues);
 
+    // 如果启用初始验证且存在表单项，则进行初始验证
     if (initValidate && formItems.length > 0) {
       validateForm();
     }
   });
 
+  /**
+   * 响应式更新表单项属性
+   * 当formItems变化时，重新生成每个表单项的属性对象
+   */
   $effect(() => {
     formItems.forEach((formItem) => {
       getFormItemProps(clone(formItem));
     });
   });
+
+  /**
+   * 响应式更新表单项隐藏状态
+   * 当formItems或values变化时，重新计算每个表单项的隐藏状态
+   */
   $effect(() => {
     formItems.forEach((formItem) => {
       formItemHiddenRecord[formItem.name] = isFieldHidden(formItem, values);
@@ -215,9 +309,10 @@
   });
 
   /**
-   * 判断字段是否隐藏
-   * @param formItem 表单项配置
-   * @returns 是否隐藏
+   * 判断表单项是否应该隐藏
+   * @param formItem - 表单项配置对象
+   * @param values - 当前表单值对象
+   * @returns 是否隐藏该表单项
    */
   const isFieldHidden = (formItem: FormItemConfig, values): boolean => {
     const { field = {} } = formItem;

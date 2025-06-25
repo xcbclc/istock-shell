@@ -1,21 +1,61 @@
 <!--
 @component
-日历通知提示组件，用于显示日历相关的提示信息。
+ShICalendarNotify 日历通知提示组件
 
-特点：
-- 支持延迟显示和自动隐藏
-- 可自定义提示类型和样式
-- 基于ShAlert组件实现
+一个专门用于显示日历相关提示信息的通知组件，支持智能的显示控制和自动隐藏功能。
+基于 ShAlert 组件构建，提供完整的类型安全和响应式支持。
+
+功能特性：
+- 支持延迟显示，可设置显示前的等待时间
+- 支持自动隐藏，可设置显示持续时间
+- 可自定义提示类型和样式（info、success、warning、error）
+- 智能的定时器管理，避免内存泄漏
+- 继承所有 ShAlert 组件的属性和功能
+- 完整的 TypeScript 类型安全
 - 响应式状态管理
 
-用法示例:
-```html
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShICalendarNotify } from '@istock-shell/ui';
+
+  let showNotify = false;
+  let notifyTitle = '';
+
+  function showSuccessNotify() {
+    notifyTitle = '操作成功';
+    showNotify = true;
+  }
+
+  function showErrorNotify() {
+    notifyTitle = '操作失败';
+    showNotify = true;
+  }
+</script>
+
+<p>基础通知</p>
 <ShICalendarNotify
-  show={true}
+  bind:show={showNotify}
+  title={notifyTitle}
+  type="info"
+/>
+
+<p>延迟显示的成功通知</p>
+<ShICalendarNotify
+  bind:show={showNotify}
   title="操作成功"
   type="success"
   duration={3}
   delay={0.5}
+/>
+
+<p>自动隐藏的警告通知</p>
+<ShICalendarNotify
+  bind:show={showNotify}
+  title="请注意"
+  type="warning"
+  duration={5}
+  soft={true}
 />
 ```
 -->

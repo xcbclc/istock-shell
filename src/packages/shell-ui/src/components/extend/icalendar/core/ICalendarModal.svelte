@@ -1,22 +1,63 @@
 <!--
 @component
-日历事件详情模态框组件，用于展示日历事件或待办事项的详细信息。支持以下功能：
+ShICalendarModal 日历事件详情模态框组件
+
+一个专门用于展示日历事件或待办事项详细信息的模态框组件。
+基于 ShModal 组件构建，提供完整的类型安全和响应式支持。
+
+功能特性：
 - 展示事件或待办事项的详细信息，包括标题、时间、地点、描述等
-- 区分事件和待办事项的不同字段展示
-- 支持优先级、状态的可视化展示
+- 智能区分事件（VEVENT）和待办事项（VTODO）的不同字段展示
+- 支持优先级、状态的可视化展示，使用不同颜色标识
 - 展示参与者、提醒、分类等扩展信息
+- 支持时间格式化和持续时间计算
+- 继承所有 ShModal 组件的属性和功能
+- 完整的 TypeScript 类型安全
 - 响应式布局，适配不同屏幕尺寸
 
-用法示例:
-```html
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShICalendarModal } from '@istock-shell/ui';
+
+  let showModal = false;
+  
+  const eventData = {
+    summary: '项目会议',
+    dtStart: '2024-01-01T10:00:00',
+    dtEnd: '2024-01-01T11:00:00',
+    description: '讨论项目进度和下一步计划',
+    location: '会议室A',
+    priority: 5,
+    status: 'CONFIRMED'
+  };
+
+  const todoData = {
+    summary: '完成报告',
+    dtStart: '2024-01-01',
+    due: '2024-01-03',
+    description: '完成月度工作报告',
+    priority: 7,
+    status: 'IN-PROCESS'
+  };
+
+  function openEventModal() {
+    showModal = true;
+  }
+</script>
+
+<p>事件详情模态框</p>
 <ShICalendarModal
   bind:show={showModal}
-  data={{
-    summary: '会议',
-    dtStart: '2024-01-01 10:00',
-    description: '项目讨论会议',
-    priority: 5
-  }}
+  data={eventData}
+/>
+
+<p>待办事项详情模态框</p>
+<ShICalendarModal
+  bind:show={showModal}
+  data={todoData}
+  closeButton={true}
+  maskClosable={true}
 />
 ```
 -->
@@ -25,7 +66,13 @@
   import { ShModal, type ModalProps } from '../../../index';
   import type { ICalendarEventOrTodo } from './ICalendarType';
 
+  /**
+   * 日历事件详情模态框组件属性接口
+   * 继承所有 ShModal 组件的属性，并扩展日历事件展示特有的功能属性
+   * @typedef {ModalProps & ICalendarModalPropsExtension} ICalendarModalProps
+   */
   export interface ICalendarModalProps extends ModalProps {
+    /** 要展示的日历事件或待办事项数据，支持事件（VEVENT）和待办（VTODO）两种类型 */
     data?: ICalendarEventOrTodo;
   }
 </script>

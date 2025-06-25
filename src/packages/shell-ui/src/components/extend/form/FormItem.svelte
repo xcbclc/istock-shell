@@ -1,17 +1,41 @@
 <!--
 @component
-表单项组件，用于构建表单的基本单元，支持各种输入控件类型。提供以下功能：
-- 支持多种输入控件类型（输入框、选择框、复选框、单选框、文本域、开关等）
-- 支持标签位置自定义（左侧、顶部）
+ShFormItem 表单项组件
+
+一个功能完整的表单项组件，用于渲染单个表单字段。
+基于动态组件加载机制，支持多种输入控件类型和完整的验证功能。
+
+功能特性：
+- 支持多种输入控件类型（input、textarea、select、checkbox、radio等）
+- 支持标签位置自定义（左侧、右侧、顶部、底部）
 - 支持表单验证（必填、长度、范围、正则、自定义验证等）
 - 支持错误信息展示
-- 支持字段描述信息
 - 支持禁用和只读状态
 - 支持自定义样式和布局
+- 支持字段描述信息
+- 支持栅格布局
+- 动态组件加载和缓存
+- 完整的 TypeScript 类型安全
+- 响应式设计支持
 
-用法示例:
-```html
-<FormItem
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShFormItem } from '@istock-shell/ui';
+
+  let username = '';
+
+  function handleFieldChange(name, value) {
+    console.log('字段变更:', name, value);
+  }
+
+  function handleFieldBlur(name) {
+    console.log('字段失焦:', name);
+  }
+</script>
+
+<p>基础输入框</p>
+<ShFormItem
   name="username"
   label="用户名"
   field={{
@@ -23,6 +47,46 @@
       maxLength: 20
     }
   }}
+  bind:value={username}
+  onFieldChange={handleFieldChange}
+  onFieldBlur={handleFieldBlur}
+  layout="horizontal"
+  size="md"
+/>
+
+<p>垂直布局文本域</p>
+<ShFormItem
+  name="description"
+  label="描述"
+  field={{
+    type: 'textarea',
+    placeholder: '请输入描述信息',
+    rows: 4
+  }}
+  layout="vertical"
+  description="请详细描述相关信息"
+/>
+
+<p>自定义验证</p>
+<ShFormItem
+  name="email"
+  label="邮箱"
+  field={{
+    type: 'input',
+    inputType: 'email',
+    validator: {
+      required: true,
+      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      custom: (value) => {
+        if (!value.endsWith('.com')) {
+          return '邮箱必须以.com结尾';
+        }
+        return true;
+      }
+    }
+  }}
+  color="primary"
+  labelPlacement="top"
 />
 ```
 -->
@@ -158,22 +222,36 @@
   import { isUndefined, tuc } from '@istock-shell/util';
   import { ShErrorInfo } from '../../index';
 
-  // 组件属性解构赋值，设置默认值
   const {
+    /** 字段名称，用于标识表单项 */
     name,
+    /** 标签文本，显示在表单项前的标签 */
     label,
+    /** 标签宽度，自定义标签的宽度 */
     labelWidth,
+    /** 标签位置，控制标签相对于字段的位置 */
     labelPlacement,
+    /** 表单项布局方式，控制标签和字段的排列方式 */
     layout = 'vertical',
+    /** 是否已触碰，用于控制验证错误的显示时机 */
     touched = false,
+    /** 字段配置，定义表单项的类型和属性 */
     field,
+    /** 是否必填，覆盖字段配置中的必填设置 */
     required = false,
+    /** 颜色主题 */
     color,
+    /** 尺寸大小 */
     size,
+    /** 变体样式 */
     variant,
+    /** 栅格列数，控制表单项占用的列数 */
     cols,
+    /** 自定义CSS类名 */
     class: className = '',
+    /** 子内容插槽，用于自定义表单项内容 */
     children,
+    /** 其他HTML属性 */
     ...otherProps
   }: FormItemProps = $props();
 
@@ -185,6 +263,10 @@
 
   const formItemFieldComponentVariants = tv(formItemFieldComponentVariantConfig);
 
+  /**
+   * 字段属性配置
+   * 根据字段配置和组件属性生成最终的字段属性对象
+   */
   const fieldProps = $derived.by(() => {
     const {
       type,

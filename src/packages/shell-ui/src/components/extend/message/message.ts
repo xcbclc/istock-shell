@@ -1,4 +1,4 @@
-import { tick, mount, unmount } from 'svelte';
+import { mount, unmount } from 'svelte';
 import { isString } from '@istock-shell/util';
 import type { AlertProps } from '../../index';
 import Message from './Message.svelte';
@@ -20,17 +20,19 @@ function createContainer() {
   if (!messageContainer) {
     messageContainer = document.createElement('div');
     messageContainer.id = 'sh-message-container';
+    messageContainer.setAttribute('popover', '');
     document.body.appendChild(messageContainer);
   }
+  messageContainer.showPopover();
   return messageContainer;
 }
 
 /**
  * 显示消息的核心处理函数
  * @param options 消息配置项或消息字符串
- * @returns Promise<SvelteComponent> 返回消息实例
+ * @returns SvelteComponent 返回消息实例
  */
-export async function showMessageHandler(options: MessageOptions | string) {
+export function showMessageHandler(options: MessageOptions | string) {
   const container = createContainer();
 
   // 统一配置格式：字符串转换为对象
@@ -50,12 +52,11 @@ export async function showMessageHandler(options: MessageOptions | string) {
       },
       // 关闭处理函数
       onClose: async () => {
+        container.hidePopover();
         await unmount(messageInstance, { outro: true });
       },
     },
   });
-
-  await tick();
   return messageInstance;
 }
 
@@ -69,28 +70,28 @@ export async function showMessageHandler(options: MessageOptions | string) {
  */
 export const showMessage = {
   // 普通提示
-  alert: async (message: string, options?: Partial<MessageOptions>) =>
-    await showMessageHandler({
+  alert: (message: string, options?: Partial<MessageOptions>) =>
+    showMessageHandler({
       ...options,
       message,
     }),
   // 信息提示
-  info: async (message: string, options?: Partial<MessageOptions>) =>
-    await showMessageHandler({
+  info: (message: string, options?: Partial<MessageOptions>) =>
+    showMessageHandler({
       ...options,
       message,
       type: 'info',
     }),
 
   // 成功提示
-  success: async (message: string, options?: Partial<MessageOptions>) =>
-    await showMessageHandler({ ...options, message, type: 'success' }),
+  success: (message: string, options?: Partial<MessageOptions>) =>
+    showMessageHandler({ ...options, message, type: 'success' }),
 
   // 警告提示
-  warning: async (message: string, options?: Partial<MessageOptions>) =>
-    await showMessageHandler({ ...options, message, type: 'warning' }),
+  warning: (message: string, options?: Partial<MessageOptions>) =>
+    showMessageHandler({ ...options, message, type: 'warning' }),
 
   // 错误提示
-  error: async (message: string, options?: Partial<MessageOptions>) =>
-    await showMessageHandler({ ...options, message, type: 'error' }),
+  error: (message: string, options?: Partial<MessageOptions>) =>
+    showMessageHandler({ ...options, message, type: 'error' }),
 };

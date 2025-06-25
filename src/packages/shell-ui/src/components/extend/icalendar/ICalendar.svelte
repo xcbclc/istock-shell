@@ -1,27 +1,92 @@
 <!--
 @component
-日历组件，集成了日历的各个功能模块，提供完整的日历应用界面。支持以下功能：
-- 日、周、月三种视图模式切换
-- 事件和待办事项的展示和管理
-- 日期选择和导航（前一个/后一个/今日）
-- 事件过滤功能
-- 通知提醒功能
-- 事件详情查看
+ShICalendar 日历组件
 
-用法示例:
-```html
+一个功能完整的日历应用组件，集成了日历的各个功能模块，提供完整的日历管理界面。
+基于多个子组件构建，包括日期选择、视图切换、事件展示、过滤和通知等功能。
+
+功能特性：
+- 支持日、周、月三种视图模式切换
+- 完整的事件和待办事项展示和管理
+- 智能的日期选择和导航（前一个/后一个/今日）
+- 强大的事件过滤功能，支持多条件筛选
+- 集成通知提醒功能，支持操作反馈
+- 事件详情查看，支持模态框展示
+- 支持仅查看模式，禁用交互功能
+- 继承所有原生 div 元素的属性和事件
+- 完整的 TypeScript 类型安全
+- 响应式设计，适配不同屏幕尺寸
+
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShICalendar } from '@istock-shell/ui';
+
+  let currentDate = '2024-01-01';
+  let currentView = 'week';
+  let filterValue = {};
+  let notifyShow = false;
+
+  const events = [
+    {
+      summary: '项目会议',
+      dtStart: '2024-01-01T10:00:00',
+      dtEnd: '2024-01-01T11:00:00',
+      description: '讨论项目进度',
+      location: '会议室A',
+      priority: 5
+    }
+  ];
+
+  const todos = [
+    {
+      summary: '完成报告',
+      dtStart: '2024-01-01',
+      due: '2024-01-03',
+      priority: 7,
+      status: 'IN-PROCESS'
+    }
+  ];
+
+  const filters = [
+    {
+      type: 'type',
+      title: '类型',
+      multiple: false,
+      options: [
+        { label: '全部', value: '' },
+        { label: '事件', value: 'event' },
+        { label: '待办', value: 'todo' }
+      ]
+    }
+  ];
+</script>
+
+<p>基础日历</p>
 <ShICalendar
-  events={[
-    { summary: '会议', dtStart: '2024-01-01 10:00', description: '项目讨论' }
-  ]}
-  todos={[
-    { summary: '任务', dtStart: '2024-01-01', priority: 5 }
-  ]}
-  currentView="week"
-  filters={[
-    { text: '全部', value: {} },
-    { text: '事件', value: { type: 'event' } }
-  ]}
+  events={events}
+  todos={todos}
+  bind:currentDate
+  bind:currentView
+/>
+
+<p>带过滤功能的日历</p>
+<ShICalendar
+  events={events}
+  todos={todos}
+  bind:currentDate
+  bind:currentView
+  bind:filterValue
+  filters={filters}
+/>
+
+<p>仅查看模式的日历</p>
+<ShICalendar
+  events={events}
+  todos={todos}
+  currentDate={currentDate}
+  currentView={currentView}
+  onlyView={true}
 />
 ```
 -->
@@ -44,16 +109,30 @@
     type ICalendarEventOrTodo,
   } from './core/ICalendarType';
 
+  /**
+   * 日历组件属性接口
+   * 继承所有原生 div 元素的 HTML 属性，并扩展日历应用特有的功能属性
+   * @typedef {HTMLAttributes<HTMLDivElement> & ICalendarPropsExtension} ICalendarProps
+   */
   interface ICalendarProps extends HTMLAttributes<HTMLDivElement> {
-    events?: ICalendarVEvent[]; // 日历事件列表
-    todos?: ICalendarVTodo[]; // 待办事项列表
-    currentDate?: string; // 当前选中日期，格式：YYYY-MM-DD
-    currentView?: ICalendarViewType; // 当前视图类型：日、周、月
-    filterValue?: ICalendarFilterValue; // 过滤条件
-    filters?: ICalendarFilterItem[]; // 过滤选项列表
-    notify?: Omit<ICalendarNotifyProps, 'show'>; // 通知配置
-    notifyShow?: boolean; // 是否显示通知
-    onlyView?: boolean; // 仅展示 无动作交互
+    /** 日历事件列表，包含会议、活动等事件数据 */
+    events?: ICalendarVEvent[];
+    /** 待办事项列表，包含任务、提醒等待办数据 */
+    todos?: ICalendarVTodo[];
+    /** 当前选中的日期，格式为 YYYY-MM-DD @default 今天 */
+    currentDate?: string;
+    /** 当前视图类型，支持日（day）、周（week）、月（month）三种模式 @default 'week' */
+    currentView?: ICalendarViewType;
+    /** 过滤条件配置，用于筛选显示特定类型的事件或待办事项 @default {} */
+    filterValue?: ICalendarFilterValue;
+    /** 过滤选项列表，定义可用的筛选条件和选项 */
+    filters?: ICalendarFilterItem[];
+    /** 通知组件配置，用于显示操作反馈和提醒信息（不包含show属性） */
+    notify?: Omit<ICalendarNotifyProps, 'show'>;
+    /** 是否显示通知提示 @default false */
+    notifyShow?: boolean;
+    /** 仅查看模式，禁用所有交互功能，只展示日历内容 @default false */
+    onlyView?: boolean;
   }
 </script>
 

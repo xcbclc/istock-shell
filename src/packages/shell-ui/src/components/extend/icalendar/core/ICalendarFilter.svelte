@@ -1,33 +1,70 @@
 <!--
 @component
-日历筛选组件，提供灵活的日历事件和待办事项筛选功能。支持以下特性：
-- 日期范围筛选
-- 多条件组合筛选（AND/OR逻辑）
-- 支持单选和多选筛选项
+ShICalendarFilter 日历筛选组件
+
+一个功能强大的日历事件和待办事项筛选组件，提供灵活的多条件筛选功能。
+基于 ShButton、ShTooltip、ShInput、ShRadio 等组件构建，提供完整的类型安全和响应式支持。
+
+功能特性：
+- 支持日期范围筛选（开始日期和结束日期）
+- 多条件组合筛选，支持 AND/OR 逻辑运算
+- 支持单选和多选筛选项配置
+- 提供筛选逻辑选择（满足任一条件或所有条件）
+- 继承所有原生 div 元素的属性和事件
+- 完整的 TypeScript 类型安全
 - 响应式布局和交互
 - 实时预览和应用筛选结果
 
-用法示例:
-```html
-<ShICalendarFilter
-  filterValue={{
-    startDate: "2024-01-01",
-    endDate: "2024-01-31",
-    logic: "OR"
-  }}
-  filters={[
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShICalendarFilter } from '@istock-shell/ui';
+
+  let filterValue = {
+    startDate: '2024-01-01',
+    endDate: '2024-01-31',
+    logic: 'OR'
+  };
+
+  const filters = [
     {
-      type: "priority",
-      title: "优先级",
+      type: 'priority',
+      title: '优先级',
       multiple: true,
       options: [
-        { label: "高", value: "high" },
-        { label: "中", value: "medium" },
-        { label: "低", value: "low" }
+        { label: '高', value: 'high' },
+        { label: '中', value: 'medium' },
+        { label: '低', value: 'low' }
+      ]
+    },
+    {
+      type: 'status',
+      title: '状态',
+      multiple: false,
+      options: [
+        { label: '进行中', value: 'in-progress' },
+        { label: '已完成', value: 'completed' }
       ]
     }
-  ]}
-  onChangeFilterValue={(value) => console.log('筛选条件变更:', value)}
+  ];
+
+  function handleFilterChange(value) {
+    console.log('筛选条件变更:', value);
+    filterValue = value;
+  }
+</script>
+
+<p>基础筛选器</p>
+<ShICalendarFilter
+  bind:filterValue
+  filters={filters}
+/>
+
+<p>带回调的筛选器</p>
+<ShICalendarFilter
+  bind:filterValue
+  filters={filters}
+  onChangeFilterValue={handleFilterChange}
 />
 ```
 -->

@@ -1,24 +1,76 @@
 <!--
 @component
-日历视图组件，用于展示和管理日历事件和待办事项。支持以下功能：
-- 日、周、月三种视图模式切换
-- 事件和待办事项的展示和管理
-- 支持事件过滤和优先级显示
-- 响应式布局和交互
-- 自动展开/收起超出显示限制的事件
+ShICalendarView 日历视图组件
 
-用法示例:
-```html
+一个功能完整的日历视图组件，用于展示和管理日历事件和待办事项。
+基于 dayjs 和多个核心工具函数构建，提供完整的类型安全和响应式支持。
+
+功能特性：
+- 支持日、周、月三种视图模式切换
+- 智能展示事件和待办事项，支持时间槽分组
+- 支持事件过滤和优先级可视化显示
+- 自动展开/收起超出显示限制的事件
+- 支持点击日期和选中事件的回调处理
+- 智能的时间格式化和优先级颜色映射
+- 继承所有原生 div 元素的属性和事件
+- 完整的 TypeScript 类型安全
+- 响应式布局和交互
+
+示例用法：
+```svelte
+<script lang="ts">
+  import { ShICalendarView } from '@istock-shell/ui';
+
+  let currentView = 'week';
+  let currentDate = '2024-01-01';
+
+  const calendarData = {
+    events: [
+      {
+        summary: '项目会议',
+        dtStart: '2024-01-01T10:00:00',
+        dtEnd: '2024-01-01T11:00:00',
+        priority: 5
+      }
+    ],
+    todos: [
+      {
+        summary: '完成报告',
+        dtStart: '2024-01-01',
+        priority: 7
+      }
+    ]
+  };
+
+  const filterValue = { type: 'event' };
+
+  function handleDayClick(day) {
+    console.log('点击日期:', day);
+    currentDate = day;
+  }
+
+  function handleItemSelected(item) {
+    console.log('选中项:', item);
+  }
+</script>
+
+<p>周视图</p>
 <ShICalendarView
   currentView="week"
-  currentDate="2024-01-01"
-  calendarData={{
-    events: [{ summary: '会议', dtstart: '2024-01-01 10:00' }],
-    todos: [{ summary: '任务', dtstart: '2024-01-01' }]
-  }}
-  filterValue={{ type: 'event' }}
+  currentDate={currentDate}
+  calendarData={calendarData}
+  filterValue={filterValue}
   viewCount={3}
-  onSelected={(item) => console.log('选中项:', item)}
+  onClickDay={handleDayClick}
+  onSelected={handleItemSelected}
+/>
+
+<p>月视图</p>
+<ShICalendarView
+  currentView="month"
+  currentDate={currentDate}
+  calendarData={calendarData}
+  viewCount={5}
 />
 ```
 -->
@@ -27,14 +79,27 @@
   import type { HTMLAttributes } from 'svelte/elements';
   import type { ICalendarData, ICalendarFilterValue, ICalendarViewType, ICalendarEventOrTodo } from './ICalendarType';
   import { ICalendarViewTypeData } from './ICalendarType';
+
+  /**
+   * 日历视图组件属性接口
+   * 继承所有原生 div 元素的 HTML 属性，并扩展日历视图特有的功能属性
+   * @typedef {HTMLAttributes<HTMLDivElement> & ICalendarViewPropsExtension} ICalendarViewProps
+   */
   export interface ICalendarViewProps extends HTMLAttributes<HTMLDivElement> {
-    currentView: ICalendarViewType; // 当前视图类型：日、周、月
-    currentDate: string; // 当前日期，格式：YYYY-MM-DD
-    calendarData: ICalendarData; // 日历数据，包含事件和待办事项
-    filterValue?: ICalendarFilterValue; // 过滤条件配置
-    viewCount?: number; // 每个时间槽显示的事件数量
-    onClickDay?: (day: string) => void; // 点击日期时间
-    onSelected?: (item: ICalendarEventOrTodo) => void; // 事件选中回调
+    /** 当前视图类型，支持日（day）、周（week）、月（month）三种模式 */
+    currentView: ICalendarViewType;
+    /** 当前选中的日期，格式为 YYYY-MM-DD */
+    currentDate: string;
+    /** 日历数据对象，包含事件列表和待办事项列表 */
+    calendarData: ICalendarData;
+    /** 过滤条件配置，用于筛选显示特定类型的事件或待办事项 */
+    filterValue?: ICalendarFilterValue;
+    /** 每个时间槽显示的事件数量限制，超出部分可通过展开按钮查看 @default 3 */
+    viewCount?: number;
+    /** 点击日期时的回调函数，传递被点击的日期字符串 */
+    onClickDay?: (day: string) => void;
+    /** 选中事件或待办事项时的回调函数，传递被选中的项目数据 */
+    onSelected?: (item: ICalendarEventOrTodo) => void;
   }
 </script>
 
