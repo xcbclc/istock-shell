@@ -28,12 +28,12 @@ export default [
   {
     text: '相关库',
     items: [
-      { text: '@istock-shell/iswork', link: '/packages/iswork/README.html' },
-      { text: '@istock-shell/ui', link: '/packages/shell-ui/README.html' },
-      { text: '@istock-shell/command-parser', link: '/packages/command-parser/README.html' },
-      { text: '@istock-shell/editor', link: '/packages/editor/README.html' },
-      { text: '@istock-shell/cli', link: '/packages/cli/README.html' },
-      { text: '@istock-shell/util', link: '/packages/util/README.html' },
+      { text: 'Web Worker服务框架', link: '/packages/iswork/README.html' },
+      { text: 'Svelte UI库', link: '/packages/shell-ui/README.html' },
+      { text: '命令行解析库', link: '/packages/command-parser/README.html' },
+      { text: '命令行编辑器库', link: '/packages/editor/README.html' },
+      { text: 'iStock Shell 命令行工具', link: '/packages/cli/README.html' },
+      { text: '常用工具库', link: '/packages/util/README.html' },
     ],
   },
   {

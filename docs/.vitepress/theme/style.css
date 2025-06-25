@@ -92,9 +92,10 @@
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+  /* 使用 custom.css 中定义的品牌色渐变 */
+  --vp-home-hero-name-background: var(--vp-home-hero-name-background);
 
-  --vp-home-hero-image-background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
+  --vp-home-hero-image-background-image: var(--vp-home-hero-image-background-image);
   --vp-home-hero-image-filter: blur(44px);
 }
 
@@ -155,7 +156,8 @@
   }
 }
 :not(.vp-raw) .outline {
-  outline-style: var(--vp-c-bg-soft);
+  outline-color: var(--color-base-300);
+  outline-style: solid;
 }
 .VPNavBarMenu.menu {
   flex-direction: row;

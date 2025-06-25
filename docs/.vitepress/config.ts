@@ -26,7 +26,7 @@ export default defineConfig({
   lang: 'zh-Hans',
   title: 'iStock Shell',
   description: '一个金融数据查询终端',
-  appearance: true, // 黑白主题
+  appearance: false, // 黑白主题
   sitemap: {
     hostname: 'https://istock.red',
   },
