@@ -1,9 +1,3 @@
-<!--
-  @component CookiesConfig Cookie配置组件
-
-  网站Cookie管理相关的配置项
--->
-
 <script lang="ts" module>
   export interface CookiesConfigProps {
     windowId: number;
@@ -11,31 +5,63 @@
 </script>
 
 <script lang="ts">
-  import { ShFieldSet, ShField, ShToggle, ShInput, ShButton, ShIcon } from '@istock-shell/ui';
+  import {
+    ShFieldSet,
+    ShInput,
+    ShButton,
+    ShIcon,
+    ShTableRow,
+    ShTextarea,
+    ShTableTh,
+    ShTableTd,
+    ShTable,
+    shShowMessage,
+  } from '@istock-shell/ui';
+  import { CmdWindowsManager } from '@/window';
+  import type { CookieStoreData } from '@/store';
 
-  let { windowId }: CookiesConfigProps = $props();
+  const { windowId }: CookiesConfigProps = $props();
+  const cmdWindow = CmdWindowsManager.cmdWindowsManager.getCmdWindow();
+  const { cookieManage } = cmdWindow.store;
 
-  // Cookie设置数据
-  let settings = $state({
-    cookies: {
-      list: [],
-      autoClean: false,
-      cleanInterval: 24, // 小时
-    },
-  });
-
-  // Cookie管理相关函数
-  const addCookie = () => {
-    settings.cookies.list.push({
-      id: Date.now().toString(),
-      host: '',
-      cookie: '',
-      isEdit: true,
-    });
+  const onSaveOrEdit = async (storeData: CookieStoreData) => {
+    if (cookieManage.editRecord[storeData.id]) {
+      await onCreateOrUpdate(storeData);
+    } else {
+      cookieManage.editRecord[storeData.id] = true;
+    }
   };
-
-  const deleteCookie = (id: string) => {
-    settings.cookies.list = settings.cookies.list.filter((item) => item.id !== id);
+  const onCreateOrUpdate = async (storeData: CookieStoreData) => {
+    const data = $state.snapshot(storeData);
+    const urlRegex =
+      /^(https|http):\/\/(?:([a-zA-Z0-9_-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3}|localhost)(?::\d+)?(?:\/[\w#!:.?+=&%@!$'~*\-]*)?$/;
+    if (!data.origin) {
+      shShowMessage.error('请填写地址源');
+      return;
+    }
+    if (!urlRegex.test(data.origin)) {
+      shShowMessage.error('地址源格式不正确');
+      return;
+    }
+    if (!data.cookie) {
+      shShowMessage.error('请填写Cookie');
+      return;
+    }
+    if (cookieManage.isCreateData(data)) {
+      await cookieManage.create(data);
+      cookieManage.editRecord[storeData.id] = false;
+      shShowMessage.success('新增成功');
+      await cookieManage.getList();
+    } else {
+      await cookieManage.update(data);
+      cookieManage.editRecord[storeData.id] = false;
+      shShowMessage.success('保存成功');
+    }
+  };
+  const onDelete = async (id: string) => {
+    await cookieManage.delete(id);
+    shShowMessage.success('删除成功');
+    await cookieManage.getList();
   };
 </script>
 
@@ -43,71 +69,57 @@
 <div class="space-y-8">
   <div class="card bg-base-100 shadow-lg border border-base-300/50">
     <div class="card-body">
-      <ShFieldSet title="Cookie设置" class="space-y-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ShField
-            label={{ title: '自动清理', placement: 'after' }}
-            class="flex items-center justify-between p-4 bg-base-200/50 rounded-lg"
-          >
-            <ShToggle bind:value={settings.cookies.autoClean} color="primary" size="md" />
-          </ShField>
-
-          <ShField label={{ title: '清理间隔（小时）', placement: 'before' }} class="space-y-4">
-            <ShInput bind:value={settings.cookies.cleanInterval} type="number" min="1" max="168" size="md" />
-          </ShField>
-        </div>
-      </ShFieldSet>
-    </div>
-  </div>
-
-  <div class="card bg-base-100 shadow-lg border border-base-300/50">
-    <div class="card-body">
       <ShFieldSet title="Cookie列表" class="space-y-6">
         <div class="flex justify-between items-center">
           <span class="text-sm font-medium">已保存的Cookie</span>
-          <ShButton color="primary" size="sm" onclick={addCookie}>
+          <ShButton color="primary" size="sm" disabled={cookieManage.hasAdd} onclick={() => cookieManage.onAddCookie()}>
             <ShIcon name="cookie" class="w-4 h-4" />
             添加Cookie
           </ShButton>
         </div>
         <div class="overflow-x-auto">
-          <table class="table table-zebra w-full">
+          <ShTable size="sm">
             <thead>
-              <tr>
-                <th>网站</th>
-                <th>Cookie内容</th>
-                <th>操作</th>
-              </tr>
+              <ShTableRow>
+                <ShTableTh>地址源</ShTableTh>
+                <ShTableTh>Cookie</ShTableTh>
+                <ShTableTh>更新时间</ShTableTh>
+                <ShTableTh class="w-30">操作</ShTableTh>
+              </ShTableRow>
             </thead>
             <tbody>
-              {#each settings.cookies.list as cookie (cookie.id)}
-                <tr>
-                  <td>
-                    <ShInput bind:value={cookie.host} placeholder="example.com" size="sm" />
-                  </td>
-                  <td>
-                    <textarea
-                      bind:value={cookie.cookie}
-                      placeholder="cookie内容..."
-                      class="textarea textarea-bordered textarea-sm w-full min-h-[60px] resize-none"
-                    ></textarea>
-                  </td>
-                  <td>
+              {#each cookieManage.list as item, index}
+                {@const displayItem = cookieManage.displayList[index]}
+                <ShTableRow>
+                  <ShTableTd>
+                    <ShInput
+                      type="url"
+                      bind:value={item.origin}
+                      disabled={!cookieManage.editRecord[item.id]}
+                      validator={false}
+                      placeholder="https://example.com"
+                    />
+                  </ShTableTd>
+                  <ShTableTd>
+                    <ShTextarea bind:value={item.cookie} disabled={!cookieManage.editRecord[item.id]} />
+                  </ShTableTd>
+                  <ShTableTd>
+                    {displayItem.updateDate}
+                  </ShTableTd>
+                  <ShTableTd>
                     <div class="flex gap-2">
-                      <ShButton color="error" size="sm" ghost onclick={() => deleteCookie(cookie.id)}>
-                        <ShIcon name="close" class="w-4 h-4" />
+                      <ShButton size="sm" ghost color="primary" onclick={() => onSaveOrEdit(item)}>
+                        {cookieManage.editRecord[item.id] ? '保存' : '编辑'}
                       </ShButton>
+                      {#if 'id' in item && item.id}
+                        <ShButton size="sm" ghost color="error" onclick={async () => onDelete(item.id)}>删除</ShButton>
+                      {/if}
                     </div>
-                  </td>
-                </tr>
+                  </ShTableTd>
+                </ShTableRow>
               {/each}
-              {#if settings.cookies.list.length === 0}
-                <tr>
-                  <td colspan="3" class="text-center text-base-content/60 py-8"> 暂无Cookie数据 </td>
-                </tr>
-              {/if}
             </tbody>
-          </table>
+          </ShTable>
         </div>
       </ShFieldSet>
     </div>

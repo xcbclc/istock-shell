@@ -1,7 +1,7 @@
 import type { ModelData } from '@istock-shell/iswork';
-import type { CmdWindow } from '@/window/cmd-window.svelte';
+import type { CmdWindow } from '@/window';
 import type { UserModel } from '@domains/global/user/user.model';
-import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store/base';
+import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
 
 export interface UserStoreModel extends ModelData<UserModel> {}
 
@@ -52,5 +52,10 @@ export class User extends StoreWindow<UserStoreModel> {
   }
   protected setLocalUser(user: UserStoreData) {
     localStorage.setItem(this.userToken, JSON.stringify(user));
+  }
+  onLogin(data: UserStoreData | null) {
+    if (!data) return;
+    this.data = data;
+    this.setLocalUser(data);
   }
 }

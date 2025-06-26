@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { ShModal, ShForm, shShowMessage, type ButtonProps } from '@istock-shell/ui';
-  import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { CmdWindowsManager } from '@/window';
 
   const { windowId }: CmdAddAliasModalProps = $props();
 

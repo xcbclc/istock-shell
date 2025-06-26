@@ -1,5 +1,5 @@
-import type { CmdWindow } from '@/window/cmd-window.svelte';
-import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store/base';
+import type { CmdWindow } from '@/window';
+import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
 import { settingStoreMenus } from './data/setting-data';
 
 export interface SettingStoreMenuItem {

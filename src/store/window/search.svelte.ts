@@ -1,5 +1,5 @@
-import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store/base';
-import type { CmdWindow } from '@/window/cmd-window.svelte';
+import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
+import type { CmdWindow } from '@/window';
 import { searchStoreSetting } from './data/search-data';
 
 export interface SearchStoreListItem {

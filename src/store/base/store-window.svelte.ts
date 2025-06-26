@@ -1,8 +1,8 @@
-import { CmdWindow } from '@/window/cmd-window.svelte';
+import { CmdWindow } from '@/window';
 import { Store, type StoreConfig } from './store.svelte';
 
 export abstract class StoreWindow<T extends Record<string, any>> extends Store<T> {
-  protected readonly cmdWindow: CmdWindow;
+  public readonly cmdWindow: CmdWindow;
   constructor(cmdWindow: CmdWindow, config: StoreConfig<T> = ({} = {})) {
     super(config);
     this.cmdWindow = cmdWindow;

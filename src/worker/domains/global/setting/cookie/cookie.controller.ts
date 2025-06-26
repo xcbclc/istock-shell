@@ -25,7 +25,7 @@ export class CookieController {
   }
 
   @Method('list')
-  async getList(@Payload() query: { host?: string }) {
-    return await this.cookieService.getList(query?.host);
+  async getList(@Payload() query: { origin?: string }) {
+    return await this.cookieService.getList(query?.origin);
   }
 }

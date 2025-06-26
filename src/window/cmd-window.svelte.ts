@@ -1,8 +1,8 @@
-import { EventEmitter, FESnowflake } from '@istock-shell/util';
+import { type Event, EventEmitter, FESnowflake } from '@istock-shell/util';
 import { CmdParser } from '@istock-shell/command-parser';
 import { Cmdp, type CmdpMessage } from '@istock-shell/iswork';
 import { getWorker } from '@/worker';
-import { createWindowStore, startWindowStore, type WindowStore } from '@/store/window/index';
+import { createWindowStore, startWindowStore, onWindowStoreHandle, type WindowStore } from '@/store/window/index';
 import { type CmdWindowsManager } from './cmd-windows-manager';
 import { CmdWorkerMessage } from './cmd-worker-message';
 
@@ -33,6 +33,8 @@ export class CmdWindow {
   readonly #eventProtocol = 'event:';
   readonly #onWorkerMessage: (event: MessageEvent<WorkerMessageData>) => void;
   public isInitialized: Boolean = $state(false);
+  protected destroyUserNameEffect!: () => void;
+  protected onWindowStoreHandleDestroy!: () => void;
   get mode() {
     return this.#mode;
   }
@@ -63,23 +65,35 @@ export class CmdWindow {
   get eventProtocol() {
     return this.#eventProtocol;
   }
+  get port() {
+    return `${this.#workId}${this.#windowId}`;
+  }
   constructor(cmdWindowsManager: CmdWindowsManager, options: CmdWindowOptions) {
     this.#cmdWindowsManager = cmdWindowsManager;
     this.#mode = options.mode || CmdWindowMode.normal;
     this.#event = new EventEmitter();
     this.#cmdParser = new CmdParser();
-    this.#worker = getWorker();
     this.#generateId = new FESnowflake(this.#workId, this.#windowId); // todo workerId自增 对于浏览器标签页或应用打开窗口的个数
     this.#message = new CmdWorkerMessage(this, this.#windowId, {}); // windowId为0时表示全局执行
     this.#store = createWindowStore(this);
+    this.#worker = getWorker();
     this.#onWorkerMessage = (event: MessageEvent<WorkerMessageData>) => this.#onWorkerMessageHandler(event);
-  }
-  public async init() {
     this.worker.addEventListener('message', this.#onWorkerMessage);
-    await startWindowStore(this.#store);
+  }
+  async start() {
+    await startWindowStore(this);
+    this.onWindowStoreHandleDestroy = onWindowStoreHandle(this);
+    const { user } = this.store;
+    this.destroyUserNameEffect = $effect.root(() => {
+      this.onUserNameChange(user.data.username);
+    });
     this.isInitialized = true;
   }
   async #onWorkerMessageHandler(event: MessageEvent<WorkerMessageData>) {
+    if (!this.isInitialized && event?.data?.address === 'event://@istock.application:0/lifecycle.listened') {
+      await this.start();
+      return;
+    }
     const message = event.data ?? {};
     if (event.ports) {
       message.ports = event.ports as MessagePort[];
@@ -114,7 +128,30 @@ export class CmdWindow {
   getNextId(): string {
     return this.#generateId.nextId();
   }
+  onUserNameChange(username: string) {
+    const { windowView } = this.store;
+    windowView.list.forEach((view) => {
+      if (!view.id) return;
+      const ctx = this.#cmdWindowsManager.getCmdContextCache(view.id);
+      if (!ctx) return;
+      const { prompt } = ctx.store;
+      if (prompt.data.username !== username) {
+        prompt.data.username = username;
+      }
+      ctx.message.events.forEach((event: Event<{ type: string; handler: Function }>) => {
+        const { type } = event;
+        if (!Cmdp.check(type, this.#eventProtocol)) return;
+        const info = Cmdp.parseAddress(type);
+        if (info.protocol === this.#eventProtocol && info.port === ctx.port && info.user) {
+          ctx.message.off(type, event.handler);
+        }
+      });
+      ctx.onContextStoreHandle();
+    });
+  }
   destroy() {
     this.worker.removeEventListener('message', this.#onWorkerMessage);
+    this.destroyUserNameEffect?.();
+    this.onWindowStoreHandleDestroy?.();
   }
 }

@@ -7,7 +7,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { ShInput, ShEmpty } from '@istock-shell/ui';
-  import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { CmdWindowsManager } from '@/window';
 
   let { windowId }: CmdSearchMainProps = $props();
 

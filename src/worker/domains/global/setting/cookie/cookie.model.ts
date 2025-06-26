@@ -8,7 +8,7 @@ export class CookieModel extends BaseModel {
 
   @Index()
   @Column()
-  host!: string;
+  origin!: string;
 
   @Column()
   cookie!: string;

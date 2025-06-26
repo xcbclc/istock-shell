@@ -1,5 +1,5 @@
 import { Controller, Method, Payload, ApplicationContext } from '@istock-shell/iswork';
-import { ERecommendType, RecommendService, type TRecommendData } from './recommend.service';
+import { RecommendType, RecommendService, type RecommendData } from './recommend.service';
 import { CmdRouteService } from '../cmd-route/cmd-route.service';
 import { HistoryService } from '../history/history.service';
 import { CmdAliasService } from '../cmd-alias/cmd-alias.service';
@@ -17,14 +17,14 @@ export class RecommendController {
   async autoRecommend(
     ctx: ApplicationContext,
     @Payload() payload: { input: string; domainNamePaths: string[] }
-  ): Promise<TRecommendData> {
+  ): Promise<RecommendData> {
     const historys = await this.historyService.query({});
     const cmdRoutes = await this.cmdRouteService.getAllCmdRoute(ctx);
     return this.recommendService.autoRecommend(payload, historys, this.cmdRouteService.mergeSubcommands(cmdRoutes));
   }
 
   @Method('alias')
-  async aliasRecommend(@Payload() data: { input: string }): Promise<TRecommendData> {
+  async aliasRecommend(@Payload() data: { input: string }): Promise<RecommendData> {
     const alias = (data?.input ?? '').replace(/^:/, '').trim();
     const list = await this.cmdAliasService.findRecommend(alias);
     return {
@@ -32,7 +32,7 @@ export class RecommendController {
         return { value: item.cmd, label: item.alias, description: item.description };
       }),
       input: '',
-      type: ERecommendType.alias,
+      type: RecommendType.alias,
     };
   }
 }

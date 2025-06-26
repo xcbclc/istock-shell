@@ -15,9 +15,6 @@ export class ThemeModel extends BaseModel {
   variables!: Record<string, string>;
 
   @Column()
-  active!: boolean;
-
-  @Column()
   rowStatus!: number;
 
   @Column()

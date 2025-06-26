@@ -1,7 +1,7 @@
 import type { ModelData } from '@istock-shell/iswork';
 import type { ThemeModel } from '@domains/global/setting/theme/theme.model';
-import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store/base';
-import type { CmdWindow } from '@/window/cmd-window.svelte';
+import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
+import type { CmdWindow } from '@/window';
 import { themeStoreOptions, themeStoreVars } from './data/theme-data';
 
 export interface ThemeOption {
@@ -10,6 +10,8 @@ export interface ThemeOption {
 }
 
 export interface ThemeStoreModel extends ModelData<ThemeModel> {}
+
+export const LOCAL_STORE_THEME_TOKEN = 'istock_local_store_theme_token';
 
 export class Theme extends StoreWindow<ThemeStoreModel> {
   readonly #defaultThemeName = 'business';
@@ -34,19 +36,21 @@ export class Theme extends StoreWindow<ThemeStoreModel> {
     );
   }
   protected async init() {
+    this.name = localStorage.getItem(LOCAL_STORE_THEME_TOKEN) || '';
     this.storeEffect = createStoreEffects({
       themeNameChange: () => {
         if (this.name) {
           this.useThemeByName(this?.model?.name);
           this.model.name = this.name;
           this.variables = this.getVariables();
+          localStorage.setItem(LOCAL_STORE_THEME_TOKEN, this.name);
         }
       },
       themeVarChange: () => {
         if (this.name) {
           this.useThemeByName(this.model?.name);
-          this.variables = this.getVariables();
-          this.updateModel({ ...this.model, variables: $state.snapshot(this.variables), active: true });
+          const variables = this.getVariables();
+          this.updateModel({ ...this.model, variables });
         }
       },
     });
@@ -62,7 +66,11 @@ export class Theme extends StoreWindow<ThemeStoreModel> {
   }
 
   protected async getActiveTheme() {
-    const { payload } = await this.cmdWindow.message.send<ThemeStoreModel>('setting', 'theme.getActiveTheme', {});
+    const { payload } = await this.cmdWindow.message.send<ThemeStoreModel>(
+      'setting',
+      'theme.getActiveTheme',
+      this.name
+    );
     return payload;
   }
   protected useThemeByName(name: string): void {

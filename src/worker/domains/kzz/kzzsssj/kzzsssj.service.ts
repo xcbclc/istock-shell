@@ -7,7 +7,7 @@ export class KzzsssjService {
   readonly #site = 'https://www.jisilu.cn';
   constructor(private readonly cookieService: CookieService) {}
   async bondCbJsl() {
-    const cookieData = await this.cookieService.findOneByHost(this.#site);
+    const cookieData = await this.cookieService.findOneByOrigin(this.#site);
     const result = await KzzsssjModel.run<{ data: Array<Record<string, string>> }>('/webapi/cb/list/', {
       method: 'get',
       query: { _: Date.now() },

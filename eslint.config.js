@@ -7,6 +7,7 @@ import svelteParser from 'svelte-eslint-parser';
 import vue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
 import prettier from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
 
 export default [
   // Global ignores
@@ -41,11 +42,10 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
-      indent: ['error', 2, { SwitchCase: 1 }],
+      ...prettierConfig.rules,
       'no-console': 'off',
       'no-debugger': 'off',
       'no-sequences': 'off',
-      'prettier/prettier': 'error',
     },
   },
 
@@ -69,7 +69,7 @@ export default [
       prettier,
     },
     rules: {
-      indent: ['error', 2, { SwitchCase: 1 }],
+      ...prettierConfig.rules,
       'no-console': 'off',
       'no-debugger': 'off',
       'no-sequences': 'off',
@@ -77,7 +77,6 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/ban-types': 'off',
       '@typescript-eslint/consistent-type-definitions': 'off',
-      'prettier/prettier': 'error',
     },
   },
 
@@ -97,9 +96,9 @@ export default [
       prettier,
     },
     rules: {
+      ...prettierConfig.rules,
       'svelte/valid-compile': 'off',
       '@typescript-eslint/unbound-method': 'off',
-      'prettier/prettier': 'error',
     },
   },
 
@@ -122,8 +121,8 @@ export default [
       prettier,
     },
     rules: {
+      ...prettierConfig.rules,
       'vue/multi-word-component-names': 'off',
-      'prettier/prettier': 'error',
     },
   },
 
@@ -131,8 +130,7 @@ export default [
   {
     files: ['**/*.model.ts'],
     rules: {
-      indent: 'off',
-      'prettier/prettier': 'error',
+      ...prettierConfig.rules,
     },
   },
 

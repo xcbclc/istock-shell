@@ -1,20 +1,20 @@
-import type { CmdWindow } from '@/window/cmd-window.svelte';
-import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store/base';
+import type { CmdWindow } from '@/window';
+import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
 
 export interface WindowViewModel {}
 export interface WindowViewDataItem {
   id: number;
 }
-export type WindowViewData = WindowViewDataItem[];
+export type WindowViewList = WindowViewDataItem[];
 
 export const LOCAL_STORE_WINDOW_VIEW_TOKEN = 'istock_local_store_window_view_token';
 
 export class WindowView extends StoreWindow<WindowViewModel> {
   readonly #windowViewToken: string = LOCAL_STORE_WINDOW_VIEW_TOKEN;
   #maxCount = 9;
-  public data: WindowViewData = $state([{ id: 1 }]);
+  public list: WindowViewList = $state([{ id: 1 }]);
   public currentFocusWindowId: number = $state(1);
-  public readonly windowCount = $derived(() => this.data.length);
+  public readonly windowCount = $derived(() => this.list.length);
   public readonly styleRecord: Record<string, string> = $derived.by(() => this.updateWindowStyleRecord());
   get windowViewToken() {
     return this.#windowViewToken;
@@ -26,7 +26,7 @@ export class WindowView extends StoreWindow<WindowViewModel> {
     this.storeEffect = createStoreEffects({});
   }
   protected getNewWindowId() {
-    const ids = this.data.map((win) => win.id).sort((a, b) => a - b);
+    const ids = this.list.map((win) => win.id).sort((a, b) => a - b);
 
     for (let i = 0; i < this.#maxCount - 1; i++) {
       if (ids[i + 1] - ids[i] > 1 || ids[i + 1] === undefined) {
@@ -58,7 +58,7 @@ export class WindowView extends StoreWindow<WindowViewModel> {
         // 新建窗口
         const newId = this.getNewWindowId();
         if (newId) {
-          this.data.push({
+          this.list.push({
             id: newId,
           });
         }
@@ -67,8 +67,8 @@ export class WindowView extends StoreWindow<WindowViewModel> {
     }
   }
   protected updateWindowStyleRecord() {
-    const styleRecord = this.data.reduce<Record<string, string>>((record, window) => {
-      const len = this.data.length;
+    const styleRecord = this.list.reduce<Record<string, string>>((record, window) => {
+      const len = this.list.length;
       const row = Math.ceil(Math.sqrt(len));
       const column = Math.ceil(len / row);
       record[`${window.id}`] = [`width: ${(100 / row).toFixed(4)}%`, `height: ${(100 / column).toFixed(4)}%`].join(';');

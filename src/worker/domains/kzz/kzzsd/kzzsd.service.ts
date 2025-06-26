@@ -2,7 +2,7 @@ import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { CookieService } from '@domains/global/setting/cookie/cookie.service';
 import { KzzsdModel } from './kzzsd.model';
 import { KzzsdResultModel } from './kzzsd-result.model';
-import { isArray, isString, ScopeError } from '@/packages/util';
+import { isArray, isString, ScopeError } from '@istock-shell/util';
 
 @Injectable()
 export class KzzsdService {
@@ -14,7 +14,7 @@ export class KzzsdService {
    */
   async findJisiluCbList() {
     // 获取集思录的cookie数据
-    const cookieData = await this.cookieService.findOneByHost(this.#site);
+    const cookieData = await this.cookieService.findOneByOrigin(this.#site);
     const jisiluData = await KzzsdModel.run<{
       data: Array<ModelData<KzzsdModel>>;
       prompt: string;

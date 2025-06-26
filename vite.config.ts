@@ -8,7 +8,8 @@ import tailwindcss from '@tailwindcss/vite';
 import { pwaConfig } from './pwa.config';
 
 const tsPlugin: PluginOption = typescript({
-  include: ['src/worker/domains/**/*'],
+  include: ['src/worker/domains/**/*.ts'],
+  exclude: ['**/*.json'],
 }) as any;
 
 // https://vitejs.dev/config/

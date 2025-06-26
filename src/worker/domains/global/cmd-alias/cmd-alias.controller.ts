@@ -1,4 +1,4 @@
-import { Controller, Method, Payload, type ModelCreate } from '@istock-shell/iswork';
+import { Controller, Method, Payload, type ModelCreate, type ModelUpdate } from '@istock-shell/iswork';
 import { CmdAliasModel } from './cmd-alias.model';
 import { CmdAliasService } from './cmd-alias.service';
 
@@ -8,8 +8,23 @@ import { CmdAliasService } from './cmd-alias.service';
 export class CmdAliasController {
   constructor(private readonly cmdAliasService: CmdAliasService) {}
 
-  @Method('add')
-  async add(@Payload() data: ModelCreate<CmdAliasModel>) {
-    return await this.cmdAliasService.createData(data);
+  @Method('create')
+  async create(@Payload() data: ModelCreate<CmdAliasModel>) {
+    return await this.cmdAliasService.create(data);
+  }
+
+  @Method('update')
+  async add(@Payload() data: ModelUpdate<CmdAliasModel>) {
+    return await this.cmdAliasService.update(data);
+  }
+
+  @Method('delete')
+  async delete(@Payload() id: string) {
+    return await this.cmdAliasService.deleteById(id);
+  }
+
+  @Method('list')
+  async getList() {
+    return await this.cmdAliasService.getList();
   }
 }

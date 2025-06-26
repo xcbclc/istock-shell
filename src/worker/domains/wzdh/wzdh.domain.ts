@@ -1,7 +1,7 @@
 import { Domain } from '@istock-shell/iswork';
 import { CjController } from './cj/cj.controller';
 import { CjService } from './cj/cj.service';
-import { ScopeError } from '@/packages/util';
+import { ScopeError } from '@istock-shell/util';
 
 @Domain({
   name: 'wzdh',

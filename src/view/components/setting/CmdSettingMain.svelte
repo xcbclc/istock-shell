@@ -7,12 +7,12 @@
 <script lang="ts">
   import { type Component, onMount } from 'svelte';
   import { ShErrorInfo, ShEmpty, ShLoading, ShIcon } from '@istock-shell/ui';
-  import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { CmdWindowsManager } from '@/window';
 
   let { windowId, ...otherProps }: CmdSettingMainProps = $props();
 
-  const cmdWindowCtx = CmdWindowsManager.cmdWindowsManager.getCmdContext(windowId);
-  const { cmdSettingMenu } = cmdWindowCtx.cmdStore;
+  const cmdWindow = CmdWindowsManager.cmdWindowsManager.getCmdWindow();
+  const { setting } = cmdWindow.store;
   const configComponentRecord: Record<string, () => Promise<Component>> = import.meta.glob<Component>(
     './config/*.svelte',
     {
@@ -34,27 +34,27 @@
   };
 </script>
 
-{#await getAsyncComponent($cmdSettingMenu?.selectedMenuItem?.key)}
+{#await getAsyncComponent(setting.selectedMenuKey)}
   <div class="flex items-center justify-center h-full">
     <ShLoading />
   </div>
 {:then Component}
   {#if Component}
     <div class="flex items-center gap-3 mb-8">
-      {#if $cmdSettingMenu?.selectedMenuItem?.iconName}
+      {#if setting.selectedMenuItem?.iconName}
         <div class="p-2 bg-warning/10 rounded-lg leading-none">
-          <ShIcon name={$cmdSettingMenu.selectedMenuItem.iconName} class="text-warning" />
+          <ShIcon name={setting.selectedMenuItem.iconName} class="text-warning" />
         </div>
       {/if}
       <div>
-        <h2 class="text-2xl font-bold text-base-content">{$cmdSettingMenu?.selectedMenuItem?.text}</h2>
-        {#if $cmdSettingMenu?.selectedMenuItem?.description}
-          <p class="text-base-content/60">{$cmdSettingMenu.selectedMenuItem.description}</p>
+        <h2 class="text-2xl font-bold text-base-content">{setting.selectedMenuItem?.text}</h2>
+        {#if setting.selectedMenuItem?.description}
+          <p class="text-base-content/60">{setting.selectedMenuItem.description}</p>
         {/if}
       </div>
     </div>
     <Component {...otherProps} />
-  {:else if !$cmdSettingMenu?.selectedMenuItem}
+  {:else if !setting.selectedMenuItem}
     <div class="flex items-center justify-center h-full">
       <div class="text-center">
         <div class="text-6xl mb-4">⚙️</div>

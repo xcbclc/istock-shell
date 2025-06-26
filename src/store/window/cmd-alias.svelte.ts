@@ -1,8 +1,7 @@
 import type { ModelData, ModelPartialData } from '@istock-shell/iswork';
-import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store/base';
-import type { CmdWindow } from '@/window/cmd-window.svelte';
+import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
+import type { CmdWindow } from '@/window';
 import type { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
-import type { SearchStoreModel } from '@/store/window/search.svelte';
 
 export interface CmdAliasStoreModal {
   title: string;
@@ -36,12 +35,16 @@ export class CmdAlias extends StoreWindow<CmdAliasStoreModel> {
     alias: '',
     description: '',
   });
+  public list: CmdAliasStoreModel[] = $state([]);
+  public editRecord: Record<string, boolean> = $state({});
+  protected newTempId: string = $state('');
+  public readonly hasAdd: boolean = $derived.by(() => Boolean(this.newTempId));
   public readonly formItems: CmdAliasStoreFormItem[] = [
     { name: 'cmd', label: '命令', field: { disabled: true } },
     { name: 'alias', label: '命令别名' },
     { name: 'description', label: '别名描述', field: { type: 'textarea' } },
   ];
-  constructor(cmdWindow: CmdWindow, config: StoreConfig<SearchStoreModel> = {}) {
+  constructor(cmdWindow: CmdWindow, config: StoreConfig<CmdAliasStoreModel> = {}) {
     super(cmdWindow, config);
   }
   protected async init() {
@@ -58,18 +61,43 @@ export class CmdAlias extends StoreWindow<CmdAliasStoreModel> {
       alias: '',
       description: '',
     };
+    this.newTempId = '';
   }
   async addCmdAlias() {
     if (!this.form.cmd || !this.form.alias) return false;
-    const { payload } = await this.cmdWindow.message.send<string | number | null>(
-      'global',
-      'cmdAlias.add',
-      $state.snapshot(this.form)
-    );
+    const payload = await this.create($state.snapshot(this.form));
     if (payload) {
       this.resetCmdAlias();
       return true;
     }
     return false;
+  }
+
+  async getList() {
+    const { payload: list } = await this.cmdWindow.message.send<CmdAliasStoreModel[]>('global', 'cmdAlias.list', {});
+    if (list) this.list = list;
+  }
+  async create(data: CmdAliasStoreCreateData) {
+    if (!data.cmd || !data.alias) {
+      return;
+    }
+    const { payload } = await this.cmdWindow.message.send<string | number | null>('global', 'cmdAlias.create', data);
+    this.newTempId = '';
+    return payload;
+  }
+  async update(model: CmdAliasStoreModel) {
+    if (!model.id || !model.cmd || !model.alias) {
+      return;
+    }
+    const { payload } = await this.cmdWindow.message.send('global', 'cmdAlias.update', model);
+    return payload;
+  }
+  async delete(id: string) {
+    if (id === this.newTempId) {
+      this.list = this.list.filter((item) => item.id === id);
+      return;
+    }
+    const { payload } = await this.cmdWindow.message.send<boolean>('global', 'cmdAlias.delete', id);
+    return payload ?? false;
   }
 }

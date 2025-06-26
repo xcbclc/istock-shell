@@ -31,10 +31,10 @@ export class CookieService {
     return await CookieModel.deleteById(id);
   }
 
-  async getList(host?: string, limit: number = 1000) {
+  async getList(origin?: string, limit: number = 1000) {
     const query: { filter: QueryFilterArr[] } = { filter: [['rowStatus', 'eq', 1]] };
-    if (host && query.filter) {
-      query.filter.push(['host', 'cont', host]);
+    if (origin && query.filter) {
+      query.filter.push(['origin', 'cont', origin]);
     }
     return await CookieModel.query({
       limit,
@@ -46,8 +46,8 @@ export class CookieService {
     });
   }
 
-  async findOneByHost(host: string) {
-    const list = await this.getList(host, 1);
+  async findOneByOrigin(origin: string) {
+    const list = await this.getList(origin, 1);
     return list[0] ?? null;
   }
 }

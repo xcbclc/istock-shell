@@ -1,8 +1,8 @@
-import { CmdWindowContext } from '@/window/cmd-window-context';
+import { CmdWindowContext } from '@/window';
 import { Store, type StoreConfig } from './store.svelte';
 
 export abstract class StoreContext<T extends Record<string, any>> extends Store<T> {
-  protected readonly ctx: CmdWindowContext;
+  public readonly ctx: CmdWindowContext;
   constructor(ctx: CmdWindowContext, config: StoreConfig<T> = {}) {
     super(config);
     this.ctx = ctx;

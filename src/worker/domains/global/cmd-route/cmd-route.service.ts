@@ -19,16 +19,14 @@ import {
 } from '@istock-shell/iswork';
 import { CmdRouteModel } from './cmd-route.model';
 
-export type TResponseSubCmdRoute = Array<
-  Omit<ControllerMethodCmdRouteMetadata, 'subcommand'> & {
-    route: string[];
-    domainName: string;
-    subcommand?: TResponseSubCmdRoute;
-  }
->;
-export type TResponseCmdRoute = Omit<ModelData<CmdRouteModel>, 'subcommand'> & {
-  subcommand?: TResponseSubCmdRoute;
-};
+export interface ResponseSubCmdRouteItem extends Omit<ControllerMethodCmdRouteMetadata, 'subcommand'> {
+  route: string[];
+  domainName: string;
+  subcommand?: ResponseSubCmdRouteItem[];
+}
+export interface ResponseCmdRoute extends Omit<ModelData<CmdRouteModel>, 'subcommand'> {
+  subcommand?: ResponseSubCmdRouteItem[];
+}
 
 @Injectable()
 export class CmdRouteService {
@@ -43,8 +41,8 @@ export class CmdRouteService {
    * 合并子命令
    * @param list
    */
-  mergeSubcommands(list: Array<ModelData<CmdRouteModel>>): TResponseCmdRoute[] {
-    const record: Record<string, TResponseCmdRoute> = {};
+  mergeSubcommands(list: Array<ModelData<CmdRouteModel>>): ResponseCmdRoute[] {
+    const record: Record<string, ResponseCmdRoute> = {};
     list.forEach((item) => {
       if (record[item.cmd]) {
         if (!item.subcommand) return;

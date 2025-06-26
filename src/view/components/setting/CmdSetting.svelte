@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { ShModal } from '@istock-shell/ui';
-  import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { CmdWindowsManager } from '@/window';
   import CmdSettingHeader from './CmdSettingHeader.svelte';
   import CmdSettingMenu from './CmdSettingMenu.svelte';
   import CmdSettingMain from './CmdSettingMain.svelte';

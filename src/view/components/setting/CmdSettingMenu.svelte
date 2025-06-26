@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { ShMenu } from '@istock-shell/ui';
-  import { CmdWindowsManager } from '@/window/cmd-windows-manager';
+  import { CmdWindowsManager } from '@/window';
 
   let { windowId }: CmdSettingMenuProps = $props();
 

@@ -1,23 +1,23 @@
 import { Injectable, type ModelData, type ControllerMethodCmdRouteMetadata } from '@istock-shell/iswork';
 import { TokenType, Tokenizer, type Token } from '@istock-shell/command-parser';
 import type { HistoryModel } from '../history/history.model';
-import type { TResponseCmdRoute } from '../cmd-route/cmd-route.service';
+import type { ResponseCmdRoute } from '../cmd-route/cmd-route.service';
 import type { StockCodeModel } from '../stock-code/stock-code.model';
 
-export enum ERecommendType {
+export enum RecommendType {
   cmd = 'cmd',
   alias = 'alias',
 }
-export type TRecommendDataItem = {
+export interface RecommendDataItem {
   label: string;
   value: string;
   description: string;
-};
-export type TRecommendData = {
-  list: TRecommendDataItem[];
+}
+export interface RecommendData {
+  list: RecommendDataItem[];
   input?: string;
-  type: ERecommendType;
-};
+  type: RecommendType;
+}
 
 @Injectable()
 export class RecommendService {
@@ -38,7 +38,7 @@ export class RecommendService {
    * @param otherTokens
    */
   findSubcommandForToken(
-    cmdRoute: TResponseCmdRoute,
+    cmdRoute: ResponseCmdRoute,
     otherTokens: Token[]
   ): Omit<ControllerMethodCmdRouteMetadata, 'subcommand'> | undefined {
     const [firstOtherToken] = otherTokens;
@@ -57,10 +57,10 @@ export class RecommendService {
    * @param otherTokens
    */
   recommendOptionKey(
-    cmdRoute: TResponseCmdRoute | undefined,
+    cmdRoute: ResponseCmdRoute | undefined,
     lasToken: Token,
     otherTokens: Token[]
-  ): TRecommendDataItem[] {
+  ): RecommendDataItem[] {
     if (!cmdRoute) return [];
     let options = cmdRoute.options ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
@@ -96,11 +96,11 @@ export class RecommendService {
    * @param lastNearToken
    */
   recommendOptionValue(
-    cmdRoute: TResponseCmdRoute | undefined,
+    cmdRoute: ResponseCmdRoute | undefined,
     lasToken: Token,
     otherTokens: Token[],
     lastNearToken: Token
-  ): TRecommendDataItem[] {
+  ): RecommendDataItem[] {
     if (!cmdRoute) return [];
     let options = cmdRoute.options ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
@@ -150,10 +150,10 @@ export class RecommendService {
    * @param otherTokens
    */
   recommendArgument(
-    cmdRoute: TResponseCmdRoute | undefined,
+    cmdRoute: ResponseCmdRoute | undefined,
     lasToken: Token,
     otherTokens: Token[]
-  ): TRecommendDataItem[] {
+  ): RecommendDataItem[] {
     if (!cmdRoute) return [];
     let args = cmdRoute.arguments ?? [];
     const subcommand = this.findSubcommandForToken(cmdRoute, otherTokens);
@@ -189,10 +189,10 @@ export class RecommendService {
    * @param otherTokens
    */
   recommendSubcommand(
-    cmdRoute: TResponseCmdRoute | undefined,
+    cmdRoute: ResponseCmdRoute | undefined,
     lasToken: Token,
     otherTokens: Token[]
-  ): TRecommendDataItem[] {
+  ): RecommendDataItem[] {
     if (!cmdRoute) return [];
     if (!cmdRoute.subcommand) return [];
     const usedCommandRecord = otherTokens
@@ -215,15 +215,15 @@ export class RecommendService {
   autoRecommend(
     payload: { input: string; domainNamePaths: string[] },
     historys: Array<ModelData<HistoryModel>>,
-    cmdRoutes: TResponseCmdRoute[]
-  ): TRecommendData {
+    cmdRoutes: ResponseCmdRoute[]
+  ): RecommendData {
     const originalInput = payload.input.trim();
     // 解析成tokens，然后找到最后一个命令
     const allTokens = this.#tokenizer.parse(originalInput, false);
     const cmdTokenIndex = allTokens.findLastIndex((token) => token.type === TokenType.command);
     const tokens = allTokens.slice(cmdTokenIndex);
     const [cmd, ...other] = tokens;
-    let list: TRecommendDataItem[] = [];
+    let list: RecommendDataItem[] = [];
     const reallyOtherTokens = other.filter(
       (token) => ![TokenType.space, TokenType.lineR, TokenType.lineN].includes(token.type)
     );
@@ -266,7 +266,7 @@ export class RecommendService {
     return {
       list,
       input,
-      type: ERecommendType.cmd,
+      type: RecommendType.cmd,
     };
   }
 }

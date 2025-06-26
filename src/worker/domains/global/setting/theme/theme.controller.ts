@@ -1,4 +1,4 @@
-import { Controller, Method, Payload, type ModelData, type ModelUpdate } from '@istock-shell/iswork';
+import { Controller, Method, Payload, type ModelCreate, type ModelUpdate } from '@istock-shell/iswork';
 import { type ThemeModel } from './theme.model';
 import { ThemeService } from './theme.service';
 
@@ -10,7 +10,7 @@ export class ThemeController {
 
   // 命令控制器方法
   @Method('createOrUpdate')
-  async createOrUpdate(@Payload() data: Omit<ModelData<ThemeModel>, 'id'> | ModelUpdate<ThemeModel>) {
+  async createOrUpdate(@Payload() data: ModelCreate<ThemeModel> | ModelUpdate<ThemeModel>) {
     return await this.themeService.createOrUpdate(data);
   }
 
@@ -25,7 +25,8 @@ export class ThemeController {
   }
 
   @Method('getActiveTheme')
-  async getActiveTheme() {
-    return await this.themeService.getActiveTheme();
+  async getActiveTheme(@Payload() name: string) {
+    if (!name) return undefined;
+    return await this.themeService.getActiveTheme(name);
   }
 }

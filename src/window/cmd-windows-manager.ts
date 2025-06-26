@@ -1,18 +1,17 @@
 import { ScopeError } from '@istock-shell/util';
-import { CmdWindow } from './cmd-window.svelte';
-import { CmdWindowContext, CmdWindowMode } from './cmd-window-context';
+import { CmdWindow, CmdWindowMode } from './cmd-window.svelte';
+import { CmdWindowContext } from './cmd-window-context.svelte';
 
-export type TCmdWindowsManagerOptions = {
+export type CmdWindowsManagerOptions = {
   mode?: CmdWindowMode;
 };
 
 export class CmdWindowsManager {
   static cmdWindowsManager: CmdWindowsManager;
   readonly #ctxMap = new Map<number, CmdWindowContext>();
-  readonly #mode: CmdWindowMode = CmdWindowMode.normal;
   readonly #cmdWindow: CmdWindow;
 
-  constructor(options: TCmdWindowsManagerOptions) {
+  constructor(options: CmdWindowsManagerOptions) {
     this.#cmdWindow = new CmdWindow(this, {
       mode: options.mode,
     });
@@ -22,7 +21,7 @@ export class CmdWindowsManager {
    * 获取自身实例
    * @param options
    */
-  static getInstance(options?: TCmdWindowsManagerOptions) {
+  static getInstance(options?: CmdWindowsManagerOptions) {
     if (!CmdWindowsManager.cmdWindowsManager && options) {
       CmdWindowsManager.cmdWindowsManager = new CmdWindowsManager(options);
     }
@@ -37,7 +36,7 @@ export class CmdWindowsManager {
   }
 
   /**
-   * 获取当前windowId对应的上下文
+   * 获取当前windowId对应的上下文，没有则创建
    * @param windowId
    */
   getCmdContext(windowId: number): CmdWindowContext {
@@ -45,10 +44,18 @@ export class CmdWindowsManager {
     if (ctx) return ctx;
     const newCtx: CmdWindowContext = new CmdWindowContext(this.getCmdWindow(), {
       windowId,
-      mode: this.#mode,
     });
     this.#ctxMap.set(windowId, newCtx);
     return newCtx;
+  }
+
+  /**
+   * 仅获取当前windowId对应的上下文
+   * @param windowId
+   */
+  getCmdContextCache(windowId: number): CmdWindowContext | undefined {
+    const ctx = this.#ctxMap.get(windowId);
+    return ctx;
   }
 
   /**
