@@ -1,0 +1,50 @@
+# Source files (keep for TypeScript resolution)
+# src/
+docs/
+examples/
+tests/
+__tests__/
+
+# Config files
+vite.config.ts
+rollup.config.js
+postcss.config.js
+tailwind.config.js
+tsconfig.json
+tsconfig.node.json
+eslint.config.js
+.eslintrc.*
+.prettierrc*
+.bundlesizerc.json
+
+# Development files
+node_modules/
+.vscode/
+.idea/
+.github/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build artifacts (temporary)
+.cache/
+.temp/
+.tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env*
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

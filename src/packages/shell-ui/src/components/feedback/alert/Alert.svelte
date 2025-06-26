@@ -93,7 +93,7 @@ ShAlert 警告框组件
 <script lang="ts">
   import { tv } from 'tailwind-variants';
   import { tuc } from '@istock-shell/util';
-  import { ShIcon } from '@istock-shell/ui';
+  import { ShIcon } from '../../index';
 
   const {
     soft = false, // 柔和样式模式

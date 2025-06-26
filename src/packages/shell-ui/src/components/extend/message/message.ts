@@ -7,6 +7,7 @@ import Message from './Message.svelte';
 interface MessageOptions extends Partial<AlertProps> {
   message: string; // 消息内容
   duration?: number; // 显示时长
+  type?: AlertProps['type']; // 消息类型
 }
 
 // 全局消息容器引用

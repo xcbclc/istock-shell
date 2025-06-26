@@ -102,17 +102,18 @@ npm install @istock-shell/ui
 
 #### Menu 属性
 
-| 属性名            | 类型                                | 默认值       | 说明                                             |
-| ----------------- | ----------------------------------- | ------------ | ------------------------------------------------ |
-| `isRoot`          | `boolean`                           | `true`       | 是否为根菜单，用于初始化上下文数据和激活状态管理 |
-| `collapsed`       | `boolean`                           | `false`      | 菜单是否处于折叠状态，影响子菜单的显示           |
-| `canToggle`       | `boolean`                           | `true`       | 是否允许切换折叠状态，控制菜单项的交互行为       |
-| `items`           | [`MenuItemProps[]`](#menuitem-属性) | `[]`         | 菜单项数据列表，用于数据驱动渲染菜单结构         |
-| `layout`          | [`MenuLayout`](#menulayout)         | `'vertical'` | 菜单布局方向，支持垂直和水平两种模式             |
-| `size`            | [`MenuSize`](#menusize)             | `'md'`       | 菜单尺寸规格，影响菜单项的大小和间距             |
-| `toggleType`      | `1 \| 2`                            | `1`          | 切换类型：1-下拉菜单模式，2-详情展开模式         |
-| `onMenuItemClick` | `(item: MenuItemProps) => void`     | -            | 菜单项点击事件回调函数，传递被点击的菜单项数据   |
-| `class`           | `string`                            | `''`         | 自定义CSS类名                                    |
+| 属性名              | 类型                               | 默认值          | 说明                       |
+|------------------|----------------------------------|--------------|--------------------------|
+| `isRoot`         | `boolean`                        | `true`       | 是否为根菜单，用于初始化上下文数据和激活状态管理 |
+| `collapsed`      | `boolean`                        | `false`      | 菜单是否处于折叠状态，影响子菜单的显示      |
+| `canToggle`      | `boolean`                        | `true`       | 是否允许切换折叠状态，控制菜单项的交互行为    |
+| `items`          | [`MenuItemProps[]`](#menuitem-属性) | `[]`         | 菜单项数据列表，用于数据驱动渲染菜单结构     |
+|  `selectedKey`   | `string`                          | -            | 设置被选择激活的菜单项key           |
+| `layout`         | [`MenuLayout`](#menulayout)      | `'vertical'` | 菜单布局方向，支持垂直和水平两种模式       |
+| `size`           | [`MenuSize`](#menusize)          | `'md'`       | 菜单尺寸规格，影响菜单项的大小和间距       |
+| `toggleType`     | `1 \| 2`                         | `1`          | 切换类型：1-下拉菜单模式，2-详情展开模式   |
+| `onMenuItemClick` | `(item: MenuItemProps) => void`  | -            | 菜单项点击事件回调函数，传递被点击的菜单项数据  |
+| `class`          | `string`                         | `''`         | 自定义CSS类名                 |
 
 #### Menu 代码片段插入位置
 

@@ -138,7 +138,11 @@ ShBreadcrumbs 面包屑导航组件
       <!-- 渲染通过items属性传入的面包屑项 -->
       {#each items as item, index}
         <!-- 面包屑项组件：传递尺寸、项数据和点击事件处理函数 -->
-        <ShBreadcrumbItem {size} {...item} onItemClick={(clickedItem) => handleItemClick(clickedItem, index)} />
+        <ShBreadcrumbItem
+          {size}
+          {...item}
+          onItemClick={(clickedItem) => handleItemClick(clickedItem, index)}
+        />
       {/each}
     </ul>
   {/if}
