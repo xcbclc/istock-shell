@@ -1,6 +1,11 @@
 <script lang="ts">
   import { ShMenu, type MenuItemProps } from '@istock-shell/ui';
-  const titleItems = [{ text: 'Title', isTitle: true }, { text: 'Item 1' }, { text: 'Item 2' }, { text: 'Item 3' }];
+  const titleItems = [
+    { text: 'Title', isTitle: true },
+    { text: 'Item 1' },
+    { text: 'Item 2' },
+    { text: 'Item 3' },
+  ];
   const titleParentItems: MenuItemProps[] = [
     {
       text: 'Title',

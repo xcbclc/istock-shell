@@ -206,7 +206,8 @@ ShTableRow 表格行组件
   const selectValue: unknown = $derived.by(() => {
     if (!rowKey) return list[0]?.value; // 无 rowKey 时取首个单元格值作为标识
     // 根据 rowKey 配置查找对应的单元格值
-    return list.find((item) => item.dataKey === (isFunction(rowKey) ? rowKey({ list }) : rowKey))?.value;
+    return list.find((item) => item.dataKey === (isFunction(rowKey) ? rowKey({ list }) : rowKey))
+      ?.value;
   });
 
   /**

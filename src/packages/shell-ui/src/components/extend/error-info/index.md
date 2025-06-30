@@ -1,7 +1,20 @@
 ---
 title: ErrorInfo 错误信息组件 | IStock Shell UI
 description: ErrorInfo错误信息组件提供标准化的错误信息展示方案，支持错误标题、详细描述和堆栈信息的结构化显示，基于ShText组件构建，提供完整的类型安全和响应式支持，适用于接口异常、开发调试、错误恢复等各种错误处理场景。
-keywords: [ErrorInfo错误信息组件, Svelte错误展示, 异常反馈UI, 错误处理组件, 堆栈信息展示, UI组件库, 错误调试, Web组件, 用户界面, UX设计, 错误恢复]
+keywords:
+  [
+    ErrorInfo错误信息组件,
+    Svelte错误展示,
+    异常反馈UI,
+    错误处理组件,
+    堆栈信息展示,
+    UI组件库,
+    错误调试,
+    Web组件,
+    用户界面,
+    UX设计,
+    错误恢复,
+  ]
 aside: false
 editLink: false
 outline: [2, 4]
@@ -48,16 +61,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景类型     | 配置建议                                    | 适用情况                       |
-| ------------ | ------------------------------------------- | ------------------------------ |
-| 接口异常     | `title` + `description`                    | API请求失败、网络错误等        |
-| 开发调试     | `title` + `description` + `stack`          | 开发环境的错误堆栈展示         |
-| 用户操作错误 | `title` + `description`                    | 表单验证失败、操作权限不足等   |
-| 系统异常     | `title` + `description` + `stack`          | 系统内部错误、运行时异常等     |
-| 简单提示     | `title`                                     | 简单的错误提示信息             |
-| 404错误      | `title="页面未找到"` + `description`      | 页面不存在、资源丢失等         |
-| 权限错误     | `title="访问被拒绝"` + `description`      | 用户权限不足、登录过期等       |
-| 数据错误     | `title` + `description`                    | 数据格式错误、数据缺失等       |
+| 场景类型     | 配置建议                             | 适用情况                     |
+| ------------ | ------------------------------------ | ---------------------------- |
+| 接口异常     | `title` + `description`              | API请求失败、网络错误等      |
+| 开发调试     | `title` + `description` + `stack`    | 开发环境的错误堆栈展示       |
+| 用户操作错误 | `title` + `description`              | 表单验证失败、操作权限不足等 |
+| 系统异常     | `title` + `description` + `stack`    | 系统内部错误、运行时异常等   |
+| 简单提示     | `title`                              | 简单的错误提示信息           |
+| 404错误      | `title="页面未找到"` + `description` | 页面不存在、资源丢失等       |
+| 权限错误     | `title="访问被拒绝"` + `description` | 用户权限不足、登录过期等     |
+| 数据错误     | `title` + `description`              | 数据格式错误、数据缺失等     |
 
 ## 示例演示
 
@@ -67,13 +80,13 @@ npm install @istock-shell/ui
 
 ### 属性说明
 
-| 属性名        | 类型                                | 默认值 | 说明                                   |
-| ------------- | ----------------------------------- | ------ | -------------------------------------- |
-| `title`       | `string`                            | -      | 错误标题，主要错误信息的标题文本       |
-| `description` | `string`                            | -      | 错误描述，详细的错误说明信息           |
-| `stack`       | `string[]`                          | `[]`   | 错误堆栈信息数组，每个元素代表堆栈一行 |
-| `class`       | `string`                            | -      | 自定义CSS类名                          |
-| `...`         | [`TextBaseProps`](#textbaseprops)   | -      | 继承 TextBase 组件的所有属性（除tag）  |
+| 属性名        | 类型                              | 默认值 | 说明                                   |
+| ------------- | --------------------------------- | ------ | -------------------------------------- |
+| `title`       | `string`                          | -      | 错误标题，主要错误信息的标题文本       |
+| `description` | `string`                          | -      | 错误描述，详细的错误说明信息           |
+| `stack`       | `string[]`                        | `[]`   | 错误堆栈信息数组，每个元素代表堆栈一行 |
+| `class`       | `string`                          | -      | 自定义CSS类名                          |
+| `...`         | [`TextBaseProps`](#textbaseprops) | -      | 继承 TextBase 组件的所有属性（除tag）  |
 
 ### 代码片段插入位置
 
@@ -163,21 +176,18 @@ type TextBaseProps = {
 ### 使用建议
 
 1. **分层展示**：根据用户类型选择合适的信息层次
+
    ```svelte
    <!-- 普通用户：仅显示友好信息 -->
    <ShErrorInfo title="操作失败" description="请检查网络连接后重试" />
-   
+
    <!-- 开发者：显示完整信息 -->
-   <ShErrorInfo 
-     title="API请求失败" 
-     description="服务器返回500错误" 
-     stack={errorStack} 
-   />
+   <ShErrorInfo title="API请求失败" description="服务器返回500错误" stack={errorStack} />
    ```
 
 2. **条件渲染**：根据环境和用户权限显示不同内容
    ```svelte
-   <ShErrorInfo 
+   <ShErrorInfo
      title={error.title}
      description={error.description}
      stack={isDev ? error.stack : undefined}

@@ -198,7 +198,19 @@ type BreadcrumbsSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 ```typescript
 // 面包屑导航最大宽度类型
-type BreadcrumbsMaxWidth = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
+type BreadcrumbsMaxWidth =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl'
+  | '7xl'
+  | 'full';
 ```
 
 ## 设计指南

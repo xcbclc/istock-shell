@@ -391,7 +391,9 @@ ShForm 表单组件
         },
         // 检查属性是否存在
         has(target, prop) {
-          return prop in target || ['value', 'error'].includes(prop as string) || prop in otherField;
+          return (
+            prop in target || ['value', 'error'].includes(prop as string) || prop in otherField
+          );
         },
       }),
     };
@@ -431,7 +433,15 @@ ShForm 表单组件
       has(target, prop) {
         return (
           prop in target ||
-          ['layout', 'labelWidth', 'labelPlacement', 'color', 'size', 'variant', 'touched'].includes(prop as string) ||
+          [
+            'layout',
+            'labelWidth',
+            'labelPlacement',
+            'color',
+            'size',
+            'variant',
+            'touched',
+          ].includes(prop as string) ||
           prop in otherFormItem
         );
       },
@@ -466,7 +476,10 @@ ShForm 表单组件
       if (!Object.keys(validator).length && !field.required) return;
 
       // 必填验证
-      if ((validator.required || field.required) && (value === undefined || value === null || value === '')) {
+      if (
+        (validator.required || field.required) &&
+        (value === undefined || value === null || value === '')
+      ) {
         formErrors[name] = `${fieldLabel}不能为空`;
         return;
       }
@@ -475,7 +488,10 @@ ShForm 表单组件
       if (value !== undefined && value !== null && value !== '') {
         // 正则表达式验证
         if (validator.pattern) {
-          const pattern = typeof validator.pattern === 'string' ? new RegExp(validator.pattern) : validator.pattern;
+          const pattern =
+            typeof validator.pattern === 'string'
+              ? new RegExp(validator.pattern)
+              : validator.pattern;
 
           if (!pattern.test(String(value))) {
             formErrors[name] = `${fieldLabel}格式不正确`;
@@ -616,7 +632,11 @@ ShForm 表单组件
 </script>
 
 <!-- 表单容器 -->
-<form class={[tuc(formVariants({ layout, size, cols })), className]} {...otherProps} onsubmit={onFormSubmit}>
+<form
+  class={[tuc(formVariants({ layout, size, cols })), className]}
+  {...otherProps}
+  onsubmit={onFormSubmit}
+>
   {#if children}
     <!-- 如果提供了自定义子内容，则渲染子内容 -->
     {@render children?.()}
@@ -631,7 +651,12 @@ ShForm 表单组件
     {#if showReset || showSubmit}
       <div
         class={tuc(
-          formButtonVariants({ layout, size, cols: layout === 'vertical' ? cols : 0, placement: buttonPlacement })
+          formButtonVariants({
+            layout,
+            size,
+            cols: layout === 'vertical' ? cols : 0,
+            placement: buttonPlacement,
+          })
         )}
       >
         {#if showReset}

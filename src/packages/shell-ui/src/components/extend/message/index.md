@@ -66,16 +66,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                    | 说明                           |
-| ------------ | --------------------------- | ------------------------------ |
-| 表单提交反馈 | `success` 或 `error` 类型   | 表单提交成功或失败的状态反馈   |
-| 操作确认     | `info` 类型                 | 操作执行中或需要用户知晓的信息 |
-| 警告提醒     | `warning` 类型              | 需要用户注意但不阻断的提醒     |
-| 错误通知     | `error` 类型                | 操作失败、系统错误等负面反馈   |
-| 成功确认     | `success` 类型              | 保存成功、操作完成等正面反馈   |
-| 普通提示     | `alert` 类型                | 一般性提示信息，无特殊语义     |
-| 系统消息     | 自定义 `duration` 配置      | 系统推送的重要消息             |
-| 临时提示     | 短 `duration` 配置          | 快速消失的轻量级提示           |
+| 场景         | 推荐配置                  | 说明                           |
+| ------------ | ------------------------- | ------------------------------ |
+| 表单提交反馈 | `success` 或 `error` 类型 | 表单提交成功或失败的状态反馈   |
+| 操作确认     | `info` 类型               | 操作执行中或需要用户知晓的信息 |
+| 警告提醒     | `warning` 类型            | 需要用户注意但不阻断的提醒     |
+| 错误通知     | `error` 类型              | 操作失败、系统错误等负面反馈   |
+| 成功确认     | `success` 类型            | 保存成功、操作完成等正面反馈   |
+| 普通提示     | `alert` 类型              | 一般性提示信息，无特殊语义     |
+| 系统消息     | 自定义 `duration` 配置    | 系统推送的重要消息             |
+| 临时提示     | 短 `duration` 配置        | 快速消失的轻量级提示           |
 
 ## 示例演示
 
@@ -85,23 +85,23 @@ npm install @istock-shell/ui
 
 ### 全局方法
 
-| 方法名                | 说明         | 参数类型                                                | 返回值            |
-| --------------------- | ------------ | ------------------------------------------------------- | ----------------- |
-| `shShowMessage.alert` | 显示普通提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
-| `shShowMessage.info`  | 显示信息提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
+| 方法名                  | 说明         | 参数类型                                               | 返回值            |
+| ----------------------- | ------------ | ------------------------------------------------------ | ----------------- |
+| `shShowMessage.alert`   | 显示普通提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
+| `shShowMessage.info`    | 显示信息提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
 | `shShowMessage.success` | 显示成功提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
 | `shShowMessage.warning` | 显示警告提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
-| `shShowMessage.error` | 显示错误提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
+| `shShowMessage.error`   | 显示错误提示 | `(message: string, options?: Partial<MessageOptions>)` | `SvelteComponent` |
 
 ### Message 组件属性
 
-| 属性名      | 类型                    | 默认值  | 说明                                   |
-| ----------- | ----------------------- | ------- | -------------------------------------- |
-| `message`   | `string`                | -       | 消息内容文本                           |
-| `duration`  | `number`                | `3000`  | 显示持续时间（毫秒），设为0时禁用自动关闭 |
-| `onClose`   | `() => void`            | -       | 关闭回调函数                           |
-| `alertProps` | `Partial<AlertProps>`   | `{}`    | Alert 组件的配置选项                   |
-| `class`     | `string`                | `''`    | 自定义CSS类名                          |
+| 属性名       | 类型                  | 默认值 | 说明                                      |
+| ------------ | --------------------- | ------ | ----------------------------------------- |
+| `message`    | `string`              | -      | 消息内容文本                              |
+| `duration`   | `number`              | `3000` | 显示持续时间（毫秒），设为0时禁用自动关闭 |
+| `onClose`    | `() => void`          | -      | 关闭回调函数                              |
+| `alertProps` | `Partial<AlertProps>` | `{}`   | Alert 组件的配置选项                      |
+| `class`      | `string`              | `''`   | 自定义CSS类名                             |
 
 ### 事件
 

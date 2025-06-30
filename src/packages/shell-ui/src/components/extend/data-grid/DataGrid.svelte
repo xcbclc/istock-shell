@@ -97,6 +97,8 @@ ShDataGrid 数据网格组件
     items?: DataGridItem[];
     /** 数据项列的宽度，支持数字（像素）或字符串（CSS 单位） @default 480 */
     itemColWidth?: number | string;
+    /** 内容被加载 **/
+    onContentLoaded?: (success: Boolean) => void;
   }
 </script>
 
@@ -108,6 +110,7 @@ ShDataGrid 数据网格组件
     stats = [], // 统计指标配置列表，默认为空数组
     items = [], // 数据项配置列表，默认为空数组
     itemColWidth = 480, // 数据项列宽，默认480像素
+    onContentLoaded, // 内容被加载回调
   }: DataGridProps = $props();
 
   // 组件缓存对象，用于存储已加载的异步组件，避免重复加载
@@ -166,9 +169,11 @@ ShDataGrid 数据网格组件
         {:then Component}
           <!-- 加载成功：渲染组件并传递所有属性 -->
           <Component {...itemProps} />
+          {onContentLoaded?.(true)}
         {:catch error}
           <!-- 加载失败：显示错误信息组件 -->
           <ShErrorInfo description={error.message} />
+          {onContentLoaded?.(false)}
         {/await}
       {:else}
         <!-- 直接组件渲染：使用 svelte:component 动态渲染组件 -->

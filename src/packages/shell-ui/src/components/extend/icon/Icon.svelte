@@ -96,11 +96,14 @@ ShIcon 图标组件
    * - eager: false - 懒加载，按需导入
    * - query: '?raw' - 以原始文本形式导入SVG内容
    */
-  const iconUrlRecord: Record<string, () => Promise<string>> = import.meta.glob<string>('./svg/**/*.svg', {
-    import: 'default',
-    eager: false,
-    query: '?raw',
-  });
+  const iconUrlRecord: Record<string, () => Promise<string>> = import.meta.glob<string>(
+    './svg/**/*.svg',
+    {
+      import: 'default',
+      eager: false,
+      query: '?raw',
+    }
+  );
 
   /**
    * 图标名称到加载函数的映射表
@@ -110,16 +113,19 @@ ShIcon 图标组件
    * 2. 提取文件名（去除路径和扩展名）
    * 3. 建立名称到加载函数的映射关系
    */
-  const iconNameRecord = Object.keys(iconUrlRecord).reduce<Record<string, () => Promise<string>>>((record, key) => {
-    const k = key
-      .split('/')
-      .reverse()
-      .find((k) => k.endsWith('.svg'));
-    if (k) {
-      record[k.replace('.svg', '')] = iconUrlRecord[key];
-    }
-    return record;
-  }, {});
+  const iconNameRecord = Object.keys(iconUrlRecord).reduce<Record<string, () => Promise<string>>>(
+    (record, key) => {
+      const k = key
+        .split('/')
+        .reverse()
+        .find((k) => k.endsWith('.svg'));
+      if (k) {
+        record[k.replace('.svg', '')] = iconUrlRecord[key];
+      }
+      return record;
+    },
+    {}
+  );
 </script>
 
 <!--
@@ -130,7 +136,11 @@ ShIcon 图标组件
   - 当size为预设值时，使用CSS类名控制尺寸
 -->
 <i
-  class={[tuc(iconVariants({ color, size: isNumber(size) ? undefined : size })), 'inline-block', className]}
+  class={[
+    tuc(iconVariants({ color, size: isNumber(size) ? undefined : size })),
+    'inline-block',
+    className,
+  ]}
   {...otherProps}
   style:width={isNumber(size) ? `${size}px` : undefined}
   style:height={isNumber(size) ? `${size}px` : undefined}

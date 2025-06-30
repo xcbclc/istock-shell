@@ -18,7 +18,7 @@ const props = defineProps({
   },
   height: {
     type: String || Number,
-    require: false,
+    default: 480,
   },
 });
 const src = computed(() => {
@@ -32,7 +32,6 @@ const style = computed(() => {
 <style>
 iframe.istock-shell-demo {
   width: 100%;
-  height: 480px;
   border: 1px solid var(--vp-c-brand-soft);
   border-radius: 8px;
   background-color: transparent;

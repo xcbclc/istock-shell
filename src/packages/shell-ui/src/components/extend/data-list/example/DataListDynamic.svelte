@@ -9,7 +9,11 @@
     // 模拟异步搜索
     return await new Promise((resolve) => {
       setTimeout(() => {
-        const results = [{ value: `${keyword}-1` }, { value: `${keyword}-2` }, { value: `${keyword}-3` }];
+        const results = [
+          { value: `${keyword}-1` },
+          { value: `${keyword}-2` },
+          { value: `${keyword}-3` },
+        ];
         resolve(results);
       }, 300);
     });

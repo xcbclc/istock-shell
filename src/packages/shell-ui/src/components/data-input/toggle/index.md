@@ -2,7 +2,19 @@
 title: Toggle 开关组件 | IStock Shell UI
 description: Toggle开关组件提供直观的二元状态切换功能，支持8种主题色彩、5种尺寸规格、标签配置、不确定状态等特性，适用于设置开关、功能启用、状态切换等各种交互场景。
 keywords:
-  [Toggle开关组件, Svelte开关, 状态切换, 表单控件, 二元开关, UI组件库, 交互组件, Web组件, 用户界面, UX设计, 响应式开关]
+  [
+    Toggle开关组件,
+    Svelte开关,
+    状态切换,
+    表单控件,
+    二元开关,
+    UI组件库,
+    交互组件,
+    Web组件,
+    用户界面,
+    UX设计,
+    响应式开关,
+  ]
 aside: false
 editLink: false
 outline: [2, 4]
@@ -126,7 +138,15 @@ npm install @istock-shell/ui
 
 ```typescript
 // 开关颜色类型
-type ToggleColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type ToggleColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### ToggleSize

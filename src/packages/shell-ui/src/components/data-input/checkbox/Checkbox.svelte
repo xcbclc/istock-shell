@@ -197,7 +197,11 @@ ShCheckbox 复选框组件
         <!-- 带标签的复选框项 -->
         <label
           class={tuc(
-            checkboxLabelVariants({ type: label?.type, size: otherProps.size, color: otherProps.color }),
+            checkboxLabelVariants({
+              type: label?.type,
+              size: otherProps.size,
+              color: otherProps.color,
+            }),
             label?.class ?? ''
           )}
         >

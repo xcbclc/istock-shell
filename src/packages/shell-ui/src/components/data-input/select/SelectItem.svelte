@@ -94,6 +94,8 @@ ShSelectItem 选择项组件
   - 显示文本优先使用 label，如果没有则使用 value
   - 透传所有其他属性到原生 option 元素
 -->
-<option {...otherProps} disabled={option?.disabled} value={option?.value}>{option?.label ?? option?.value}</option>
+<option {...otherProps} disabled={option?.disabled} value={option?.value}
+  >{option?.label ?? option?.value}</option
+>
 
 <style></style>

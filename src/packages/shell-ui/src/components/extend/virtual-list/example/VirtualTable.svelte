@@ -62,7 +62,13 @@
   };
 </script>
 
-<ShVirtualList bind:this={virtualList} {list} {onRangeChange} thresholdTop={40} class="w-full max-h-100">
+<ShVirtualList
+  bind:this={virtualList}
+  {list}
+  {onRangeChange}
+  thresholdTop={40}
+  class="w-full max-h-100"
+>
   {#if range}
     <ShTable {thead} {tbody} onRender={onItemResize} pinRows size="sm" />
   {/if}

@@ -43,37 +43,25 @@ yarn add @istock-shell/ui
 ```svelte
 <script>
   import { ShButton, ShInput, ShAlert } from '@istock-shell/ui';
-  
+
   let message = '';
   let showAlert = false;
-  
+
   function handleSubmit() {
     showAlert = true;
-    setTimeout(() => showAlert = false, 3000);
+    setTimeout(() => (showAlert = false), 3000);
   }
 </script>
 
 <!-- 输入框 -->
-<ShInput 
-  bind:value={message} 
-  placeholder="输入你的消息"
-  color="primary"
-/>
+<ShInput bind:value={message} placeholder="输入你的消息" color="primary" />
 
 <!-- 按钮 -->
-<ShButton 
-  color="primary" 
-  size="lg"
-  onclick={handleSubmit}
->
-  发送消息
-</ShButton>
+<ShButton color="primary" size="lg" onclick={handleSubmit}>发送消息</ShButton>
 
 <!-- 提示信息 -->
 {#if showAlert}
-  <ShAlert color="success">
-    消息发送成功！
-  </ShAlert>
+  <ShAlert color="success">消息发送成功！</ShAlert>
 {/if}
 ```
 
@@ -89,13 +77,17 @@ yarn add @istock-shell/ui
 ## 📦 组件概览
 
 ### 🎬 动作组件 (3个)
+
 用于触发操作和用户交互
+
 - **Button** - 按钮组件，支持8种颜色主题和多种样式变体
 - **Dropdown** - 下拉菜单，支持位置自适应和键盘导航
 - **Modal** - 模态框，支持层级管理和焦点锁定
 
 ### 📝 数据录入 (7个)
+
 用于用户输入和数据收集
+
 - **Input** - 输入框，支持多种类型和验证状态
 - **Textarea** - 文本域，支持自适应高度
 - **Select** - 选择器，支持单选/多选和搜索过滤
@@ -105,26 +97,34 @@ yarn add @istock-shell/ui
 - **FieldSet** - 字段集，用于表单分组
 
 ### 📊 数据展示 (4个)
+
 用于数据可视化和信息展示
+
 - **Table** - 表格，支持排序、筛选、分页
 - **List** - 列表，支持虚拟滚动和无限加载
 - **Stat** - 统计数值，支持趋势指示
 - **Kbd** - 键盘按键，用于快捷键展示
 
 ### 🔔 反馈组件 (4个)
+
 用于用户反馈和状态提示
+
 - **Alert** - 警告提示，支持4种类型
 - **Toast** - 消息提示，支持自动消失
 - **Loading** - 加载状态，支持多种样式
 - **Tooltip** - 工具提示，支持智能定位
 
 ### 🧭 导航组件 (2个)
+
 用于页面导航和路径指示
+
 - **Menu** - 菜单，支持多级嵌套
 - **Breadcrumbs** - 面包屑，支持路径导航
 
 ### 🎨 扩展组件 (13个)
+
 专业功能组件，满足复杂业务需求
+
 - **Chart** - 图表组件，基于AntV G2
 - **VirtualTable** - 虚拟表格，支持万级数据渲染
 - **VirtualList** - 虚拟列表，大数据量优化
@@ -142,6 +142,7 @@ yarn add @istock-shell/ui
 ## 🎨 主题系统
 
 ### 颜色主题
+
 IStock Shell UI 提供8种预设颜色主题：
 
 - `primary` - 主色调
@@ -154,9 +155,11 @@ IStock Shell UI 提供8种预设颜色主题：
 - `error` - 错误色
 
 ### 尺寸规格
+
 支持5种尺寸规格：`xs`、`sm`、`md`、`lg`、`xl`
 
 ### 自定义主题
+
 ```css
 :root {
   --primary: #3b82f6;
@@ -169,16 +172,19 @@ IStock Shell UI 提供8种预设颜色主题：
 ## 🌟 使用场景
 
 ### 💻 终端应用
+
 - **命令行界面**：现代化的终端UI体验
 - **开发工具**：IDE插件、调试工具界面
 - **系统监控**：服务器状态、日志查看
 
 ### 🤖 AI交互
+
 - **聊天界面**：对话式AI交互
 - **代码助手**：AI编程辅助工具
 - **智能问答**：知识库查询界面
 
 ### 📊 数据应用
+
 - **数据看板**：实时数据监控
 - **报表系统**：业务数据展示
 - **分析工具**：数据可视化平台

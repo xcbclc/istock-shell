@@ -214,7 +214,11 @@ ShICalendarModal 日历事件详情模态框组件
     {#if closeButton}
       <!-- 关闭按钮 -->
       <form method="dialog" class={tuc('absolute right-3 top-3 z-100')}>
-        <ShButton size="sm" shape="circle" class={tuc('backdrop-blur-sm transition-all duration-200')} ghost>✕</ShButton
+        <ShButton
+          size="sm"
+          shape="circle"
+          class={tuc('backdrop-blur-sm transition-all duration-200')}
+          ghost>✕</ShButton
         >
       </form>
     {/if}
@@ -227,22 +231,30 @@ ShICalendarModal 日历事件详情模态框组件
           <div class={tuc('flex gap-2 flex-wrap')}>
             {#if isVEvent(data)}
               <span
-                class={[tuc('badge badge-outline badge-sm shadow-xs transition-all'), getEventStatusColor(data.status)]}
+                class={[
+                  tuc('badge badge-outline badge-sm shadow-xs transition-all'),
+                  getEventStatusColor(data.status),
+                ]}
                 >{data.status && ICalendarEventStatusTextRecord[data.status]
                   ? ICalendarEventStatusTextRecord[data.status]
                   : '未确认'}</span
               >
             {:else}
               <span
-                class={[tuc('badge badge-outline badge-sm shadow-xs transition-all'), getTodoStatusColor(data.status)]}
+                class={[
+                  tuc('badge badge-outline badge-sm shadow-xs transition-all'),
+                  getTodoStatusColor(data.status),
+                ]}
                 >{data.status && ICalendarTodoStatusTextRecord[data.status]
                   ? ICalendarTodoStatusTextRecord[data.status]
                   : '未设置'}</span
               >
             {/if}
             <span
-              class={[tuc('badge badge-outline badge-sm shadow-xs transition-all'), getPriorityColor(data.priority)]}
-              >优先级: {getPriorityLevelText(data.priority)}</span
+              class={[
+                tuc('badge badge-outline badge-sm shadow-xs transition-all'),
+                getPriorityColor(data.priority),
+              ]}>优先级: {getPriorityLevelText(data.priority)}</span
             >
             {#if data.url}
               <a
@@ -262,7 +274,9 @@ ShICalendarModal 日历事件详情模态框组件
             <div class={tuc('icalendar-modal-content')}>
               <h3 class={tuc('icalendar-modal-field-title text-lg')}>
                 <span
-                  class={tuc('inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary')}
+                  class={tuc(
+                    'inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary'
+                  )}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -277,7 +291,11 @@ ShICalendarModal 日历事件详情模态框组件
                 </span>
                 {isVEvent(data) ? '事件' : '待办'}时间
               </h3>
-              <div class={tuc('space-y-3 group-hover:translate-x-0.5 transition-transform duration-300')}>
+              <div
+                class={tuc(
+                  'space-y-3 group-hover:translate-x-0.5 transition-transform duration-300'
+                )}
+              >
                 <div class={tuc('icalendar-modal-kv')}>
                   <span class={tuc('icalendar-modal-kv-title')}>开始时间:</span>
                   <span class="text-base-content font-medium">{formatDateTime(data.dtStart)}</span>
@@ -296,7 +314,9 @@ ShICalendarModal 日历事件详情模态框组件
                 {#if isVTodo(data) && data.completed}
                   <div class={tuc('icalendar-modal-kv')}>
                     <span class={tuc('icalendar-modal-kv-title')}>完成时间:</span>
-                    <span class="text-base-content font-medium">{formatDateTime(data.completed)}</span>
+                    <span class="text-base-content font-medium"
+                      >{formatDateTime(data.completed)}</span
+                    >
                   </div>
                 {/if}
                 {#if isVTodo(data) && data.percentComplete !== undefined}
@@ -310,7 +330,9 @@ ShICalendarModal 日历事件详情模态框组件
                           max="100"
                         ></progress>
                         <div
-                          class={tuc(`absolute -top-0.5 left-0 h-3 w-3 rounded-full bg-primary transition-all`)}
+                          class={tuc(
+                            `absolute -top-0.5 left-0 h-3 w-3 rounded-full bg-primary transition-all`
+                          )}
                           style={`left: ${Math.min(100, Math.max(0, data.percentComplete))}%`}
                         ></div>
                       </div>
@@ -327,7 +349,9 @@ ShICalendarModal 日历事件详情模态框组件
                 <div class={tuc('icalendar-modal-content')}>
                   <div class={tuc('icalendar-modal-field-title')}>
                     <span
-                      class={tuc('inline-flex items-center justify-center w-5 h-5 rounded-full bg-info/10 text-info')}
+                      class={tuc(
+                        'inline-flex items-center justify-center w-5 h-5 rounded-full bg-info/10 text-info'
+                      )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -343,7 +367,11 @@ ShICalendarModal 日历事件详情模态框组件
                     </span>
                     地点
                   </div>
-                  <p class={tuc('text-base-content group-hover:translate-x-0.5 transition-transform duration-300')}>
+                  <p
+                    class={tuc(
+                      'text-base-content group-hover:translate-x-0.5 transition-transform duration-300'
+                    )}
+                  >
                     {data.location}
                   </p>
                 </div>
@@ -372,7 +400,9 @@ ShICalendarModal 日历事件详情模态框组件
                     分类
                   </div>
                   <div
-                    class={tuc('flex flex-wrap gap-2 group-hover:translate-x-0.5 transition-transform duration-300')}
+                    class={tuc(
+                      'flex flex-wrap gap-2 group-hover:translate-x-0.5 transition-transform duration-300'
+                    )}
                   >
                     {#each data.categories as category}
                       <span
@@ -407,7 +437,11 @@ ShICalendarModal 日历事件详情模态框组件
                     </span>
                     组织者
                   </div>
-                  <p class={tuc('text-base-content group-hover:translate-x-0.5 transition-transform duration-300')}>
+                  <p
+                    class={tuc(
+                      'text-base-content group-hover:translate-x-0.5 transition-transform duration-300'
+                    )}
+                  >
                     {data.organizer.replace('mailto:', '')}
                   </p>
                 </div>
@@ -452,7 +486,9 @@ ShICalendarModal 日历事件详情模态框组件
             <div class={tuc('icalendar-modal-field')}>
               <h3 class={tuc('icalendar-modal-field-title')}>
                 <span
-                  class={tuc('inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary')}
+                  class={tuc(
+                    'inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary'
+                  )}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -504,7 +540,9 @@ ShICalendarModal 日历事件详情模态框组件
             <div class={tuc('icalendar-modal-field')}>
               <h3 class={tuc('icalendar-modal-field-title')}>
                 <span
-                  class={tuc('inline-flex items-center justify-center w-5 h-5 rounded-full bg-error/10 text-error')}
+                  class={tuc(
+                    'inline-flex items-center justify-center w-5 h-5 rounded-full bg-error/10 text-error'
+                  )}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -552,7 +590,9 @@ ShICalendarModal 日历事件详情模态框组件
             <div class={tuc('icalendar-modal-field')}>
               <h3 class={tuc('icalendar-modal-field-title')}>
                 <span
-                  class={tuc('inline-flex items-center justify-center w-5 h-5 rounded-full bg-accent/10 text-accent')}
+                  class={tuc(
+                    'inline-flex items-center justify-center w-5 h-5 rounded-full bg-accent/10 text-accent'
+                  )}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

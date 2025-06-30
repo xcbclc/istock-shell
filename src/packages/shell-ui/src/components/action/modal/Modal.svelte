@@ -172,7 +172,12 @@ ShModal 模态框组件
   使用原生 HTML dialog 元素作为模态框基础
   支持淡入淡出过渡动画和完整的样式定制
 -->
-<dialog bind:this={dialog} class={[tuc('modal'), className]} {...otherProps} transition:fade={{ duration: 500 }}>
+<dialog
+  bind:this={dialog}
+  class={[tuc('modal'), className]}
+  {...otherProps}
+  transition:fade={{ duration: 500 }}
+>
   {#if children}
     <!--
       自定义内容渲染
@@ -190,7 +195,8 @@ ShModal 模态框组件
           按钮样式为小尺寸圆形幽灵按钮
         -->
         <form method="dialog">
-          <ShButton size="sm" shape="circle" class={tuc('absolute right-2 top-2')} ghost>✕</ShButton>
+          <ShButton size="sm" shape="circle" class={tuc('absolute right-2 top-2')} ghost>✕</ShButton
+          >
         </form>
       {/if}
       {#if title}

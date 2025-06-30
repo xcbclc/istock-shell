@@ -57,7 +57,7 @@ npm install @istock-shell/ui
       { category: 'D', value: 13 },
       { category: 'E', value: 9 },
     ],
-    encode: { x: 'category', y: 'value' }
+    encode: { x: 'category', y: 'value' },
   };
 </script>
 
@@ -77,18 +77,18 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                     | 说明                               |
-| ------------ | ---------------------------- | ---------------------------------- |
-| 数据统计     | `type: 'interval'`           | 销售数据、用户统计、业绩分析       |
-| 趋势分析     | `type: 'line'`               | 时间序列数据、增长趋势、变化曲线   |
-| 占比展示     | `type: 'pie'`                | 市场份额、分类占比、构成分析       |
-| 关系分析     | `type: 'point'`              | 相关性分析、分布情况、聚类展示     |
-| 实时监控     | 动态数据 + `autoFit: true`   | 系统监控、实时数据、动态仪表盘     |
-| 报表展示     | 多图表组合                   | 数据报告、分析报表、综合展示       |
-| 移动端适配   | `autoFit: true`              | 响应式图表、移动设备、自适应布局   |
-| 交互探索     | 事件配置 + 动态更新          | 数据钻取、交互分析、动态筛选       |
-| 大屏展示     | 大尺寸 + 自定义主题          | 数据大屏、展示中心、可视化大屏     |
-| 嵌入式图表   | `show` 属性控制              | 卡片内图表、弹窗图表、条件展示     |
+| 场景       | 推荐配置                   | 说明                             |
+| ---------- | -------------------------- | -------------------------------- |
+| 数据统计   | `type: 'interval'`         | 销售数据、用户统计、业绩分析     |
+| 趋势分析   | `type: 'line'`             | 时间序列数据、增长趋势、变化曲线 |
+| 占比展示   | `type: 'pie'`              | 市场份额、分类占比、构成分析     |
+| 关系分析   | `type: 'point'`            | 相关性分析、分布情况、聚类展示   |
+| 实时监控   | 动态数据 + `autoFit: true` | 系统监控、实时数据、动态仪表盘   |
+| 报表展示   | 多图表组合                 | 数据报告、分析报表、综合展示     |
+| 移动端适配 | `autoFit: true`            | 响应式图表、移动设备、自适应布局 |
+| 交互探索   | 事件配置 + 动态更新        | 数据钻取、交互分析、动态筛选     |
+| 大屏展示   | 大尺寸 + 自定义主题        | 数据大屏、展示中心、可视化大屏   |
+| 嵌入式图表 | `show` 属性控制            | 卡片内图表、弹窗图表、条件展示   |
 
 ## 示例演示
 
@@ -98,11 +98,11 @@ npm install @istock-shell/ui
 
 ### 属性
 
-| 属性名    | 类型                            | 默认值 | 说明                                         |
-| --------- | ------------------------------- | ------ | -------------------------------------------- |
-| `options` | [`ChartOptions`](#chartoptions) | `{}`   | G2 图表配置选项，支持所有 G2 配置参数        |
-| `show`    | `boolean`                       | `true` | 控制图表显示/隐藏状态，支持双向绑定          |
-| `class`   | `string`                        | `''`   | 自定义容器 CSS 类名                          |
+| 属性名    | 类型                            | 默认值 | 说明                                  |
+| --------- | ------------------------------- | ------ | ------------------------------------- |
+| `options` | [`ChartOptions`](#chartoptions) | `{}`   | G2 图表配置选项，支持所有 G2 配置参数 |
+| `show`    | `boolean`                       | `true` | 控制图表显示/隐藏状态，支持双向绑定   |
+| `class`   | `string`                        | `''`   | 自定义容器 CSS 类名                   |
 
 ### 代码片段插入位置
 
@@ -219,7 +219,7 @@ A: 使用 `autoFit: true` 配置选项，图表会自动适应容器大小：
     type: 'line',
     autoFit: true, // 启用自适应
     data: chartData,
-    encode: { x: 'date', y: 'value' }
+    encode: { x: 'date', y: 'value' },
   };
 </script>
 
@@ -263,8 +263,8 @@ A: 通过 G2 的主题配置系统自定义样式：
     style: {
       fill: '#1f77b4',
       stroke: '#1f77b4',
-      lineWidth: 2
-    }
+      lineWidth: 2,
+    },
   };
 </script>
 
@@ -283,11 +283,11 @@ A: 可以通过数据采样、分页加载等方式优化：
     const step = Math.ceil(data.length / maxPoints);
     return data.filter((_, index) => index % step === 0);
   }
-  
+
   const options = {
     type: 'line',
     data: sampleData(largeDataset),
-    encode: { x: 'time', y: 'value' }
+    encode: { x: 'time', y: 'value' },
   };
 </script>
 
@@ -307,8 +307,8 @@ A: 通过 G2 的交互配置实现各种交互效果：
     interaction: {
       tooltip: true,
       brushX: true, // 启用 X 轴刷选
-      elementHighlight: true // 启用元素高亮
-    }
+      elementHighlight: true, // 启用元素高亮
+    },
   };
 </script>
 

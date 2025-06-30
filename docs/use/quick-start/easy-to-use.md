@@ -15,7 +15,7 @@
 ### 尝试输入命令
 
 1. **查找应用**：在底部的输入框中输入应用查找命令`yycz`，查看当前可用的应用列表。按回车键执行，即可看到应用列表输出结果。 示例：
-   <IStockShellDemo cmd="yycz" :domains="[]" height="200"/>
+   <IStockShellDemo cmd="yycz" :domains="[]"/>
 
 2. **进入应用**：要进入特定应用，输入应用进入命令`yyjr <应用名或应用别名>`。例如，要进入A股应用，输入`yyjr A股`，随后提示符路径会更新为A股应用的环境。 示例：
    <IStockShellDemo cmd="yyjr A股" :domains="[]" height="200"/>

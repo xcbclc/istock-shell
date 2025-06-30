@@ -1,9 +1,17 @@
 <script lang="ts">
   import { ShMenu } from '@istock-shell/ui';
 
-  const stateActiveItems = [{ text: '普通项' }, { text: '激活项', active: true }, { text: '普通项' }];
+  const stateActiveItems = [
+    { text: '普通项' },
+    { text: '激活项', active: true },
+    { text: '普通项' },
+  ];
   const stateFocusItems = [{ text: '普通项' }, { text: '聚焦项', focus: true }, { text: '普通项' }];
-  const stateDisabledItems = [{ text: '普通项' }, { text: '禁用项', disabled: true }, { text: '普通项' }];
+  const stateDisabledItems = [
+    { text: '普通项' },
+    { text: '禁用项', disabled: true },
+    { text: '普通项' },
+  ];
 </script>
 
 <div class="space-y-8">

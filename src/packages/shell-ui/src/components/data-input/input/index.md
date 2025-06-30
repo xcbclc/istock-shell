@@ -279,7 +279,13 @@ A: 使用 `prefixRender` 和 `suffixRender` 属性：
 A: 使用 Tailwind CSS 的响应式类名：
 
 ```svelte
-<ShInput type="text" bind:value={searchTerm} size="sm" class="sm:size-md lg:size-lg" placeholder="搜索内容" />
+<ShInput
+  type="text"
+  bind:value={searchTerm}
+  size="sm"
+  class="sm:size-md lg:size-lg"
+  placeholder="搜索内容"
+/>
 ```
 
 ### Q: 幽灵模式适用于什么场景？

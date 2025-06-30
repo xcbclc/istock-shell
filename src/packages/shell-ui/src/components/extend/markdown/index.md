@@ -73,16 +73,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                     | 说明                                     |
-| ------------ | ---------------------------- | ---------------------------------------- |
-| 文档展示     | 启用代码高亮、GFM支持       | 技术文档、API文档、用户手册、帮助中心    |
-| 内容管理     | 标准配置、安全渲染           | 博客文章、新闻内容、产品描述、CMS系统    |
-| 代码展示     | 代码高亮、多语言支持         | 代码片段、编程教程、技术分享、示例展示   |
-| 在线编辑     | 响应式更新、自定义样式       | Markdown编辑器、写作工具、实时预览       |
-| 评论系统     | 安全配置、内容过滤           | 用户评论、论坛回复、社区讨论             |
-| 邮件模板     | 简化配置、兼容性优先         | 邮件内容、通知模板、自动化消息           |
-| 技术博客     | 代码高亮 + 自定义主题        | 个人博客、技术分享、开发日志             |
-| 知识库       | GFM支持 + 搜索优化           | 企业知识库、FAQ系统、产品文档            |
+| 场景     | 推荐配置               | 说明                                   |
+| -------- | ---------------------- | -------------------------------------- |
+| 文档展示 | 启用代码高亮、GFM支持  | 技术文档、API文档、用户手册、帮助中心  |
+| 内容管理 | 标准配置、安全渲染     | 博客文章、新闻内容、产品描述、CMS系统  |
+| 代码展示 | 代码高亮、多语言支持   | 代码片段、编程教程、技术分享、示例展示 |
+| 在线编辑 | 响应式更新、自定义样式 | Markdown编辑器、写作工具、实时预览     |
+| 评论系统 | 安全配置、内容过滤     | 用户评论、论坛回复、社区讨论           |
+| 邮件模板 | 简化配置、兼容性优先   | 邮件内容、通知模板、自动化消息         |
+| 技术博客 | 代码高亮 + 自定义主题  | 个人博客、技术分享、开发日志           |
+| 知识库   | GFM支持 + 搜索优化     | 企业知识库、FAQ系统、产品文档          |
 
 ## 示例演示
 
@@ -93,12 +93,12 @@ npm install @istock-shell/ui
 
 ### 属性说明
 
-| 属性名        | 类型                                      | 默认值 | 说明                                                                     |
-| ------------- | ----------------------------------------- | ------ | ------------------------------------------------------------------------ |
-| `content`     | `string`                                  | `''`   | Markdown原始内容字符串，支持完整的Markdown语法和GitHub Flavored Markdown扩展 |
-| `options`     | [`MarkedExtension`](#markedextension)     | `{}`   | Marked解析器扩展配置对象，用于自定义解析行为、添加插件或修改渲染规则     |
-| `class`       | `string`                                  | `''`   | 自定义CSS类名，用于样式定制和主题覆盖                                   |
-| `...otherProps` | `HTMLAttributes<HTMLDivElement>`        | -      | 继承所有原生div元素的HTML属性，如id、style、data-*等                    |
+| 属性名          | 类型                                  | 默认值 | 说明                                                                         |
+| --------------- | ------------------------------------- | ------ | ---------------------------------------------------------------------------- |
+| `content`       | `string`                              | `''`   | Markdown原始内容字符串，支持完整的Markdown语法和GitHub Flavored Markdown扩展 |
+| `options`       | [`MarkedExtension`](#markedextension) | `{}`   | Marked解析器扩展配置对象，用于自定义解析行为、添加插件或修改渲染规则         |
+| `class`         | `string`                              | `''`   | 自定义CSS类名，用于样式定制和主题覆盖                                        |
+| `...otherProps` | `HTMLAttributes<HTMLDivElement>`      | -      | 继承所有原生div元素的HTML属性，如id、style、data-\*等                        |
 
 ### 代码片段插入位置
 
@@ -141,12 +141,12 @@ export interface MarkdownProps extends HTMLAttributes<HTMLDivElement> {
 ```typescript
 // Marked扩展配置类型（来自marked库）
 interface MarkedExtension {
-  breaks?: boolean;        // 是否将换行符转换为<br>
-  gfm?: boolean;          // 是否启用GitHub Flavored Markdown
-  pedantic?: boolean;     // 是否严格遵循原始markdown.pl规范
-  sanitize?: boolean;     // 是否清理HTML标签
-  smartLists?: boolean;   // 是否使用更智能的列表行为
-  smartypants?: boolean;  // 是否使用智能标点符号
+  breaks?: boolean; // 是否将换行符转换为<br>
+  gfm?: boolean; // 是否启用GitHub Flavored Markdown
+  pedantic?: boolean; // 是否严格遵循原始markdown.pl规范
+  sanitize?: boolean; // 是否清理HTML标签
+  smartLists?: boolean; // 是否使用更智能的列表行为
+  smartypants?: boolean; // 是否使用智能标点符号
   // ... 更多配置选项
 }
 ```
@@ -169,11 +169,11 @@ interface MarkedExtension {
   /* 标题样式 */
   --markdown-h1-color: #2c3e50;
   --markdown-h2-color: #34495e;
-  
+
   /* 代码块样式 */
   --markdown-code-bg: #f8f9fa;
   --markdown-code-border: #e9ecef;
-  
+
   /* 链接样式 */
   --markdown-link-color: #007bff;
   --markdown-link-hover-color: #0056b3;
@@ -250,12 +250,12 @@ A: 通过options属性传入自定义的Marked扩展配置：
     renderer: {
       link(href, title, text) {
         return `<a href="${href}" target="_blank">${text}</a>`;
-      }
-    }
+      },
+    },
   };
 </script>
 
-<ShMarkdown content={content} options={customOptions} />
+<ShMarkdown {content} options={customOptions} />
 ```
 
 ### Q: 如何处理大量内容的性能问题？
@@ -273,7 +273,7 @@ A: 是的，组件支持响应式内容更新。当content属性发生变化时�
 ```svelte
 <script>
   let markdownContent = $state('# 初始内容');
-  
+
   // 内容变化时会自动更新渲染
   function updateContent() {
     markdownContent = '# 更新后的内容';
@@ -288,4 +288,3 @@ A: 是的，组件支持响应式内容更新。当content属性发生变化时�
 查看 [GitHub Releases](https://github.com/xcbclc/istock-shell/releases) 了解详细的更新历史。
 
 > **提示**：参考[`marked`](https://marked.js.org/)了解更多配置
-

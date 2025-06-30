@@ -271,15 +271,16 @@
   /* ========================================
    * 字体系统
    * ======================================== */
-  --vp-font-family-base: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --vp-font-family-mono: ui-monospace, "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+  --vp-font-family-base:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --vp-font-family-mono: ui-monospace, 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
 }
 
 .dark {
   /* ========================================
    * 暗色主题特定覆盖
    * ======================================== */
-  
+
   /* 基础背景色系统 - 暗色主题调整 */
   --vp-c-bg: var(--color-base-100);
   --vp-c-bg-alt: var(--color-base-200);
@@ -288,7 +289,7 @@
   --vp-c-bg-elv-up: var(--color-base-300);
   --vp-c-bg-elv-down: var(--color-base-100);
   --vp-c-bg-elv-mute: color-mix(in oklch, var(--color-base-200) 70%, var(--color-base-100));
-  
+
   /* 文本颜色 - 暗色主题优化对比度 */
   --vp-c-text-1: var(--color-base-content);
   --vp-c-text-2: color-mix(in oklch, var(--color-base-content) 75%, transparent);
@@ -368,7 +369,7 @@
   --vp-c-border: color-mix(in oklch, var(--color-base-300) 70%, var(--color-base-content) 30%);
   --vp-c-divider: color-mix(in oklch, var(--color-base-200) 60%, var(--color-base-content) 40%);
   --vp-c-gutter: var(--vp-c-gray-soft);
-  
+
   /* 组件特定颜色 - 暗色主题优化 */
   /* 侧边栏 */
   --vp-sidebar-bg-color: var(--color-base-200);

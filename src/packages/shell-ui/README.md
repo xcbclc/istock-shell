@@ -38,20 +38,18 @@ yarn add @istock-shell/ui
 一个简单的按钮组件。
 
 **属性：**
+
 - `text: string` - 按钮文本（默认：'Click me'）
 - `disabled: boolean` - 是否禁用（默认：false）
 
 **事件：**
+
 - `on:click` - 点击事件
 
 **示例：**
 
 ```svelte
-<SimpleButton 
-  text="提交" 
-  disabled={false} 
-  on:click={() => console.log('clicked')} 
-/>
+<SimpleButton text="提交" disabled={false} on:click={() => console.log('clicked')} />
 ```
 
 ## 开发

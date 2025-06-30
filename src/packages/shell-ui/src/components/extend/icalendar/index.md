@@ -51,7 +51,7 @@ npm install @istock-shell/ui
 
   let currentDate = $state(new Date().toISOString().split('T')[0]);
   let currentView = $state('week');
-  
+
   const events = [
     {
       uid: 'event-1',
@@ -62,16 +62,12 @@ npm install @istock-shell/ui
       summary: '团队会议',
       description: '讨论项目进展和下周计划',
       location: '会议室A',
-      status: 'CONFIRMED'
-    }
+      status: 'CONFIRMED',
+    },
   ];
 </script>
 
-<ShICalendar 
-  bind:currentDate 
-  bind:currentView 
-  {events} 
-/>
+<ShICalendar bind:currentDate bind:currentView {events} />
 ```
 
 ## 组件特性
@@ -86,16 +82,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景           | 推荐配置                                    | 说明                                   |
-| -------------- | ------------------------------------------- | -------------------------------------- |
-| 企业办公系统   | 周视图 + 事件管理 + 通知提醒                | 团队日程协调、会议安排、工作计划       |
-| 项目管理       | 月视图 + 待办事项 + 优先级过滤              | 项目里程碑、任务跟踪、进度管理         |
-| 个人日程管理   | 日视图 + 事件详情 + 分类过滤                | 个人事务安排、生活规划、时间管理       |
-| 会议室预订     | 周视图 + 地点信息 + 状态过滤                | 资源预订、场地管理、冲突检测           |
-| 教育培训       | 月视图 + 课程事件 + 分类管理                | 课程安排、培训计划、学习进度           |
-| 医疗预约       | 日视图 + 患者信息 + 时间段管理              | 预约管理、医生排班、患者提醒           |
-| 活动策划       | 多视图切换 + 详细描述 + 参与者管理          | 活动安排、嘉宾邀请、流程管理           |
-| 生产排程       | 周视图 + 任务状态 + 优先级管理              | 生产计划、设备维护、质量检查           |
+| 场景         | 推荐配置                           | 说明                             |
+| ------------ | ---------------------------------- | -------------------------------- |
+| 企业办公系统 | 周视图 + 事件管理 + 通知提醒       | 团队日程协调、会议安排、工作计划 |
+| 项目管理     | 月视图 + 待办事项 + 优先级过滤     | 项目里程碑、任务跟踪、进度管理   |
+| 个人日程管理 | 日视图 + 事件详情 + 分类过滤       | 个人事务安排、生活规划、时间管理 |
+| 会议室预订   | 周视图 + 地点信息 + 状态过滤       | 资源预订、场地管理、冲突检测     |
+| 教育培训     | 月视图 + 课程事件 + 分类管理       | 课程安排、培训计划、学习进度     |
+| 医疗预约     | 日视图 + 患者信息 + 时间段管理     | 预约管理、医生排班、患者提醒     |
+| 活动策划     | 多视图切换 + 详细描述 + 参与者管理 | 活动安排、嘉宾邀请、流程管理     |
+| 生产排程     | 周视图 + 任务状态 + 优先级管理     | 生产计划、设备维护、质量检查     |
 
 ## 示例演示
 
@@ -107,17 +103,17 @@ npm install @istock-shell/ui
 
 #### ICalendar 属性
 
-| 属性名 | 类型 | 默认值 | 说明 |
-|--|--|--|--|
-| `events` | [`ICalendarVEvent[]`](#icalendarvevent) | `[]` | 日历事件列表，包含会议、活动等事件数据 |
-| `todos` | [`ICalendarVTodo[]`](#icalendarvtodo) | `[]` | 待办事项列表，包含任务、提醒等待办数据 |
-| `currentDate` | `string` | 当天日期 | 当前选中的日期，格式为 YYYY-MM-DD（双向绑定） |
-| `currentView` | [`ICalendarViewType`](#icalendarviewtype) | `'week'` | 当前视图类型，支持日（day）、周（week）、月（month）三种模式（双向绑定） |
-| `filterValue` | [`ICalendarFilterValue`](#icalendarfiltervalue) | `{}` | 过滤条件配置，用于筛选显示特定类型的事件或待办事项（双向绑定） |
-| `filters` | [`ICalendarFilterItem[]`](#icalendarfilteritem) | `[]` | 过滤选项列表，定义可用的筛选条件和选项 |
-| `notify` | `Omit<`[`ICalendarNotifyProps`](#icalendarnotifyprops)`, 'show'>` | `{}` | 通知组件配置，用于显示操作反馈和提醒信息（不包含show属性） |
-| `notifyShow` | `boolean` | `false` | 是否显示通知提示（双向绑定） |
-| `onlyView` | `boolean` | `false` | 仅查看模式，禁用所有交互功能，只展示日历内容 |
+| 属性名        | 类型                                                              | 默认值   | 说明                                                                     |
+| ------------- | ----------------------------------------------------------------- | -------- | ------------------------------------------------------------------------ |
+| `events`      | [`ICalendarVEvent[]`](#icalendarvevent)                           | `[]`     | 日历事件列表，包含会议、活动等事件数据                                   |
+| `todos`       | [`ICalendarVTodo[]`](#icalendarvtodo)                             | `[]`     | 待办事项列表，包含任务、提醒等待办数据                                   |
+| `currentDate` | `string`                                                          | 当天日期 | 当前选中的日期，格式为 YYYY-MM-DD（双向绑定）                            |
+| `currentView` | [`ICalendarViewType`](#icalendarviewtype)                         | `'week'` | 当前视图类型，支持日（day）、周（week）、月（month）三种模式（双向绑定） |
+| `filterValue` | [`ICalendarFilterValue`](#icalendarfiltervalue)                   | `{}`     | 过滤条件配置，用于筛选显示特定类型的事件或待办事项（双向绑定）           |
+| `filters`     | [`ICalendarFilterItem[]`](#icalendarfilteritem)                   | `[]`     | 过滤选项列表，定义可用的筛选条件和选项                                   |
+| `notify`      | `Omit<`[`ICalendarNotifyProps`](#icalendarnotifyprops)`, 'show'>` | `{}`     | 通知组件配置，用于显示操作反馈和提醒信息（不包含show属性）               |
+| `notifyShow`  | `boolean`                                                         | `false`  | 是否显示通知提示（双向绑定）                                             |
+| `onlyView`    | `boolean`                                                         | `false`  | 仅查看模式，禁用所有交互功能，只展示日历内容                             |
 
 #### ICalendar 代码片段插入位置
 
@@ -147,11 +143,11 @@ npm install @istock-shell/ui
 
 #### ICalendarFilter 属性
 
-| 属性名 | 类型 | 默认值 | 说明 |
-|--|--|--|--|
-| `filterValue` | [`ICalendarFilterValue`](#icalendarfiltervalue) | `{}` | 当前过滤条件值（双向绑定） |
-| `filters` | [`ICalendarFilterItem[]`](#icalendarfilteritem) | `[]` | 过滤选项列表配置 |
-| `onChangeFilterValue` | `(filterValue?: ICalendarFilterValue) => void` | - | 过滤条件变更时的回调函数 |
+| 属性名                | 类型                                            | 默认值 | 说明                       |
+| --------------------- | ----------------------------------------------- | ------ | -------------------------- |
+| `filterValue`         | [`ICalendarFilterValue`](#icalendarfiltervalue) | `{}`   | 当前过滤条件值（双向绑定） |
+| `filters`             | [`ICalendarFilterItem[]`](#icalendarfilteritem) | `[]`   | 过滤选项列表配置           |
+| `onChangeFilterValue` | `(filterValue?: ICalendarFilterValue) => void`  | -      | 过滤条件变更时的回调函数   |
 
 #### ICalendarFilter 代码片段插入位置
 
@@ -178,16 +174,16 @@ npm install @istock-shell/ui
 
 #### ICalendarNotify 属性
 
-| 属性名 | 类型 | 默认值 | 说明 |
-|--|--|--|--|
-| `show` | `boolean` | `false` | 是否显示通知（双向绑定） |
-| `duration` | `number` | `0` | 通知显示持续时间（秒），0表示不自动隐藏 |
-| `delay` | `number` | `0` | 显示前的延迟时间（秒） |
-| `type` | `'info'` \| `'success'` \| `'warning'` \| `'error'` | `'info'` | 通知类型，影响显示样式和图标 |
-| `title` | `string` | - | 通知标题文本 |
-| `message` | `string` | - | 通知消息内容 |
-| `soft` | `boolean` | `true` | 是否使用柔和样式 |
-| `closable` | `boolean` | `true` | 是否显示关闭按钮 |
+| 属性名     | 类型                                                | 默认值   | 说明                                    |
+| ---------- | --------------------------------------------------- | -------- | --------------------------------------- |
+| `show`     | `boolean`                                           | `false`  | 是否显示通知（双向绑定）                |
+| `duration` | `number`                                            | `0`      | 通知显示持续时间（秒），0表示不自动隐藏 |
+| `delay`    | `number`                                            | `0`      | 显示前的延迟时间（秒）                  |
+| `type`     | `'info'` \| `'success'` \| `'warning'` \| `'error'` | `'info'` | 通知类型，影响显示样式和图标            |
+| `title`    | `string`                                            | -        | 通知标题文本                            |
+| `message`  | `string`                                            | -        | 通知消息内容                            |
+| `soft`     | `boolean`                                           | `true`   | 是否使用柔和样式                        |
+| `closable` | `boolean`                                           | `true`   | 是否显示关闭按钮                        |
 
 #### ICalendarNotify 代码片段插入位置
 
@@ -212,13 +208,13 @@ npm install @istock-shell/ui
 
 #### ICalendarDate 属性
 
-| 属性名 | 类型 | 默认值 | 说明 |
-|--|--|--|--|
-| `currentDate` | `string` | `''` | 当前选中的日期值，格式为 YYYY-MM-DD（双向绑定） |
-| `button` | [`ButtonProps<'button'>`](#buttonprops) | - | 今日按钮配置，支持所有按钮组件属性 |
-| `prevButton` | [`ButtonProps<'button'>`](#buttonprops) | - | 上一个日期按钮配置，支持所有按钮组件属性 |
-| `nextButton` | [`ButtonProps<'button'>`](#buttonprops) | - | 下一个日期按钮配置，支持所有按钮组件属性 |
-| `inputDate` | `Omit<`[`InputProps`](#inputprops)`, 'value' \| 'type'>` | - | 日期输入框配置，不包含value和type属性（由组件内部控制） |
+| 属性名        | 类型                                                     | 默认值 | 说明                                                    |
+| ------------- | -------------------------------------------------------- | ------ | ------------------------------------------------------- |
+| `currentDate` | `string`                                                 | `''`   | 当前选中的日期值，格式为 YYYY-MM-DD（双向绑定）         |
+| `button`      | [`ButtonProps<'button'>`](#buttonprops)                  | -      | 今日按钮配置，支持所有按钮组件属性                      |
+| `prevButton`  | [`ButtonProps<'button'>`](#buttonprops)                  | -      | 上一个日期按钮配置，支持所有按钮组件属性                |
+| `nextButton`  | [`ButtonProps<'button'>`](#buttonprops)                  | -      | 下一个日期按钮配置，支持所有按钮组件属性                |
+| `inputDate`   | `Omit<`[`InputProps`](#inputprops)`, 'value' \| 'type'>` | -      | 日期输入框配置，不包含value和type属性（由组件内部控制） |
 
 #### ICalendarDate 代码片段插入位置
 
@@ -245,9 +241,9 @@ npm install @istock-shell/ui
 
 #### ICalendarTab 属性
 
-| 属性名 | 类型 | 默认值 | 说明 |
-|--|--|--|--|
-| `tabs` | `Array<`[`ButtonProps<'button'>`](#buttonprops)`>` | `[]` | 标签页按钮配置数组，每个按钮都支持完整的ButtonProps配置 |
+| 属性名 | 类型                                               | 默认值 | 说明                                                    |
+| ------ | -------------------------------------------------- | ------ | ------------------------------------------------------- |
+| `tabs` | `Array<`[`ButtonProps<'button'>`](#buttonprops)`>` | `[]`   | 标签页按钮配置数组，每个按钮都支持完整的ButtonProps配置 |
 
 #### ICalendarTab 代码片段插入位置
 
@@ -274,12 +270,12 @@ npm install @istock-shell/ui
 
 #### ICalendarModal 属性
 
-| 属性名 | 类型 | 默认值 | 说明 |
-|--|--|--|--|
-| `data` | [`ICalendarEventOrTodo`](#icalendareventortodo) | - | 要展示的日历事件或待办事项数据，支持事件（VEVENT）和待办（VTODO）两种类型 |
-| `show` | `boolean` | `false` | 是否显示模态框（双向绑定） |
-| `closeButton` | `boolean` | `true` | 是否显示关闭按钮 |
-| `maskClosable` | `boolean` | `true` | 是否允许点击遮罩层关闭模态框 |
+| 属性名         | 类型                                            | 默认值  | 说明                                                                      |
+| -------------- | ----------------------------------------------- | ------- | ------------------------------------------------------------------------- |
+| `data`         | [`ICalendarEventOrTodo`](#icalendareventortodo) | -       | 要展示的日历事件或待办事项数据，支持事件（VEVENT）和待办（VTODO）两种类型 |
+| `show`         | `boolean`                                       | `false` | 是否显示模态框（双向绑定）                                                |
+| `closeButton`  | `boolean`                                       | `true`  | 是否显示关闭按钮                                                          |
+| `maskClosable` | `boolean`                                       | `true`  | 是否允许点击遮罩层关闭模态框                                              |
 
 #### ICalendarModal 代码片段插入位置
 
@@ -305,15 +301,15 @@ npm install @istock-shell/ui
 
 #### ICalendarView 属性
 
-| 属性名 | 类型 | 默认值 | 说明 |
-|--|--|--|--|
-| `currentView` | [`ICalendarViewType`](#icalendarviewtype) | - | 当前视图类型，支持日（day）、周（week）、月（month）三种模式 |
-| `currentDate` | `string` | - | 当前选中的日期，格式为 YYYY-MM-DD |
-| `calendarData` | [`ICalendarData`](#icalendardata) | - | 日历数据对象，包含事件列表和待办事项列表 |
-| `filterValue` | [`ICalendarFilterValue`](#icalendarfiltervalue) | `{}` | 过滤条件配置，用于筛选显示特定类型的事件或待办事项 |
-| `viewCount` | `number` | `3` | 每个时间槽显示的事件数量限制，超出部分可通过展开按钮查看 |
-| `onClickDay` | `(day: string) => void` | - | 点击日期时的回调函数，传递被点击的日期字符串 |
-| `onSelected` | `(item: `[`ICalendarEventOrTodo`](#icalendareventortodo)`) => void` | - | 选中事件或待办事项时的回调函数，传递被选中的项目数据 |
+| 属性名         | 类型                                                                | 默认值 | 说明                                                         |
+| -------------- | ------------------------------------------------------------------- | ------ | ------------------------------------------------------------ |
+| `currentView`  | [`ICalendarViewType`](#icalendarviewtype)                           | -      | 当前视图类型，支持日（day）、周（week）、月（month）三种模式 |
+| `currentDate`  | `string`                                                            | -      | 当前选中的日期，格式为 YYYY-MM-DD                            |
+| `calendarData` | [`ICalendarData`](#icalendardata)                                   | -      | 日历数据对象，包含事件列表和待办事项列表                     |
+| `filterValue`  | [`ICalendarFilterValue`](#icalendarfiltervalue)                     | `{}`   | 过滤条件配置，用于筛选显示特定类型的事件或待办事项           |
+| `viewCount`    | `number`                                                            | `3`    | 每个时间槽显示的事件数量限制，超出部分可通过展开按钮查看     |
+| `onClickDay`   | `(day: string) => void`                                             | -      | 点击日期时的回调函数，传递被点击的日期字符串                 |
+| `onSelected`   | `(item: `[`ICalendarEventOrTodo`](#icalendareventortodo)`) => void` | -      | 选中事件或待办事项时的回调函数，传递被选中的项目数据         |
 
 #### ICalendarView 代码片段插入位置
 
@@ -343,9 +339,9 @@ npm install @istock-shell/ui
 视图类型：
 
 ```typescript
-type ICalendarViewType = 
-  | 'day'    // 日视图
-  | 'week'   // 周视图
+type ICalendarViewType =
+  | 'day' // 日视图
+  | 'week' // 周视图
   | 'month'; // 月视图
 ```
 
@@ -355,13 +351,13 @@ iCalendar数据对象：
 
 ```typescript
 interface ICalendarData {
-  version: string;                    // iCalendar版本，通常为 '2.0'
-  prodId: string;                     // 产品标识符
-  calscale?: string;                  // 日历刻度，默认 'GREGORIAN'（可选）
-  method?: string;                    // 日历方法（可选）
-  events?: ICalendarVEvent[];         // 事件列表（可选）
-  todos?: ICalendarVTodo[];           // 待办事项列表（可选）
-  timeZones?: ICalendarTimeZone[];    // 时区信息列表（可选）
+  version: string; // iCalendar版本，通常为 '2.0'
+  prodId: string; // 产品标识符
+  calscale?: string; // 日历刻度，默认 'GREGORIAN'（可选）
+  method?: string; // 日历方法（可选）
+  events?: ICalendarVEvent[]; // 事件列表（可选）
+  todos?: ICalendarVTodo[]; // 待办事项列表（可选）
+  timeZones?: ICalendarTimeZone[]; // 时区信息列表（可选）
 }
 ```
 
@@ -371,11 +367,11 @@ interface ICalendarData {
 
 ```typescript
 interface ICalendarTimeZone {
-  tzId: string;                       // 时区标识符
-  lastModified?: ICalendarDateTime;   // 最后修改时间（可选）
-  tzUrl?: string;                     // 时区URL（可选）
-  daylight?: ICalendarTimeZoneRule;   // 夏令时规则（可选）
-  standard?: ICalendarTimeZoneRule;   // 标准时间规则（可选）
+  tzId: string; // 时区标识符
+  lastModified?: ICalendarDateTime; // 最后修改时间（可选）
+  tzUrl?: string; // 时区URL（可选）
+  daylight?: ICalendarTimeZoneRule; // 夏令时规则（可选）
+  standard?: ICalendarTimeZoneRule; // 标准时间规则（可选）
 }
 ```
 
@@ -385,26 +381,26 @@ interface ICalendarTimeZone {
 
 ```typescript
 interface ICalendarVEvent {
-  uid: string;                    // 事件唯一标识符，必须全局唯一
-  sequence?: number;              // 事件序列号，用于版本控制（可选）
-  dtStamp: ICalendarDateTime;     // 事件创建/修改时间戳
-  dtStart: ICalendarDateTime;     // 事件开始时间
-  dtEnd?: ICalendarDateTime;      // 事件结束时间（可选）
-  summary: string;                // 事件标题/摘要
-  description?: string;           // 事件详细描述（可选）
-  location?: string;              // 事件地点（可选）
-  status?: ICalendarEventStatus;  // 事件状态（可选）
-  categories?: string[];          // 事件分类标签（可选）
-  organizer?: string;             // 组织者邮箱或标识（可选）
-  attendees?: string[];           // 参与者邮箱列表（可选）
+  uid: string; // 事件唯一标识符，必须全局唯一
+  sequence?: number; // 事件序列号，用于版本控制（可选）
+  dtStamp: ICalendarDateTime; // 事件创建/修改时间戳
+  dtStart: ICalendarDateTime; // 事件开始时间
+  dtEnd?: ICalendarDateTime; // 事件结束时间（可选）
+  summary: string; // 事件标题/摘要
+  description?: string; // 事件详细描述（可选）
+  location?: string; // 事件地点（可选）
+  status?: ICalendarEventStatus; // 事件状态（可选）
+  categories?: string[]; // 事件分类标签（可选）
+  organizer?: string; // 组织者邮箱或标识（可选）
+  attendees?: string[]; // 参与者邮箱列表（可选）
   class?: 'PUBLIC' | 'PRIVATE' | 'CONFIDENTIAL'; // 访问级别（可选）
-  url?: string;                   // 相关URL链接（可选）
-  rrule?: string;                 // 重复规则，遵循RFC5545（可选）
-  exDates?: ICalendarDateTime[];  // 排除的重复日期（可选）
-  alarms?: ICalendarAlarm[];      // 提醒设置列表（可选）
+  url?: string; // 相关URL链接（可选）
+  rrule?: string; // 重复规则，遵循RFC5545（可选）
+  exDates?: ICalendarDateTime[]; // 排除的重复日期（可选）
+  alarms?: ICalendarAlarm[]; // 提醒设置列表（可选）
   transp?: 'OPAQUE' | 'TRANSPARENT'; // 时间透明度，影响忙闲状态（可选）
-  priority?: number;              // 优先级 0-9，0为未定义，1最高，9最低（可选）
-  attach?: string[];              // 附件URL列表（可选）
+  priority?: number; // 优先级 0-9，0为未定义，1最高，9最低（可选）
+  attach?: string[]; // 附件URL列表（可选）
 }
 ```
 
@@ -414,19 +410,19 @@ interface ICalendarVEvent {
 
 ```typescript
 interface ICalendarVTodo {
-  uid: string;                    // 待办事项唯一标识符
-  dtStamp: ICalendarDateTime;     // 创建/修改时间戳
-  dtStart?: ICalendarDateTime;    // 开始时间（可选）
-  due?: ICalendarDateTime;        // 截止时间（可选）
-  summary: string;                // 待办事项标题
-  description?: string;           // 待办事项详细描述（可选）
-  status?: ICalendarTodoStatus;   // 待办事项状态（可选）
-  percentComplete?: number;       // 完成百分比 0-100（可选）
-  priority?: number;              // 优先级 0-9，0为未定义，1最高，9最低（可选）
-  categories?: string[];          // 分类标签（可选）
-  url?: string;                   // 相关URL链接（可选）
-  completed?: ICalendarDateTime;  // 完成时间（可选）
-  alarms?: ICalendarAlarm[];      // 提醒设置列表（可选）
+  uid: string; // 待办事项唯一标识符
+  dtStamp: ICalendarDateTime; // 创建/修改时间戳
+  dtStart?: ICalendarDateTime; // 开始时间（可选）
+  due?: ICalendarDateTime; // 截止时间（可选）
+  summary: string; // 待办事项标题
+  description?: string; // 待办事项详细描述（可选）
+  status?: ICalendarTodoStatus; // 待办事项状态（可选）
+  percentComplete?: number; // 完成百分比 0-100（可选）
+  priority?: number; // 优先级 0-9，0为未定义，1最高，9最低（可选）
+  categories?: string[]; // 分类标签（可选）
+  url?: string; // 相关URL链接（可选）
+  completed?: ICalendarDateTime; // 完成时间（可选）
+  alarms?: ICalendarAlarm[]; // 提醒设置列表（可选）
 }
 ```
 
@@ -436,9 +432,9 @@ interface ICalendarVTodo {
 
 ```typescript
 interface ICalendarDateTime {
-  value: string;      // 日期时间值，格式：YYYYMMDDTHHMMSS[Z] 或 YYYYMMDD
-  tzId?: string;      // 时区标识符，如 'Asia/Shanghai'（可选）
-  isDate?: boolean;   // 是否为纯日期（无时间部分）
+  value: string; // 日期时间值，格式：YYYYMMDDTHHMMSS[Z] 或 YYYYMMDD
+  tzId?: string; // 时区标识符，如 'Asia/Shanghai'（可选）
+  isDate?: boolean; // 是否为纯日期（无时间部分）
 }
 ```
 
@@ -447,10 +443,10 @@ interface ICalendarDateTime {
 事件状态枚举：
 
 ```typescript
-type ICalendarEventStatus = 
-  | 'TENTATIVE'   // 暂定
-  | 'CONFIRMED'   // 已确认
-  | 'CANCELLED';  // 已取消
+type ICalendarEventStatus =
+  | 'TENTATIVE' // 暂定
+  | 'CONFIRMED' // 已确认
+  | 'CANCELLED'; // 已取消
 ```
 
 #### ICalendarTodoStatus
@@ -458,11 +454,11 @@ type ICalendarEventStatus =
 待办事项状态枚举：
 
 ```typescript
-type ICalendarTodoStatus = 
-  | 'NEEDS-ACTION'  // 需要行动
-  | 'IN-PROCESS'    // 进行中
-  | 'COMPLETED'     // 已完成
-  | 'CANCELLED';    // 已取消
+type ICalendarTodoStatus =
+  | 'NEEDS-ACTION' // 需要行动
+  | 'IN-PROCESS' // 进行中
+  | 'COMPLETED' // 已完成
+  | 'CANCELLED'; // 已取消
 ```
 
 #### ICalendarAlarmAction
@@ -470,10 +466,10 @@ type ICalendarTodoStatus =
 提醒动作类型：
 
 ```typescript
-type ICalendarAlarmAction = 
-  | 'AUDIO'    // 音频提醒
-  | 'DISPLAY'  // 显示提醒
-  | 'EMAIL';   // 邮件提醒
+type ICalendarAlarmAction =
+  | 'AUDIO' // 音频提醒
+  | 'DISPLAY' // 显示提醒
+  | 'EMAIL'; // 邮件提醒
 ```
 
 #### ICalendarGeo
@@ -482,8 +478,8 @@ type ICalendarAlarmAction =
 
 ```typescript
 interface ICalendarGeo {
-  lat: number;  // 纬度
-  lon: number;  // 经度
+  lat: number; // 纬度
+  lon: number; // 经度
 }
 ```
 
@@ -509,12 +505,12 @@ interface ICalendarRRule {
 
 ```typescript
 interface ICalendarAlarm {
-  action: ICalendarAlarmAction;   // 提醒动作类型
-  trigger: string;                // 触发时间，相对或绝对时间
-  description?: string;           // 提醒描述文本（可选）
-  duration?: string;              // 提醒持续时间（可选）
-  repeat?: number;                // 重复次数（可选）
-  attach?: string;                // 附件URL（可选）
+  action: ICalendarAlarmAction; // 提醒动作类型
+  trigger: string; // 触发时间，相对或绝对时间
+  description?: string; // 提醒描述文本（可选）
+  duration?: string; // 提醒持续时间（可选）
+  repeat?: number; // 重复次数（可选）
+  attach?: string; // 附件URL（可选）
 }
 ```
 
@@ -534,9 +530,9 @@ interface ICalendarFilterValue {
 
 ```typescript
 interface ICalendarFilterItem {
-  title: string;                    // 过滤组标题
-  type: 'radio' | 'checkbox';      // 过滤类型：单选或多选
-  multiple?: boolean;               // 是否支持多选（可选）
+  title: string; // 过滤组标题
+  type: 'radio' | 'checkbox'; // 过滤类型：单选或多选
+  multiple?: boolean; // 是否支持多选（可选）
   options: ICalendarFilterOption[]; // 过滤选项列表
 }
 ```
@@ -547,8 +543,8 @@ interface ICalendarFilterItem {
 
 ```typescript
 interface ICalendarFilterOption {
-  label: string;  // 选项显示文本
-  value: string;  // 选项值
+  label: string; // 选项显示文本
+  value: string; // 选项值
 }
 ```
 
@@ -558,12 +554,11 @@ interface ICalendarFilterOption {
 
 ```typescript
 interface ICalendarNotifyProps extends AlertProps {
-  show?: boolean;     // 是否显示通知
-  duration?: number;  // 显示持续时间（秒），0表示不自动隐藏
-  delay?: number;     // 显示前延迟时间（秒）
+  show?: boolean; // 是否显示通知
+  duration?: number; // 显示持续时间（秒），0表示不自动隐藏
+  delay?: number; // 显示前延迟时间（秒）
 }
 ```
-
 
 ## 设计指南
 
@@ -610,11 +605,11 @@ type ICalendarEventOrTodo = ICalendarVEvent | ICalendarVTodo;
 
 ```typescript
 interface ICalendarDateProps extends HTMLAttributes<HTMLDivElement> {
-  button?: ButtonProps<'button'>;           // 今日按钮配置
-  prevButton?: ButtonProps<'button'>;       // 上一个日期按钮配置
-  nextButton?: ButtonProps<'button'>;       // 下一个日期按钮配置
+  button?: ButtonProps<'button'>; // 今日按钮配置
+  prevButton?: ButtonProps<'button'>; // 上一个日期按钮配置
+  nextButton?: ButtonProps<'button'>; // 下一个日期按钮配置
   inputDate?: Omit<InputProps, 'value' | 'type'>; // 日期输入框配置
-  currentDate?: string;                     // 当前选中的日期值
+  currentDate?: string; // 当前选中的日期值
 }
 ```
 
@@ -624,7 +619,7 @@ interface ICalendarDateProps extends HTMLAttributes<HTMLDivElement> {
 
 ```typescript
 interface ICalendarTabProps extends HTMLAttributes<HTMLDivElement> {
-  tabs: Array<ButtonProps<'button'>>;      // 标签页按钮配置数组
+  tabs: Array<ButtonProps<'button'>>; // 标签页按钮配置数组
 }
 ```
 
@@ -634,7 +629,7 @@ interface ICalendarTabProps extends HTMLAttributes<HTMLDivElement> {
 
 ```typescript
 interface ICalendarModalProps extends ModalProps {
-  data?: ICalendarEventOrTodo;              // 要展示的日历事件或待办事项数据
+  data?: ICalendarEventOrTodo; // 要展示的日历事件或待办事项数据
 }
 ```
 
@@ -644,12 +639,12 @@ interface ICalendarModalProps extends ModalProps {
 
 ```typescript
 interface ICalendarViewProps extends HTMLAttributes<HTMLDivElement> {
-  currentView: ICalendarViewType;           // 当前视图类型
-  currentDate: string;                      // 当前选中的日期
-  calendarData: ICalendarData;              // 日历数据对象
-  filterValue?: ICalendarFilterValue;       // 过滤条件配置
-  viewCount?: number;                       // 每个时间槽显示的事件数量限制
-  onClickDay?: (day: string) => void;       // 点击日期时的回调函数
+  currentView: ICalendarViewType; // 当前视图类型
+  currentDate: string; // 当前选中的日期
+  calendarData: ICalendarData; // 日历数据对象
+  filterValue?: ICalendarFilterValue; // 过滤条件配置
+  viewCount?: number; // 每个时间槽显示的事件数量限制
+  onClickDay?: (day: string) => void; // 点击日期时的回调函数
   onSelected?: (item: ICalendarEventOrTodo) => void; // 选中事件或待办事项时的回调函数
 }
 ```
@@ -660,8 +655,8 @@ interface ICalendarViewProps extends HTMLAttributes<HTMLDivElement> {
 
 ```typescript
 interface ICalendarNotifyProps extends AlertProps {
-  duration?: number;                        // 通知显示持续时间（秒），0表示不自动隐藏
-  delay?: number;                          // 显示前的延迟时间（秒）
+  duration?: number; // 通知显示持续时间（秒），0表示不自动隐藏
+  delay?: number; // 显示前的延迟时间（秒）
 }
 ```
 

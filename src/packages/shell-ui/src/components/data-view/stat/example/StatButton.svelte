@@ -4,7 +4,9 @@
     {
       title: '账户余额',
       value: '$89,400',
-      actions: [{ text: '添加余额', color: 'success', onclick: () => shShowMessage.info('点击添加余额') }],
+      actions: [
+        { text: '添加余额', color: 'success', onclick: () => shShowMessage.info('点击添加余额') },
+      ],
     },
     {
       title: '当前余额',

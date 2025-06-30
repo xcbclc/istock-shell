@@ -183,7 +183,9 @@ ShMenuItem 菜单项组件
    * 处理子菜单折叠/展开逻辑和事件传播
    * @param e 鼠标点击事件
    */
-  const onMenuItemClickHandler = (e: MouseEvent & { currentTarget: EventTarget & HTMLAnchorElement }) => {
+  const onMenuItemClickHandler = (
+    e: MouseEvent & { currentTarget: EventTarget & HTMLAnchorElement }
+  ) => {
     // 阻止事件冒泡，避免触发父级菜单项的点击事件
     e.stopPropagation();
 
@@ -198,7 +200,10 @@ ShMenuItem 菜单项组件
 </script>
 
 <!-- 菜单项根容器，使用li元素提供语义化的列表项结构 -->
-<li class={[tuc(menuItemVariants({ disabled, title: isTitle && !Boolean(subItem) })), className]} {...otherProps}>
+<li
+  class={[tuc(menuItemVariants({ disabled, title: isTitle && !Boolean(subItem) })), className]}
+  {...otherProps}
+>
   {#if children}
     <!-- 渲染自定义子内容插槽 -->
     {@render children()}

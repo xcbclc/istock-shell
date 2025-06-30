@@ -73,7 +73,10 @@ ShDropdownMenu 下拉菜单内容组件
   使用 ul 元素作为菜单容器，提供标准的菜单样式
   包含背景色、圆角、阴影和固定宽度等默认样式
 -->
-<ul class={[tuc('dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm'), className]} {...otherProps}>
+<ul
+  class={[tuc('dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm'), className]}
+  {...otherProps}
+>
   {#if children}
     <!--
       自定义菜单内容渲染

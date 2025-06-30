@@ -215,7 +215,14 @@ ShMenu 菜单组件
         传递点击事件处理器和计算后的激活状态
         展开菜单项的所有其他属性
       -->
-      <ShMenuItem {collapsed} {toggleType} {canToggle} onMenuItemClick={onMenuItemClickHandler} {...item} {active} />
+      <ShMenuItem
+        {collapsed}
+        {toggleType}
+        {canToggle}
+        onMenuItemClick={onMenuItemClickHandler}
+        {...item}
+        {active}
+      />
     {/each}
   {/if}
 </ul>

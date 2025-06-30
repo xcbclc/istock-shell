@@ -158,7 +158,8 @@ export function getFilterCalendarList(
       if (filterValue === 'todo') return isVTodo(data);
     }
     if (key === '$priority') {
-      if (filterValue === 'all' || (isArray(filterValue) && filterValue.includes('all'))) return true;
+      if (filterValue === 'all' || (isArray(filterValue) && filterValue.includes('all')))
+        return true;
       if (isNil(data.priority)) return false;
       const levelValue = getPriorityLevel(data.priority);
       if (isArray(filterValue)) return filterValue.includes(levelValue);
@@ -184,10 +185,16 @@ export function getFilterCalendarList(
     if (dateMatch && !Object.keys(otherFilter).length) return true;
     if (realFilter.logic === 'OR') {
       // OR逻辑：日期匹配且至少一个其他条件匹配
-      return dateMatch && Object.keys(otherFilter).some((key) => matchFilterValue(item, key, otherFilter[key]));
+      return (
+        dateMatch &&
+        Object.keys(otherFilter).some((key) => matchFilterValue(item, key, otherFilter[key]))
+      );
     } else {
       // AND逻辑（默认）：日期匹配且所有其他条件都匹配
-      return dateMatch && Object.keys(otherFilter).every((key) => matchFilterValue(item, key, otherFilter[key]));
+      return (
+        dateMatch &&
+        Object.keys(otherFilter).every((key) => matchFilterValue(item, key, otherFilter[key]))
+      );
     }
   });
 }

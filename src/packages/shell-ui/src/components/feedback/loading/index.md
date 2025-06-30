@@ -133,7 +133,15 @@ type LoadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 ```typescript
 // 加载器颜色类型
-type LoadingColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type LoadingColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 ## 设计指南

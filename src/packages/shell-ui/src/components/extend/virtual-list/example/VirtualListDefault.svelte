@@ -67,7 +67,12 @@
 <!-- 动态高度测试按钮 -->
 <ShButton onclick={onChangeHeight}>动态高度</ShButton>
 
-<ShVirtualList bind:this={virtualList} {...virtualListProps} {onRangeChange} class="w-full max-h-100">
+<ShVirtualList
+  bind:this={virtualList}
+  {...virtualListProps}
+  {onRangeChange}
+  class="w-full max-h-100"
+>
   <ShList>
     {#if range}
       {#each list.slice(range?.start, range?.end + 1) as item (item.id)}

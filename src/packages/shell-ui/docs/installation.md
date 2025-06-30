@@ -13,17 +13,20 @@ keywords: [IStock Shell UI安装, Svelte组件库安装, npm安装, pnpm安装, 
 在开始安装之前，请确保你的开发环境满足以下要求：
 
 ### Node.js 版本
+
 - **Node.js**: >= 16.0.0
 - **npm**: >= 7.0.0
 - **pnpm**: >= 7.0.0 (推荐)
 - **yarn**: >= 1.22.0
 
 ### 框架支持
+
 - **Svelte**: >= 5.0.0
 - **SvelteKit**: >= 2.0.0
 - **Vite**: >= 4.0.0
 
 ### TypeScript (可选)
+
 - **TypeScript**: >= 4.9.0
 
 ## 📦 安装方式
@@ -49,6 +52,7 @@ yarn add @istock-shell/ui
 ## 🔧 依赖说明
 
 ### 核心依赖
+
 IStock Shell UI 依赖以下核心包：
 
 ```json
@@ -64,6 +68,7 @@ IStock Shell UI 依赖以下核心包：
 ```
 
 ### 样式依赖
+
 组件库使用 Tailwind CSS 和 DaisyUI 作为样式基础：
 
 ```json
@@ -105,14 +110,12 @@ pnpm add -D tailwindcss @tailwindcss/vite daisyui
 export default {
   content: [
     './src/**/*.{html,js,svelte,ts}',
-    './node_modules/@istock-shell/ui/src/**/*.{js,svelte,ts}'
+    './node_modules/@istock-shell/ui/src/**/*.{js,svelte,ts}',
   ],
   theme: {
-    extend: {}
+    extend: {},
   },
-  plugins: [
-    require('daisyui')
-  ],
+  plugins: [require('daisyui')],
   daisyui: {
     themes: [
       'light',
@@ -143,9 +146,9 @@ export default {
       'lemonade',
       'night',
       'coffee',
-      'winter'
-    ]
-  }
+      'winter',
+    ],
+  },
 };
 ```
 
@@ -158,10 +161,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [
-    svelte(),
-    tailwindcss()
-  ]
+  plugins: [svelte(), tailwindcss()],
 });
 ```
 
@@ -187,7 +187,7 @@ export default defineConfig({
 <script>
   // 按需导入组件
   import { ShButton, ShInput, ShAlert } from '@istock-shell/ui';
-  
+
   // 或者导入特定组件
   import ShButton from '@istock-shell/ui/src/components/action/button/Button.svelte';
 </script>
@@ -198,29 +198,19 @@ export default defineConfig({
 ```svelte
 <script>
   import { ShButton, ShInput } from '@istock-shell/ui';
-  
+
   let inputValue = '';
-  
+
   function handleClick() {
     console.log('按钮被点击了！');
   }
 </script>
 
 <!-- 输入框 -->
-<ShInput 
-  bind:value={inputValue}
-  placeholder="请输入内容"
-  color="primary"
-/>
+<ShInput bind:value={inputValue} placeholder="请输入内容" color="primary" />
 
 <!-- 按钮 -->
-<ShButton 
-  color="primary"
-  size="lg"
-  onclick={handleClick}
->
-  提交
-</ShButton>
+<ShButton color="primary" size="lg" onclick={handleClick}>提交</ShButton>
 ```
 
 ## 🔧 TypeScript 配置
@@ -309,6 +299,7 @@ body {
 ### Q: 样式没有正确加载？
 
 **A**: 请确保：
+
 1. 正确引入了 `@istock-shell/ui/src/index.css`
 2. Tailwind CSS 配置中包含了组件库的路径
 3. 样式引入顺序正确（Tailwind 基础样式 → 组件样式）
@@ -316,6 +307,7 @@ body {
 ### Q: TypeScript 类型错误？
 
 **A**: 请确保：
+
 1. TypeScript 版本 >= 4.9.0
 2. Svelte 版本 >= 5.0.0
 3. 正确导入组件类型
@@ -323,6 +315,7 @@ body {
 ### Q: 组件无法正常显示？
 
 **A**: 请检查：
+
 1. 组件导入路径是否正确
 2. 是否正确配置了 Tailwind CSS
 3. 浏览器控制台是否有错误信息
@@ -330,6 +323,7 @@ body {
 ### Q: 如何自定义主题？
 
 **A**: 可以通过以下方式自定义主题：
+
 1. 修改 DaisyUI 主题配置
 2. 使用 CSS 变量覆盖默认样式
 3. 参考 [主题定制指南](./theming.md)

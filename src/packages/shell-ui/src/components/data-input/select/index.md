@@ -151,7 +151,15 @@ npm install @istock-shell/ui
 
 ```typescript
 // 选择器颜色类型
-type SelectColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type SelectColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### SelectSize

@@ -33,7 +33,12 @@
   });
 </script>
 
-<ShToast horizontal="center" vertical="top" {...otherProps} class={[tuc(['z-50 max-w-md']), className]}>
+<ShToast
+  horizontal="center"
+  vertical="top"
+  {...otherProps}
+  class={[tuc(['z-50 max-w-md']), className]}
+>
   <ShAlert {...alertProps} description={message} />
 </ShToast>
 

@@ -77,7 +77,16 @@ ShStatTitle 统计项标题组件
   import { tv } from 'tailwind-variants';
   import { tuc } from '@istock-shell/util';
 
-  const { text, color, size, align, weight, class: className = '', children, ...otherProps }: StatTitleProps = $props();
+  const {
+    text,
+    color,
+    size,
+    align,
+    weight,
+    class: className = '',
+    children,
+    ...otherProps
+  }: StatTitleProps = $props();
 
   const statTitleVariant = tv(statTitleVariantConfig, {});
 </script>

@@ -29,11 +29,11 @@ export default [
     text: '相关库',
     items: [
       { text: 'Web Worker服务框架', link: '/packages/iswork/README.html' },
-      { text: 'Svelte UI库', link: '/packages/shell-ui/README.html' },
-      { text: '命令行解析库', link: '/packages/command-parser/README.html' },
-      { text: '命令行编辑器库', link: '/packages/editor/README.html' },
-      { text: 'iStock Shell 命令行工具', link: '/packages/cli/README.html' },
+      { text: 'Svelte UI', link: '/packages/shell-ui/README.html' },
+      { text: '命令行解析', link: '/packages/command-parser/README.html' },
+      { text: '命令行编辑器', link: '/packages/editor/README.html' },
       { text: '常用工具库', link: '/packages/util/README.html' },
+      { text: '项目脚手架', link: '/packages/cli/README.html' },
     ],
   },
   {

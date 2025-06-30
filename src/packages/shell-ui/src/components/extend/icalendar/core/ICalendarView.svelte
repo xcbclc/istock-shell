@@ -77,7 +77,12 @@ ShICalendarView 日历视图组件
 
 <script lang="ts" module>
   import type { HTMLAttributes } from 'svelte/elements';
-  import type { ICalendarData, ICalendarFilterValue, ICalendarViewType, ICalendarEventOrTodo } from './ICalendarType';
+  import type {
+    ICalendarData,
+    ICalendarFilterValue,
+    ICalendarViewType,
+    ICalendarEventOrTodo,
+  } from './ICalendarType';
   import { ICalendarViewTypeData } from './ICalendarType';
 
   /**
@@ -139,7 +144,10 @@ ShICalendarView 日历视图组件
    * 合并事件和待办事项，并应用filterValue中的过滤条件
    */
   const filterCalendarList: ICalendarEventOrTodo[] = $derived.by(() => {
-    return getFilterCalendarList([...(calendarData.events ?? []), ...(calendarData.todos ?? [])], filterValue);
+    return getFilterCalendarList(
+      [...(calendarData.events ?? []), ...(calendarData.todos ?? [])],
+      filterValue
+    );
   });
 
   /**
@@ -221,7 +229,10 @@ ShICalendarView 日历视图组件
    * @param slot 时间槽标识
    * @returns 应显示的事件列表（展开时显示全部，否则显示viewCount个）
    */
-  const getCurrentViewList = (list: ICalendarEventOrTodo[], slot: string): ICalendarEventOrTodo[] => {
+  const getCurrentViewList = (
+    list: ICalendarEventOrTodo[],
+    slot: string
+  ): ICalendarEventOrTodo[] => {
     return list.slice(0, expandedTimeSlots[slot] ? list.length : viewCount);
   };
 
@@ -281,7 +292,11 @@ ShICalendarView 日历视图组件
       <!-- 日视图内容区 - 按小时显示事件 -->
       <div class={tuc('icalendar-view-day')}>
         {#each generateDayTimeSlots(currentDate) as timeSlot}
-          {@const currentCalendarList = getCurrentCalendarListBySlot(filterCalendarList, timeSlot, currentView)}
+          {@const currentCalendarList = getCurrentCalendarListBySlot(
+            filterCalendarList,
+            timeSlot,
+            currentView
+          )}
           <div class={tuc('icalendar-view-day-row')}>
             <div class={tuc('icalendar-view-day-left')}>
               <svg
@@ -300,7 +315,10 @@ ShICalendarView 日历视图组件
             </div>
             <div class={tuc('icalendar-view-day-right')}>
               <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
-              {@render renderCalendarCell(getCurrentViewList(currentCalendarList, timeSlot), currentView)}
+              {@render renderCalendarCell(
+                getCurrentViewList(currentCalendarList, timeSlot),
+                currentView
+              )}
               <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderExpandedButton(currentCalendarList, timeSlot)}
             </div>
@@ -353,7 +371,11 @@ ShICalendarView 日历视图组件
       <!-- 周视图内容区 - 每天一列显示事件 -->
       <div class={tuc('icalendar-view-week-body')}>
         {#each generateWeekDays(currentDate) as day}
-          {@const currentCalendarList = getCurrentCalendarListBySlot(filterCalendarList, day, currentView)}
+          {@const currentCalendarList = getCurrentCalendarListBySlot(
+            filterCalendarList,
+            day,
+            currentView
+          )}
           <div
             class={[
               tuc('icalendar-view-cell'),
@@ -363,7 +385,10 @@ ShICalendarView 日历视图组件
           >
             <div class="flex flex-col gap-1.5 text-xs">
               <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
-              {@render renderCalendarCell(getCurrentViewList(currentCalendarList, day), currentView)}
+              {@render renderCalendarCell(
+                getCurrentViewList(currentCalendarList, day),
+                currentView
+              )}
               <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderExpandedButton(currentCalendarList, day)}
             </div>
@@ -411,13 +436,19 @@ ShICalendarView 日历视图组件
       <!-- 月视图内容区 - 日历网格 -->
       <div class={tuc('icalendar-view-month-body')}>
         {#each generateMonthGrid(currentDate) as day}
-          {@const currentCalendarList = getCurrentCalendarListBySlot(filterCalendarList, day, currentView)}
+          {@const currentCalendarList = getCurrentCalendarListBySlot(
+            filterCalendarList,
+            day,
+            currentView
+          )}
           <div
             class={[
               tuc('icalendar-view-cell'),
               'hover:bg-base-200/30 transition-colors duration-200',
               !isCurrentMonth(day) ? 'opacity-40 bg-base-200/20' : '',
-              isToday(day) ? 'bg-primary/10 hover:bg-primary/30 ring-1 ring-primary/30 ring-inset' : '',
+              isToday(day)
+                ? 'bg-primary/10 hover:bg-primary/30 ring-1 ring-primary/30 ring-inset'
+                : '',
             ]}
           >
             <div
@@ -431,7 +462,10 @@ ShICalendarView 日历视图组件
             </div>
             <div class="flex flex-col gap-0.5 text-xs">
               <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
-              {@render renderCalendarCell(getCurrentViewList(currentCalendarList, day), currentView)}
+              {@render renderCalendarCell(
+                getCurrentViewList(currentCalendarList, day),
+                currentView
+              )}
               <!-- eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -->
               {@render renderExpandedButton(currentCalendarList, day)}
             </div>

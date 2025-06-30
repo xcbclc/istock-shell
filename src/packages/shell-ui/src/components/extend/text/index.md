@@ -63,16 +63,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                           | 说明                               |
-| ------------ | ---------------------------------- | ---------------------------------- |
-| 标题文本     | `size="lg"` + `weight="bold"`     | 页面标题、章节标题、卡片标题       |
-| 正文内容     | `size="md"` + 默认配置            | 文章正文、描述信息、说明文字       |
-| 辅助文本     | `size="sm"` + `color="secondary"` | 提示信息、备注说明、次要内容       |
-| 链接文本     | `tag="a"` + `color="primary"`     | 导航链接、外部链接、操作链接       |
-| 强调文本     | `weight="bold"` + `color="accent"` | 重要提示、关键信息、突出内容       |
-| 状态文本     | 对应状态颜色主题                   | 成功提示、警告信息、错误提示       |
-| 多段落组合   | `texts` 数组配置                   | 复杂文本布局、混合样式文本         |
-| 响应式文本   | 响应式尺寸配置                     | 适配不同设备屏幕的文本显示         |
+| 场景       | 推荐配置                           | 说明                         |
+| ---------- | ---------------------------------- | ---------------------------- |
+| 标题文本   | `size="lg"` + `weight="bold"`      | 页面标题、章节标题、卡片标题 |
+| 正文内容   | `size="md"` + 默认配置             | 文章正文、描述信息、说明文字 |
+| 辅助文本   | `size="sm"` + `color="secondary"`  | 提示信息、备注说明、次要内容 |
+| 链接文本   | `tag="a"` + `color="primary"`      | 导航链接、外部链接、操作链接 |
+| 强调文本   | `weight="bold"` + `color="accent"` | 重要提示、关键信息、突出内容 |
+| 状态文本   | 对应状态颜色主题                   | 成功提示、警告信息、错误提示 |
+| 多段落组合 | `texts` 数组配置                   | 复杂文本布局、混合样式文本   |
+| 响应式文本 | 响应式尺寸配置                     | 适配不同设备屏幕的文本显示   |
 
 ## 示例演示
 
@@ -87,15 +87,15 @@ npm install @istock-shell/ui
 
 ### 属性说明
 
-| 属性名   | 类型                              | 默认值 | 说明                                     |
-| -------- | --------------------------------- | ------ | ---------------------------------------- |
-| `color`  | [`TextColor`](#textcolor)         | -      | 文本的颜色主题                           |
-| `size`   | [`TextSize`](#textsize)           | -      | 文本的尺寸大小                           |
-| `align`  | [`TextAlign`](#textalign)         | -      | 文本的对齐方式                           |
-| `tag`    | [`TextTag`](#texttag)             | `'p'`  | 渲染的HTML标签类型                       |
-| `weight` | [`TextWeight`](#textweight)       | -      | 文本的字体粗细                           |
+| 属性名   | 类型                                | 默认值 | 说明                                     |
+| -------- | ----------------------------------- | ------ | ---------------------------------------- |
+| `color`  | [`TextColor`](#textcolor)           | -      | 文本的颜色主题                           |
+| `size`   | [`TextSize`](#textsize)             | -      | 文本的尺寸大小                           |
+| `align`  | [`TextAlign`](#textalign)           | -      | 文本的对齐方式                           |
+| `tag`    | [`TextTag`](#texttag)               | `'p'`  | 渲染的HTML标签类型                       |
+| `weight` | [`TextWeight`](#textweight)         | -      | 文本的字体粗细                           |
 | `texts`  | [`TextItemProps[]`](#textitemprops) | `[]`   | 文本项配置数组，用于批量渲染多个文本元素 |
-| `class`  | `string`                          | -      | 自定义CSS类名                            |
+| `class`  | `string`                            | -      | 自定义CSS类名                            |
 
 ### 代码片段插入位置
 
@@ -125,7 +125,15 @@ npm install @istock-shell/ui
 
 ```typescript
 // 文本颜色类型
-type TextColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type TextColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### TextSize
@@ -274,9 +282,7 @@ interface TextProps extends TextBaseProps {
 <ShText tag="span">行内文本</ShText>
 
 <!-- 链接文本 -->
-<ShText tag="a" href="https://example.com" color="primary">
-  点击访问链接
-</ShText>
+<ShText tag="a" href="https://example.com" color="primary">点击访问链接</ShText>
 
 <!-- 强调文本 -->
 <ShText tag="strong" weight="bold">重要内容</ShText>
@@ -290,7 +296,7 @@ interface TextProps extends TextBaseProps {
   const textItems = [
     { text: '第一项', color: 'primary' },
     { text: '第二项', color: 'secondary' },
-    { text: '链接项', tag: 'a', href: '/link', color: 'info' }
+    { text: '链接项', tag: 'a', href: '/link', color: 'info' },
   ];
 </script>
 
@@ -350,7 +356,7 @@ interface TextProps extends TextBaseProps {
   :global(.responsive-text) {
     font-size: 14px;
   }
-  
+
   @media (min-width: 768px) {
     :global(.responsive-text) {
       font-size: 16px;

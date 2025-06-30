@@ -34,6 +34,7 @@ pnpm install
 ### Q: 为什么推荐使用 pnpm？
 
 **A:** pnpm 具有以下优势：
+
 - **节省磁盘空间**: 使用硬链接避免重复安装
 - **安装速度快**: 并行安装和缓存机制
 - **严格依赖**: 避免幽灵依赖问题
@@ -70,24 +71,27 @@ npm install svelte @istock-shell/util
 **A:** 请检查以下几个方面：
 
 1. **确保导入了样式文件**：
+
 ```javascript
 // 在你的主入口文件中
 import '@istock-shell/ui/dist/style.css';
 ```
 
 2. **检查 Tailwind CSS 配置**：
+
 ```javascript
 // tailwind.config.js
 module.exports = {
   content: [
     './src/**/*.{html,js,svelte,ts}',
-    './node_modules/@istock-shell/ui/**/*.{js,svelte,ts}'
+    './node_modules/@istock-shell/ui/**/*.{js,svelte,ts}',
   ],
   // ...
 };
 ```
 
 3. **确保 DaisyUI 配置正确**：
+
 ```javascript
 // tailwind.config.js
 module.exports = {
@@ -104,6 +108,7 @@ module.exports = {
 **A:** 有多种方式自定义样式：
 
 1. **使用 CSS 变量**：
+
 ```css
 :root {
   --primary: #your-color;
@@ -112,13 +117,13 @@ module.exports = {
 ```
 
 2. **使用 Tailwind 类**：
+
 ```svelte
-<ShButton class="bg-blue-500 hover:bg-blue-600">
-  自定义按钮
-</ShButton>
+<ShButton class="bg-blue-500 hover:bg-blue-600">自定义按钮</ShButton>
 ```
 
 3. **全局样式覆盖**：
+
 ```css
 /* 在你的全局样式文件中 */
 .btn-custom {
@@ -160,10 +165,7 @@ function toggleTheme() {
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": [
-    "src/**/*",
-    "node_modules/@istock-shell/ui/**/*"
-  ]
+  "include": ["src/**/*", "node_modules/@istock-shell/ui/**/*"]
 }
 ```
 
@@ -172,23 +174,26 @@ function toggleTheme() {
 **A:** SvelteKit 集成步骤：
 
 1. **安装依赖**：
+
 ```bash
 pnpm add @istock-shell/ui
 pnpm add -D @tailwindcss/vite daisyui tailwindcss
 ```
 
 2. **配置 Vite**：
+
 ```javascript
 // vite.config.js
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 
 export default {
-  plugins: [sveltekit(), tailwindcss()]
+  plugins: [sveltekit(), tailwindcss()],
 };
 ```
 
 3. **配置样式**：
+
 ```css
 /* src/app.css */
 @import '@istock-shell/ui/dist/style.css';
@@ -198,6 +203,7 @@ export default {
 ```
 
 4. **在布局中导入**：
+
 ```svelte
 <!-- src/routes/+layout.svelte -->
 <script>
@@ -214,12 +220,13 @@ export default {
 **A:** IStock Shell UI 支持 SSR，但需要注意：
 
 1. **避免浏览器特定的 API**：
+
 ```svelte
 <script>
   import { browser } from '$app/environment';
-  
+
   let theme = 'light';
-  
+
   // 只在浏览器环境中执行
   if (browser) {
     theme = localStorage.getItem('theme') || 'light';
@@ -228,10 +235,11 @@ export default {
 ```
 
 2. **使用 onMount 进行客户端初始化**：
+
 ```svelte
 <script>
   import { onMount } from 'svelte';
-  
+
   onMount(() => {
     // 客户端初始化逻辑
     initializeTheme();
@@ -244,17 +252,17 @@ export default {
 **A:** 检查事件绑定方式：
 
 ```svelte
-<!-- 正确的事件绑定 -->
-<ShButton onclick={handleClick}>点击我</ShButton>
-
-<!-- 或使用 on:click -->
-<ShButton on:click={handleClick}>点击我</ShButton>
-
 <script>
   function handleClick(event) {
     console.log('按钮被点击', event);
   }
 </script>
+
+<!-- 正确的事件绑定 -->
+<ShButton onclick={handleClick}>点击我</ShButton>
+
+<!-- 或使用 on:click -->
+<ShButton on:click={handleClick}>点击我</ShButton>
 ```
 
 ## ⚡ 性能相关
@@ -281,11 +289,11 @@ export default {
       external: ['svelte'],
       output: {
         manualChunks: {
-          'ui-core': ['@istock-shell/ui']
-        }
-      }
-    }
-  }
+          'ui-core': ['@istock-shell/ui'],
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -296,21 +304,16 @@ export default {
 ```svelte
 <script>
   import { ShVirtualTable } from '@istock-shell/ui';
-  
+
   // 大数据量使用虚拟表格
   const largeData = Array.from({ length: 100000 }, (_, i) => ({
     id: i,
     name: `Item ${i}`,
-    value: Math.random()
+    value: Math.random(),
   }));
 </script>
 
-<ShVirtualTable 
-  data={largeData}
-  columns={columns}
-  height={400}
-  itemHeight={40}
-/>
+<ShVirtualTable data={largeData} {columns} height={400} itemHeight={40} />
 ```
 
 ### Q: 组件渲染性能优化？
@@ -321,10 +324,10 @@ export default {
 <script>
   // 1. 使用 key 优化列表渲染
   export let items = [];
-  
+
   // 2. 避免在模板中进行复杂计算
   $: processedItems = items.map(processItem);
-  
+
   // 3. 使用 createEventDispatcher
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
@@ -385,24 +388,22 @@ import 'regenerator-runtime/runtime';
 ```svelte
 <script>
   import { onMount } from 'svelte';
-  
+
   let isMobile = false;
-  
+
   onMount(() => {
     isMobile = window.innerWidth < 768;
-    
+
     const handleResize = () => {
       isMobile = window.innerWidth < 768;
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   });
 </script>
 
-<ShButton size={isMobile ? 'sm' : 'md'}>
-  响应式按钮
-</ShButton>
+<ShButton size={isMobile ? 'sm' : 'md'}>响应式按钮</ShButton>
 ```
 
 ## 🔍 调试相关
@@ -412,6 +413,7 @@ import 'regenerator-runtime/runtime';
 **A:** 使用以下调试方法：
 
 1. **开启 Svelte 开发工具**：
+
 ```javascript
 // 在开发环境中
 if (process.env.NODE_ENV === 'development') {
@@ -420,11 +422,13 @@ if (process.env.NODE_ENV === 'development') {
 ```
 
 2. **使用浏览器开发者工具**：
+
 - 检查元素的 CSS 类
 - 查看计算后的样式
 - 检查 JavaScript 控制台错误
 
 3. **添加调试样式**：
+
 ```css
 /* 临时调试样式 */
 .debug * {
@@ -437,6 +441,7 @@ if (process.env.NODE_ENV === 'development') {
 **A:** 解决样式冲突的方法：
 
 1. **检查 CSS 优先级**：
+
 ```css
 /* 使用更具体的选择器 */
 .my-app .btn-primary {
@@ -445,6 +450,7 @@ if (process.env.NODE_ENV === 'development') {
 ```
 
 2. **使用 CSS Modules 或 scoped 样式**：
+
 ```svelte
 <style>
   /* 组件级样式，自动作用域隔离 */
@@ -455,6 +461,7 @@ if (process.env.NODE_ENV === 'development') {
 ```
 
 3. **重置或规范化 CSS**：
+
 ```css
 /* 在组件库样式之前导入 */
 @import 'normalize.css';
@@ -468,6 +475,7 @@ if (process.env.NODE_ENV === 'development') {
 **A:** 与常见状态管理库的集成：
 
 **Svelte Stores**：
+
 ```javascript
 // stores.js
 import { writable } from 'svelte/store';
@@ -480,9 +488,9 @@ export const user = writable(null);
 <script>
   import { theme } from './stores.js';
   import { ShButton } from '@istock-shell/ui';
-  
+
   function toggleTheme() {
-    theme.update(t => t === 'light' ? 'dark' : 'light');
+    theme.update((t) => (t === 'light' ? 'dark' : 'light'));
   }
 </script>
 
@@ -492,6 +500,7 @@ export const user = writable(null);
 ```
 
 **Pinia (Vue)**：
+
 ```javascript
 // 如果在 Vue 项目中使用 Web Components
 import { defineStore } from 'pinia';
@@ -501,8 +510,8 @@ export const useThemeStore = defineStore('theme', {
   actions: {
     toggleTheme() {
       this.theme = this.theme === 'light' ? 'dark' : 'light';
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -514,15 +523,15 @@ export const useThemeStore = defineStore('theme', {
 <script>
   import { ShInput, ShButton, ShAlert } from '@istock-shell/ui';
   import * as yup from 'yup';
-  
+
   const schema = yup.object({
     email: yup.string().email('邮箱格式不正确').required('邮箱必填'),
-    password: yup.string().min(6, '密码至少6位').required('密码必填')
+    password: yup.string().min(6, '密码至少6位').required('密码必填'),
   });
-  
+
   let formData = { email: '', password: '' };
   let errors = {};
-  
+
   async function validateField(field, value) {
     try {
       await schema.validateAt(field, { [field]: value });
@@ -532,7 +541,7 @@ export const useThemeStore = defineStore('theme', {
     }
     errors = { ...errors };
   }
-  
+
   async function handleSubmit() {
     try {
       await schema.validate(formData, { abortEarly: false });
@@ -554,7 +563,7 @@ export const useThemeStore = defineStore('theme', {
   {#if errors.email}
     <ShAlert color="error" size="sm">{errors.email}</ShAlert>
   {/if}
-  
+
   <ShButton type="submit">提交</ShButton>
 </form>
 ```
@@ -573,18 +582,18 @@ export default {
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
-      }
+        drop_debugger: true,
+      },
     },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['svelte'],
-          ui: ['@istock-shell/ui']
-        }
-      }
-    }
-  }
+          ui: ['@istock-shell/ui'],
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -594,8 +603,11 @@ export default {
 
 ```html
 <!-- 确保正确的资源路径 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@istock-shell/ui@latest/dist/style.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@istock-shell/ui@latest/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@istock-shell/ui@latest/dist/style.css" />
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/@istock-shell/ui@latest/dist/index.js"
+></script>
 ```
 
 ## 🆘 获取帮助
@@ -616,36 +628,45 @@ export default {
 
 ### 问题模板
 
-```markdown
+````markdown
 ## 问题描述
+
 简要描述遇到的问题...
 
 ## 复现步骤
+
 1. 执行 xxx
 2. 点击 xxx
 3. 看到错误 xxx
 
 ## 期望行为
+
 描述期望的正确行为...
 
 ## 实际行为
+
 描述实际发生的行为...
 
 ## 环境信息
+
 - OS: [e.g. macOS 12.0]
 - Browser: [e.g. Chrome 95.0]
 - Node.js: [e.g. 18.0.0]
 - @istock-shell/ui: [e.g. 0.1.4]
 
 ## 代码示例
+
 ```svelte
 // 最小化的复现代码
 ```
+````
 
 ## 错误信息
+
 ```
 // 完整的错误堆栈
 ```
+
 ```
 
 ---
@@ -653,3 +674,4 @@ export default {
 <p class="text-center text-gray-500 mt-8">
   💡 没有找到你的问题？欢迎在 <a href="https://github.com/your-org/istock-shell/issues" class="text-primary hover:underline">GitHub Issues</a> 中提交新问题。
 </p>
+```

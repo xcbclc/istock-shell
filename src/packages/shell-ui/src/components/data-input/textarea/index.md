@@ -112,7 +112,15 @@ npm install @istock-shell/ui
 
 ```typescript
 // 文本框颜色类型
-type TextareaColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type TextareaColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### TextareaSize

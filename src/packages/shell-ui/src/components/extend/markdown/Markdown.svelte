@@ -57,19 +57,19 @@ ShMarkdown Markdown渲染组件
     content?: string;
     /** Marked解析器扩展配置，用于自定义解析行为和扩展功能 */
     options?: MarkedExtension;
+    /** 内容被加载 **/
+    onContentLoaded?: (success: Boolean) => void;
   }
 </script>
 
 <script lang="ts">
-  // 导入代码高亮样式和Markdown处理库
-  import 'highlight.js/styles/github-dark.css';
-  import { Marked } from 'marked';
-  import { markedHighlight } from 'marked-highlight';
-  import hljs from 'highlight.js';
+  import { onMount, tick } from 'svelte';
   import { tuc } from '@istock-shell/util';
+  import type { Marked } from 'marked';
   const {
     content = $bindable(''), // Markdown原始内容，支持双向绑定
     options = {}, // Marked解析器扩展配置（默认空对象）
+    onContentLoaded, // 内容被加载
     class: className = '', // 自定义CSS类名（默认空字符串）
     ...otherProps // 其他原生div元素属性
   }: MarkdownProps = $props();
@@ -81,6 +81,11 @@ ShMarkdown Markdown渲染组件
   let markdownHtml: string = $state('');
 
   /**
+   * Marked解析器实例
+   */
+  let marked: Marked | undefined = $state.raw();
+
+  /**
    * 初始化Marked解析器实例
    * 配置代码高亮插件和自定义选项
    *
@@ -89,25 +94,36 @@ ShMarkdown Markdown渲染组件
    * - highlight: 自定义代码高亮处理函数
    * - ...options: 合并用户自定义配置
    */
-  const marked = new Marked(
-    markedHighlight({
-      langPrefix: 'hljs language-', // 代码块CSS类名前缀
-      highlight(code, lang, _info) {
-        /**
-         * 代码高亮处理函数
-         * @param code - 代码内容
-         * @param lang - 语言标识
-         * @param _info - 额外信息（未使用）
-         * @returns 高亮后的HTML字符串
-         */
-        // 验证并获取有效语言类型，如果不支持则使用plaintext
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        // 执行代码高亮处理，返回带有高亮标记的HTML
-        return hljs.highlight(code, { language }).value;
-      },
-      ...options, // 合并用户自定义配置选项
-    })
-  );
+  const initMarked = async () => {
+    import('highlight.js/styles/github-dark.css');
+    const [importMarked, importHighlight, importMarkedHighlight] = await Promise.all([
+      import('marked'),
+      import('highlight.js'),
+      import('marked-highlight'),
+    ]);
+    const { Marked: MarkedClass } = importMarked;
+    const hljs = importHighlight.default;
+    const { markedHighlight: markedHighlightMethod } = importMarkedHighlight;
+    marked = new MarkedClass(
+      markedHighlightMethod({
+        langPrefix: 'hljs language-', // 代码块CSS类名前缀
+        highlight(code, lang, _info) {
+          /**
+           * 代码高亮处理函数
+           * @param code - 代码内容
+           * @param lang - 语言标识
+           * @param _info - 额外信息（未使用）
+           * @returns 高亮后的HTML字符串
+           */
+          // 验证并获取有效语言类型，如果不支持则使用plaintext
+          const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+          // 执行代码高亮处理，返回带有高亮标记的HTML
+          return hljs.highlight(code, { language }).value;
+        },
+        ...options, // 合并用户自定义配置选项
+      })
+    );
+  };
 
   /**
    * Markdown解析方法
@@ -115,7 +131,9 @@ ShMarkdown Markdown渲染组件
    * 使用异步处理以支持复杂的解析操作
    */
   const parseMarkdownToHtml = async () => {
-    markdownHtml = await marked.parse(content);
+    if (marked) {
+      markdownHtml = await marked.parse(content);
+    }
   };
 
   /**
@@ -124,8 +142,19 @@ ShMarkdown Markdown渲染组件
    * 确保渲染内容与输入内容保持同步
    */
   $effect(() => {
-    if (content) {
+    if (content && marked) {
       void parseMarkdownToHtml();
+    }
+  });
+
+  onMount(async () => {
+    try {
+      await initMarked();
+      await tick();
+      onContentLoaded?.(true);
+    } catch (e) {
+      onContentLoaded?.(false);
+      throw e;
     }
   });
 </script>

@@ -115,6 +115,8 @@ export class Virtual {
    */
   syncDataSources(dataSources: any[]) {
     this.#dataSources = dataSources;
+    this.#virtualCore.updateParam('uniqueIds', this.getUniqueIdFromDataSources());
+    this.#virtualCore.handleDataSourcesChange();
   }
 
   /**
@@ -309,11 +311,18 @@ export class Virtual {
     });
 
     // 顶部阈值触发
-    if (this.#virtualCore.isFront() && this.#dataSources.length > 0 && offset - this.#topThreshold <= 0) {
+    if (
+      this.#virtualCore.isFront() &&
+      this.#dataSources.length > 0 &&
+      offset - this.#topThreshold <= 0
+    ) {
       void this.#eventEmitter.emit('scrollToTop');
     }
     // 底部阈值触发
-    else if (this.#virtualCore.isBehind() && offset + clientSize + this.#bottomThreshold >= scrollSize) {
+    else if (
+      this.#virtualCore.isBehind() &&
+      offset + clientSize + this.#bottomThreshold >= scrollSize
+    ) {
       void this.#eventEmitter.emit('scrollToBottom');
     }
   }

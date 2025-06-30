@@ -214,7 +214,7 @@ keywords: [IStock Shell UI更新日志, 版本历史, 发布记录, 变更日志
 
 ### v0.2.0 (计划中)
 
-- **新组件**: 
+- **新组件**:
   - `ShDatePicker`: 日期选择器
   - `ShTimePicker`: 时间选择器
   - `ShUpload`: 文件上传组件

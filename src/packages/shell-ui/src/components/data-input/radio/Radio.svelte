@@ -148,10 +148,17 @@ ShRadio 单选按钮组组件
       {@const itemDisabled = opt.disabled ?? disabled ?? undefined}
       {#if opt.label}
         <!-- 带标签的单选项 -->
-        <label class={tuc(radioLabelVariants({ type: label?.type, color: otherProps.color }), label?.class ?? '')}>
+        <label
+          class={tuc(
+            radioLabelVariants({ type: label?.type, color: otherProps.color }),
+            label?.class ?? ''
+          )}
+        >
           {#if label?.placement === 'before'}
             <!-- 前置标签：显示在单选按钮之前 -->
-            <span class={tuc(radioLabelVariants({ size, disabled: itemDisabled }))}>{opt.label}</span>
+            <span class={tuc(radioLabelVariants({ size, disabled: itemDisabled }))}
+              >{opt.label}</span
+            >
           {/if}
 
           <!--
@@ -159,11 +166,19 @@ ShRadio 单选按钮组组件
             支持双向数据绑定和完整的状态管理
             继承所有父级配置和透传属性
           -->
-          <ShRadioItem bind:groupValue={value} value={opt.value} disabled={itemDisabled} {size} {...otherProps} />
+          <ShRadioItem
+            bind:groupValue={value}
+            value={opt.value}
+            disabled={itemDisabled}
+            {size}
+            {...otherProps}
+          />
 
           {#if !label?.placement || label?.placement === 'after'}
             <!-- 后置标签：显示在单选按钮之后（默认位置） -->
-            <span class={tuc(radioLabelVariants({ size, disabled: itemDisabled }))}>{opt.label}</span>
+            <span class={tuc(radioLabelVariants({ size, disabled: itemDisabled }))}
+              >{opt.label}</span
+            >
           {/if}
         </label>
       {:else}
@@ -171,7 +186,13 @@ ShRadio 单选按钮组组件
           无标签单选按钮项
           直接渲染单选按钮组件，适用于纯图标或自定义内容场景
         -->
-        <ShRadioItem bind:groupValue={value} value={opt.value} disabled={itemDisabled} {size} {...otherProps} />
+        <ShRadioItem
+          bind:groupValue={value}
+          value={opt.value}
+          disabled={itemDisabled}
+          {size}
+          {...otherProps}
+        />
       {/if}
     {/each}
   {/if}

@@ -121,4 +121,9 @@
 
 <h2 class="text-xl font-semibold mb-4">用户注册表单</h2>
 
-<ShForm {formItems} bind:values={formValues} onChangeValues={handleValuesChange} onSubmit={handleSubmit} />
+<ShForm
+  {formItems}
+  bind:values={formValues}
+  onChangeValues={handleValuesChange}
+  onSubmit={handleSubmit}
+/>

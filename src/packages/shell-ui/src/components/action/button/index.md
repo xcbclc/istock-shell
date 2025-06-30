@@ -1,7 +1,19 @@
 ---
 title: Button 按钮组件 | IStock Shell UI
 description: Button按钮组件提供丰富的交互样式和功能，支持8种主题色彩、5种尺寸规格、多种视觉变体（柔和、轮廓、虚线）、图标嵌入、加载状态等特性，适用于表单提交、操作触发、导航跳转等各种交互场景。
-keywords: [Button按钮组件, Svelte按钮, UI组件库, 交互按钮, 按钮样式, 前端组件, Web组件, 用户界面, UX设计, 响应式按钮]
+keywords:
+  [
+    Button按钮组件,
+    Svelte按钮,
+    UI组件库,
+    交互按钮,
+    按钮样式,
+    前端组件,
+    Web组件,
+    用户界面,
+    UX设计,
+    响应式按钮,
+  ]
 aside: false
 editLink: false
 outline: [2, 4]
@@ -129,7 +141,15 @@ npm install @istock-shell/ui
 
 ```typescript
 // 按钮颜色类型
-type ButtonColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type ButtonColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### ButtonSize

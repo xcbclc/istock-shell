@@ -1,7 +1,21 @@
 ---
 title: VirtualList 虚拟列表组件 | IStock Shell UI
 description: VirtualList虚拟列表组件提供高性能的大数据量渲染解决方案，支持垂直/水平滚动、动态尺寸检测、预渲染缓冲、自定义头尾部渲染、精确滚动定位等特性，基于虚拟化技术优化，适用于大数据列表、聊天记录、数据表格、无限滚动等高性能要求场景。
-keywords: [VirtualList虚拟列表, 虚拟滚动组件, Svelte虚拟列表, 大数据渲染, 性能优化组件, 高性能列表, UI组件库, 前端组件, Web组件, 用户界面, UX设计, 响应式列表]
+keywords:
+  [
+    VirtualList虚拟列表,
+    虚拟滚动组件,
+    Svelte虚拟列表,
+    大数据渲染,
+    性能优化组件,
+    高性能列表,
+    UI组件库,
+    前端组件,
+    Web组件,
+    用户界面,
+    UX设计,
+    响应式列表,
+  ]
 aside: false
 editLink: false
 outline: [2, 4]
@@ -36,12 +50,12 @@ npm install @istock-shell/ui
   const largeDataList = Array.from({ length: 10000 }, (_, index) => ({
     id: index,
     name: `项目 ${index + 1}`,
-    description: `这是第 ${index + 1} 个列表项的描述信息`
+    description: `这是第 ${index + 1} 个列表项的描述信息`,
   }));
 </script>
 
-<VirtualList 
-  list={largeDataList} 
+<VirtualList
+  list={largeDataList}
   estimateSize={60}
   mainItemRender={(item) => {
     return `
@@ -67,16 +81,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景           | 推荐配置                                    | 说明                                   |
-| -------------- | ------------------------------------------- | -------------------------------------- |
-| 大数据列表     | `keeps={30}` + `estimateSize={50}`         | 商品列表、用户列表、数据表格等大量数据 |
-| 聊天消息列表   | `direction="vertical"` + 动态高度检测      | 即时通讯、评论列表、消息记录           |
-| 图片瀑布流     | `direction="vertical"` + 不等高配置        | 图片展示、作品集、媒体库               |
-| 水平滚动卡片   | `direction="horizontal"` + 固定宽度        | 轮播图、产品展示、时间轴               |
-| 无限滚动       | 配合 `onRangeChange` + 数据懒加载           | 社交媒体流、新闻列表、搜索结果         |
-| 表格虚拟滚动   | `headerRender` + `footerRender` + 固定高度  | 数据表格、报表展示、统计面板           |
-| 移动端长列表   | `thresholdTop/Bottom` + 触摸优化            | 移动应用、小程序、响应式页面           |
-| 复杂列表项     | `mainItemRender` + 动态内容渲染             | 复合组件列表、卡片列表、富文本内容     |
+| 场景         | 推荐配置                                   | 说明                                   |
+| ------------ | ------------------------------------------ | -------------------------------------- |
+| 大数据列表   | `keeps={30}` + `estimateSize={50}`         | 商品列表、用户列表、数据表格等大量数据 |
+| 聊天消息列表 | `direction="vertical"` + 动态高度检测      | 即时通讯、评论列表、消息记录           |
+| 图片瀑布流   | `direction="vertical"` + 不等高配置        | 图片展示、作品集、媒体库               |
+| 水平滚动卡片 | `direction="horizontal"` + 固定宽度        | 轮播图、产品展示、时间轴               |
+| 无限滚动     | 配合 `onRangeChange` + 数据懒加载          | 社交媒体流、新闻列表、搜索结果         |
+| 表格虚拟滚动 | `headerRender` + `footerRender` + 固定高度 | 数据表格、报表展示、统计面板           |
+| 移动端长列表 | `thresholdTop/Bottom` + 触摸优化           | 移动应用、小程序、响应式页面           |
+| 复杂列表项   | `mainItemRender` + 动态内容渲染            | 复合组件列表、卡片列表、富文本内容     |
 
 ## 示例演示
 
@@ -87,25 +101,25 @@ npm install @istock-shell/ui
 
 ### 属性说明
 
-| 属性名            | 类型                                      | 默认值       | 说明                                 |
-| ----------------- | ----------------------------------------- | ------------ | ------------------------------------ |
-| `list`            | `any[]`                                   | `[]`         | 数据源数组，虚拟列表渲染的数据集合                           |
-| `thresholdTop`    | `number`                                  | `0`          | 顶部预渲染阈值（像素），提前渲染顶部缓冲区               |
-| `thresholdBottom` | `number`                                  | `0`          | 底部预渲染阈值（像素），提前渲染底部缓冲区               |
-| `keeps`           | `number`                                  | `25`         | 保持渲染的最小项数，影响滚动性能和内存占用                   |
-| `direction`       | [`VirtualDirection`](#virtualdirection)   | `'vertical'` | 滚动方向，支持垂直和水平滚动                             |
-| `dataKey`         | `string \| ((item: any, index: number) => string)` | `'id'`       | 数据项唯一标识键或函数，用于优化渲染性能               |
-| `headerSize`      | `number`                                  | `0`          | 头部固定区域高度（像素），不参与虚拟滚动                     |
-| `footerSize`      | `number`                                  | `0`          | 尾部固定区域高度（像素），不参与虚拟滚动                     |
-| `estimateSize`    | `number`                                  | `32`         | 列表项尺寸预估值（像素），用于初始化计算                 |
-| `shepherdElement` | `HTMLElement`                             | -            | 关联的外部滚动元素，实现滚动联动                         |
-| `scrollToIndex`   | `number`                                  | -            | 初始滚动到指定索引位置                   |
-| `scrollToOffset`  | `number`                                  | -            | 初始滚动到指定偏移量位置                 |
-| `headerRender`    | `() => ReturnType<Snippet<[]>>`           | -            | 头部固定内容渲染函数                     |
-| `mainItemRender`  | `(item: any) => ReturnType<Snippet<[]>>`  | -            | 列表项内容渲染函数，自定义每个项的显示                     |
-| `footerRender`    | `() => ReturnType<Snippet<[]>>`           | -            | 尾部固定内容渲染函数                     |
-| `onRangeChange`   | `(range: VirtualCoreRange) => void`       | -            | 可视区域变化回调函数，监听滚动状态                 |
-| `class`           | `string`                                  | `''`         | 自定义CSS类名                        |
+| 属性名            | 类型                                               | 默认值       | 说明                                       |
+| ----------------- | -------------------------------------------------- | ------------ | ------------------------------------------ |
+| `list`            | `any[]`                                            | `[]`         | 数据源数组，虚拟列表渲染的数据集合         |
+| `thresholdTop`    | `number`                                           | `0`          | 顶部预渲染阈值（像素），提前渲染顶部缓冲区 |
+| `thresholdBottom` | `number`                                           | `0`          | 底部预渲染阈值（像素），提前渲染底部缓冲区 |
+| `keeps`           | `number`                                           | `25`         | 保持渲染的最小项数，影响滚动性能和内存占用 |
+| `direction`       | [`VirtualDirection`](#virtualdirection)            | `'vertical'` | 滚动方向，支持垂直和水平滚动               |
+| `dataKey`         | `string \| ((item: any, index: number) => string)` | `'id'`       | 数据项唯一标识键或函数，用于优化渲染性能   |
+| `headerSize`      | `number`                                           | `0`          | 头部固定区域高度（像素），不参与虚拟滚动   |
+| `footerSize`      | `number`                                           | `0`          | 尾部固定区域高度（像素），不参与虚拟滚动   |
+| `estimateSize`    | `number`                                           | `32`         | 列表项尺寸预估值（像素），用于初始化计算   |
+| `shepherdElement` | `HTMLElement`                                      | -            | 关联的外部滚动元素，实现滚动联动           |
+| `scrollToIndex`   | `number`                                           | -            | 初始滚动到指定索引位置                     |
+| `scrollToOffset`  | `number`                                           | -            | 初始滚动到指定偏移量位置                   |
+| `headerRender`    | `() => ReturnType<Snippet<[]>>`                    | -            | 头部固定内容渲染函数                       |
+| `mainItemRender`  | `(item: any) => ReturnType<Snippet<[]>>`           | -            | 列表项内容渲染函数，自定义每个项的显示     |
+| `footerRender`    | `() => ReturnType<Snippet<[]>>`                    | -            | 尾部固定内容渲染函数                       |
+| `onRangeChange`   | `(range: VirtualCoreRange) => void`                | -            | 可视区域变化回调函数，监听滚动状态         |
+| `class`           | `string`                                           | `''`         | 自定义CSS类名                              |
 
 ### 代码片段插入位置
 
@@ -118,14 +132,14 @@ npm install @istock-shell/ui
     {#if headerRender}
       {@render headerRender()}
     {/if}
-    
+
     <!-- 主要内容区域 -->
     {#if mainItemRender}
       <!-- 虚拟列表项渲染 -->
     {:else}
       {@render children?.()}
     {/if}
-    
+
     <!-- 尾部固定区域 -->
     {#if footerRender}
       {@render footerRender()}
@@ -146,11 +160,11 @@ npm install @istock-shell/ui
 
 ### 方法
 
-| 方法名              | 参数                    | 返回值 | 说明                           |
-| ------------------- | ----------------------- | ------ | ------------------------------ |
+| 方法名              | 参数                              | 返回值                    | 说明                                 |
+| ------------------- | --------------------------------- | ------------------------- | ------------------------------------ |
 | `onItemResize`      | `(node: HTMLElement, id: string)` | `VirtualListResizeAction` | 列表项尺寸监听动作，用于动态尺寸检测 |
-| `scrollToLastChild` | -                       | `void` | 滚动到列表末尾                 |
-| `scrollToElement`   | `selector: string`      | `void` | 滚动到指定CSS选择器的元素      |
+| `scrollToLastChild` | -                                 | `void`                    | 滚动到列表末尾                       |
+| `scrollToElement`   | `selector: string`                | `void`                    | 滚动到指定CSS选择器的元素            |
 
 ### 类型定义
 
@@ -159,8 +173,8 @@ npm install @istock-shell/ui
 ```typescript
 // 虚拟列表滚动方向
 enum VirtualDirection {
-  vertical = 'vertical',   // 垂直滚动
-  horizontal = 'horizontal' // 水平滚动
+  vertical = 'vertical', // 垂直滚动
+  horizontal = 'horizontal', // 水平滚动
 }
 ```
 
@@ -169,11 +183,11 @@ enum VirtualDirection {
 ```typescript
 // 虚拟列表可视区域范围信息
 interface VirtualCoreRange {
-  offset: number;      // 当前滚动偏移量（像素）
-  start: number;       // 可视区域起始索引
-  end: number;         // 可视区域结束索引
-  padFront: number;    // 前置填充高度（像素）
-  padBehind: number;   // 后置填充高度（像素）
+  offset: number; // 当前滚动偏移量（像素）
+  start: number; // 可视区域起始索引
+  end: number; // 可视区域结束索引
+  padFront: number; // 前置填充高度（像素）
+  padBehind: number; // 后置填充高度（像素）
   totalHeight: number; // 列表总高度（像素）
 }
 ```
@@ -183,9 +197,12 @@ interface VirtualCoreRange {
 ```typescript
 // 列表项尺寸监听动作接口
 interface VirtualListResizeAction {
-  (node: HTMLElement, id: string): {
-    update: (newId: string) => void;  // 更新监听的元素ID
-    destroy: () => void;              // 销毁监听器
+  (
+    node: HTMLElement,
+    id: string
+  ): {
+    update: (newId: string) => void; // 更新监听的元素ID
+    destroy: () => void; // 销毁监听器
   };
 }
 ```
@@ -235,6 +252,7 @@ interface VirtualListResizeAction {
 ### Q: 滚动时出现白屏或闪烁？
 
 A: 这通常是由于 `estimateSize` 与实际列表项尺寸差异过大导致的。解决方案：
+
 - 测量实际列表项的平均高度，调整 `estimateSize` 值
 - 适当增加 `keeps` 值，增加渲染的缓冲项数量
 - 检查 `mainItemRender` 函数是否存在异步操作
@@ -242,6 +260,7 @@ A: 这通常是由于 `estimateSize` 与实际列表项尺寸差异过大导致�
 ### Q: 动态高度列表项渲染异常？
 
 A: 动态高度场景需要特别处理：
+
 - 必须使用 `onItemResize` 动作监听每个列表项的尺寸变化
 - 确保 `dataKey` 返回稳定的唯一标识
 - 避免在列表项内容变化时改变其唯一标识
@@ -249,6 +268,7 @@ A: 动态高度场景需要特别处理：
 ### Q: 滚动性能不佳，出现卡顿？
 
 A: 性能问题的常见原因和解决方案：
+
 - 减少 `keeps` 值，降低同时渲染的DOM数量
 - 优化 `mainItemRender` 函数，避免复杂计算和DOM操作
 - 检查是否存在内存泄漏，及时清理事件监听器
@@ -257,11 +277,12 @@ A: 性能问题的常见原因和解决方案：
 ### Q: 如何实现无限滚动加载？
 
 A: 结合 `onRangeChange` 回调实现：
+
 ```svelte
 <script>
   let list = $state([]);
   let loading = $state(false);
-  
+
   const handleRangeChange = async (range) => {
     // 当滚动接近底部时加载更多数据
     if (range.end >= list.length - 5 && !loading) {
@@ -279,6 +300,7 @@ A: 结合 `onRangeChange` 回调实现：
 ### Q: 如何处理列表项中的交互元素？
 
 A: 在虚拟列表中处理交互元素需要注意：
+
 - 使用事件委托而非直接绑定事件到每个列表项
 - 确保交互状态与数据模型同步
 - 避免在 `mainItemRender` 中创建复杂的事件处理逻辑
@@ -286,6 +308,7 @@ A: 在虚拟列表中处理交互元素需要注意：
 ### Q: 水平滚动模式如何配置？
 
 A: 设置 `direction="horizontal"` 并注意：
+
 - `estimateSize` 表示列表项的宽度而非高度
 - 容器需要设置固定宽度和 `overflow-x: auto`
 - 列表项需要设置适当的宽度和 `display: inline-block` 或 `flex`

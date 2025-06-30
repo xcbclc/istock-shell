@@ -10,7 +10,10 @@
 
 <ShFieldSet title="请选择" class="p-4 bg-base-100 border border-base-300 rounded-box w-64">
   <ShField
-    label={{ title: `选择了: ${options.find((option) => option.value === value)?.label ?? ''}`, position: 'after' }}
+    label={{
+      title: `选择了: ${options.find((option) => option.value === value)?.label ?? ''}`,
+      position: 'after',
+    }}
   >
     <ShSelect {options} bind:value />
   </ShField>

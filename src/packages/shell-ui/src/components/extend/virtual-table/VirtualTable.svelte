@@ -54,7 +54,13 @@ ShVirtualTable 虚拟表格组件
 -->
 
 <script lang="ts" module>
-  import { ShVirtualList, ShTable, type TableProps, type VirtualCoreRange, type TableArea } from '../../index';
+  import {
+    ShVirtualList,
+    ShTable,
+    type TableProps,
+    type VirtualCoreRange,
+    type TableArea,
+  } from '../../index';
 
   /**
    * 虚拟表格行数据项接口
@@ -149,8 +155,22 @@ ShVirtualTable 虚拟表格组件
   - 内部通过 ShTable 渲染当前可见区间的表格行
   - 通过 onRangeChange、onRender、onSyncAreaHeight 实现联动与自适应
 -->
-<ShVirtualList bind:this={virtualList} {list} {onRangeChange} {headerSize} thresholdTop={40} class="w-full max-h-160">
+<ShVirtualList
+  bind:this={virtualList}
+  {list}
+  {onRangeChange}
+  {headerSize}
+  thresholdTop={40}
+  class="w-full max-h-160"
+>
   {#if range}
-    <ShTable {...tableProps} tbody={rangeTbody} {size} {pinRows} onRender={onItemResize} {onSyncAreaHeight} />
+    <ShTable
+      {...tableProps}
+      tbody={rangeTbody}
+      {size}
+      {pinRows}
+      onRender={onItemResize}
+      {onSyncAreaHeight}
+    />
   {/if}
 </ShVirtualList>

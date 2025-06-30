@@ -27,7 +27,12 @@
     {
       text: 'Solutions',
       subItem: {
-        items: [{ text: 'Design' }, { text: 'Development' }, { text: 'Hosting' }, { text: 'Domain register' }],
+        items: [
+          { text: 'Design' },
+          { text: 'Development' },
+          { text: 'Hosting' },
+          { text: 'Domain register' },
+        ],
       },
     },
     {
@@ -51,7 +56,11 @@
           {
             text: 'Open source',
             subItem: {
-              items: [{ text: 'Auth management system' }, { text: 'VScode theme' }, { text: 'Color picker app' }],
+              items: [
+                { text: 'Auth management system' },
+                { text: 'VScode theme' },
+                { text: 'Color picker app' },
+              ],
             },
           },
         ],
@@ -60,7 +69,12 @@
     {
       text: 'Company',
       subItem: {
-        items: [{ text: 'About us' }, { text: 'Contact us' }, { text: 'Privacy policy' }, { text: 'Press kit' }],
+        items: [
+          { text: 'About us' },
+          { text: 'Contact us' },
+          { text: 'Privacy policy' },
+          { text: 'Press kit' },
+        ],
       },
     },
   ];

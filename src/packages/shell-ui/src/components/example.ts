@@ -6,16 +6,22 @@ export type TExampleAppCode = {
   lang: 'svelte';
 };
 
-const appRecord: Record<string, () => Promise<Component>> = import.meta.glob<Component>('./**/example/*.svelte', {
-  import: 'default',
-  eager: false,
-});
+const appRecord: Record<string, () => Promise<Component>> = import.meta.glob<Component>(
+  './**/example/*.svelte',
+  {
+    import: 'default',
+    eager: false,
+  }
+);
 
-const appCodeRecord: Record<string, () => Promise<string>> = import.meta.glob<string>('./**/example/*.svelte', {
-  import: 'default',
-  eager: false,
-  query: '?raw',
-});
+const appCodeRecord: Record<string, () => Promise<string>> = import.meta.glob<string>(
+  './**/example/*.svelte',
+  {
+    import: 'default',
+    eager: false,
+    query: '?raw',
+  }
+);
 
 /**
  * 根据scr路径获取演示组件的源码

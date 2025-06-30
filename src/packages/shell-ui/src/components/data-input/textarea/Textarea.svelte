@@ -127,6 +127,10 @@ ShTextarea 文本域组件
   - class: 合并样式变体生成的类名和自定义类名
   - {...otherProps}: 透传所有其他原生 textarea 属性（如 placeholder, rows, cols 等）
 -->
-<textarea bind:value class={[tuc(textareaVariants({ color, size, variant })), className]} {...otherProps}></textarea>
+<textarea
+  bind:value
+  class={[tuc(textareaVariants({ color, size, variant })), className]}
+  {...otherProps}
+></textarea>
 
 <style></style>

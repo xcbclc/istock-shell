@@ -94,7 +94,16 @@ ShStatDesc 统计项描述组件
   import { tv } from 'tailwind-variants';
   import { ShTooltip, ShIcon } from '../../index';
 
-  const { text, color, size, align, weight, class: className = '', children, ...otherProps }: StatDescProps = $props();
+  const {
+    text,
+    color,
+    size,
+    align,
+    weight,
+    class: className = '',
+    children,
+    ...otherProps
+  }: StatDescProps = $props();
 
   const statDescVariant = tv(statDescVariantConfig, {});
 </script>

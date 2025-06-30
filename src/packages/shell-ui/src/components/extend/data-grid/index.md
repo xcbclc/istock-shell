@@ -51,7 +51,7 @@ npm install @istock-shell/ui
   const statsData = [
     { title: '总用户数', value: '1,234', trend: 'up' },
     { title: '活跃率', value: '89%', trend: 'down' },
-    { title: '转化率', value: '12.5%', trend: 'up' }
+    { title: '转化率', value: '12.5%', trend: 'up' },
   ];
 
   const chartItems = [
@@ -59,9 +59,12 @@ npm install @istock-shell/ui
       component: ShChart,
       options: {
         type: 'line',
-        data: [{ year: '2021', value: 3 }, { year: '2022', value: 4 }]
-      }
-    }
+        data: [
+          { year: '2021', value: 3 },
+          { year: '2022', value: 4 },
+        ],
+      },
+    },
   ];
 </script>
 
@@ -81,16 +84,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                           | 说明                               |
-| ------------ | ---------------------------------- | ---------------------------------- |
-| 数据仪表板   | `stats` + 多个图表组件             | 企业级数据仪表板，展示关键指标     |
-| 管理后台     | 统计卡片 + 数据图表 + 自定义组件   | 后台管理系统的数据概览页面         |
-| 数据看板     | 大屏展示 + `itemColWidth` 自定义   | 数据大屏、监控看板等场景           |
-| 报表系统     | 多图表组合 + 响应式布局            | 业务报表、分析报告等数据展示       |
-| 项目概览     | 项目统计 + 进度图表 + 状态展示     | 项目管理、任务跟踪等场景           |
-| 销售分析     | 销售指标 + 趋势图表 + 排行榜       | 销售数据分析、业绩展示             |
-| 用户画像     | 用户统计 + 行为图表 + 分布图       | 用户数据分析、画像展示             |
-| 运营监控     | 实时指标 + 监控图表 + 告警状态     | 系统监控、运营数据实时展示         |
+| 场景       | 推荐配置                         | 说明                           |
+| ---------- | -------------------------------- | ------------------------------ |
+| 数据仪表板 | `stats` + 多个图表组件           | 企业级数据仪表板，展示关键指标 |
+| 管理后台   | 统计卡片 + 数据图表 + 自定义组件 | 后台管理系统的数据概览页面     |
+| 数据看板   | 大屏展示 + `itemColWidth` 自定义 | 数据大屏、监控看板等场景       |
+| 报表系统   | 多图表组合 + 响应式布局          | 业务报表、分析报告等数据展示   |
+| 项目概览   | 项目统计 + 进度图表 + 状态展示   | 项目管理、任务跟踪等场景       |
+| 销售分析   | 销售指标 + 趋势图表 + 排行榜     | 销售数据分析、业绩展示         |
+| 用户画像   | 用户统计 + 行为图表 + 分布图     | 用户数据分析、画像展示         |
+| 运营监控   | 实时指标 + 监控图表 + 告警状态   | 系统监控、运营数据实时展示     |
 
 ## 示例演示
 
@@ -100,12 +103,12 @@ npm install @istock-shell/ui
 
 ### 属性
 
-| 属性名        | 类型                                      | 默认值 | 说明                                           |
-| ------------- | ----------------------------------------- | ------ | ---------------------------------------------- |
-| `stats`       | [`StatItemProps[]`](#statitemprops)       | `[]`   | 统计指标配置列表，用于展示关键数据指标         |
-| `items`       | [`DataGridItem[]`](#datagriditem)         | `[]`   | 数据项列表，包含图表和其他可视化组件的配置     |
-| `itemColWidth`| `number \| string`                        | `480`  | 数据项列的宽度，支持数字（像素）或字符串（CSS单位） |
-| `class`       | `string`                                  | `''`   | 自定义CSS类名                                  |
+| 属性名         | 类型                                | 默认值 | 说明                                                |
+| -------------- | ----------------------------------- | ------ | --------------------------------------------------- |
+| `stats`        | [`StatItemProps[]`](#statitemprops) | `[]`   | 统计指标配置列表，用于展示关键数据指标              |
+| `items`        | [`DataGridItem[]`](#datagriditem)   | `[]`   | 数据项列表，包含图表和其他可视化组件的配置          |
+| `itemColWidth` | `number \| string`                  | `480`  | 数据项列的宽度，支持数字（像素）或字符串（CSS单位） |
+| `class`        | `string`                            | `''`   | 自定义CSS类名                                       |
 
 ### 代码片段插入位置
 
@@ -117,7 +120,7 @@ npm install @istock-shell/ui
   <div class="gird-stats">
     <ShStat list={stats} />
   </div>
-  
+
   <!-- 数据项展示区域 -->
   <div class="gird-items">
     <!-- 动态渲染的组件项 -->
@@ -264,10 +267,10 @@ A: 可以直接传递Svelte组件类或使用字符串形式的组件名：
 ```svelte
 <script>
   import CustomComponent from './CustomComponent.svelte';
-  
+
   const items = [
     { component: CustomComponent, customProp: 'value' },
-    { component: 'ShChart', options: chartOptions }
+    { component: 'ShChart', options: chartOptions },
   ];
 </script>
 
@@ -290,7 +293,7 @@ A: 可以通过响应式数据绑定实现实时更新：
 <script>
   let stats = $state([]);
   let items = $state([]);
-  
+
   // 定时更新数据
   setInterval(() => {
     stats = fetchLatestStats();

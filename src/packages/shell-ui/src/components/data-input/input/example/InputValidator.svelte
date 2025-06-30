@@ -6,8 +6,8 @@
 <div class="min-w-[18rem]">
   <ShInput type="text" placeholder="文本" list="invest" />
   <datalist id="invest">
-    <option value="股票"> </option><option value="债券"> </option><option value="基金"> </option><option value="其它">
-    </option></datalist
+    <option value="股票"> </option><option value="债券"> </option><option value="基金">
+    </option><option value="其它"> </option></datalist
   >
 </div>
 
@@ -30,7 +30,13 @@
 
 <div class="join min-w-[18rem]">
   <div>
-    <ShInput type="email" prefixRender={emailIconRender} required placeholder="电子邮件" class="join-item" />
+    <ShInput
+      type="email"
+      prefixRender={emailIconRender}
+      required
+      placeholder="电子邮件"
+      class="join-item"
+    />
     <div class="validator-hint hidden">输入有效的电子邮件地址</div>
   </div>
   <button class="btn btn-neutral join-item">加入</button>

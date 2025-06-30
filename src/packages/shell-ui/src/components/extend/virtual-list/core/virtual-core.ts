@@ -149,7 +149,9 @@ export class VirtualCore {
    * 获取向前或向上填充值
    */
   getPadFront(): number {
-    return this.isFixedType() ? this.#fixedSizeValue * this.#range.start : this.getIndexOffset(this.#range.start);
+    return this.isFixedType()
+      ? this.#fixedSizeValue * this.#range.start
+      : this.getIndexOffset(this.#range.start);
   }
 
   /**
@@ -158,7 +160,9 @@ export class VirtualCore {
   getPadBehind(): number {
     const end = this.#range.end;
     const lastIndex = this.getLastIndex();
-    return this.isFixedType() ? (lastIndex - end) * this.#fixedSizeValue : (lastIndex - end) * this.getEstimateSize();
+    return this.isFixedType()
+      ? (lastIndex - end) * this.#fixedSizeValue
+      : (lastIndex - end) * this.getEstimateSize();
   }
 
   /**
@@ -166,7 +170,9 @@ export class VirtualCore {
    */
   getTotalHeight() {
     const lastIndex = this.getLastIndex();
-    const height = this.isFixedType() ? this.#fixedSizeValue * lastIndex : this.getIndexOffset(lastIndex);
+    const height = this.isFixedType()
+      ? this.#fixedSizeValue * lastIndex
+      : this.getIndexOffset(lastIndex);
     if (this.#range.end === lastIndex) return height;
     return Math.max(height, this.#range.totalHeight ?? 0);
   }
@@ -175,7 +181,9 @@ export class VirtualCore {
    * 获取预估值
    */
   getEstimateSize(): number {
-    return this.isFixedType() ? this.#fixedSizeValue : this.#firstRangeAverageSize || this.#param.estimateSize;
+    return this.isFixedType()
+      ? this.#fixedSizeValue
+      : this.#firstRangeAverageSize || this.#param.estimateSize;
   }
 
   /**
@@ -219,24 +227,6 @@ export class VirtualCore {
   }
 
   /**
-   * 批量保存元素的大小，动态计算时调用
-   * @param list
-   */
-  batchSaveSize(list: Array<{ id: string; size: number }>) {
-    list.forEach(({ id, size }) => {
-      this.#sizeMap.set(id, size);
-    });
-    if (this.#calcType !== VirtualCalcType.DYNAMIC) {
-      this.#calcType = VirtualCalcType.DYNAMIC;
-    }
-    // 重新算值
-    if (this.#sizeMap.size < Math.min(this.#param.keeps, this.#param.uniqueIds.length)) {
-      this.#firstRangeTotalSize = [...this.#sizeMap.values()].reduce((acc, val) => acc + val, 0);
-      this.#firstRangeAverageSize = Math.round(this.#firstRangeTotalSize / this.#sizeMap.size);
-    }
-  }
-
-  /**
    * 数据源变化时，根据当前滚动方向调整开始索引，并更新渲染范围。
    */
   handleDataSourcesChange() {
@@ -272,7 +262,10 @@ export class VirtualCore {
    */
   handleScroll(offset: number) {
     // 方向判断：新偏移小于旧偏移或归零时为向上/左滚动
-    this.#direction = offset < this.#offset || offset === 0 ? VirtualCoreDirection.FRONT : VirtualCoreDirection.BEHIND;
+    this.#direction =
+      offset < this.#offset || offset === 0
+        ? VirtualCoreDirection.FRONT
+        : VirtualCoreDirection.BEHIND;
     this.#offset = offset; // 更新当前滚动位置
 
     // 根据滚动方向执行不同处理逻辑

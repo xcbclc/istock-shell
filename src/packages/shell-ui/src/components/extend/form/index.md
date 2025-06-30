@@ -55,8 +55,8 @@ npm install @istock-shell/ui
       field: {
         type: 'input',
         placeholder: '请输入用户名',
-        required: true
-      }
+        required: true,
+      },
     },
     {
       name: 'email',
@@ -64,9 +64,9 @@ npm install @istock-shell/ui
       field: {
         type: 'input',
         inputType: 'email',
-        placeholder: '请输入邮箱地址'
-      }
-    }
+        placeholder: '请输入邮箱地址',
+      },
+    },
   ];
 
   let values = $state({});
@@ -88,16 +88,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                           | 说明                               |
-| ------------ | ---------------------------------- | ---------------------------------- |
-| 用户注册     | `layout="vertical"` + 验证规则    | 用户注册、账号创建等信息收集       |
-| 登录表单     | `cols=1` + `size="lg"`            | 用户登录、身份验证等简单表单       |
-| 数据录入     | `cols=2-3` + 多种控件类型          | 客户信息、订单录入等复杂数据收集   |
-| 系统设置     | `layout="horizontal"` + 开关控件  | 系统配置、用户偏好设置等           |
-| 搜索筛选     | `layout="horizontal"` + `cols=4-5` | 数据筛选、高级搜索等查询表单       |
-| 问卷调查     | 动态显示 + 多种控件                | 问卷表单、调研收集等动态表单       |
-| 配置向导     | 分步表单 + 条件显示                | 安装向导、配置流程等多步骤表单     |
-| 移动端表单   | `layout="vertical"` + `size="lg"` | 移动设备上的表单，优化触摸体验     |
+| 场景       | 推荐配置                           | 说明                             |
+| ---------- | ---------------------------------- | -------------------------------- |
+| 用户注册   | `layout="vertical"` + 验证规则     | 用户注册、账号创建等信息收集     |
+| 登录表单   | `cols=1` + `size="lg"`             | 用户登录、身份验证等简单表单     |
+| 数据录入   | `cols=2-3` + 多种控件类型          | 客户信息、订单录入等复杂数据收集 |
+| 系统设置   | `layout="horizontal"` + 开关控件   | 系统配置、用户偏好设置等         |
+| 搜索筛选   | `layout="horizontal"` + `cols=4-5` | 数据筛选、高级搜索等查询表单     |
+| 问卷调查   | 动态显示 + 多种控件                | 问卷表单、调研收集等动态表单     |
+| 配置向导   | 分步表单 + 条件显示                | 安装向导、配置流程等多步骤表单   |
+| 移动端表单 | `layout="vertical"` + `size="lg"`  | 移动设备上的表单，优化触摸体验   |
 
 ## 示例演示
 
@@ -107,30 +107,32 @@ npm install @istock-shell/ui
 <IStockShellUiExample src="./example/FormValidate.svelte" layout="column"></IStockShellUiExample>
 
 ## API 参考
+
 ### Form API
+
 #### Form 属性
 
-| 属性名          | 类型                                                                                             | 默认值         | 说明                                           |
-| --------------- | ------------------------------------------------------------------------------------------------ | -------------- | ---------------------------------------------- |
-| `formItems`     | [`FormItemConfig[]`](#formitemconfig)                                                            | `[]`           | 表单字段配置数组，用于配置驱动渲染表单项       |
-| `values`        | `Record<string, any>`                                                                            | `{}`           | 表单值对象（双向绑定），存储所有字段的当前值   |
-| `onChangeValues`| `(values: Record<string, any>, isValid: boolean) => void`                                        | -              | 表单值变更回调，传递完整表单值和验证状态       |
-| `onChangeValue` | `(name: string, value: any) => void`                                                             | -              | 单个字段值变更回调，传递字段名和新值           |
-| `onSubmit`      | `(values: Record<string, any>) => void`                                                          | -              | 表单提交回调，传递完整的表单值对象             |
-| `layout`        | [`FormLayout`](#formlayout)                                                                      | `'horizontal'` | 表单布局方式，水平或垂直布局                   |
-| `cols`          | [`FormCols`](#formcols)                                                                          | `1`            | 表单栅格列数，支持1-5列响应式布局              |
-| `labelWidth`    | `string`                                                                                         | `'120px'`      | 标签宽度，仅在水平布局时生效                   |
-| `labelPlacement`| [`FormPlacement`](#formplacement)                                                                | `'end'`        | 标签对齐位置，支持左对齐、居中、右对齐         |
-| `buttonPlacement`| [`FormButtonPlacement`](#formbuttonplacement)                                                   | `'end'`        | 按钮对齐位置，支持左对齐、居中、右对齐         |
-| `submitText`    | `string`                                                                                         | `'提交'`       | 提交按钮的显示文本                             |
-| `resetText`     | `string`                                                                                         | `'重置'`       | 重置按钮的显示文本                             |
-| `showReset`     | `boolean`                                                                                        | `true`         | 是否显示重置按钮                               |
-| `showSubmit`    | `boolean`                                                                                        | `true`         | 是否显示提交按钮                               |
-| `color`         | [`FormColor`](#formcolor)                                                                        | -              | 表单主题颜色，影响按钮和控件的颜色主题         |
-| `size`          | [`FormSize`](#formsize)                                                                          | `'md'`         | 表单控件尺寸，统一设置所有控件的大小           |
-| `variant`       | [`FormVariant`](#formvariant)                                                                    | -              | 表单控件变体样式                               |
-| `initValidate`  | `boolean`                                                                                        | `false`        | 是否在表单初始化时立即执行验证                 |
-| `className`     | `string`                                                                                         | -              | 自定义CSS类名                                  |
+| 属性名            | 类型                                                      | 默认值         | 说明                                         |
+| ----------------- | --------------------------------------------------------- | -------------- | -------------------------------------------- |
+| `formItems`       | [`FormItemConfig[]`](#formitemconfig)                     | `[]`           | 表单字段配置数组，用于配置驱动渲染表单项     |
+| `values`          | `Record<string, any>`                                     | `{}`           | 表单值对象（双向绑定），存储所有字段的当前值 |
+| `onChangeValues`  | `(values: Record<string, any>, isValid: boolean) => void` | -              | 表单值变更回调，传递完整表单值和验证状态     |
+| `onChangeValue`   | `(name: string, value: any) => void`                      | -              | 单个字段值变更回调，传递字段名和新值         |
+| `onSubmit`        | `(values: Record<string, any>) => void`                   | -              | 表单提交回调，传递完整的表单值对象           |
+| `layout`          | [`FormLayout`](#formlayout)                               | `'horizontal'` | 表单布局方式，水平或垂直布局                 |
+| `cols`            | [`FormCols`](#formcols)                                   | `1`            | 表单栅格列数，支持1-5列响应式布局            |
+| `labelWidth`      | `string`                                                  | `'120px'`      | 标签宽度，仅在水平布局时生效                 |
+| `labelPlacement`  | [`FormPlacement`](#formplacement)                         | `'end'`        | 标签对齐位置，支持左对齐、居中、右对齐       |
+| `buttonPlacement` | [`FormButtonPlacement`](#formbuttonplacement)             | `'end'`        | 按钮对齐位置，支持左对齐、居中、右对齐       |
+| `submitText`      | `string`                                                  | `'提交'`       | 提交按钮的显示文本                           |
+| `resetText`       | `string`                                                  | `'重置'`       | 重置按钮的显示文本                           |
+| `showReset`       | `boolean`                                                 | `true`         | 是否显示重置按钮                             |
+| `showSubmit`      | `boolean`                                                 | `true`         | 是否显示提交按钮                             |
+| `color`           | [`FormColor`](#formcolor)                                 | -              | 表单主题颜色，影响按钮和控件的颜色主题       |
+| `size`            | [`FormSize`](#formsize)                                   | `'md'`         | 表单控件尺寸，统一设置所有控件的大小         |
+| `variant`         | [`FormVariant`](#formvariant)                             | -              | 表单控件变体样式                             |
+| `initValidate`    | `boolean`                                                 | `false`        | 是否在表单初始化时立即执行验证               |
+| `className`       | `string`                                                  | -              | 自定义CSS类名                                |
 
 #### Form 代码片段插入位置
 
@@ -161,21 +163,21 @@ npm install @istock-shell/ui
 
 #### FormItem 属性
 
-| 属性名          | 类型                                                                                             | 默认值         | 说明                                           |
-| --------------- | ------------------------------------------------------------------------------------------------ | -------------- | ---------------------------------------------- |
-| `name`          | `string`                                                                                         | -              | 字段名称（必填），用于数据绑定和验证           |
-| `label`         | `string`                                                                                         | -              | 标签文本，显示在表单项前面                     |
-| `labelWidth`    | `string`                                                                                         | -              | 标签宽度，优先于Form的labelWidth设置           |
-| `labelPlacement`| [`FormItemLabelPlacement`](#formitemlabelplacement)                                             | -              | 标签对齐位置，优先于Form的labelPlacement设置   |
-| `layout`        | [`FormItemLayout`](#formitemlayout)                                                             | -              | 表单项布局，优先于Form的layout设置             |
-| `touched`       | `boolean`                                                                                        | `false`        | 是否已触碰，用于验证状态管理                   |
-| `field`         | [`FormItemField`](#formitemfield)                                                               | `{}`           | 表单字段详细配置                               |
-| `required`      | `boolean`                                                                                        | `false`        | 是否必填，影响标签显示和验证                   |
-| `color`         | [`FormItemColor`](#formitemcolor)                                                               | -              | 表单项颜色，优先于Form的color设置              |
-| `size`          | [`FormItemSize`](#formitemsize)                                                                 | -              | 表单项尺寸，优先于Form的size设置               |
-| `variant`       | [`FormItemVariant`](#formitemvariant)                                                           | -              | 表单项变体样式                                 |
-| `cols`          | [`FormItemCols`](#formitemcols)                                                                 | `1`            | 占用列数（1-5），用于栅格布局                  |
-| `className`     | `string`                                                                                         | -              | 自定义CSS类名                                  |
+| 属性名           | 类型                                                | 默认值  | 说明                                         |
+| ---------------- | --------------------------------------------------- | ------- | -------------------------------------------- |
+| `name`           | `string`                                            | -       | 字段名称（必填），用于数据绑定和验证         |
+| `label`          | `string`                                            | -       | 标签文本，显示在表单项前面                   |
+| `labelWidth`     | `string`                                            | -       | 标签宽度，优先于Form的labelWidth设置         |
+| `labelPlacement` | [`FormItemLabelPlacement`](#formitemlabelplacement) | -       | 标签对齐位置，优先于Form的labelPlacement设置 |
+| `layout`         | [`FormItemLayout`](#formitemlayout)                 | -       | 表单项布局，优先于Form的layout设置           |
+| `touched`        | `boolean`                                           | `false` | 是否已触碰，用于验证状态管理                 |
+| `field`          | [`FormItemField`](#formitemfield)                   | `{}`    | 表单字段详细配置                             |
+| `required`       | `boolean`                                           | `false` | 是否必填，影响标签显示和验证                 |
+| `color`          | [`FormItemColor`](#formitemcolor)                   | -       | 表单项颜色，优先于Form的color设置            |
+| `size`           | [`FormItemSize`](#formitemsize)                     | -       | 表单项尺寸，优先于Form的size设置             |
+| `variant`        | [`FormItemVariant`](#formitemvariant)               | -       | 表单项变体样式                               |
+| `cols`           | [`FormItemCols`](#formitemcols)                     | `1`     | 占用列数（1-5），用于栅格布局                |
+| `className`      | `string`                                            | -       | 自定义CSS类名                                |
 
 #### FormItem 代码片段插入位置
 
@@ -314,7 +316,15 @@ type FormPlacement = 'start' | 'center' | 'end';
 
 ```typescript
 // 表单颜色类型
-type FormColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type FormColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 ##### FormSize
@@ -358,7 +368,15 @@ type FormItemSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 ```typescript
 // 表单项颜色类型
-type FormItemColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type FormItemColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 ##### FormItemLabelPlacement
@@ -379,7 +397,14 @@ type FormItemVariant = string; // 根据具体实现定义
 
 ```typescript
 // 支持的表单字段类型数组
-const FormItemFieldTypes: FormItemFieldType[] = ['input', 'select', 'checkbox', 'radio', 'textarea', 'toggle'];
+const FormItemFieldTypes: FormItemFieldType[] = [
+  'input',
+  'select',
+  'checkbox',
+  'radio',
+  'textarea',
+  'toggle',
+];
 ```
 
 ##### FormItemFieldType
@@ -474,10 +499,10 @@ A: 使用响应式数据更新 `formItems` 配置：
         type: 'select',
         options: [
           { label: '个人', value: 'personal' },
-          { label: '企业', value: 'company' }
-        ]
-      }
-    }
+          { label: '企业', value: 'company' },
+        ],
+      },
+    },
   ]);
 
   let values = $state({});
@@ -490,8 +515,8 @@ A: 使用响应式数据更新 `formItems` 配置：
         {
           name: 'companyName',
           label: '公司名称',
-          field: { type: 'input', required: true }
-        }
+          field: { type: 'input', required: true },
+        },
       ];
     }
   });
@@ -519,10 +544,10 @@ A: 使用 `validator.custom` 函数：
             if (!/[A-Z]/.test(value)) return '密码必须包含大写字母';
             if (!/[0-9]/.test(value)) return '密码必须包含数字';
             return true;
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   ];
 </script>
 ```
@@ -537,16 +562,16 @@ A: 使用 `hidden` 函数和 `onChangeValue` 回调：
     {
       name: 'hasAddress',
       label: '是否有地址',
-      field: { type: 'checkbox' }
+      field: { type: 'checkbox' },
     },
     {
       name: 'address',
       label: '详细地址',
       field: {
         type: 'textarea',
-        hidden: (values) => !values.hasAddress
-      }
-    }
+        hidden: (values) => !values.hasAddress,
+      },
+    },
   ];
 </script>
 ```

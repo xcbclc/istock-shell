@@ -141,7 +141,10 @@ ShLoading 加载指示器组件
     接收额外的CSS类名参数，用于在不同布局模式下应用特定样式
     生成基础的加载器span元素，应用样式变体和自定义类名
   -->
-  <span class={[tuc(loadingVariants({ shape, size, color })), className, extraClassName]} {...otherProps}></span>
+  <span
+    class={[tuc(loadingVariants({ shape, size, color })), className, extraClassName]}
+    {...otherProps}
+  ></span>
 {/snippet}
 
 <style></style>

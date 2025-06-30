@@ -13,11 +13,8 @@
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
-    "./style": {
-      "import": "./src/index.css",
-      "require": "./src/index.css",
-      "default": "./src/index.css"
-    },
+    "./style": "./src/index.css",
+    "./example": "./src/components/example.ts",
     "./package.json": "./package.json"
   },
   "files": [

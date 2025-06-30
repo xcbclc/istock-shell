@@ -81,7 +81,12 @@ ShTable 表格组件
   import type { HTMLAttributes, HTMLColAttributes, HTMLTableAttributes } from 'svelte/elements';
   import type { Attachment } from 'svelte/attachments';
   import { TableVariantConfig, TableCaptionVariantConfig } from '../../../theme/config';
-  import type { TableTrProps, TableTrTh, TableTrButtonConfig, TableTrButton } from './TableRow.svelte';
+  import type {
+    TableTrProps,
+    TableTrTh,
+    TableTrButtonConfig,
+    TableTrButton,
+  } from './TableRow.svelte';
 
   const tableVariantConfig = TableVariantConfig;
   const tableCaptionVariantConfig = TableCaptionVariantConfig;
@@ -173,7 +178,12 @@ ShTable 表格组件
     /** 行渲染完成后的回调函数，接收 DOM 节点和行索引 */
     onRender?: (node: HTMLElement, index: number) => void;
     /** 行选择状态变更回调函数，提供详细的选择信息 */
-    onRowSelect?: <T = any>(index: number, checked: boolean, selected: T[], rawSelected: TableDataList) => void;
+    onRowSelect?: <T = any>(
+      index: number,
+      checked: boolean,
+      selected: T[],
+      rawSelected: TableDataList
+    ) => void;
     /** 全选状态变更回调函数，当全选复选框状态改变时触发 */
     onRowSelectAll?: (checked: boolean) => void;
     /** 行点击事件回调函数，接收行数据和索引 */
@@ -342,8 +352,9 @@ ShTable 表格组件
   {:else}
     <!-- 渲染表格标题 -->
     {#if caption}
-      <caption {@attach captionAttachment} class={tuc(['py-2 font-semibold', tableCaptionVariant({ size })])}
-        >{caption}</caption
+      <caption
+        {@attach captionAttachment}
+        class={tuc(['py-2 font-semibold', tableCaptionVariant({ size })])}>{caption}</caption
       >
     {/if}
 
@@ -375,7 +386,14 @@ ShTable 表格组件
       {/snippet}
 
       <!-- 表头行组件 -->
-      <ShTableRow type="thead" {selectionRender} {selection} {buttons} {buttonConfig} {...theadProps} />
+      <ShTableRow
+        type="thead"
+        {selectionRender}
+        {selection}
+        {buttons}
+        {buttonConfig}
+        {...theadProps}
+      />
     </thead>
   {/if}
 

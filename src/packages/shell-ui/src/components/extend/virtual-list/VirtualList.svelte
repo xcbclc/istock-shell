@@ -89,7 +89,8 @@ ShVirtualList 虚拟列表组件
    * @template T - 列表项数据类型（默认为任意对象）
    * @typedef {HTMLAttributes<HTMLDivElement> & VirtualListPropsExtension} VirtualListProps
    */
-  export interface VirtualListProps<T = Record<string, any>> extends HTMLAttributes<HTMLDivElement> {
+  export interface VirtualListProps<T = Record<string, any>>
+    extends HTMLAttributes<HTMLDivElement> {
     /** 数据源数组，用于渲染列表项 */
     list?: T[];
     /** 顶部预渲染阈值（像素），当滚动到距离顶部该值时开始加载更多内容 */
@@ -126,6 +127,7 @@ ShVirtualList 虚拟列表组件
 </script>
 
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { tuc, isString } from '@istock-shell/util';
   import { Virtual } from './core/index';
 
@@ -146,7 +148,7 @@ ShVirtualList 虚拟列表组件
     totalHeight: 0, // 总高度
   });
   /** 滚动容器元素引用 */
-  let scrollElement: HTMLElement | undefined = $state();
+  let scrollElement: HTMLElement | undefined;
   /** 内容包装器的动态样式字符串，用于设置填充 */
   let wrapperStyle = $state('');
 
@@ -180,69 +182,6 @@ ShVirtualList 虚拟列表组件
    */
   const onScroll = (event: Event) => {
     virtual?.onScroll(event);
-  };
-
-  /**
-   * 虚拟列表初始化副作用
-   * 当滚动元素可用时，创建虚拟列表实例并设置事件监听
-   */
-  $effect(() => {
-    if (!scrollElement) return;
-
-    // 创建虚拟列表核心实例，传入配置参数
-    virtual = new Virtual({
-      dataSources: list, // 数据源
-      keeps, // 保持渲染项数
-      direction, // 滚动方向
-      dataKey, // 数据键
-      topThreshold: thresholdTop, // 顶部阈值
-      bottomThreshold: thresholdBottom, // 底部阈值
-      slotHeaderSize: headerSize, // 头部插槽尺寸
-      slotFooterSize: footerSize, // 尾部插槽尺寸
-      estimateSize, // 预估尺寸
-      scrollElement, // 滚动容器元素
-      shepherdElement, // 关联滚动元素
-    });
-
-    // 可视区域范围更新处理函数
-    const handleRangeUpdate = (newRange: VirtualCoreRange) => {
-      range = newRange;
-    };
-
-    // 监听可视区域范围同步事件
-    virtual.eventEmitter.on('syncRange', handleRangeUpdate);
-    // 添加滚动事件监听器
-    scrollElement.addEventListener('scroll', onScroll);
-    // 获取初始可视区域范围
-    range = virtual.core.getRange();
-    // 标记虚拟列表实例已创建
-    hasVirtualInstance = true;
-    // 清理函数：移除事件监听器并销毁实例
-    return () => {
-      virtual.eventEmitter.off('syncRange', handleRangeUpdate);
-      scrollElement?.removeEventListener('scroll', onScroll);
-      virtual.destroy();
-      hasVirtualInstance = false;
-    };
-  });
-
-  /**
-   * 列表项尺寸变化更新逻辑
-   * 检测并记录列表项元素的尺寸变化
-   * @param node - 列表项DOM元素
-   * @param id - 列表项唯一标识
-   */
-  const updateItemResize = (node: HTMLElement, id: string) => {
-    // 根据滚动方向获取对应的尺寸（垂直方向取高度，水平方向取宽度）
-    const newSize = virtual?.isVertical() ? node.offsetHeight : node.offsetWidth;
-
-    // 如果尺寸发生变化，更新尺寸信息记录
-    if (sizeChangeInfo[id]?.size !== newSize) {
-      sizeChangeInfo = {
-        ...sizeChangeInfo,
-        [id]: { id, size: Number(newSize.toFixed(2)) }, // 保留两位小数精度
-      };
-    }
   };
 
   /**
@@ -296,6 +235,66 @@ ShVirtualList 虚拟列表组件
   });
 
   /**
+   * 虚拟列表初始化
+   */
+  onMount(() => {
+    if (!scrollElement) return;
+    // 创建虚拟列表核心实例，传入配置参数
+    virtual = new Virtual({
+      dataSources: list, // 数据源
+      keeps, // 保持渲染项数
+      direction, // 滚动方向
+      dataKey, // 数据键
+      topThreshold: thresholdTop, // 顶部阈值
+      bottomThreshold: thresholdBottom, // 底部阈值
+      slotHeaderSize: headerSize, // 头部插槽尺寸
+      slotFooterSize: footerSize, // 尾部插槽尺寸
+      estimateSize, // 预估尺寸
+      scrollElement, // 滚动容器元素
+      shepherdElement, // 关联滚动元素
+    });
+    // 可视区域范围更新处理函数
+    const handleRangeUpdate = (newRange: VirtualCoreRange) => {
+      range = newRange;
+    };
+
+    // 监听可视区域范围同步事件
+    virtual.eventEmitter.on('syncRange', handleRangeUpdate);
+    // 添加滚动事件监听器
+    scrollElement.addEventListener('scroll', onScroll);
+    // 获取初始可视区域范围
+    range = virtual.core.getRange();
+    // 标记虚拟列表实例已创建
+    hasVirtualInstance = true;
+    // 清理函数：移除事件监听器并销毁实例
+    return () => {
+      virtual.eventEmitter.off('syncRange', handleRangeUpdate);
+      scrollElement?.removeEventListener('scroll', onScroll);
+      virtual.destroy();
+      hasVirtualInstance = false;
+    };
+  });
+
+  /**
+   * 列表项尺寸变化更新逻辑
+   * 检测并记录列表项元素的尺寸变化
+   * @param node - 列表项DOM元素
+   * @param id - 列表项唯一标识
+   */
+  const updateItemResize = (node: HTMLElement, id: string) => {
+    // 根据滚动方向获取对应的尺寸（垂直方向取高度，水平方向取宽度）
+    const newSize = virtual?.isVertical() ? node.offsetHeight : node.offsetWidth;
+    virtual.onItemResized(id, newSize);
+    // 如果尺寸发生变化，更新尺寸信息记录
+    if (sizeChangeInfo[id]?.size !== newSize) {
+      sizeChangeInfo = {
+        ...sizeChangeInfo,
+        [id]: { id, size: Number(newSize.toFixed(2)) }, // 保留两位小数精度
+      };
+    }
+  };
+
+  /**
    * 列表项尺寸监听动作实现
    * 使用ResizeObserver监听列表项元素尺寸变化，优化虚拟列表渲染性能
    * @param node - 要监听的DOM元素
@@ -337,15 +336,95 @@ ShVirtualList 虚拟列表组件
   };
 
   /**
-   * 滚动到指定元素
-   * 根据CSS选择器查找元素并滚动到该位置
-   * @param selector - CSS选择器字符串
+   * 滚动到指定索引位置
+   * @param index - 目标索引
+   * @param align - 与视窗的对齐方式，类似原生scrollIntoView的block参数
+   *   - 'start': 元素顶部与视窗顶部对齐
+   *   - 'center': 元素中心与视窗中心对齐
+   *   - 'end': 元素底部与视窗底部对齐
+   *   - 'nearest': 选择最近的对齐方式（最小滚动距离）
    */
-  export const scrollToElement = (selector: string) => {
-    const element = document.querySelector(selector);
-    if (element) {
-      element.scrollIntoView({ behavior: 'auto', block: 'start' });
+  export const scrollByIndex = (
+    index: number,
+    align: 'start' | 'center' | 'end' | 'nearest' = 'start'
+  ) => {
+    if (!virtual || !scrollElement) return;
+    // 边界检查
+    if (index < 0 || index >= list.length) return;
+
+    // 获取目标元素的偏移量（包含header偏移）
+    const targetOffset = virtual.core.getOffset(index);
+    const clientSize = virtual.getClientSize();
+    const currentOffset = virtual.getOffset();
+
+    // 获取目标元素的实际尺寸
+    let elementSize = virtual.core.getEstimateSize(); // 默认使用预估尺寸
+
+    // 尝试获取目标元素的实际尺寸
+    if (index < list.length) {
+      const item = list[index];
+      const elementId = isString(dataKey) ? item[dataKey] : dataKey(item, index);
+      const actualSize = virtual.core.getSizeById(elementId);
+      if (actualSize !== undefined) {
+        elementSize = actualSize;
+      }
     }
+
+    let finalOffset = targetOffset;
+
+    switch (align) {
+      case 'start':
+        // 元素顶部与视窗顶部对齐
+        finalOffset = targetOffset;
+        break;
+
+      case 'center':
+        // 元素中心与视窗中心对齐
+        // 计算元素中心点相对于视窗中心的偏移
+        const elementCenter = targetOffset + elementSize / 2;
+        const viewportCenter = clientSize / 2;
+        finalOffset = elementCenter - viewportCenter;
+        break;
+
+      case 'end':
+        // 元素底部与视窗底部对齐
+        finalOffset = targetOffset + elementSize - clientSize;
+        break;
+
+      case 'nearest':
+        // 选择最小滚动距离的对齐方式
+        const elementTop = targetOffset;
+        const elementBottom = targetOffset + elementSize;
+        const viewportTop = currentOffset;
+        const viewportBottom = currentOffset + clientSize;
+
+        // 如果元素已经完全可见，不需要滚动
+        if (elementTop >= viewportTop && elementBottom <= viewportBottom) {
+          return;
+        }
+
+        // 计算到顶部和底部对齐的滚动距离
+        const toStartOffset = targetOffset;
+        const toEndOffset = targetOffset + elementSize - clientSize;
+
+        const startDistance = Math.abs(toStartOffset - currentOffset);
+        const endDistance = Math.abs(toEndOffset - currentOffset);
+
+        // 选择滚动距离最小的方式
+        if (startDistance <= endDistance) {
+          finalOffset = toStartOffset; // start对齐
+        } else {
+          finalOffset = toEndOffset; // end对齐
+        }
+        break;
+    }
+
+    // 确保偏移量在有效范围内
+    const maxOffset = virtual.getScrollSize() - clientSize;
+    finalOffset = Math.max(0, Math.min(finalOffset, maxOffset));
+
+    // 执行滚动
+    virtual.scrollToOffset(finalOffset);
   };
 </script>
 

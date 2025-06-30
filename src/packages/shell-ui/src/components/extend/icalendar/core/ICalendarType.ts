@@ -30,7 +30,8 @@ export const ICalendarEventStatus = {
   CONFIRMED: 'CONFIRMED',
   CANCELLED: 'CANCELLED',
 } as const;
-export type ICalendarEventStatusType = (typeof ICalendarEventStatus)[keyof typeof ICalendarEventStatus];
+export type ICalendarEventStatusType =
+  (typeof ICalendarEventStatus)[keyof typeof ICalendarEventStatus];
 
 /**
  * 任务状态机规则（RFC5545 Section 3.8.1.1）
@@ -51,7 +52,8 @@ export const ICalendarTodoStatus = {
   COMPLETED: 'COMPLETED',
   IN_PROCESS: 'IN-PROCESS',
 } as const;
-export type ICalendarTodoStatusType = (typeof ICalendarTodoStatus)[keyof typeof ICalendarTodoStatus];
+export type ICalendarTodoStatusType =
+  (typeof ICalendarTodoStatus)[keyof typeof ICalendarTodoStatus];
 
 /**
  * 事件提醒动作类型（RFC5545 Section 3.8.6）
@@ -82,7 +84,8 @@ export const ICalendarAlarmAction = {
    */
   AUDIO: 'AUDIO',
 } as const;
-export type ICalendarAlarmActionType = (typeof ICalendarAlarmAction)[keyof typeof ICalendarAlarmAction];
+export type ICalendarAlarmActionType =
+  (typeof ICalendarAlarmAction)[keyof typeof ICalendarAlarmAction];
 
 /**
  * 地理坐标定义（WGS-84坐标系）

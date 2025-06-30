@@ -192,7 +192,9 @@ ShSelect 选择框组件
       const valArray = value;
       onChangeValue?.(
         valArray,
-        valArray.map((item: any) => findByKeyForValue(allOptions, item, 'value')).filter((v: any) => !!v)
+        valArray
+          .map((item: any) => findByKeyForValue(allOptions, item, 'value'))
+          .filter((v: any) => !!v)
       );
     } else {
       // 单选模式：传递单个值和对应的选项对象
@@ -270,7 +272,10 @@ ShSelect 选择框组件
             分组内的子选项
             根据单选/多选模式判断选中状态
           -->
-          <ShSelectItem option={child} selected={multiple ? value.includes(child.value) : value === child.value} />
+          <ShSelectItem
+            option={child}
+            selected={multiple ? value.includes(child.value) : value === child.value}
+          />
         {/each}
       </optgroup>
     {:else}
@@ -279,7 +284,10 @@ ShSelect 选择框组件
         没有子选项的常规选项
         根据单选/多选模式判断选中状态
       -->
-      <ShSelectItem {option} selected={multiple ? value.includes(option.value) : value === option.value} />
+      <ShSelectItem
+        {option}
+        selected={multiple ? value.includes(option.value) : value === option.value}
+      />
     {/if}
   {/each}
 </select>

@@ -169,16 +169,16 @@ export const createSvelteTypesPlugin = (): Plugin => {
 
                   for (let i = 0; i < lines.length; i++) {
                     const line = lines[i];
-                    
+
                     // 如果行包含闭合大括号，先减少缩进级别
                     if (line.includes('}') && !line.includes('{')) {
                       indentLevel = Math.max(0, indentLevel - 1);
                     }
-                    
+
                     // 应用缩进
                     const indentedLine = INDENT.repeat(indentLevel) + line;
                     formattedLines.push(indentedLine);
-                    
+
                     // 如果行包含开放大括号，增加缩进级别
                     if (line.includes('{') && !line.includes('}')) {
                       indentLevel++;
@@ -188,7 +188,7 @@ export const createSvelteTypesPlugin = (): Plugin => {
                   return formattedLines.join('\n');
                 })
                 .join('\n');
-                
+
               const outputPath = join(
                 distDir,
                 relativePath,
@@ -246,7 +246,7 @@ export const createSvelteTypesPlugin = (): Plugin => {
               const typeContent = [
                 ...imports,
                 '',
-                ...typeExports.map(exportStr => {
+                ...typeExports.map((exportStr) => {
                   // 重新格式化每个导出的类型定义，确保正确缩进
                   const lines = exportStr.split('\n');
                   const formattedLines = [];
@@ -256,22 +256,22 @@ export const createSvelteTypesPlugin = (): Plugin => {
                   for (const line of lines) {
                     const trimmedLine = line.trim();
                     if (!trimmedLine) continue;
-                    
+
                     // 如果行包含闭合大括号，先减少缩进级别
                     if (trimmedLine.includes('}') && !trimmedLine.includes('{')) {
                       indentLevel = Math.max(0, indentLevel - 1);
                     }
-                    
+
                     // 应用缩进
                     const indentedLine = INDENT.repeat(indentLevel) + trimmedLine;
                     formattedLines.push(indentedLine);
-                    
+
                     // 如果行包含开放大括号，增加缩进级别
                     if (trimmedLine.includes('{') && !trimmedLine.includes('}')) {
                       indentLevel++;
                     }
                   }
-                  
+
                   return formattedLines.join('\n');
                 }),
                 '',

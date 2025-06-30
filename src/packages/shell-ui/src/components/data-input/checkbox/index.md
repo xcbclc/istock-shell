@@ -2,7 +2,18 @@
 title: Checkbox 复选框组件 | IStock Shell UI
 description: Checkbox复选框组件提供强大的多选交互功能，支持8种主题色彩、5种尺寸规格、不确定状态、标签配置、批量操作等特性，基于Tailwind CSS构建，适用于表单选择、配置开关、数据筛选等各种交互场景。
 keywords:
-  [Checkbox复选框组件, Svelte复选框, 多选组件, 表单控件, 复选框样式, UI组件库, Web组件, 用户界面, UX设计, 响应式复选框]
+  [
+    Checkbox复选框组件,
+    Svelte复选框,
+    多选组件,
+    表单控件,
+    复选框样式,
+    UI组件库,
+    Web组件,
+    用户界面,
+    UX设计,
+    响应式复选框,
+  ]
 aside: false
 editLink: false
 outline: [2, 4]
@@ -131,7 +142,15 @@ npm install @istock-shell/ui
 #### CheckboxItemColor
 
 ```typescript
-type CheckboxItemColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type CheckboxItemColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### CheckboxItemSize
@@ -235,14 +254,18 @@ A: 使用 `indeterminate` 状态配合计算属性：
 
   // 计算全选状态
   const isAllSelected = $derived(selectedValues.length === allOptions.length);
-  const isIndeterminate = $derived(selectedValues.length > 0 && selectedValues.length < allOptions.length);
+  const isIndeterminate = $derived(
+    selectedValues.length > 0 && selectedValues.length < allOptions.length
+  );
 
   function toggleAll() {
     selectedValues = isAllSelected ? [] : allOptions.map((opt) => opt.value);
   }
 </script>
 
-<ShCheckboxItem checked={isAllSelected} indeterminate={isIndeterminate} onchange={toggleAll}>全选</ShCheckboxItem>
+<ShCheckboxItem checked={isAllSelected} indeterminate={isIndeterminate} onchange={toggleAll}
+  >全选</ShCheckboxItem
+>
 
 <ShCheckbox bind:value={selectedValues} options={allOptions} />
 ```

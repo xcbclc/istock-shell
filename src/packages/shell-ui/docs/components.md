@@ -11,21 +11,27 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ## 📋 组件分类
 
 ### 🎯 动作组件 (Action)
+
 用于触发操作和交互的组件
 
 ### 📝 数据录入 (Data Input)
+
 用于收集和输入数据的表单组件
 
 ### 📊 数据展示 (Data View)
+
 用于展示和呈现数据的组件
 
 ### 💬 反馈组件 (Feedback)
+
 用于向用户提供反馈信息的组件
 
 ### 🧭 导航组件 (Navigation)
+
 用于页面导航和路由的组件
 
 ### 🔧 扩展组件 (Extend)
+
 提供高级功能和特殊用途的组件
 
 ---
@@ -95,7 +101,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 <!-- 带图标 -->
 <ShButton>
   <svg slot="icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-    <path d="M10 12l-4-4h8l-4 4z"/>
+    <path d="M10 12l-4-4h8l-4 4z" />
   </svg>
   带图标按钮
 </ShButton>
@@ -106,16 +112,16 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 
 #### API 参考
 
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | 按钮颜色 |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | 按钮尺寸 |
-| `variant` | `'solid' \| 'outline' \| 'soft' \| 'ghost' \| 'link' \| 'dash'` | `'solid'` | 样式变体 |
-| `loading` | `boolean` | `false` | 加载状态 |
-| `disabled` | `boolean` | `false` | 禁用状态 |
-| `block` | `boolean` | `false` | 块级显示 |
-| `tag` | `string` | `'button'` | HTML 标签 |
-| `onclick` | `function` | - | 点击事件处理器 |
+| 属性       | 类型                                                                                               | 默认值      | 描述           |
+| ---------- | -------------------------------------------------------------------------------------------------- | ----------- | -------------- |
+| `color`    | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | 按钮颜色       |
+| `size`     | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                                                             | `'md'`      | 按钮尺寸       |
+| `variant`  | `'solid' \| 'outline' \| 'soft' \| 'ghost' \| 'link' \| 'dash'`                                    | `'solid'`   | 样式变体       |
+| `loading`  | `boolean`                                                                                          | `false`     | 加载状态       |
+| `disabled` | `boolean`                                                                                          | `false`     | 禁用状态       |
+| `block`    | `boolean`                                                                                          | `false`     | 块级显示       |
+| `tag`      | `string`                                                                                           | `'button'`  | HTML 标签      |
+| `onclick`  | `function`                                                                                         | -           | 点击事件处理器 |
 
 ### ShDropdown - 下拉菜单
 
@@ -126,13 +132,13 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShDropdown, ShButton } from '@istock-shell/ui';
-  
+
   const menuItems = [
     { label: '编辑', value: 'edit' },
     { label: '删除', value: 'delete', color: 'error' },
-    { label: '分享', value: 'share' }
+    { label: '分享', value: 'share' },
   ];
-  
+
   function handleSelect(item) {
     console.log('选择了:', item);
   }
@@ -152,13 +158,13 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShModal, ShButton } from '@istock-shell/ui';
-  
+
   let showModal = false;
-  
+
   function openModal() {
     showModal = true;
   }
-  
+
   function closeModal() {
     showModal = false;
   }
@@ -168,7 +174,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 
 <ShModal bind:show={showModal} title="确认操作">
   <p>您确定要执行此操作吗？</p>
-  
+
   <div slot="actions" class="flex gap-2">
     <ShButton color="primary" onclick={closeModal}>确认</ShButton>
     <ShButton variant="outline" onclick={closeModal}>取消</ShButton>
@@ -189,7 +195,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShInput } from '@istock-shell/ui';
-  
+
   let value = '';
 </script>
 
@@ -224,12 +230,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 <ShInput label="用户名" placeholder="请输入用户名" />
 
 <!-- 带帮助文本 -->
-<ShInput 
-  label="密码" 
-  type="password" 
-  placeholder="请输入密码"
-  help="密码长度至少8位"
-/>
+<ShInput label="密码" type="password" placeholder="请输入密码" help="密码长度至少8位" />
 ```
 
 ### ShTextarea - 文本域
@@ -239,16 +240,11 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShTextarea } from '@istock-shell/ui';
-  
+
   let content = '';
 </script>
 
-<ShTextarea 
-  bind:value={content}
-  placeholder="请输入多行文本"
-  rows={4}
-  label="描述"
-/>
+<ShTextarea bind:value={content} placeholder="请输入多行文本" rows={4} label="描述" />
 ```
 
 ### ShSelect - 选择器
@@ -258,29 +254,24 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShSelect } from '@istock-shell/ui';
-  
+
   const options = [
     { value: 'option1', label: '选项1' },
     { value: 'option2', label: '选项2' },
-    { value: 'option3', label: '选项3' }
+    { value: 'option3', label: '选项3' },
   ];
-  
+
   let selectedValue = '';
   let selectedValues = [];
 </script>
 
 <!-- 单选 -->
-<ShSelect 
-  bind:value={selectedValue}
-  options={options}
-  placeholder="请选择"
-  label="单选选择器"
-/>
+<ShSelect bind:value={selectedValue} {options} placeholder="请选择" label="单选选择器" />
 
 <!-- 多选 -->
-<ShSelect 
+<ShSelect
   bind:value={selectedValues}
-  options={options}
+  {options}
   multiple
   placeholder="请选择多个选项"
   label="多选选择器"
@@ -294,7 +285,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShCheckbox } from '@istock-shell/ui';
-  
+
   let checked = false;
   let checkedItems = [];
 </script>
@@ -317,7 +308,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShRadio } from '@istock-shell/ui';
-  
+
   let selectedOption = '';
 </script>
 
@@ -335,7 +326,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShToggle } from '@istock-shell/ui';
-  
+
   let enabled = false;
 </script>
 
@@ -353,18 +344,18 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShTable } from '@istock-shell/ui';
-  
+
   const columns = [
     { key: 'name', title: '姓名', sortable: true },
     { key: 'age', title: '年龄', sortable: true },
     { key: 'email', title: '邮箱' },
-    { key: 'actions', title: '操作' }
+    { key: 'actions', title: '操作' },
   ];
-  
+
   const data = [
     { id: 1, name: '张三', age: 25, email: 'zhang@example.com' },
     { id: 2, name: '李四', age: 30, email: 'li@example.com' },
-    { id: 3, name: '王五', age: 28, email: 'wang@example.com' }
+    { id: 3, name: '王五', age: 28, email: 'wang@example.com' },
   ];
 </script>
 
@@ -378,11 +369,11 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShList } from '@istock-shell/ui';
-  
+
   const items = [
     { id: 1, title: '列表项1', description: '这是第一个列表项' },
     { id: 2, title: '列表项2', description: '这是第二个列表项' },
-    { id: 3, title: '列表项3', description: '这是第三个列表项' }
+    { id: 3, title: '列表项3', description: '这是第三个列表项' },
   ];
 </script>
 
@@ -414,8 +405,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
   import { ShKbd } from '@istock-shell/ui';
 </script>
 
-<p>按 <ShKbd>Ctrl</ShKbd> + <ShKbd>S</ShKbd> 保存文件</p>
-<p>按 <ShKbd>Esc</ShKbd> 退出</p>
+<p>按 <ShKbd>Ctrl</ShKbd> + <ShKbd>S</ShKbd> 保存文件</p><p>按 <ShKbd>Esc</ShKbd> 退出</p>
 ```
 
 ---
@@ -450,12 +440,12 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShToast, ShButton } from '@istock-shell/ui';
-  
+
   function showToast(type) {
     ShToast.show({
       type,
       message: `这是一条${type}消息`,
-      duration: 3000
+      duration: 3000,
     });
   }
 </script>
@@ -516,24 +506,24 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShMenu } from '@istock-shell/ui';
-  
+
   const menuItems = [
     {
       label: '首页',
       href: '/',
-      icon: 'home'
+      icon: 'home',
     },
     {
       label: '产品',
       children: [
         { label: '产品A', href: '/product-a' },
-        { label: '产品B', href: '/product-b' }
-      ]
+        { label: '产品B', href: '/product-b' },
+      ],
     },
     {
       label: '关于',
-      href: '/about'
-    }
+      href: '/about',
+    },
   ];
 </script>
 
@@ -547,12 +537,12 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShBreadcrumbs } from '@istock-shell/ui';
-  
+
   const breadcrumbs = [
     { label: '首页', href: '/' },
     { label: '产品', href: '/products' },
     { label: '产品详情', href: '/products/123' },
-    { label: '当前页面' }
+    { label: '当前页面' },
   ];
 </script>
 
@@ -570,21 +560,21 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShChart } from '@istock-shell/ui';
-  
+
   const chartData = [
     { month: '1月', sales: 1000 },
     { month: '2月', sales: 1200 },
     { month: '3月', sales: 800 },
     { month: '4月', sales: 1500 },
-    { month: '5月', sales: 1800 }
+    { month: '5月', sales: 1800 },
   ];
-  
+
   const chartConfig = {
     type: 'line',
     data: chartData,
     xField: 'month',
     yField: 'sales',
-    smooth: true
+    smooth: true,
   };
 </script>
 
@@ -598,7 +588,7 @@ IStock Shell UI 提供了丰富的组件库，涵盖了现代 Web 应用开发�
 ```svelte
 <script>
   import { ShMarkdown } from '@istock-shell/ui';
-  
+
   const markdownContent = `
 # 标题
 
@@ -627,29 +617,24 @@ console.log(hello);
 ```svelte
 <script>
   import { ShVirtualTable } from '@istock-shell/ui';
-  
+
   // 生成大量数据
   const data = Array.from({ length: 10000 }, (_, i) => ({
     id: i + 1,
     name: `用户${i + 1}`,
     email: `user${i + 1}@example.com`,
-    age: Math.floor(Math.random() * 50) + 20
+    age: Math.floor(Math.random() * 50) + 20,
   }));
-  
+
   const columns = [
     { key: 'id', title: 'ID', width: 80 },
     { key: 'name', title: '姓名', width: 120 },
     { key: 'email', title: '邮箱', width: 200 },
-    { key: 'age', title: '年龄', width: 80 }
+    { key: 'age', title: '年龄', width: 80 },
   ];
 </script>
 
-<ShVirtualTable 
-  {data} 
-  {columns} 
-  height={400}
-  itemHeight={40}
-/>
+<ShVirtualTable {data} {columns} height={400} itemHeight={40} />
 ```
 
 ### ShForm - 表单
@@ -659,28 +644,28 @@ console.log(hello);
 ```svelte
 <script>
   import { ShForm, ShInput, ShSelect, ShButton } from '@istock-shell/ui';
-  
+
   const formSchema = {
     name: {
       type: 'text',
       label: '姓名',
       required: true,
-      placeholder: '请输入姓名'
+      placeholder: '请输入姓名',
     },
     email: {
       type: 'email',
       label: '邮箱',
       required: true,
-      placeholder: '请输入邮箱'
+      placeholder: '请输入邮箱',
     },
     age: {
       type: 'number',
       label: '年龄',
       min: 18,
-      max: 100
-    }
+      max: 100,
+    },
   };
-  
+
   function handleSubmit(data) {
     console.log('表单数据:', data);
   }
@@ -722,10 +707,7 @@ console.log(hello);
   import { ShEmpty, ShButton } from '@istock-shell/ui';
 </script>
 
-<ShEmpty 
-  title="暂无数据" 
-  description="当前没有任何内容，点击下方按钮添加"
->
+<ShEmpty title="暂无数据" description="当前没有任何内容，点击下方按钮添加">
   <ShButton color="primary">添加内容</ShButton>
 </ShEmpty>
 ```
@@ -765,6 +747,8 @@ console.log(hello);
   import { ShButton } from '@istock-shell/ui';
 </script>
 
+<ShButton class="my-custom-button">自定义样式按钮</ShButton>
+
 <style>
   :global(.my-custom-button) {
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
@@ -774,14 +758,12 @@ console.log(hello);
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  
+
   :global(.my-custom-button:hover) {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 </style>
-
-<ShButton class="my-custom-button">自定义样式按钮</ShButton>
 ```
 
 ## 📱 响应式设计
@@ -794,12 +776,7 @@ console.log(hello);
 </script>
 
 <!-- 响应式按钮 -->
-<ShButton 
-  size="sm" 
-  class="md:btn-md lg:btn-lg"
->
-  响应式按钮
-</ShButton>
+<ShButton size="sm" class="md:btn-md lg:btn-lg">响应式按钮</ShButton>
 
 <!-- 响应式网格布局 -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -810,10 +787,7 @@ console.log(hello);
 
 <!-- 响应式表单 -->
 <div class="w-full max-w-md mx-auto">
-  <ShInput 
-    placeholder="响应式输入框" 
-    class="w-full"
-  />
+  <ShInput placeholder="响应式输入框" class="w-full" />
 </div>
 ```
 
@@ -828,11 +802,11 @@ console.log(hello);
     <ShIcon name="info" slot="icon" />
     请填写完整的用户信息
   </ShAlert>
-  
+
   <ShForm>
     <ShInput label="用户名" required />
     <ShInput label="邮箱" type="email" required />
-    
+
     <div class="flex gap-2">
       <ShButton type="submit" color="primary">提交</ShButton>
       <ShButton variant="outline">取消</ShButton>
@@ -847,9 +821,9 @@ console.log(hello);
 <script>
   import { writable } from 'svelte/store';
   import { ShButton, ShLoading } from '@istock-shell/ui';
-  
+
   const loading = writable(false);
-  
+
   async function handleSubmit() {
     loading.set(true);
     try {
@@ -875,28 +849,28 @@ console.log(hello);
 ```svelte
 <script>
   import { ShAlert, ShInput, ShButton } from '@istock-shell/ui';
-  
+
   let errors = {};
   let formData = { email: '', password: '' };
-  
+
   function validateForm() {
     errors = {};
-    
+
     if (!formData.email) {
       errors.email = '邮箱不能为空';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = '邮箱格式不正确';
     }
-    
+
     if (!formData.password) {
       errors.password = '密码不能为空';
     } else if (formData.password.length < 6) {
       errors.password = '密码长度至少6位';
     }
-    
+
     return Object.keys(errors).length === 0;
   }
-  
+
   function handleSubmit() {
     if (validateForm()) {
       // 提交表单
@@ -905,26 +879,16 @@ console.log(hello);
 </script>
 
 <div class="space-y-4">
-  <ShInput 
-    bind:value={formData.email}
-    label="邮箱"
-    type="email"
-    error={!!errors.email}
-  />
+  <ShInput bind:value={formData.email} label="邮箱" type="email" error={!!errors.email} />
   {#if errors.email}
     <ShAlert color="error" size="sm">{errors.email}</ShAlert>
   {/if}
-  
-  <ShInput 
-    bind:value={formData.password}
-    label="密码"
-    type="password"
-    error={!!errors.password}
-  />
+
+  <ShInput bind:value={formData.password} label="密码" type="password" error={!!errors.password} />
   {#if errors.password}
     <ShAlert color="error" size="sm">{errors.password}</ShAlert>
   {/if}
-  
+
   <ShButton onclick={handleSubmit}>登录</ShButton>
 </div>
 ```
@@ -934,19 +898,19 @@ console.log(hello);
 ```svelte
 <script>
   import { ShVirtualTable, ShList } from '@istock-shell/ui';
-  
+
   // 对于大数据量，使用虚拟化组件
   export let largeDataSet = [];
-  
+
   // 使用计算属性避免重复计算
-  $: filteredData = largeDataSet.filter(item => 
+  $: filteredData = largeDataSet.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 </script>
 
 <!-- 大数据量使用虚拟表格 -->
 {#if largeDataSet.length > 1000}
-  <ShVirtualTable data={filteredData} columns={columns} />
+  <ShVirtualTable data={filteredData} {columns} />
 {:else}
   <ShList items={filteredData} />
 {/if}

@@ -137,7 +137,15 @@ npm install @istock-shell/ui
 
 ```typescript
 // 提示框颜色类型
-type TooltipColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type TooltipColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### TooltipPlacement

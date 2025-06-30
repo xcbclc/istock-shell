@@ -52,16 +52,16 @@ npm install @istock-shell/ui
       items: [
         { text: '功能', href: '/features' },
         { text: '定价', href: '/pricing' },
-        { text: '演示', href: '/demo' }
-      ]
+        { text: '演示', href: '/demo' },
+      ],
     },
     {
       title: '支持',
       items: [
         { text: '文档', href: '/docs' },
-        { text: '联系我们', href: '/contact' }
-      ]
-    }
+        { text: '联系我们', href: '/contact' },
+      ],
+    },
   ];
 </script>
 
@@ -79,16 +79,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                     | 说明                           |
-| ------------ | ---------------------------- | ------------------------------ |
-| 门户网站导航 | 多分组 + 外链配置            | 新闻、财经类网站的导航菜单     |
-| 帮助中心     | 文档分类 + 内链导航          | 文档分类导航、知识库导航       |
-| 产品导航     | 功能分组 + 描述性链接        | 产品功能介绍、服务展示         |
-| 友情链接     | 分类链接 + 新窗口打开        | 合作伙伴、相关网站链接         |
-| 侧边栏导航   | 层级导航 + 自定义样式        | 管理后台、文档站点侧边栏       |
-| 底部导航     | 多列分组 + 响应式布局        | 网站底部的分类导航链接         |
-| 移动端菜单   | 简化分组 + 触摸友好          | 移动设备上的导航菜单           |
-| 目录导航     | 嵌套结构 + 锚点链接          | 长文档的目录导航、页面内跳转   |
+| 场景         | 推荐配置              | 说明                         |
+| ------------ | --------------------- | ---------------------------- |
+| 门户网站导航 | 多分组 + 外链配置     | 新闻、财经类网站的导航菜单   |
+| 帮助中心     | 文档分类 + 内链导航   | 文档分类导航、知识库导航     |
+| 产品导航     | 功能分组 + 描述性链接 | 产品功能介绍、服务展示       |
+| 友情链接     | 分类链接 + 新窗口打开 | 合作伙伴、相关网站链接       |
+| 侧边栏导航   | 层级导航 + 自定义样式 | 管理后台、文档站点侧边栏     |
+| 底部导航     | 多列分组 + 响应式布局 | 网站底部的分类导航链接       |
+| 移动端菜单   | 简化分组 + 触摸友好   | 移动设备上的导航菜单         |
+| 目录导航     | 嵌套结构 + 锚点链接   | 长文档的目录导航、页面内跳转 |
 
 ## 示例演示
 
@@ -100,10 +100,10 @@ npm install @istock-shell/ui
 
 #### NavList 属性
 
-| 属性名  | 类型                                      | 默认值 | 说明                                           |
-| ------- | ----------------------------------------- | ------ | ---------------------------------------------- |
-| `list`  | [`NavListItemProps[]`](#navlistitemprops) | `[]`   | 导航项列表配置，用于数据驱动渲染导航分组       |
-| `class` | `string`                                  | `''`   | 自定义CSS类名                                  |
+| 属性名  | 类型                                      | 默认值 | 说明                                     |
+| ------- | ----------------------------------------- | ------ | ---------------------------------------- |
+| `list`  | [`NavListItemProps[]`](#navlistitemprops) | `[]`   | 导航项列表配置，用于数据驱动渲染导航分组 |
+| `class` | `string`                                  | `''`   | 自定义CSS类名                            |
 
 #### NavList 代码片段插入位置
 
@@ -129,11 +129,11 @@ npm install @istock-shell/ui
 
 #### NavListItem 属性
 
-| 属性名  | 类型                                                  | 默认值 | 说明                                 |
-| ------- | ----------------------------------------------------- | ------ | ------------------------------------ |
-| `title` | `string`                                              | -      | 分组标题，显示在导航项详情列表上方   |
+| 属性名  | 类型                                                  | 默认值 | 说明                                         |
+| ------- | ----------------------------------------------------- | ------ | -------------------------------------------- |
+| `title` | `string`                                              | -      | 分组标题，显示在导航项详情列表上方           |
 | `items` | [`NavListItemDetailProps[]`](#navlistitemdetailprops) | `[]`   | 导航项详情列表，用于渲染该分组下的具体导航项 |
-| `class` | `string`                                              | `''`   | 自定义CSS类名                        |
+| `class` | `string`                                              | `''`   | 自定义CSS类名                                |
 
 #### NavListItem 代码片段插入位置
 
@@ -159,13 +159,13 @@ npm install @istock-shell/ui
 
 #### NavListItemDetail 属性
 
-| 属性名   | 类型                                              | 默认值     | 说明                                 |
-| -------- | ------------------------------------------------- | ---------- | ------------------------------------ |
-| `text`   | `string`                                          | -          | 显示文本内容                         |
-| `href`   | `string`                                          | -          | 链接地址 URL                         |
-| `target` | [`TextTarget`](#texttarget)                       | `'_blank'` | 链接打开方式，如 _blank、_self 等    |
+| 属性名   | 类型                                              | 默认值     | 说明                                     |
+| -------- | ------------------------------------------------- | ---------- | ---------------------------------------- |
+| `text`   | `string`                                          | -          | 显示文本内容                             |
+| `href`   | `string`                                          | -          | 链接地址 URL                             |
+| `target` | [`TextTarget`](#texttarget)                       | `'_blank'` | 链接打开方式，如 \_blank、\_self 等      |
 | `link`   | [`NavListItemDetailLink`](#navlistitemdetaillink) | `{}`       | 链接配置对象，用于自定义链接的样式和行为 |
-| `class`  | `string`                                          | `''`       | 自定义CSS类名                        |
+| `class`  | `string`                                          | `''`       | 自定义CSS类名                            |
 
 #### NavListItemDetail 代码片段插入位置
 
@@ -264,23 +264,23 @@ type TextTarget = '_blank' | '_self' | '_parent' | '_top' | string;
 ```svelte
 <script>
   import { ShNavList } from '@istock/shell-ui';
-  
+
   const navData = [
     {
       title: '产品中心',
       items: [
         { text: '股票分析', href: '/stocks' },
         { text: '基金投资', href: '/funds' },
-        { text: '债券市场', href: '/bonds' }
-      ]
+        { text: '债券市场', href: '/bonds' },
+      ],
     },
     {
       title: '服务支持',
       items: [
         { text: '帮助中心', href: '/help' },
-        { text: '联系我们', href: '/contact' }
-      ]
-    }
+        { text: '联系我们', href: '/contact' },
+      ],
+    },
   ];
 </script>
 
@@ -292,23 +292,23 @@ type TextTarget = '_blank' | '_self' | '_parent' | '_top' | string;
 ```svelte
 <script>
   import { ShNavList } from '@istock/shell-ui';
-  
+
   const navData = [
     {
       title: '快速链接',
       items: [
-        { 
-          text: '内部页面', 
-          href: '/internal', 
-          target: '_self' 
+        {
+          text: '内部页面',
+          href: '/internal',
+          target: '_self',
         },
-        { 
-          text: '外部链接', 
-          href: 'https://example.com', 
-          target: '_blank' 
-        }
-      ]
-    }
+        {
+          text: '外部链接',
+          href: 'https://example.com',
+          target: '_blank',
+        },
+      ],
+    },
   ];
 </script>
 
@@ -345,15 +345,15 @@ type TextTarget = '_blank' | '_self' | '_parent' | '_top' | string;
 ```svelte
 <script>
   import { ShNavList } from '@istock/shell-ui';
-  
+
   let navData = [];
-  
+
   // 异步加载导航数据
   async function loadNavData() {
     const response = await fetch('/api/navigation');
     navData = await response.json();
   }
-  
+
   onMount(loadNavData);
 </script>
 
@@ -365,19 +365,19 @@ type TextTarget = '_blank' | '_self' | '_parent' | '_top' | string;
 ```svelte
 <script>
   import { ShNavListItemDetail } from '@istock/shell-ui';
-  
+
   function handleNavClick(event, item) {
     // 发送统计数据
     analytics.track('nav_click', {
       text: item.text,
-      href: item.href
+      href: item.href,
     });
   }
 </script>
 
-<ShNavListItemDetail 
-  text="统计链接" 
-  href="/analytics" 
+<ShNavListItemDetail
+  text="统计链接"
+  href="/analytics"
   on:click={(e) => handleNavClick(e, { text: '统计链接', href: '/analytics' })}
 />
 ```

@@ -118,13 +118,13 @@ cd src/components/data-view/badge
 <!-- Badge.svelte -->
 <script lang="ts">
   import type { BadgeColor, BadgeSize, BadgeVariant } from './types';
-  
+
   export let color: BadgeColor = 'primary';
   export let size: BadgeSize = 'md';
   export let variant: BadgeVariant = 'solid';
   export let outline: boolean = false;
   export let dot: boolean = false;
-  
+
   // 样式计算
   $: badgeClasses = [
     'badge',
@@ -132,8 +132,10 @@ cd src/components/data-view/badge
     `badge-${size}`,
     variant !== 'solid' && `badge-${variant}`,
     outline && 'badge-outline',
-    dot && 'badge-dot'
-  ].filter(Boolean).join(' ');
+    dot && 'badge-dot',
+  ]
+    .filter(Boolean)
+    .join(' ');
 </script>
 
 <span class={badgeClasses} {...$$restProps}>
@@ -150,37 +152,47 @@ cd src/components/data-view/badge
     @apply rounded-full border;
     @apply transition-colors duration-200;
   }
-  
+
   /* 尺寸样式 */
-  .badge-xs { @apply px-1.5 py-0.5 text-xs; }
-  .badge-sm { @apply px-2 py-1 text-xs; }
-  .badge-md { @apply px-2.5 py-1 text-sm; }
-  .badge-lg { @apply px-3 py-1.5 text-sm; }
-  .badge-xl { @apply px-4 py-2 text-base; }
-  
+  .badge-xs {
+    @apply px-1.5 py-0.5 text-xs;
+  }
+  .badge-sm {
+    @apply px-2 py-1 text-xs;
+  }
+  .badge-md {
+    @apply px-2.5 py-1 text-sm;
+  }
+  .badge-lg {
+    @apply px-3 py-1.5 text-sm;
+  }
+  .badge-xl {
+    @apply px-4 py-2 text-base;
+  }
+
   /* 颜色样式 */
   .badge-primary {
     @apply bg-primary text-primary-content border-primary;
   }
-  
+
   .badge-secondary {
     @apply bg-secondary text-secondary-content border-secondary;
   }
-  
+
   /* 变体样式 */
   .badge-outline {
     @apply bg-transparent;
   }
-  
+
   .badge-soft {
     @apply bg-opacity-10 border-opacity-20;
   }
-  
+
   /* 点状徽章 */
   .badge-dot {
     @apply relative pl-4;
   }
-  
+
   .badge-dot-indicator {
     @apply absolute left-1 top-1/2 transform -translate-y-1/2;
     @apply w-2 h-2 rounded-full bg-current;
@@ -192,7 +204,7 @@ cd src/components/data-view/badge
 
 ```typescript
 // types.ts
-export type BadgeColor = 
+export type BadgeColor =
   | 'primary'
   | 'secondary'
   | 'accent'
@@ -226,8 +238,9 @@ export type * from './types';
 
 6. **创建文档**
 
-```markdown
+````markdown
 <!-- index.md -->
+
 # Badge 徽章
 
 用于显示状态、标签或计数的小型标识组件。
@@ -245,6 +258,7 @@ export type * from './types';
 ```bash
 pnpm add @istock-shell/ui
 ```
+````
 
 ## 基础用法
 
@@ -263,20 +277,21 @@ pnpm add @istock-shell/ui
 
 ### Props
 
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `color` | `BadgeColor` | `'primary'` | 徽章颜色 |
-| `size` | `BadgeSize` | `'md'` | 徽章尺寸 |
-| `variant` | `BadgeVariant` | `'solid'` | 样式变体 |
-| `outline` | `boolean` | `false` | 轮廓样式 |
-| `dot` | `boolean` | `false` | 点状徽章 |
+| 属性      | 类型           | 默认值      | 描述     |
+| --------- | -------------- | ----------- | -------- |
+| `color`   | `BadgeColor`   | `'primary'` | 徽章颜色 |
+| `size`    | `BadgeSize`    | `'md'`      | 徽章尺寸 |
+| `variant` | `BadgeVariant` | `'solid'`   | 样式变体 |
+| `outline` | `boolean`      | `false`     | 轮廓样式 |
+| `dot`     | `boolean`      | `false`     | 点状徽章 |
 
 ### Slots
 
-| 名称 | 描述 |
-|------|------|
+| 名称      | 描述     |
+| --------- | -------- |
 | `default` | 徽章内容 |
-```
+
+````
 
 7. **创建示例文件**
 
@@ -294,7 +309,7 @@ pnpm add @istock-shell/ui
   <ShBadge color="warning">警告</ShBadge>
   <ShBadge color="error">错误</ShBadge>
 </div>
-```
+````
 
 8. **更新导出文件**
 
@@ -326,7 +341,7 @@ export let disabled: boolean = false;
 
 // 避免的做法
 export let style: string; // 过于宽泛
-export let config: any;   // 类型不明确
+export let config: any; // 类型不明确
 ```
 
 #### 3. 样式规范
@@ -339,12 +354,12 @@ export let config: any;   // 类型不明确
     @apply px-4 py-2 rounded-md;
     @apply transition-colors duration-200;
   }
-  
+
   /* 组件特定样式 */
   .component-primary {
     @apply bg-primary text-primary-content;
   }
-  
+
   /* 响应式样式 */
   @media (min-width: 768px) {
     .component {
@@ -398,40 +413,40 @@ import Button from '../../../src/components/action/button/Button.svelte';
 describe('Button Component', () => {
   it('renders with default props', () => {
     const { getByRole } = render(Button, {
-      props: { children: 'Click me' }
+      props: { children: 'Click me' },
     });
-    
+
     const button = getByRole('button');
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent('Click me');
   });
-  
+
   it('applies correct color class', () => {
     const { getByRole } = render(Button, {
-      props: { color: 'primary', children: 'Primary Button' }
+      props: { color: 'primary', children: 'Primary Button' },
     });
-    
+
     const button = getByRole('button');
     expect(button).toHaveClass('btn-primary');
   });
-  
+
   it('handles click events', async () => {
     const handleClick = vi.fn();
     const { getByRole } = render(Button, {
-      props: { onclick: handleClick, children: 'Click me' }
+      props: { onclick: handleClick, children: 'Click me' },
     });
-    
+
     const button = getByRole('button');
     await fireEvent.click(button);
-    
+
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
-  
+
   it('is disabled when disabled prop is true', () => {
     const { getByRole } = render(Button, {
-      props: { disabled: true, children: 'Disabled Button' }
+      props: { disabled: true, children: 'Disabled Button' },
     });
-    
+
     const button = getByRole('button');
     expect(button).toBeDisabled();
   });
@@ -461,31 +476,28 @@ pnpm test:watch
 ```javascript
 // .eslintrc.js
 module.exports = {
-  extends: [
-    '@antfu',
-    'plugin:svelte/recommended'
-  ],
+  extends: ['@antfu', 'plugin:svelte/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2022,
     sourceType: 'module',
-    extraFileExtensions: ['.svelte']
+    extraFileExtensions: ['.svelte'],
   },
   overrides: [
     {
       files: ['*.svelte'],
       parser: 'svelte-eslint-parser',
       parserOptions: {
-        parser: '@typescript-eslint/parser'
-      }
-    }
+        parser: '@typescript-eslint/parser',
+      },
+    },
   ],
   rules: {
     // 自定义规则
     'svelte/no-unused-svelte-ignore': 'error',
     'svelte/no-useless-mustaches': 'error',
-    'svelte/prefer-class-directive': 'error'
-  }
+    'svelte/prefer-class-directive': 'error',
+  },
 };
 ```
 
@@ -623,35 +635,40 @@ git push --tags
 ### 贡献步骤
 
 1. **Fork 项目**
+
    ```bash
    # 在 GitHub 上 fork 项目
    git clone https://github.com/your-username/istock-shell.git
    ```
 
 2. **创建分支**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
 
 3. **开发和测试**
+
    ```bash
    # 安装依赖
    pnpm install
-   
+
    # 开发
    pnpm dev
-   
+
    # 测试
    pnpm test
    ```
 
 4. **提交代码**
+
    ```bash
    git add .
    git commit -m "feat: add your feature"
    ```
 
 5. **推送分支**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -665,6 +682,7 @@ git push --tags
 
 ```markdown
 ## 变更类型
+
 - [ ] Bug 修复
 - [ ] 新功能
 - [ ] 文档更新
@@ -674,17 +692,21 @@ git push --tags
 - [ ] 测试
 
 ## 变更描述
+
 简要描述你的变更内容...
 
 ## 测试
+
 - [ ] 单元测试通过
 - [ ] 集成测试通过
 - [ ] 手动测试通过
 
 ## 截图
+
 如果有 UI 变更，请提供截图...
 
 ## 检查清单
+
 - [ ] 代码遵循项目规范
 - [ ] 添加了必要的测试
 - [ ] 更新了相关文档
@@ -741,13 +763,13 @@ git push --tags
 ```svelte
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
-  
+
   // 使用 createEventDispatcher 而不是回调 props
   const dispatch = createEventDispatcher();
-  
+
   // 避免在模板中使用复杂计算
   $: computedValue = expensiveComputation(data);
-  
+
   // 使用 onMount 进行初始化
   onMount(() => {
     // 初始化逻辑
@@ -773,24 +795,24 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       name: 'IStockShellUI',
-      fileName: 'index'
+      fileName: 'index',
     },
     rollupOptions: {
       external: ['svelte'],
       output: {
         globals: {
-          svelte: 'Svelte'
-        }
-      }
+          svelte: 'Svelte',
+        },
+      },
     },
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
-      }
-    }
-  }
+        drop_debugger: true,
+      },
+    },
+  },
 });
 ```
 
@@ -801,18 +823,18 @@ export default defineConfig({
 ```svelte
 <script>
   import { dev } from '$app/environment';
-  
+
   // 开发环境调试
   $: if (dev) {
     console.log('Component props:', { color, size, variant });
   }
-  
+
   // 使用 Svelte 开发工具
   $: {
     if (typeof window !== 'undefined' && window.__SVELTE_DEVTOOLS_GLOBAL_HOOK__) {
       window.__SVELTE_DEVTOOLS_GLOBAL_HOOK__.onComponentUpdate({
         component: 'Button',
-        props: { color, size, variant }
+        props: { color, size, variant },
       });
     }
   }
@@ -829,7 +851,7 @@ export default defineConfig({
 
 /* 调试网格 */
 .debug-grid {
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
@@ -839,12 +861,14 @@ export default defineConfig({
 ## 📚 学习资源
 
 ### 官方文档
+
 - [Svelte 官方文档](https://svelte.dev/docs)
 - [SvelteKit 文档](https://kit.svelte.dev/docs)
 - [Tailwind CSS 文档](https://tailwindcss.com/docs)
 - [DaisyUI 文档](https://daisyui.com/)
 
 ### 推荐阅读
+
 - [Svelte 最佳实践](https://svelte.dev/docs/best-practices)
 - [组件设计原则](https://component.gallery/)
 - [无障碍设计指南](https://www.w3.org/WAI/WCAG21/quickref/)

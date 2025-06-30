@@ -120,10 +120,18 @@ ShFormItem 表单项组件
   // 表单项颜色类型
   export type FormItemColor = keyof (typeof formItemLabelVariantConfig)['variants']['color'];
   // 表单项标签位置类型
-  export type FormItemLabelPlacement = keyof (typeof formItemLabelVariantConfig)['variants']['placement'];
+  export type FormItemLabelPlacement =
+    keyof (typeof formItemLabelVariantConfig)['variants']['placement'];
 
   // 支持的表单字段类型常量数组
-  export const FormItemFieldTypes = ['input', 'select', 'checkbox', 'radio', 'textarea', 'toggle'] as const;
+  export const FormItemFieldTypes = [
+    'input',
+    'select',
+    'checkbox',
+    'radio',
+    'textarea',
+    'toggle',
+  ] as const;
   // 表单字段类型
   export type FormItemFieldType = (typeof FormItemFieldTypes)[number];
 
@@ -327,7 +335,8 @@ ShFormItem 表单项组件
    * 优先级：字段级别的required > 字段验证器的required > 表单项级别的required
    */
   const isFieldRequired = $derived.by((): boolean => {
-    if (isUndefined(innerField.required) && isUndefined(innerField.validator?.required)) return required;
+    if (isUndefined(innerField.required) && isUndefined(innerField.validator?.required))
+      return required;
     return Boolean(innerField.required) || Boolean(innerField.validator?.required);
   });
 
@@ -376,7 +385,10 @@ ShFormItem 表单项组件
 </script>
 
 <!-- 表单项容器 -->
-<div class={[tuc(formItemVariants({ layout, size, cols, hasError: shouldShowError })), className]} {...otherProps}>
+<div
+  class={[tuc(formItemVariants({ layout, size, cols, hasError: shouldShowError })), className]}
+  {...otherProps}
+>
   <!-- 标签部分 -->
   {#if label}
     <label

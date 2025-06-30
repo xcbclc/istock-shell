@@ -61,7 +61,13 @@ ShStatItem 统计项组件
 
 <script lang="ts" module>
   import type { HTMLAttributes } from 'svelte/elements';
-  import type { StatActionProps, StatDescProps, StatFigureProps, StatTitleProps, StatValueProps } from './index';
+  import type {
+    StatActionProps,
+    StatDescProps,
+    StatFigureProps,
+    StatTitleProps,
+    StatValueProps,
+  } from './index';
 
   /**
    * 统计项组件属性接口

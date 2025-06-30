@@ -52,14 +52,14 @@ npm install @istock-shell/ui
     id: `${index + 1}`,
     name: `用户 ${index + 1}`,
     email: `user${index + 1}@example.com`,
-    status: index % 2 === 0 ? '活跃' : '非活跃'
+    status: index % 2 === 0 ? '活跃' : '非活跃',
   }));
 
   const thead = [
     { value: '编号', dataKey: 'id' },
     { value: '姓名', dataKey: 'name' },
     { value: '邮箱', dataKey: 'email' },
-    { value: '状态', dataKey: 'status' }
+    { value: '状态', dataKey: 'status' },
   ];
 </script>
 
@@ -79,16 +79,16 @@ npm install @istock-shell/ui
 
 ## 使用场景
 
-| 场景         | 推荐配置                                | 说明                                   |
-| ------------ | --------------------------------------- | -------------------------------------- |
-| 数据监控     | 大数据量 + 实时更新                     | 系统监控、性能指标、实时日志展示       |
-| 金融数据     | 高频数据 + 表头固定                     | 股票行情、交易记录、财务报表           |
-| 用户管理     | 万级用户数据 + 搜索筛选                 | 用户列表、权限管理、客户关系管理       |
-| 日志查看     | 大量日志数据 + 时间排序                 | 系统日志、操作记录、错误追踪           |
-| 报表展示     | 复杂数据结构 + 多列展示                 | 业务报表、数据分析、统计图表           |
-| 文件管理     | 大量文件列表 + 文件信息                 | 文件浏览器、资源管理、媒体库           |
-| 订单管理     | 历史订单数据 + 状态筛选                 | 电商订单、交易记录、物流跟踪           |
-| 移动端优化   | `size="sm"` + 紧凑布局                | 移动设备上的大数据量表格展示           |
+| 场景       | 推荐配置                | 说明                             |
+| ---------- | ----------------------- | -------------------------------- |
+| 数据监控   | 大数据量 + 实时更新     | 系统监控、性能指标、实时日志展示 |
+| 金融数据   | 高频数据 + 表头固定     | 股票行情、交易记录、财务报表     |
+| 用户管理   | 万级用户数据 + 搜索筛选 | 用户列表、权限管理、客户关系管理 |
+| 日志查看   | 大量日志数据 + 时间排序 | 系统日志、操作记录、错误追踪     |
+| 报表展示   | 复杂数据结构 + 多列展示 | 业务报表、数据分析、统计图表     |
+| 文件管理   | 大量文件列表 + 文件信息 | 文件浏览器、资源管理、媒体库     |
+| 订单管理   | 历史订单数据 + 状态筛选 | 电商订单、交易记录、物流跟踪     |
+| 移动端优化 | `size="sm"` + 紧凑布局  | 移动设备上的大数据量表格展示     |
 
 ## 示例演示
 
@@ -100,13 +100,13 @@ npm install @istock-shell/ui
 
 #### VirtualTable 属性
 
-| 属性名      | 类型                                                    | 默认值  | 说明                                                   |
-| ----------- | ------------------------------------------------------- | ------- | ------------------------------------------------------ |
-| `tbody`     | [`VirtualTableListItem[]`](#virtualtablelistitem)      | `[]`    | 表格数据数组，支持万级数据量的高效渲染                 |
-| `thead`     | [`TableThead`](../../data-view/table/#tablethead)      | -       | 表头配置数组，定义列标题和数据键映射                   |
-| `size`      | [`TableSize`](../../data-view/table/#tablesize)        | `'sm'`  | 表格尺寸大小，虚拟表格默认使用紧凑尺寸                 |
-| `pinRows`   | `boolean`                                               | `true`  | 是否固定表头，虚拟表格默认启用表头固定功能             |
-| `class`     | `string`                                                | -       | 自定义CSS类名，建议设置最大高度以启用虚拟滚动          |
+| 属性名    | 类型                                              | 默认值 | 说明                                          |
+| --------- | ------------------------------------------------- | ------ | --------------------------------------------- |
+| `tbody`   | [`VirtualTableListItem[]`](#virtualtablelistitem) | `[]`   | 表格数据数组，支持万级数据量的高效渲染        |
+| `thead`   | [`TableThead`](../../data-view/table/#tablethead) | -      | 表头配置数组，定义列标题和数据键映射          |
+| `size`    | [`TableSize`](../../data-view/table/#tablesize)   | `'sm'` | 表格尺寸大小，虚拟表格默认使用紧凑尺寸        |
+| `pinRows` | `boolean`                                         | `true` | 是否固定表头，虚拟表格默认启用表头固定功能    |
+| `class`   | `string`                                          | -      | 自定义CSS类名，建议设置最大高度以启用虚拟滚动 |
 
 #### VirtualTable 继承属性
 
@@ -243,9 +243,9 @@ A: 虚拟表格支持动态行高，通过以下方式优化：
   const estimateRowHeight = 60; // 根据实际内容调整
 </script>
 
-<ShVirtualTable 
-  {thead} 
-  {tbody} 
+<ShVirtualTable
+  {thead}
+  {tbody}
   class="w-full max-h-96"
   onRender={(node, index) => {
     // 行渲染完成后，组件会自动调整高度
@@ -261,21 +261,19 @@ A: 可以通过响应式数据和定时更新实现：
 ```svelte
 <script>
   let tableData = $state([]);
-  
+
   // 定时更新数据
   setInterval(async () => {
     const newData = await fetchLatestData();
     tableData = newData; // 触发重新渲染
   }, 5000);
-  
+
   // 或者使用WebSocket实时推送
   const ws = new WebSocket('ws://localhost:8080');
   ws.onmessage = (event) => {
     const update = JSON.parse(event.data);
     // 更新特定行数据
-    tableData = tableData.map(row => 
-      row.id === update.id ? { ...row, ...update } : row
-    );
+    tableData = tableData.map((row) => (row.id === update.id ? { ...row, ...update } : row));
   };
 </script>
 ```
@@ -289,12 +287,12 @@ A: 建议在数据层面实现搜索筛选，然后更新表格数据：
   let originalData = [];
   let filteredData = $state([]);
   let searchTerm = $state('');
-  
+
   // 搜索筛选逻辑
   $effect(() => {
     if (searchTerm) {
-      filteredData = originalData.filter(row => 
-        Object.values(row).some(value => 
+      filteredData = originalData.filter((row) =>
+        Object.values(row).some((value) =>
           String(value).toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
@@ -315,7 +313,7 @@ A: 支持，可以通过状态管理实现行选择：
 ```svelte
 <script>
   let selectedRows = $state(new Set());
-  
+
   const handleRowClick = (row, index) => {
     if (selectedRows.has(row.id)) {
       selectedRows.delete(row.id);
@@ -324,12 +322,13 @@ A: 支持，可以通过状态管理实现行选择：
     }
     selectedRows = new Set(selectedRows); // 触发响应式更新
   };
-  
-  const enhancedColumns = columns.map(col => ({
+
+  const enhancedColumns = columns.map((col) => ({
     ...col,
-    cellRender: col.dataKey === 'selection' ? 
-      (row) => `<input type="checkbox" ${selectedRows.has(row.id) ? 'checked' : ''} />` :
-      undefined
+    cellRender:
+      col.dataKey === 'selection'
+        ? (row) => `<input type="checkbox" ${selectedRows.has(row.id) ? 'checked' : ''} />`
+        : undefined,
   }));
 </script>
 ```
@@ -344,8 +343,8 @@ A: 针对移动端进行以下优化：
   const isMobile = window.innerWidth < 768;
 </script>
 
-<ShVirtualTable 
-  {thead} 
+<ShVirtualTable
+  {thead}
   {tbody}
   size={isMobile ? 'sm' : 'md'}
   class="w-full {isMobile ? 'max-h-80' : 'max-h-96'}"
@@ -358,7 +357,7 @@ A: 针对移动端进行以下优化：
     :global(.virtual-table) {
       font-size: 0.875rem;
     }
-    
+
     :global(.virtual-table th),
     :global(.virtual-table td) {
       padding: 0.5rem 0.25rem;

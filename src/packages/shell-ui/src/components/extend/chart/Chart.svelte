@@ -61,12 +61,14 @@ ShChart 图表组件
     options?: ChartOptions;
     /** 控制图表显示/隐藏状态，支持双向绑定 @default true */
     show?: boolean;
+    /** 内容被加载 **/
+    onContentLoaded?: (success: Boolean) => void;
   }
 </script>
 
 <script lang="ts">
   import { onMount, onDestroy, tick } from 'svelte';
-  import { Chart } from '@antv/g2';
+  import type { Chart } from '@antv/g2';
   import { tuc } from '@istock-shell/util';
 
   // 解构props并设置默认值
@@ -74,6 +76,7 @@ ShChart 图表组件
     options = {}, // 图表配置选项，默认为空对象
     show = true, // 图表显示状态，默认显示
     class: className = '', // 自定义CSS类名（默认空字符串）
+    onContentLoaded, // 内容被加载
     ...otherProps // 其他原生div元素属性
   }: ChatProps = $props();
 
@@ -108,7 +111,6 @@ ShChart 图表组件
 
   // 交叉观察器实例，用于监听容器元素的视口可见性
   let observer: IntersectionObserver | undefined;
-
   /**
    * 组件挂载时的初始化逻辑
    * 设置交叉观察器来监听容器的视口可见性，实现性能优化
@@ -116,27 +118,34 @@ ShChart 图表组件
    */
   onMount(async () => {
     await tick(); // 等待DOM更新完成
-
-    // 创建交叉观察器实例，用于监听容器元素的视口可见性
-    observer = new IntersectionObserver(
-      (entries) => {
-        // 更新容器元素是否在视口内的状态
-        isInViewport = entries[0].isIntersecting;
-        if (!chart) {
-          // 延迟创建图表实例，只有当容器首次进入视口时才创建
-          chart = new Chart({
-            container: containerElement, // 指定图表渲染的容器元素
-          });
+    try {
+      const { Chart: AntVChart } = await import('@antv/g2');
+      // 创建交叉观察器实例，用于监听容器元素的视口可见性
+      observer = new IntersectionObserver(
+        (entries) => {
+          // 更新容器元素是否在视口内的状态
+          isInViewport = entries[0].isIntersecting;
+          if (!chart) {
+            // 延迟创建图表实例，只有当容器首次进入视口时才创建
+            chart = new AntVChart({
+              container: containerElement, // 指定图表渲染的容器元素
+            });
+          }
+        },
+        {
+          threshold: 0.15, // 当容器15%的区域可见时触发回调，平衡性能和用户体验
         }
-      },
-      {
-        threshold: 0.15, // 当容器15%的区域可见时触发回调，平衡性能和用户体验
-      }
-    );
+      );
 
-    // 开始观察容器元素的视口可见性变化
-    if (containerElement) {
-      observer.observe(containerElement);
+      // 开始观察容器元素的视口可见性变化
+      if (containerElement) {
+        observer.observe(containerElement);
+      }
+      await tick(); // 等待图表更新后触发
+      onContentLoaded?.(true);
+    } catch (e) {
+      onContentLoaded?.(false);
+      throw e;
     }
   });
 

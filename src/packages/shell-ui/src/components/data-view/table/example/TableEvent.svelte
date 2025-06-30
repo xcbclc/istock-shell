@@ -19,7 +19,12 @@
 
   let selected = $state([]);
 
-  const onRowSelect = <T = number,>(index: number, checked: boolean, selectedData: T[], tbody: TableDataList): void => {
+  const onRowSelect = <T = number,>(
+    index: number,
+    checked: boolean,
+    selectedData: T[],
+    tbody: TableDataList
+  ): void => {
     result = JSON.stringify(['onRowSelect', index, checked, selectedData, tbody]);
     console.log('onRowSelect', index, checked, selectedData, tbody);
   };

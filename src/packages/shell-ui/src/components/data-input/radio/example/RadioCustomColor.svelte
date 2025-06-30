@@ -8,7 +8,10 @@
   ];
 </script>
 
-<ShRadio {options} class="bg-red-100 border-red-300 checked:bg-red-200 checked:text-red-600 checked:border-red-600" />
+<ShRadio
+  {options}
+  class="bg-red-100 border-red-300 checked:bg-red-200 checked:text-red-600 checked:border-red-600"
+/>
 <ShRadio
   {options}
   class="bg-blue-100 border-blue-300 checked:bg-blue-200 checked:text-blue-600 checked:border-blue-600"

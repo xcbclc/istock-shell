@@ -129,7 +129,11 @@ ShTooltip 工具提示组件
 </script>
 
 <!-- Tooltip容器：工具提示的根容器元素，包含触发元素和提示内容 -->
-<div class={[tuc(tooltipVariants({ color, placement, open })), className]} data-tip={dataTip ?? ''} {...otherProps}>
+<div
+  class={[tuc(tooltipVariants({ color, placement, open })), className]}
+  data-tip={dataTip ?? ''}
+  {...otherProps}
+>
   <!-- 条件渲染：自定义提示内容区域 -->
   {#if tooltipRender}
     <!-- 自定义提示内容容器：当提供了tooltipRender函数时，渲染复杂的自定义提示内容 -->

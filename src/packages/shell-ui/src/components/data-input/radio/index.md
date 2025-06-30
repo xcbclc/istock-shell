@@ -2,7 +2,18 @@
 title: Radio 单选框组件 | IStock Shell UI
 description: Radio单选框组件提供丰富的交互样式和功能，支持8种主题色彩、5种尺寸规格、灵活的标签布局、禁用状态控制等特性，适用于表单选择、设置配置、选项切换等各种单选场景。
 keywords:
-  [Radio单选框组件, Svelte单选框, UI组件库, 表单单选, 选项组件, 前端组件, Web组件, 用户界面, UX设计, 响应式单选框]
+  [
+    Radio单选框组件,
+    Svelte单选框,
+    UI组件库,
+    表单单选,
+    选项组件,
+    前端组件,
+    Web组件,
+    用户界面,
+    UX设计,
+    响应式单选框,
+  ]
 aside: false
 editLink: false
 outline: [2, 4]
@@ -152,7 +163,15 @@ npm install @istock-shell/ui
 
 ```typescript
 // 单选框颜色类型
-type RadioColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type RadioColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### RadioSize
@@ -166,7 +185,15 @@ type RadioSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 ```typescript
 // 单选按钮项颜色类型
-type RadioItemColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+type RadioItemColor =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 ```
 
 #### RadioItemSize
@@ -282,7 +309,12 @@ A: 使用 `onChangeValue` 回调结合验证逻辑：
   };
 </script>
 
-<ShRadio bind:value {options} onChangeValue={validateSelection} color={error ? 'error' : 'primary'} />
+<ShRadio
+  bind:value
+  {options}
+  onChangeValue={validateSelection}
+  color={error ? 'error' : 'primary'}
+/>
 {#if error}
   <p class="text-error text-sm mt-1">{error}</p>
 {/if}

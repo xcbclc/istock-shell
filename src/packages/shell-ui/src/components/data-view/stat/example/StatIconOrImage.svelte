@@ -52,7 +52,9 @@
         <ShStatFigure class="text-secondary">
           <div class="avatar online">
             <div class="w-16 rounded-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              />
             </div>
           </div>
         </ShStatFigure>

@@ -142,7 +142,11 @@ ShICalendarFilter 日历筛选组件
    * @constant InitFilterValue
    * @type {ICalendarFilterValue}
    */
-  const InitFilterValue: ICalendarFilterValue = { startDate: '', endDate: '', logic: ICalendarLogicRecord.OR.value };
+  const InitFilterValue: ICalendarFilterValue = {
+    startDate: '',
+    endDate: '',
+    logic: ICalendarLogicRecord.OR.value,
+  };
 </script>
 
 <script lang="ts">
@@ -305,7 +309,12 @@ ShICalendarFilter 日历筛选组件
             </span>
           </legend>
           <div class="flex gap-2">
-            <ShInput size="xs" type="date" bind:value={tempFilterValue.startDate} aria-label="开始日期" />
+            <ShInput
+              size="xs"
+              type="date"
+              bind:value={tempFilterValue.startDate}
+              aria-label="开始日期"
+            />
             <span class="self-center text-base-content/70 font-medium flex items-center">
               <svg
                 class="w-3.5 h-3.5 mx-0.5"
@@ -319,7 +328,12 @@ ShICalendarFilter 日历筛选组件
                 <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
             </span>
-            <ShInput size="xs" type="date" bind:value={tempFilterValue.endDate} aria-label="结束日期" />
+            <ShInput
+              size="xs"
+              type="date"
+              bind:value={tempFilterValue.endDate}
+              aria-label="结束日期"
+            />
           </div>
         </fieldset>
 
@@ -342,7 +356,12 @@ ShICalendarFilter 日历筛选组件
             </span>
           </legend>
           <div class="flex flex-wrap gap-2">
-            <ShRadio bind:value={tempFilterValue.logic} options={ICalendarLogicOptions} size="xs" color="primary" />
+            <ShRadio
+              bind:value={tempFilterValue.logic}
+              options={ICalendarLogicOptions}
+              size="xs"
+              color="primary"
+            />
           </div>
         </fieldset>
         <!-- 其它筛选 -->
@@ -381,7 +400,9 @@ ShICalendarFilter 日历筛选组件
                     color={getFilterButtonColor(filter.type, option.value)}
                     class={[
                       'rounded-full transition-all',
-                      getFilterButtonColor(filter.type, option.value) ? 'border-2' : 'border border-base-300',
+                      getFilterButtonColor(filter.type, option.value)
+                        ? 'border-2'
+                        : 'border border-base-300',
                     ]}
                     onclick={() => {
                       onFilterButtonClick(filter.type, filter.multiple, option.value);

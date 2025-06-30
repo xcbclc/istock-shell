@@ -1,7 +1,19 @@
 ---
 title: Modal 对话框组件 | IStock Shell UI
 description: Modal对话框组件提供强大的模态交互功能，支持多种尺寸规格、自定义内容渲染、操作按钮配置、遮罩层关闭等特性，基于原生HTML dialog元素构建，适用于信息确认、表单提交、详情展示等各种交互场景。
-keywords: [Modal对话框组件, Svelte对话框, 模态框, 弹窗组件, 交互反馈, UI组件库, Web组件, 用户界面, UX设计, 响应式对话框]
+keywords:
+  [
+    Modal对话框组件,
+    Svelte对话框,
+    模态框,
+    弹窗组件,
+    交互反馈,
+    UI组件库,
+    Web组件,
+    用户界面,
+    UX设计,
+    响应式对话框,
+  ]
 aside: false
 editLink: false
 outline: [2, 4]

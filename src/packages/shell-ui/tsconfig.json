@@ -23,17 +23,8 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.js",
-    "src/**/*.svelte"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "docs",
-    "**/*.md"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+  "exclude": ["node_modules", "dist", "docs", "**/*.md"],
   "references": [
     {
       "path": "./tsconfig.node.json"
