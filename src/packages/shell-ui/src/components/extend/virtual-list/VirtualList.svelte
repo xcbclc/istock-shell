@@ -299,12 +299,18 @@ ShVirtualList 虚拟列表组件
    * 使用ResizeObserver监听列表项元素尺寸变化，优化虚拟列表渲染性能
    * @param node - 要监听的DOM元素
    * @param id - 元素的唯一标识
+   * @param updateCallback - 更新回调
    * @returns 返回包含update和destroy方法的动作对象
    */
-  export const onItemResize: VirtualListResizeAction = (node: HTMLElement, id: string) => {
+  export const onItemResize: VirtualListResizeAction = (
+    node: HTMLElement,
+    id: string,
+    updateCallback?: (node: HTMLElement, id: string) => void
+  ) => {
     // 尺寸更新处理函数
     const update = () => {
       updateItemResize(node, id);
+      updateCallback?.(node, id);
     };
     // 创建ResizeObserver实例监听元素尺寸变化
     const observer = new ResizeObserver(update);

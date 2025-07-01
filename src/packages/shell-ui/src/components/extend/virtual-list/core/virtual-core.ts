@@ -160,9 +160,12 @@ export class VirtualCore {
   getPadBehind(): number {
     const end = this.#range.end;
     const lastIndex = this.getLastIndex();
+    if (end >= lastIndex) return 0; // 已经到达或超过最后一个元素
+
+    const remainingCount = lastIndex - end;
     return this.isFixedType()
-      ? (lastIndex - end) * this.#fixedSizeValue
-      : (lastIndex - end) * this.getEstimateSize();
+      ? remainingCount * this.#fixedSizeValue
+      : remainingCount * this.getEstimateSize();
   }
 
   /**
@@ -170,6 +173,8 @@ export class VirtualCore {
    */
   getTotalHeight() {
     const lastIndex = this.getLastIndex();
+    if (lastIndex < 0) return 0; // 处理空数据情况
+
     const height = this.isFixedType()
       ? this.#fixedSizeValue * lastIndex
       : this.getIndexOffset(lastIndex);
@@ -209,6 +214,8 @@ export class VirtualCore {
    * @param size
    */
   saveSize(id: string, size: number) {
+    if (size <= 0) return; // 防止无效尺寸
+
     this.#sizeMap.set(id, size);
     // 修正计算方式
     if (this.#calcType === VirtualCalcType.INIT) {
@@ -373,7 +380,7 @@ export class VirtualCore {
     for (let index = 0; index < givenIndex; index++) {
       const id = this.#param.uniqueIds[index];
       // 优先使用缓存尺寸，无缓存时使用预估尺寸
-      offset += this.#sizeMap.get(id) ?? estimateSize;
+      offset += this.#sizeMap.get(id) || estimateSize;
     }
     return Number(offset.toFixed(2)); // 控制精度防止误差累积
   }
