@@ -1,432 +1,628 @@
 /**
- * 虚拟滚动列表核心方法
+ * @fileoverview 虚拟列表核心引擎
+ * @description 虚拟滚动核心实现，支持动态高度、滚动补偿和性能优化
+ * @author IStock Shell Team
+ * @version 0.1.1
+ * @features
+ * - 动态高度自适应
+ * - 滚动补偿机制
+ * - 性能监控与优化
+ * - 增量更新机制
+ * - 智能缓存策略
  */
 
-export interface VirtualCoreOptions {
-  keeps: number; // 虚拟列表渲染个数
-  buffer: number;
-  slotHeaderSize: number;
-  slotFooterSize: number;
-  estimateSize: number;
-  uniqueIds: string[];
-}
-
-export interface VirtualCoreRange {
-  offset: number;
-  start: number; // 开始索引
-  end: number; // 结束索引
-  padFront: number; // 前填充的大小
-  padBehind: number; // 后填充的大小
-  totalHeight: number;
-}
-
-export enum VirtualCoreDirection {
-  'FRONT', // 向前或向前滚动
-  'BEHIND', // 向后或向下滚动
-}
-
-export enum VirtualCalcType {
-  'INIT',
-  'FIXED',
-  'DYNAMIC',
-}
-
-export type VirtualCoreCallUpdate = (range: VirtualCoreRange) => void;
-
-const LEADING_BUFFER = 0;
+import { SizeCacheManager } from './size-cache';
+import { ViewportAnchorManager } from './viewport-anchor';
+import { ScrollProcessor } from './scroll-processor';
+import { RangeCalculator } from './range-calculator';
+import { PerformanceMonitor } from './performance-monitor';
+import type {
+  VirtualCoreOptions,
+  VirtualRange,
+  RangeUpdateCallback,
+  ScrollToTopCallback,
+  ScrollToBottomCallback,
+} from './types';
 
 /**
- * 虚拟滚动核心类，负责计算和管理虚拟列表的渲染范围
+ * @class VirtualCore
+ * @description 虚拟列表核心引擎，提供高性能虚拟滚动实现
  *
- * 核心功能：
- * 1. 动态计算可视区域需要渲染的元素
- * 2. 维护元素尺寸缓存用于精确计算
- * 3. 处理滚动事件并优化渲染性能
- * 4. 提供填充量计算保持滚动条比例
+ * 基于视窗锚定和尺寸缓存的虚拟滚动实现，
+ * 支持动态高度自适应、滚动补偿和性能优化
+ *
+ * @features
+ * - 高性能渲染：支持大数据量列表
+ * - 动态高度：实时适应内容变化
+ * - 智能缓冲：基于滚动速度调整
+ * - 滚动补偿：保持用户视野稳定
+ * - 性能监控：基础性能统计
+ *
+ * @algorithm
+ * - 时间复杂度：O(log n) 查找，O(1) 更新
+ * - 空间复杂度：O(n) 缓存存储
+ * - 渲染复杂度：O(k) k为可视元素数量
+ *
+ * @example
+ * ```typescript
+ * const virtualCore = new VirtualCore(
+ *   {
+ *     keeps: 30,
+ *     estimateSize: 50,
+ *     totalCount: 10000
+ *   },
+ *   (range) => console.log('Range updated:', range),
+ *   () => console.log('Scroll to top'),
+ *   () => console.log('Scroll to bottom')
+ * );
+ * ```
  */
 export class VirtualCore {
-  #param!: VirtualCoreOptions; // 配置参数对象
-  #callUpdate!: VirtualCoreCallUpdate; // 范围更新回调函数
-  #sizeMap!: Map<string, number>; // 元素ID到尺寸的映射表
-  #firstRangeTotalSize!: number; // 首屏元素总尺寸（用于动态计算）
-  #firstRangeAverageSize!: number; // 首屏元素平均尺寸（动态计算初始值）
-  #fixedSizeValue!: number; // 固定尺寸模式下的元素尺寸
-  #calcType!: VirtualCalcType; // 尺寸计算类型（初始化/固定/动态）
-  #offset!: number; // 当前滚动偏移量
-  #direction!: VirtualCoreDirection | null; // 当前滚动方向
-  #range!: VirtualCoreRange; // 当前渲染范围信息
+  /** 虚拟列表配置选项 */
+  private options: VirtualCoreOptions;
+  /** 尺寸缓存管理器 - 负责元素高度的缓存和计算 */
+  private sizeCache: SizeCacheManager;
+  /** 视窗锚定管理器 - 负责滚动过程中的位置锚定 */
+  private anchorManager: ViewportAnchorManager;
+  /** 当前渲染范围状态 */
+  private currentRange: VirtualRange;
+  /** 记录最后一次范围状态值，方便对比 */
+  private lastRange!: VirtualRange;
+  /** 模块化组件 */
+  private scrollProcessor: ScrollProcessor;
+  private rangeCalculator: RangeCalculator;
+  private performanceMonitor: PerformanceMonitor;
 
-  constructor(param: VirtualCoreOptions, callUpdate: VirtualCoreCallUpdate = () => {}) {
-    this.#init(param, callUpdate);
+  /** 滚动处理状态 */
+  private scrollElement: HTMLElement | null = null;
+
+  /** 节流相关状态 */
+  private rangeRafId: number | null = null;
+
+  /**
+   * @constructor
+   * @description 创建虚拟列表核心引擎实例
+   *
+   * @param {VirtualCoreOptions} options - 虚拟列表配置选项
+   * @param {RangeUpdateCallback} onRangeUpdate - 范围更新回调函数
+   * @param {ScrollToTopCallback} [onScrollToTop] - 滚动到顶部回调函数（可选）
+   * @param {ScrollToBottomCallback} [onScrollToBottom] - 滚动到底部回调函数（可选）
+   * ```
+   */
+  constructor(
+    options: VirtualCoreOptions,
+    private onRangeUpdate: RangeUpdateCallback,
+    private onScrollToTop?: ScrollToTopCallback,
+    private onScrollToBottom?: ScrollToBottomCallback
+  ) {
+    this.options = {
+      thresholdTop: 0,
+      thresholdBottom: 0,
+      ...options,
+    };
+    this.sizeCache = new SizeCacheManager(options.estimateSize);
+    this.sizeCache.setTotalCount(options.totalCount);
+    this.anchorManager = new ViewportAnchorManager();
+
+    // 初始化模块化组件
+    this.scrollProcessor = new ScrollProcessor(
+      this.options,
+      this.onScrollToTop,
+      this.onScrollToBottom
+    );
+    this.rangeCalculator = new RangeCalculator(this.options);
+    this.performanceMonitor = new PerformanceMonitor();
+
+    // 设置性能监控器到各个组件
+    this.scrollProcessor.setPerformanceMonitor(this.performanceMonitor);
+    this.rangeCalculator = new RangeCalculator(this.options, this.performanceMonitor);
+    this.sizeCache.setPerformanceMonitor(this.performanceMonitor);
+
+    // 设置ScrollProcessor的回调函数
+    this.scrollProcessor.setScrollProcessCallback((scrollTop, viewportHeight) => {
+      this.processScrollInternal(scrollTop, viewportHeight);
+    });
+
+    this.currentRange = {
+      start: 0,
+      end: Math.min(options.keeps - 1, Math.max(0, options.totalCount - 1)),
+      paddingTop: 0,
+      paddingBottom: 0,
+      totalHeight: 0,
+    };
+    this.updateRange();
   }
 
-  #init(param: VirtualCoreOptions, callUpdate: VirtualCoreCallUpdate) {
-    this.#param = param;
-    this.#callUpdate = callUpdate;
+  /**
+   * @private
+   * @method updateRange
+   * @description 触发范围更新，将当前计算的渲染范围通过回调函数通知给外部组件
+   */
+  private updateRange(): void {
+    if (this.rangeRafId) cancelAnimationFrame(this.rangeRafId);
+    requestAnimationFrame(() => {
+      this.executeRangeUpdate();
+    });
+  }
 
-    this.#sizeMap = new Map();
-    this.#firstRangeAverageSize = 0;
-    this.#fixedSizeValue = 0;
-    this.#calcType = VirtualCalcType.INIT;
+  /**
+   * 检查范围是否发生变化
+   */
+  private hasRangeChanged(newRange: VirtualRange, lastRange: VirtualRange): boolean {
+    return (
+      newRange.start !== lastRange.start ||
+      newRange.end !== lastRange.end ||
+      Math.abs(newRange.paddingTop - lastRange.paddingTop) > 1 ||
+      Math.abs(newRange.paddingBottom - lastRange.paddingBottom) > 1
+    );
+  }
 
-    this.#offset = 0;
-    this.#direction = null;
+  /**
+   * @private
+   * @method executeRangeUpdate
+   * @description 执行实际的范围更新操作
+   */
+  private executeRangeUpdate(): void {
+    const range: VirtualRange = {
+      ...this.currentRange,
+      totalHeight: Math.round(this.currentRange.totalHeight * 1000) / 1000,
+      paddingTop: Math.round(this.currentRange.paddingTop * 1000) / 1000,
+      paddingBottom: Math.round(this.currentRange.paddingBottom * 1000) / 1000,
+    };
+    if (!this.lastRange || this.hasRangeChanged(range, this.lastRange)) {
+      // 更新渲染指标
+      const renderedCount = range.end - range.start + 1;
+      this.performanceMonitor.updateRenderMetrics(renderedCount, this.options.totalCount);
 
-    this.#range = Object.create(null);
-    if (param) {
-      this.checkRange(0, param.keeps - 1);
+      this.onRangeUpdate(range);
     }
+    this.lastRange = range;
   }
 
   /**
-   * 获取被渲染元素总个数
+   * @public
+   * @method getRange
+   * @description 获取当前渲染范围的副本
+   *
+   * @returns {VirtualRange} 当前渲染范围信息的副本
    */
-  getSizes() {
-    return this.#sizeMap.size;
+  getRange(): VirtualRange {
+    return { ...this.currentRange };
   }
 
   /**
-   * 通过id获取元素尺寸
-   * @param id
+   * @public
+   * @method getScrollDirection
+   * @description 获取当前滚动方向
+   *
+   * @returns {'up' | 'down' | 'none'} 滚动方向
    */
-  getSizeById(id: string) {
-    return this.#sizeMap.get(id);
+  getScrollDirection(): 'up' | 'down' | 'none' {
+    return this.scrollProcessor.getScrollDirection();
   }
 
   /**
-   * 返回当前渲染的范围
+   * 设置滚动容器元素
+   * @param {HTMLElement} element - 滚动容器DOM元素
+   *
+   * @description 设置虚拟列表的滚动容器元素引用，用于后续的滚动事件监听和位置计算
    */
-  getRange(): VirtualCoreRange {
-    return { ...this.#range };
+  setScrollElement(element: HTMLElement): void {
+    this.scrollElement = element;
+    this.scrollProcessor.setScrollElement(element);
   }
 
   /**
-   * 是否向后或向下滚动
+   * @public
+   * @method scrollToBottom
+   * @description 将虚拟列表滚动到最底部位置
    */
-  isBehind(): boolean {
-    return this.#direction === VirtualCoreDirection.BEHIND;
-  }
+  scrollToBottom(): void {
+    if (!this.scrollElement) return;
 
-  /**
-   * 是否向前或向前滚动
-   */
-  isFront(): boolean {
-    return this.#direction === VirtualCoreDirection.FRONT;
-  }
+    // 使用双重RAF确保DOM完全更新后再滚动
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!this.scrollElement) return;
 
-  /**
-   * 是否是固定值计算方式
-   */
-  isFixedType(): boolean {
-    return this.#calcType === VirtualCalcType.FIXED;
-  }
+        // 获取最新的滚动高度和客户端高度
+        const scrollHeight = this.scrollElement.scrollHeight;
 
-  /**
-   * 获取最后一个值索引
-   */
-  getLastIndex(): number {
-    return this.#param.uniqueIds.length - 1;
-  }
-
-  /**
-   * 根据开始索引计算偏移量，并加上 slot 头部的大小
-   * @param start
-   */
-  getOffset(start: number): number {
-    return (start < 1 ? 0 : this.getIndexOffset(start)) + this.#param.slotHeaderSize;
-  }
-
-  /**
-   * 真实渲染个数的最后位置
-   * @param start
-   */
-  getEndByStart(start: number): number {
-    const theoryEnd = start + this.#param.keeps - 1;
-    return Math.min(theoryEnd, this.getLastIndex());
-  }
-
-  /**
-   * 获取向前或向上填充值
-   */
-  getPadFront(): number {
-    return this.isFixedType()
-      ? this.#fixedSizeValue * this.#range.start
-      : this.getIndexOffset(this.#range.start);
-  }
-
-  /**
-   * 获取向后或向下的填充值
-   */
-  getPadBehind(): number {
-    const end = this.#range.end;
-    const lastIndex = this.getLastIndex();
-    if (end >= lastIndex) return 0; // 已经到达或超过最后一个元素
-
-    const remainingCount = lastIndex - end;
-    return this.isFixedType()
-      ? remainingCount * this.#fixedSizeValue
-      : remainingCount * this.getEstimateSize();
-  }
-
-  /**
-   * 获取总共高度
-   */
-  getTotalHeight() {
-    const lastIndex = this.getLastIndex();
-    if (lastIndex < 0) return 0; // 处理空数据情况
-
-    const height = this.isFixedType()
-      ? this.#fixedSizeValue * lastIndex
-      : this.getIndexOffset(lastIndex);
-    if (this.#range.end === lastIndex) return height;
-    return Math.max(height, this.#range.totalHeight ?? 0);
-  }
-
-  /**
-   * 获取预估值
-   */
-  getEstimateSize(): number {
-    return this.isFixedType()
-      ? this.#fixedSizeValue
-      : this.#firstRangeAverageSize || this.#param.estimateSize;
-  }
-
-  /**
-   * 通过key设置Param字段的值
-   * @param key
-   * @param value
-   */
-  updateParam(key: keyof VirtualCoreOptions, value: any) {
-    if (!(key in this.#param)) return;
-    if (key === 'uniqueIds') {
-      this.#sizeMap.forEach((_v, k) => {
-        if (!value.includes(k)) {
-          this.#sizeMap.delete(k);
-        }
+        // 确保滚动到最底部
+        this.scrollElement.scrollTop = scrollHeight + 100; // 添加额外偏移确保到底
       });
-    }
-    this.#param[key] = value;
+    });
   }
 
   /**
-   * 通过id保存元素的大小，并根据大小变化更新计算类型（固定大小或动态大小）
-   * @param id
-   * @param size
-   */
-  saveSize(id: string, size: number) {
-    if (size <= 0) return; // 防止无效尺寸
-
-    this.#sizeMap.set(id, size);
-    // 修正计算方式
-    if (this.#calcType === VirtualCalcType.INIT) {
-      this.#fixedSizeValue = size;
-      this.#calcType = VirtualCalcType.FIXED;
-    } else if (this.#calcType === VirtualCalcType.FIXED && this.#fixedSizeValue !== size) {
-      this.#calcType = VirtualCalcType.DYNAMIC;
-    }
-
-    if (this.#calcType !== VirtualCalcType.FIXED) {
-      if (this.#sizeMap.size < Math.min(this.#param.keeps, this.#param.uniqueIds.length)) {
-        this.#firstRangeTotalSize = [...this.#sizeMap.values()].reduce((acc, val) => acc + val, 0);
-        this.#firstRangeAverageSize = Math.round(this.#firstRangeTotalSize / this.#sizeMap.size);
-      }
-    }
-  }
-
-  /**
-   * 数据源变化时，根据当前滚动方向调整开始索引，并更新渲染范围。
-   */
-  handleDataSourcesChange() {
-    let start = this.#range.start;
-
-    if (this.isFront()) {
-      start -= LEADING_BUFFER;
-    } else if (this.isBehind()) {
-      start += LEADING_BUFFER;
-    }
-
-    start = Math.max(start, 0);
-
-    this.updateRange(start, this.getEndByStart(start));
-  }
-
-  /**
-   * 当元素尺寸有变化时，需要调整开始索引并更新渲染范围
-   */
-  handleSlotSizeChange() {
-    this.handleDataSourcesChange();
-  }
-
-  /**
-   * 处理滚动事件的核心方法
-   * @param offset - 当前滚动偏移量（相对于滚动容器顶部/左侧）
+   * @public
+   * @method handleScroll
+   * @description 处理滚动事件的主入口方法
    *
-   * 实现要点：
-   * 1. 方向判断：通过比较新旧偏移量确定滚动方向
-   * 2. 偏移量更新：记录最新滚动位置
-   * 3. 方向路由：根据方向调用对应处理逻辑
-   * 4. 性能优化：避免不必要的范围计算
+   * @param {number} scrollTop - 当前滚动位置（像素）
+   * @param {number} viewportHeight - 视窗高度（像素）
    */
-  handleScroll(offset: number) {
-    // 方向判断：新偏移小于旧偏移或归零时为向上/左滚动
-    this.#direction =
-      offset < this.#offset || offset === 0
-        ? VirtualCoreDirection.FRONT
-        : VirtualCoreDirection.BEHIND;
-    this.#offset = offset; // 更新当前滚动位置
+  handleScroll(scrollTop: number, viewportHeight: number): void {
+    // 微小滚动过滤：避免不必要的计算
+    const scrollDelta = Math.abs(scrollTop - (this.lastScrollTop || 0));
+    if (scrollDelta < 0.5) return;
 
-    // 根据滚动方向执行不同处理逻辑
-    if (this.#direction === VirtualCoreDirection.FRONT) {
-      this.handleFront();
-    } else if (this.#direction === VirtualCoreDirection.BEHIND) {
-      this.handleBehind();
-    }
+    // 委托给ScrollProcessor处理
+    this.scrollProcessor.handleScroll(scrollTop, viewportHeight);
+
+    // 记录最后滚动位置
+    this.lastScrollTop = scrollTop;
+  }
+
+  /** 最后滚动位置记录 */
+  private lastScrollTop: number = 0;
+
+  /**
+   * @private
+   * @method processScrollInternal
+   * @description 内部滚动处理逻辑，委托给核心处理方法
+   *
+   * @param {number} scrollTop - 当前滚动位置
+   * @param {number} viewportHeight - 视窗高度
+   */
+  private processScrollInternal(scrollTop: number, viewportHeight: number): void {
+    this.processScrollCore(scrollTop, viewportHeight);
   }
 
   /**
-   * 处理向前滚动（用户向上或向左滚动）
+   * @private
+   * @method processScrollCore
+   * @description 核心滚动处理逻辑，计算渲染范围和更新视窗状态
    *
-   * 实现逻辑：
-   * 1. 计算当前滚动超过的元素数量
-   * 2. 根据缓冲值调整新的起始位置
-   * 3. 校验并更新渲染范围
+   * @param {number} scrollTop - 当前滚动位置
+   * @param {number} viewportHeight - 视窗高度
    */
-  handleFront() {
-    const overs = this.getScrollOvers();
-    if (overs > this.#range.start) {
+  private processScrollCore(scrollTop: number, viewportHeight: number): void {
+    // 处理空列表的边界情况
+    if (this.options.totalCount === 0) {
+      // 空列表时只显示头部和底部区域
+      this.currentRange = {
+        start: 0,
+        end: 0,
+        paddingTop: this.options.headerSize,
+        paddingBottom: this.options.footerSize,
+        totalHeight: this.options.headerSize + this.options.footerSize,
+      };
+      this.updateRange();
       return;
     }
 
-    const start = Math.max(overs - this.#param.buffer, 0);
-    this.checkRange(start, this.getEndByStart(start));
+    // 委托给范围计算器进行复杂的渲染范围计算
+    // 这里整合了锚点管理、尺寸缓存等多个模块的数据
+    this.currentRange = this.rangeCalculator.calculateRange(
+      scrollTop,
+      viewportHeight,
+      this.sizeCache,
+      this.anchorManager
+    );
+    // 触发范围更新，通知外部组件重新渲染
+    this.updateRange();
   }
 
   /**
-   * 处理向后滚动（用户向下或向右滚动）
+   * @public
+   * @method updateOptions
+   * @description 更新虚拟列表配置选项，支持部分更新
    *
-   * 实现逻辑：
-   * 1. 计算当前滚动超过的元素数量
-   * 2. 当滚动超过缓冲区域时调整起始位置
-   * 3. 校验并更新渲染范围
+   * @param {Partial<VirtualCoreOptions>} newOptions - 新的配置选项（部分更新）
    */
-  handleBehind() {
-    const overs = this.getScrollOvers();
-    if (overs < this.#range.start + this.#param.buffer) {
-      return;
-    }
+  updateOptions(newOptions: Partial<VirtualCoreOptions>): void {
+    const oldTotalCount = this.options.totalCount;
+    this.options = { ...this.options, ...newOptions };
 
-    this.checkRange(overs, this.getEndByStart(overs));
-  }
+    // 更新各个模块的配置
+    this.rangeCalculator.updateOptions(this.options);
 
-  /**
-   * 获取滚动超过的元素数量（二分查找优化）
-   * @returns 当前视口上方/左侧已滚过的元素数量
-   *
-   * 算法选择：
-   * - 固定尺寸：直接数学计算 O(1)
-   * - 动态尺寸：二分查找 O(log n)
-   *
-   * 边界处理：
-   * - 处理header偏移量
-   * - 处理负偏移和零偏移
-   * - 处理浮点数精度问题
-   */
-  getScrollOvers(): number {
-    const offset = this.#offset - this.#param.slotHeaderSize;
-    if (offset <= 0) return 0;
+    if (newOptions.totalCount !== undefined && newOptions.totalCount !== oldTotalCount) {
+      this.sizeCache.setTotalCount(newOptions.totalCount);
 
-    // 固定尺寸模式快速计算
-    if (this.isFixedType()) {
-      return Math.floor(offset / this.#fixedSizeValue);
-    }
-
-    // 动态尺寸二分查找
-    let low = 0;
-    let middle = 0;
-    let middleOffset = 0;
-    let high = this.#param.uniqueIds.length;
-
-    while (low <= high) {
-      middle = low + Math.floor((high - low) / 2);
-      middleOffset = this.getIndexOffset(middle);
-
-      if (middleOffset === offset) {
-        return middle;
-      } else if (middleOffset < offset) {
-        low = middle + 1;
+      if (this.options.totalCount === 0) {
+        this.currentRange.start = 0;
+        this.currentRange.end = 0;
       } else {
-        high = middle - 1;
+        this.currentRange.start = Math.min(this.currentRange.start, this.options.totalCount - 1);
+        this.currentRange.end = Math.min(this.currentRange.end, this.options.totalCount - 1);
+        if (this.currentRange.end < this.currentRange.start) {
+          this.currentRange.end = this.currentRange.start;
+        }
+      }
+      const totalHeight =
+        this.sizeCache.getTotalHeight() + this.options.headerSize + this.options.footerSize;
+      this.currentRange.totalHeight = totalHeight;
+      this.updateRange();
+    }
+  }
+
+  /**
+   * @public
+   * @method updateItemSize
+   * @description 动态更新虚拟列表中指定元素的尺寸
+   *
+   * @param {number} index - 项目索引
+   * @param {number} size - 新的尺寸值（通常是高度，单位：像素）
+   * @param {HTMLElement} scrollElement - 滚动容器元素
+   */
+  updateItemSize(index: number, size: number, scrollElement: HTMLElement): void {
+    // 边界检查：确保索引在有效范围内
+    if (index < 0 || index >= this.options.totalCount) {
+      console.warn(`Invalid index ${index} for updateItemSize`);
+      return;
+    }
+
+    // 获取旧尺寸并计算变化量
+    const oldSize = this.sizeCache.getItemHeight(index);
+    const delta = size - oldSize;
+
+    // 微小变化过滤：避免不必要的更新操作
+    if (Math.abs(delta) < 0.1) {
+      return;
+    }
+
+    // 步骤1：更新尺寸缓存，这是所有后续计算的基础
+    this.sizeCache.updateSize(index, size);
+
+    // 步骤2：智能滚动补偿判断
+    // 只有当变化的元素在当前渲染范围内或附近时才需要补偿
+    const isInCurrentRange = index >= this.currentRange.start && index <= this.currentRange.end;
+    const isSignificantChange = Math.abs(delta) > 1;
+
+    if (isSignificantChange && (isInCurrentRange || this.shouldCompensateScroll(index, delta))) {
+      // 注释：滚动补偿功能暂时禁用，避免滚动抖动
+      // this.anchorManager.compensateScroll(index, delta, scrollElement);
+    }
+
+    // 步骤3：智能范围重计算
+    // 只有当变化影响到当前可视区域时才重新计算渲染范围
+    if (this.shouldRecalculateRange(index, delta)) {
+      this.scheduleRangeUpdate(scrollElement);
+    }
+  }
+
+  /**
+   * 批量更新项目尺寸
+   * @param updates - 尺寸更新数组
+   * @param scrollElement - 滚动容器元素
+   */
+  updateItemSizes(
+    updates: Array<{ index: number; size: number }>,
+    scrollElement: HTMLElement
+  ): void {
+    let hasSignificantChanges = false;
+    let affectedRange = { min: Infinity, max: -1 };
+
+    // 批量更新尺寸
+    for (const { index, size } of updates) {
+      if (index < 0 || index >= this.options.totalCount) continue;
+
+      const oldSize = this.sizeCache.getItemHeight(index);
+      const delta = Math.abs(size - oldSize);
+
+      if (delta > 0.1) {
+        this.sizeCache.updateSize(index, size);
+
+        if (delta > 1) {
+          hasSignificantChanges = true;
+          affectedRange.min = Math.min(affectedRange.min, index);
+          affectedRange.max = Math.max(affectedRange.max, index);
+        }
       }
     }
 
-    return low > 0 ? --low : 0;
-  }
-
-  /**
-   * 动态尺寸索引偏移计算
-   * @param givenIndex - 目标元素索引
-   * @returns 累计偏移量（保留两位小数）
-   *
-   * 优化策略：
-   * - 使用缓存尺寸提升性能
-   * - 自动回退到预估尺寸
-   * - 浮点数精度控制
-   */
-  getIndexOffset(givenIndex: number): number {
-    if (!givenIndex) return 0;
-
-    let offset = 0;
-    const estimateSize = this.getEstimateSize(); // 获取预估尺寸
-    for (let index = 0; index < givenIndex; index++) {
-      const id = this.#param.uniqueIds[index];
-      // 优先使用缓存尺寸，无缓存时使用预估尺寸
-      offset += this.#sizeMap.get(id) || estimateSize;
-    }
-    return Number(offset.toFixed(2)); // 控制精度防止误差累积
-  }
-
-  /**
-   * 检查当前范围是否需要更新
-   * @param start
-   * @param end
-   */
-  checkRange(start: number, end: number) {
-    const keeps = this.#param.keeps;
-    const total = this.#param.uniqueIds.length;
-
-    if (total <= keeps) {
-      start = 0;
-      end = this.getLastIndex();
-    } else if (end - start < keeps - 1) {
-      start = end - keeps + 1;
-    }
-
-    if (this.#range.start !== start) {
-      this.updateRange(start, end);
+    // 智能重计算
+    if (hasSignificantChanges && this.isRangeAffected(affectedRange)) {
+      this.scheduleRangeUpdate(scrollElement);
     }
   }
 
   /**
-   * 更新渲染范围并触发回调
-   *
-   * @param start - 新的起始索引
-   * @param end - 新的结束索引
-   *
-   * 更新策略：
-   * 1. 计算前后填充量保持滚动条位置稳定
-   * 2. 计算总高度确保滚动条尺寸正确
-   * 3. 触发外部回调通知范围变化
+   * 判断是否需要滚动补偿
+   * @private
    */
-  updateRange(start: number, end: number) {
-    this.#range.offset = this.#offset;
-    this.#range.start = start;
-    this.#range.end = end;
-    // 计算前后填充量（虚拟滚动核心）
-    this.#range.padFront = this.getPadFront();
-    this.#range.padBehind = this.getPadBehind();
-    // 计算总高度（用于正确渲染滚动条）
-    this.#range.totalHeight = this.getTotalHeight();
-    // 触发外部更新回调
-    this.#callUpdate(this.getRange());
+  private shouldCompensateScroll(index: number, delta: number): boolean {
+    // 定义缓冲区大小，用于判断元素是否接近当前渲染范围
+    const bufferSize = 5;
+    // 检查变化的元素是否在当前渲染范围附近
+    const nearCurrentRange =
+      index >= this.currentRange.start - bufferSize && index <= this.currentRange.end + bufferSize;
+    // 只有在范围附近且尺寸变化较大时才需要滚动补偿
+    return nearCurrentRange && Math.abs(delta) > 5;
+  }
+
+  /**
+   * 判断是否需要重新计算范围
+   * @private
+   */
+  private shouldRecalculateRange(index: number, delta: number): boolean {
+    // 检查元素是否在当前视窗内
+    const isInViewport = index >= this.currentRange.start && index <= this.currentRange.end;
+    // 检查元素是否在视窗附近
+    const isNearViewport =
+      index >= this.currentRange.start - 10 && index <= this.currentRange.end + 10;
+    // 判断是否为大幅度尺寸变化
+    const isLargeChange = Math.abs(delta) > 20;
+
+    // 视窗内的变化或附近的大变化都需要重新计算范围
+    return isInViewport || (isNearViewport && isLargeChange);
+  }
+
+  /**
+   * 检查范围是否受影响
+   * @private
+   */
+  private isRangeAffected(affectedRange: { min: number; max: number }): boolean {
+    // 如果受影响的范围与当前渲染范围有重叠或接近，则认为受影响
+    // 使用20个元素的缓冲区来判断是否需要更新
+    return !(
+      affectedRange.min > this.currentRange.end + 20 ||
+      affectedRange.max < this.currentRange.start - 20
+    );
+  }
+
+  /**
+   * 调度范围更新
+   * @private
+   */
+  private scheduleRangeUpdate(scrollElement: HTMLElement): void {
+    // 防止重复调度，避免不必要的计算
+    if (this.rangeUpdateScheduled) return;
+
+    // 标记调度状态
+    this.rangeUpdateScheduled = true;
+    // 使用RAF确保更新在下一帧执行，不阻塞当前操作
+    requestAnimationFrame(() => {
+      // 重置调度状态
+      this.rangeUpdateScheduled = false;
+
+      // 确保元素存在且实例未被销毁
+      if (scrollElement && !this.isDestroyed) {
+        // 获取当前滚动状态
+        const scrollTop = scrollElement.scrollTop;
+        const viewportHeight = scrollElement.clientHeight;
+
+        // 重新计算渲染范围
+        this.currentRange = this.rangeCalculator.calculateRange(
+          scrollTop,
+          viewportHeight,
+          this.sizeCache,
+          this.anchorManager
+        );
+
+        // 触发范围更新回调
+        this.updateRange();
+      }
+    });
+  }
+
+  /** 范围更新调度状态 */
+  private rangeUpdateScheduled: boolean = false;
+  /** 销毁状态标记 */
+  private isDestroyed: boolean = false;
+
+  /**
+   * @public
+   * @method getOffsetByIndex
+   * @description 计算指定索引元素的精确滚动位置，支持动态高度和缓存优化
+   *
+   * @param {number} index - 目标索引位置
+   * @returns {number} 实际滚动到的偏移量（像素）
+   */
+  getOffsetByIndex(index: number): number {
+    const clampedIndex = Math.max(0, Math.min(index, this.options.totalCount - 1));
+    return this.sizeCache.getOffsetByIndex(clampedIndex) + this.options.headerSize;
+  }
+
+  /**
+   * 滚动到指定索引位置
+   * @param index 目标索引
+   * @param alignment 对齐方式
+   */
+  scrollToIndex(index: number, alignment: 'start' | 'center' | 'end' = 'start'): void {
+    // 验证滚动元素和索引的有效性
+    if (!this.scrollElement || index < 0 || index >= this.options.totalCount) {
+      console.warn(
+        `[VirtualCore] scrollToIndex: 无效索引 ${index}, 总数: ${this.options.totalCount}`
+      );
+      return;
+    }
+
+    // 获取目标元素的位置信息
+    const targetOffset = this.sizeCache.getOffsetByIndex(index);
+    const itemHeight = this.sizeCache.getItemHeight(index);
+    const viewportHeight = this.scrollElement.clientHeight;
+
+    let scrollTop: number;
+
+    // 根据对齐方式计算滚动位置
+    switch (alignment) {
+      case 'center':
+        // 居中对齐：元素在视窗中央
+        scrollTop = targetOffset - (viewportHeight - itemHeight) / 2;
+        break;
+      case 'end':
+        // 底部对齐：元素在视窗底部
+        scrollTop = targetOffset - viewportHeight + itemHeight;
+        break;
+      default: // 'start'
+        // 顶部对齐：元素在视窗顶部
+        scrollTop = targetOffset;
+    }
+
+    // 添加头部偏移量，考虑列表头部的额外空间
+    scrollTop += this.options.headerSize || 0;
+
+    // 限制滚动范围，确保不超出可滚动区域
+    const maxScrollTop = Math.max(0, this.scrollElement.scrollHeight - viewportHeight);
+    scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
+
+    // 执行滚动操作
+    this.scrollElement.scrollTop = scrollTop;
+  }
+  /**
+   * 获取性能监控器实例
+   * @returns PerformanceMonitor实例
+   */
+  getPerformanceMonitor(): PerformanceMonitor {
+    return this.performanceMonitor;
+  }
+
+  /**
+   * 获取当前性能指标
+   * @returns 性能指标对象
+   */
+  getPerformanceMetrics() {
+    return this.performanceMonitor.getMetrics();
+  }
+
+  /**
+   * 生成性能报告
+   * @returns 性能报告字符串
+   */
+  getPerformanceReport(): string {
+    return this.performanceMonitor.getPerformanceReport();
+  }
+
+  /**
+   * 开始性能监控
+   */
+  startPerformanceMonitoring(): void {
+    this.performanceMonitor.stopMonitoring();
+  }
+
+  /**
+   * 停止性能监控
+   */
+  stopPerformanceMonitoring(): void {
+    this.performanceMonitor.stopMonitoring();
+  }
+
+  /**
+   * @public
+   * @method destroy
+   * @description 销毁虚拟列表实例，清理所有资源防止内存泄漏
+   */
+  destroy(): void {
+    // 设置销毁状态标记，防止后续操作
+    this.isDestroyed = true;
+
+    // 清理范围更新调度状态，取消待执行的更新
+    this.rangeUpdateScheduled = false;
+
+    // 逐个销毁各个核心模块，释放相关资源
+    this.sizeCache.clear(); // 清空尺寸缓存
+    this.scrollProcessor.destroy(); // 销毁滚动处理器
+    this.performanceMonitor.stopMonitoring(); // 停止性能监控
+
+    // ViewportAnchorManager是纯数据管理，无需特殊清理
+
+    // 清理DOM元素引用，避免内存泄漏
+    this.scrollElement = null;
+
+    // 重置核心状态变量
+    this.lastScrollTop = 0;
   }
 }
