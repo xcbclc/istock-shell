@@ -33,7 +33,7 @@ npm install @istock-shell/ui
 
 ```svelte
 <script>
-  import { VirtualList } from '@istock-shell/ui';
+  import { ShVirtualList } from '@istock-shell/ui';
 </script>
 ```
 
@@ -43,7 +43,7 @@ npm install @istock-shell/ui
 
 ```svelte
 <script>
-  import { VirtualList } from '@istock-shell/ui';
+  import { ShVirtualList } from '@istock-shell/ui';
 
   const items = Array.from({ length: 10000 }, (_, i) => ({
     id: i,
@@ -52,14 +52,14 @@ npm install @istock-shell/ui
   }));
 </script>
 
-<VirtualList list={items} estimateSize={50} keeps={20}>
+<ShVirtualList list={items} estimateSize={50} keeps={20}>
   {#snippet itemRender(item, index)}
     <div class="p-4 border-b">
       <h3>{item.name}</h3>
       <p>Index: {index}, Value: {item.value.toFixed(2)}</p>
     </div>
   {/snippet}
-</VirtualList>
+</ShVirtualList>
 ```
 
 ## 组件特性

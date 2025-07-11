@@ -44,7 +44,7 @@ export class RangeCalculator {
   ): VirtualRange {
     // 记录计算开始时间，用于性能监控
     this.performanceMonitor?.recordRangeCalculationStart();
-    
+
     // 处理空列表的边界情况，直接返回空范围
     if (this.options.totalCount === 0) {
       return {
