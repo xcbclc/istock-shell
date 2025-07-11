@@ -314,7 +314,6 @@ export class VirtualCore {
   updateOptions(newOptions: Partial<VirtualCoreOptions>): void {
     const oldTotalCount = this.options.totalCount;
     this.options = { ...this.options, ...newOptions };
-
     // 更新各个模块的配置
     this.rangeCalculator.updateOptions(this.options);
 
@@ -326,15 +325,29 @@ export class VirtualCore {
         this.currentRange.end = 0;
       } else {
         this.currentRange.start = Math.min(this.currentRange.start, this.options.totalCount - 1);
-        this.currentRange.end = Math.min(this.currentRange.end, this.options.totalCount - 1);
+        this.currentRange.end = Math.min(
+          Math.max(this.currentRange.end, this.options.keeps),
+          this.options.totalCount - 1
+        );
         if (this.currentRange.end < this.currentRange.start) {
           this.currentRange.end = this.currentRange.start;
         }
       }
-      const totalHeight =
-        this.sizeCache.getTotalHeight() + this.options.headerSize + this.options.footerSize;
-      this.currentRange.totalHeight = totalHeight;
-      this.updateRange();
+      const scrollElement = this.scrollElement;
+      if (scrollElement && !this.isDestroyed) {
+        // 获取当前滚动状态
+        const scrollTop = scrollElement.scrollTop;
+        const viewportHeight = scrollElement.clientHeight;
+        // 重新计算渲染范围
+        this.currentRange = this.rangeCalculator.calculateRange(
+          scrollTop,
+          viewportHeight,
+          this.sizeCache,
+          this.anchorManager
+        );
+        // 触发范围更新回调
+        this.updateRange();
+      }
     }
   }
 
@@ -521,11 +534,11 @@ export class VirtualCore {
    * @param index 目标索引
    * @param alignment 对齐方式
    */
-  scrollToIndex(index: number, alignment: 'start' | 'center' | 'end' = 'start'): void {
+  scrollByIndex(index: number, alignment: 'start' | 'center' | 'end' = 'start'): void {
     // 验证滚动元素和索引的有效性
     if (!this.scrollElement || index < 0 || index >= this.options.totalCount) {
       console.warn(
-        `[VirtualCore] scrollToIndex: 无效索引 ${index}, 总数: ${this.options.totalCount}`
+        `[VirtualCore] scrollByIndex: 无效索引 ${index}, 总数: ${this.options.totalCount}`
       );
       return;
     }

@@ -2,18 +2,17 @@
 @component
 ShVirtualList 虚拟列表组件
 
-一个高性能的虚拟列表组件，专为大数据集的高效渲染而设计。
-基于虚拟化技术，仅渲染可视区域内的列表项，大幅提升大数据量场景下的渲染性能。
+一个高性能的虚拟滚动列表组件，基于视窗锚定和双向尺寸缓存技术，专为大数据量列表的高效滚动渲染而设计。
+基于虚拟化技术，仅渲染可视区域内的列表项，大幅提升大数据量列表场景下的渲染性能和用户体验。
 
 功能特性：
-- 支持大数据集的高效虚拟化渲染，仅渲染可见区域项
-- 支持垂直和水平两种滚动方向
-- 自动计算滚动位置和内容尺寸，动态调整可视区域
-- 支持头部和尾部固定区域，适用于复杂布局需求
-- 提供滚动到指定索引或偏移量的定位功能
-- 集成ResizeObserver实现列表项尺寸自适应
-- 支持自定义项渲染模板和内容插槽
-- 提供可视区域变化监听，便于实现懒加载等功能
+- 支持大数据集的高效虚拟化渲染，仅渲染可见区间的列表项
+- 动态高度自适应，支持不同高度的列表项混合渲染
+- 智能滚动优化，支持滚动到顶部/底部的无限加载
+- 支持自定义头部、尾部和列表项渲染插槽
+- 提供可视区间变化监听，便于实现懒加载或数据联动
+- 支持列表项尺寸自适应，通过ResizeObserver动态调整
+- 内置防抖和性能优化机制，确保流畅的滚动体验
 - 完整的 TypeScript 类型安全
 - 响应式设计支持
 
@@ -22,51 +21,36 @@ ShVirtualList 虚拟列表组件
 <script lang="ts">
   import { ShVirtualList } from '@istock-shell/ui';
 
-  const largeDataSet = Array.from({ length: 10000 }, (_, i) => ({
-    id: i,
-    name: `项目 ${i}`,
-    description: `这是第 ${i} 个项目的描述`
+  const largeListData = Array.from({ length: 10000 }, (_, i) => ({
+    id: `item-${i}`,
+    name: `项目 ${i + 1}`,
+    description: `这是第 ${i + 1} 个列表项的描述信息`
   }));
 
-  function handleRangeChange(range) {
-    console.log('可视区域变化:', range);
-  }
+  const handleRangeChange = (range) => {
+    console.log('可见范围变化:', range);
+  };
+
+  const handleScrollToBottom = () => {
+    console.log('滚动到底部，可以加载更多数据');
+  };
 </script>
 
 <p>基础虚拟列表</p>
 <ShVirtualList
-  list={largeDataSet}
-  keeps={30}
-  estimateSize={40}
-  mainItemRender={(item) => (
-    <div class="p-2 border-b">
+  list={largeListData}
+  estimateSize={60}
+  onRangeChange={handleRangeChange}
+  onScrollToBottom={handleScrollToBottom}
+  class="h-96"
+>
+  {#snippet itemChildrenRender(item, index)}
+    <div class="p-4 border-b">
       <h3>{item.name}</h3>
       <p>{item.description}</p>
     </div>
-  )}
-/>
-
-<p>带头部和尾部的虚拟列表</p>
-<ShVirtualList
-  list={largeDataSet}
-  headerSize={50}
-  footerSize={30}
-  headerRender={() => (
-    <div class="bg-gray-100 p-4 font-bold">列表头部</div>
-  )}
-  footerRender={() => (
-    <div class="bg-gray-100 p-2 text-center">列表底部</div>
-  )}
-  onRangeChange={handleRangeChange}
-/>
-
-<p>滚动定位的虚拟列表</p>
-<ShVirtualList
-  list={largeDataSet}
-  scrollToIndex={100}
-  thresholdTop={200}
-  thresholdBottom={200}
-/>
+  {/snippet}
+</ShVirtualList>
 ```
 -->
 
@@ -74,410 +58,467 @@ ShVirtualList 虚拟列表组件
   import type { Snippet } from 'svelte';
   import type { HTMLAttributes } from 'svelte/elements';
   import type { Action } from 'svelte/action';
-  import { VirtualDirection, type VirtualCoreRange } from './core/index';
 
   /**
-   * 虚拟列表项尺寸监听动作类型
-   * 用于监听列表项元素尺寸变化的Svelte动作类型定义
+   * 虚拟列表元素尺寸监听动作类型
    * @typedef {Action<HTMLElement, string>} VirtualListResizeAction
+   *
+   * @description 用于监听虚拟列表项尺寸变化的Svelte动作类型
+   *
+   * @template HTMLElement - 监听的DOM元素类型
+   * @template string - 元素唯一标识符类型
+   *
+   * @features
+   * - 自动监听元素尺寸变化
+   * - 防抖优化避免频繁更新
+   * - 并发控制防止重复监听
+   * - 内存泄漏防护机制
+   *
+   * @example
+   * ```svelte
+   * <div use:onItemResize={itemId}>
+   *   <!-- 内容 -->
+   * </div>
+   * ```
    */
-  export type VirtualListResizeAction = Action<HTMLElement, string>;
+  export type VirtualListResizeAction = Action<HTMLElement>;
 
   /**
    * 虚拟列表组件属性接口
-   * 继承所有原生 div 元素的 HTML 属性，并扩展虚拟列表特有的功能属性
-   * @template T - 列表项数据类型（默认为任意对象）
-   * @typedef {HTMLAttributes<HTMLDivElement> & VirtualListPropsExtension} VirtualListProps
+   * 继承所有HTML div元素的属性，支持虚拟化渲染的大数据列表
+   * @typedef {HTMLAttributes<HTMLDivElement>} VirtualListProps
    */
   export interface VirtualListProps<T = Record<string, any>>
     extends HTMLAttributes<HTMLDivElement> {
-    /** 数据源数组，用于渲染列表项 */
+    /**
+     * 数据列表
+     * @type {T[]}
+     * @default []
+     * @description 要渲染的数据数组，支持任意类型的数据项
+     */
     list?: T[];
-    /** 顶部预渲染阈值（像素），当滚动到距离顶部该值时开始加载更多内容 */
+
+    /**
+     * 顶部阈值
+     * @type {number}
+     * @default 0
+     * @description 距离顶部多少像素时触发onScrollToTop事件，用于无限滚动加载
+     */
     thresholdTop?: number;
-    /** 底部预渲染阈值（像素），当滚动到距离底部该值时开始加载更多内容 */
+
+    /**
+     * 底部阈值
+     * @type {number}
+     * @default 0
+     * @description 距离底部多少像素时触发onScrollToBottom事件，用于无限滚动加载
+     */
     thresholdBottom?: number;
-    /** 始终保留渲染的最小项数，影响滚动流畅性和性能平衡 */
+
+    /**
+     * 保持渲染的元素数量
+     * @type {number}
+     * @default 25
+     * @description 可见区域内保持渲染的元素数量，影响性能和内存使用
+     */
     keeps?: number;
-    /** 滚动方向，支持垂直和水平两种方向 */
-    direction?: VirtualDirection;
-    /** 项唯一标识键，支持字符串键名或函数动态生成 */
+
+    /**
+     * 滚动方向
+     * @type {'vertical' | 'horizontal'}
+     * @default 'vertical'
+     * @description 虚拟滚动的方向，目前主要支持垂直滚动
+     */
+    direction?: 'vertical' | 'horizontal';
+
+    /**
+     * 数据项唯一标识
+     * @type {string | ((item: T, index: number) => string)}
+     * @default 'id'
+     * @description 用于生成列表项key的字段名或函数，确保列表项的唯一性
+     */
     dataKey?: string | ((item: T, index: number) => string);
-    /** 头部固定区域高度（像素），需要配合headerRender使用 */
+
+    /**
+     * 头部区域高度
+     * @type {number}
+     * @default 0
+     * @description 列表头部固定区域的高度（像素）
+     */
     headerSize?: number;
-    /** 尾部固定区域高度（像素），需要配合footerRender使用 */
+
+    /**
+     * 尾部区域高度
+     * @type {number}
+     * @default 0
+     * @description 列表尾部固定区域的高度（像素）
+     */
     footerSize?: number;
-    /** 项尺寸预估值（像素），用于初始渲染计算和性能优化 */
+
+    /**
+     * 元素预估高度
+     * @type {number}
+     * @default 32
+     * @description 列表项的预估高度，用于初始计算和未测量元素的占位
+     */
     estimateSize?: number;
-    /** 关联滚动元素，用于嵌套滚动场景的滚动事件委托 */
-    shepherdElement?: HTMLElement;
-    /** 初始化时滚动到指定索引，优先级高于scrollToOffset */
+
+    /**
+     * 滚动到指定索引
+     * @type {number}
+     * @description 组件初始化时滚动到的目标索引位置
+     */
     scrollToIndex?: number;
-    /** 初始化时滚动到指定偏移量（像素） */
+
+    /**
+     * 滚动到指定偏移量
+     * @type {number}
+     * @description 组件初始化时滚动到的目标像素位置
+     */
     scrollToOffset?: number;
-    /** 头部固定区域渲染模板，返回Svelte片段 */
+
+    /**
+     * 头部渲染插槽
+     * @type {() => ReturnType<Snippet<[]>>}
+     * @description 用于渲染列表头部内容的Svelte插槽函数
+     */
     headerRender?: () => ReturnType<Snippet<[]>>;
-    /** 主项内容渲染模板，参数为当前项数据 */
-    mainItemRender?: Snippet<[item: T]>;
-    /** 尾部固定区域渲染模板，返回Svelte片段 */
+
+    /**
+     * 主要内容渲染插槽
+     * @type {Snippet<[item: T, index: number]>}
+     * @description 用于渲染每个列表项的Svelte插槽，接收数据项和索引作为参数
+     */
+    itemRender?: Snippet<[item: T, index: number]>;
+
+    /**
+     * 列表项子内容渲染插槽
+     * @type {Snippet<[item: T, index: number]>}
+     * @description 用于渲染列表项内部内容的Svelte插槽，支持自定义列表项布局和样式
+     */
+    itemChildrenRender?: Snippet<[item: T, index: number]>;
+
+    /**
+     * 尾部渲染插槽
+     * @type {() => ReturnType<Snippet<[]>>}
+     * @description 用于渲染列表尾部内容的Svelte插槽函数
+     */
     footerRender?: () => ReturnType<Snippet<[]>>;
-    /** 可视区域变化回调函数，参数包含start/end索引等元数据 */
-    onRangeChange?: (range: VirtualCoreRange) => void;
+
+    /**
+     * 可见范围变化回调
+     * @type {(range: any) => void}
+     * @description 当可见区域范围发生变化时的回调函数
+     */
+    onRangeChange?: (range: any) => void;
+
+    /**
+     * 滚动到顶部回调
+     * @type {() => void}
+     * @description 滚动到列表顶部时的回调，通常用于加载历史数据
+     */
+    onScrollToTop?: () => void;
+
+    /**
+     * 滚动到底部回调
+     * @type {() => void}
+     * @description 滚动到列表底部时的回调，通常用于标记消息已读
+     */
+    onScrollToBottom?: () => void;
   }
 </script>
 
 <script lang="ts">
   import { onMount } from 'svelte';
   import { tuc, isString } from '@istock-shell/util';
-  import { Virtual } from './core/index';
+  import { VirtualCore, type VirtualRange } from './core/index.ts';
 
-  // 响应式状态声明
-  /** 列表项尺寸变化信息记录，用于跟踪每个项的尺寸变化 */
-  let sizeChangeInfo: Record<string, { id: string; size: number }> = {};
-  /** 虚拟列表核心实例，负责虚拟化逻辑处理 */
-  let virtual: Virtual;
-  /** 虚拟列表实例是否已创建的状态标识 */
-  let hasVirtualInstance = $state(false);
-  /** 当前可视区域范围信息，包含起始索引、结束索引、填充等数据 */
-  let range = $state<VirtualCoreRange>({
-    offset: 0, // 滚动偏移量
-    start: 0, // 可视区域起始索引
-    end: 0, // 可视区域结束索引
-    padFront: 0, // 前置填充高度
-    padBehind: 0, // 后置填充高度
-    totalHeight: 0, // 总高度
-  });
-  /** 滚动容器元素引用 */
-  let scrollElement: HTMLElement | undefined;
-  /** 内容包装器的动态样式字符串，用于设置填充 */
-  let wrapperStyle = $state('');
-
-  // 属性解构：从props中提取组件属性，设置默认值
   const {
-    list = [], // 数据源数组（默认空数组）
-    thresholdTop = 0, // 顶部预渲染阈值（默认0像素）
-    thresholdBottom = 0, // 底部预渲染阈值（默认0像素）
-    keeps = 25, // 保持渲染的最小项数（默认25项）
-    direction = VirtualDirection.vertical, // 滚动方向（默认垂直）
-    dataKey = 'id', // 数据项唯一标识键（默认'id'）
-    headerSize = 0, // 头部固定区域高度（默认0）
-    footerSize = 0, // 尾部固定区域高度（默认0）
-    estimateSize = 32, // 项尺寸预估值（默认32px）
-    shepherdElement, // 关联滚动元素（可选）
-    scrollToIndex, // 初始滚动到指定索引（可选）
-    scrollToOffset, // 初始滚动到指定偏移量（可选）
-    headerRender, // 头部内容渲染函数（可选）
-    mainItemRender, // 主项内容渲染函数（可选）
-    footerRender, // 尾部内容渲染函数（可选）
-    onRangeChange, // 可视区域变化回调函数（可选）
-    class: className = '', // 自定义CSS类名（默认空字符串）
-    children, // 子内容插槽
-    ...otherProps // 其他原生div元素属性
+    list = [],
+    thresholdTop = 0,
+    thresholdBottom = 0,
+    keeps = 25,
+    direction = 'vertical',
+    dataKey = 'id',
+    headerSize = 0,
+    footerSize = 0,
+    estimateSize = 32,
+    scrollToIndex,
+    scrollToOffset,
+    headerRender,
+    itemRender,
+    itemChildrenRender,
+    footerRender,
+    onRangeChange,
+    onScrollToTop,
+    onScrollToBottom,
+    class: className = '',
+    children,
+    ...otherProps
   }: VirtualListProps = $props();
+
+  /** 虚拟列表核心引擎实例，负责滚动计算和渲染优化 */
+  let virtualCore: VirtualCore;
+
+  /** 虚拟实例初始化状态标识，用于控制组件生命周期 */
+  let hasVirtualInstance = $state(false);
+
+  /** 当前可视区域范围状态，用于跟踪渲染区间和滚动位置 */
+  let range: VirtualRange = $state({
+    start: 0,
+    end: 0,
+    totalHeight: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+  });
+
+  /** 滚动容器DOM元素引用，用于滚动事件监听和位置计算 */
+  let scrollElement: HTMLElement | undefined;
+
+  /** 当前可见区间的列表数据，基于range动态切片原始数据实现虚拟化渲染 */
+  let currentList: Array<Record<string, any>> = $derived.by(() => {
+    return list.slice(range.start, range.end + 1);
+  });
 
   /**
    * 滚动事件处理函数
-   * 将滚动事件委托给虚拟列表核心实例处理
-   * @param event - 滚动事件对象
+   * 处理滚动容器的滚动事件，更新虚拟列表的渲染范围和状态
+   * @param _event - 滚动事件对象
+   * @description 核心滚动处理逻辑，负责计算可视区域并触发虚拟渲染更新
    */
-  const onScroll = (event: Event) => {
-    virtual?.onScroll(event);
+  const onScroll = (_event: Event) => {
+    // 安全检查：确保虚拟实例和滚动元素已初始化
+    if (!hasVirtualInstance || !scrollElement) return;
+
+    // 获取当前滚动状态：位置和视窗尺寸
+    const scrollTop = scrollElement.scrollTop;
+    const viewportHeight = scrollElement.clientHeight;
+
+    // 使用RAF确保滚动处理的流畅性，避免阻塞主线程
+    virtualCore.handleScroll(scrollTop, viewportHeight);
   };
 
   /**
-   * 虚拟列表容器样式计算副作用
-   * 根据可视区域范围动态计算内容包装器的填充样式
+   * 获取列表项的唯一标识
+   * 为虚拟列表项生成唯一的key值，确保列表项的正确渲染和更新
+   * @param item - 列表项数据对象
+   * @param index - 列表项在当前可见区间中的相对索引
+   * @returns {string} 列表项的唯一标识符
+   * @description 支持字符串字段名和自定义函数两种key生成方式
    */
-  $effect(() => {
-    if (!hasVirtualInstance) return;
-
-    // 从可视区域范围中提取前置和后置填充值
-    const { padFront, padBehind } = range;
-
-    // 根据滚动方向设置对应的填充样式
-    wrapperStyle =
-      (virtual?.isVertical() ?? true)
-        ? `padding: ${padFront}px 0 ${padBehind}px` // 垂直方向：上下填充
-        : `padding: 0 ${padBehind}px 0 ${padFront}px`; // 水平方向：左右填充
-  });
+  const getItemKey = (item: Record<string, any>, index: number) => {
+    // 边界检查：计算绝对索引，防止越界
+    const absoluteIndex = Math.min(range.start + index, list.length - 1);
+    const safeIndex = Math.max(0, absoluteIndex);
+    // 生成唯一标识：支持字符串字段名和函数两种方式
+    return String(isString(dataKey) ? item[dataKey] : dataKey(item, safeIndex));
+  };
 
   /**
-   * 虚拟列表配置和数据同步副作用
-   * 处理数据源变化、滚动定位和配置参数更新
+   * 智能数据同步效应
+   * 响应式监听数据变化，自动更新虚拟列表配置和滚动位置
+   * @description 当list、keeps等关键属性变化时，自动同步虚拟核心配置并处理滚动定位
    */
   $effect(() => {
     if (!hasVirtualInstance) return;
 
-    // 数据源变化处理：同步新的数据源到虚拟列表实例
-    virtual.syncDataSources(list);
-    // 更新唯一标识列表，用于优化渲染性能
-    virtual.core.updateParam('uniqueIds', virtual.getUniqueIdFromDataSources());
+    // 更新配置
+    virtualCore.updateOptions({
+      totalCount: list.length,
+      keeps,
+      headerSize,
+      footerSize,
+      estimateSize,
+      thresholdTop,
+      thresholdBottom,
+    });
 
-    // 滚动定位逻辑：优先处理索引定位，其次处理偏移量定位
-    if (scrollToIndex !== undefined) {
-      virtual.scrollToIndex(scrollToIndex); // 滚动到指定索引位置
-    } else if (scrollToOffset !== undefined) {
-      virtual.scrollToOffset(scrollToOffset); // 滚动到指定偏移量位置
+    // 滚动定位
+    if (scrollToIndex !== undefined && scrollElement) {
+      scrollElement.scrollTop = virtualCore.getOffsetByIndex(scrollToIndex);
+    } else if (scrollToOffset !== undefined && scrollElement) {
+      scrollElement.scrollTop = scrollToOffset;
     }
-
-    // 配置参数更新：同步最新的配置到虚拟列表核心
-    virtual.core.updateParam('keeps', keeps); // 更新保持渲染项数
-    virtual.setTopThreshold(thresholdTop); // 更新顶部预渲染阈值
-    virtual.setBottomThreshold(thresholdBottom); // 更新底部预渲染阈值
   });
 
-  /**
-   * 可视区域范围变化监听副作用
-   * 当可视区域范围发生变化时，触发外部回调函数
-   */
-  $effect(() => {
-    onRangeChange?.(range);
-  });
-
-  /**
-   * 虚拟列表初始化
-   */
   onMount(() => {
     if (!scrollElement) return;
-    // 创建虚拟列表核心实例，传入配置参数
-    virtual = new Virtual({
-      dataSources: list, // 数据源
-      keeps, // 保持渲染项数
-      direction, // 滚动方向
-      dataKey, // 数据键
-      topThreshold: thresholdTop, // 顶部阈值
-      bottomThreshold: thresholdBottom, // 底部阈值
-      slotHeaderSize: headerSize, // 头部插槽尺寸
-      slotFooterSize: footerSize, // 尾部插槽尺寸
-      estimateSize, // 预估尺寸
-      scrollElement, // 滚动容器元素
-      shepherdElement, // 关联滚动元素
-    });
-    // 可视区域范围更新处理函数
-    const handleRangeUpdate = (newRange: VirtualCoreRange) => {
-      range = newRange;
-    };
 
-    // 监听可视区域范围同步事件
-    virtual.eventEmitter.on('syncRange', handleRangeUpdate);
-    // 添加滚动事件监听器
-    scrollElement.addEventListener('scroll', onScroll);
-    // 获取初始可视区域范围
-    range = virtual.core.getRange();
-    // 标记虚拟列表实例已创建
+    // 创建虚拟核心实例
+    virtualCore = new VirtualCore(
+      {
+        keeps,
+        estimateSize,
+        headerSize,
+        footerSize,
+        totalCount: list.length,
+        thresholdTop,
+        thresholdBottom,
+      },
+      (newRange) => {
+        console.log('Range:', JSON.stringify(newRange));
+        onRangeChange?.(newRange);
+        range = newRange;
+      },
+      onScrollToTop,
+      onScrollToBottom
+    );
+
+    // 设置滚动元素引用
+    virtualCore.setScrollElement(scrollElement);
+
+    // 添加滚动监听
+    scrollElement.addEventListener('scroll', onScroll, { passive: true });
+
     hasVirtualInstance = true;
-    // 清理函数：移除事件监听器并销毁实例
+
     return () => {
-      virtual.eventEmitter.off('syncRange', handleRangeUpdate);
       scrollElement?.removeEventListener('scroll', onScroll);
-      virtual.destroy();
+      virtualCore?.destroy();
       hasVirtualInstance = false;
     };
   });
 
   /**
-   * 列表项尺寸变化更新逻辑
-   * 检测并记录列表项元素的尺寸变化
-   * @param node - 列表项DOM元素
-   * @param id - 列表项唯一标识
+   * 滚动到列表底部
+   * 智能滚动到列表的最底部位置，常用于聊天应用的新消息自动滚动
+   * @description 调用虚拟核心引擎的底部滚动方法，确保滚动位置准确
    */
-  const updateItemResize = (node: HTMLElement, id: string) => {
-    // 根据滚动方向获取对应的尺寸（垂直方向取高度，水平方向取宽度）
-    const newSize = virtual?.isVertical() ? node.offsetHeight : node.offsetWidth;
-    virtual.onItemResized(id, newSize);
-    // 如果尺寸发生变化，更新尺寸信息记录
-    if (sizeChangeInfo[id]?.size !== newSize) {
-      sizeChangeInfo = {
-        ...sizeChangeInfo,
-        [id]: { id, size: Number(newSize.toFixed(2)) }, // 保留两位小数精度
-      };
+  export const scrollToBottom = () => {
+    // 安全检查：确保虚拟实例已初始化
+    if (hasVirtualInstance) {
+      // 调用核心引擎：执行智能底部滚动
+      virtualCore.scrollToBottom();
     }
   };
 
   /**
-   * 列表项尺寸监听动作实现
-   * 使用ResizeObserver监听列表项元素尺寸变化，优化虚拟列表渲染性能
-   * @param node - 要监听的DOM元素
-   * @param id - 元素的唯一标识
-   * @param updateCallback - 更新回调
-   * @returns 返回包含update和destroy方法的动作对象
+   * 元素尺寸监听动作 - 性能优化版本
+   * @param {HTMLElement} node - 要监听的DOM元素
+   * @param {number }index
+   * @returns {ActionReturn} Svelte动作返回对象
+   *
+   * @description 高性能的虚拟列表项尺寸监听动作，专为大数据量场景优化
    */
-  export const onItemResize: VirtualListResizeAction = (
-    node: HTMLElement,
-    id: string,
-    updateCallback?: (node: HTMLElement, id: string) => void
-  ) => {
-    // 尺寸更新处理函数
-    const update = () => {
-      updateItemResize(node, id);
-      updateCallback?.(node, id);
-    };
-    // 创建ResizeObserver实例监听元素尺寸变化
-    const observer = new ResizeObserver(update);
+  export const onItemResize: VirtualListResizeAction = (node: HTMLElement) => {
+    let isDestroyed = false;
 
-    update(); // 执行初始测量
-    observer.observe(node); // 开始监听元素
+    /**
+     * 更新元素尺寸
+     */
+    const update = () => {
+      if (isDestroyed || !hasVirtualInstance || !scrollElement || !node || !document.contains(node))
+        return;
+
+      const size = direction === 'vertical' ? node.offsetHeight : node.offsetWidth;
+      const dataIndex = node.getAttribute('data-index');
+      if (!dataIndex) return;
+      const index = Number(dataIndex);
+      virtualCore.updateItemSize(Math.max(0, Math.min(index, list.length)), size, scrollElement);
+    };
+
+    /**
+     * ResizeObserver回调
+     */
+    const observer = new ResizeObserver(() => {
+      if (!isDestroyed) {
+        update();
+      }
+    });
+
+    // 初始化
+    update();
+    observer.observe(node);
+
+    /**
+     * 清理资源
+     */
+    const cleanup = () => {
+      isDestroyed = true;
+      observer.disconnect();
+    };
 
     return {
-      // 更新方法：当元素ID发生变化时调用
-      update: (newId: string) => {
-        delete sizeChangeInfo[id]; // 删除旧ID的尺寸信息
-        id = newId; // 更新ID
-        update(); // 重新测量
+      update: () => {
+        if (!isDestroyed) {
+          update();
+        }
       },
-      // 销毁方法：清理监听器和尺寸信息
-      destroy: () => {
-        delete sizeChangeInfo[id]; // 删除尺寸信息记录
-        observer.disconnect(); // 断开ResizeObserver连接
-      },
+      destroy: cleanup,
     };
   };
 
   /**
-   * 滚动到列表末尾
-   * 将滚动容器滚动到最后一个子元素位置
+   * 获取列表项的绝对位置
+   * 计算每个元素在虚拟列表中的top偏移量，用于绝对定位渲染
+   * @param offsetIndex - 列表项在当前可见区间中的相对索引
+   * @returns {number} 列表项距离容器顶部的像素偏移量
+   * @description 使用虚拟核心引擎精确计算元素位置，确保渲染位置准确
    */
-  export const scrollToLastChild = () => {
-    scrollElement?.lastChild?.scrollIntoView?.(false);
-  };
+  export const getItemTop = (offsetIndex: number): number => {
+    if (!hasVirtualInstance || !virtualCore) return 0;
 
-  /**
-   * 滚动到指定索引位置
-   * @param index - 目标索引
-   * @param align - 与视窗的对齐方式，类似原生scrollIntoView的block参数
-   *   - 'start': 元素顶部与视窗顶部对齐
-   *   - 'center': 元素中心与视窗中心对齐
-   *   - 'end': 元素底部与视窗底部对齐
-   *   - 'nearest': 选择最近的对齐方式（最小滚动距离）
-   */
-  export const scrollByIndex = (
-    index: number,
-    align: 'start' | 'center' | 'end' | 'nearest' = 'start'
-  ) => {
-    if (!virtual || !scrollElement) return;
-    // 边界检查
-    if (index < 0 || index >= list.length) return;
-
-    // 获取目标元素的偏移量（包含header偏移）
-    const targetOffset = virtual.core.getOffset(index);
-    const clientSize = virtual.getClientSize();
-    const currentOffset = virtual.getOffset();
-
-    // 获取目标元素的实际尺寸
-    let elementSize = virtual.core.getEstimateSize(); // 默认使用预估尺寸
-
-    // 尝试获取目标元素的实际尺寸
-    if (index < list.length) {
-      const item = list[index];
-      const elementId = isString(dataKey) ? item[dataKey] : dataKey(item, index);
-      const actualSize = virtual.core.getSizeById(elementId);
-      if (actualSize !== undefined) {
-        elementSize = actualSize;
-      }
-    }
-
-    let finalOffset = targetOffset;
-
-    switch (align) {
-      case 'start':
-        // 元素顶部与视窗顶部对齐
-        finalOffset = targetOffset;
-        break;
-
-      case 'center':
-        // 元素中心与视窗中心对齐
-        // 计算元素中心点相对于视窗中心的偏移
-        const elementCenter = targetOffset + elementSize / 2;
-        const viewportCenter = clientSize / 2;
-        finalOffset = elementCenter - viewportCenter;
-        break;
-
-      case 'end':
-        // 元素底部与视窗底部对齐
-        finalOffset = targetOffset + elementSize - clientSize;
-        break;
-
-      case 'nearest':
-        // 选择最小滚动距离的对齐方式
-        const elementTop = targetOffset;
-        const elementBottom = targetOffset + elementSize;
-        const viewportTop = currentOffset;
-        const viewportBottom = currentOffset + clientSize;
-
-        // 如果元素已经完全可见，不需要滚动
-        if (elementTop >= viewportTop && elementBottom <= viewportBottom) {
-          return;
-        }
-
-        // 计算到顶部和底部对齐的滚动距离
-        const toStartOffset = targetOffset;
-        const toEndOffset = targetOffset + elementSize - clientSize;
-
-        const startDistance = Math.abs(toStartOffset - currentOffset);
-        const endDistance = Math.abs(toEndOffset - currentOffset);
-
-        // 选择滚动距离最小的方式
-        if (startDistance <= endDistance) {
-          finalOffset = toStartOffset; // start对齐
-        } else {
-          finalOffset = toEndOffset; // end对齐
-        }
-        break;
-    }
-
-    // 确保偏移量在有效范围内
-    const maxOffset = virtual.getScrollSize() - clientSize;
-    finalOffset = Math.max(0, Math.min(finalOffset, maxOffset));
-
-    // 执行滚动
-    virtual.scrollToOffset(finalOffset);
+    // 使用虚拟核心引擎计算元素的top偏移量
+    return virtualCore.getOffsetByIndex(range.start + offsetIndex);
   };
 </script>
 
-<!-- 虚拟列表滚动容器：绑定滚动元素引用，应用样式类和属性 -->
+<!--
+  组件结构说明：
+  - 外层为滚动容器，负责滚动事件监听和可视区域管理
+  - 内部通过条件渲染支持自定义children或默认插槽渲染
+  - 头部、主内容、尾部区域分别对应headerRender、itemChildrenRender/itemRender、footerRender插槽
+  - 主内容区域使用绝对定位实现虚拟化渲染，仅渲染可见区间的列表项
+  - 通过onItemResize动作监听列表项尺寸变化，实现动态高度自适应
+-->
 <div bind:this={scrollElement} class={[tuc('virtual-list'), className]} {...otherProps}>
-  <!-- 内容包装器：应用动态计算的填充样式，实现虚拟滚动效果 -->
-  <div style={wrapperStyle}>
-    <!-- 头部固定区域：当配置了headerRender时渲染头部内容 -->
+  {#if children}
+    {@render children()}
+  {:else}
+    <!-- 头部区域 -->
     {#if headerRender}
       {@render headerRender()}
     {/if}
-
-    <!-- 主要内容区域：根据是否配置mainItemRender决定渲染方式 -->
-    {#if mainItemRender}
-      <!-- 虚拟列表主容器：包含可视区域内的列表项 -->
-      <div class={[tuc('virtual-main')]}>
-        <!-- 遍历可视区域内的数据项，仅渲染当前可见的项 -->
-        {#each list.slice(range.start, range.end + 1) as item, index}
-          <!-- 列表项容器：应用尺寸监听动作，传入项的唯一标识 -->
+    <!-- 内容容器 -->
+    <div class={tuc('virtual-main')} style:--virtual-total-size={`${range.totalHeight}px`}>
+      <!-- 主内容区域 -->
+      {#each currentList as item, index (getItemKey(item, index))}
+        {#if itemChildrenRender}
           <div
-            class={[tuc('virtual-item')]}
-            use:onItemResize={`${item[isString(dataKey) ? dataKey : dataKey(item, index)]}`}
+            class={tuc('virtual-item absolute left-0 w-full')}
+            style={`top: ${getItemTop(index) || 0}px `}
+            data-index={range.start + index}
+            use:onItemResize
           >
-            <!-- 渲染列表项内容：使用mainItemRender函数渲染当前项 -->
-            {@render mainItemRender(item)}
+            {@render itemChildrenRender(item, range.start + index)}
           </div>
-        {/each}
-      </div>
-    {:else}
-      <!-- 自定义内容渲染：当没有配置mainItemRender时，渲染子内容插槽 -->
-      {@render children?.()}
-    {/if}
-
-    <!-- 尾部固定区域：当配置了footerRender时渲染尾部内容 -->
+        {/if}
+        {#if itemRender}
+          {@render itemRender(item, range.start + index)}
+        {/if}
+      {/each}
+    </div>
+    <!-- 尾部区域 -->
     {#if footerRender}
       {@render footerRender()}
     {/if}
-  </div>
+  {/if}
 </div>
 
 <style>
+  @reference "../../../style/daisyui.css";
   @layer components {
     :global(.virtual-list) {
-      @apply overflow-auto;
+      @apply overflow-auto relative will-change-transform;
+      /* 确保滚动容器正确处理溢出内容，禁用浏览器的自动滚动锚定 */
+      overflow-anchor: none;
     }
 
     :global(.virtual-main) {
+      @apply relative h-[var(--virtual-total-size)];
+    }
+
+    :global(.virtual-item) {
+      @apply absolute;
     }
   }
 </style>
