@@ -229,7 +229,7 @@ export class VirtualCore {
         const scrollHeight = this.scrollElement.scrollHeight;
 
         // 确保滚动到最底部
-        this.scrollElement.scrollTop = scrollHeight + 100; // 添加额外偏移确保到底
+        this.scrollElement.scrollTop = scrollHeight;
       });
     });
   }

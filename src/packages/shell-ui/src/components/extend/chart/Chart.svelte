@@ -36,9 +36,6 @@ ShChart 图表组件
 <p>基础折线图</p>
 <ShChart options={lineChartOptions} />
 
-<p>可控制显示的图表</p>
-<ShChart bind:show={chartVisible} options={lineChartOptions} />
-
 <p>自定义样式的图表</p>
 <ShChart
   options={lineChartOptions}
@@ -49,7 +46,7 @@ ShChart 图表组件
 -->
 <script lang="ts" module>
   import type { HTMLAttributes } from 'svelte/elements';
-  import type { ChartOptions } from '@antv/g2';
+  import type { Chart, ChartOptions } from '@antv/g2';
 
   /**
    * 图表组件属性接口
@@ -59,30 +56,30 @@ ShChart 图表组件
   export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
     /** 图表配置选项，支持 @antv/g2 的所有配置参数 */
     options?: ChartOptions;
-    /** 控制图表显示/隐藏状态，支持双向绑定 @default true */
-    show?: boolean;
     /** 内容被加载 **/
     onContentLoaded?: (success: Boolean) => void;
   }
+
+  let AntVChart: typeof Chart | undefined;
 </script>
 
 <script lang="ts">
   import { onMount, onDestroy, tick } from 'svelte';
-  import type { Chart } from '@antv/g2';
+
   import { tuc } from '@istock-shell/util';
 
   // 解构props并设置默认值
   const {
     options = {}, // 图表配置选项，默认为空对象
-    show = true, // 图表显示状态，默认显示
     class: className = '', // 自定义CSS类名（默认空字符串）
     onContentLoaded, // 内容被加载
     ...otherProps // 其他原生div元素属性
   }: ChatProps = $props();
 
   // 响应式状态变量
-  let containerElement: HTMLElement | undefined = $state(); // 图表容器DOM元素引用
-  let chart: Chart | undefined = $state(); // @antv/g2 图表实例
+  let containerElement: HTMLElement | undefined; // 图表容器DOM元素引用
+  let chart: Chart | undefined; // @antv/g2 图表实例
+  let hasChartInstance = $state(false); // 是否有图表实例
   let isInViewport: boolean = $state(false); // 容器元素是否在视口内的状态
 
   /**
@@ -91,7 +88,7 @@ ShChart 图表组件
    * 确保图表始终反映最新的配置状态
    */
   $effect(() => {
-    if (chart) {
+    if (hasChartInstance && chart) {
       chart.options(options); // 更新图表配置选项
       void chart.render(); // 重新渲染图表以应用新配置
     }
@@ -99,13 +96,11 @@ ShChart 图表组件
 
   /**
    * 响应式控制图表显示/隐藏状态
-   * 结合 show 属性和视口可见性来优化性能
    * 只有当图表需要显示且在视口内时才真正显示图表
    */
   $effect(() => {
-    if (chart) {
-      // 同时满足显示条件和视口可见性才显示图表，否则隐藏以节省性能
-      show && isInViewport ? chart.show() : chart.hide();
+    if (hasChartInstance && chart) {
+      isInViewport ? chart.show() : chart.hide();
     }
   });
 
@@ -119,21 +114,25 @@ ShChart 图表组件
   onMount(async () => {
     await tick(); // 等待DOM更新完成
     try {
-      const { Chart: AntVChart } = await import('@antv/g2');
+      if (!AntVChart) {
+        AntVChart = (await import('@antv/g2')).Chart;
+      }
       // 创建交叉观察器实例，用于监听容器元素的视口可见性
       observer = new IntersectionObserver(
         (entries) => {
-          // 更新容器元素是否在视口内的状态
-          isInViewport = entries[0].isIntersecting;
-          if (!chart) {
+          if (!chart && AntVChart) {
             // 延迟创建图表实例，只有当容器首次进入视口时才创建
             chart = new AntVChart({
               container: containerElement, // 指定图表渲染的容器元素
             });
+            hasChartInstance = true;
           }
+          // 更新容器元素是否在视口内的状态
+          isInViewport = entries[0].isIntersecting;
         },
         {
-          threshold: 0.15, // 当容器15%的区域可见时触发回调，平衡性能和用户体验
+          rootMargin: '500px', // 当离视口相距500px就触发交叉回调
+          threshold: 0.0,
         }
       );
 

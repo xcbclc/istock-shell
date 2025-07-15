@@ -91,7 +91,13 @@ ShVirtualTable 虚拟表格组件
   }: VirtualTableProps = $props();
 
   /** 当前可视区域范围状态，用于跟踪渲染区间 */
-  let range: VirtualCoreRange | undefined = $state();
+  let range: VirtualCoreRange = $state({
+    start: 0,
+    end: 0,
+    totalHeight: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+  });
 
   /** 表头高度状态，用于虚拟列表头部占位，确保滚动时表头位置正确 */
   let headerSize: number = $state(0);
@@ -112,7 +118,19 @@ ShVirtualTable 虚拟表格组件
   /** 当前可见区间的tbody数据，用于表格渲染，仅包含可视区域内的行数据 */
   const rangeTbody = $derived.by(() => {
     // 根据可视区域范围切片原始数据，实现虚拟化渲染
-    return tbody.slice(range?.start ?? 0, (range?.end ?? 0) + 1);
+    return tbody.slice(range.start, range.end + 1);
+  });
+
+  /**
+   * 获取内容容器样式
+   */
+  const wrapStyle = $derived.by(() => {
+    if (range && virtualList) {
+      const height = `${range.totalHeight}px`;
+      const padding = `${range.paddingTop}px 0 ${range.paddingBottom}px 0`;
+      return `height: ${height}; padding: ${padding}`;
+    }
+    return '';
   });
 
   /**
@@ -128,11 +146,9 @@ ShVirtualTable 虚拟表格组件
    * 列表项尺寸变化回调函数
    * 当表格行高度变化时通知虚拟列表重新计算
    * @param node - 表格行DOM元素
-   * @param index - 行索引
    */
-  const onItemResize = (node: HTMLElement, index: number) => {
-    const id = list[index]?.id; // 获取当前行的唯一标识符
-    virtualList?.onItemResize(node, id); // 调用虚拟列表的尺寸更新方法，保持滚动位置准确性
+  const onItemResize = (node: HTMLElement) => {
+    virtualList?.onItemResize(node); // 调用虚拟列表的尺寸更新方法
   };
 
   /**
@@ -155,15 +171,8 @@ ShVirtualTable 虚拟表格组件
   - 内部通过 ShTable 渲染当前可见区间的表格行
   - 通过 onRangeChange、onRender、onSyncAreaHeight 实现联动与自适应
 -->
-<ShVirtualList
-  bind:this={virtualList}
-  {list}
-  {onRangeChange}
-  {headerSize}
-  thresholdTop={40}
-  class="w-full max-h-160"
->
-  {#if range}
+<ShVirtualList bind:this={virtualList} {list} {onRangeChange} {headerSize} class="w-full max-h-160">
+  <div class="virtual-main" style={wrapStyle}>
     <ShTable
       {...tableProps}
       tbody={rangeTbody}
@@ -172,5 +181,5 @@ ShVirtualTable 虚拟表格组件
       onRender={onItemResize}
       {onSyncAreaHeight}
     />
-  {/if}
+  </div>
 </ShVirtualList>

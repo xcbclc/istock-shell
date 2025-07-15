@@ -237,6 +237,7 @@ ShTableRow 表格行组件
 <tr
   use:render
   {...otherProps}
+  data-index={dataIndex}
   class={[
     hover ? tuc('hover:bg-base-300') : '',
     selectValue && selected.includes(selectValue) ? tuc('bg-base-300') : '',

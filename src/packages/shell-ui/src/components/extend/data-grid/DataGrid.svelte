@@ -98,8 +98,11 @@ ShDataGrid 数据网格组件
     /** 数据项列的宽度，支持数字（像素）或字符串（CSS 单位） @default 480 */
     itemColWidth?: number | string;
     /** 内容被加载 **/
-    onContentLoaded?: (success: Boolean) => void;
+    onContentLoaded?: () => void;
   }
+
+  // 组件缓存对象，用于存储已加载的异步组件，避免重复加载
+  const componentRecord: Record<string, Component<Record<string, any>>> = {};
 </script>
 
 <script lang="ts">
@@ -113,8 +116,7 @@ ShDataGrid 数据网格组件
     onContentLoaded, // 内容被加载回调
   }: DataGridProps = $props();
 
-  // 组件缓存对象，用于存储已加载的异步组件，避免重复加载
-  const componentRecord: Record<string, Component<Record<string, any>>> = {};
+  let contentLoadedCount: number = $state(0);
 
   /**
    * 异步加载组件函数
@@ -142,6 +144,17 @@ ShDataGrid 数据网格组件
     componentRecord[name] = component;
     return component;
   };
+
+  /**
+   * 组件内容加载完成回调
+   * @param _loaded
+   */
+  const onGirdContentLoaded = (_loaded: boolean) => {
+    contentLoadedCount++;
+    if (items.length === contentLoadedCount) {
+      onContentLoaded?.();
+    }
+  };
 </script>
 
 <!-- 数据网格主容器：应用基础样式类，提供完整的网格布局结构 -->
@@ -163,18 +176,24 @@ ShDataGrid 数据网格组件
 
       <!-- 判断组件类型：字符串类型需要异步加载，组件类型直接渲染 -->
       {#if isString(component)}
-        <!-- 异步加载组件：显示加载状态、成功渲染或错误处理 -->
-        {#await getAsyncComponent(component)}
-          <div class={tuc('skeleton h-4 w-full')}></div>
-        {:then Component}
-          <!-- 加载成功：渲染组件并传递所有属性 -->
-          <Component {...itemProps} />
-          {onContentLoaded?.(true)}
-        {:catch error}
-          <!-- 加载失败：显示错误信息组件 -->
-          <ShErrorInfo description={error.message} />
-          {onContentLoaded?.(false)}
-        {/await}
+        {#if componentRecord[component]}
+          {@const Component = componentRecord[component]}
+          <Component {...itemProps} onContentLoaded={onGirdContentLoaded} />
+          {@render onContentLoadedRender(component, true)}
+        {:else}
+          <!-- 异步加载组件：显示加载状态、成功渲染或错误处理 -->
+          {#await getAsyncComponent(component)}
+            <div class={tuc('skeleton h-4 w-full')}></div>
+          {:then Component}
+            <!-- 加载成功：渲染组件并传递所有属性 -->
+            <Component {...itemProps} onContentLoaded={onGirdContentLoaded} />
+            {@render onContentLoadedRender(component, true)}
+          {:catch error}
+            <!-- 加载失败：显示错误信息组件 -->
+            <ShErrorInfo description={error.message} />
+            {@render onContentLoadedRender(component, false)}
+          {/await}
+        {/if}
       {:else}
         <!-- 直接组件渲染：使用 svelte:component 动态渲染组件 -->
         <svelte:component this={component} {...itemProps} />
@@ -182,6 +201,9 @@ ShDataGrid 数据网格组件
     {/each}
   </div>
 </div>
+{#snippet onContentLoadedRender(component: string, success: boolean)}
+  {#if !['ShMarkdown', 'ShChart', 'ShDataGrid'].includes(component)}onGirdContentLoaded?.(success){/if}
+{/snippet}
 
 <style>
   @reference "../../../style/daisyui.css";

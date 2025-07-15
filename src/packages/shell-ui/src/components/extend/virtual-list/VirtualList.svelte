@@ -266,7 +266,7 @@ ShVirtualList 虚拟列表组件
   let range: VirtualRange = $state({
     start: 0,
     end: 0,
-    totalHeight: 0,
+    totalHeight: estimateSize * list.length,
     paddingTop: 0,
     paddingBottom: 0,
   });
@@ -283,7 +283,7 @@ ShVirtualList 虚拟列表组件
    * 滚动事件处理函数
    * 处理滚动容器的滚动事件，更新虚拟列表的渲染范围和状态
    * @param _event - 滚动事件对象
-   * @description 核心滚动处理逻辑，负责计算可视区域并触发虚拟渲染更新
+   * @description 核心滚动处理逻辑，负责计算可视区域并触发虚拟渲染更新，限制鼠标拖动滚动条的滚动行为
    */
   const onScroll = (_event: Event) => {
     // 安全检查：确保虚拟实例和滚动元素已初始化
@@ -355,7 +355,6 @@ ShVirtualList 虚拟列表组件
         thresholdBottom,
       },
       (newRange) => {
-        console.log('Range:', JSON.stringify(newRange));
         onRangeChange?.(newRange);
         range = newRange;
       },

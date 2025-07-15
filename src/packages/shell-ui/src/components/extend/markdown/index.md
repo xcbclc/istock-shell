@@ -87,7 +87,7 @@ npm install @istock-shell/ui
 ## 示例演示
 
 <IStockShellUiExample src="./example/MarkdownDefault.svelte" raw="false"></IStockShellUiExample>
-<IStockShellUiExample src="./example/MarkdownLive.svelte" layout="column"></IStockShellUiExample>
+<IStockShellUiExample src="./example/MarkdownLive.svelte" layout="column" raw="false"></IStockShellUiExample>
 
 ## API 参考
 
