@@ -15,7 +15,8 @@ export const getCmdOutputLoadingData = (): OutputStoreComponentInfo => {
   return {
     component: 'ShLoading',
     props: {
-      type: 'Loading',
+      shape: 'dots',
+      style: 'margin: 1em auto;display: block;',
     },
     messageId: '',
   };

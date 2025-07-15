@@ -24,7 +24,7 @@ export interface OutputStoreComponentInfo {
 }
 
 export interface OutputStoreDataItem {
-  id: string | number;
+  id: string;
   promptTexts: PromptStoreDataText[];
   input: string; // 输入
   output: OutputStoreComponentInfo[];
@@ -35,7 +35,19 @@ export interface OutputStoreModel {}
 
 export class Output extends StoreContext<OutputStoreModel> {
   public list: OutputStoreList = $state([]);
-  public historyIndex: number = -1;
+  public historyIndex: number = $state(-1);
+  public loading: boolean = $state(false);
+  public readonly count: number = $derived.by(() => this.list.length);
+  public readonly last: OutputStoreDataItem | undefined = $derived.by(() => {
+    if (!this.list.length) return;
+    return this.list[this.list.length - 1];
+  });
+  public readonly componentCount: number = $derived.by(() => {
+    if (!this.list.length) return 0;
+    return this.list.reduce((count, item) => {
+      return count + item.output.length;
+    }, 0);
+  });
   constructor(ctx: CmdWindowContext, config: StoreConfig<OutputStoreModel> = {}) {
     super(ctx, config);
     this.storeEffect = createStoreEffects({});
@@ -50,13 +62,17 @@ export class Output extends StoreContext<OutputStoreModel> {
     input = input.trim();
     if (!input) return;
     const { prompt } = this.ctx.store;
-    // 初始化命令数据
-    const lastOutput: OutputStoreDataItem = getCmdOutputInit(this.ctx.cmdWindow.getNextId(), input, prompt.promptTexts);
-    lastOutput.output = [getCmdOutputLoadingData()]; // 添加loading
-    this.list.push(lastOutput);
-    this.historyIndex = -1;
-
     try {
+      this.loading = true;
+      // 初始化命令数据
+      const lastOutput: OutputStoreDataItem = getCmdOutputInit(
+        this.ctx.cmdWindow.getNextId(),
+        input,
+        prompt.promptTexts
+      );
+      lastOutput.output = [getCmdOutputLoadingData()]; // 添加loading
+      this.list.push(lastOutput);
+      this.historyIndex = -1;
       await sendCmdExecutionFlow(this, input);
     } catch (e) {
       console.error(e);
@@ -68,8 +84,8 @@ export class Output extends StoreContext<OutputStoreModel> {
       // 关闭loading
       lastOutput.output = lastOutput.output.filter((data) => !isCmdOutputLoadingData(data));
       this.list[lastIndex] = lastOutput;
-      lastOutput.source = 'db';
       await this.saveCmdToHistory(lastOutput, prompt.data);
+      this.loading = false;
     }
   }
 

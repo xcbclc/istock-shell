@@ -33,6 +33,9 @@ export const themeStoreOptions: ThemeOption[] = [
   { label: '暗淡 (Dim)', value: 'dim' },
   { label: '北欧 (Nord)', value: 'nord' },
   { label: '日落 (Sunset)', value: 'sunset' },
+  { label: '焦糖拿铁 (Caramellatte)', value: 'caramellatte' },
+  { label: '深渊 (Abyss)', value: 'abyss' },
+  { label: '丝绸 (Silk)', value: 'silk' },
 ];
 
 export const themeStoreVars: string[] = [

@@ -15,7 +15,7 @@ export interface PromptStoreDataDomain {
 
 export interface PromptStoreData {
   time: string;
-  username: string;
+  nickname: string;
   app: string;
   domains: PromptStoreDataDomain[];
   split: string;
@@ -28,7 +28,7 @@ export const getPromptTexts = (data?: PromptStoreData): PromptStoreDataText[] =>
   const domain = ['', data.app, ...data.domains.map((d) => d.viewName)];
   return [
     { text: dayjs(data.time).format('HH:mm:ss') || '', type: 'time' },
-    { text: data.username, type: 'username' },
+    { text: data.nickname, type: 'nickname' },
     { text: domain.join('/'), type: 'path' },
     { text: data.split, type: 'split' },
   ];
@@ -38,26 +38,25 @@ export class Prompt extends StoreContext<PromptStoreData> {
   #timeoutId?: number;
   public data: PromptStoreData = $state({
     time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    username: '',
+    nickname: '',
     app: 'IS',
     domains: [],
     split: '$',
   });
-  public promptTexts: PromptStoreDataText[] = $derived.by(() => {
-    const domain = ['', this.data.app, ...this.data.domains.map((d) => d.viewName)];
-    return [
-      { text: dayjs(this.data.time).format('HH:mm:ss') || '', type: 'time' },
-      { text: this.data.username, type: 'username' },
-      { text: domain.join('/'), type: 'path' },
-      { text: this.data.split, type: 'split' },
-    ];
+  public readonly promptTexts: PromptStoreDataText[] = $derived.by(() => {
+    return getPromptTexts(this.data);
   });
   readonly #promptToken: string = $derived.by(() => {
     return `${LOCAL_STORE_PROMPT_DOMAINS}_${this.ctx.windowId}`;
   });
   constructor(ctx: CmdWindowContext, config: StoreConfig<PromptStoreData> = {}) {
     super(ctx, config);
-    this.storeEffect = createStoreEffects({});
+    this.storeEffect = createStoreEffects({
+      nameChange: () => {
+        const { nickname, username } = ctx.cmdWindow.store.user.data;
+        this.data.nickname = nickname || username;
+      },
+    });
   }
   protected async init() {
     const localDomain = sessionStorage.getItem(this.#promptToken);
@@ -77,7 +76,7 @@ export class Prompt extends StoreContext<PromptStoreData> {
     const updateEffect = () => {
       // 直接更新属性而不是替换整个对象，以确保$derived.by能够正确追踪变化
       this.data.time = dayjs().format('YYYY-MM-DD HH:mm:ss');
-      this.#timeoutId = setTimeout(updateEffect, 1000);
+      this.#timeoutId = window.setTimeout(updateEffect, 1000);
     };
     updateEffect(); // 立即执行一次
   }

@@ -58,7 +58,7 @@ ShVirtualTable 虚拟表格组件
     ShVirtualList,
     ShTable,
     type TableProps,
-    type VirtualCoreRange,
+    type VirtualRange,
     type TableArea,
   } from '../../index';
 
@@ -91,7 +91,7 @@ ShVirtualTable 虚拟表格组件
   }: VirtualTableProps = $props();
 
   /** 当前可视区域范围状态，用于跟踪渲染区间 */
-  let range: VirtualCoreRange = $state({
+  let range: VirtualRange = $state({
     start: 0,
     end: 0,
     totalHeight: 0,
@@ -138,7 +138,7 @@ ShVirtualTable 虚拟表格组件
    * 当用户滚动时触发，更新当前可见范围
    * @param newRange - 新的可视区域范围信息
    */
-  const onRangeChange = (newRange: VirtualCoreRange) => {
+  const onRangeChange = (newRange: VirtualRange) => {
     range = newRange; // 更新当前可见范围，触发表格重新渲染可见行
   };
 

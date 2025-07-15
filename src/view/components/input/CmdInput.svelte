@@ -5,7 +5,7 @@
 </script>
 
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import { getQueryParam, ScopeError } from '@istock-shell/util';
   import { shShowMessage } from '@istock-shell/ui';
   import {
@@ -13,7 +13,6 @@
     CommandEditorEventNames,
     type CommandEditorRecommendCmdData,
     type CommandEditorCustomEvent,
-    type CommandEditorRecommendCmdEvent,
   } from '@istock-shell/editor';
   import { CmdWindowsManager } from '@/window';
   import { RecommendStoreType, type RecommendStoreModel } from '@/store';
@@ -82,14 +81,6 @@
     commandEditor.commandInput.addEventListener(CommandEditorEventNames.SendCmd, onSendCmd);
     commandEditor.commandInput.addEventListener(CommandEditorEventNames.RecommendCmd, onRecommendCmd);
 
-    return () => {
-      commandEditor.commandInput.removeEventListener(CommandEditorEventNames.SendCmd, onSendCmd);
-      commandEditor.commandInput.removeEventListener(CommandEditorEventNames.RecommendCmd, onRecommendCmd);
-      commandEditor && commandEditor.destroy();
-    };
-  });
-
-  $effect(() => {
     if (ctx.cmdWindow.isDemoMode && ctx.isInitialized) {
       // demo演示逻辑
       let cmd = getQueryParam('cmd');
@@ -98,6 +89,12 @@
       commandEditor.handleCommandInput(cmd, cmd);
       input.sendCmd(cmd);
     }
+
+    return () => {
+      commandEditor.commandInput.removeEventListener(CommandEditorEventNames.SendCmd, onSendCmd);
+      commandEditor.commandInput.removeEventListener(CommandEditorEventNames.RecommendCmd, onRecommendCmd);
+      commandEditor && commandEditor.destroy();
+    };
   });
 </script>
 

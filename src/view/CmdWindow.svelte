@@ -18,7 +18,7 @@
   const onMouseenter = () => {
     cmdWindow.store.windowView.currentFocusWindowId = windowId;
   };
-  
+
   onMount(() => {
     ctx.start();
     return () => ctx.destroy();

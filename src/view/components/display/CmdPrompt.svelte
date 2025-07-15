@@ -33,7 +33,7 @@
 <style>
   @reference "@istock-shell/ui/style";
   .is-username {
-    @apply text-accent font-semibold;
+    @apply text-accent font-medium;
   }
 
   .is-path {

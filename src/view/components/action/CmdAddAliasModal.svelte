@@ -25,10 +25,11 @@
       color: 'primary',
       size: 'sm',
       onclick: async () => {
-        if (!this.form.alias) {
+        if (!cmdAlias.form.alias) {
           return shShowMessage.error('请填写命令别名');
         }
         await cmdAlias.addCmdAlias();
+        shShowMessage.success('命令别名添加成功');
       },
     },
   ];

@@ -13,6 +13,8 @@ export interface ThemeStoreModel extends ModelData<ThemeModel> {}
 
 export const LOCAL_STORE_THEME_TOKEN = 'istock_local_store_theme_token';
 
+export const LOCAL_STORE_THEME_DEMO_TOKEN = 'istock_local_store_theme_demo_token';
+
 export class Theme extends StoreWindow<ThemeStoreModel> {
   readonly #defaultThemeName = 'business';
   public name: string = $state('');
@@ -36,7 +38,8 @@ export class Theme extends StoreWindow<ThemeStoreModel> {
     );
   }
   protected async init() {
-    this.name = localStorage.getItem(LOCAL_STORE_THEME_TOKEN) || '';
+    this.name =
+      localStorage.getItem(this.cmdWindow.isDemoMode ? LOCAL_STORE_THEME_DEMO_TOKEN : LOCAL_STORE_THEME_TOKEN) || '';
     this.storeEffect = createStoreEffects({
       themeNameChange: () => {
         if (this.name) {

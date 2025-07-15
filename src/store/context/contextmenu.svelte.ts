@@ -1,29 +1,17 @@
 import type { CmdWindowContext } from '@/window';
 import { createStoreEffects, type StoreConfig, StoreContext } from '@/store';
+import {
+  contextmenuStoreList,
+  ContextmenuStoreCopy,
+  ContextmenuStoreSplit,
+  ContextmenuStoreOther,
+} from './data/contextmenu-data';
+
+export { ContextmenuStoreCopy, ContextmenuStoreSplit, ContextmenuStoreOther } from './data/contextmenu-data';
 
 export interface ContextmenuStorePosition {
   window: { width: number; height: number };
   offset: { x: number; y: number };
-}
-
-export enum ContextmenuStoreCopy {
-  input = 'input',
-  output = 'output',
-  prompt = 'prompt',
-  link = 'link',
-  all = 'all',
-}
-
-export enum ContextmenuStoreSplit {
-  up = 'up',
-  right = 'right',
-  down = 'down',
-  left = 'left',
-}
-
-export enum ContextmenuStoreOther {
-  addCmdAlias = 'addCmdAlias',
-  bookmark = 'bookmark',
 }
 
 export type ContextmenuStoreAction = ContextmenuStoreCopy | ContextmenuStoreSplit | ContextmenuStoreOther;
@@ -42,12 +30,18 @@ export interface ContextmenuStoreItem {
 }
 export type ContextmenuStoreList = ContextmenuStoreItem[];
 
-export class Contextmenu extends StoreContext<ContextmenuStoreModel> {
-  public list: ContextmenuStoreList = $state([]);
-  public position: ContextmenuStorePosition = $state({
+export const getInitPosition = () => {
+  return {
     window: { width: 0, height: 0 },
     offset: { x: -1, y: -1 },
-  });
+  };
+};
+
+export class Contextmenu extends StoreContext<ContextmenuStoreModel> {
+  public list: ContextmenuStoreList = $state(contextmenuStoreList);
+  public position: ContextmenuStorePosition = $state(getInitPosition());
+  public hoverBlockIndex: number = $state(-1);
+  public show: boolean = $state(false);
   constructor(ctx: CmdWindowContext, config: StoreConfig<ContextmenuStoreModel> = {}) {
     super(ctx, config);
   }

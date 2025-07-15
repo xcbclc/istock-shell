@@ -28,7 +28,7 @@ export class UserController {
         label: field,
         field: {
           type: 'input',
-          placeholder: '请输入账号',
+          placeholder: '请输入账号，如：daoyou',
           description: '仅支持账号和手机号登录',
           required: true,
         },
@@ -41,7 +41,7 @@ export class UserController {
         field: {
           type: 'input',
           inputType: 'password',
-          placeholder: '请输入密码',
+          placeholder: '请输入密码，如：Dy123123',
           description: '密码必须包含大小写字母和数字，至少8位',
           validator: {
             required: true,

@@ -33,6 +33,10 @@ export class HistoryController {
       ['port', 'eq', String(port)],
       ['rowStatus', 'eq', 1],
     ];
+    query.sort = {
+      field: 'createDate',
+      order: 'ASC',
+    };
     return await this.historyService.find(query);
   }
 

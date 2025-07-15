@@ -6,7 +6,7 @@ import cmdJson, { EDataType } from './sshqsj.cmd';
 
 @Controller({
   alias: 'sshqsj',
-  component: { name: 'ShTable' },
+  component: { name: 'ShVirtualTable' },
 })
 export class SshqsjController {
   constructor(private readonly sshqsjService: SshqsjService) {}

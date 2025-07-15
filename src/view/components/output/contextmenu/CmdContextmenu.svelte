@@ -46,27 +46,25 @@
   onmouseleave={() => onMouseStatus?.(false)}
   role="menu"
 >
-  {#if list}
-    <ul class="py-2 border border-base-300/80 bg-base-200 shadow-md rounded-md max-w-md overflow-hidden">
-      {#each list as item, index}
-        {#each item.menus as menu}
-          <li
-            onclick={() => onMenuClick?.(menu)}
-            class="flex flex-nowrap items-center content-center gap-2 px-2 py-1 cursor-pointer hover:bg-base-300 active:bg-base-300 transition-colors"
-            role="menuitem"
-          >
-            <span class="flex-1 text-sm">{menu.text}</span>
-            {#if menu.shortcutKey}
-              <ShKbd size="sm">
-                {menu.shortcutKey}
-              </ShKbd>
-            {/if}
-          </li>
-        {/each}
-        {#if index < list.length - 1 && item.menus.length}
-          <li class="border-top border-base-300"></li>
-        {/if}
+  <ul class="py-2 border border-base-300/80 bg-base-200 shadow-md rounded-md max-w-md overflow-hidden">
+    {#each list as item, index}
+      {#each item.menus as menu}
+        <li
+          onclick={() => onMenuClick?.(menu)}
+          class="flex flex-nowrap items-center content-center gap-2 px-2 py-1 cursor-pointer hover:bg-base-300 active:bg-base-300 transition-colors"
+          role="menuitem"
+        >
+          <span class="flex-1 text-xs">{menu.text}</span>
+          {#if menu.shortcutKey}
+            <ShKbd size="xs">
+              {menu.shortcutKey}
+            </ShKbd>
+          {/if}
+        </li>
       {/each}
-    </ul>
-  {/if}
+      {#if index < list.length - 1 && item.menus.length}
+        <li class="border-top border-base-300"></li>
+      {/if}
+    {/each}
+  </ul>
 </div>

@@ -2,7 +2,7 @@ import type { ModelData } from '@istock-shell/iswork';
 import { sleep } from '@istock-shell/util';
 import type { CmdWindowContext } from '@/window';
 import type { HistoryModel } from '@domains/global/history/history.model';
-import { createStoreEffects, type StoreConfig, StoreContext } from '@/store';
+import { createStoreEffects, type OutputStoreList, type StoreConfig, StoreContext } from '@/store';
 
 export interface HistoryStoreModel extends ModelData<HistoryModel> {}
 export interface HistoryStoreData extends HistoryStoreModel {}
@@ -18,7 +18,7 @@ export class History extends StoreContext<HistoryStoreModel> {
       await this.getList();
     }
     // todo 后续同步数据
-    this.ctx.store.output.list = $state.snapshot(this.list);
+    this.ctx.store.output.list = $state.snapshot(this.list) as OutputStoreList;
   }
   async getList() {
     const { payload } = await this.ctx.message.send<HistoryStoreList>('global', 'history.list', {});
@@ -31,7 +31,7 @@ export class History extends StoreContext<HistoryStoreModel> {
     if (success) {
       await sleep();
       await this.getList();
-      this.ctx.store.output.list = $state.snapshot(this.list);
+      this.ctx.store.output.list = $state.snapshot(this.list) as OutputStoreList;
     }
   }
 }

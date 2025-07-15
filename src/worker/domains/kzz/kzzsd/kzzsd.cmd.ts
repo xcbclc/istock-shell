@@ -1,7 +1,7 @@
 const cmdRoute = {
   name: '可转债双低',
   cmd: 'kzzsd',
-  usage: 'kzzsd',
+  usage: 'kzzsd -sdtj [双低条件] -ldzq [轮动周期]',
   options: {
     sdtj: {
       name: 'sdtj',
