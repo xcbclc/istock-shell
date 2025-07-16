@@ -35,7 +35,7 @@
   ];
 </script>
 
-<ShModal show={cmdAlias.modal.show} title={cmdAlias.modal.title} {actions} maskClosable={true} size="md">
+<ShModal bind:show={cmdAlias.modal.show} title={cmdAlias.modal.title} {actions} maskClosable={true} size="md">
   {#snippet contentRender()}
     <ShForm
       bind:values={cmdAlias.form}

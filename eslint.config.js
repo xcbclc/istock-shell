@@ -96,6 +96,7 @@ export default [
       prettier,
     },
     rules: {
+      ...svelte.configs.recommended.rules,
       ...prettierConfig.rules,
       'svelte/valid-compile': 'off',
       '@typescript-eslint/unbound-method': 'off',

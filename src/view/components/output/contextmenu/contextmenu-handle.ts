@@ -30,8 +30,7 @@ export const contextmenuAction = async (
   }
   if (action === ContextmenuStoreOther.addCmdAlias) {
     const { cmdAlias } = ctx.cmdWindow.store;
-    cmdAlias.form.cmd = block.input;
-    cmdAlias.modal.show = true;
+    cmdAlias.openCmdAlias(block.input);
   }
 };
 

@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import type { ModelData, ModelPartialData } from '@istock-shell/iswork';
 import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
 import type { CmdWindow } from '@/window';
@@ -23,7 +24,23 @@ export interface CmdAliasStoreCreateData extends ModelPartialData<CmdAliasModel>
   description: string;
 }
 
+export interface CmdAliasStoreData extends ModelPartialData<CmdAliasModel> {
+  id: string;
+  cmd: string;
+  alias: string;
+  description: string;
+}
+
+export interface CmdAliasStoreDisplayData extends Omit<CmdAliasStoreData, 'updateDate'> {
+  updateDate: string;
+}
+
 export interface CmdAliasStoreModel extends ModelData<CmdAliasModel> {}
+
+export const getUpdateDateDisplay = (updateDate?: string | Date) => {
+  if (!updateDate) return '';
+  return dayjs(updateDate).format('YYYY-MM-DD HH:mm:ss');
+};
 
 export class CmdAlias extends StoreWindow<CmdAliasStoreModel> {
   public modal: CmdAliasStoreModal = $state({
@@ -35,10 +52,15 @@ export class CmdAlias extends StoreWindow<CmdAliasStoreModel> {
     alias: '',
     description: '',
   });
-  public list: CmdAliasStoreModel[] = $state([]);
+  public list: Array<CmdAliasStoreModel | CmdAliasStoreData> = $state([]);
   public editRecord: Record<string, boolean> = $state({});
   protected newTempId: string = $state('');
   public readonly hasAdd: boolean = $derived.by(() => Boolean(this.newTempId));
+  public readonly displayList: CmdAliasStoreDisplayData[] = $derived.by(() => {
+    return this.list.map((item) => {
+      return { ...item, updateDate: getUpdateDateDisplay(item.updateDate) };
+    });
+  });
   public readonly formItems: CmdAliasStoreFormItem[] = [
     { name: 'cmd', label: '命令', field: { disabled: true } },
     { name: 'alias', label: '命令别名' },
@@ -49,6 +71,7 @@ export class CmdAlias extends StoreWindow<CmdAliasStoreModel> {
   }
   protected async init() {
     this.storeEffect = createStoreEffects({});
+    await this.getList();
   }
   openCmdAlias(cmd: string) {
     this.form.cmd = cmd;
@@ -99,5 +122,20 @@ export class CmdAlias extends StoreWindow<CmdAliasStoreModel> {
     }
     const { payload } = await this.cmdWindow.message.send<boolean>('global', 'cmdAlias.delete', id);
     return payload ?? false;
+  }
+  onCmdAlias() {
+    if (this.hasAdd) return;
+    const tempId = this.cmdWindow.getNextId();
+    this.newTempId = tempId;
+    this.editRecord[this.newTempId] = true;
+    this.list.push({
+      id: tempId,
+      cmd: '',
+      alias: '',
+      description: '',
+    });
+  }
+  isCreateData(data: CmdAliasStoreModel | CmdAliasStoreData): data is CmdAliasStoreData {
+    return data.id === this.newTempId;
   }
 }

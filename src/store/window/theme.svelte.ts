@@ -2,11 +2,34 @@ import type { ModelData } from '@istock-shell/iswork';
 import type { ThemeModel } from '@domains/global/setting/theme/theme.model';
 import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
 import type { CmdWindow } from '@/window';
-import { themeStoreOptions, themeStoreVars } from './data/theme-data';
+import { themeStoreOptions, themeStoreVarKeys } from './data/theme-data';
 
 export interface ThemeOption {
   label: string;
   value: string;
+  variables: {
+    'color-scheme': string;
+    '--color-base-100': string;
+    '--color-base-200': string;
+    '--color-base-300': string;
+    '--color-base-content': string;
+    '--color-primary': string;
+    '--color-primary-content': string;
+    '--color-secondary': string;
+    '--color-secondary-content': string;
+    '--color-accent': string;
+    '--color-accent-content': string;
+    '--color-neutral': string;
+    '--color-neutral-content': string;
+    '--color-info': string;
+    '--color-info-content': string;
+    '--color-success': string;
+    '--color-success-content': string;
+    '--color-warning': string;
+    '--color-warning-content': string;
+    '--color-error': string;
+    '--color-error-content': string;
+  };
 }
 
 export interface ThemeStoreModel extends ModelData<ThemeModel> {}
@@ -20,7 +43,7 @@ export class Theme extends StoreWindow<ThemeStoreModel> {
   public name: string = $state('');
   public variables: ThemeStoreModel['variables'] = $state({});
   public options: ThemeOption[] = $state(themeStoreOptions);
-  readonly themeVars: string[] = themeStoreVars;
+  readonly themeVars: string[] = themeStoreVarKeys;
   constructor(cmdWindow: CmdWindow, config: StoreConfig<ThemeStoreModel> = {}) {
     super(
       cmdWindow,

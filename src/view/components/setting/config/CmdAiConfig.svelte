@@ -76,7 +76,7 @@
 </script>
 
 <!-- AI模型配置 -->
-<div class="space-y-8">
+<div class="space-y-4">
   <div class="card bg-base-100 shadow-lg border border-base-300/50">
     <div class="card-body">
       <ShFieldSet title="基础配置" class="space-y-6">

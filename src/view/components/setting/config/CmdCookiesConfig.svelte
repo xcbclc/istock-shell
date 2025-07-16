@@ -36,7 +36,7 @@
     const urlRegex =
       /^(https|http):\/\/(?:([a-zA-Z0-9_-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3}|localhost)(?::\d+)?(?:\/[\w#!:.?+=&%@!$'~*\-]*)?$/;
     if (!data.origin) {
-      shShowMessage.error('请填写地址源');
+      shShowMessage.error('请输入地址源');
       return;
     }
     if (!urlRegex.test(data.origin)) {
@@ -44,7 +44,7 @@
       return;
     }
     if (!data.cookie) {
-      shShowMessage.error('请填写Cookie');
+      shShowMessage.error('请输入Cookie');
       return;
     }
     if (cookieManage.isCreateData(data)) {
@@ -66,7 +66,7 @@
 </script>
 
 <!-- 网站Cookie管理 -->
-<div class="space-y-8">
+<div class="space-y-4">
   <div class="card bg-base-100 shadow-lg border border-base-300/50">
     <div class="card-body">
       <ShFieldSet title="Cookie列表" class="space-y-6">

@@ -1,9 +1,3 @@
-<!--
-  @component AboutConfig 关于应用配置组件
-
-  应用信息和系统信息展示
--->
-
 <script lang="ts" module>
   export interface AboutConfigProps {
     windowId: number;
@@ -11,57 +5,33 @@
 </script>
 
 <script lang="ts">
-  import { ShFieldSet, ShField, ShInput, ShButton, ShIcon } from '@istock-shell/ui';
+  import { ShFieldSet, ShField, ShButton, ShIcon } from '@istock-shell/ui';
+  import { CmdWindowsManager } from '@/window';
 
   let { windowId }: AboutConfigProps = $props();
 
-  // 应用信息
-  const appInfo = {
-    name: 'iStock Shell',
-    version: '1.0.0',
-    description: '一个现代化的终端模拟器和命令行工具',
-    author: 'iStock Shell Team',
-    license: 'MIT',
-    homepage: 'https://github.com/istock-shell/istock-shell',
-    repository: 'https://github.com/istock-shell/istock-shell.git',
-    buildDate: new Date().toLocaleDateString('zh-CN'),
-  };
+  const cmdWindow = CmdWindowsManager.cmdWindowsManager.getCmdWindow();
+  const { shellInfo } = cmdWindow.store;
 
-  // 系统信息
-  const systemInfo = {
-    userAgent: navigator.userAgent,
-    platform: navigator.platform,
-    language: navigator.language,
-    cookieEnabled: navigator.cookieEnabled,
-    onLine: navigator.onLine,
-    screenResolution: `${screen.width}x${screen.height}`,
-    colorDepth: screen.colorDepth,
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  };
+  // 获取应用和系统信息
+  const appInfo = shellInfo.data.projectInfo;
+  const systemInfo = shellInfo.data.systemInfo;
 
-  // 打开链接
+  // 工具函数
   const openLink = (url: string) => {
     window.open(url, '_blank');
   };
 
-  // 复制信息到剪贴板
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      // 这里可以添加toast通知
+      // TODO: 添加toast通知
       console.log('已复制到剪贴板:', text);
     } catch (err) {
       console.error('复制失败:', err);
     }
   };
 
-  // 检查更新
-  const checkUpdate = () => {
-    // 这里应该调用实际的更新检查逻辑
-    console.log('检查更新...');
-  };
-
-  // 导出系统信息
   const exportSystemInfo = () => {
     const info = {
       application: appInfo,
@@ -77,63 +47,87 @@
     link.click();
     URL.revokeObjectURL(url);
   };
+
+  // 格式化系统信息显示
+  const formatPlatform = (platform: string) => {
+    if (platform.includes('Win')) return 'Windows';
+    if (platform.includes('Mac')) return 'macOS';
+    if (platform.includes('Linux')) return 'Linux';
+    return platform;
+  };
+
+  const formatMemory = (memory: number | string) => {
+    if (typeof memory === 'number') {
+      return `${memory} GB`;
+    }
+    return memory;
+  };
+
+  const formatConnection = (connection: any) => {
+    if (!connection) return '未知';
+    return `${connection.effectiveType} (${connection.downlink}Mbps)`;
+  };
 </script>
 
 <!-- 关于应用配置 -->
 <div class="space-y-4">
-  <!-- 应用信息 -->
+  <!-- 应用概览 -->
   <div class="card bg-base-100 shadow-lg border border-base-300/50">
     <div class="card-body">
-      <ShFieldSet title="应用信息" class="space-y-6">
-        <!-- 应用标识 -->
-        <div class="flex items-center gap-4 p-4 bg-base-200/50 rounded-lg">
+      <ShFieldSet title="应用概览" class="space-y-6">
+        <div class="flex items-center gap-6 p-6 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg">
           <div class="avatar">
-            <div class="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
-              <ShIcon name="istock-shell" class="w-10 h-10 text-primary" />
+            <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center">
+              <ShIcon name="terminal" class="w-10 h-10 text-primary" />
             </div>
           </div>
           <div class="flex-1">
-            <h3 class="text-xl font-bold text-base-content">{appInfo.name}</h3>
-            <p class="text-base-content/60 text-sm">{appInfo.description}</p>
-            <div class="badge badge-primary badge-sm mt-1">v{appInfo.version}</div>
+            <h2 class="text-2xl font-bold text-base-content mb-1">{appInfo.name}</h2>
+            <p class="text-base-content/70 mb-3">{appInfo.description}</p>
+            <div class="flex items-center gap-3">
+              <div class="badge badge-primary">v{appInfo.version}</div>
+              <div class="badge badge-outline">{appInfo.license}</div>
+            </div>
           </div>
         </div>
+      </ShFieldSet>
+    </div>
+  </div>
 
-        <!-- 详细信息 -->
+  <!-- 项目信息 -->
+  <div class="card bg-base-100 shadow-lg border border-base-300/50">
+    <div class="card-body">
+      <ShFieldSet title="项目信息" class="space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <ShField label={{ title: '作者', placement: 'before' }} class="space-y-2">
-            <ShInput value={appInfo.author} readonly size="md" />
-          </ShField>
-
-          <ShField label={{ title: '许可证', placement: 'before' }} class="space-y-2">
-            <ShInput value={appInfo.license} readonly size="md" />
-          </ShField>
-
-          <ShField label={{ title: '构建日期', placement: 'before' }} class="space-y-2">
-            <ShInput value={appInfo.buildDate} readonly size="md" />
-          </ShField>
-
-          <ShField label={{ title: '主页', placement: 'before' }} class="space-y-2">
-            <div class="flex gap-2">
-              <ShInput value={appInfo.homepage} readonly size="md" class="flex-1" />
-              <ShButton size="md" color="ghost" onclick={() => openLink(appInfo.homepage)}>
-                <ShIcon name="external-link" class="w-4 h-4" />
-              </ShButton>
-              <ShButton size="md" color="ghost" onclick={() => copyToClipboard(appInfo.homepage)}>
-                <ShIcon name="copy" class="w-4 h-4" />
-              </ShButton>
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <span class="font-medium">{appInfo.author}</span>
             </div>
           </ShField>
 
-          <ShField label={{ title: '仓库地址', placement: 'before' }} class="space-y-2 lg:col-span-2">
-            <div class="flex gap-2">
-              <ShInput value={appInfo.repository} readonly size="md" class="flex-1" />
-              <ShButton size="md" color="ghost" onclick={() => openLink(appInfo.repository)}>
-                <ShIcon name="external-link" class="w-4 h-4" />
-              </ShButton>
-              <ShButton size="md" color="ghost" onclick={() => copyToClipboard(appInfo.repository)}>
-                <ShIcon name="copy" class="w-4 h-4" />
-              </ShButton>
+          <ShField label={{ title: '联系方式', placement: 'before' }} class="space-y-2">
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <a href={appInfo.contact} target="_blank" class="link">
+                联系我
+                <ShIcon name="external-link" class="w-3 h-3 ml-1" />
+              </a>
+            </div>
+          </ShField>
+
+          <ShField label={{ title: '技术栈', placement: 'before' }} class="space-y-2">
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <div class="flex flex-wrap gap-2">
+                {#each appInfo.techStack as tech}
+                  <div class="badge badge-secondary badge-sm">{tech}</div>
+                {/each}
+              </div>
+            </div>
+          </ShField>
+
+          <ShField label={{ title: '运行环境', placement: 'before' }} class="space-y-2">
+            <div class="p-3 bg-base-200/50 rounded-lg space-y-1">
+              <div class="text-sm">Node.js {appInfo.engines.node}</div>
+              <div class="text-sm">pnpm {appInfo.engines.pnpm}</div>
             </div>
           </ShField>
         </div>
@@ -147,49 +141,39 @@
       <ShFieldSet title="系统信息" class="space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <ShField label={{ title: '操作系统', placement: 'before' }} class="space-y-2">
-            <ShInput value={systemInfo.platform} readonly size="md" />
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <span class="font-medium">{formatPlatform(systemInfo.platform)}</span>
+            </div>
           </ShField>
 
           <ShField label={{ title: '语言', placement: 'before' }} class="space-y-2">
-            <ShInput value={systemInfo.language} readonly size="md" />
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <span class="font-medium">{systemInfo.language}</span>
+            </div>
           </ShField>
 
           <ShField label={{ title: '屏幕分辨率', placement: 'before' }} class="space-y-2">
-            <ShInput value={systemInfo.screenResolution} readonly size="md" />
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <span class="font-medium">{systemInfo.screenResolution}</span>
+            </div>
           </ShField>
 
-          <ShField label={{ title: '颜色深度', placement: 'before' }} class="space-y-2">
-            <ShInput value={`${systemInfo.colorDepth} 位`} readonly size="md" />
+          <ShField label={{ title: 'CPU核心数', placement: 'before' }} class="space-y-2">
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <span class="font-medium">{systemInfo.hardwareConcurrency}</span>
+            </div>
           </ShField>
 
-          <ShField label={{ title: '时区', placement: 'before' }} class="space-y-2">
-            <ShInput value={systemInfo.timezone} readonly size="md" />
+          <ShField label={{ title: '设备内存', placement: 'before' }} class="space-y-2">
+            <div class="p-3 bg-base-200/50 rounded-lg">
+              <span class="font-medium">{formatMemory(systemInfo.deviceMemory)}</span>
+            </div>
           </ShField>
 
           <ShField label={{ title: '网络状态', placement: 'before' }} class="space-y-2">
-            <div class="flex items-center gap-2">
-              <div class={`w-3 h-3 rounded-full ${systemInfo.onLine ? 'bg-success' : 'bg-error'}`}></div>
-              <span class={`text-sm font-medium ${systemInfo.onLine ? 'text-success' : 'text-error'}`}>
-                {systemInfo.onLine ? '在线' : '离线'}
-              </span>
-            </div>
-          </ShField>
-
-          <ShField label={{ title: 'Cookie支持', placement: 'before' }} class="space-y-2">
-            <div class="flex items-center gap-2">
-              <div class={`w-3 h-3 rounded-full ${systemInfo.cookieEnabled ? 'bg-success' : 'bg-error'}`}></div>
-              <span class={`text-sm font-medium ${systemInfo.cookieEnabled ? 'text-success' : 'text-error'}`}>
-                {systemInfo.cookieEnabled ? '已启用' : '已禁用'}
-              </span>
-            </div>
-          </ShField>
-
-          <ShField label={{ title: '用户代理', placement: 'before' }} class="space-y-2 lg:col-span-2">
-            <div class="flex gap-2">
-              <ShInput value={systemInfo.userAgent} readonly size="md" class="flex-1" />
-              <ShButton size="md" color="ghost" onclick={() => copyToClipboard(systemInfo.userAgent)}>
-                <ShIcon name="copy" class="w-4 h-4" />
-              </ShButton>
+            <div class="p-3 bg-base-200/50 rounded-lg flex items-center gap-2">
+              <div class={`w-2 h-2 rounded-full ${systemInfo.onLine ? 'bg-success' : 'bg-error'}`}></div>
+              <span class="font-medium">{formatConnection(systemInfo.connection)}</span>
             </div>
           </ShField>
         </div>
@@ -197,61 +181,40 @@
     </div>
   </div>
 
-  <!-- 操作按钮 -->
+  <!-- 快速操作 -->
   <div class="card bg-base-100 shadow-lg border border-base-300/50">
     <div class="card-body">
-      <ShFieldSet title="操作" class="space-y-6">
-        <div class="flex flex-wrap gap-4">
-          <ShButton color="primary" size="md" onclick={checkUpdate}>
-            <ShIcon name="refresh" class="w-4 h-4" />
-            检查更新
+      <ShFieldSet title="快速操作" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ShButton color="primary" size="md" onclick={() => openLink(appInfo.homepage)}>
+            <ShIcon name="home" class="w-4 h-4" />
+            项目主页
           </ShButton>
 
-          <ShButton color="secondary" size="md" onclick={exportSystemInfo}>
+          <ShButton color="secondary" size="md" onclick={() => openLink(appInfo.repository)}>
+            <ShIcon name="github" class="w-4 h-4" />
+            源码仓库
+          </ShButton>
+
+          <ShButton color="info" size="md" onclick={() => openLink(`${appInfo.repository}/issues`)}>
+            <ShIcon name="bug" class="w-4 h-4" />
+            问题反馈
+          </ShButton>
+
+          <ShButton color="accent" size="md" onclick={() => copyToClipboard(systemInfo.userAgent)}>
+            <ShIcon name="copy" class="w-4 h-4" />
+            复制用户代理
+          </ShButton>
+
+          <ShButton color="warning" size="md" onclick={exportSystemInfo}>
             <ShIcon name="download" class="w-4 h-4" />
             导出信息
           </ShButton>
 
-          <ShButton
-            color="accent"
-            size="md"
-            onclick={() => openLink('https://github.com/istock-shell/istock-shell/issues')}
-          >
-            <ShIcon name="bug" class="w-4 h-4" />
-            反馈问题
+          <ShButton color="error" size="md" onclick={() => window.location.reload()}>
+            <ShIcon name="refresh" class="w-4 h-4" />
+            重新加载
           </ShButton>
-        </div>
-      </ShFieldSet>
-    </div>
-  </div>
-
-  <!-- 使用说明 -->
-  <div class="card bg-base-100 shadow-lg border border-base-300/50">
-    <div class="card-body">
-      <ShFieldSet title="使用说明" class="space-y-4">
-        <div class="prose prose-sm max-w-none text-base-content">
-          <h4 class="text-base font-semibold mb-2">关于 iStock Shell：</h4>
-          <ul class="space-y-1 text-sm">
-            <li>• 现代化的终端模拟器，支持多种命令行工具</li>
-            <li>• 基于 Web 技术构建，跨平台兼容</li>
-            <li>• 支持主题定制和插件扩展</li>
-            <li>• 提供丰富的配置选项和快捷键</li>
-          </ul>
-
-          <h4 class="text-base font-semibold mb-2 mt-4">技术栈：</h4>
-          <ul class="space-y-1 text-sm">
-            <li>• 前端框架：Svelte 5 + TypeScript</li>
-            <li>• UI 组件：DaisyUI + Tailwind CSS</li>
-            <li>• 构建工具：Vite + Rollup</li>
-            <li>• 包管理：pnpm workspace</li>
-          </ul>
-
-          <h4 class="text-base font-semibold mb-2 mt-4">支持与帮助：</h4>
-          <ul class="space-y-1 text-sm">
-            <li>• 文档：访问项目主页查看完整文档</li>
-            <li>• 问题反馈：通过 GitHub Issues 提交问题</li>
-            <li>• 社区讨论：加入我们的开发者社区</li>
-          </ul>
         </div>
       </ShFieldSet>
     </div>

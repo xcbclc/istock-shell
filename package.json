@@ -1,23 +1,65 @@
 {
   "name": "istock-shell",
-  "private": true,
+  "private": false,
   "title": "iStock Shell",
   "version": "0.1.7",
+  "description": "以AI智能分析为核心的专业金融数据查询分析平台，简单、高效、灵活，并可轻松定制。",
   "type": "module",
+  "author": {
+    "name": "xcbclc(星辰编程理财)",
+    "url": "https://github.com/xcbclc"
+  },
+  "contributors": [
+    {
+      "name": "xcbclc(星辰编程理财)",
+      "url": "https://github.com/xcbclc"
+    }
+  ],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "finance",
+    "stock",
+    "ai",
+    "analysis",
+    "terminal",
+    "shell",
+    "financial-data",
+    "investment",
+    "trading",
+    "svelte"
+  ],
+  "homepage": "https://istock.red",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcbclc/istock-shell.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xcbclc/istock-shell/issues"
+  },
+  "license": "MIT",
   "engines": {
     "node": ">=16",
-    "pnpm": ">=7"
+    "pnpm": ">=7",
+    "npm": ">=8"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:docker": "pnpm run build & docker build -f ./Dockerfile -t istock-shell .",
     "preview": "vite preview",
+    "start": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "eslint -c eslint.config.js",
     "lint:fix": "eslint -c eslint.config.js --fix",
     "format": "prettier --write ./**/*.{ts,tsx,js,mjs,cjs,svelte,css,json,md}",
     "prepare": "husky install",
+    "prepublishOnly": "pnpm run build",
+    "postinstall": "echo \"Thanks for installing iStock Shell!\"",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:build:docker": "pnpm run docs:build & docker build -f ./docs/Dockerfile -t istock-shell-doc .",

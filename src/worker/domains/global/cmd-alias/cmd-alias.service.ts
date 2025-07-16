@@ -34,8 +34,8 @@ export class CmdAliasService {
     return await CmdAliasModel.query({
       limit,
       sort: {
-        field: 'id',
-        order: 'DESC',
+        field: 'createDate',
+        order: 'ASC',
       },
       filter: query.filter,
     });
