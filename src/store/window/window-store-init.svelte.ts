@@ -2,9 +2,11 @@ import type { CmdWindow } from '@/window';
 import { CmdAlias } from './cmd-alias.svelte';
 import { OutputComponent } from './output-component.svelte';
 import { CookieManage } from './cookie-manage.svelte';
+import { Proxy } from './proxy.svelte';
 import { Search } from './search.svelte';
 import { Setting } from './setting.svelte';
 import { ShellInfo } from './shell-info.svelte';
+import { Shortcut } from './shortcut.svelte';
 import { Theme } from './theme.svelte';
 import { User } from './user.svelte';
 import { WindowView } from './window-view.svelte';
@@ -13,9 +15,11 @@ const windowStoreClassRecord = {
   cmdAlias: CmdAlias,
   outputComponent: OutputComponent,
   cookieManage: CookieManage,
+  proxy: Proxy,
   search: Search,
   setting: Setting,
   shellInfo: ShellInfo,
+  shortcut: Shortcut,
   theme: Theme,
   user: User,
   windowView: WindowView,
@@ -26,9 +30,11 @@ export type WindowStore = {
   cmdAlias: CmdAlias;
   outputComponent: OutputComponent;
   cookieManage: CookieManage;
+  proxy: Proxy;
   search: Search;
   setting: Setting;
   shellInfo: ShellInfo;
+  shortcut: Shortcut;
   theme: Theme;
   user: User;
   windowView: WindowView;
@@ -56,11 +62,13 @@ export const startWindowStore = async (cmdWindow: CmdWindow) => {
   await Promise.all([
     windowStore.windowView.start(),
     windowStore.theme.start(),
+    windowStore.shortcut.start(),
     windowStore.shellInfo.start(),
     windowStore.outputComponent.start(),
     windowStore.search.start(),
     windowStore.setting.start(),
     windowStore.cookieManage.start(),
+    windowStore.proxy.start(),
     windowStore.cmdAlias.start(),
   ]);
 };

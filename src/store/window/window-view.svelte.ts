@@ -1,4 +1,4 @@
-import type { CmdWindow } from '@/window';
+import { type CmdWindow, CmdWindowsManager } from '@/window';
 import { StoreWindow, createStoreEffects, type StoreConfig } from '@/store';
 
 export interface WindowViewModel {}
@@ -36,34 +36,43 @@ export class WindowView extends StoreWindow<WindowViewModel> {
     return null;
   }
   public onWindowViewKeyAction(event: KeyboardEvent) {
-    const { key } = event;
-    if (event.ctrlKey) {
-      const shortcutKeys = ['ctrl'];
-      if (event.shiftKey) shortcutKeys.push('shift');
-      if (event.altKey) shortcutKeys.push('alt');
-      shortcutKeys.push(key.toLowerCase());
-      const shortcutKey = shortcutKeys.join('+');
-      if (shortcutKey === ['ctrl', 'shift', 's'].join('+')) {
-        // 打开搜索
-        const { search } = this.cmdWindow.store;
-        search.show = true;
-        event.preventDefault();
+    const { shortcut } = this.cmdWindow.store;
+
+    // 检查搜索快捷键
+    if (shortcut.matchShortcut(event, 'search')) {
+      const { search } = this.cmdWindow.store;
+      search.show = true;
+      event.preventDefault();
+      return;
+    }
+
+    // 检查设置快捷键
+    if (shortcut.matchShortcut(event, 'settings')) {
+      const { setting } = this.cmdWindow.store;
+      setting.show = true;
+      event.preventDefault();
+      return;
+    }
+
+    // 检查新建窗口快捷键
+    if (shortcut.matchShortcut(event, 'newWindow')) {
+      const newId = this.getNewWindowId();
+      if (newId) {
+        this.list.push({
+          id: newId,
+        });
       }
-      if (shortcutKey === ['ctrl', 'alt', 's'].join('+')) {
-        const { setting } = this.cmdWindow.store;
-        setting.show = true;
-        event.preventDefault();
+      event.preventDefault();
+      return;
+    }
+    if (shortcut.matchShortcut(event, 'clearScreen')) {
+      if (this.currentFocusWindowId) {
+        const ctx = CmdWindowsManager.getInstance().getCmdContext(this.currentFocusWindowId);
+        const { input } = ctx.store;
+        input.sendCmd('lssc');
       }
-      if (shortcutKey === ['ctrl', 'shift', 'x'].join('+')) {
-        // 新建窗口
-        const newId = this.getNewWindowId();
-        if (newId) {
-          this.list.push({
-            id: newId,
-          });
-        }
-        event.preventDefault();
-      }
+      event.preventDefault();
+      return;
     }
   }
   protected updateWindowStyleRecord() {

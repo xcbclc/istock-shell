@@ -51,23 +51,40 @@ export const contextmenuHandleFactory = (ctx: CmdWindowContext) => {
   const onMenuShortcutKey = async (ev: KeyboardEvent) => {
     if (ctx.cmdWindow.isDemoMode) return;
     const { output } = ctx.store;
+    const { shortcut } = ctx.cmdWindow.store;
     const currentIndex = contextmenu.hoverBlockIndex;
     if (currentIndex === -1) return;
     const currentBlock = output.list[currentIndex];
-    const { key } = ev;
-    if (ev.ctrlKey) {
-      const { contextmenu } = ctx.store;
-      let allContextMenuItem: ContextmenuStoreModels = contextmenu.getAllMenu();
-      const shortcutKeys = ['ctrl'];
-      if (ev.shiftKey) shortcutKeys.push('shift');
-      if (ev.altKey) shortcutKeys.push('alt');
-      shortcutKeys.push(key.toLowerCase());
-      const shortcutKey = shortcutKeys.join('+');
-      const contextMenuItem = allContextMenuItem.find((item) => item.shortcutKey === shortcutKey);
-      if (contextMenuItem) {
-        ev.preventDefault();
-        await handleMenuAction(contextMenuItem.action, currentBlock);
-      }
+
+    // 检查右键菜单相关的快捷键
+    if (shortcut.matchShortcut(ev, 'copyInput')) {
+      ev.preventDefault();
+      await handleMenuAction(ContextmenuStoreCopy.input, currentBlock);
+      return;
+    }
+
+    if (shortcut.matchShortcut(ev, 'copyOutput')) {
+      ev.preventDefault();
+      await handleMenuAction(ContextmenuStoreCopy.output, currentBlock);
+      return;
+    }
+
+    if (shortcut.matchShortcut(ev, 'copyPrompt')) {
+      ev.preventDefault();
+      await handleMenuAction(ContextmenuStoreCopy.prompt, currentBlock);
+      return;
+    }
+
+    if (shortcut.matchShortcut(ev, 'copyAll')) {
+      ev.preventDefault();
+      await handleMenuAction(ContextmenuStoreCopy.all, currentBlock);
+      return;
+    }
+
+    if (shortcut.matchShortcut(ev, 'addCmdAlias')) {
+      ev.preventDefault();
+      await handleMenuAction(ContextmenuStoreOther.addCmdAlias, currentBlock);
+      return;
     }
   };
   const onContextmenu = (ev: MouseEvent, index: number) => {

@@ -74,13 +74,6 @@ export const settingStoreMenus: SettingStoreMenus = [
     subItem: {
       items: [
         {
-          key: 'CmdAiConfig',
-          text: 'AI模型配置',
-          description: '配置AI助手的模型和参数',
-          iconName: 'lightning',
-          active: false,
-        },
-        {
           key: 'CmdProxyConfig',
           text: '接口代理配置',
           description: '配置API请求的代理设置',

@@ -1,9 +1,3 @@
-<!--
-  @component AliasesConfig 别名配置组件
-
-  命令别名管理相关的配置项
--->
-
 <script lang="ts" module>
   export interface AliasesConfigProps {
     windowId: number;

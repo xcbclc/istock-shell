@@ -30,6 +30,8 @@ import { CookieModel } from '@domains/global/setting/cookie/cookie.model';
 import { CdfceshqsjModel } from '@domains/cdfc/cdesf/cdfceshqsj.model';
 import { CdfcjysjModel } from '@domains/cdfc/cdesf/cdfcjysj.model';
 import { ThemeModel } from '@domains/global/setting/theme/theme.model';
+import { ProxyModel } from '@domains/global/setting/proxy/proxy.model';
+import { ShortcutModel } from '@domains/global/setting/shortcut/shortcut.model';
 
 export const indexedDataSourceModels = [
   UserModel,
@@ -39,6 +41,8 @@ export const indexedDataSourceModels = [
   KzzsdResultModel,
   StockCodeResultModel,
   ThemeModel,
+  ProxyModel,
+  ShortcutModel,
 ];
 export const akShareFetchDataSourceModels = [
   SzgpsczmModel,
@@ -70,7 +74,7 @@ export const initDataSource = async () => {
     type: 'indexedDB',
     entities: indexedDataSourceModels,
     dbName: 'istock',
-    version: 9,
+    version: 11,
   });
   await indexedDataSource.initialize();
 

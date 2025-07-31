@@ -1,9 +1,3 @@
-<!--
-  @component ProxyConfig 代理配置组件
-
-  接口代理配置相关的配置项
--->
-
 <script lang="ts" module>
   export interface ProxyConfigProps {
     windowId: number;
@@ -14,65 +8,6 @@
   import { ShFieldSet, ShField, ShToggle, ShInput, ShButton, ShIcon } from '@istock-shell/ui';
 
   let { windowId }: ProxyConfigProps = $props();
-
-  // 代理配置设置
-  let settings = $state({
-    proxyConfigs: {
-      list: [],
-      globalEnabled: false,
-    },
-  });
-
-  // 代理配置管理
-  const addProxyConfig = () => {
-    settings.proxyConfigs.list.push({
-      id: Date.now().toString(),
-      name: '',
-      enabled: true,
-      host: '',
-      port: 8080,
-      username: '',
-      password: '',
-      matchPaths: [],
-      headers: {},
-      isEdit: true,
-    });
-  };
-
-  const deleteProxyConfig = (id: string) => {
-    settings.proxyConfigs.list = settings.proxyConfigs.list.filter((item) => item.id !== id);
-  };
-
-  // 代理路径管理
-  const addProxyPath = (proxyId: string) => {
-    const proxy = settings.proxyConfigs.list.find((p) => p.id === proxyId);
-    if (proxy) {
-      proxy.matchPaths.push('');
-    }
-  };
-
-  const removeProxyPath = (proxyId: string, index: number) => {
-    const proxy = settings.proxyConfigs.list.find((p) => p.id === proxyId);
-    if (proxy) {
-      proxy.matchPaths.splice(index, 1);
-    }
-  };
-
-  // 代理头部管理
-  const addProxyHeader = (proxyId: string) => {
-    const proxy = settings.proxyConfigs.list.find((p) => p.id === proxyId);
-    if (proxy) {
-      const key = `header-${Date.now()}`;
-      proxy.headers[key] = '';
-    }
-  };
-
-  const removeProxyHeader = (proxyId: string, key: string) => {
-    const proxy = settings.proxyConfigs.list.find((p) => p.id === proxyId);
-    if (proxy) {
-      delete proxy.headers[key];
-    }
-  };
 </script>
 
 <!-- 接口代理配置 -->

@@ -1,9 +1,3 @@
-<!--
-  @component DataConfig 数据管理配置组件
-
-  本地数据管理相关的配置项
--->
-
 <script lang="ts" module>
   export interface DataConfigProps {
     windowId: number;
