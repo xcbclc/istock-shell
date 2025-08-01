@@ -10,6 +10,7 @@ import { Shortcut } from './shortcut.svelte';
 import { Theme } from './theme.svelte';
 import { User } from './user.svelte';
 import { WindowView } from './window-view.svelte';
+import { IndexedDbConfig } from './indexed-db-config.svelte';
 
 const windowStoreClassRecord = {
   cmdAlias: CmdAlias,
@@ -23,6 +24,7 @@ const windowStoreClassRecord = {
   theme: Theme,
   user: User,
   windowView: WindowView,
+  indexedDbConfig: IndexedDbConfig,
 } as const;
 
 // 窗口存储类型定义
@@ -38,6 +40,7 @@ export type WindowStore = {
   theme: Theme;
   user: User;
   windowView: WindowView;
+  indexedDbConfig: IndexedDbConfig;
 };
 
 export type WindowStoreKey = keyof WindowStore;
@@ -70,6 +73,7 @@ export const startWindowStore = async (cmdWindow: CmdWindow) => {
     windowStore.cookieManage.start(),
     windowStore.proxy.start(),
     windowStore.cmdAlias.start(),
+    windowStore.indexedDbConfig.start(),
   ]);
 };
 

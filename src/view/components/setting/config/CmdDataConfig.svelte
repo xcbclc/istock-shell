@@ -9,166 +9,199 @@
     ShFieldSet,
     ShField,
     ShToggle,
-    ShInput,
-    ShSelect,
     ShButton,
     ShIcon,
-    type SelectItemOption,
+    ShStat,
+    ShTable,
+    ShAlert,
+    shShowMessage,
   } from '@istock-shell/ui';
+  import { dbUtils } from '@/common/db-utils';
+  import { CmdWindowsManager } from '@/window';
 
   let { windowId }: DataConfigProps = $props();
 
-  // 数据管理设置
-  let settings = $state({
-    dataManagement: {
-      autoBackup: true,
-      backupInterval: 7, // 天
-      maxBackups: 10,
-      exportFormat: 'json',
-    },
-  });
+  // 获取命令窗口实例
+  const cmdWindow = CmdWindowsManager.cmdWindowsManager.getCmdWindow(windowId);
 
-  // 导出格式选项
-  const exportFormatOptions: SelectItemOption[] = [
-    { label: 'JSON', value: 'json' },
-    { label: 'CSV', value: 'csv' },
-    { label: 'XML', value: 'xml' },
-  ];
+  // 使用窗口存储中的数据库配置实例
+  const dbConfig = cmdWindow.store.indexedDbConfig;
 
-  // 导出设置
-  const exportSettings = () => {
-    const dataStr = JSON.stringify(settings, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'istock-shell-settings.json';
-    link.click();
-    URL.revokeObjectURL(url);
-  };
+  // 数据库配置已在窗口存储启动时自动初始化，无需手动初始化
 
-  // 导入设置
-  const importSettings = () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    input.onchange = (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          try {
-            const importedSettings = JSON.parse(e.target?.result as string);
-            settings = { ...settings, ...importedSettings };
-          } catch (error) {
-            console.error('导入设置失败:', error);
-          }
-        };
-        reader.readAsText(file);
+  // 导出数据库处理函数
+  const handleExportDatabase = async () => {
+    try {
+      const result = await dbConfig.exportDatabase();
+      if (result?.success) {
+        shShowMessage.success(result.message);
       }
-    };
-    input.click();
-  };
-
-  // 清理数据
-  const clearData = () => {
-    if (confirm('确定要清理所有本地数据吗？此操作不可恢复。')) {
-      // 这里应该调用实际的清理逻辑
-      console.log('清理本地数据');
+    } catch (error) {
+      shShowMessage.error('导出数据库失败: ' + error);
     }
   };
 
-  // 备份数据
-  const backupData = () => {
-    // 这里应该调用实际的备份逻辑
-    console.log('备份数据');
+  // 导入数据库处理函数
+  const handleImportDatabase = async () => {
+    try {
+      const result = await dbConfig.importDatabase(async (message) => {
+        return new Promise((resolve) => {
+          const confirmed = confirm(message);
+          resolve(confirmed);
+        });
+      });
+      if (result?.success) {
+        shShowMessage.success(result.message);
+      }
+      window.location.reload();
+    } catch (error) {
+      shShowMessage.error('导入数据库失败: ' + error);
+    }
+  };
+
+  // 清理数据处理函数
+  const handleClearData = async () => {
+    try {
+      const result = await dbConfig.clearData(async (message) => {
+        return new Promise((resolve) => {
+          const confirmed = confirm(message);
+          resolve(confirmed);
+        });
+      });
+      if (result?.success) {
+        shShowMessage.success(result.message);
+      }
+    } catch (error) {
+      shShowMessage.error('清理数据失败: ' + error);
+    }
+  };
+
+  // 重新连接数据库处理函数
+  const handleReconnectDatabase = async () => {
+    try {
+      await dbConfig.connectDatabase();
+      shShowMessage.success('重新连接成功！');
+    } catch (error) {
+      shShowMessage.error('重新连接失败: ' + error);
+    }
+  };
+
+  // 刷新数据库信息处理函数
+  const handleRefreshDatabase = async () => {
+    try {
+      await dbConfig.refreshDatabaseInfo();
+      shShowMessage.success('刷新成功！');
+    } catch (error) {
+      shShowMessage.error('刷新失败: ' + error);
+    }
   };
 </script>
 
-<!-- 本地数据管理 -->
-<div class="space-y-4">
+<!-- 数据库配置管理 -->
+<div class="space-y-6">
+  <!-- 数据操作 -->
   <div class="card bg-base-100 shadow-lg border border-base-300/50">
     <div class="card-body">
-      <ShFieldSet title="备份设置" class="space-y-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ShField
-            label={{ title: '自动备份', placement: 'after' }}
-            class="flex items-center justify-between p-4 bg-base-200/50 rounded-lg"
+      <ShFieldSet title="数据操作">
+        <div class="flex flex-wrap gap-4">
+          <ShButton
+            color="primary"
+            size="md"
+            onclick={handleExportDatabase}
+            disabled={!dbConfig.dbInfo.isConnected || dbConfig.operationStatus.isExporting}
           >
-            <ShToggle bind:value={settings.dataManagement.autoBackup} color="primary" size="md" />
-          </ShField>
+            <ShIcon name="download" class="w-4 h-4" />
+            {dbConfig.operationStatus.isExporting ? '导出中...' : '导出数据'}
+          </ShButton>
 
-          <ShField label={{ title: '备份间隔（天）', placement: 'before' }} class="space-y-4">
-            <ShInput bind:value={settings.dataManagement.backupInterval} type="number" min="1" max="30" size="md" />
-          </ShField>
+          <ShButton
+            color="secondary"
+            size="md"
+            onclick={handleImportDatabase}
+            disabled={!dbConfig.dbInfo.isConnected || dbConfig.operationStatus.isImporting}
+          >
+            <ShIcon name="upload" class="w-4 h-4" />
+            {dbConfig.operationStatus.isImporting ? '导入中...' : '导入数据'}
+          </ShButton>
+          <ShButton
+            color="error"
+            size="md"
+            onclick={handleClearData}
+            disabled={!dbConfig.dbInfo.isConnected || dbConfig.operationStatus.isClearing}
+          >
+            <ShIcon name="trash" class="w-4 h-4" />
+            {dbConfig.operationStatus.isClearing ? '清理中...' : '清理数据'}
+          </ShButton>
+        </div>
+      </ShFieldSet>
+    </div>
+  </div>
 
-          <ShField label={{ title: '最大备份数', placement: 'before' }} class="space-y-4">
-            <ShInput bind:value={settings.dataManagement.maxBackups} type="number" min="1" max="50" size="md" />
-          </ShField>
+  <!-- 数据库状态 -->
+  <div class="card bg-base-100 shadow-lg border border-base-300/50">
+    <div class="card-body">
+      <ShFieldSet title="数据库状态">
+        <!-- 连接状态 -->
+        <ShAlert type={dbConfig.dbInfo.isConnected ? 'success' : 'warning'} class="mb-4">
+          <ShIcon name={dbConfig.dbInfo.isConnected ? 'check-circle' : 'exclamation-triangle'} class="w-5 h-5" />
+          <span>
+            {#if dbConfig.dbInfo.isLoading}
+              正在连接数据库...
+            {:else if dbConfig.dbInfo.isConnected}
+              数据库已连接: {dbConfig.dbInfo.dbName} (版本 {dbConfig.dbInfo.version})
+            {:else}
+              数据库未连接
+            {/if}
+          </span>
+          {#if !dbConfig.dbInfo.isConnected && !dbConfig.dbInfo.isLoading}
+            <ShButton size="sm" color="warning" onclick={handleReconnectDatabase}>重新连接</ShButton>
+          {/if}
+        </ShAlert>
 
-          <ShField label={{ title: '导出格式', placement: 'before' }} class="space-y-4">
-            <ShSelect
-              bind:value={settings.dataManagement.exportFormat}
-              options={exportFormatOptions}
-              color="primary"
-              size="md"
+        {#if dbConfig.dbInfo.isConnected}
+          <!-- 存储统计 -->
+          <ShStat
+            class="mb-6"
+            list={[
+              {
+                title: '总存储大小',
+                value: dbUtils.formatFileSize(dbConfig.dbInfo.totalSize),
+                desc: '所有数据表大小',
+              },
+              {
+                title: '数据表数量',
+                value: dbConfig.dbInfo.stores.length.toString(),
+                desc: 'IndexedDB 对象存储',
+              },
+              {
+                title: '总记录数',
+                value: dbConfig.dbInfo.stores.reduce((sum, store) => sum + store.count, 0).toString(),
+                desc: '所有表记录总数',
+              },
+            ]}
+          />
+
+          <!-- 数据表详情 -->
+          {#if dbConfig.dbInfo.stores.length > 0}
+            <ShTable
+              thead={[
+                { dataKey: 'name', value: '数据表名称' },
+                { dataKey: 'count', value: '记录数量' },
+                { dataKey: 'size', value: '存储大小' },
+              ]}
+              tbody={dbConfig.dbInfo.stores}
+              class="mb-4"
             />
-          </ShField>
-        </div>
-      </ShFieldSet>
-    </div>
-  </div>
+          {/if}
 
-  <div class="card bg-base-100 shadow-lg border border-base-300/50">
-    <div class="card-body">
-      <ShFieldSet title="数据操作" class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <ShButton color="primary" size="md" onclick={exportSettings}>
-            <ShIcon name="file" class="w-4 h-4" />
-            导出设置
-          </ShButton>
-
-          <ShButton color="secondary" size="md" onclick={importSettings}>
-            <ShIcon name="file" class="w-4 h-4" />
-            导入设置
-          </ShButton>
-
-          <ShButton color="info" size="md" onclick={backupData}>
-            <ShIcon name="database" class="w-4 h-4" />
-            立即备份
-          </ShButton>
-
-          <ShButton color="error" size="md" onclick={clearData}>
-            <ShIcon name="warning" class="w-4 h-4" />
-            清理数据
-          </ShButton>
-        </div>
-      </ShFieldSet>
-    </div>
-  </div>
-
-  <div class="card bg-base-100 shadow-lg border border-base-300/50">
-    <div class="card-body">
-      <ShFieldSet title="存储信息" class="space-y-6">
-        <div class="stats stats-vertical lg:stats-horizontal shadow">
-          <div class="stat">
-            <div class="stat-title">已用存储</div>
-            <div class="stat-value text-primary">2.6 MB</div>
-            <div class="stat-desc">本地数据大小</div>
+          <!-- 刷新按钮 -->
+          <div class="flex justify-end">
+            <ShButton size="sm" color="ghost" onclick={handleRefreshDatabase}>
+              <ShIcon name="refresh" class="w-4 h-4" />
+              刷新信息
+            </ShButton>
           </div>
-
-          <div class="stat">
-            <div class="stat-title">备份数量</div>
-            <div class="stat-value text-secondary">5</div>
-            <div class="stat-desc">自动备份文件</div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-title">最后备份</div>
-            <div class="stat-value text-accent">2天前</div>
-            <div class="stat-desc">上次备份时间</div>
-          </div>
-        </div>
+        {/if}
       </ShFieldSet>
     </div>
   </div>

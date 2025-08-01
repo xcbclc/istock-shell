@@ -2,6 +2,7 @@ import { type Event, EventEmitter, FESnowflake } from '@istock-shell/util';
 import { CmdParser } from '@istock-shell/command-parser';
 import { Cmdp, type CmdpMessage } from '@istock-shell/iswork';
 import { getWorker } from '@/worker';
+import { IndexedDBManager } from '@/common/indexed-db-manager';
 import { createWindowStore, startWindowStore, onWindowStoreHandle, type WindowStore } from '@/store/window/index';
 import { type CmdWindowsManager } from './cmd-windows-manager';
 import { CmdWorkerMessage } from './cmd-worker-message';
@@ -31,6 +32,10 @@ export class CmdWindow {
   readonly #useRecord: Record<string, any> = {};
   readonly #cmdpProtocol = 'cmdp:';
   readonly #eventProtocol = 'event:';
+  readonly #indexedDBManager: IndexedDBManager = new IndexedDBManager(
+    import.meta.env.VITE_INDEXED_DB_NAME,
+    parseInt(import.meta.env.VITE_INDEXED_DB_VERSION)
+  );
   readonly #onWorkerMessage: (event: MessageEvent<WorkerMessageData>) => void;
   public isInitialized: Boolean = $state(false);
   protected destroyUserNameEffect!: () => void;
@@ -67,6 +72,9 @@ export class CmdWindow {
   }
   get port() {
     return `${this.#workId}${this.#windowId}`;
+  }
+  get indexedDBManager() {
+    return this.#indexedDBManager;
   }
   constructor(cmdWindowsManager: CmdWindowsManager, options: CmdWindowOptions) {
     this.#cmdWindowsManager = cmdWindowsManager;
