@@ -35,32 +35,26 @@ cmdp://user@my-app.example.com:8080/UserController.getUser?id=123&include=posts#
 #### 各部分说明
 
 - **protocol**：协议类型
-
   - `cmdp`：命令协议，用于业务操作
   - `event`：事件协议，用于事件通知
 
 - **user**：用户标识（可选）
-
   - 通常为控制器别名
   - 用于权限控制和路由优化
 
 - **domain**：域名
-
   - 应用的domainPath
   - 用于多应用隔离
 
 - **port**：端口号（可选）
-
   - 默认为8080
   - 用于版本控制或环境区分
 
 - **path**：路径
-
   - 格式：`ControllerName.methodName`
   - 指定目标控制器和方法
 
 - **query**：查询参数（可选）
-
   - 传递简单参数
   - 格式：`key=value&key2=value2`
 

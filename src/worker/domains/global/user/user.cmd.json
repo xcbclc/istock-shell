@@ -3,8 +3,8 @@
     "name": "用户登录",
     "tag": "",
     "cmd": "yhdl",
-    "usage": "yhdl [-zh <用户名>] [-mm <密码>]",
-    "description": "登录指定用户账号",
+    "usage": "yhdl [-zh <用户名>] [-mm <密码>] [-wx]",
+    "description": "登录指定用户账号，支持账号密码登录和微信扫码登录",
     "options": {
       "账号": {
         "name": "账号",
@@ -19,6 +19,14 @@
         "parameter": ["-mm", "--密码"],
         "parameterType": ["string"],
         "description": "账号密码",
+        "optional": true,
+        "choices": []
+      },
+      "微信扫码": {
+        "name": "微信扫码",
+        "parameter": ["-wx", "--微信扫码"],
+        "parameterType": ["boolean"],
+        "description": "使用微信扫码登录",
         "optional": true,
         "choices": []
       }

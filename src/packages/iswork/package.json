@@ -1,12 +1,61 @@
 {
   "name": "@istock-shell/iswork",
   "version": "0.1.1",
+  "description": "一个基于类似Nestjs的Web Worker应用框架，支持依赖注入、ORM、消息处理等功能",
   "main": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "docs"
+  ],
+  "scripts": {
+    "build": "tsc && rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "typescript",
+    "framework",
+    "decorator",
+    "dependency-injection",
+    "orm",
+    "messaging",
+    "web-worker",
+    "application",
+    "domain-driven",
+    "middleware"
+  ],
+  "author": "xcbclc",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcbclc/istock-shell.git",
+    "directory": "src/packages/iswork"
+  },
+  "homepage": "https://github.com/xcbclc/istock-shell/tree/main/src/packages/iswork",
+  "bugs": {
+    "url": "https://github.com/xcbclc/istock-shell/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "peerDependencies": {
+    "@istock-shell/command-parser": "^0.1.0",
+    "@istock-shell/util": "^0.1.0"
+  },
   "dependencies": {
-    "@istock-shell/command-parser": "workspace:^",
-    "@istock-shell/util": "workspace:^",
     "idb": "^8.0.3",
     "qs": "^6.14.0",
     "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@istock-shell/command-parser": "workspace:^",
+    "@istock-shell/util": "workspace:^",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-dts": "^5.0.0",
+    "typescript": "^5.0.0"
   }
 }

@@ -73,8 +73,8 @@ export const initDataSource = async () => {
     name: 'indexedDB',
     type: 'indexedDB',
     entities: indexedDataSourceModels,
-    dbName: 'istock',
-    version: 11,
+    dbName: import.meta.env.VITE_INDEXED_DB_NAME,
+    version: parseInt(import.meta.env.VITE_INDEXED_DB_VERSION),
   });
   await indexedDataSource.initialize();
 

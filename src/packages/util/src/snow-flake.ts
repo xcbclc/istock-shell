@@ -15,15 +15,15 @@
  * 64位ID结构：
  * +----------+----------+----------+----------+
  * | 时间戳   | 数据中心 | 工作节点 | 序列号   |
- * | 41位     | 5位      | 5位      | 12位     |
+ * | 42位     | 5位      | 5位      | 12位     |
  * +----------+----------+----------+----------+
  * ```
  *
  * ### 各部分说明：
  *
- * 1. **时间戳（41位）**：
+ * 1. **时间戳（42位）**：
  *    - 记录ID生成时的毫秒时间戳（相对于epoch起始时间）
- *    - 支持约69年的时间范围（2^41 / (1000 * 60 * 60 * 24 * 365) ≈ 69年）
+ *    - 支持约139年的时间范围（2^42 / (1000 * 60 * 60 * 24 * 365) ≈ 139年）
  *    - 确保时间维度的唯一性
  *
  * 2. **数据中心ID（5位）**：
@@ -77,10 +77,12 @@ export class FESnowflake {
   private readonly workerIdBits: number = 5;
   private readonly datacenterIdBits: number = 5;
   private readonly sequenceBits: number = 12;
+  private readonly timestampBits: number = 42; // 明确定义时间戳位数
 
   private readonly maxWorkerId: number = (1 << this.workerIdBits) - 1; // 31
   private readonly maxDatacenterId: number = (1 << this.datacenterIdBits) - 1; // 31
   private readonly maxSequence: number = (1 << this.sequenceBits) - 1; // 4095
+  private readonly maxTimestamp: bigint = (1n << BigInt(this.timestampBits)) - 1n; // 时间戳最大值
 
   private readonly workerIdShift: number = this.sequenceBits;
   private readonly datacenterIdShift: number = this.sequenceBits + this.workerIdBits;
@@ -136,15 +138,29 @@ export class FESnowflake {
 
     this.lastTimestamp = timestamp;
 
-    // 生成64位ID
+    // 使用BigInt生成64位ID，避免精度丢失
+    const timestampBig = BigInt(timestamp - this.epoch);
+
+    // 检查时间戳是否超出范围
+    if (timestampBig > this.maxTimestamp) {
+      throw new Error(
+        `Timestamp exceeds maximum value. Current: ${timestampBig}, Max: ${this.maxTimestamp}. ` +
+          `This epoch (${new Date(this.epoch).toISOString()}) can only support timestamps until ${new Date(this.epoch + Number(this.maxTimestamp)).toISOString()}`
+      );
+    }
+
+    const datacenterIdBig = BigInt(this.datacenterId);
+    const workerIdBig = BigInt(this.workerId);
+    const sequenceBig = BigInt(this.sequence);
+
     const id =
-      ((timestamp - this.epoch) << this.timestampShift) |
-      (this.datacenterId << this.datacenterIdShift) |
-      (this.workerId << this.workerIdShift) |
-      this.sequence;
+      (timestampBig << BigInt(this.timestampShift)) |
+      (datacenterIdBig << BigInt(this.datacenterIdShift)) |
+      (workerIdBig << BigInt(this.workerIdShift)) |
+      sequenceBig;
 
     // 转换为字符串并返回
-    return this.toBase62(id);
+    return this.toBase62BigInt(id);
   }
 
   /**
@@ -169,24 +185,33 @@ export class FESnowflake {
   }
 
   /**
-   * 将数字转换为Base62字符串（更短的字符串表示）
-   * @param num 要转换的数字
+   * 将BigInt转换为Base62字符串（更短的字符串表示）
+   * @param num 要转换的BigInt
    * @returns Base62字符串
    */
-  private toBase62(num: number): string {
+  private toBase62BigInt(num: bigint): string {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     let result = '';
 
-    // 处理大数字，使用字符串操作避免精度丢失
-    let n = Math.abs(num);
-    if (n === 0) return '0';
+    let n = num < 0n ? -num : num;
+    if (n === 0n) return '0';
 
-    while (n > 0) {
-      result = chars[n % 62] + result;
-      n = Math.floor(n / 62);
+    while (n > 0n) {
+      result = chars[Number(n % 62n)] + result;
+      n = n / 62n;
     }
 
     return result;
+  }
+
+  /**
+   * 将数字转换为Base62字符串（兼容性方法）
+   * @param num 要转换的数字
+   * @returns Base62字符串
+   * @deprecated 使用 toBase62BigInt 以避免精度丢失
+   */
+  private toBase62(num: number): string {
+    return this.toBase62BigInt(BigInt(num));
   }
 
   /**
@@ -208,12 +233,12 @@ export class FESnowflake {
    * @returns ID信息对象
    */
   parseId(id: string): { timestamp: number; datacenterId: number; workerId: number; sequence: number } {
-    const num = this.fromBase62(id);
+    const num = this.fromBase62BigInt(id);
 
-    const sequence = num & this.maxSequence;
-    const workerId = (num >> this.workerIdShift) & this.maxWorkerId;
-    const datacenterId = (num >> this.datacenterIdShift) & this.maxDatacenterId;
-    const timestamp = (num >> this.timestampShift) + this.epoch;
+    const sequence = Number(num & BigInt(this.maxSequence));
+    const workerId = Number((num >> BigInt(this.workerIdShift)) & BigInt(this.maxWorkerId));
+    const datacenterId = Number((num >> BigInt(this.datacenterIdShift)) & BigInt(this.maxDatacenterId));
+    const timestamp = Number(num >> BigInt(this.timestampShift)) + this.epoch;
 
     return {
       timestamp,
@@ -224,13 +249,13 @@ export class FESnowflake {
   }
 
   /**
-   * 将Base62字符串转换为数字
+   * 将Base62字符串转换为BigInt
    * @param str Base62字符串
-   * @returns 数字
+   * @returns BigInt
    */
-  private fromBase62(str: string): number {
+  private fromBase62BigInt(str: string): bigint {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    let result = 0;
+    let result = 0n;
 
     for (let i = 0; i < str.length; i++) {
       const char = str[i];
@@ -238,9 +263,24 @@ export class FESnowflake {
       if (index === -1) {
         throw new Error(`Invalid character in Base62 string: ${char}`);
       }
-      result = result * 62 + index;
+      result = result * 62n + BigInt(index);
     }
 
     return result;
+  }
+
+  /**
+   * 将Base62字符串转换为数字（兼容性方法）
+   * @param str Base62字符串
+   * @returns 数字
+   * @deprecated 使用 fromBase62BigInt 以避免精度丢失
+   */
+  private fromBase62(str: string): number {
+    const result = this.fromBase62BigInt(str);
+    // 检查是否超出安全整数范围
+    if (result > BigInt(Number.MAX_SAFE_INTEGER)) {
+      console.warn('ID value exceeds safe integer range, precision may be lost');
+    }
+    return Number(result);
   }
 }

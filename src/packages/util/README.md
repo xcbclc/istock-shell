@@ -218,13 +218,13 @@ emitter.off('userLogin');
 ```typescript
 class FESnowflake {
   constructor(workerId?: number, datacenterId?: number);
-  
+
   // 生成单个唯一ID
   nextId(): string;
-  
+
   // 批量生成ID
   nextIds(count: number): string[];
-  
+
   // 解析ID信息（调试用）
   parseId(id: string): {
     timestamp: number;
@@ -285,7 +285,7 @@ const store = tx.objectStore('items');
 const item = {
   id: snowflake.nextId(),
   name: 'Example Item',
-  createdAt: new Date()
+  createdAt: new Date(),
 };
 
 await store.add(item);

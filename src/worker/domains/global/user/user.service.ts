@@ -2,6 +2,25 @@ import { Injectable, type ModelCreate, type ModelUpdate, type OrmQuery } from '@
 import { ScopeError } from '@istock-shell/util';
 import { UserModel } from './user.model';
 
+interface WxQrCodeResponse {
+  qrCode: string;
+  expiresIn: number;
+}
+
+interface WxStatusResponse {
+  status: 'waiting' | 'need_bind' | 'success' | 'expired';
+  user?: {
+    userId: string;
+    account: string;
+    nickname?: string;
+    avatar?: string;
+  };
+  tokens?: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
+
 @Injectable()
 export class UserService {
   constructor() {
@@ -42,5 +61,57 @@ export class UserService {
 
   async find(query: OrmQuery = {}) {
     return await UserModel.query(query);
+  }
+
+  async generateWxQrCode(scene: string): Promise<WxQrCodeResponse> {
+    const API_BASE = 'http://localhost:5170/api/v1';
+    try {
+      const response = await fetch(`${API_BASE}/wx/user/qr/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ scene }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      throw new ScopeError(
+        `domain.${this.constructor.name}`,
+        `生成微信二维码失败: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
+  }
+
+  async checkWxQrStatus(scene: string): Promise<WxStatusResponse> {
+    const API_BASE = 'http://localhost:5170/api/v1';
+    try {
+      const response = await fetch(`${API_BASE}/wx/user/qr/status`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ scene }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      throw new ScopeError(
+        `domain.${this.constructor.name}`,
+        `检查微信扫码状态失败: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
+  }
+
+  generateRandomScene(): string {
+    return 'login_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
 }
