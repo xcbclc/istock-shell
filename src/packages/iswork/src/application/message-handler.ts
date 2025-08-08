@@ -50,6 +50,10 @@ export class MessageHandler {
       methodParams,
       middlewares,
     } = domainHandler.getMessageHandlerInfo({ ...cmdpInfo, subDomain: subDomainName });
+    if (!controller)
+      return {
+        middlewares,
+      };
     let handler: Function | undefined;
     if (methodProperty) handler = controller[methodProperty];
     if (!handler) {

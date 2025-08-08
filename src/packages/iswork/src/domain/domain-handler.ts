@@ -36,14 +36,11 @@ const { ControllerDecorator } = Decorator;
  * ```typescript
  * const handler = DomainHandler.create();
  *
- * // 注册领域
- * handler.register(MyDomainClass);
+ * // 添加全局提供者
+ * handler.addGlobalProvider();
  *
- * // 解析控制器信息
- * const resolveInfo = handler.resolveCmdpInfo(cmdpInfo);
- *
- * // 获取控制器实例和方法
- * const { controller, method } = handler.getControllerAndMethod(resolveInfo);
+ * // 获取消息处理器信息
+ * const handlerInfo = handler.getMessageHandlerInfo(cmdpResolveInfo);
  * ```
  */
 export class DomainHandler {
@@ -97,6 +94,14 @@ export class DomainHandler {
           this.#iocContainer.addProvider<any>(provider);
           this.#iocContainer.addScope(GLOBAL_SCOPE, domain.domainClass);
         });
+
+        // 主动实例化全局Domain类，确保constructor执行
+        const DomainClass: DomainClassBase<any> = domain.domainClass;
+        const domainInstance = this.#iocContainer.inject<typeof DomainClass>({
+          provide: DomainClass,
+          useClass: DomainClass,
+        });
+        domain.setDomainClassInstance(domainInstance);
       });
   }
 
@@ -122,6 +127,19 @@ export class DomainHandler {
     if (!domain) {
       throw new ScopeError(`iswork.${this.constructor.name}`, `未找到${cmdpResolveInfo.subDomain}对应的domain`);
     }
+    const isGlobal = domain.isGlobal;
+    // 提供者添加到ioc容器
+    domain.providers.forEach((provider) => {
+      this.#iocContainer.addProvider<any>(provider);
+      this.#iocContainer.addScope(isGlobal ? GLOBAL_SCOPE : provider.provide, domain.domainClass);
+    });
+    const DomainClass: DomainClassBase<any> = domain.domainClass;
+    // 从ioc容器获取Domain实例
+    const domainClass = this.#iocContainer.inject<typeof DomainClass>({
+      provide: DomainClass,
+      useClass: DomainClass,
+    });
+    domain.setDomainClassInstance(domainClass);
     // controller元数据与cmdp解析出的相关信息匹配获取到具体处理的Controller类
     const Controller: ControllerBase<any> | undefined = domain.controllers.find((controller) => {
       const controllerDecorator = this.#domainManager.decoratorRegister.get(ControllerDecorator);
@@ -134,27 +152,14 @@ export class DomainHandler {
       return controllerMeta.alias === cmdpResolveInfo.controller;
     });
     if (!Controller) {
-      throw new ScopeError(`iswork.${this.constructor.name}`, `未找到${cmdpResolveInfo.controller}对应的Controller`);
+      return { DomainClass, domain, domainClass };
     }
-    const isGlobal = domain.isGlobal;
-    // 提供者添加到ioc容器
-    domain.providers.forEach((provider) => {
-      this.#iocContainer.addProvider<any>(provider);
-      this.#iocContainer.addScope(isGlobal ? GLOBAL_SCOPE : provider.provide, domain.domainClass);
-    });
     // 从ioc容器获取Controller实例
     const controller = this.#iocContainer.inject<ControllerBase>({
       provide: Controller,
       useClass: Controller,
     });
-    const DomainClass: DomainClassBase<any> = domain.domainClass;
-    // 从ioc容器获取Domain实例
-    const domainClass = this.#iocContainer.inject<typeof DomainClass>({
-      provide: DomainClass,
-      useClass: DomainClass,
-    });
-    domain.setDomainClassInstance(domainClass);
-    return { controller, domainClass, Controller, DomainClass, domain };
+    return { DomainClass, domain, domainClass, Controller, controller };
   }
 
   /**
@@ -175,7 +180,13 @@ export class DomainHandler {
    * ```
    */
   getMessageHandlerInfo(cmdpResolveInfo: CmdpResolveInfo) {
-    const { Controller, domain, controller } = this.#resolveInstanceByCmdpInfo(cmdpResolveInfo);
+    const { domain, Controller, controller } = this.#resolveInstanceByCmdpInfo(cmdpResolveInfo);
+    if (!Controller || !controller) {
+      return {
+        domain,
+        middlewares: [...domain.middlewares],
+      };
+    }
     const cmdpMethod = cmdpResolveInfo.method;
     const controllerMeta = domain.getControllerMetadata(Controller);
     if (!controllerMeta) {
