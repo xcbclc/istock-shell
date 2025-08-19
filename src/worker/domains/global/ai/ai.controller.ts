@@ -16,6 +16,7 @@ import { isString, ScopeError } from '@istock-shell/util';
 
 @Controller({
   alias: 'ai',
+  viewName: 'AI',
 })
 export class AiController {
   constructor(private readonly aiService: AiService) {}

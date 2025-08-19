@@ -1,7 +1,7 @@
 import { Global, Domain } from '@istock-shell/iswork';
 import { GlobalDomain } from './global/global.domain';
 import { InputDomain } from './input/input.domain';
-import { AgDomain } from './ag/ag.domain';
+import { AkshareDomain } from './akshare/akshare.domain';
 import { WzdhDomain } from './wzdh/wzdh.domain';
 import { KzzDomain } from './kzz/kzz.domain';
 import { TzrlDomain } from './tzrl/tzrl.domain';
@@ -11,7 +11,7 @@ import { CdfcDomain } from './cdfc/cdfc.domain';
 @Domain({
   name: 'root',
   viewName: '根',
-  imports: [GlobalDomain, InputDomain, AgDomain, WzdhDomain, KzzDomain, TzrlDomain, CdfcDomain],
+  imports: [GlobalDomain, InputDomain, AkshareDomain, WzdhDomain, KzzDomain, TzrlDomain, CdfcDomain],
   providers: [],
 })
 export class RootDomain {}

@@ -4,6 +4,7 @@ import cmdJson from './cj.cmd';
 
 @Controller({
   alias: 'cj',
+  viewName: '财经导航',
 })
 export class CjController {
   constructor(private readonly cjService: CjService) {}

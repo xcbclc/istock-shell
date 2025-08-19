@@ -146,7 +146,7 @@ export abstract class AbstractCmdp {
    * ```
    */
   static check(address: string, protocol: string = 'cmdp:'): boolean {
-    const pattern = `^${protocol}\/\/@\\w{1,20}(\\.[\\w]{1,20}){1,5}:[0-9]{1,4}\/[\\w]{1,20}\.[\\w]{1,20}$`;
+    const pattern = `^${protocol}\/\/@\\w{1,20}(\\.[\\w]{1,20}){1,5}:[0-9]{1,4}\/[\\w]{1,20}\.[\\w]{1,40}$`;
     const regExp = new RegExp(pattern);
     return regExp.test(address);
   }

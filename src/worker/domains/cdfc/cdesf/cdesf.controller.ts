@@ -4,6 +4,7 @@ import cmdJson from './cdesf.cmd';
 
 @Controller({
   alias: 'cdesf',
+  viewName: '成都房产',
 })
 export class CdesfController {
   constructor(private readonly cdesfService: CdesfService) {}

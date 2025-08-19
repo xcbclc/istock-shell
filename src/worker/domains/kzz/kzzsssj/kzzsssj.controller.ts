@@ -6,6 +6,7 @@ import cmdJson from './kzzsssj.cmd';
 
 @Controller({
   alias: 'kzzsssj', // 控制器别名
+  viewName: '可转债实时数据',
   component: { name: 'ShVirtualTable' }, // 控制器所有方法返回的数据用表格组件展示
 })
 export class KzzsssjController {

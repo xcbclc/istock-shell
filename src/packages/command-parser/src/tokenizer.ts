@@ -143,8 +143,8 @@ export class Tokenizer {
   /** OR 管道操作符正则表达式 */
   readonly #pipeOr = /^\|$/;
 
-  /** 命令名称正则表达式（仅支持字母开头） */
-  readonly #command = /^[a-zA-Z]$/;
+  /** 命令正则表达式（支持字母和下划线） */
+  readonly #command = /^[a-zA-Z_]$/;
 
   /** 参数值正则表达式（排除特殊字符） */
   readonly #parameter = /^[^()（）|&\s]$/;

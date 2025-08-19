@@ -15,11 +15,29 @@ export const getUnitOption = (unitOption: Partial<ControllerMethodCmdRouteOption
     parameter: ['-dw', '--单位'],
     parameterType: ['array'],
     description: `设置表格单位，单位值支持（万亿、亿、千万、百万、十万、万、千、百、十），可带多个参数。
-      格式如：1、列名称:行名称·单位 2、*:行名称·单位 3、列名称:*·单位 4、列名称1:*·单位 5、列名称2:*·单位`,
+      格式如：1、列名称:行名称·单位 2、*:行名称·单位 3、列名称:*·单位 4、列名称1:*·单位,列名称2:*·单位`,
     default: '',
     optional: true,
     choices: [],
     ...unitOption,
+  };
+};
+
+/**
+ * 获取管道选项模版数据
+ * @param pipeOption
+ */
+export const getPipeOption = (pipeOption: Partial<ControllerMethodCmdRouteOptions> = {}) => {
+  return {
+    name: '管道',
+    parameter: ['-gd', '--管道'],
+    parameterType: ['array'],
+    description: `设置表格管道，管道支持（格式化·AK日期），可带多个参数。
+      格式如：1、列名称:行名称·管道 2、*:行名称·管道 3、列名称:*·管道 4、列名称1:*·管道,列名称2:*·管道`,
+    default: '',
+    optional: true,
+    choices: [],
+    ...pipeOption,
   };
 };
 

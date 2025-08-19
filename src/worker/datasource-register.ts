@@ -5,20 +5,6 @@ import { CmdRouteModel } from '@domains/global/cmd-route/cmd-route.model';
 import { HistoryModel } from '@domains/global/history/history.model';
 import { StockCodeModel } from '@domains/global/stock-code/stock-code.model';
 import { StockCodeResultModel } from '@domains/global/stock-code/stock-code-result.model';
-import { SzgpsczmModel, SzlbtjModel, SzdqjypxModel, SzgphycjModel, SzmrgkModel } from '@domains/ag/gpsczm/gpsczm.model';
-import { GgxxcxModel } from '@domains/ag/ggxxcx/ggxxcx.model';
-import { HqbjModel } from '@domains/ag/hqbj/hqbj.model';
-import { SshqsjModel, SshqxlModel } from '@domains/ag/sshqsj/sshqsj.model';
-import {
-  LshqsjModel,
-  LshqxlModel,
-  LshqtxModel,
-  FssjxlModel,
-  FssjdcModel,
-  RnfssjdcModel,
-  PqsjlModel,
-} from '@domains/ag/lshqsj/lshqsj.model';
-import { LsfbsjModel } from '@domains/ag/lsfbsj/lsfbsj.model';
 import { CmdAliasModel } from '@domains/global/cmd-alias/cmd-alias.model';
 import { CjModel } from '@domains/wzdh/cj/cj.model';
 import { AiModel } from '@domains/global/ai/ai.model';
@@ -44,26 +30,7 @@ export const indexedDataSourceModels = [
   ProxyModel,
   ShortcutModel,
 ];
-export const akShareFetchDataSourceModels = [
-  SzgpsczmModel,
-  SzlbtjModel,
-  SzdqjypxModel,
-  SzgphycjModel,
-  SzmrgkModel,
-  GgxxcxModel,
-  HqbjModel,
-  SshqsjModel,
-  SshqxlModel,
-  LshqsjModel,
-  LshqxlModel,
-  LshqtxModel,
-  FssjxlModel,
-  FssjdcModel,
-  RnfssjdcModel,
-  PqsjlModel,
-  LsfbsjModel,
-  StockCodeModel,
-];
+export const akShareFetchDataSourceModels = [StockCodeModel];
 export const fetchDataSourceModels = [AiModel, TzrlModel, KzzsdModel, KzzsssjModel];
 export const teableDataSourceModels = [CdfceshqsjModel, CdfcjysjModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];

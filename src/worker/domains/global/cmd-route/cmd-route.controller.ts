@@ -11,7 +11,10 @@ import {
 import { CmdRouteService } from './cmd-route.service';
 import cmdJson from './cmd-route.cmd.json';
 
-@Controller('cmdRoute')
+@Controller({
+  alias: 'cmdRoute',
+  viewName: '命令路由',
+})
 export class CmdRouteController {
   constructor(private readonly cmdRouteService: CmdRouteService) {}
 

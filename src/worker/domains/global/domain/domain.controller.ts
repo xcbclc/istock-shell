@@ -16,7 +16,10 @@ import { DomainService } from './domain.service';
 import type { DomainModel } from './domain.model';
 import cmdJson from './domain.cmd.json';
 
-@Controller('domain')
+@Controller({
+  alias: 'domain',
+  viewName: '应用域',
+})
 export class DomainController {
   constructor(private readonly domainService: DomainService) {}
 

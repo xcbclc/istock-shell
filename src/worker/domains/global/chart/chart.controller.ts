@@ -22,7 +22,10 @@ type TViewChartStockPayload =
   | TCmdTablePipeRequest<TStockOption, TStockArguments>
   | TCmdRequest<TStockOption, TStockArguments>;
 
-@Controller('chart')
+@Controller({
+  alias: 'chart',
+  viewName: '图表',
+})
 export class ChartController {
   constructor(private readonly chartService: ChartService) {}
 

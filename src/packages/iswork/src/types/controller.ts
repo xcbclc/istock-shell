@@ -20,6 +20,8 @@ export type ControllerBase<T = any> = AnyClass<T>;
 export type ControllerMetadata = {
   /** 控制器别名，默认值为控制器实例类名 */
   alias?: string | string[];
+  /** 控制器的显示名称 */
+  viewName: string;
   /** 控制器版本 */
   version?: string;
   /** 定义控制器返回数据的展示组件 */

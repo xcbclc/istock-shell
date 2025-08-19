@@ -9,6 +9,7 @@ dayjs.extend(utc);
 
 @Controller({
   alias: 'tzrl',
+  viewName: '投资日历',
 })
 export class TzrlController {
   constructor(private readonly tzrlService: TzrlService) {}

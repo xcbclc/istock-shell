@@ -17,15 +17,28 @@ const packageJson = JSON.parse(readFileSync(join(__dirname, '../package.json'), 
 import docPackage from './action/package.mjs';
 import mergeMarkdown from './action/merge-markdown.mjs';
 import shellUi from './action/shell-ui.mjs';
+import parseAkshare from './action/parse-akshare.mjs';
 
 // 设置CLI工具版本号
 program.version(packageJson.version);
 
 /**
- * 注册'cmd init'命令
- * 用于初始化命令开发环境，创建命令模板文件
+ * 注册'cmd'命令组
+ * 支持多种命令开发操作：
+ * - init: 初始化命令开发环境
+ * - akshare: 解析AKShare文档生成接口定义
  */
-program.command('cmd init').description('初始化命令开发').action(cmdInit);
+program
+  .command('cmd <action>')
+  .description('命令开发工具')
+  .action(async (action) => {
+    if (action === 'init') {
+      await cmdInit(); // 初始化命令开发环境，创建命令模板文件
+    }
+    if (action === 'akshare') {
+      await parseAkshare(); // 解析AKShare文档生成接口定义
+    }
+  });
 
 /**
  * 注册'doc'命令组
@@ -49,6 +62,7 @@ program
     if (action === 'merge') {
       await mergeMarkdown();
     }
+
     if (action === 'ui') {
       await shellUi();
     }

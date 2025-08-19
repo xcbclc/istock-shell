@@ -4,6 +4,7 @@ import cmdJson from './kzzsd.cmd';
 
 @Controller({
   alias: 'kzzsd',
+  viewName: '可转债双低',
 })
 export class KzzsdController {
   constructor(private readonly kzzsdService: KzzsdService) {}

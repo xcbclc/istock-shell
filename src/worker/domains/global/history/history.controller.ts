@@ -14,7 +14,10 @@ import { HistoryService } from './history.service';
 import type { HistoryModel } from './history.model';
 import cmdJson from './history.cmd.json';
 
-@Controller('history')
+@Controller({
+  alias: 'history',
+  viewName: '输出历史',
+})
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
   @Method('add')

@@ -30,6 +30,7 @@ export interface ResponseCmdRoute extends Omit<ModelData<CmdRouteModel>, 'subcom
 
 @Injectable()
 export class CmdRouteService {
+  private initCmdRoute: boolean = false;
   newCmdRoute(id: number | string, data: ModelCreateNoId<CmdRouteModel>) {
     const cmdRoute = CmdRouteModel.createModel(
       Object.assign(data, { id, updateDate: new Date(), createDate: new Date() })
@@ -70,7 +71,7 @@ export class CmdRouteService {
    */
   async getAllCmdRoute(ctx: ApplicationContext) {
     const cmdRouteList = (await CmdRouteModel.query({})) ?? [];
-    if (cmdRouteList.length > 0) return cmdRouteList;
+    if (cmdRouteList.length > 0 && this.initCmdRoute) return cmdRouteList;
     const domains = ctx.app.allDomain;
     // 从domain开始遍历、遍历controller上方法的CmdRouteMeta，然后保存在内存中
     for (const domain of domains) {
@@ -142,6 +143,7 @@ export class CmdRouteService {
         }
       }
     }
+    this.initCmdRoute = true;
     return cmdRouteList;
   }
 
@@ -169,5 +171,13 @@ export class CmdRouteService {
 
   async delete(id: number | string) {
     return await CmdRouteModel.deleteById(id);
+  }
+
+  async createMany(list: Array<ModelCreate<CmdRouteModel>>): Promise<Array<string | number>> {
+    if (!list.length) {
+      return [];
+    }
+    const ids = await CmdRouteModel.createMany(list);
+    return ids;
   }
 }

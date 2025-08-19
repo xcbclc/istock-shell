@@ -54,8 +54,7 @@ const switchBodyHandler = (body: TTableBody, unitValue?: TTableUnit, shwoUnit: b
  * @param matrix
  * @param tableItemUnits
  */
-export const withUnit = (matrix: TMatrixTable, conditions: TTableFilterConditions = []): TMatrixTable | [] => {
-  if (!matrix.length) return [];
+export const withUnit = (matrix: TMatrixTable, conditions: TTableFilterConditions = []): TMatrixTable => {
   const conditionRecord = conditions.reduce<Record<string, TTableUnit>>((record, condition) => {
     const { row, column, pipe } = condition;
     if (row?.name && pipe) {

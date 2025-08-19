@@ -26,6 +26,7 @@ export type TUiTableProps = {
   caption?: string;
   thead: TTableHeader[];
   tbody: TTableBody[][];
+  size?: string;
 };
 
 export type TCmdTablePipeRequest<Opt = unknown, Args = unknown[]> = TCmdRequest<

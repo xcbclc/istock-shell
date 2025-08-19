@@ -17,7 +17,10 @@ import { UserService } from './user.service';
 import type { UserModel } from './user.model';
 import cmd from './user.cmd.json';
 
-@Controller('user')
+@Controller({
+  alias: 'user',
+  viewName: '用户管理',
+})
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -204,7 +207,7 @@ export class UserController {
           <h4 style="margin-top: 0; color: #52c41a;">登录成功</h4>
           <div id="userDetails"></div>
         </div>
-        
+
         <style>
           .status { font-weight: bold; }
           .status.waiting { color: #1890ff; }
@@ -214,13 +217,13 @@ export class UserController {
           button:hover { opacity: 0.8; }
           button:disabled { opacity: 0.5; cursor: not-allowed; }
         </style>
-        
+
         <script>
           const currentScene = '${scene}';
           let pollingInterval = null;
           let countdownInterval = null;
           let expiresAt = Date.now() + (${expiresIn} * 1000);
-          
+
           async function checkStatus() {
              if (!currentScene) return;
              try {
@@ -232,21 +235,21 @@ export class UserController {
                  },
                  body: JSON.stringify({ scene: currentScene })
                });
-               
+
                if (!response.ok) {
                  throw new Error(\`HTTP error! status: \${response.status}\`);
                }
-               
+
                const data = await response.json();
                handleStatusUpdate(data);
-               
+
                // 如果登录成功，通知父窗口
                if (data.status === 'success' && data.user) {
                  window.parent.postMessage({
                    type: 'wx_login_success',
                    data: data
                  }, '*');
-                 
+
                  // 关闭当前窗口
                  window.close();
                }
@@ -255,7 +258,7 @@ export class UserController {
                updateStatus('检查状态失败: ' + error.message, 'error');
              }
            }
-          
+
           function handleStatusUpdate(data) {
             switch (data.status) {
               case 'waiting':
@@ -277,13 +280,13 @@ export class UserController {
                 updateStatus('未知状态: ' + data.status, 'error');
             }
           }
-          
+
           function updateStatus(message, type) {
             const statusEl = document.getElementById('status');
             statusEl.textContent = message;
             statusEl.className = \`status \${type}\`;
           }
-          
+
           function showUserInfo(data) {
             if (data.user) {
               const userInfoEl = document.getElementById('userInfo');
@@ -298,11 +301,11 @@ export class UserController {
               userInfoEl.style.display = 'block';
             }
           }
-          
+
           function startPolling() {
             pollingInterval = setInterval(checkStatus, 2000);
           }
-          
+
           function stopPolling() {
             if (pollingInterval) {
               clearInterval(pollingInterval);
@@ -315,23 +318,23 @@ export class UserController {
             document.getElementById('checkBtn').disabled = false;
             document.getElementById('stopBtn').disabled = true;
           }
-          
+
           function startCountdown() {
             countdownInterval = setInterval(() => {
               if (!expiresAt) return;
-              
+
               const remaining = Math.max(0, expiresAt - Date.now());
               const seconds = Math.ceil(remaining / 1000);
-              
+
               document.getElementById('countdown').textContent = \`剩余时间: \${seconds}秒\`;
-              
+
               if (seconds <= 0) {
                 updateStatus('二维码已过期', 'expired');
                 stopPolling();
               }
             }, 1000);
           }
-          
+
           // 自动开始轮询和倒计时
           startPolling();
           startCountdown();
