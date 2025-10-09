@@ -6,16 +6,34 @@ export class UserModel extends BaseModel {
 
   @Index()
   @Column()
+  userId!: string;
+
+  @Column()
   username!: string;
 
   @Column()
-  password!: string;
+  account!: string;
+
+  @Column()
+  avatar!: string;
+
+  @Column()
+  gender!: string;
+
+  @Column()
+  mobile!: string;
+
+  @Column()
+  nickname!: string;
 
   @Column()
   phone!: string;
 
   @Column()
-  nickname!: string;
+  isMember!: boolean;
+
+  @Column()
+  hasUnionid!: boolean;
 
   @Column()
   updateDate!: Date;

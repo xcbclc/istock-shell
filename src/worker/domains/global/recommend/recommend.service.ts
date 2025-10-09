@@ -213,11 +213,12 @@ export class RecommendService {
   }
 
   autoRecommend(
-    payload: { input: string; domainNamePaths: string[] },
+    payload: { input: string; domainName: string },
     historys: Array<ModelData<HistoryModel>>,
     cmdRoutes: ResponseCmdRoute[]
   ): RecommendData {
     const originalInput = payload.input.trim();
+    const domainNamePaths = payload.domainName.split('.');
     // 解析成tokens，然后找到最后一个命令
     const allTokens = this.#tokenizer.parse(originalInput, false);
     const cmdTokenIndex = allTokens.findLastIndex((token) => token.type === TokenType.command);
@@ -249,7 +250,7 @@ export class RecommendService {
     } else {
       // 在路由列表里面匹配命令，不包含子命令
       list = cmdRoutes
-        .filter((cmdRoute) => cmdRoute.cmd.startsWith(cmd.value))
+        .filter((cmdRoute) => cmdRoute.cmd.startsWith(cmd.value) && (domainNamePaths.includes(cmdRoute.domainName) || cmdRoute.domainName === 'global'))
         .map((cmdRoute) => {
           return {
             label: cmdRoute.cmd,

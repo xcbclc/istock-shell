@@ -54,7 +54,7 @@ export class DomainService {
 
   async find(ctx: ApplicationContext) {
     const domains = await this.getAllDomain(ctx);
-    return domains.filter((domain) => !domain.isGlobal);
+    return domains.filter((domain) => !domain.isGlobal || domain.name === 'akshare');
   }
 
   async findDomainPaths(ctx: ApplicationContext, currentPaths: string[], paths: string[]) {
@@ -65,7 +65,7 @@ export class DomainService {
       record[`_${domain.viewName}`] = domain;
       return record;
     }, {});
-    let currentDomainPaths = currentPaths.map((path) => {
+    let currentDomainPaths = currentPaths.filter((path) => path !== 'global').map((path) => {
       const domain = domainRecord[path] ?? domainRecord[`_${path}`];
       if (!domain) {
         throw new ScopeError(

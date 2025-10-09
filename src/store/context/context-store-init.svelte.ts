@@ -73,14 +73,14 @@ export const onContextStoreHandle = (context: CmdWindowContext) => {
   const onDomainChange = prompt.onDomainChange.bind(prompt);
   context.message.on(evenPromptDomainChangeAddress, onDomainChange);
 
-  const evenUserLoginAddress = `event://@anonymous.global:${port}/user.login`;
-  const onLogin = user.onLogin.bind(user);
-  context.message.on(evenUserLoginAddress, onLogin);
+  const evenUserCheckLoginAddress = `event://@anonymous.global:${port}/user.checkLogin`;
+  const onCheckLogin = user.checkLogin.bind(user);
+  context.message.on(evenUserCheckLoginAddress, onCheckLogin);
 
   return () => {
     context.message.off(eventHistoryBatchDelete, onBatchDeleteHistory);
     context.message.off(eventOutputAiAddress, onSendAiMessage);
     context.message.off(evenPromptDomainChangeAddress, onDomainChange);
-    context.message.off(evenUserLoginAddress, onLogin);
+    context.message.off(evenUserCheckLoginAddress, onCheckLogin);
   };
 };

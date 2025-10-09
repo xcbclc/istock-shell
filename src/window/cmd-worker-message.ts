@@ -1,6 +1,7 @@
 import { EventEmitter, ScopeError, isNil, isString, unWarp, wrap } from '@istock-shell/util';
 import { MessageStatus, Cmdp } from '@istock-shell/iswork';
 import type { CmdWindow } from '@/window/cmd-window.svelte';
+import { CmdWindowsManager } from '@/window/cmd-windows-manager';
 
 export type TWorkerMessageMeta = (Record<string, unknown> & { messageId?: string }) | null;
 
@@ -40,11 +41,19 @@ export class CmdWorkerMessage extends EventEmitter {
     const { user } = windowStore;
     const domains = domainPath.split('.');
     const [controller, method] = executePath.split('.');
-    // 获取执行域
-    // const originPrompt = get(this.#ctx.cmdStore.cmdPrompt);
-    // const { domains } = originPrompt;
-    // const domainNames: string[] = domains.map((domain) => domain.name);
-    // const domainName: string = domainNames.join('.');
+    let domainName = 'root.global';
+    if (this.windowId !== 0) {
+      const ctx = CmdWindowsManager.getInstance().getCmdContextCache(this.windowId);
+      if (ctx) {
+        const promptDomains = ctx.store.prompt.data.domains;
+        if (promptDomains.length && promptDomains.length > 1) {
+         domainName = promptDomains.map((domain) => domain.name).join('.'); 
+        }
+      }
+    }
+    if (meta && !meta.domainName) {
+      meta.domainName = domainName;
+    }
     const request = {
       payload,
       address: Cmdp.getAddressByInfo({
@@ -55,7 +64,7 @@ export class CmdWorkerMessage extends EventEmitter {
         controller,
         method,
       }), // 使用cmd协议地址
-      meta: { domainName: 'global', ...meta, messageId: this.cmdWindow.getNextId() },
+      meta: { ...meta, messageId: this.cmdWindow.getNextId() },
     };
     worker.postMessage(wrap(request));
 

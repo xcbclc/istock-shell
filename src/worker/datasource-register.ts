@@ -20,7 +20,6 @@ import { ProxyModel } from '@domains/global/setting/proxy/proxy.model';
 import { ShortcutModel } from '@domains/global/setting/shortcut/shortcut.model';
 
 export const indexedDataSourceModels = [
-  UserModel,
   HistoryModel,
   CmdAliasModel,
   CookieModel,
@@ -30,8 +29,8 @@ export const indexedDataSourceModels = [
   ProxyModel,
   ShortcutModel,
 ];
-export const akShareFetchDataSourceModels = [StockCodeModel];
-export const fetchDataSourceModels = [AiModel, TzrlModel, KzzsdModel, KzzsssjModel];
+export const proxyFetchDataSourceModels = [StockCodeModel, TzrlModel, KzzsdModel, KzzsssjModel];
+export const fetchDataSourceModels = [UserModel, AiModel];
 export const teableDataSourceModels = [CdfceshqsjModel, CdfcjysjModel];
 export const memoryDataSourceModels = [DomainModel, CmdRouteModel, CjModel];
 
@@ -45,19 +44,19 @@ export const initDataSource = async () => {
   });
   await indexedDataSource.initialize();
 
-  const akShareFetchDataSource = new DataSource<'fetch'>({
+  const proxyFetchDataSource = new DataSource<'fetch'>({
     name: 'fetch',
     type: 'fetch',
-    entities: akShareFetchDataSourceModels,
-    prefixUrl: import.meta.env.VITE_AKSHARE_API ?? '/api/akshare',
+    entities: proxyFetchDataSourceModels,
+    prefixUrl: import.meta.env.VITE_PROXY_API ?? '/api/v1/proxy',
   });
-  await akShareFetchDataSource.initialize();
+  await proxyFetchDataSource.initialize();
 
   const fetchDataSource = new DataSource<'fetch'>({
     name: 'fetch',
     type: 'fetch',
     entities: fetchDataSourceModels,
-    prefixUrl: import.meta.env.VITE_ISTOCK_API ?? '/api',
+    prefixUrl: import.meta.env.VITE_ISTOCK_API ?? '/api/v1',
   });
   await fetchDataSource.initialize();
 
@@ -65,10 +64,10 @@ export const initDataSource = async () => {
     name: 'fetch',
     type: 'fetch',
     entities: teableDataSourceModels,
-    prefixUrl: import.meta.env.VITE_ISTOCK_API ?? '/api',
+    prefixUrl: import.meta.env.VITE_PROXY_API ?? '/api/v1/proxy',
     requestOptions: {
       headers: {
-        'x-target': import.meta.env.VITE_ISTOCK_TEABLE ?? 'https://teable.istock.red',
+        'xx-target': import.meta.env.VITE_ISTOCK_TEABLE ?? 'https://istock.red',
       },
     },
   });

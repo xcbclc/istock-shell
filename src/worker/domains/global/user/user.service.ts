@@ -1,84 +1,48 @@
-import { Injectable, type ModelCreate, type ModelUpdate, type OrmQuery } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { ScopeError } from '@istock-shell/util';
 import { UserModel } from './user.model';
 
 interface WxQrCodeResponse {
+  qrId: string;
   qrCode: string;
-  expiresIn: number;
+  expireTime: number;
 }
 
 interface WxStatusResponse {
-  status: 'waiting' | 'need_bind' | 'success' | 'expired';
-  user?: {
+  status: 'pending' | 'scanned' | 'confirmed' | 'expired' | 'cancelled';
+  userInfo?: {
     userId: string;
     account: string;
     nickname?: string;
     avatar?: string;
   };
-  tokens?: {
-    accessToken: string;
-    refreshToken: string;
-  };
+  token?: string;
+  message: string;
 }
 
 @Injectable()
 export class UserService {
-  constructor() {
-    this.initUser().catch((e) => {
-      if (e instanceof Error) throw e;
-      throw new ScopeError(`domain.${this.constructor.name}`, e?.message ?? '初始化用户错误');
+  constructor() {}
+  // async login(username: string, password: string) {
+  //   const query = UserModel.createQueryBuilder().setFilter(['username', 'eq', username]);
+  //   const [user] = (await UserModel.query(query.getQueryData())) ?? [];
+  //   return user?.password === password ? user : null;
+  // }
+
+  async getSelfInfo(token: string) {
+    return await UserModel.run<ModelData<UserModel>>('/wx/user/self/info', {
+      method: 'get',
+      headers: { authorization: `Bearer ${token}` },
     });
   }
 
-  async initUser() {
-    const users = await this.find();
-    if (users.length > 0) return;
-    await this.create({
-      id: UserModel.generateId.nextId(),
-      username: 'daoyou',
-      password: 'Dy123123',
-      phone: '18888888888',
-      nickname: '星辰编程理财',
-      updateDate: new Date(),
-      createDate: new Date(),
-      rowStatus: 1,
-    });
-  }
-
-  async login(username: string, password: string) {
-    const query = UserModel.createQueryBuilder().setFilter(['username', 'eq', username]);
-    const [user] = (await UserModel.query(query.getQueryData())) ?? [];
-    return user?.password === password ? user : null;
-  }
-
-  async create(data: ModelCreate<UserModel>) {
-    return await UserModel.createOne(data);
-  }
-
-  async update(data: ModelUpdate<UserModel>) {
-    return await UserModel.updateById(data.id, data);
-  }
-
-  async find(query: OrmQuery = {}) {
-    return await UserModel.query(query);
-  }
-
-  async generateWxQrCode(scene: string): Promise<WxQrCodeResponse> {
-    const API_BASE = 'http://localhost:5170/api/v1';
+  async generateWxQrCode(): Promise<WxQrCodeResponse> {
     try {
-      const response = await fetch(`${API_BASE}/wx/user/qr/generate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ scene }),
+      const response = await UserModel.run<WxQrCodeResponse>(`/wx/user/qr/generate`, {
+        method: 'post',
+        body: JSON.stringify({ width: 280 }),
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return await response.json();
+      return response;
     } catch (error) {
       throw new ScopeError(
         `domain.${this.constructor.name}`,
@@ -87,31 +51,17 @@ export class UserService {
     }
   }
 
-  async checkWxQrStatus(scene: string): Promise<WxStatusResponse> {
-    const API_BASE = 'http://localhost:5170/api/v1';
+  async checkWxQrStatus(qrId: string): Promise<WxStatusResponse> {
     try {
-      const response = await fetch(`${API_BASE}/wx/user/qr/status`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ scene }),
+      const response = await UserModel.run<WxStatusResponse>(`/wx/user/qr/status/${qrId}`, {
+        method: 'get',
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return await response.json();
+      return response;
     } catch (error) {
       throw new ScopeError(
         `domain.${this.constructor.name}`,
         `检查微信扫码状态失败: ${error instanceof Error ? error.message : String(error)}`
       );
     }
-  }
-
-  generateRandomScene(): string {
-    return 'login_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
 }

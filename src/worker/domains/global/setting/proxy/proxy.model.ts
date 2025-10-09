@@ -8,10 +8,14 @@ export class ProxyModel extends BaseModel {
 
   @Index()
   @Column()
+  name!: string;
+
+  @Index()
+  @Column()
   url!: string;
 
   @Column()
-  pathRewrite!: [string, string];
+  pathRewrite!: Array<[string, string]>;
 
   @Column()
   headers!: Record<string, string>;

@@ -44,4 +44,26 @@ export class ProxyService {
       filter: query.filter,
     });
   }
+
+  async findOneByName(name: string) {
+    const query: { filter: QueryFilterArr[] } = { filter: [['name', 'eq', name], ['rowStatus', 'eq', 1]] };
+    const result = await ProxyModel.query({
+      limit: 1,
+      sort: {
+        field: 'id',
+        order: 'DESC',
+      },
+      filter: query.filter,
+    });
+    return result && result.length ? result[0] : null;
+  };
+
+  addProxyHeaderPrefix(headers: Record<string, string>) {
+    return Object.keys(headers).reduce((data, key) => {
+      return {
+        ...data,
+        ['xx-' + key]: headers[key],
+      };
+    }, {});
+  }
 }

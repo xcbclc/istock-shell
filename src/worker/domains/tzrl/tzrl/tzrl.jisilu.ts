@@ -1,4 +1,3 @@
-export const site = 'https://www.jisilu.cn';
 export const typeRecord: Record<string, string> = {
   newstock_onlist: '新股上市',
   newstock_apply: '新股申购',

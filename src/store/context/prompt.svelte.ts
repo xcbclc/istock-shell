@@ -25,7 +25,7 @@ export const LOCAL_STORE_PROMPT_DOMAINS = 'istock_local_store_prompt_domains';
 
 export const getPromptTexts = (data?: PromptStoreData): PromptStoreDataText[] => {
   if (!data) return [];
-  const domain = ['', data.app, ...data.domains.map((d) => d.viewName)];
+  const domain = ['', data.app, ...data.domains.filter((d, i) => d.name !== 'root' && i !== 0).map((d) => d.viewName)];
   return [
     { text: dayjs(data.time).format('HH:mm:ss') || '', type: 'time' },
     { text: data.nickname, type: 'nickname' },
@@ -83,7 +83,6 @@ export class Prompt extends StoreContext<PromptStoreData> {
   onDomainChange(data: PromptStoreDataDomain[]) {
     // 创建一个新数组而不是修改传入的数组
     const domains = [...data];
-    domains.shift(); // 去掉根目录
     // 直接更新属性而不是替换整个对象
     this.data.domains = domains.map((item) => ({ viewName: item.viewName, name: item.name }));
     sessionStorage.setItem(this.#promptToken, JSON.stringify(this.data.domains));

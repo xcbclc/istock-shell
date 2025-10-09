@@ -78,7 +78,7 @@
         <div class="flex items-center gap-6 p-6 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg">
           <div class="avatar">
             <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center">
-              <ShIcon name="terminal" class="w-10 h-10 text-primary" />
+              <ShIcon name="terminal" class="w-16 h-16 text-primary" />
             </div>
           </div>
           <div class="flex-1">

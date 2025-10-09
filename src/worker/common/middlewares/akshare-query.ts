@@ -265,7 +265,7 @@ export const akshareQuery = async (ctx: ApplicationContext, next: () => Promise<
   }
   try {
     const { options = {}, arguments: args = [] } = isPlainObject(info.payload) ? info.payload : {};
-    const apiUrl = [import.meta.env.VITE_AKSHARE_API ?? '/api/akshare', apiInterface.api].join('/');
+    const apiUrl = [import.meta.env.VITE_PROXY_API ?? '/api/v1/proxy', apiInterface.api].join('/');
 
     // 构建请求参数
     const queryParams: Record<string, any> = {};
@@ -308,7 +308,7 @@ export const akshareQuery = async (ctx: ApplicationContext, next: () => Promise<
     // 调用AkShare API
     const response = await fetch(fullUrl, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'xx-target': (import.meta.env.VITE_ISTOCK_BASE ?? 'https://istock.red') + '/api/akshare' },
     });
 
     if (!response.ok) {
@@ -344,7 +344,7 @@ export const akshareQuery = async (ctx: ApplicationContext, next: () => Promise<
     let message = ctx.cmdp.getReturnMessage({
       output: [
         {
-          component: 'ShTable',
+          component: 'ShVirtualTable',
           props,
         },
       ],

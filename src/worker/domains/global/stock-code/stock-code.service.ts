@@ -20,6 +20,7 @@ export class StockCodeService {
     }
     const list = await StockCodeModel.run<Array<{ 代码: string; 名称: string }>>('/stock_zh_a_spot_em', {
       method: 'get',
+      headers: { 'xx-target': (import.meta.env.VITE_ISTOCK_BASE ?? 'https://istock.red') + '/api/akshare' },
     });
     this.#list = list.map((item) => {
       return {

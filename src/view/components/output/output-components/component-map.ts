@@ -4,6 +4,7 @@ import * as ShellUi from '@istock-shell/ui';
 import CmdOutputDoc from './CmdOutputDoc.svelte';
 import CmdOutputDocTable from './CmdOutputDocTable.svelte';
 import CmdOutputEvent from './CmdOutputEvent.svelte';
+import CmdOutputImage from './CmdOutputImage.svelte';
 
 export const registerOutputViewComponents = (outputComponent: OutputComponent) => {
   Object.entries(ShellUi as unknown as Record<string, SvelteComponent>).forEach(([name, component]) => {
@@ -12,4 +13,5 @@ export const registerOutputViewComponents = (outputComponent: OutputComponent) =
   outputComponent.registerComponent('CmdOutputDocTable', CmdOutputDocTable as unknown as SvelteComponent);
   outputComponent.registerComponent('CmdOutputDoc', CmdOutputDoc as unknown as SvelteComponent);
   outputComponent.registerComponent('CmdOutputEvent', CmdOutputEvent as unknown as SvelteComponent);
+  outputComponent.registerComponent('CmdOutputImage', CmdOutputImage as unknown as SvelteComponent);
 };

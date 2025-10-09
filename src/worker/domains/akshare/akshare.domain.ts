@@ -14,7 +14,7 @@ const name = 'akshare';
 @Global()
 @Domain({
   name,
-  viewName: name,
+  viewName: name.toUpperCase(),
   providers: [CmdRouteService],
   controllers: [],
   middlewares: [transformStockName, akshareQuery],

@@ -1,27 +1,28 @@
 import { Injectable, type ModelData } from '@istock-shell/iswork';
-import { CookieService } from '@domains/global/setting/cookie/cookie.service';
+import { isArray, isString, ScopeError } from '@istock-shell/util';
+import { ProxyService } from '@domains/global/setting/proxy/proxy.service';
 import { KzzsdModel } from './kzzsd.model';
 import { KzzsdResultModel } from './kzzsd-result.model';
-import { isArray, isString, ScopeError } from '@istock-shell/util';
 
 @Injectable()
 export class KzzsdService {
-  readonly #site = 'https://www.jisilu.cn';
-  constructor(private readonly cookieService: CookieService) {}
+  constructor(private readonly proxyService: ProxyService) {}
 
   /**
    * 获取集思录可转债列表数据
    */
   async findJisiluCbList() {
-    // 获取集思录的cookie数据
-    const cookieData = await this.cookieService.findOneByOrigin(this.#site);
+    const proxyData = await this.proxyService.findOneByName('jisilu');
+    if (!proxyData) {
+      throw new ScopeError(`KzzsdService.findJisiluCbList`, `未找到jisilu代理配置`);
+    }
     const jisiluData = await KzzsdModel.run<{
       data: Array<ModelData<KzzsdModel>>;
       prompt: string;
     }>('/webapi/cb/list/', {
       method: 'get',
       query: { _: Date.now() },
-      headers: { 'x-target': this.#site, 'x-cookie': cookieData?.cookie || '', init: 1 },
+      headers: { 'xx-target': proxyData?.url, ...this.proxyService.addProxyHeaderPrefix(proxyData?.headers || {}), init: 1 },
     });
     if (jisiluData.prompt) {
       throw new ScopeError(`kzzsd.${this.constructor.name}`, jisiluData.prompt);

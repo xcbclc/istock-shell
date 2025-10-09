@@ -6,8 +6,8 @@ import type { CmdWindow } from '@/window';
 
 export interface ProxyStoreData extends ModelPartialData<ProxyModel> {
   id: string;
-  origin: string;
-  cookie: string;
+  name: string;
+  url: string;
 }
 export interface ProxyStoreModel extends ModelData<ProxyModel> {}
 
@@ -33,14 +33,14 @@ export class Proxy extends StoreWindow<ProxyStoreModel> {
     if (list) this.list = list;
   }
   async create(data: ProxyStoreData) {
-    if (!data.origin || !data.cookie) {
+    if (!data.name || !data.url) {
       return;
     }
     await this.cmdWindow.message.send('setting', 'proxy.create', data);
     this.newTempId = '';
   }
   async update(model: ProxyStoreData) {
-    if (!model.id || !model.origin || !model.cookie) {
+    if (!model.id || !model.name || !model.url) {
       return;
     }
     await this.cmdWindow.message.send('setting', 'proxy.update', model);
@@ -60,9 +60,10 @@ export class Proxy extends StoreWindow<ProxyStoreModel> {
     this.editRecord[this.newTempId] = true;
     this.list.push({
       id: tempId,
+      name: '',
       url: '',
-      path: '',
-      pathRewrite: '',
+      pathRewrite: [],
+      headers: {},
     });
   }
   isCreateData(data: ProxyStoreData | ProxyStoreModel): data is ProxyStoreData {

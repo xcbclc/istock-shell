@@ -16,10 +16,12 @@ export class RecommendController {
   @Method('auto')
   async autoRecommend(
     ctx: ApplicationContext,
-    @Payload() payload: { input: string; domainNamePaths: string[] }
+    @Payload() payload: { input: string; domainName?: string }
   ): Promise<RecommendData> {
     const historys = await this.historyService.query({});
     const cmdRoutes = await this.cmdRouteService.getAllCmdRoute(ctx);
+    const domainName = ctx.cmdp.getMeta<string>('domainName');
+    payload.domainName = payload.domainName ?? domainName;
     return this.recommendService.autoRecommend(payload, historys, this.cmdRouteService.mergeSubcommands(cmdRoutes));
   }
 

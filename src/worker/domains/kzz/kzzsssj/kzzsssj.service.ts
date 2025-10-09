@@ -1,17 +1,20 @@
 import { Injectable } from '@istock-shell/iswork';
+import { ScopeError } from '@istock-shell/util';
 import { KzzsssjModel } from './kzzsssj.model';
-import { CookieService } from '@domains/global/setting/cookie/cookie.service';
+import { ProxyService } from '@domains/global/setting/proxy/proxy.service';
 
 @Injectable()
 export class KzzsssjService {
-  readonly #site = 'https://www.jisilu.cn';
-  constructor(private readonly cookieService: CookieService) {}
+  constructor(private readonly proxyService: ProxyService) {}
   async bondCbJsl() {
-    const cookieData = await this.cookieService.findOneByOrigin(this.#site);
+    const proxyData = await this.proxyService.findOneByName('jisilu');
+    if (!proxyData) {
+      throw new ScopeError(`KzzsssjService.bondCbJsl`, `未找到jisilu代理配置`);
+    }
     const result = await KzzsssjModel.run<{ data: Array<Record<string, string>> }>('/webapi/cb/list/', {
       method: 'get',
       query: { _: Date.now() },
-      headers: { 'x-target': this.#site, 'x-cookie': cookieData?.cookie || '', init: 1 },
+      headers: { 'xx-target': proxyData?.url, ...this.proxyService.addProxyHeaderPrefix(proxyData?.headers || {}), init: 1 },
     });
     return result.data.map((data) => {
       return {

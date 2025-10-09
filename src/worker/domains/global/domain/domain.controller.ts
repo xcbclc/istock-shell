@@ -64,7 +64,6 @@ export class DomainController {
     const cmdInfo = ctx.cmdp.getInfo();
     const meta = ctx.cmdp.getMeta<CmdpMeta & { domainName: string }>();
     const currentDomainPaths = meta.domainName ? meta.domainName.split('.') : [];
-    currentDomainPaths.unshift('root'); // 加入根目录
     const domains = await this.domainService.findDomainPaths(
       ctx,
       currentDomainPaths,

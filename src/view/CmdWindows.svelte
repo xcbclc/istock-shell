@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { getQueryParam } from '@istock-shell/util';
+  import { shShowMessage } from '@istock-shell/ui';
   import { CmdWindowsManager, type CmdWindowMode, type CmdWindowsManagerOptions } from '@/window';
   import CmdWindow from './CmdWindow.svelte';
   import CmdAddAliasModal from './components/action/CmdAddAliasModal.svelte';
@@ -14,7 +15,7 @@
   }
   CmdWindowsManager.getInstance(cmdWindowsManagerOptions);
   const cmdWindow = CmdWindowsManager.cmdWindowsManager.getCmdWindow();
-  const { windowView, cmdAlias, search } = cmdWindow.store;
+  const { windowView, cmdAlias, search, user } = cmdWindow.store;
   const isInitialized = $derived.by(() => cmdWindow.isInitialized); // 解决 CmdWindows 初始化后才未显示的问题
   const onWindowKeydown = (event: KeyboardEvent) => {
     if (cmdWindow.isDemoMode) return;
@@ -24,6 +25,12 @@
     return () => {
       cmdWindow.destroy();
     };
+  });
+
+  $effect(() => {
+    if (user.loginStatus.status && user.loginStatus.message) {
+      shShowMessage.info(user.loginStatus.message);
+    }
   });
 </script>
 
