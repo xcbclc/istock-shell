@@ -45,7 +45,7 @@ export class DomainController {
       })
       .filter((item) => {
         if (isString(filter)) {
-          return item.text.indexOf(filter) !== 1;
+          return item.text.indexOf(filter) !== -1;
         }
         if (isRegExp(filter)) {
           return filter.test(item.text);
