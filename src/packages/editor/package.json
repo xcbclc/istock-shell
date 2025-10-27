@@ -3,8 +3,6 @@
   "version": "0.1.1",
   "description": "一个功能强大的命令行富文本编辑器，支持语法高亮、光标管理和事件系统",
   "main": "./src/index.ts",
-  "module": "./dist/index.esm.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "src",
@@ -36,8 +34,15 @@
   },
   "homepage": "https://github.com/xcbclc/istock-shell#readme",
   "dependencies": {
+    "@floating-ui/dom": "^1.7.4",
     "@istock-shell/command-parser": "workspace:^",
-    "@istock-shell/util": "workspace:^"
+    "@istock-shell/util": "workspace:^",
+    "@tiptap/core": "^3.6.6",
+    "@tiptap/extension-mention": "^3.6.6",
+    "@tiptap/extension-placeholder": "^3.6.6",
+    "@tiptap/pm": "^3.6.6",
+    "@tiptap/starter-kit": "^3.6.6",
+    "@tiptap/suggestion": "^3.6.6"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
