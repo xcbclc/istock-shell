@@ -4,7 +4,6 @@
   "description": "一个功能强大且易于使用的命令行解析库，专为现代 TypeScript/JavaScript 应用程序设计",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "README.md",

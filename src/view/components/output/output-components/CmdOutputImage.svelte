@@ -37,7 +37,7 @@
     columns = 3,
     showTitle = true,
     showDescription = true,
-    clickable = true
+    clickable = true,
   }: CmdOutputImageProps = $props();
 
   let selectedImage = $state<string | null>(null);
@@ -77,7 +77,7 @@
       3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
       5: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5',
-      6: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6'
+      6: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6',
     };
     return gridClasses[cols as keyof typeof gridClasses] || 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
   };
@@ -93,7 +93,9 @@
             <img
               src={images[0].src}
               alt={images[0].alt || images[0].title || '图片'}
-              class="w-full h-auto object-cover rounded-t-2xl {clickable ? 'cursor-pointer hover:opacity-90 transition-opacity' : ''}"
+              class="w-full h-auto object-cover rounded-t-2xl {clickable
+                ? 'cursor-pointer hover:opacity-90 transition-opacity'
+                : ''}"
               style={images[0].width && images[0].height ? `aspect-ratio: ${images[0].width}/${images[0].height}` : ''}
               onclick={() => openModal(images[0].src)}
             />
@@ -120,20 +122,26 @@
             class="w-full h-96 object-cover {clickable ? 'cursor-pointer hover:opacity-90 transition-opacity' : ''}"
             onclick={() => openModal(images[currentCarouselIndex].src)}
           />
-          
+
           <!-- 轮播控制按钮 -->
           {#if images.length > 1}
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <button class="btn btn-circle btn-sm bg-black/50 border-none text-white hover:bg-black/70" onclick={prevCarousel}>
+              <button
+                class="btn btn-circle btn-sm bg-black/50 border-none text-white hover:bg-black/70"
+                onclick={prevCarousel}
+              >
                 ❮
               </button>
-              <button class="btn btn-circle btn-sm bg-black/50 border-none text-white hover:bg-black/70" onclick={nextCarousel}>
+              <button
+                class="btn btn-circle btn-sm bg-black/50 border-none text-white hover:bg-black/70"
+                onclick={nextCarousel}
+              >
                 ❯
               </button>
             </div>
           {/if}
         </div>
-        
+
         <!-- 轮播指示器 -->
         {#if images.length > 1}
           <div class="flex justify-center w-full py-2 gap-2 bg-base-100">
@@ -147,7 +155,7 @@
             {/each}
           </div>
         {/if}
-        
+
         <!-- 图片信息 -->
         {#if (showTitle && images[currentCarouselIndex].title) || (showDescription && images[currentCarouselIndex].description)}
           <div class="p-4 bg-base-100">
@@ -169,7 +177,9 @@
               <img
                 src={image.src}
                 alt={image.alt || image.title || `图片 ${index + 1}`}
-                class="w-full h-48 object-cover {clickable ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}"
+                class="w-full h-48 object-cover {clickable
+                  ? 'cursor-pointer hover:scale-105 transition-transform duration-300'
+                  : ''}"
                 onclick={() => openModal(image.src)}
               />
             </figure>
@@ -194,11 +204,7 @@
     <div class="modal modal-open" onclick={closeModal}>
       <div class="modal-box max-w-4xl p-0 shadow-none" onclick={(e) => e.stopPropagation()}>
         <div class="relative p-4">
-          <img
-            src={selectedImage}
-            alt="预览图片"
-            class="w-full h-auto max-h-[80vh] object-contain rounded-lg"
-          />
+          <img src={selectedImage} alt="预览图片" class="w-full h-auto max-h-[80vh] object-contain rounded-lg" />
           <button
             class="btn btn-sm btn-circle absolute right-2 top-2 bg-black/50 border-none text-white hover:bg-black/70"
             onclick={closeModal}
@@ -220,7 +226,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;

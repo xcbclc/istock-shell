@@ -2,6 +2,19 @@ import { CmdWorkerMessage } from './cmd-worker-message';
 import type { CmdWindow } from '@/window/cmd-window.svelte';
 import { createContextStore, startContextStore, onContextStoreHandle, type ContextStore } from '@/store';
 
+export interface CmdWindowMessageContextData {
+  id: string | number;
+  [key: string]: any;
+};
+export interface CmdWindowContextData extends Record<string, any> {
+  windowId: number;
+  port: string;
+  messageContext: {
+    data: CmdWindowMessageContextData | Array<CmdWindowMessageContextData>;
+    type: string;
+  };
+}
+
 export class CmdWindowContext {
   readonly cmdWindow: CmdWindow;
   readonly #windowId: number;
@@ -43,6 +56,23 @@ export class CmdWindowContext {
 
   onContextStoreHandle() {
     this.contextStoreHandleDestroy = onContextStoreHandle(this);
+  }
+
+  /**
+   * 获取上下文数据
+   * @param messageContextType 消息上下文类型
+   * @param data 消息上下文数据
+   * @returns 上下文数据
+   */
+  getContextData(messageContextType: string, data: CmdWindowMessageContextData | Array<CmdWindowMessageContextData>): CmdWindowContextData {
+    return {
+      windowId: this.#windowId,
+      port: this.port,
+      messageContext: {
+        type: messageContextType,
+        data,
+      },
+    };
   }
 
   /**

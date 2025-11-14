@@ -46,7 +46,12 @@ export class ProxyService {
   }
 
   async findOneByName(name: string) {
-    const query: { filter: QueryFilterArr[] } = { filter: [['name', 'eq', name], ['rowStatus', 'eq', 1]] };
+    const query: { filter: QueryFilterArr[] } = {
+      filter: [
+        ['name', 'eq', name],
+        ['rowStatus', 'eq', 1],
+      ],
+    };
     const result = await ProxyModel.query({
       limit: 1,
       sort: {
@@ -56,7 +61,7 @@ export class ProxyService {
       filter: query.filter,
     });
     return result && result.length ? result[0] : null;
-  };
+  }
 
   addProxyHeaderPrefix(headers: Record<string, string>) {
     return Object.keys(headers).reduce((data, key) => {

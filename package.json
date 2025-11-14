@@ -117,11 +117,16 @@
     "vue-eslint-parser": "^10.1.4"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.7.4",
     "@istock-shell/command-parser": "workspace:^",
     "@istock-shell/editor": "workspace:^",
     "@istock-shell/iswork": "workspace:^",
     "@istock-shell/ui": "workspace:^",
     "@istock-shell/util": "workspace:^",
+    "@tiptap/core": "^3.6.6",
+    "@tiptap/extension-mention": "^3.6.6",
+    "@tiptap/extension-placeholder": "^3.6.6",
+    "@tiptap/starter-kit": "^3.6.6",
     "dayjs": "^1.11.13",
     "idb": "^8.0.3"
   },

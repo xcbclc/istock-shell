@@ -34,4 +34,7 @@ export class History extends StoreContext<HistoryStoreModel> {
       this.ctx.store.output.list = $state.snapshot(this.list) as OutputStoreList;
     }
   }
+  findListById(ids: Array<string> = []) {
+    return $state.snapshot(this.list).filter((item) => ids.includes(`${item.id}`));
+  }
 }

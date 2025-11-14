@@ -3,8 +3,8 @@ import { AiModel } from './ai.model';
 
 @Injectable()
 export class AiService {
-  readonly #contentMap = new Map<string, string>();
-  setMessageContent(messageId: string, value: string) {
+  readonly #contentMap = new Map<string, ModelData<AiModel>>();
+  setMessageContent(messageId: string, value: ModelData<AiModel>) {
     this.#contentMap.set(messageId, value);
   }
 
@@ -18,7 +18,7 @@ export class AiService {
 
   // 命令服务方法
   async send(data: ModelData<AiModel>) {
-    const messageAsyncGenerator = await AiModel.run<AsyncGenerator<FetchSSEMessage, void, unknown>>('/ai/send', {
+    const messageAsyncGenerator = await AiModel.run<AsyncGenerator<FetchSSEMessage, void, unknown>>('/ai/chat/stream', {
       method: 'post',
       body: JSON.stringify(data),
     });

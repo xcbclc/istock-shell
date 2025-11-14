@@ -68,62 +68,62 @@ export interface ApiInterface {
  */
 export const hfInterfaces: ApiInterface[] = [
   {
-    "moduleTitle": "高频数据",
-    "moduleName": "hf",
-    "title": "标普 500 指数",
-    "name": "bp_500_zs",
-    "api": "hf_sp_500",
-    "targetUrl": "https://github.com/FutureSharks/financial-data",
-    "description": "获取标普 500 指数的分钟数据, 由于数据量比较大, 需要等待, 由于服务器在国外, 建议使用代理访问",
-    "remarks": "",
-    "inputParameters": [
+    moduleTitle: '高频数据',
+    moduleName: 'hf',
+    title: '标普 500 指数',
+    name: 'bp_500_zs',
+    api: 'hf_sp_500',
+    targetUrl: 'https://github.com/FutureSharks/financial-data',
+    description: '获取标普 500 指数的分钟数据, 由于数据量比较大, 需要等待, 由于服务器在国外, 建议使用代理访问',
+    remarks: '',
+    inputParameters: [
       {
-        "title": "year",
-        "name": "year",
-        "type": "str",
-        "description": "year=\"2017\"; 只能获取 **2012-2018** 年的数据",
-        "defaultValue": "2017",
-        "isRequired": false
-      }
+        title: 'year',
+        name: 'year',
+        type: 'str',
+        description: 'year="2017"; 只能获取 **2012-2018** 年的数据',
+        defaultValue: '2017',
+        isRequired: false,
+      },
     ],
-    "outputParameters": [
+    outputParameters: [
       {
-        "title": "date",
-        "name": "date",
-        "type": "object",
-        "description": "日期时间",
-        "unit": ""
+        title: 'date',
+        name: 'date',
+        type: 'object',
+        description: '日期时间',
+        unit: '',
       },
       {
-        "title": "open",
-        "name": "open",
-        "type": "float64",
-        "description": "开盘价",
-        "unit": ""
+        title: 'open',
+        name: 'open',
+        type: 'float64',
+        description: '开盘价',
+        unit: '',
       },
       {
-        "title": "high",
-        "name": "high",
-        "type": "float64",
-        "description": "最高价",
-        "unit": ""
+        title: 'high',
+        name: 'high',
+        type: 'float64',
+        description: '最高价',
+        unit: '',
       },
       {
-        "title": "low",
-        "name": "low",
-        "type": "float64",
-        "description": "最低价",
-        "unit": ""
+        title: 'low',
+        name: 'low',
+        type: 'float64',
+        description: '最低价',
+        unit: '',
       },
       {
-        "title": "close",
-        "name": "close",
-        "type": "float64",
-        "description": "收盘价",
-        "unit": ""
-      }
-    ]
-  }
+        title: 'close',
+        name: 'close',
+        type: 'float64',
+        description: '收盘价',
+        unit: '',
+      },
+    ],
+  },
 ];
 
 /**
@@ -132,7 +132,7 @@ export const hfInterfaces: ApiInterface[] = [
  * @returns 接口定义或undefined
  */
 export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
-  return hfInterfaces.find(item => item.api === apiName);
+  return hfInterfaces.find((item) => item.api === apiName);
 }
 
 /**
@@ -141,7 +141,7 @@ export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
  * @returns 接口定义或undefined
  */
 export function getInterfaceByName(name: string): ApiInterface | undefined {
-  return hfInterfaces.find(item => item.name === name);
+  return hfInterfaces.find((item) => item.name === name);
 }
 
 export default hfInterfaces;

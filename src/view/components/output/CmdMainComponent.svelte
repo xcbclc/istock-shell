@@ -15,17 +15,9 @@
   import { onMount, tick } from 'svelte';
   import { CmdWindowsManager } from '@/window';
 
-  const {
-    windowId,
-    outputId,
-    componentInfo,
-    initShow = false,
-    source,
-    onContentLoaded,
-  }: CmdMainComponentProps = $props();
+  const { windowId, componentInfo, initShow = false, source, onContentLoaded }: CmdMainComponentProps = $props();
   const ctx = CmdWindowsManager.cmdWindowsManager.getCmdContext(windowId);
 
-  const { output } = ctx.store;
   const { outputComponent } = ctx.cmdWindow.store;
   let outputComponentElement: HTMLElement | undefined;
   let observer: IntersectionObserver | undefined;

@@ -47,7 +47,7 @@ export class CmdWorkerMessage extends EventEmitter {
       if (ctx) {
         const promptDomains = ctx.store.prompt.data.domains;
         if (promptDomains.length && promptDomains.length > 1) {
-         domainName = promptDomains.map((domain) => domain.name).join('.'); 
+          domainName = promptDomains.map((domain) => domain.name).join('.');
         }
       }
     }

@@ -516,7 +516,7 @@ export class Tokenizer {
             char = input[++index];
           }
           if (content) {
-            tokens.push({ type: TokenType.keyCommandContent, value: content.trim() });
+            tokens.push({ type: TokenType.keyCommandContent, value: content });
           }
         }
         return { isContinue: true, index };

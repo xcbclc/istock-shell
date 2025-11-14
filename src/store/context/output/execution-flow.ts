@@ -7,6 +7,7 @@ import {
 } from '@istock-shell/command-parser';
 import { MessageCmdAction, MessageStatus, type AnyObject } from '@istock-shell/iswork';
 import type { Output, OutputStoreDataItem, OutputStoreComponentInfo } from '@/store';
+import type { CmdWindowContextData } from '@/window';
 import { getOutputErrorData } from './default-output';
 
 type TDeepOutputs = Array<OutputStoreComponentInfo[] | OutputStoreComponentInfo>;
@@ -16,7 +17,7 @@ type TDeepOutputs = Array<OutputStoreComponentInfo[] | OutputStoreComponentInfo>
  * @param output
  * @param input
  */
-export const sendCmdExecutionFlow = async (output: Output, input: string) => {
+export const sendCmdExecutionFlow = async (output: Output, input: string, context?: CmdWindowContextData) => {
   const maxExecution = 50;
   const { cmdRoute, prompt } = output.ctx.store;
   const { domains } = prompt.data;
@@ -122,7 +123,7 @@ export const sendCmdExecutionFlow = async (output: Output, input: string) => {
               default:
                 throw new ScopeError('store.cmd-output', `没有找到该关键字命令处理程序:${keyCommandResult.cmd}`);
             }
-            payload = { arguments: keyCommandResult.arguments };
+            payload = { arguments: keyCommandResult.arguments, context: context?.messageContext };
           }
           // 命令
           if (cmdItemResult.type === AstTreeType.command) {
@@ -141,6 +142,7 @@ export const sendCmdExecutionFlow = async (output: Output, input: string) => {
             payload = {
               options: commandResult.options,
               arguments: commandResult.arguments,
+              context: context?.messageContext,
               previous: {
                 output: previousOutput,
               },

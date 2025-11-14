@@ -55,9 +55,19 @@ export class Contextmenu extends StoreContext<ContextmenuStoreModel> {
           { text: '拷贝输入', action: ContextmenuStoreCopy.input, shortcutKey: shortcut.getShortcut('copyInput') },
           { text: '拷贝输出', action: ContextmenuStoreCopy.output, shortcutKey: shortcut.getShortcut('copyOutput') },
           { text: '拷贝提示符', action: ContextmenuStoreCopy.prompt, shortcutKey: shortcut.getShortcut('copyPrompt') },
+          // { text: '拷贝成链接', action: ContextmenuStoreCopy.link, shortcutKey: 'ctrl+alt+l' },
           { text: '拷贝全部', action: ContextmenuStoreCopy.all, shortcutKey: shortcut.getShortcut('copyAll') },
         ],
       },
+      /* {
+        groupName: '拆分',
+        menus: [
+          { text: '向上拆分', action: ContextmenuStoreSplit.up, shortcutKey: 'ctrl+u' },
+          { text: '向右拆分', action: ContextmenuStoreSplit.right, shortcutKey: 'ctrl+r' },
+          { text: '向下拆分', action: ContextmenuStoreSplit.down, shortcutKey: 'ctrl+d' },
+          { text: '向左拆分', action: ContextmenuStoreSplit.left, shortcutKey: 'ctrl+l' },
+        ],
+      }, */
       {
         groupName: '其它',
         menus: [
@@ -66,6 +76,7 @@ export class Contextmenu extends StoreContext<ContextmenuStoreModel> {
             action: ContextmenuStoreOther.addCmdAlias,
             shortcutKey: shortcut.getShortcut('addCmdAlias'),
           },
+          { text: 'AI分析', action: ContextmenuStoreOther.ai, shortcutKey: shortcut.getShortcut('ai') },
         ],
       },
     ];

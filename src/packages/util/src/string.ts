@@ -21,3 +21,19 @@ export function getEndAndStartOverlapStr(str1: string, str2: string): string {
 
   return overlap;
 }
+
+/**
+ * 获取参数2去除与参数1尾部重叠部分后的剩余字符串。
+ *
+ * @param str1 - 第一个字符串
+ * @param str2 - 第二个字符串
+ * @returns 参数2去除重叠部分后的剩余字符串
+ * @example
+ * getNonOverlapStr('abc', 'cde'); // 'de'
+ * getNonOverlapStr('hello', 'world'); // 'world'
+ * getNonOverlapStr('test', 'testing'); // 'ing'
+ */
+export function getNonOverlapStr(str1: string, str2: string): string {
+  const overlap = getEndAndStartOverlapStr(str1, str2);
+  return str2.slice(overlap.length);
+}

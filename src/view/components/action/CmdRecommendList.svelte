@@ -14,6 +14,11 @@
   let activeIndex: number = $state(0);
   let recommendWrapView: HTMLElement | undefined = $state();
 
+  // 暴露获取DOM元素的方法
+  export function getElement(): HTMLElement | undefined {
+    return recommendWrapView;
+  }
+
   $effect(() => {
     if (list && recommendWrapView) {
       recommendWrapView.focus();
@@ -22,6 +27,14 @@
   $effect(() => {
     if (!list) {
       activeIndex = 0;
+    }
+  });
+
+  $effect(() => {
+    if (recommendWrapView && list && list.length) {
+      const items = recommendWrapView.querySelectorAll('li');
+      const node = items[activeIndex] as HTMLElement | undefined;
+      node?.scrollIntoView({ block: 'nearest' });
     }
   });
 
@@ -50,7 +63,7 @@
 </script>
 
 <div
-  class="relative h-0 outline-none"
+  class="absolute left-0 z-10 overflow-auto border border-base-300/80 bg-base-200 shadow-md rounded-md max-w-md max-h-[15em] outline-none"
   {style}
   bind:this={recommendWrapView}
   onkeydown={onKeydown}
@@ -58,19 +71,17 @@
   tabindex="-1"
   role="menu"
 >
-  <ul
-    class="absolute left-0 bottom-[2em] z-10 overflow-auto border border-base-300/80 bg-base-200 shadow-md rounded-md max-w-md max-h-[10em]"
-  >
+  <ul>
     {#each list as item, index}
       <li
         role="menuitem"
-        class="flex flex-nowrap items-center gap-2 px-2 py-1 cursor-pointer hover:bg-base-300 active:bg-base-300 transition-colors {activeIndex ===
+        class="flex flex-wrap items-center gap-2 px-2 py-1 cursor-pointer hover:bg-base-300 active:bg-base-300 transition-colors {activeIndex ===
         index
           ? 'bg-base-300/80'
           : ''}"
         onclick={() => onRecommendSelected?.(item)}
       >
-        <span class="text-primary whitespace-nowrap">{item.label ?? item.value}</span>
+        <span class="text-primary">{item.label ?? item.value}</span>
         {#if item.description}
           <span class="text-xs opacity-70">{item.description}</span>
         {/if}

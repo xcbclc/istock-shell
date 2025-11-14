@@ -41,4 +41,10 @@ export const shortcutStoreDefaultList: ShortcutItem[] = [
     label: '添加别名',
     description: '为当前命令添加别名',
   },
+  {
+    key: 'ai',
+    shortcut: isMacOS() ? 'Cmd+Alt+I' : 'Ctrl+Alt+I',
+    label: 'AI分析',
+    description: '使用AI分析当前数据',
+  },
 ];

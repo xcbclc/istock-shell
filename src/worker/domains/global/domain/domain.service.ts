@@ -65,16 +65,18 @@ export class DomainService {
       record[`_${domain.viewName}`] = domain;
       return record;
     }, {});
-    let currentDomainPaths = currentPaths.filter((path) => path !== 'global').map((path) => {
-      const domain = domainRecord[path] ?? domainRecord[`_${path}`];
-      if (!domain) {
-        throw new ScopeError(
-          `domains.${this.constructor.name}`,
-          `当前未知路径：${JSON.stringify(domain)}，${commonErrorMessage}`
-        );
-      }
-      return domain;
-    });
+    let currentDomainPaths = currentPaths
+      .filter((path) => path !== 'global')
+      .map((path) => {
+        const domain = domainRecord[path] ?? domainRecord[`_${path}`];
+        if (!domain) {
+          throw new ScopeError(
+            `domains.${this.constructor.name}`,
+            `当前未知路径：${JSON.stringify(domain)}，${commonErrorMessage}`
+          );
+        }
+        return domain;
+      });
     const domainPaths = paths.map((path): ModelData<DomainModel> | string => {
       return domainRecord[path] ?? domainRecord[`_${path}`] ?? path;
     });

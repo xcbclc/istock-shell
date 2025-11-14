@@ -185,3 +185,137 @@ ShMarkdown Markdown渲染组件
   <!--eslint-disable-next-line svelte/no-at-html-tags-->
   {@html markdownHtml}
 </div>
+
+<style>
+  @reference "../../../style/daisyui.css";
+  @layer components {
+    /* 基础排版与色彩，遵循 DaisyUI 主题变量 */
+    :global(.markdown) {
+      @apply text-base text-base-content;
+      line-height: 1.75;
+    }
+
+    /* 标题层级，清晰的视觉层次与节奏 */
+    :global(.markdown h1) {
+      @apply text-3xl font-bold mt-6 mb-4 text-base-content border-b border-base-300 pb-2;
+    }
+    :global(.markdown h2) {
+      @apply text-2xl font-semibold mt-5 mb-3 text-base-content border-b border-base-300 pb-1;
+    }
+    :global(.markdown h3) {
+      @apply text-xl font-semibold mt-4 mb-2 text-base-content;
+    }
+    :global(.markdown h4) {
+      @apply text-lg font-semibold mt-3 mb-2 text-base-content;
+    }
+    :global(.markdown h5) {
+      @apply text-base font-semibold mt-3 mb-2 text-base-content;
+    }
+    :global(.markdown h6) {
+      @apply text-sm font-semibold mt-3 mb-2 uppercase tracking-wide text-base-content;
+    }
+
+    /* 段落与文本元素 */
+    :global(.markdown p) {
+      @apply my-2;
+    }
+    :global(.markdown strong) {
+      @apply font-semibold;
+    }
+    :global(.markdown em) {
+      font-style: italic;
+    }
+    :global(.markdown a) {
+      @apply link link-primary no-underline;
+    }
+    :global(.markdown a:hover) {
+      @apply underline;
+    }
+
+    /* 引用块：弱化背景与左侧强调线 */
+    :global(.markdown blockquote) {
+      @apply my-4 pl-4 border-l-4 border-base-300 bg-base-200 rounded-lg;
+    }
+
+    /* 分隔线 */
+    :global(.markdown hr) {
+      @apply my-8 border-base-300;
+    }
+
+    /* 列表与层级缩进 */
+    :global(.markdown ul) {
+      @apply list-disc my-4 pl-6;
+    }
+    :global(.markdown ol) {
+      @apply list-decimal my-4 pl-6;
+    }
+    :global(.markdown li) {
+      @apply my-1;
+    }
+    :global(.markdown li > ul),
+    :global(.markdown li > ol) {
+      @apply mt-2;
+    }
+
+    /* 行内代码与代码块 */
+    :global(.markdown code) {
+      @apply font-mono text-sm rounded px-1.5 py-0.5 bg-base-200 border border-base-300;
+    }
+    :global(.markdown pre) {
+      @apply bg-base-200 border border-base-300 rounded-xl p-4 my-6 overflow-x-auto;
+    }
+    :global(.markdown pre code) {
+      display: block;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      @apply text-sm;
+    }
+    :global(.markdown pre code.hljs) {
+      background: transparent !important;
+    }
+    :global(.markdown .hljs) {
+      @apply bg-transparent text-base-content;
+    }
+
+    /* 表格：对齐、边框与交互态 */
+    :global(.markdown table) {
+      @apply w-full my-6 border-collapse rounded-xl overflow-hidden border border-base-300;
+    }
+    :global(.markdown thead) {
+      @apply bg-base-200;
+    }
+    :global(.markdown th) {
+      @apply text-left font-semibold text-base-content px-3 py-2 border-b border-base-300;
+    }
+    :global(.markdown td) {
+      @apply text-base-content px-3 py-2 border-t border-base-300;
+    }
+    :global(.markdown tbody tr:hover) {
+      @apply bg-base-200;
+    }
+    :global(.markdown tbody tr:nth-child(odd)) {
+      @apply bg-base-100;
+    }
+
+    /* 图片：响应式与边界处理 */
+    :global(.markdown img) {
+      @apply max-w-full rounded-xl border border-base-300 my-4;
+    }
+
+    /* 键盘符号与任务列表复选框 */
+    :global(.markdown kbd) {
+      @apply inline-flex items-center justify-center rounded-md border border-base-300 bg-base-200 px-1.5 py-0.5 text-xs font-medium;
+    }
+    :global(.markdown .task-list-item) {
+      @apply list-none pl-0;
+    }
+    :global(.markdown .task-list-item input[type='checkbox']) {
+      width: 1rem;
+      height: 1rem;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      @apply rounded border-base-300 bg-base-200;
+    }
+  }
+</style>

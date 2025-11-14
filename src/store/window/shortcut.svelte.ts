@@ -25,6 +25,13 @@ export class Shortcut extends StoreWindow<ShortcutStoreModel> {
     if (!this.list.length) {
       await this.cmdWindow.message.send<string[]>('setting', 'shortcut.createMany', shortcutStoreDefaultList);
       await this.getList();
+    } else if (this.list.length !== shortcutStoreDefaultList.length) {
+      const oldShortcuts = this.list.map((shortcut) => shortcut.key);
+      const newShortcutStoreDefaultList = shortcutStoreDefaultList.filter((shortcut) => {
+        return !oldShortcuts.includes(shortcut.key);
+      });
+      await this.cmdWindow.message.send<string[]>('setting', 'shortcut.createMany', newShortcutStoreDefaultList);
+      await this.getList();
     }
     this.storeEffect = createStoreEffects({});
   }

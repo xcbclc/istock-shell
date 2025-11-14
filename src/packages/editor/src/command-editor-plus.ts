@@ -73,11 +73,31 @@ export type CommandEditorCustomEvent<Data = unknown> = {
  */
 export type CommandEditorRecommendCmdEvent = CommandEditorCustomEvent<CommandEditorRecommendCmdData>;
 
+/**
+ * 命令编辑器选项类型
+ * @public
+ */
 export type CommandEditorOptions = {
   commandHighlighter?: Partial<CommandHighlighterOption>;
   mention?: Partial<MentionOptions> & { suggestionOption?: MentionSuggestionOption };
   keyboardShortcuts?: KeyboardShortcutsOption;
 };
+
+/**
+ * 命令编辑器提及数据类型
+ * @public
+ */
+export interface CommandEditorMentionData {
+  id: string;
+  label: string;
+  mentionSuggestionChar: string;
+};
+
+/**
+ * 命令编辑器JSON节点类型
+ * @public
+ */
+type CommandEditorJsonNode = { type: string; attrs?: CommandEditorMentionData, content?: Array<{ type: string; attrs?: CommandEditorMentionData }> }
 
 /**
  * 命令编辑器类
@@ -119,6 +139,27 @@ export class CommandEditor {
   }
 
   /**
+   * 获取当前输入的文本内容中的提及数据
+   * @returns 提及数据数组
+   */
+  get mentions(): CommandEditorMentionData[] {
+    const json = this.inputJson;
+    const mentions: CommandEditorMentionData[] = [];
+    function findMention(content: Array<CommandEditorJsonNode>) {
+      content.forEach((node) => {
+        if (node.content) {
+          findMention(node.content);
+        }
+        if (node.type === 'mention' && node.attrs) {
+          mentions.push(node.attrs as CommandEditorMentionData);
+        }
+      });
+    }
+    findMention(json.content as Array<CommandEditorJsonNode>);
+    return mentions;
+  }
+
+  /**
    * 构造函数
    * @param commandInput - 命令输入DOM元素
    */
@@ -136,9 +177,6 @@ export class CommandEditor {
             ? {
                 ...Object.assign(
                   {
-                    HTMLAttributes: {
-                      class: 'is-mention',
-                    },
                     suggestions: getMentionSuggestions(options.mention.suggestionOption),
                   },
                   options.mention
@@ -305,12 +343,7 @@ export class CommandEditor {
     const selection = this.#editor.state.selection;
     const cursorPos = this.#editor.view.coordsAtPos(selection.from);
     const editorRect = editorDom.getBoundingClientRect();
-    return {
-      ...editorRect,
-      left: cursorPos.left,
-      right: cursorPos.left,
-      width: 0,
-    };
+    return new DOMRect(cursorPos.left, cursorPos.top, 0, editorRect.height);
   }
 
   /**

@@ -14,7 +14,11 @@ export class KzzsssjService {
     const result = await KzzsssjModel.run<{ data: Array<Record<string, string>> }>('/webapi/cb/list/', {
       method: 'get',
       query: { _: Date.now() },
-      headers: { 'xx-target': proxyData?.url, ...this.proxyService.addProxyHeaderPrefix(proxyData?.headers || {}), init: 1 },
+      headers: {
+        'xx-target': proxyData?.url,
+        ...this.proxyService.addProxyHeaderPrefix(proxyData?.headers || {}),
+        init: 1,
+      },
     });
     return result.data.map((data) => {
       return {

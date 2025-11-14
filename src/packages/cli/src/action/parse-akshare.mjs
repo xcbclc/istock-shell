@@ -124,7 +124,11 @@ function parseTable(tableContent, isInputParam = true) {
 
       const param = {
         title,
-        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' }).join('').replace(/\s+/g, '_').replace(/-/g, '_').replace(/\(([^)]+)\)/g, '_$1'),
+        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' })
+          .join('')
+          .replace(/\s+/g, '_')
+          .replace(/-/g, '_')
+          .replace(/\(([^)]+)\)/g, '_$1'),
         type,
         description,
         defaultValue: undefined,
@@ -138,7 +142,7 @@ function parseTable(tableContent, isInputParam = true) {
 
         // 提取默认值的多种模式匹配
         let defaultValueMatch = null;
-        
+
         // 1. 匹配带引号的字符串值：param='value' 或 param="value"（包括空字符串）
         defaultValueMatch = description.match(/[a-zA-Z_]+\s*=\s*["']([^"']*)["']/);
         if (defaultValueMatch) {
@@ -150,7 +154,7 @@ function parseTable(tableContent, isInputParam = true) {
             defaultValue = value;
           }
         }
-        
+
         // 2. 匹配数字类型的默认值：param=123
         if (!defaultValueMatch) {
           defaultValueMatch = description.match(/[a-zA-Z_]+\s*=\s*(\d+(?:\.\d+)?)/);
@@ -160,7 +164,7 @@ function parseTable(tableContent, isInputParam = true) {
             defaultValue = value.includes('.') ? parseFloat(value) : parseInt(value, 10);
           }
         }
-        
+
         // 3. 匹配None值：param=None
         if (!defaultValueMatch) {
           const noneMatch = description.match(/[a-zA-Z_]+\s*=\s*None/);
@@ -186,42 +190,55 @@ function parseTable(tableContent, isInputParam = true) {
         }
 
         // 特殊处理adjust参数：识别各种adjust参数的描述格式
-        if (param.name === 'adjust' && (
-          description.includes('默认返回不复权') || 
-          description.includes('默认不复权') ||
-          description.includes('返回未复权的数据') ||
-          description.includes('则返回未复权的数据') ||
-          description.includes('返回前复权') ||
-          description.includes('返回后复权') ||
-          description.includes('前复权') ||
-          description.includes('后复权') ||
-          description.includes('不复权')
-        )) {
+        if (
+          param.name === 'adjust' &&
+          (description.includes('默认返回不复权') ||
+            description.includes('默认不复权') ||
+            description.includes('返回未复权的数据') ||
+            description.includes('则返回未复权的数据') ||
+            description.includes('返回前复权') ||
+            description.includes('返回后复权') ||
+            description.includes('前复权') ||
+            description.includes('后复权') ||
+            description.includes('不复权'))
+        ) {
           // 如果没有通过正则匹配到默认值，设置为空字符串
           if (defaultValue === undefined) {
             defaultValue = '';
           }
-          
+
           // 从文字描述中提取choices
-            const adjustChoices = [''];
-            // 先检查基础选项
-            if (description.includes('qfq:') || description.includes('qfq ') || (description.includes('qfq') && !description.includes('qfq-factor'))) {
-              adjustChoices.push('qfq');
-            }
-            if (description.includes('hfq:') || description.includes('hfq ') || (description.includes('hfq') && !description.includes('hfq-factor'))) {
-              adjustChoices.push('hfq');
-            }
-            // 再检查因子选项
-            if (description.includes('qfq-factor')) adjustChoices.push('qfq-factor');
-            if (description.includes('hfq-factor')) adjustChoices.push('hfq-factor');
-            choices = adjustChoices;
+          const adjustChoices = [''];
+          // 先检查基础选项
+          if (
+            description.includes('qfq:') ||
+            description.includes('qfq ') ||
+            (description.includes('qfq') && !description.includes('qfq-factor'))
+          ) {
+            adjustChoices.push('qfq');
+          }
+          if (
+            description.includes('hfq:') ||
+            description.includes('hfq ') ||
+            (description.includes('hfq') && !description.includes('hfq-factor'))
+          ) {
+            adjustChoices.push('hfq');
+          }
+          // 再检查因子选项
+          if (description.includes('qfq-factor')) adjustChoices.push('qfq-factor');
+          if (description.includes('hfq-factor')) adjustChoices.push('hfq-factor');
+          choices = adjustChoices;
         }
 
         param.defaultValue = defaultValue;
         param.choices = choices;
 
         // 判断是否必需（简单规则：如果描述中包含"可选"、"默认为空"或有默认值则非必需）
-        param.isRequired = !description.includes('可选') && !description.includes('默认为空') && title !== '-' && defaultValue === undefined;
+        param.isRequired =
+          !description.includes('可选') &&
+          !description.includes('默认为空') &&
+          title !== '-' &&
+          defaultValue === undefined;
       } else {
         // 输出参数：提取单位信息
         let unit = '';
@@ -253,7 +270,7 @@ function extractFirstTitle(content, fileName) {
   if (fileName === 'article') {
     return '政策不确定性数据';
   }
-  
+
   const lines = content.split('\n');
   for (const line of lines) {
     // 匹配一级或二级标题
@@ -283,14 +300,14 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
   const content = fs.readFileSync(filePath, 'utf-8');
   const interfaces = [];
   const lines = content.split('\n');
-  
+
   let currentInterface = null;
   let currentSection = null;
   let inRequestTable = false;
   let inResponseTable = false;
   let requestTableLines = [];
   let responseTableLines = [];
-  
+
   for (const line of lines) {
     // 匹配二级标题（接口开始）
     const h2Match = line.match(/^##\s+(.+)/);
@@ -299,7 +316,7 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
       if (currentInterface && currentInterface.api) {
         currentInterface.inputParameters = parseTable(requestTableLines.join('\n'), true);
         currentInterface.outputParameters = parseTable(responseTableLines.join('\n'), false);
-        
+
         if (!currentInterface.remarks) {
           currentInterface.remarks = '';
         }
@@ -309,17 +326,22 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
         if (!currentInterface.description) {
           currentInterface.description = '';
         }
-        
+
         interfaces.push(currentInterface);
       }
-      
+
       // 开始新接口
       const title = h2Match[1].trim();
       currentInterface = {
         moduleTitle,
         moduleName: fileName,
         title,
-        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' }).join('').toLowerCase().replace(/\s+/g, '_').replace(/-/g, '_').replace(/\(([^)]+)\)/g, '_$1'),
+        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' })
+          .join('')
+          .toLowerCase()
+          .replace(/\s+/g, '_')
+          .replace(/-/g, '_')
+          .replace(/\(([^)]+)\)/g, '_$1'),
       };
       currentSection = null;
       inRequestTable = false;
@@ -328,9 +350,9 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
       responseTableLines = [];
       continue;
     }
-    
+
     if (!currentInterface) continue;
-    
+
     // 匹配三级标题（接口字段）
     const h3Match = line.match(/^###\s+(.+)/);
     if (h3Match) {
@@ -338,7 +360,7 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
       currentSection = sectionTitle;
       inRequestTable = false;
       inResponseTable = false;
-      
+
       if (sectionTitle === '请求参数') {
         inRequestTable = true;
         requestTableLines = [];
@@ -348,7 +370,7 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
       }
       continue;
     }
-    
+
     // 处理接口字段内容
     if (currentSection === '接口名称' && line.trim() && !line.startsWith('|') && !line.startsWith('#')) {
       currentInterface.api = line.trim();
@@ -360,12 +382,12 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
       responseTableLines.push(line);
     }
   }
-  
+
   // 处理最后一个接口
   if (currentInterface && currentInterface.api) {
     currentInterface.inputParameters = parseTable(requestTableLines.join('\n'), true);
     currentInterface.outputParameters = parseTable(responseTableLines.join('\n'), false);
-    
+
     if (!currentInterface.remarks) {
       currentInterface.remarks = '';
     }
@@ -375,10 +397,10 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
     if (!currentInterface.description) {
       currentInterface.description = '';
     }
-    
+
     interfaces.push(currentInterface);
   }
-  
+
   return interfaces;
 }
 
@@ -433,7 +455,12 @@ function parseMarkdownFile(fileName, filePath, moduleTitle) {
         moduleTitle,
         moduleName: fileName,
         title,
-        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' }).join('').toLowerCase().replace(/\s+/g, '_').replace(/-/g, '_').replace(/\(([^)]+)\)/g, '_$1'),
+        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' })
+          .join('')
+          .toLowerCase()
+          .replace(/\s+/g, '_')
+          .replace(/-/g, '_')
+          .replace(/\(([^)]+)\)/g, '_$1'),
       };
       inInputTable = false;
       inOutputTable = false;
@@ -657,10 +684,10 @@ export default async function parseAkshare() {
       // 读取文件内容并提取首标题
       const content = fs.readFileSync(filePath, 'utf-8');
       const moduleTitle = extractFirstTitle(content, moduleName);
-      
+
       // 检测是否为qhkc文件，使用相应的解析函数
       const isQhkcFile = filePath.includes('qhkc');
-      const interfaces = isQhkcFile 
+      const interfaces = isQhkcFile
         ? parseQhkcMarkdownFile(moduleName, filePath, moduleTitle)
         : parseMarkdownFile(moduleName, filePath, moduleTitle);
       console.log(`  解析到 ${interfaces.length} 个接口`);
@@ -697,4 +724,3 @@ export default async function parseAkshare() {
   console.log(`\n解析完成！共生成 ${totalInterfaces} 个接口定义`);
   console.log(`输出目录: ${path.relative(rootPath, outputPath)}`);
 }
-

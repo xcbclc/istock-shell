@@ -7,7 +7,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { TokenType } from '@istock-shell/command-parser';
-  import { shShowMessage, type VirtualCoreRange } from '@istock-shell/ui';
+  import { shShowMessage } from '@istock-shell/ui';
   import { CmdWindowsManager } from '@/window';
   import { ContextmenuStoreCopy } from '@/store';
   import CmdPrompt from '../display/CmdPrompt.svelte';

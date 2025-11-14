@@ -7,9 +7,8 @@ import { ProxyService } from '@domains/global/setting/proxy/proxy.service';
 @Injectable()
 export class TzrlService {
   jisilu: typeof jisilu = jisilu;
-  constructor ( private readonly proxyService: ProxyService,) {
-  }
-  async getProxyInfo () {
+  constructor(private readonly proxyService: ProxyService) {}
+  async getProxyInfo() {
     const proxyData = await this.proxyService.findOneByName('jisilu');
     if (!proxyData) {
       throw new ScopeError(`TzrlService.findJisiluCalendar`, `未找到jisilu代理配置`);

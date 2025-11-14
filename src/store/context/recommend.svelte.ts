@@ -3,8 +3,8 @@ import { type CommandEditor, CommandEditorActionTypes } from '@istock-shell/edit
 import type { CmdWindowContext } from '@/window';
 import { RecommendType, type RecommendDataItem, type RecommendData } from '@domains/global/recommend/recommend.service';
 import { createStoreEffects, StoreContext, type StoreConfig, type InputStoreNodes } from '@/store';
+export { RecommendType } from '@domains/global/recommend/recommend.service';
 
-export const RecommendStoreType = RecommendType;
 export interface RecommendStoreModel extends RecommendDataItem {}
 export type RecommendStoreList = RecommendStoreModel[];
 export interface RecommendStoreData extends RecommendData {}
@@ -57,7 +57,7 @@ export class Recommend extends StoreContext<RecommendStoreModel> {
         if (item) inputText = item.input;
       }
       if (inputText) {
-        target.handleCommandInput(inputText, inputText);
+        target.handleCommandInput(inputText);
         output.historyIndex = historyIndex;
       }
     }

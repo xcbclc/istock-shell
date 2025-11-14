@@ -22,7 +22,11 @@ export class KzzsdService {
     }>('/webapi/cb/list/', {
       method: 'get',
       query: { _: Date.now() },
-      headers: { 'xx-target': proxyData?.url, ...this.proxyService.addProxyHeaderPrefix(proxyData?.headers || {}), init: 1 },
+      headers: {
+        'xx-target': proxyData?.url,
+        ...this.proxyService.addProxyHeaderPrefix(proxyData?.headers || {}),
+        init: 1,
+      },
     });
     if (jisiluData.prompt) {
       throw new ScopeError(`kzzsd.${this.constructor.name}`, jisiluData.prompt);

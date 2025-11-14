@@ -4,7 +4,6 @@
   "description": "一个功能丰富的 TypeScript 工具库，提供常用的工具函数和类型检测方法",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "src",

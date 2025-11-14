@@ -139,7 +139,7 @@ function generateCmdOptions(inputParams: InputParameter[]): {
 /**
  * 生成命令用法字符串
  * @param cmd 命令名称
-* @param args 必选参数配置
+ * @param args 必选参数配置
  * @param options 选项配置
  * @returns 用法字符串
  */
@@ -179,7 +179,7 @@ function generateExample(
   _options: Record<string, ControllerMethodCmdRouteOptions>
 ): string {
   let example = cmd;
-  
+
   args.forEach((arg) => {
     if (arg.default) {
       example += ` ${arg.default}`;
@@ -188,8 +188,7 @@ function generateExample(
     } else {
       example += ' 缺省值';
     }
-    
-  })
+  });
 
   // Object.values(options).forEach((option) => {
   //   const shortParam = option.parameter[0];
@@ -308,7 +307,10 @@ export const akshareQuery = async (ctx: ApplicationContext, next: () => Promise<
     // 调用AkShare API
     const response = await fetch(fullUrl, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json', 'xx-target': (import.meta.env.VITE_ISTOCK_BASE ?? 'https://istock.red') + '/api/akshare' },
+      headers: {
+        'Content-Type': 'application/json',
+        'xx-target': (import.meta.env.VITE_ISTOCK_BASE ?? 'https://istock.red') + '/api/akshare',
+      },
     });
 
     if (!response.ok) {

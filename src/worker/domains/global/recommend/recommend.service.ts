@@ -1,4 +1,5 @@
 import { Injectable, type ModelData, type ControllerMethodCmdRouteMetadata } from '@istock-shell/iswork';
+import { FESnowflake } from '@istock-shell/util';
 import { TokenType, Tokenizer, type Token } from '@istock-shell/command-parser';
 import type { HistoryModel } from '../history/history.model';
 import type { ResponseCmdRoute } from '../cmd-route/cmd-route.service';
@@ -9,9 +10,11 @@ export enum RecommendType {
   alias = 'alias',
 }
 export interface RecommendDataItem {
+  id: string | number;
   label: string;
   value: string;
-  description: string;
+  type: string;
+  description?: string;
 }
 export interface RecommendData {
   list: RecommendDataItem[];
@@ -23,6 +26,7 @@ export interface RecommendData {
 export class RecommendService {
   readonly #tokenizer = new Tokenizer();
   #stockCodeList: Array<ModelData<StockCodeModel>> = [];
+  readonly generateId = new FESnowflake(1, 1);
 
   /**
    * 设置股票代码列表数据
@@ -78,9 +82,11 @@ export class RecommendService {
             return parameter.startsWith(lasToken.value);
           }) ?? '';
         return {
+          id: this.generateId.nextId(),
           label: value,
           value,
           description: param.description ?? param.name,
+          type: 'optionKey',
         };
       })
       .filter((item) => {
@@ -112,9 +118,11 @@ export class RecommendService {
         .filter((stock) => stock.code.startsWith(lasToken.value))
         .map((stock) => {
           return {
+            id: this.generateId.nextId(),
             label: stock.code,
             value: stock.code,
             description: stock.name,
+            type: 'optionValue',
           };
         });
     }
@@ -123,9 +131,11 @@ export class RecommendService {
         .filter((stock) => stock.name.startsWith(lasToken.value))
         .map((stock) => {
           return {
+            id: this.generateId.nextId(),
             label: stock.name,
             value: stock.name,
             description: stock.code,
+            type: 'optionValue',
           };
         });
     }
@@ -136,9 +146,11 @@ export class RecommendService {
       })
       .map((choice) => {
         return {
+          id: this.generateId.nextId(),
           label: `${choice}`,
           value: `${choice}`,
           description: '',
+          type: 'optionValue',
         };
       });
   }
@@ -172,9 +184,11 @@ export class RecommendService {
             return `${choice}`.startsWith(lasToken.value);
           }) ?? '';
         return {
+          id: this.generateId.nextId(),
           label: `${value}`,
           value: `${value}`,
           description: param.description ?? param.name,
+          type: 'argument',
         };
       })
       .filter((item) => {
@@ -205,16 +219,18 @@ export class RecommendService {
       .filter((command) => command.cmd.startsWith(lasToken.value) && !usedCommandRecord[command.cmd])
       .map((command) => {
         return {
+          id: this.generateId.nextId(),
           label: command.cmd,
           value: command.cmd,
           description: command.description ?? command.name,
+          type: 'command',
         };
       });
   }
 
   autoRecommend(
     payload: { input: string; domainName: string },
-    historys: Array<ModelData<HistoryModel>>,
+    historyList: Array<ModelData<HistoryModel>>,
     cmdRoutes: ResponseCmdRoute[]
   ): RecommendData {
     const originalInput = payload.input.trim();
@@ -250,17 +266,23 @@ export class RecommendService {
     } else {
       // 在路由列表里面匹配命令，不包含子命令
       list = cmdRoutes
-        .filter((cmdRoute) => cmdRoute.cmd.startsWith(cmd.value) && (domainNamePaths.includes(cmdRoute.domainName) || cmdRoute.domainName === 'global'))
+        .filter(
+          (cmdRoute) =>
+            cmdRoute.cmd.startsWith(cmd.value) &&
+            (domainNamePaths.includes(cmdRoute.domainName) || cmdRoute.domainName === 'global')
+        )
         .map((cmdRoute) => {
           return {
+            id: cmdRoute.id,
             label: cmdRoute.cmd,
             value: cmdRoute.cmd,
             description: cmdRoute.description ?? cmdRoute.name,
+            type: 'command',
           };
         });
     }
     // 倒查历史命令获得历史推荐命令
-    const input = historys
+    const input = historyList
       .reverse()
       .map((history) => history.input)
       .find((input) => input.startsWith(originalInput));

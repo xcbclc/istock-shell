@@ -1,11 +1,11 @@
 import { ScopeError } from '@istock-shell/util';
+import { keyCommand } from '@istock-shell/command-parser';
 import {
   getInitPosition,
   ContextmenuStoreCopy,
   ContextmenuStoreOther,
   type ContextmenuStoreAction,
   type ContextmenuStoreModel,
-  type ContextmenuStoreModels,
   type OutputStoreDataItem,
 } from '@/store';
 import { CmdWindowsManager, type CmdWindowContext } from '@/window';
@@ -31,6 +31,19 @@ export const contextmenuAction = async (
   if (action === ContextmenuStoreOther.addCmdAlias) {
     const { cmdAlias } = ctx.cmdWindow.store;
     cmdAlias.openCmdAlias(block.input);
+  }
+  if (action === ContextmenuStoreOther.ai) {
+    const { commandEditor } = ctx.store.input;
+    if (!commandEditor) throw new ScopeError('iswork.handleBlockContextmenuFactory', '没有绑定命令编辑器');
+    let input = commandEditor.input.trim();
+    const tag = `#[${block.id}, ${block.input}]`;
+    if (input.startsWith(keyCommand.ai.command)) {
+      input += tag;
+      commandEditor.handleCommandInput(input);
+    } else {
+      input = `${keyCommand.ai.command} ${tag}`;
+      commandEditor.handleCommandInput(input);
+    }
   }
 };
 
@@ -84,6 +97,12 @@ export const contextmenuHandleFactory = (ctx: CmdWindowContext) => {
     if (shortcut.matchShortcut(ev, 'addCmdAlias')) {
       ev.preventDefault();
       await handleMenuAction(ContextmenuStoreOther.addCmdAlias, currentBlock);
+      return;
+    }
+
+    if (shortcut.matchShortcut(ev, 'ai')) {
+      ev.preventDefault();
+      await handleMenuAction(ContextmenuStoreOther.ai, currentBlock);
       return;
     }
   };

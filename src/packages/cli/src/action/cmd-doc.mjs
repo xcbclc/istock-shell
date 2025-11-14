@@ -90,139 +90,143 @@ export default async () => {
 
   /** @type {Object.<string, Array>} 命令文档链接记录 */
   const linkRecord = {};
-  
+
   // 获取动态配置
   const aliasRecord = await getDomainAliasRecord();
   console.log('找到文件数量:', cmdFiles.length);
 
   /**
- * 根据输入参数生成命令选项配置
- * @param {Array} inputParams - 输入参数数组
- * @returns {{options: Object, args: Array}} 选项配置对象和必选参数数组
- */
-function generateCmdOptions(inputParams) {
-  const options = {};
-  const args = [];
+   * 根据输入参数生成命令选项配置
+   * @param {Array} inputParams - 输入参数数组
+   * @returns {{options: Object, args: Array}} 选项配置对象和必选参数数组
+   */
+  function generateCmdOptions(inputParams) {
+    const options = {};
+    const args = [];
 
-  inputParams.forEach((param) => {
-    const shortParam = `-${param.name}`;
-    const longParam = `--${param.title}`;
+    inputParams.forEach((param) => {
+      const shortParam = `-${param.name}`;
+      const longParam = `--${param.title}`;
 
-    // 类型映射
-    let paramType = 'string';
-    if (param.type === 'str') {
-      paramType = 'string';
-    } else if (param.type === 'int64' || param.type === 'int') {
-      paramType = 'number';
-    } else if (param.type === 'float64' || param.type === 'float') {
-      paramType = 'number';
-    } else if (param.type === 'bool' || param.type === 'boolean') {
-      paramType = 'boolean';
-    } else if (param.type === 'object') {
-      paramType = 'string';
-    }
+      // 类型映射
+      let paramType = 'string';
+      if (param.type === 'str') {
+        paramType = 'string';
+      } else if (param.type === 'int64' || param.type === 'int') {
+        paramType = 'number';
+      } else if (param.type === 'float64' || param.type === 'float') {
+        paramType = 'number';
+      } else if (param.type === 'bool' || param.type === 'boolean') {
+        paramType = 'boolean';
+      } else if (param.type === 'object') {
+        paramType = 'string';
+      }
 
-    const cmdOption = {
-      name: param.name,
-      parameter: [],
-      parameterType: [paramType],
-      description: param.description,
-      default: param.defaultValue || '',
-      optional: !param.isRequired,
-      choices: param.choices || [],
-    };
+      const cmdOption = {
+        name: param.name,
+        parameter: [],
+        parameterType: [paramType],
+        description: param.description,
+        default: param.defaultValue || '',
+        optional: !param.isRequired,
+        choices: param.choices || [],
+      };
 
-    if (param.isRequired) {
-      args.push(cmdOption);
-    } else {
-      cmdOption.parameter = [shortParam, longParam];
-      options[param.title] = cmdOption;
-    }
-  });
+      if (param.isRequired) {
+        args.push(cmdOption);
+      } else {
+        cmdOption.parameter = [shortParam, longParam];
+        options[param.title] = cmdOption;
+      }
+    });
 
-  return { options, args };
-}
+    return { options, args };
+  }
 
-/**
- * 生成命令用法字符串
- * @param {string} cmd - 命令名称
- * @param {Array} args - 必选参数配置
- * @param {Object} options - 选项配置
- * @returns {string} 用法字符串
- */
-function generateUsage(cmd, args, options) {
-  let usage = cmd;
+  /**
+   * 生成命令用法字符串
+   * @param {string} cmd - 命令名称
+   * @param {Array} args - 必选参数配置
+   * @param {Object} options - 选项配置
+   * @returns {string} 用法字符串
+   */
+  function generateUsage(cmd, args, options) {
+    let usage = cmd;
 
-  // 添加必选参数
-  args.forEach((arg) => {
-    usage += ` <${arg.name}>`;
-  });
+    // 添加必选参数
+    args.forEach((arg) => {
+      usage += ` <${arg.name}>`;
+    });
 
-  // 添加可选参数
-  Object.values(options).forEach((option) => {
-    if (!['单位', '管道'].includes(option.name)) {
-      const shortParam = option.parameter[0];
-      usage += ` [${shortParam} ${option.default ? ['[', option.name, ']'].join('') : ['<', option.name, '>'].join('')}]`;
-    }
-  });
+    // 添加可选参数
+    Object.values(options).forEach((option) => {
+      if (!['单位', '管道'].includes(option.name)) {
+        const shortParam = option.parameter[0];
+        usage += ` [${shortParam} ${option.default ? ['[', option.name, ']'].join('') : ['<', option.name, '>'].join('')}]`;
+      }
+    });
 
-  return usage;
-}
+    return usage;
+  }
 
-/**
- * 生成命令示例
- * @param {string} cmd - 命令名称
- * @param {Array} args - 必选参数配置
- * @param {Object} options - 选项配置
- * @returns {string} 示例字符串
- */
-function generateExample(cmd, args, options) {
-  let example = cmd;
-  
-  args.forEach((arg) => {
-    if (arg.default) {
-      example += ` ${arg.default}`;
-    } else if (arg.choices && arg.choices.length > 0) {
-      example += ` ${arg.choices[0]}`;
-    } else {
-      example += ' 缺省值';
-    }
-  });
+  /**
+   * 生成命令示例
+   * @param {string} cmd - 命令名称
+   * @param {Array} args - 必选参数配置
+   * @param {Object} options - 选项配置
+   * @returns {string} 示例字符串
+   */
+  function generateExample(cmd, args, options) {
+    let example = cmd;
 
-  return example;
-}
+    args.forEach((arg) => {
+      if (arg.default) {
+        example += ` ${arg.default}`;
+      } else if (arg.choices && arg.choices.length > 0) {
+        example += ` ${arg.choices[0]}`;
+      } else {
+        example += ' 缺省值';
+      }
+    });
 
-/**
- * 从Controller文件中获取viewName作为显示名称
- * @param {string} cmdPath - cmd文件路径
- */
-function getControllerViewName(cmdPath) {
+    return example;
+  }
+
+  /**
+   * 从Controller文件中获取viewName作为显示名称
+   * @param {string} cmdPath - cmd文件路径
+   */
+  function getControllerViewName(cmdPath) {
     try {
       // 将cmd文件路径转换为controller文件路径
       const controllerPath = cmdPath.replace(/\.cmd\.(ts|json)$/, '.controller.ts');
-      
+
       if (!fs.existsSync(controllerPath)) {
         // 如果controller文件不存在，返回文件名作为默认值
         return path.basename(cmdPath, path.extname(cmdPath)).replace('.cmd', '');
       }
-      
+
       // 读取controller文件内容
       const controllerContent = fs.readFileSync(controllerPath, 'utf-8');
-      
+
       // 使用正则表达式匹配@Controller装饰器中的viewName（支持多行和注释）
-      const controllerMatch = controllerContent.match(/@Controller\s*\(\s*{[\s\S]*?viewName\s*:\s*['"]([^'"]+)['"][\s\S]*?}\s*\)/);
-      
+      const controllerMatch = controllerContent.match(
+        /@Controller\s*\(\s*{[\s\S]*?viewName\s*:\s*['"]([^'"]+)['"][\s\S]*?}\s*\)/
+      );
+
       if (controllerMatch && controllerMatch[1]) {
         return controllerMatch[1];
       }
-      
+
       // 如果没有找到viewName，尝试从alias中获取
-      const aliasMatch = controllerContent.match(/@Controller\s*\(\s*{[\s\S]*?alias\s*:\s*['"]([^'"]+)['"][\s\S]*?}\s*\)/);
-      
+      const aliasMatch = controllerContent.match(
+        /@Controller\s*\(\s*{[\s\S]*?alias\s*:\s*['"]([^'"]+)['"][\s\S]*?}\s*\)/
+      );
+
       if (aliasMatch && aliasMatch[1]) {
         return aliasMatch[1];
       }
-      
+
       // 如果都没有找到，返回文件名作为默认值
       return path.basename(cmdPath, path.extname(cmdPath)).replace('.cmd', '');
     } catch (error) {
@@ -237,48 +241,53 @@ function getControllerViewName(cmdPath) {
    */
   async function getDomainAliasRecord() {
     const aliasRecord = {};
-    
+
     // 读取所有domain文件
-    const domainFiles = fs.readdirSync(domainPath, { withFileTypes: true })
-      .filter(entry => entry.isDirectory())
-      .map(entry => entry.name);
-    
+    const domainFiles = fs
+      .readdirSync(domainPath, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name);
+
     for (const domainName of domainFiles) {
       const domainFilePath = path.resolve(domainPath, domainName, `${domainName}.domain.ts`);
       if (fs.existsSync(domainFilePath)) {
         try {
           const domainContent = fs.readFileSync(domainFilePath, 'utf-8');
-          
+
           let viewName = '';
-          
-          let viewNameMatch = domainContent.match(/viewName:\s*['"]([^'"]+)['"]/); 
-            viewName = viewNameMatch ? viewNameMatch[1] : domainName;
-            
-            // 处理akshare特殊情况，viewName可能是变量
-            if (!viewNameMatch && domainName === 'akshare') {
-              const nameVarMatch = domainContent.match(/const\s+name\s*=\s*['"]([^'"]+)['"]/); 
-              if (nameVarMatch) {
-                viewName = nameVarMatch[1];
-              }
+
+          let viewNameMatch = domainContent.match(/viewName:\s*['"]([^'"]+)['"]/);
+          viewName = viewNameMatch ? viewNameMatch[1] : domainName;
+
+          // 处理akshare特殊情况，viewName可能是变量
+          if (!viewNameMatch && domainName === 'akshare') {
+            const nameVarMatch = domainContent.match(/const\s+name\s*=\s*['"]([^'"]+)['"]/);
+            if (nameVarMatch) {
+              viewName = nameVarMatch[1];
             }
-          
+          }
+
           // 初始化domain记录
           aliasRecord[domainName] = {
             name: viewName,
-            cmd: {}
+            cmd: {},
           };
-          
+
           // 获取该domain下的所有命令文件
           const domainDir = path.resolve(domainPath, domainName);
           const cmdFiles = getAllCmdFiles(domainDir);
           console.log(`处理域 ${domainName}, 找到 ${cmdFiles.length} 个命令文件`);
-          
+
           for (const cmdFile of cmdFiles) {
             try {
               let cmdData;
               if (path.extname(cmdFile) === '.ts') {
                 const relativePath = cmdFile.replace(domainPath, 'src/worker/domains');
-                const buildFilePath = path.resolve(cliPath, './dist/worker/domains', relativePath.replace('.ts', '.js').replace('src/worker/domains/', ''));
+                const buildFilePath = path.resolve(
+                  cliPath,
+                  './dist/worker/domains',
+                  relativePath.replace('.ts', '.js').replace('src/worker/domains/', '')
+                );
                 if (fs.existsSync(buildFilePath)) {
                   const relativeImportPath = path.relative(currentDirPath, buildFilePath);
                   const importedData = await import(relativeImportPath.replaceAll('\\', '/'));
@@ -287,7 +296,7 @@ function getControllerViewName(cmdPath) {
               } else if (path.extname(cmdFile) === '.json') {
                 cmdData = JSON.parse(fs.readFileSync(cmdFile, 'utf8'));
               }
-              
+
               if (cmdData) {
                 const cmdList = cmdData.cmd ? [cmdData] : Object.values(cmdData);
                 for (const cmd of cmdList) {
@@ -305,10 +314,10 @@ function getControllerViewName(cmdPath) {
         }
       }
     }
-    
+
     // 处理akshare特殊情况 - 从生成的接口文件中获取命令列表
- // 处理akshare特殊情况
-  if (aliasRecord.akshare) {
+    // 处理akshare特殊情况
+    if (aliasRecord.akshare) {
       try {
         const akshareDir = path.resolve(rootPath, 'src/worker/akshare');
         if (fs.existsSync(akshareDir)) {
@@ -325,16 +334,20 @@ function getControllerViewName(cmdPath) {
             }
             return files;
           };
-          
+
           const tsFiles = getAllTsFiles(akshareDir);
           for (const tsFile of tsFiles) {
             const content = fs.readFileSync(tsFile, 'utf-8');
             // 提取接口名称
             const nameMatches = content.match(/name:\s*['"]([^'"]+)['"]/g);
             if (nameMatches) {
-              nameMatches.forEach(match => {
+              nameMatches.forEach((match) => {
                 const cmdKey = match.match(/name:\s*['"]([^'"]+)['"]/)[1];
-                const titleMatch = content.match(new RegExp(`name:\s*['"]${cmdKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][\s\S]*?title:\s*['"]([^'"]+)['"]`));
+                const titleMatch = content.match(
+                  new RegExp(
+                    `name:\s*['"]${cmdKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][\s\S]*?title:\s*['"]([^'"]+)['"]`
+                  )
+                );
                 const title = titleMatch ? titleMatch[1] : cmdKey;
                 aliasRecord.akshare.cmd[cmdKey] = title;
               });
@@ -345,18 +358,17 @@ function getControllerViewName(cmdPath) {
         console.warn('获取akshare命令映射失败:', error.message);
       }
     }
-    
+
     // 手动添加akshare域配置
     if (!aliasRecord.akshare) {
       aliasRecord.akshare = {
         name: 'AKShare',
-        cmd: {}
+        cmd: {},
       };
     }
-    
+
     return aliasRecord;
   }
-  
 
   for (let file of cmdFiles) {
     let data;
@@ -463,7 +475,7 @@ function getControllerViewName(cmdPath) {
       if (fs.existsSync(akshareDir)) {
         // 递归获取所有.ts文件并按模块分组
         const moduleGroups = new Map();
-        
+
         const getAllTsFiles = (dir, files = []) => {
           const entries = fs.readdirSync(dir, { withFileTypes: true });
           for (const entry of entries) {
@@ -476,14 +488,14 @@ function getControllerViewName(cmdPath) {
           }
           return files;
         };
-        
+
         const tsFiles = getAllTsFiles(akshareDir);
-        
+
         for (const tsFile of tsFiles) {
           const content = fs.readFileSync(tsFile, 'utf-8');
           const relativePath = path.relative(akshareDir, tsFile);
           const moduleName = path.dirname(relativePath).replace(/\\/g, '/') || path.basename(tsFile, '.ts');
-          
+
           try {
             // 提取导出的接口数组 - 更稳定的方法
             const arrayMatch = content.match(/export\s+const\s+\w+Interfaces\s*:\s*\w+\[\]\s*=\s*(\[[\s\S]*?\]);/);
@@ -491,7 +503,7 @@ function getControllerViewName(cmdPath) {
               if (!moduleGroups.has(moduleName)) {
                 moduleGroups.set(moduleName, []);
               }
-              
+
               // 使用Function构造函数安全地解析数组数据
               const arrayStr = arrayMatch[1];
               let interfaces;
@@ -508,17 +520,17 @@ function getControllerViewName(cmdPath) {
                   .replace(/,\s*]/g, ']'); // 移除数组末尾多余的逗号
                 interfaces = JSON.parse(cleanedStr);
               }
-              
+
               if (Array.isArray(interfaces)) {
-                interfaces.forEach(interfaceObj => {
+                interfaces.forEach((interfaceObj) => {
                   if (interfaceObj.name && interfaceObj.title) {
                     // 解析inputParameters生成arguments和options
                     const { options, args } = generateCmdOptions(interfaceObj.inputParameters || []);
-                    
+
                     // 生成usage和example
                     const usage = generateUsage(interfaceObj.name, args, options);
                     const example = generateExample(interfaceObj.name, args, options);
-                    
+
                     const cmdRoute = {
                       name: interfaceObj.title,
                       cmd: interfaceObj.name,
@@ -528,14 +540,14 @@ function getControllerViewName(cmdPath) {
                       route: ['akshare', interfaceObj.name],
                       source: {
                         title: interfaceObj.moduleTitle || interfaceObj.title,
-                        url: interfaceObj.targetUrl || ''
+                        url: interfaceObj.targetUrl || '',
                       },
                       example: example,
                       arguments: args,
                       options: options,
-                      subcommand: []
+                      subcommand: [],
                     };
-                    
+
                     moduleGroups.get(moduleName).push(cmdRoute);
                   }
                 });
@@ -545,7 +557,7 @@ function getControllerViewName(cmdPath) {
             console.warn(`解析文件失败: ${tsFile}, 错误: ${parseError.message}`);
           }
         }
-        
+
         // 为每个模块生成文档
         for (const [moduleName, commands] of moduleGroups) {
           if (commands.length > 0) {
@@ -554,10 +566,10 @@ function getControllerViewName(cmdPath) {
             if (!fs.existsSync(dirPath)) {
               fs.mkdirSync(dirPath, { recursive: true });
             }
-            
+
             const templatePath = path.resolve(cliPath, './src/template/doc/cmd/cmd.ejs');
             const templateContent = fs.readFileSync(templatePath, 'utf-8');
-            
+
             const renderedContent = ejs.render(
               templateContent,
               {
@@ -595,9 +607,9 @@ function getControllerViewName(cmdPath) {
               },
               { filename: templatePath }
             );
-            
+
             fs.writeFileSync(filePath, renderedContent);
-            
+
             if (!linkRecord.akshare) linkRecord.akshare = [];
             // 从第一个命令中获取moduleTitle作为显示名称
             const moduleTitle = commands.length > 0 && commands[0].source ? commands[0].source.title : moduleName;
@@ -612,7 +624,7 @@ function getControllerViewName(cmdPath) {
       console.warn('生成akshare文档失败:', error.message);
     }
   }
-  
+
   const indexTemplateContent = fs.readFileSync(path.resolve(cliPath, './src/template/doc/cmd/index.ejs'), 'utf-8');
 
   fs.writeFileSync(

@@ -7,8 +7,7 @@ import {
   isCmdOutputLoadingData,
 } from './default-output';
 import { sendCmdExecutionFlow } from './execution-flow';
-
-import type { CmdWindowContext } from '@/window';
+import type { CmdWindowContext, CmdWindowContextData } from '@/window';
 import {
   createStoreEffects,
   StoreContext,
@@ -56,9 +55,10 @@ export class Output extends StoreContext<OutputStoreModel> {
 
   /**
    * 发送命令
-   * @param input
+   * @param input 命令字符串
+   * @param context 上下文
    */
-  async sendCmd(input: string) {
+  async sendCmd(input: string, context?: CmdWindowContextData) {
     input = input.trim();
     if (!input) return;
     const { prompt } = this.ctx.store;
@@ -73,7 +73,7 @@ export class Output extends StoreContext<OutputStoreModel> {
       lastOutput.output = [getCmdOutputLoadingData()]; // 添加loading
       this.list.push(lastOutput);
       this.historyIndex = -1;
-      await sendCmdExecutionFlow(this, input);
+      await sendCmdExecutionFlow(this, input, context);
     } catch (e) {
       console.error(e);
       const errorOutputData = getOutputErrorData(e as Error);

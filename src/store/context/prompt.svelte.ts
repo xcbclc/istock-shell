@@ -87,6 +87,9 @@ export class Prompt extends StoreContext<PromptStoreData> {
     this.data.domains = domains.map((item) => ({ viewName: item.viewName, name: item.name }));
     sessionStorage.setItem(this.#promptToken, JSON.stringify(this.data.domains));
   }
+  getPromptDescription(promptTexts?: PromptStoreDataText[]) {
+    return (promptTexts || this.promptTexts).filter((item) => item.type !== 'split').map((item) => item.text).join(' ');
+  }
   destroy() {
     if (this.#timeoutId) clearTimeout(this.#timeoutId);
     super.destroy();

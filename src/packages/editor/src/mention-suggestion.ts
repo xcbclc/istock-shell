@@ -1,22 +1,34 @@
-import { type MentionOptions } from '@tiptap/extension-mention';
-import { computePosition, type ComputePositionConfig } from '@floating-ui/dom';
+import { type MentionOptions, type MentionNodeAttrs } from '@tiptap/extension-mention';
+import { computePosition, shift, type ComputePositionConfig } from '@floating-ui/dom';
 
-export interface MentionSuggestionData extends Record<string, any> {
-  id: string | number;
+/**
+ * 命令编辑器提及建议数据类型
+ * @public
+ */
+export interface MentionSuggestionData extends MentionNodeAttrs {
+  id: string;
   label: string;
   value: string;
   type: string;
   extra?: Record<string, any>;
 }
 
-export interface MentionSuggestionOption {
+/**
+ * 命令编辑器提及建议选项类型
+ * @public
+ */
+export type MentionSuggestionOption = {
   getSuggestionList: (query: string) => Promise<MentionSuggestionData[]>;
-  renderSuggestionList: (list: MentionSuggestionData[], state: 'start' | 'update') => Promise<HTMLElement | undefined>;
+  renderSuggestionList: (list: MentionSuggestionData[], state: 'start' | 'update', onSelectedCallback?: (item: MentionSuggestionData) => void) => Promise<HTMLElement | undefined>;
   updateSuggestionListPosition: (x: number, y: number, position: string) => void;
   onKeyDownSuggestion: (event: KeyboardEvent) => boolean;
   onDestroySuggestion: () => void;
-}
+} & MentionOptions['suggestion'];
 
+/**
+ * 命令编辑器提及建议扩展类型
+ * @public
+ */
 export const getMentionSuggestions = (option: MentionSuggestionOption): MentionOptions['suggestions'] => {
   const {
     getSuggestionList,
@@ -24,12 +36,17 @@ export const getMentionSuggestions = (option: MentionSuggestionOption): MentionO
     updateSuggestionListPosition,
     onKeyDownSuggestion,
     onDestroySuggestion,
+    ...other
   } = option;
   const computePositionConfig: ComputePositionConfig = {
-    placement: 'bottom-start',
-    strategy: 'absolute',
+    placement: 'top-start',
+    middleware: [shift()],
   };
-
+  /**
+   * 更新建议列表位置
+   * @param floatElement - 浮动元素
+   * @param clientRect - 客户端矩形函数，用于获取参考元素位置
+   */
   const updatePosition = async (floatElement: HTMLElement, clientRect?: (() => DOMRect | null) | null) => {
     if (!clientRect) {
       return;
@@ -49,11 +66,11 @@ export const getMentionSuggestions = (option: MentionSuggestionOption): MentionO
       render: () => {
         return {
           onStart: async (props) => {
-            const floatElement = await renderSuggestionList(props.items, 'start');
+            const floatElement = await renderSuggestionList(props.items, 'start', props.command);
             if (floatElement) await updatePosition(floatElement, props.clientRect);
           },
           onUpdate: async (props) => {
-            const floatElement = await renderSuggestionList(props.items, 'update');
+            const floatElement = await renderSuggestionList(props.items, 'update', props.command);
             if (floatElement) await updatePosition(floatElement, props.clientRect);
           },
           onKeyDown: (props) => {
@@ -64,6 +81,7 @@ export const getMentionSuggestions = (option: MentionSuggestionOption): MentionO
           },
         };
       },
+      ...other,
     },
   ];
 };
