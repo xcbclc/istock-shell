@@ -19,7 +19,11 @@ export interface MentionSuggestionData extends MentionNodeAttrs {
  */
 export type MentionSuggestionOption = {
   getSuggestionList: (query: string) => Promise<MentionSuggestionData[]>;
-  renderSuggestionList: (list: MentionSuggestionData[], state: 'start' | 'update', onSelectedCallback?: (item: MentionSuggestionData) => void) => Promise<HTMLElement | undefined>;
+  renderSuggestionList: (
+    list: MentionSuggestionData[],
+    state: 'start' | 'update',
+    onSelectedCallback?: (item: MentionSuggestionData) => void
+  ) => Promise<HTMLElement | undefined>;
   updateSuggestionListPosition: (x: number, y: number, position: string) => void;
   onKeyDownSuggestion: (event: KeyboardEvent) => boolean;
   onDestroySuggestion: () => void;

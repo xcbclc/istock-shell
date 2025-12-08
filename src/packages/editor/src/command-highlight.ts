@@ -30,9 +30,10 @@ function findCommandHighlights(tokenizer: Tokenizer, doc: Node): DecorationSet {
     try {
       const tokens = tokenizer.parse(text, false); // 不进行语法检查，只做词法分析
       if (isInitTextNode) {
-        hasKeyCommand = tokens.filter((token) => {
-          return ![TokenType.space, TokenType.lineN, TokenType.lineR].includes(token.type);
-        })[0]?.type === TokenType.keyCommand;
+        hasKeyCommand =
+          tokens.filter((token) => {
+            return ![TokenType.space, TokenType.lineN, TokenType.lineR].includes(token.type);
+          })[0]?.type === TokenType.keyCommand;
       }
       let textOffset = 0;
       for (const token of tokens) {
@@ -46,7 +47,7 @@ function findCommandHighlights(tokenizer: Tokenizer, doc: Node): DecorationSet {
           } else {
             className = 'is-keyCommandContent';
           }
-        } else{
+        } else {
           switch (token.type) {
             case TokenType.command:
               className = 'is-command';
@@ -76,7 +77,6 @@ function findCommandHighlights(tokenizer: Tokenizer, doc: Node): DecorationSet {
               break;
           }
         }
-        
 
         if (className) {
           decorations.push(

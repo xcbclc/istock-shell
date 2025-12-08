@@ -5,7 +5,7 @@ import { createContextStore, startContextStore, onContextStoreHandle, type Conte
 export interface CmdWindowMessageContextData {
   id: string | number;
   [key: string]: any;
-};
+}
 export interface CmdWindowContextData extends Record<string, any> {
   windowId: number;
   port: string;
@@ -64,7 +64,10 @@ export class CmdWindowContext {
    * @param data 消息上下文数据
    * @returns 上下文数据
    */
-  getContextData(messageContextType: string, data: CmdWindowMessageContextData | Array<CmdWindowMessageContextData>): CmdWindowContextData {
+  getContextData(
+    messageContextType: string,
+    data: CmdWindowMessageContextData | Array<CmdWindowMessageContextData>
+  ): CmdWindowContextData {
     return {
       windowId: this.#windowId,
       port: this.port,

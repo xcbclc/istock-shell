@@ -88,7 +88,10 @@ export class Prompt extends StoreContext<PromptStoreData> {
     sessionStorage.setItem(this.#promptToken, JSON.stringify(this.data.domains));
   }
   getPromptDescription(promptTexts?: PromptStoreDataText[]) {
-    return (promptTexts || this.promptTexts).filter((item) => item.type !== 'split').map((item) => item.text).join(' ');
+    return (promptTexts || this.promptTexts)
+      .filter((item) => item.type !== 'split')
+      .map((item) => item.text)
+      .join(' ');
   }
   destroy() {
     if (this.#timeoutId) clearTimeout(this.#timeoutId);

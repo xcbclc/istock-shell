@@ -18,7 +18,7 @@ import { isString, ScopeError } from '@istock-shell/util';
 interface AiMessageContext {
   data: AiModel['context'];
   type: string;
-};
+}
 
 function splitJsonObjects(input: string): string[] {
   if (!input) return [];
@@ -97,7 +97,7 @@ export class AiController {
     @Field('messageId') messageId: string | undefined,
     @CmdRouteArguments(0) content: string,
     @MessageHandler() handler: IMessageHandler,
-    @Field('context') context?: AiMessageContext,
+    @Field('context') context?: AiMessageContext
   ) {
     const cmdInfo = ctx.cmdp.getInfo();
     if (messageId) {
