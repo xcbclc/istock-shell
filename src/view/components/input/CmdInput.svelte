@@ -47,7 +47,7 @@
   });
 
   const getSendCmdContext = (mentions: CommandEditorMentionData[]): CmdWindowContextData => {
-    return ctx.getContextData('mention', history.findListById(mentions.map(item => item.id)));
+    return ctx.getContextData('mention', history.findListById(mentions.map((item) => item.id)));
   };
 
   const onRecommendClose = () => {
@@ -124,23 +124,29 @@
           char: '#',
           decorationClass: 'is-mention',
           getSuggestionList: async (query: string) => {
-            const list: RecommendStoreModel[] = history.list.map((item) => {
-              const data: RecommendStoreModel = {
-                id: item.id,
-                label: item.input,
-                value: `${item.id}`,
-                type: 'history',
-                description: prompt.getPromptDescription(item.promptTexts),
-              };
-              return data;
-            }).filter(item => !query || item.label.indexOf(query) !== -1);
+            const list: RecommendStoreModel[] = history.list
+              .map((item) => {
+                const data: RecommendStoreModel = {
+                  id: item.id,
+                  label: item.input,
+                  value: `${item.id}`,
+                  type: 'history',
+                  description: prompt.getPromptDescription(item.promptTexts),
+                };
+                return data;
+              })
+              .filter((item) => !query || item.label.indexOf(query) !== -1);
             recommend.data.list = list;
-            return list.map(item => ({
+            return list.map((item) => ({
               ...item,
               id: item.id.toString(),
             }));
           },
-          renderSuggestionList: async (_list: MentionSuggestionData[], _state: 'start' | 'update', selectedCallback?: (item: MentionSuggestionData) => void) => {
+          renderSuggestionList: async (
+            _list: MentionSuggestionData[],
+            _state: 'start' | 'update',
+            selectedCallback?: (item: MentionSuggestionData) => void
+          ) => {
             onSelectedCallback = selectedCallback;
             await tick();
             return cmdRecommendListView?.getElement();
@@ -161,12 +167,12 @@
         },
         renderHTML: ({ options, node }) => {
           return [
-            'div', 
-            { ...options.HTMLAttributes, 'class': 'is-mention', title: node.attrs.label },
+            'div',
+            { ...options.HTMLAttributes, class: 'is-mention', title: node.attrs.label },
             ['span', {}, `${node.attrs.mentionSuggestionChar}${node.attrs.label ?? node.attrs.id}`],
             // ['i', { 'class': 'i-carbon:mention' }, '✕'],
           ];
-        }
+        },
       },
       keyboardShortcuts: {},
     });
@@ -196,9 +202,9 @@
   });
 </script>
 
-<div class="cmd-input relative">
+<div class="cmd-input command-container relative">
   <div
-    class="min-h-[2em] py-1 px-2 break-all tracking-wider outline-none text-base-content font-mono rounded-md bg-base-100 shadow-xs border border-base-200/80 ring-primary/80 focus-within:border-primary/80 focus-within:ring-1"
+    class="min-h-[2.2em] py-1 px-2 break-all tracking-wider outline-none text-base-content rounded-md bg-base-100 shadow-xs border border-base-200/80 ring-primary/80 focus-within:border-primary/80 focus-within:ring-1"
     {tabindex}
     bind:this={cmdInputView}
   ></div>
@@ -213,47 +219,10 @@
 
 <style>
   @reference "@istock-shell/ui/style";
+  :global(.cmd-input) {
+    @apply text-sm;
+  }
   :global(.cmd-input .tiptap:focus-visible) {
     @apply outline-0;
-  }
-  :global(span.is-command) {
-    font-weight: 600;
-    @apply text-primary;
-  }
-  :global(span.is-optionKey) {
-    @apply text-secondary;
-  }
-  :global(span.is-parameter) {
-    @apply text-accent;
-  }
-  :global(span.is-pipe) {
-    font-weight: 700;
-    @apply text-warning;
-  }
-  :global(span.is-keyCommand) {
-    font-weight: 600;
-    @apply text-info;
-  }
-  :global(span.is-keyCommandContent) {
-    @apply text-base-content;
-  }
-  :global(span.is-parentheses) {
-    font-weight: 600;
-    @apply text-neutral;
-  }
-  :global(.ProseMirror div.is-mention) {
-    @apply whitespace-nowrap;
-  }
-  :global(div.is-mention) {
-    @apply text-secondary bg-base-200 border-base-300 rounded-md px-2 py-1 inline-flex items-center gap-1.5 leading-none align-middle;
-  }
-  :global(div.is-mention:hover) {
-    @apply bg-base-300;
-  }
-  :global(div.is-mention > i) {
-    @apply cursor-pointer not-italic;
-  }
-  :global(div.is-mention > span) {
-    @apply inline-block max-w-[12em] overflow-hidden text-ellipsis text-sm;
   }
 </style>

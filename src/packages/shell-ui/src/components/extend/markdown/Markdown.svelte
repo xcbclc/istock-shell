@@ -191,7 +191,7 @@ ShMarkdown Markdown渲染组件
   @layer components {
     /* 基础排版与色彩，遵循 DaisyUI 主题变量 */
     :global(.markdown) {
-      @apply text-base text-base-content;
+      @apply text-base-content;
       line-height: 1.75;
     }
 

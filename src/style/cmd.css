@@ -1,0 +1,41 @@
+@reference "@istock-shell/ui/style";
+
+.command-container {
+  .is-command {
+    font-weight: 600;
+    @apply text-primary;
+  }
+  .is-optionKey {
+    @apply text-secondary;
+  }
+  .is-parameter {
+    @apply text-accent;
+  }
+  .is-pipe {
+    font-weight: 700;
+    @apply text-warning;
+  }
+  .is-keyCommand {
+    font-weight: 600;
+    @apply text-info;
+  }
+  .is-keyCommandContent {
+    @apply text-base-content;
+  }
+  .is-parentheses {
+    font-weight: 600;
+    @apply text-neutral;
+  }
+  .is-mention {
+    @apply text-secondary bg-base-300/50 border-base-300 rounded-md mx-1 px-2 inline-flex items-center gap-1.5 leading-[1.1] whitespace-nowrap;
+  }
+  .is-mention:hover {
+    @apply bg-base-300;
+  }
+  .is-mention > i {
+    @apply cursor-pointer not-italic;
+  }
+  .is-mention > span {
+    @apply inline-block max-w-[12em] overflow-hidden text-ellipsis text-sm whitespace-nowrap;
+  }
+}

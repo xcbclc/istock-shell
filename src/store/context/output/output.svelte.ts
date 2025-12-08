@@ -97,7 +97,12 @@ export class Output extends StoreContext<OutputStoreModel> {
   async saveCmdToHistory(data: OutputStoreDataItem, promptData: PromptStoreData) {
     // 演示发起的命令不保存到历史记录
     if (this.ctx.cmdWindow.isDemoMode) return;
-    const payload: OutputStoreDataItem & { cmd?: string; rowStatus?: number; createDate?: Date } = clone(data);
+    const payload: OutputStoreDataItem & {
+      cmd?: string;
+      rowStatus?: number;
+      createDate?: Date;
+      context?: CmdWindowContextData;
+    } = clone(data);
     payload.source = 'db';
     payload.cmd = ''; // todo 单命令需要保存方便搜索
     payload.promptTexts = payload.promptTexts.map((text) => {
@@ -109,6 +114,7 @@ export class Output extends StoreContext<OutputStoreModel> {
     payload.rowStatus = 1;
     payload.createDate = new Date();
     await this.ctx.message.send('global', 'history.add', payload);
+    await this.ctx.store.history.getList();
   }
 
   /**
@@ -177,6 +183,10 @@ export class Output extends StoreContext<OutputStoreModel> {
     this.list.splice(lastIndex, 1, lastOutput);
   }
 
+  /**
+   * 发送AI消息
+   * @param data
+   */
   async onSendAiMessage(data: { messageId: string }) {
     this.ctx.message.sendMessageToChannel(data.messageId, { messageId: data.messageId });
   }

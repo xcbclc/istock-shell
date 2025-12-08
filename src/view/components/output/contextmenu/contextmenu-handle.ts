@@ -36,7 +36,7 @@ export const contextmenuAction = async (
     const { commandEditor } = ctx.store.input;
     if (!commandEditor) throw new ScopeError('iswork.handleBlockContextmenuFactory', '没有绑定命令编辑器');
     let input = commandEditor.input.trim();
-    const tag = `#[${block.id}, ${block.input}]`;
+    const tag = `#[${block.id},${block.input}]`;
     if (input.startsWith(keyCommand.ai.command)) {
       input += tag;
       commandEditor.handleCommandInput(input);

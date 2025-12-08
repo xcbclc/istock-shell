@@ -23,7 +23,23 @@ export enum AstTreeType {
   'parameter',
   /** 选项键节点类型（如 -v、--help 等） */
   'optionKey',
+  /** 提及节点类型 */
+  'mention',
 }
+
+/**
+ * AST 提及节点类型定义
+ *
+ * 表示命令行中的提及（如 @[id,label] 等）
+ *
+ * @public
+ */
+export type AstTreeMention = {
+  /** 节点类型标识 */
+  type: AstTreeType.mention;
+  /** 提及值 */
+  value: string;
+};
 
 /**
  * AST 参数节点类型定义
@@ -96,7 +112,7 @@ export type AstTreeKeyCommand = {
   /** 关键字命令值 */
   value: string;
   /** 子节点列表，仅包含参数 */
-  children: AstTreeParameter[];
+  children: (AstTreeParameter | AstTreeMention)[];
 };
 
 /**
@@ -291,7 +307,9 @@ export class Ast {
           // 处理命令的参数和选项
           while (
             token &&
-            [TokenType.keyCommandContent, TokenType.optionKey, TokenType.parameter].includes(token.type)
+            [TokenType.keyCommandContent, TokenType.optionKey, TokenType.parameter, TokenType.mention].includes(
+              token.type
+            )
           ) {
             // 处理关键字命令内容
             if (token.type === TokenType.keyCommandContent) {
@@ -315,6 +333,16 @@ export class Ast {
                 type: AstTreeType.parameter,
                 value: token.value,
               });
+            }
+
+            // 处理提及
+            if (TokenType.mention === token.type) {
+              if (commandNode.type === AstTreeType.keyCommand) {
+                (commandNode as AstTreeKeyCommand).children.push({
+                  type: AstTreeType.mention,
+                  value: token.value,
+                });
+              }
             }
 
             token = tokens[++index];

@@ -1,4 +1,6 @@
+@reference "@istock-shell/ui/style";
 @import './theme.css';
+@import './cmd.css';
 
 html {
   color: var(--color-base-content);
@@ -24,4 +26,5 @@ body {
   box-sizing: border-box;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  @apply text-sm;
 }

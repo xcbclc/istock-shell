@@ -91,13 +91,17 @@ export interface CommandEditorMentionData {
   id: string;
   label: string;
   mentionSuggestionChar: string;
-};
+}
 
 /**
  * 命令编辑器JSON节点类型
  * @public
  */
-type CommandEditorJsonNode = { type: string; attrs?: CommandEditorMentionData, content?: Array<{ type: string; attrs?: CommandEditorMentionData }> }
+type CommandEditorJsonNode = {
+  type: string;
+  attrs?: CommandEditorMentionData;
+  content?: Array<{ type: string; attrs?: CommandEditorMentionData }>;
+};
 
 /**
  * 命令编辑器类
@@ -127,7 +131,18 @@ export class CommandEditor {
    * @returns 解析后的文本内容
    */
   get input() {
-    return this.#editor.getText();
+    return this.#editor.getText({
+      textSerializers: {
+        mention: ({ node }) => {
+          const { attrs } = node;
+          const text = attrs.label ?? '';
+          if (attrs.mentionSuggestionChar && attrs.id) {
+            return `${attrs.mentionSuggestionChar}[${attrs.id},${text}]`;
+          }
+          return attrs.mentionSuggestionChar ? `${attrs.mentionSuggestionChar}${text}` : text;
+        },
+      },
+    });
   }
 
   /**
@@ -303,7 +318,19 @@ export class CommandEditor {
   handleCommandInput(input: string) {
     // 清空当前内容并设置新内容
     this.#editor.commands.clearContent();
-    this.#editor.commands.insertContent(input);
+    const content = this.#parseMention(input);
+
+    if (Array.isArray(content) && content.length > 0) {
+      const lastItem = content[content.length - 1];
+      if (lastItem.type === 'mention') {
+        content.push({
+          type: 'text',
+          text: ' ',
+        });
+      }
+    }
+
+    this.#editor.commands.insertContent(content);
     // 设置焦点到编辑器末尾
     this.#editor.commands.focus('end');
   }
@@ -317,7 +344,99 @@ export class CommandEditor {
     // 获取光标位置前的文本
     let offsetText = this.getCursorOffsetText();
     const insetText = getNonOverlapStr(offsetText, str);
-    this.#editor.commands.insertContent(insetText);
+    const content = this.#parseMention(insetText);
+    this.#editor.commands.insertContent(content);
+  }
+
+  /**
+   * 解析包含提及格式的文本
+   * @param text - 待解析文本
+   * @returns Tiptap内容数组
+   * @private
+   */
+  #parseMention(text: string) {
+    const content = [];
+    let currentIndex = 0;
+
+    while (currentIndex < text.length) {
+      const hashIndex = text.indexOf('#[', currentIndex);
+      const atIndex = text.indexOf('@[', currentIndex);
+
+      let startIndex = -1;
+      let char = '';
+
+      if (hashIndex !== -1 && (atIndex === -1 || hashIndex < atIndex)) {
+        startIndex = hashIndex;
+        char = '#';
+      } else if (atIndex !== -1) {
+        startIndex = atIndex;
+        char = '@';
+      }
+
+      if (startIndex === -1) {
+        content.push({
+          type: 'text',
+          text: text.slice(currentIndex),
+        });
+        break;
+      }
+
+      if (startIndex > currentIndex) {
+        content.push({
+          type: 'text',
+          text: text.slice(currentIndex, startIndex),
+        });
+      }
+
+      const commaIndex = text.indexOf(',', startIndex + 2);
+
+      if (commaIndex === -1) {
+        content.push({
+          type: 'text',
+          text: text.slice(startIndex, startIndex + 2),
+        });
+        currentIndex = startIndex + 2;
+        continue;
+      }
+
+      const id = text.slice(startIndex + 2, commaIndex);
+      let bracketCount = 1;
+      let endIndex = -1;
+
+      for (let i = commaIndex + 1; i < text.length; i++) {
+        if (text[i] === '[') {
+          bracketCount++;
+        } else if (text[i] === ']') {
+          bracketCount--;
+        }
+
+        if (bracketCount === 0) {
+          endIndex = i;
+          break;
+        }
+      }
+
+      if (endIndex !== -1) {
+        const label = text.slice(commaIndex + 1, endIndex);
+        content.push({
+          type: 'mention',
+          attrs: {
+            id,
+            label,
+            mentionSuggestionChar: char,
+          },
+        });
+        currentIndex = endIndex + 1;
+      } else {
+        content.push({
+          type: 'text',
+          text: text.slice(startIndex, startIndex + 2),
+        });
+        currentIndex = startIndex + 2;
+      }
+    }
+
+    return content.length > 0 ? content : text;
   }
 
   /**

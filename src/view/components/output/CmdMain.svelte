@@ -45,6 +45,14 @@
     return tokens;
   };
 
+  const formatMention = (value: string) => {
+    const index = value.indexOf(',');
+    if (index !== -1 && value.endsWith(']')) {
+      return '#' + value.slice(index + 1, -1);
+    }
+    return '#' + value;
+  };
+
   const scrollEnd = (isInit: boolean = false) => {
     if (scrollContainer && canScrollEnd) {
       scrollContainer.scrollTop = scrollContainer.scrollHeight + 100;
@@ -137,12 +145,18 @@
             <!-- 提示符 -->
             <CmdPrompt texts={block.promptTexts} />
             <!-- 命令输入 -->
-            <div class="font-mono text-sm flex-auto break-all">
+            <div class="command-container text-sm flex-auto break-all">
               {#each getCmdInputTokens(block.input) as token, tIndex (tIndex)}
                 {#if [TokenType.lineN, TokenType.lineR].includes(token.type)}
                   <br />
+                {:else if token.type === TokenType.mention}
+                  <div class="is-{token.type}">
+                    <span title={formatMention(token.value)}>{formatMention(token.value)}</span>
+                  </div>
                 {:else}
-                  <span class="is-{token.type}">{token.value}</span>
+                  <span class="is-{token.type}">
+                    {token.value}
+                  </span>
                 {/if}
               {/each}
             </div>
@@ -170,19 +184,3 @@
     <div class="flex align-middle justify-center absolute top-0 left-0 w-full h-full z-10 bg-base-200/50"></div>
   {/if}
 </div>
-
-<style>
-  @reference "@istock-shell/ui/style";
-  :global(.is-command) {
-    @apply text-primary;
-  }
-  :global(.is-command-text) {
-    @apply font-semibold text-primary;
-  }
-  :global(.is-option) {
-    @apply text-secondary;
-  }
-  :global(.is-parameter) {
-    @apply text-accent;
-  }
-</style>

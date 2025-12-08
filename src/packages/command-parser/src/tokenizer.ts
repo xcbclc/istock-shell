@@ -29,6 +29,8 @@ export enum TokenType {
   keyCommand = 'keyCommand',
   /** 关键字命令的内容部分 */
   keyCommandContent = 'keyCommandContent',
+  /** 提及（如 @[id,label] 或 #[id,label]） */
+  mention = 'mention',
 }
 
 /**
@@ -512,6 +514,34 @@ export class Tokenizer {
         if (char) {
           let content = '';
           while (ai.content.test(char)) {
+            // 检查是否为 mention 格式 @[id,label] 或 #[id,label]
+            if ((char === '@' || char === '#') && input[index + 1] === '[') {
+              let tempIndex = index + 2;
+              let foundComma = false;
+              let foundClose = false;
+              while (input[tempIndex]) {
+                if (input[tempIndex] === ']') {
+                  foundClose = true;
+                  break;
+                }
+                if (input[tempIndex] === ',') {
+                  foundComma = true;
+                }
+                tempIndex++;
+              }
+
+              if (foundComma && foundClose) {
+                if (content) {
+                  tokens.push({ type: TokenType.keyCommandContent, value: content });
+                  content = '';
+                }
+                const mention = input.substring(index, tempIndex + 1);
+                tokens.push({ type: TokenType.mention, value: mention });
+                index = tempIndex + 1;
+                char = input[index];
+                continue;
+              }
+            }
             content += char;
             char = input[++index];
           }
@@ -532,12 +562,46 @@ export class Tokenizer {
         char = input[index];
         if (char) {
           let content = '';
+          let hasPushedToken = false;
           while (search.content.test(char)) {
+            // 检查是否为 mention 格式 @[id,label] 或 #[id,label]
+            if ((char === '@' || char === '#') && input[index + 1] === '[') {
+              let tempIndex = index + 2;
+              let foundComma = false;
+              let foundClose = false;
+              while (input[tempIndex]) {
+                if (input[tempIndex] === ']') {
+                  foundClose = true;
+                  break;
+                }
+                if (input[tempIndex] === ',') {
+                  foundComma = true;
+                }
+                tempIndex++;
+              }
+
+              if (foundComma && foundClose) {
+                if (!hasPushedToken) {
+                  content = content.trimStart();
+                }
+                if (content) {
+                  tokens.push({ type: TokenType.keyCommandContent, value: content });
+                  content = '';
+                  hasPushedToken = true;
+                }
+                const mention = input.substring(index, tempIndex + 1);
+                tokens.push({ type: TokenType.mention, value: mention });
+                hasPushedToken = true;
+                index = tempIndex + 1;
+                char = input[index];
+                continue;
+              }
+            }
             content += char;
             char = input[++index];
           }
           if (content) {
-            tokens.push({ type: TokenType.keyCommandContent, value: content.trim() });
+            tokens.push({ type: TokenType.keyCommandContent, value: content });
           }
         }
         return { isContinue: true, index };
