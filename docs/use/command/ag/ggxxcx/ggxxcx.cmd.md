@@ -27,4 +27,4 @@ editLink: false
 ### 命令示例
 
 `ggxxcx -gpmc 贵州茅台 -dw`
-<IStockShellDemo cmd='ggxxcx -gpmc 贵州茅台 -dw' :domains='[{"viewName":"A股","name":"ag"}]' :height='480'/>
+<IStockShellDemo cmd='ggxxcx -gpmc 贵州茅台 -dw' :domains='[{"viewName":"A股","name":"ag"}]' :height='640'/>

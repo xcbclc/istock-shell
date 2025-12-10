@@ -53,7 +53,7 @@ ShChart 图表组件
    * 继承所有原生 div 元素的 HTML 属性，并扩展图表特有的功能属性
    * @typedef {HTMLAttributes<HTMLDivElement> & ChartPropsExtension} ChartProps
    */
-  export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
+  export interface ChartProps extends HTMLAttributes<HTMLDivElement> {
     /** 图表配置选项，支持 @antv/g2 的所有配置参数 */
     options?: ChartOptions;
     /** 内容被加载 **/
@@ -74,7 +74,7 @@ ShChart 图表组件
     class: className = '', // 自定义CSS类名（默认空字符串）
     onContentLoaded, // 内容被加载
     ...otherProps // 其他原生div元素属性
-  }: ChatProps = $props();
+  }: ChartProps = $props();
 
   // 响应式状态变量
   let containerElement: HTMLElement | undefined; // 图表容器DOM元素引用

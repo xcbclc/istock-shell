@@ -8,7 +8,7 @@
 
 > **AstTreePipe** = `object`
 
-Defined in: ast.ts:63
+Defined in: ast.ts:79
 
 AST 管道节点类型定义
 
@@ -20,7 +20,7 @@ AST 管道节点类型定义
 
 > **type**: [`pipe`](../enumerations/AstTreeType.md#pipe)
 
-Defined in: ast.ts:65
+Defined in: ast.ts:81
 
 节点类型标识
 
@@ -30,6 +30,6 @@ Defined in: ast.ts:65
 
 > **value**: `string`
 
-Defined in: ast.ts:67
+Defined in: ast.ts:83
 
 管道操作符值

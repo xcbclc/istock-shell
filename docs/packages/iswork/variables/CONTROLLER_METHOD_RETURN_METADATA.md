@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_RETURN_METADATA**: _typeof_ `CONTROLLER_METHOD_RETURN_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:11
+Defined in: constants/decorator.ts:22
+
+控制器方法返回值元数据键

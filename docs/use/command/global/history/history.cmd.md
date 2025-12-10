@@ -26,4 +26,4 @@ editLink: false
 ### 命令示例
 
 `lssc -sl 1 -ms 0`
-<IStockShellDemo cmd='lssc -sl 1 -ms 0' :domains='[]' :height='650'/>
+<IStockShellDemo cmd='lssc -sl 1 -ms 0' :domains='[]' :height='640'/>

@@ -6,7 +6,7 @@
 
 # Class: Ast
 
-Defined in: ast.ts:165
+Defined in: ast.ts:181
 
 AST（抽象语法树）解析器类
 
@@ -29,7 +29,7 @@ console.log(tree);
 
 > **new Ast**(): `Ast`
 
-Defined in: ast.ts:192
+Defined in: ast.ts:208
 
 构造函数
 
@@ -47,7 +47,7 @@ Defined in: ast.ts:192
 
 > **get** **symbol**(): `object`
 
-Defined in: ast.ts:174
+Defined in: ast.ts:190
 
 获取词法分析器的符号配置
 
@@ -105,7 +105,7 @@ OR 管道符号列表 - 无论第一个命令是否错误，都会执行第二�
 
 > **get** **tokenizer**(): [`Tokenizer`](Tokenizer.md)
 
-Defined in: ast.ts:183
+Defined in: ast.ts:199
 
 获取词法分析器实例
 
@@ -121,7 +121,7 @@ Defined in: ast.ts:183
 
 > **parse**(`input`): [`AstTreeRoot`](../type-aliases/AstTreeRoot.md)
 
-Defined in: ast.ts:228
+Defined in: ast.ts:244
 
 解析输入字符串为抽象语法树
 

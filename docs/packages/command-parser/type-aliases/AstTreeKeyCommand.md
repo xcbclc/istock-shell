@@ -8,7 +8,7 @@
 
 > **AstTreeKeyCommand** = `object`
 
-Defined in: ast.ts:93
+Defined in: ast.ts:109
 
 AST 关键字命令节点类型定义
 
@@ -18,9 +18,9 @@ AST 关键字命令节点类型定义
 
 ### children
 
-> **children**: [`AstTreeParameter`](AstTreeParameter.md)[]
+> **children**: ([`AstTreeParameter`](AstTreeParameter.md) \| [`AstTreeMention`](AstTreeMention.md))[]
 
-Defined in: ast.ts:99
+Defined in: ast.ts:115
 
 子节点列表，仅包含参数
 
@@ -30,7 +30,7 @@ Defined in: ast.ts:99
 
 > **type**: [`keyCommand`](../enumerations/AstTreeType.md#keycommand)
 
-Defined in: ast.ts:95
+Defined in: ast.ts:111
 
 节点类型标识
 
@@ -40,6 +40,6 @@ Defined in: ast.ts:95
 
 > **value**: `string`
 
-Defined in: ast.ts:97
+Defined in: ast.ts:113
 
 关键字命令值

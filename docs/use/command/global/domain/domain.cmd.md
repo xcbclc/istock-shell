@@ -26,7 +26,7 @@ editLink: false
 ### 命令示例
 
 `yycz -gl A股 -sl 1`
-<IStockShellDemo cmd='yycz -gl A股 -sl 1' :domains='[]' :height='480'/>
+<IStockShellDemo cmd='yycz -gl A股 -sl 1' :domains='[]' :height='640'/>
 
 ## yyjr 应用进入
 
@@ -39,4 +39,4 @@ editLink: false
 ### 命令示例
 
 `yyjr A股`
-<IStockShellDemo cmd='yyjr A股' :domains='[]' :height='480'/>
+<IStockShellDemo cmd='yyjr A股' :domains='[]' :height='640'/>

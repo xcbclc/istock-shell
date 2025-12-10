@@ -6,16 +6,39 @@
 
 # Function: getIndexMetadata()
 
-> **getIndexMetadata**(`target`): `undefined` \| [`TDecoratorIndexOptions`](../type-aliases/TDecoratorIndexOptions.md)
+> **getIndexMetadata**(`target`): `undefined` \| [`DecoratorIndexOptions`](../type-aliases/DecoratorIndexOptions.md)
 
-Defined in: src/packages/iswork/src/orm/decorators/columns/Index.ts:21
+Defined in: orm/decorators/columns/Index.ts:83
+
+获取索引元数据
 
 ## Parameters
 
 ### target
 
-[`IAnyClass`](../interfaces/IAnyClass.md)
+[`AnyClass`](../interfaces/AnyClass.md)
+
+目标类
 
 ## Returns
 
-`undefined` \| [`TDecoratorIndexOptions`](../type-aliases/TDecoratorIndexOptions.md)
+`undefined` \| [`DecoratorIndexOptions`](../type-aliases/DecoratorIndexOptions.md)
+
+索引元数据，如果不存在则返回 undefined
+
+## Description
+
+从指定类中获取索引装饰器设置的元数据
+
+## Example
+
+```typescript
+class User {
+  @Index('idx_user_email', { unique: true })
+  email: string;
+}
+
+const metadata = getIndexMetadata(User);
+console.log(metadata?.indexName); // 'idx_user_email'
+console.log(metadata?.unique); // true
+```

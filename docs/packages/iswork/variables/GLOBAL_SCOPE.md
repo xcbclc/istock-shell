@@ -8,4 +8,6 @@
 
 > `const` **GLOBAL_SCOPE**: _typeof_ `GLOBAL_SCOPE`
 
-Defined in: src/packages/iswork/src/constants/ioc-container.ts:1
+Defined in: constants/ioc-container.ts:7
+
+全局作用域标识符

@@ -205,16 +205,6 @@ export class FESnowflake {
   }
 
   /**
-   * 将数字转换为Base62字符串（兼容性方法）
-   * @param num 要转换的数字
-   * @returns Base62字符串
-   * @deprecated 使用 toBase62BigInt 以避免精度丢失
-   */
-  private toBase62(num: number): string {
-    return this.toBase62BigInt(BigInt(num));
-  }
-
-  /**
    * 生成批量ID
    * @param count 生成数量
    * @returns ID数组
@@ -267,20 +257,5 @@ export class FESnowflake {
     }
 
     return result;
-  }
-
-  /**
-   * 将Base62字符串转换为数字（兼容性方法）
-   * @param str Base62字符串
-   * @returns 数字
-   * @deprecated 使用 fromBase62BigInt 以避免精度丢失
-   */
-  private fromBase62(str: string): number {
-    const result = this.fromBase62BigInt(str);
-    // 检查是否超出安全整数范围
-    if (result > BigInt(Number.MAX_SAFE_INTEGER)) {
-      console.warn('ID value exceeds safe integer range, precision may be lost');
-    }
-    return Number(result);
   }
 }

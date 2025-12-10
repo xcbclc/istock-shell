@@ -267,7 +267,7 @@ parser.addOption({
 
 > **parse**(`input`): [`CommandParserResult`](../type-aliases/CommandParserResult.md)
 
-Defined in: parser.ts:434
+Defined in: parser.ts:439
 
 解析命令行字符串
 

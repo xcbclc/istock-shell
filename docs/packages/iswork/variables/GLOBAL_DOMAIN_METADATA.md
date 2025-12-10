@@ -8,4 +8,6 @@
 
 > `const` **GLOBAL_DOMAIN_METADATA**: _typeof_ `GLOBAL_DOMAIN_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:1
+Defined in: constants/decorator.ts:7
+
+全局域元数据键

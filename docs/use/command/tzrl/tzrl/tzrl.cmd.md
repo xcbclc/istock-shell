@@ -25,4 +25,4 @@ editLink: false
 ### 命令示例
 
 `tzrl -lx newstock_onlist,newstock_apply,CNV,kzzsg,CBDIV,cnreits,FUND,BOND,STOCK,OTHER,newbond_apply,newbond_onlist,diva,divhk,idxfut,idxopt`
-<IStockShellDemo cmd='tzrl -lx newstock_onlist,newstock_apply,CNV,kzzsg,CBDIV,cnreits,FUND,BOND,STOCK,OTHER,newbond_apply,newbond_onlist,diva,divhk,idxfut,idxopt' :domains='[{"viewName":"投资日历","name":"tzrl"}]' :height='480'/>
+<IStockShellDemo cmd='tzrl -lx newstock_onlist,newstock_apply,CNV,kzzsg,CBDIV,cnreits,FUND,BOND,STOCK,OTHER,newbond_apply,newbond_onlist,diva,divhk,idxfut,idxopt' :domains='[{"viewName":"投资日历","name":"tzrl"}]' :height='640'/>

@@ -12,14 +12,17 @@
 ## Classes
 
 - [CommandEditor](classes/CommandEditor.md)
-- [CommandEditorCursor](classes/CommandEditorCursor.md)
-- [CommandEditorParser](classes/CommandEditorParser.md)
+
+## Interfaces
+
+- [CommandEditorMentionData](interfaces/CommandEditorMentionData.md)
+- [CommandHighlighterOption](interfaces/CommandHighlighterOption.md)
+- [MentionSuggestionData](interfaces/MentionSuggestionData.md)
 
 ## Type Aliases
 
-- [CommandEditorContentNode](type-aliases/CommandEditorContentNode.md)
 - [CommandEditorCustomEvent](type-aliases/CommandEditorCustomEvent.md)
 - [CommandEditorInputOption](type-aliases/CommandEditorInputOption.md)
-- [CommandEditorRangInfo](type-aliases/CommandEditorRangInfo.md)
+- [CommandEditorOptions](type-aliases/CommandEditorOptions.md)
 - [CommandEditorRecommendCmdData](type-aliases/CommandEditorRecommendCmdData.md)
 - [CommandEditorRecommendCmdEvent](type-aliases/CommandEditorRecommendCmdEvent.md)

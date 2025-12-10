@@ -31,7 +31,7 @@ editLink: false
 ### 命令示例
 
 `sshqsj hag`
-<IStockShellDemo cmd='sshqsj hag' :domains='[{"viewName":"A股","name":"ag"}]' :height='480'/>
+<IStockShellDemo cmd='sshqsj hag' :domains='[{"viewName":"A股","name":"ag"}]' :height='640'/>
 
 ## sshqxl 实时行情新浪 <Badge type="tip" text="不稳定" />
 
@@ -50,4 +50,4 @@ editLink: false
 ### 命令示例
 
 `sshqxl`
-<IStockShellDemo cmd='sshqxl' :domains='[{"viewName":"A股","name":"ag"}]' :height='480'/>
+<IStockShellDemo cmd='sshqxl' :domains='[{"viewName":"A股","name":"ag"}]' :height='640'/>

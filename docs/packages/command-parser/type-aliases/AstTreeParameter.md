@@ -8,7 +8,7 @@
 
 > **AstTreeParameter** = `object`
 
-Defined in: ast.ts:35
+Defined in: ast.ts:51
 
 AST 参数节点类型定义
 
@@ -20,7 +20,7 @@ AST 参数节点类型定义
 
 > **type**: [`parameter`](../enumerations/AstTreeType.md#parameter)
 
-Defined in: ast.ts:37
+Defined in: ast.ts:53
 
 节点类型标识
 
@@ -30,6 +30,6 @@ Defined in: ast.ts:37
 
 > **value**: `string`
 
-Defined in: ast.ts:39
+Defined in: ast.ts:55
 
 参数值

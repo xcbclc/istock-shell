@@ -6,31 +6,63 @@
 
 # Function: Model()
 
+模型装饰器实现
+
+## Description
+
+模型装饰器的具体实现，支持多种参数形式
+
+## Param
+
+模型名称或配置选项
+
+## Param
+
+可选的配置选项
+
 ## Call Signature
 
 > **Model**(`options?`): `ClassDecorator`
 
-Defined in: src/packages/iswork/src/orm/decorators/model/Model.ts:11
+Defined in: orm/decorators/model/Model.ts:25
 
-定义模型
+模型装饰器
 
 ### Parameters
 
 #### options?
 
-[`TDecoratorModelOptions`](../type-aliases/TDecoratorModelOptions.md)
+[`DecoratorModelOptions`](../type-aliases/DecoratorModelOptions.md)
+
+模型配置选项
 
 ### Returns
 
 `ClassDecorator`
 
+类装饰器函数
+
+### Description
+
+用于标记类为 ORM 模型，并设置模型的配置选项
+
+### Example
+
+```typescript
+@Model({ tableName: 'users' })
+class User {
+  id: number;
+  name: string;
+}
+```
+
 ## Call Signature
 
 > **Model**(`name?`, `options?`): `ClassDecorator`
 
-Defined in: src/packages/iswork/src/orm/decorators/model/Model.ts:12
+Defined in: orm/decorators/model/Model.ts:42
 
-定义模型
+模型装饰器（带名称）
 
 ### Parameters
 
@@ -38,10 +70,30 @@ Defined in: src/packages/iswork/src/orm/decorators/model/Model.ts:12
 
 `string`
 
+模型名称
+
 #### options?
 
-[`TDecoratorModelOptions`](../type-aliases/TDecoratorModelOptions.md)
+[`DecoratorModelOptions`](../type-aliases/DecoratorModelOptions.md)
+
+模型配置选项
 
 ### Returns
 
 `ClassDecorator`
+
+类装饰器函数
+
+### Description
+
+用于标记类为 ORM 模型，并指定模型名称和配置选项
+
+### Example
+
+```typescript
+@Model('User', { tableName: 'users' })
+class UserModel {
+  id: number;
+  name: string;
+}
+```

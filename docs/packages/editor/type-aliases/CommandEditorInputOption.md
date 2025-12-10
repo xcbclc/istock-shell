@@ -8,7 +8,7 @@
 
 > **CommandEditorInputOption** = `object`
 
-Defined in: command-editor.ts:40
+Defined in: src/packages/editor/src/command-editor-plus.ts:42
 
 命令编辑器输入选项类型
 
@@ -18,7 +18,7 @@ Defined in: command-editor.ts:40
 
 > `optional` **action**: [`CommandEditorActionTypes`](../enumerations/CommandEditorActionTypes.md)
 
-Defined in: command-editor.ts:42
+Defined in: src/packages/editor/src/command-editor-plus.ts:44
 
 操作类型
 
@@ -28,6 +28,6 @@ Defined in: command-editor.ts:42
 
 > `optional` **event**: `Event`
 
-Defined in: command-editor.ts:44
+Defined in: src/packages/editor/src/command-editor-plus.ts:46
 
 触发事件

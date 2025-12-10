@@ -12,7 +12,7 @@ export interface KeyboardShortcutsOption {
  * 命令编辑器键盘快捷键扩展类型
  * @public
  */
-export const getKeyboardShortcuts = (option: KeyboardShortcutsOption) => {
+export const getKeyboardShortcuts = (_option: KeyboardShortcutsOption) => {
   return Extension.create({
     name: 'keyboard',
     addKeyboardShortcuts() {

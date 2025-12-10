@@ -6,7 +6,7 @@
 
 # Enumeration: CommandEditorEventNames
 
-Defined in: command-editor.ts:10
+Defined in: src/packages/editor/src/command-editor-plus.ts:14
 
 命令编辑器事件名称枚举
 
@@ -16,19 +16,9 @@ Defined in: command-editor.ts:10
 
 > **RecommendCmd**: `"recommendCmd"`
 
-Defined in: command-editor.ts:12
+Defined in: src/packages/editor/src/command-editor-plus.ts:16
 
 推荐命令事件
-
----
-
-### ReRenderCmd
-
-> **ReRenderCmd**: `"reRenderCmd"`
-
-Defined in: command-editor.ts:16
-
-重新渲染命令事件
 
 ---
 
@@ -36,6 +26,6 @@ Defined in: command-editor.ts:16
 
 > **SendCmd**: `"sendCmd"`
 
-Defined in: command-editor.ts:14
+Defined in: src/packages/editor/src/command-editor-plus.ts:18
 
 发送命令事件

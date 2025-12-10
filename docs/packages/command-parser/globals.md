@@ -27,6 +27,7 @@
 - [AstTreeCommand](type-aliases/AstTreeCommand.md)
 - [AstTreeItem](type-aliases/AstTreeItem.md)
 - [AstTreeKeyCommand](type-aliases/AstTreeKeyCommand.md)
+- [AstTreeMention](type-aliases/AstTreeMention.md)
 - [AstTreeOption](type-aliases/AstTreeOption.md)
 - [AstTreeParameter](type-aliases/AstTreeParameter.md)
 - [AstTreeParentheses](type-aliases/AstTreeParentheses.md)

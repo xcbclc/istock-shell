@@ -8,7 +8,7 @@
 
 > **AstTreeRoot** = `object`
 
-Defined in: ast.ts:132
+Defined in: ast.ts:148
 
 AST 根节点类型定义
 
@@ -20,7 +20,7 @@ AST 根节点类型定义
 
 > **children**: [`AstTreeItem`](AstTreeItem.md)[]
 
-Defined in: ast.ts:136
+Defined in: ast.ts:152
 
 子节点列表
 
@@ -30,6 +30,6 @@ Defined in: ast.ts:136
 
 > **type**: [`root`](../enumerations/AstTreeType.md#root)
 
-Defined in: ast.ts:134
+Defined in: ast.ts:150
 
 节点类型标识

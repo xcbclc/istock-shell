@@ -6,9 +6,36 @@
 
 # Class: Cmdp
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:8
+Defined in: cmdp/cmdp.ts:35
 
-istock cmdp协议实现
+CMDP 协议实现类
+
+## Description
+
+继承自 AbstractCmdp，提供完整的 CMDP 协议功能实现，包括元数据管理、负载处理、消息构建等
+
+## Example
+
+```typescript
+// 通过地址字符串创建实例
+const cmdp1 = new Cmdp('cmdp://@admin.example.com:8080/UserController.getUser');
+
+// 通过消息对象创建实例
+const cmdp2 = new Cmdp({
+  address: 'cmdp://@admin.example.com:8080/UserController.getUser',
+  meta: { timestamp: Date.now() },
+  payload: { userId: '123' },
+});
+
+// 通过地址信息对象创建实例
+const cmdp3 = new Cmdp({
+  user: 'admin',
+  domains: ['example', 'com'],
+  port: '8080',
+  controller: 'UserController',
+  method: 'getUser',
+});
+```
 
 ## Extends
 
@@ -24,21 +51,51 @@ istock cmdp协议实现
 
 > **new Cmdp**(`msgOrInfo`, `options?`): `Cmdp`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:18
+Defined in: cmdp/cmdp.ts:109
+
+构造函数
 
 #### Parameters
 
 ##### msgOrInfo
 
-[`TCmdpAddressInfo`](../type-aliases/TCmdpAddressInfo.md) | [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+CMDP 消息对象或地址信息对象
+
+[`CmdpAddressInfo`](../type-aliases/CmdpAddressInfo.md) | [`CmdpMessage`](../type-aliases/CmdpMessage.md)
 
 ##### options?
 
-[`TCmdpOptions`](../type-aliases/TCmdpOptions.md)
+[`CmdpOptions`](../type-aliases/CmdpOptions.md)
+
+可选的协议配置
 
 #### Returns
 
 `Cmdp`
+
+#### Description
+
+创建 CMDP 协议实例，支持通过消息对象或地址信息对象初始化
+
+#### Example
+
+```typescript
+// 通过消息对象初始化
+const cmdp1 = new Cmdp({
+  address: 'cmdp://@admin.example.com:8080/UserController.getUser',
+  meta: { timestamp: Date.now() },
+  payload: { userId: '123' },
+});
+
+// 通过地址信息对象初始化
+const cmdp2 = new Cmdp({
+  user: 'admin',
+  domains: ['example', 'com'],
+  port: '8080',
+  controller: 'UserController',
+  method: 'getUser',
+});
+```
 
 #### Overrides
 
@@ -50,7 +107,9 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:18
 
 > `protected` **address**: `string`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:14
+Defined in: cmdp/abstract-cmdp.ts:53
+
+完整的 CMDP 地址
 
 #### Inherited from
 
@@ -62,7 +121,9 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:14
 
 > `protected` **controller**: `string`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:12
+Defined in: cmdp/abstract-cmdp.ts:47
+
+控制器名称
 
 #### Inherited from
 
@@ -74,7 +135,9 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:12
 
 > `protected` **domains**: `string`[]
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:10
+Defined in: cmdp/abstract-cmdp.ts:41
+
+域名数组，支持多级域名
 
 #### Inherited from
 
@@ -84,9 +147,15 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:10
 
 ### meta
 
-> `protected` **meta**: `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+> `protected` **meta**: `undefined` \| [`CmdpMeta`](../type-aliases/CmdpMeta.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:9
+Defined in: cmdp/cmdp.ts:41
+
+请求元数据
+
+#### Description
+
+存储请求相关的元数据信息
 
 #### Overrides
 
@@ -98,7 +167,9 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:9
 
 > `protected` **method**: `string`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:13
+Defined in: cmdp/abstract-cmdp.ts:50
+
+方法名称
 
 #### Inherited from
 
@@ -108,9 +179,15 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:13
 
 ### payload
 
-> `protected` **payload**: [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+> `protected` **payload**: [`CmdpPayload`](../type-aliases/CmdpPayload.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:10
+Defined in: cmdp/cmdp.ts:48
+
+请求负载数据
+
+#### Description
+
+存储请求的负载数据
 
 #### Overrides
 
@@ -122,7 +199,9 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:10
 
 > `protected` **port**: `string`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:11
+Defined in: cmdp/abstract-cmdp.ts:44
+
+端口号
 
 #### Inherited from
 
@@ -132,9 +211,11 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:11
 
 ### protocol
 
-> `protected` **protocol**: `string` = `'cmdp://'`
+> `protected` **protocol**: `string` = `'cmdp:'`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:8
+Defined in: cmdp/abstract-cmdp.ts:35
+
+CMDP 协议标识符，默认为 'cmdp:'
 
 #### Inherited from
 
@@ -144,9 +225,15 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:8
 
 ### returnMeta
 
-> `protected` **returnMeta**: `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+> `protected` **returnMeta**: `undefined` \| [`CmdpMeta`](../type-aliases/CmdpMeta.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:11
+Defined in: cmdp/cmdp.ts:55
+
+响应元数据
+
+#### Description
+
+存储响应相关的元数据信息
 
 #### Overrides
 
@@ -156,9 +243,15 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:11
 
 ### returnPayload
 
-> `protected` **returnPayload**: [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+> `protected` **returnPayload**: [`CmdpPayload`](../type-aliases/CmdpPayload.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:12
+Defined in: cmdp/cmdp.ts:62
+
+响应负载数据
+
+#### Description
+
+存储响应的负载数据
 
 #### Overrides
 
@@ -170,7 +263,9 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:12
 
 > `protected` **user**: `string`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:9
+Defined in: cmdp/abstract-cmdp.ts:38
+
+用户名
 
 #### Inherited from
 
@@ -178,41 +273,35 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:9
 
 ## Methods
 
-### check()
-
-> `protected` **check**(`address`): `boolean`
-
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:97
-
-检查是否是cmdp地址 例如: cmdp://@user.domain.subDomain:1/controllerName.methodName
-
-#### Parameters
-
-##### address
-
-`string`
-
-#### Returns
-
-`boolean`
-
-#### Inherited from
-
-`AbstractCmdp.check`
-
----
-
 ### getInfo()
 
-> **getInfo**(): [`TCmdpInfo`](../type-aliases/TCmdpInfo.md)
+> **getInfo**(): [`CmdpInfo`](../type-aliases/CmdpInfo.md)
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:41
+Defined in: cmdp/abstract-cmdp.ts:201
 
-获取cmdp信息
+获取完整的 CMDP 信息
 
 #### Returns
 
-[`TCmdpInfo`](../type-aliases/TCmdpInfo.md)
+[`CmdpInfo`](../type-aliases/CmdpInfo.md)
+
+完整的 CMDP 信息对象
+
+#### Description
+
+返回包含所有 CMDP 相关信息的对象，包括地址信息、元数据和载荷数据
+
+#### Example
+
+```typescript
+const cmdp = new MyCmdp('cmdp://@admin.example.com:8080/UserController.getUser');
+const info = cmdp.getInfo();
+console.log(info.protocol); // 'cmdp:'
+console.log(info.user); // 'admin'
+console.log(info.domains); // ['example', 'com']
+console.log(info.controller); // 'UserController'
+console.log(info.method); // 'getUser'
+```
 
 #### Inherited from
 
@@ -222,23 +311,56 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:41
 
 ### getMessage()
 
+获取消息数据的实现
+
+#### Description
+
+获取包含地址、响应元数据和响应负载的完整消息对象
+
+#### Param
+
+可选的响应负载数据
+
+#### Example
+
+```typescript
+// 获取当前消息
+const message1 = cmdp.getMessage();
+
+// 设置负载并获取消息
+const message2 = cmdp.getMessage({ result: 'success', data: userData });
+
+// 消息结构:
+// {
+//   address: 'cmdp://@admin.example.com:8080/UserController.getUser',
+//   meta: { status: 'success', timestamp: 1234567890 },
+//   payload: { result: 'success', data: userData }
+// }
+```
+
 #### Call Signature
 
-> **getMessage**(): [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+> **getMessage**(): [`CmdpMessage`](../type-aliases/CmdpMessage.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:127
+Defined in: cmdp/cmdp.ts:483
 
 获取消息数据
 
 ##### Returns
 
-[`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+[`CmdpMessage`](../type-aliases/CmdpMessage.md)
+
+CMDP 消息对象
+
+##### Description
+
+获取当前的消息数据，包含地址、响应元数据和响应负载
 
 #### Call Signature
 
-> **getMessage**(`payload`): [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+> **getMessage**(`payload`): [`CmdpMessage`](../type-aliases/CmdpMessage.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:128
+Defined in: cmdp/cmdp.ts:491
 
 获取消息数据
 
@@ -246,33 +368,74 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:128
 
 ###### payload
 
-[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+[`CmdpPayload`](../type-aliases/CmdpPayload.md)
+
+响应负载数据
 
 ##### Returns
 
-[`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+[`CmdpMessage`](../type-aliases/CmdpMessage.md)
+
+CMDP 消息对象
+
+##### Description
+
+设置响应负载并获取消息数据
 
 ---
 
 ### getMeta()
 
+获取请求元数据的实现
+
+#### Description
+
+支持获取完整元数据对象或指定键的值
+
+#### Template
+
+返回值类型
+
+#### Param
+
+可选的元数据键名
+
+#### Example
+
+```typescript
+// 获取完整元数据
+const allMeta = cmdp.getMeta();
+
+// 获取指定键的元数据
+const timestamp = cmdp.getMeta('timestamp');
+const userId = cmdp.getMeta<string>('userId');
+```
+
 #### Call Signature
 
 > **getMeta**\<`Return`\>(): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:43
+Defined in: cmdp/cmdp.ts:173
 
-获取请求元数据
+获取完整的请求元数据
 
 ##### Type Parameters
 
 ###### Return
 
-`Return` _extends_ `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+`Return` _extends_ `undefined` \| [`CmdpMeta`](../type-aliases/CmdpMeta.md)
+
+返回值类型
 
 ##### Returns
 
 `Return`
+
+完整的元数据对象
+
+##### Description
+
+获取完整的元数据对象
 
 ##### Overrides
 
@@ -282,13 +445,17 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:43
 
 > **getMeta**\<`Return`\>(`key`): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:44
+Defined in: cmdp/cmdp.ts:182
+
+获取指定键的请求元数据
 
 ##### Type Parameters
 
 ###### Return
 
-`Return` _extends_ [`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
+`Return` _extends_ [`CmdpMetaValue`](../type-aliases/CmdpMetaValue.md)
+
+返回值类型
 
 ##### Parameters
 
@@ -296,9 +463,17 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:44
 
 `never`
 
+元数据键名
+
 ##### Returns
 
 `Return`
+
+指定键的元数据值
+
+##### Description
+
+获取指定键名的元数据值
 
 ##### Overrides
 
@@ -308,23 +483,56 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:44
 
 ### getPayload()
 
+获取请求负载数据的实现
+
+#### Description
+
+支持获取完整负载数据对象或指定键的值
+
+#### Template
+
+返回值类型
+
+#### Param
+
+可选的负载数据键名
+
+#### Example
+
+```typescript
+// 获取完整负载数据
+const allPayload = cmdp.getPayload();
+
+// 获取指定键的负载数据
+const userId = cmdp.getPayload<string>('userId');
+const action = cmdp.getPayload('action');
+```
+
 #### Call Signature
 
 > **getPayload**\<`Return`\>(): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:62
+Defined in: cmdp/cmdp.ts:255
 
-获取请求数据
+获取完整的请求负载数据
 
 ##### Type Parameters
 
 ###### Return
 
-`Return` _extends_ [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+`Return` _extends_ [`CmdpPayload`](../type-aliases/CmdpPayload.md)
+
+返回值类型
 
 ##### Returns
 
 `Return`
+
+完整的负载数据对象
+
+##### Description
+
+获取完整的负载数据对象
 
 ##### Overrides
 
@@ -334,7 +542,9 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:62
 
 > **getPayload**\<`Return`\>(`key`): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:63
+Defined in: cmdp/cmdp.ts:264
+
+获取指定键的请求负载数据
 
 ##### Type Parameters
 
@@ -342,15 +552,25 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:63
 
 `Return` = `unknown`
 
+返回值类型
+
 ##### Parameters
 
 ###### key
 
 `string`
 
+负载数据键名
+
 ##### Returns
 
 `Return`
+
+指定键的负载数据值
+
+##### Description
+
+获取指定键名的负载数据值
 
 ##### Overrides
 
@@ -360,23 +580,59 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:63
 
 ### getReturnMessage()
 
+获取返回消息数据的实现
+
+#### Description
+
+获取包含地址、响应元数据和响应负载的完整返回消息对象
+
+#### Param
+
+可选的响应负载数据
+
+#### Example
+
+```typescript
+// 获取当前返回消息
+const returnMessage1 = cmdp.getReturnMessage();
+
+// 设置负载并获取返回消息
+const returnMessage2 = cmdp.getReturnMessage({
+  success: true,
+  data: processedData,
+});
+
+// 返回消息结构:
+// {
+//   address: 'cmdp://@admin.example.com:8080/UserController.getUser',
+//   meta: { status: 'completed', messageId: 'msg-123' },
+//   payload: { success: true, data: processedData }
+// }
+```
+
 #### Call Signature
 
-> **getReturnMessage**(): [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+> **getReturnMessage**(): [`CmdpMessage`](../type-aliases/CmdpMessage.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:141
+Defined in: cmdp/cmdp.ts:528
 
 获取返回消息数据
 
 ##### Returns
 
-[`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+[`CmdpMessage`](../type-aliases/CmdpMessage.md)
+
+CMDP 消息对象
+
+##### Description
+
+获取当前的返回消息数据，包含地址、响应元数据和响应负载
 
 #### Call Signature
 
-> **getReturnMessage**(`payload`): [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+> **getReturnMessage**(`payload`): [`CmdpMessage`](../type-aliases/CmdpMessage.md)
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:142
+Defined in: cmdp/cmdp.ts:536
 
 获取返回消息数据
 
@@ -384,33 +640,74 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:142
 
 ###### payload
 
-[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+[`CmdpPayload`](../type-aliases/CmdpPayload.md)
+
+响应负载数据
 
 ##### Returns
 
-[`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+[`CmdpMessage`](../type-aliases/CmdpMessage.md)
+
+CMDP 消息对象
+
+##### Description
+
+设置响应负载并获取返回消息数据
 
 ---
 
 ### getReturnMeta()
 
+获取响应元数据的实现
+
+#### Description
+
+支持获取完整响应元数据对象或指定键的值
+
+#### Template
+
+返回值类型
+
+#### Param
+
+可选的元数据键名
+
+#### Example
+
+```typescript
+// 获取完整响应元数据
+const allReturnMeta = cmdp.getReturnMeta();
+
+// 获取指定键的响应元数据
+const status = cmdp.getReturnMeta<string>('status');
+const timestamp = cmdp.getReturnMeta('timestamp');
+```
+
 #### Call Signature
 
 > **getReturnMeta**\<`Return`\>(): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:83
+Defined in: cmdp/cmdp.ts:339
 
-获取响应元数据
+获取完整的响应元数据
 
 ##### Type Parameters
 
 ###### Return
 
-`Return` _extends_ `undefined` \| [`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+`Return` _extends_ `undefined` \| [`CmdpMeta`](../type-aliases/CmdpMeta.md)
+
+返回值类型
 
 ##### Returns
 
 `Return`
+
+完整的响应元数据对象
+
+##### Description
+
+获取完整的响应元数据对象
 
 ##### Overrides
 
@@ -420,13 +717,17 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:83
 
 > **getReturnMeta**\<`Return`\>(`key`): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:84
+Defined in: cmdp/cmdp.ts:348
+
+获取指定键的响应元数据
 
 ##### Type Parameters
 
 ###### Return
 
-`Return` _extends_ [`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
+`Return` _extends_ [`CmdpMetaValue`](../type-aliases/CmdpMetaValue.md)
+
+返回值类型
 
 ##### Parameters
 
@@ -434,9 +735,17 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:84
 
 `never`
 
+元数据键名
+
 ##### Returns
 
 `Return`
+
+指定键的响应元数据值
+
+##### Description
+
+获取指定键名的响应元数据值
 
 ##### Overrides
 
@@ -446,23 +755,56 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:84
 
 ### getReturnPayload()
 
+获取响应负载数据的实现
+
+#### Description
+
+支持获取完整响应负载数据对象或指定键的值
+
+#### Template
+
+返回值类型
+
+#### Param
+
+可选的负载数据键名
+
+#### Example
+
+```typescript
+// 获取完整响应负载数据
+const allReturnPayload = cmdp.getReturnPayload();
+
+// 获取指定键的响应负载数据
+const result = cmdp.getReturnPayload<any>('result');
+const data = cmdp.getReturnPayload('data');
+```
+
 #### Call Signature
 
 > **getReturnPayload**\<`Return`\>(): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:102
+Defined in: cmdp/cmdp.ts:421
 
-获取响应数据
+获取完整的响应负载数据
 
 ##### Type Parameters
 
 ###### Return
 
-`Return` _extends_ [`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+`Return` _extends_ [`CmdpPayload`](../type-aliases/CmdpPayload.md)
+
+返回值类型
 
 ##### Returns
 
 `Return`
+
+完整的响应负载数据对象
+
+##### Description
+
+获取完整的响应负载数据对象
 
 ##### Overrides
 
@@ -472,7 +814,9 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:102
 
 > **getReturnPayload**\<`Return`\>(`key`): `Return`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:103
+Defined in: cmdp/cmdp.ts:430
+
+获取指定键的响应负载数据
 
 ##### Type Parameters
 
@@ -480,15 +824,25 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:103
 
 `Return` = `unknown`
 
+返回值类型
+
 ##### Parameters
 
 ###### key
 
 `string`
 
+负载数据键名
+
 ##### Returns
 
 `Return`
+
+指定键的响应负载数据值
+
+##### Description
+
+获取指定键名的响应负载数据值
 
 ##### Overrides
 
@@ -500,9 +854,9 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:103
 
 > `protected` **initByAddress**(`address`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:65
+Defined in: cmdp/abstract-cmdp.ts:233
 
-用地址初始化
+通过地址字符串初始化实例
 
 #### Parameters
 
@@ -510,9 +864,26 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:65
 
 `string`
 
+CMDP 地址字符串
+
 #### Returns
 
 `void`
+
+#### Description
+
+解析 CMDP 地址字符串并设置实例的各个属性
+
+#### Throws
+
+当地址格式不正确时抛出错误
+
+#### Example
+
+```typescript
+// 在子类构造函数中使用
+this.initByAddress('cmdp://@admin.example.com:8080/UserController.getUser');
+```
 
 #### Inherited from
 
@@ -520,35 +891,11 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:65
 
 ---
 
-### parse()
-
-> `protected` **parse**(`address`): [`TCmdpInfo`](../type-aliases/TCmdpInfo.md)
-
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:110
-
-解析cmdp地址信息
-
-#### Parameters
-
-##### address
-
-`string`
-
-#### Returns
-
-[`TCmdpInfo`](../type-aliases/TCmdpInfo.md)
-
-#### Inherited from
-
-`AbstractCmdp.parse`
-
----
-
 ### searchSubDomain()
 
 > **searchSubDomain**(`rootDomain`): `string`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:116
+Defined in: cmdp/cmdp.ts:469
 
 查找子域
 
@@ -558,9 +905,29 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:116
 
 `string` = `''`
 
+根域名，默认为空字符串
+
 #### Returns
 
 `string`
+
+找到的子域名
+
+#### Description
+
+从域名列表中查找子域，排除指定的根域名
+
+#### Throws
+
+当未找到子域时抛出错误
+
+#### Example
+
+```typescript
+// 假设域名为 ['api', 'example', 'com']
+const subDomain1 = cmdp.searchSubDomain('com'); // 返回 'example'
+const subDomain2 = cmdp.searchSubDomain(); // 返回 'com'
+```
 
 ---
 
@@ -568,19 +935,39 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:116
 
 > `protected` **setAddressInfo**(`info`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:81
+Defined in: cmdp/abstract-cmdp.ts:263
 
-设置基本信息
+设置地址基本信息
 
 #### Parameters
 
 ##### info
 
-[`TCmdpAddressInfo`](../type-aliases/TCmdpAddressInfo.md)
+[`CmdpAddressInfo`](../type-aliases/CmdpAddressInfo.md)
+
+CMDP 地址信息对象
 
 #### Returns
 
 `void`
+
+#### Description
+
+根据地址信息对象设置实例的各个属性，并重新生成完整地址
+
+#### Example
+
+```typescript
+const info: CmdpAddressInfo = {
+  protocol: 'cmdp:',
+  user: 'admin',
+  domains: ['example', 'com'],
+  port: '8080',
+  controller: 'UserController',
+  method: 'getUser',
+};
+this.setAddressInfo(info);
+```
 
 #### Inherited from
 
@@ -590,11 +977,40 @@ Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:81
 
 ### setMeta()
 
+设置请求元数据的实现
+
+#### Description
+
+支持设置单个键值对或完整的元数据对象
+
+#### Param
+
+元数据键名或完整元数据对象
+
+#### Param
+
+元数据值（当第一个参数为键名时使用）
+
+#### Example
+
+```typescript
+// 设置单个元数据
+cmdp.setMeta('timestamp', Date.now());
+cmdp.setMeta('userId', '123');
+
+// 设置完整元数据对象
+cmdp.setMeta({
+  timestamp: Date.now(),
+  userId: '123',
+  source: 'client',
+});
+```
+
 #### Call Signature
 
 > **setMeta**(`key`, `value`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:32
+Defined in: cmdp/cmdp.ts:130
 
 设置请求元数据
 
@@ -604,13 +1020,21 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:32
 
 `string`
 
+元数据键名
+
 ###### value
 
-[`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
+[`CmdpMetaValue`](../type-aliases/CmdpMetaValue.md)
+
+元数据值
 
 ##### Returns
 
 `void`
+
+##### Description
+
+设置单个元数据键值对
 
 ##### Overrides
 
@@ -620,17 +1044,25 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:32
 
 > **setMeta**(`value`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:33
+Defined in: cmdp/cmdp.ts:137
+
+设置请求元数据
 
 ##### Parameters
 
 ###### value
 
-[`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+[`CmdpMeta`](../type-aliases/CmdpMeta.md)
+
+元数据对象
 
 ##### Returns
 
 `void`
+
+##### Description
+
+设置完整的元数据对象
 
 ##### Overrides
 
@@ -640,13 +1072,42 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:33
 
 ### setPayload()
 
+设置请求负载数据的实现
+
+#### Description
+
+支持设置单个键值对或完整的负载数据对象
+
+#### Param
+
+负载数据键名或完整负载数据对象
+
+#### Param
+
+负载数据值（当第一个参数为键名时使用）
+
+#### Example
+
+```typescript
+// 设置单个负载数据
+cmdp.setPayload('userId', '123');
+cmdp.setPayload('action', 'login');
+
+// 设置完整负载数据对象
+cmdp.setPayload({
+  userId: '123',
+  action: 'login',
+  timestamp: Date.now(),
+});
+```
+
 #### Call Signature
 
 > **setPayload**(`key`, `value`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:51
+Defined in: cmdp/cmdp.ts:212
 
-设置请求数据
+设置请求负载数据
 
 ##### Parameters
 
@@ -654,13 +1115,21 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:51
 
 `string`
 
+负载数据键名
+
 ###### value
 
 `unknown`
 
+负载数据值
+
 ##### Returns
 
 `void`
+
+##### Description
+
+设置单个负载数据键值对
 
 ##### Overrides
 
@@ -670,17 +1139,25 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:51
 
 > **setPayload**(`payload`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:52
+Defined in: cmdp/cmdp.ts:219
+
+设置请求负载数据
 
 ##### Parameters
 
 ###### payload
 
-[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+[`CmdpPayload`](../type-aliases/CmdpPayload.md)
+
+负载数据对象
 
 ##### Returns
 
 `void`
+
+##### Description
+
+设置完整的负载数据对象
 
 ##### Overrides
 
@@ -690,11 +1167,40 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:52
 
 ### setReturnMeta()
 
+设置响应元数据的实现
+
+#### Description
+
+支持设置单个键值对或完整的响应元数据对象
+
+#### Param
+
+元数据键名或完整元数据对象
+
+#### Param
+
+元数据值（当第一个参数为键名时使用）
+
+#### Example
+
+```typescript
+// 设置单个响应元数据
+cmdp.setReturnMeta('status', 'success');
+cmdp.setReturnMeta('timestamp', Date.now());
+
+// 设置完整响应元数据对象
+cmdp.setReturnMeta({
+  status: 'success',
+  timestamp: Date.now(),
+  messageId: 'msg-123',
+});
+```
+
 #### Call Signature
 
 > **setReturnMeta**(`key`, `value`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:72
+Defined in: cmdp/cmdp.ts:296
 
 设置响应元数据
 
@@ -704,13 +1210,21 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:72
 
 `string`
 
+元数据键名
+
 ###### value
 
-[`TCmdpMetaValue`](../type-aliases/TCmdpMetaValue.md)
+[`CmdpMetaValue`](../type-aliases/CmdpMetaValue.md)
+
+元数据值
 
 ##### Returns
 
 `void`
+
+##### Description
+
+设置单个响应元数据键值对
 
 ##### Overrides
 
@@ -720,17 +1234,25 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:72
 
 > **setReturnMeta**(`value`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:73
+Defined in: cmdp/cmdp.ts:303
+
+设置响应元数据
 
 ##### Parameters
 
 ###### value
 
-[`TCmdpMeta`](../type-aliases/TCmdpMeta.md)
+[`CmdpMeta`](../type-aliases/CmdpMeta.md)
+
+元数据对象
 
 ##### Returns
 
 `void`
+
+##### Description
+
+设置完整的响应元数据对象
 
 ##### Overrides
 
@@ -740,13 +1262,42 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:73
 
 ### setReturnPayload()
 
+设置响应负载数据的实现
+
+#### Description
+
+支持设置单个键值对或完整的响应负载数据对象
+
+#### Param
+
+负载数据键名或完整负载数据对象
+
+#### Param
+
+负载数据值（当第一个参数为键名时使用）
+
+#### Example
+
+```typescript
+// 设置单个响应负载数据
+cmdp.setReturnPayload('result', { success: true });
+cmdp.setReturnPayload('data', userData);
+
+// 设置完整响应负载数据对象
+cmdp.setReturnPayload({
+  result: { success: true },
+  data: userData,
+  timestamp: Date.now(),
+});
+```
+
 #### Call Signature
 
 > **setReturnPayload**(`key`, `value`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:91
+Defined in: cmdp/cmdp.ts:378
 
-设置响应数据
+设置响应负载数据
 
 ##### Parameters
 
@@ -754,13 +1305,21 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:91
 
 `string`
 
+负载数据键名
+
 ###### value
 
 `unknown`
 
+负载数据值
+
 ##### Returns
 
 `void`
+
+##### Description
+
+设置单个响应负载数据键值对
 
 ##### Overrides
 
@@ -770,17 +1329,25 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:91
 
 > **setReturnPayload**(`payload`): `void`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:92
+Defined in: cmdp/cmdp.ts:385
+
+设置响应负载数据
 
 ##### Parameters
 
 ###### payload
 
-[`TCmdpPayload`](../type-aliases/TCmdpPayload.md)
+[`CmdpPayload`](../type-aliases/CmdpPayload.md)
+
+负载数据对象
 
 ##### Returns
 
 `void`
+
+##### Description
+
+设置完整的响应负载数据对象
 
 ##### Overrides
 
@@ -788,25 +1355,99 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:92
 
 ---
 
+### check()
+
+> `protected` `static` **check**(`address`, `protocol`): `boolean`
+
+Defined in: cmdp/abstract-cmdp.ts:148
+
+检查地址格式是否正确
+
+#### Parameters
+
+##### address
+
+`string`
+
+待检查的地址字符串
+
+##### protocol
+
+`string` = `'cmdp:'`
+
+待检查的地址协议
+
+#### Returns
+
+`boolean`
+
+如果地址格式正确返回 true，否则返回 false
+
+#### Description
+
+验证传入的地址字符串是否符合 CMDP 协议格式
+
+#### Example
+
+```typescript
+// 正确格式示例: cmdp://@user.domain.subDomain:1/controllerName.methodName
+const isValid = AbstractCmdp.check('cmdp://@admin.example.com:8080/UserController.getUser');
+console.log(isValid); // true
+
+const isInvalid = AbstractCmdp.check('invalid-address');
+console.log(isInvalid); // false
+```
+
+#### Inherited from
+
+`AbstractCmdp.check`
+
+---
+
 ### create()
 
 > `static` **create**(`addOrInfo`, `options?`): `Cmdp`
 
-Defined in: src/packages/iswork/src/cmdp/cmdp.ts:14
+Defined in: cmdp/cmdp.ts:81
+
+创建 CMDP 实例的静态工厂方法
 
 #### Parameters
 
 ##### addOrInfo
 
-[`TCmdpAddressInfo`](../type-aliases/TCmdpAddressInfo.md) | [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+CMDP 消息对象或地址信息对象
+
+[`CmdpAddressInfo`](../type-aliases/CmdpAddressInfo.md) | [`CmdpMessage`](../type-aliases/CmdpMessage.md)
 
 ##### options?
 
-[`TCmdpOptions`](../type-aliases/TCmdpOptions.md)
+[`CmdpOptions`](../type-aliases/CmdpOptions.md)
+
+可选的协议配置
 
 #### Returns
 
 `Cmdp`
+
+CMDP 实例
+
+#### Description
+
+提供创建 CMDP 实例的便捷方法
+
+#### Static
+
+#### Example
+
+```typescript
+// 使用静态方法创建实例
+const cmdp = Cmdp.create({
+  address: 'cmdp://@admin.example.com:8080/UserController.getUser',
+  meta: { source: 'client' },
+  payload: { userId: '123' },
+});
+```
 
 ---
 
@@ -814,20 +1455,96 @@ Defined in: src/packages/iswork/src/cmdp/cmdp.ts:14
 
 > `static` **getAddressByInfo**(`info`): `string`
 
-Defined in: src/packages/iswork/src/cmdp/abstract-cmdp.ts:24
+Defined in: cmdp/abstract-cmdp.ts:87
 
-根据传入信息获取地址
+根据地址信息构建完整的 CMDP 地址
 
 #### Parameters
 
 ##### info
 
-[`TCmdpAddressInfo`](../type-aliases/TCmdpAddressInfo.md)
+[`CmdpAddressInfo`](../type-aliases/CmdpAddressInfo.md)
+
+CMDP 地址信息对象
 
 #### Returns
 
 `string`
 
+格式化的 CMDP 地址字符串
+
+#### Description
+
+将 CmdpAddressInfo 对象转换为标准的 CMDP 地址字符串
+
+#### Static
+
+#### Example
+
+```typescript
+const info: CmdpAddressInfo = {
+  protocol: 'cmdp:',
+  user: 'admin',
+  domains: ['example', 'com'],
+  port: '8080',
+  controller: 'UserController',
+  method: 'getUser',
+};
+const address = AbstractCmdp.getAddressByInfo(info);
+// 返回: 'cmdp://@admin.example.com:8080/UserController.getUser'
+```
+
 #### Inherited from
 
 `AbstractCmdp.getAddressByInfo`
+
+---
+
+### parseAddress()
+
+> `static` **parseAddress**(`address`): [`CmdpInfo`](../type-aliases/CmdpInfo.md)
+
+Defined in: cmdp/abstract-cmdp.ts:114
+
+解析 CMDP 地址字符串
+
+#### Parameters
+
+##### address
+
+`string`
+
+要解析的 CMDP 地址字符串
+
+#### Returns
+
+[`CmdpInfo`](../type-aliases/CmdpInfo.md)
+
+解析后的 CMDP 信息对象
+
+#### Description
+
+将 CMDP 地址字符串解析为结构化的地址信息对象
+
+#### Static
+
+#### Example
+
+```typescript
+const address = 'cmdp://@admin.example.com:8080/UserController.getUser';
+const info = AbstractCmdp.parse(address);
+// 返回:
+// {
+//   address: 'cmdp://@admin.example.com:8080/UserController.getUser',
+//   protocol: 'cmdp:',
+//   user: 'admin',
+//   domains: ['example', 'com'],
+//   port: '8080',
+//   controller: 'UserController',
+//   method: 'getUser'
+// }
+```
+
+#### Inherited from
+
+`AbstractCmdp.parseAddress`

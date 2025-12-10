@@ -8,4 +8,10 @@
 
 > `const` **decoratorRegister**: `DecoratorRegister`
 
-Defined in: src/packages/iswork/src/decorators/index.ts:47
+Defined in: decorators/index.ts:74
+
+装饰器注册器实例
+
+## Description
+
+用于管理和注册所有装饰器的全局实例

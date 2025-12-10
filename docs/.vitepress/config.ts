@@ -59,6 +59,7 @@ export default defineConfig({
       },
     },
     socialLinks: [
+      { icon: 'github', link: 'https://github.com/xcbclc/istock-shell' },
       {
         icon: {
           svg: `
@@ -66,7 +67,6 @@ export default defineConfig({
         },
         link: 'https://gitee.com/xcbclc/istock-shell',
       },
-      { icon: 'github', link: 'https://github.com/xcbclc/istock-shell' },
     ],
     footer: {
       message: '免责声明：本站所有信息、数据、软件仅供学习研究，都不构成投资建议，本站不承担由此导致的任何责任。',

@@ -10,20 +10,19 @@ editLink: false
 
 ## yhdl 用户登录
 
-登录指定用户账号
+支持微信扫码登录
 
 ### 用法
 
-`yhdl [-zh <用户名>] [-mm <密码>]`
+`yhdl <登录类型>`
 
-### 选项
+### 参数
 
-|   选项参数    | 名称 | 描述           |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----------: | :--: | :------------- | :----: | :------: | :----: | :----: |
-| `-zh，--账号` | 账号 | 指定的用户账号 | string |   true   |        |        |
-| `-mm，--密码` | 密码 | 账号密码       | string |   true   |        |        |
+|   名称   | 描述           |  类型  | 是否可选 | 默认值 | 可选值 |
+| :------: | :------------- | :----: | :------: | :----: | :----: |
+| 登录类型 | 用户登录的类型 | string |  false   |        |   wx   |
 
 ### 命令示例
 
-`yhdl -zh daoyou -mm Dy123123`
-<IStockShellDemo cmd='yhdl -zh daoyou -mm Dy123123' :domains='[]' :height='480'/>
+`yhdl wx`
+<IStockShellDemo cmd='yhdl wx' :domains='[]' :height='640'/>

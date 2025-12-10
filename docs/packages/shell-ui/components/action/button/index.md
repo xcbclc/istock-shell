@@ -1,62 +1,85 @@
 ---
-title: Button 按钮组件
-description: 按钮（Button）组件提供多种交互样式，包括主要按钮、次要按钮、轮廓按钮、加载状态等，支持颜色定制、尺寸调整和禁用状态，适用于表单提交、操作触发等场景。
-keywords: [按钮组件, Svelte按钮, UI组件, 交互按钮, 按钮样式, 按钮API]
+title: Button 按钮组件 | IStock Shell UI
+description: Button按钮组件提供丰富的交互样式和功能，支持8种主题色彩、5种尺寸规格、多种视觉变体（柔和、轮廓、虚线）、图标嵌入、加载状态等特性，适用于表单提交、操作触发、导航跳转等各种交互场景。
+keywords: [Button按钮组件, Svelte按钮, UI组件库, 交互按钮, 按钮样式, 前端组件, Web组件, 用户界面, UX设计, 响应式按钮]
 aside: false
 editLink: false
-outline: [2, 3]
+outline: [2, 4]
 ---
 
-## Button 按钮组件
+# Button 按钮组件
 
-**按钮（Button）是用户界面中最基础的交互元素，用于触发即时操作或表单提交。**
+按钮是用户界面中最基础且重要的交互元素，用于触发操作、提交表单、导航跳转等用户行为。IStock Shell UI 的 Button 组件提供了丰富的样式变体和功能特性，满足各种设计需求。
+
+## 快速开始
+
+### 安装引入
+
+```bash
+npm install @istock-shell/ui
+```
+
+```svelte
+<script>
+  import { ShButton } from '@istock-shell/ui';
+</script>
+```
+
+### 基础用法
+
+最简单的按钮用法，适用于大多数场景：
+
+```svelte
+<script>
+  import { ShButton } from '@istock-shell/ui';
+</script>
+
+<ShButton>默认按钮</ShButton>
+```
+
+## 组件特性
+
+- 🎨 **丰富色彩**：8种预设主题色彩（primary、secondary、accent、neutral、info、success、warning、error）
+- 📏 **多种尺寸**：5种尺寸规格（xs、sm、md、lg、xl）支持响应式适配
+- 🎭 **视觉变体**：柔和（soft）、轮廓（outline）、虚线（dash）、幽灵（ghost）、链接（link）等样式
+- 🔧 **灵活配置**：支持图标嵌入、加载状态、禁用状态、块级布局
+- 🏷️ **标签适配**：可渲染为 button、a、input、div 等不同HTML标签
+- ♿ **无障碍友好**：遵循 WCAG 2.0 标准，支持键盘导航和屏幕阅读器
 
 ## 使用场景
 
-- 需要用户提交表单或确认操作时
-- 在表格操作栏需要行内操作按钮时
-- 页面需要主要操作（Primary Action）和次要操作（Secondary Action）时
-- 需要引导用户进行导航跳转时
-- 展示加载状态或禁用不可用操作时
-
-## 功能特性
-
-- 预设8种主题色系选择
-- 支持5种尺寸（xs/xl）和响应式适配
-- 提供柔和（soft）/轮廓（outline）/虚线（dash）三种变体
-- 支持图标嵌入和加载状态
-- 适配块级布局和自定义HTML标签
-- 禁用状态支持
+| 场景     | 推荐配置                         | 说明                           |
+| -------- | -------------------------------- | ------------------------------ |
+| 主要操作 | `color="primary"`                | 页面中最重要的操作，如提交表单 |
+| 次要操作 | `color="secondary"` 或 `outline` | 辅助操作，如取消、重置         |
+| 危险操作 | `color="error"`                  | 删除、清空等不可逆操作         |
+| 成功确认 | `color="success"`                | 保存成功、操作完成等正面反馈   |
+| 信息提示 | `color="info"`                   | 查看详情、帮助说明等信息类操作 |
+| 警告提醒 | `color="warning"`                | 需要用户注意的操作             |
+| 导航链接 | `tag="a"` + `link`               | 页面跳转、外链访问             |
+| 表格操作 | `size="sm"`                      | 表格行内的操作按钮             |
 
 ## 示例演示
 
 ### 默认按钮
 
-基础按钮样式，不包含任何特殊样式参数。当不设置`color`属性时，默认采用中性色（neutral）作为主色调，适合作为其他按钮变体的基础模板。
+展示按钮的默认样式效果，不设置任何特殊属性的基础按钮。采用中性色调，适用于一般性操作和作为其他按钮样式的对比参考。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonDefault.svelte"></IStockShellUiExample>
 :::
 
-### 尺寸规范
+### 按钮尺寸
 
-通过`size`属性控制按钮尺寸层级：
-
-| 尺寸值     | 典型场景     |
-| ---------- | ------------ |
-| `xs`       | 表格操作列   |
-| `sm`       | 密集布局     |
-| `md`(默认) | 常规操作     |
-| `lg`       | 重点操作     |
-| `xl`       | 全屏弹窗操作 |
+展示按钮的5种尺寸规格效果，通过 `size` 属性控制按钮大小。包括xs、sm、md、lg、xl等尺寸，满足不同场景下的尺寸需求。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonSize.svelte"></IStockShellUiExample>
 :::
 
-### 响应式适配
+### 响应式按钮
 
-通过Tailwind断点系统实现自适应。
+展示按钮在不同屏幕尺寸下的自适应效果，基于Tailwind断点系统实现。适用于需要在移动端和桌面端提供不同交互体验的场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonResponsive.svelte"></IStockShellUiExample>
@@ -64,24 +87,15 @@ outline: [2, 3]
 
 ### 按钮颜色
 
-按钮支持通过设置`color`属性，设置以下预定义颜色类型：
-
-- `primary` - 主要操作
-- `secondary` - 次要操作
-- `success` - 成功状态
-- `warning` - 警告提示
-- `error` - 错误提示
-- `accent` - 强调操作
-- `neutral` - 中性操作
-- `info` - 信息提示
+展示按钮的8种主题颜色效果，通过 `color` 属性设置不同的语义化颜色。包括主要、次要、成功、警告、错误、强调、中性、信息等颜色类型，满足各种业务场景需求。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonColor.svelte"></IStockShellUiExample>
 :::
 
-### 柔和变体
+### 柔和按钮
 
-通过`soft`布尔属性启用低饱和度背景，这样可以创建视觉层次结构，减少高对比度带来的视觉疲劳。
+展示按钮的柔和样式效果，通过 `soft` 属性启用低饱和度背景。提供更温和的视觉表现，适用于需要降低视觉冲击力的场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonSoft.svelte"></IStockShellUiExample>
@@ -89,19 +103,15 @@ outline: [2, 3]
 
 ### 线框按钮
 
-通过`outline`布尔属性切换为线框样式，适用场景：
-
-- 次级操作/避免视觉过载
-- 深色背景环境
-- 需要降低按钮视觉权重时
+展示按钮的线框样式效果，通过 `outline` 属性启用边框样式。适用于次要操作、避免视觉过载的场景，提供更轻量的视觉表现。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonOutline.svelte"></IStockShellUiExample>
 :::
 
-### 虚线边框按钮
+### 虚线按钮
 
-用于特殊场景的边框样式按钮，通过`dash`属性为`true`添加虚线边框样式。该属性为布尔类型，默认值为`false`。
+展示按钮的虚线边框效果，通过 `dash` 属性启用虚线样式。适用于上传区域、可拖拽元素等需要虚线边框提示的交互场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonDash.svelte"></IStockShellUiExample>
@@ -109,15 +119,15 @@ outline: [2, 3]
 
 ### 激活状态按钮
 
-**通过`active`属性实现按钮的交互状态反馈**，用于表示当前选中或需要强提示的操作场景。
+展示按钮的激活状态效果，通过 `active` 属性控制按钮是否处于激活状态。适用于选中状态、当前页面标识等需要突出显示的场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonActive.svelte"></IStockShellUiExample>
 :::
 
-### 幽灵、链接按钮
+### 幽灵和链接按钮
 
-幽灵按钮和链接按钮分别使用`ghost`、`link`属性定义。
+展示幽灵按钮和链接按钮的效果，通过 `ghost` 和 `link` 属性设置不同的轻量级样式。适用于需要降低视觉权重、强调文本内容的场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonTextAndLink.svelte"></IStockShellUiExample>
@@ -125,27 +135,23 @@ outline: [2, 3]
 
 ### 宽按钮
 
-比普通按钮稍微再宽一些的按钮，使用`wide`属性定义宽按钮。
+展示按钮的加宽样式效果，通过 `wide` 属性增加按钮的水平内边距。适用于需要更大点击区域或视觉重点突出的场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonWide.svelte"></IStockShellUiExample>
 :::
 
-### 自定义标签
+### 标签类型
 
-使用`tag`属性可以灵活的自定义元素标签名，提供`a`、`button`、`input`、`div`标签的支持。
+展示按钮渲染为不同HTML标签的效果，通过 `tag` 属性设置元素类型。支持button、a、input、div等标签，满足不同语义化需求。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonTag.svelte"></IStockShellUiExample>
 :::
 
-### 禁用状态按钮
+### 禁用按钮
 
-用于不可交互场景的按钮样式，通过`disabled`布尔属性控制按钮禁用状态。该状态会触发以下行为：
-
-- 视觉上降低透明度
-- 阻止所有交互事件
-- 保持原有布局占位
+展示按钮的禁用状态效果，通过 `disabled` 属性控制按钮是否可交互。禁用状态下按钮会降低透明度并阻止所有交互事件，适用于表单验证未通过、权限不足等场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonDisabled.svelte"></IStockShellUiExample>
@@ -153,7 +159,7 @@ outline: [2, 3]
 
 ### 图标按钮
 
-支持通过插槽嵌入SVG图标，可配合`ShIcon`组件使用。
+展示按钮与图标的组合效果，通过插槽可以在按钮中嵌入图标元素。支持图标在文字前后的不同位置，适用于需要图标辅助说明的操作场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonIcon.svelte"></IStockShellUiExample>
@@ -161,15 +167,15 @@ outline: [2, 3]
 
 ### 块级按钮
 
-块级按钮（Block Button）是表单和操作场景中的核心交互元素，通过`block`布尔属性控制按钮宽度，使其撑满父容器。
+展示按钮的块级布局效果，通过 `block` 属性使按钮宽度撑满父容器。适用于表单提交、移动端操作等需要全宽显示的场景。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonBlock.svelte"></IStockShellUiExample>
 :::
 
-### 加载状态
+### 加载按钮
 
-通过`loading`布尔属性启用加载指示器。
+展示按钮的加载状态效果，通过 `loading` 属性显示加载指示器。适用于异步操作、表单提交等需要等待反馈的场景，防止用户重复点击。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonLoading.svelte"></IStockShellUiExample>
@@ -177,14 +183,7 @@ outline: [2, 3]
 
 ### 第三方登录按钮
 
-通过Tailwind CSS定制的品牌登录按钮模板，示例：
-
-| 品牌     | 类组合示例                  | 配色规范        |
-| -------- | --------------------------- | --------------- |
-| GitHub   | `bg-black text-white`       | #000000/#FFFFFF |
-| Google   | `bg-white border-[#e5e5e5]` | #FFFFFF/#E5E5E5 |
-| Facebook | `bg-[#1A77F2] text-white`   | #1A77F2/#FFFFFF |
-| Apple    | `bg-black text-white`       | #000000/#FFFFFF |
+展示常见第三方平台登录按钮的样式效果，通过自定义CSS类实现品牌化设计。包括GitHub、Google、Facebook、Apple等主流平台的标准配色和图标组合。
 
 ::: raw
 <IStockShellUiExample src="./action/button/example/ButtonLogins.svelte"></IStockShellUiExample>
@@ -194,22 +193,133 @@ outline: [2, 3]
 
 ### 属性说明
 
-| 参数     | 说明                   | 类型                                                                                             | 默认值 |
-| -------- | ---------------------- | ------------------------------------------------------------------------------------------------ | ------ |
-| color    | 按钮颜色设置           | `primary` \| `secondary` \| `accent` \| `neutral` \| `info` \| `success` \| `warning` \| `error` |        |
-| size     | 按钮大小设置           | `xs` \| `sm` \| `md` \| `lg` \| `xl`                                                             |        |
-| soft     | 是否为柔和按钮         | boolean                                                                                          |        |
-| outline  | 是否为边框按钮         | boolean                                                                                          |        |
-| dash     | 是否为虚线按钮         | boolean                                                                                          |        |
-| active   | 是否为激活状态按钮     | boolean                                                                                          |        |
-| ghost    | 是否为幽灵按钮         | boolean                                                                                          |        |
-| link     | 是否为链接按钮         | boolean                                                                                          |        |
-| wide     | 是否为宽按钮           | boolean                                                                                          |        |
-| tag      | 按钮的标签类型         | `a` \| `button` \| `input` \| `div` \| `button`                                                  | button |
-| disabled | 是否禁用按钮           | boolean                                                                                          |        |
-| shape    | 按钮的形状             | `square` \| `circle`                                                                             |        |
-| block    | 是否为块级按钮         | boolean                                                                                          |        |
-| loading  | 显示加载状态和禁用交互 | boolean                                                                                          |        |
+| 属性名     | 类型                          | 默认值     | 说明               |
+| ---------- | ----------------------------- | ---------- | ------------------ |
+| `color`    | [`ButtonColor`](#buttoncolor) | -          | 按钮的主题颜色     |
+| `size`     | [`ButtonSize`](#buttonsize)   | `'md'`     | 按钮的尺寸大小     |
+| `soft`     | `boolean`                     | `false`    | 是否使用柔和样式   |
+| `outline`  | `boolean`                     | `false`    | 是否使用轮廓样式   |
+| `dash`     | `boolean`                     | `false`    | 是否使用虚线边框   |
+| `active`   | `boolean`                     | `false`    | 是否为激活状态     |
+| `ghost`    | `boolean`                     | `false`    | 是否使用幽灵样式   |
+| `link`     | `boolean`                     | `false`    | 是否使用链接样式   |
+| `wide`     | `boolean`                     | `false`    | 是否使用加宽样式   |
+| `tag`      | [`ButtonTag`](#buttontag)     | `'button'` | 渲染的HTML标签类型 |
+| `disabled` | `boolean`                     | `false`    | 是否禁用按钮       |
+| `shape`    | [`ButtonShape`](#buttonshape) | -          | 按钮的形状         |
+| `block`    | `boolean`                     | `false`    | 是否为块级按钮     |
+| `loading`  | `boolean`                     | `false`    | 是否显示加载状态   |
+| `text`     | `string`                      | -          | 按钮文本内容       |
+| `class`    | `string`                      | -          | 自定义CSS类名      |
 
-> **注意**：幽灵（ghost）按钮建议仅在复杂背景上使用，确保对比度符合WCAG 2.0标准。
-> **属性透传**：组件支持所有标准HTML按钮/锚点/输入框元素的原生属性（如`type`、`form`、`autofocus`等），这些属性将直接透传到最终渲染的DOM元素。
+### 代码片段插入位置
+
+- `children`：
+
+```svelte
+<svelte:element this={tag}>
+  <!-- ...code -->
+  {@render children()}
+  <!-- ...code -->
+</svelte:element>
+```
+
+### 事件
+
+继承所有原生HTML元素事件，如：
+
+- `click` - 点击事件
+- `focus` - 获得焦点事件
+- `blur` - 失去焦点事件
+- `mouseenter` - 鼠标进入事件
+- `mouseleave` - 鼠标离开事件
+
+### 类型定义
+
+#### ButtonColor
+
+```typescript
+// 按钮颜色类型
+type ButtonColor = 'primary' | 'secondary' | 'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'error';
+```
+
+#### ButtonSize
+
+```typescript
+// 按钮尺寸类型
+type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+```
+
+#### ButtonTag
+
+```typescript
+// 按钮标签类型
+type ButtonTag = 'button' | 'a' | 'input' | 'div';
+```
+
+#### ButtonShape
+
+```typescript
+// 按钮形状类型
+type ButtonShape = 'square' | 'circle';
+```
+
+## 设计指南
+
+### 颜色使用建议
+
+- **Primary（主要）**：页面中最重要的操作，建议每个页面只有一个
+- **Secondary（次要）**：重要但非主要的操作
+- **Success（成功）**：确认、保存、完成等正面操作
+- **Warning（警告）**：需要用户注意但不危险的操作
+- **Error（错误）**：删除、清空等危险操作
+- **Info（信息）**：查看、帮助等信息类操作
+- **Neutral（中性）**：普通操作，无特殊语义
+- **Accent（强调）**：需要突出显示的特殊操作
+
+### 尺寸选择建议
+
+- **xs**：表格内操作、标签式按钮
+- **sm**：卡片内操作、次要功能
+- **md**：默认尺寸，适用于大多数场景
+- **lg**：重要操作、表单提交
+- **xl**：页面主要CTA按钮
+
+### 无障碍支持
+
+- 所有按钮都支持键盘导航（Tab、Enter、Space）
+- 提供适当的 `aria-label` 属性
+- 确保颜色对比度符合 WCAG 2.0 AA 标准
+- 禁用状态下自动添加 `aria-disabled` 属性
+- 加载状态下提供 `aria-busy` 属性
+
+### 最佳实践
+
+1. **语义化使用**：根据操作的重要性和语义选择合适的颜色
+2. **一致性**：在同一个应用中保持按钮样式的一致性
+3. **层次感**：通过不同的视觉变体建立操作的层次关系
+4. **响应式**：在不同设备上使用合适的尺寸
+5. **加载状态**：对于异步操作及时显示加载状态
+6. **禁用状态**：对于不可用的操作及时禁用按钮
+
+## 常见问题
+
+### Q: 如何自定义按钮样式？
+
+A: 可以通过 `class` 属性添加自定义CSS类，或者使用CSS变量覆盖默认样式。
+
+### Q: 按钮支持哪些HTML属性？
+
+A: 组件支持所有标准HTML按钮/锚点/输入框元素的原生属性（如 `type`、`form`、`autofocus` 等），这些属性将直接透传到最终渲染的DOM元素。
+
+### Q: 幽灵按钮什么时候使用？
+
+A: 幽灵按钮建议仅在复杂背景（如图片、渐变）上使用，确保对比度符合WCAG 2.0标准。
+
+### Q: 如何实现按钮组？
+
+A: 可以使用[`daisyui Join`](https://daisyui.com/components/join/)样式类名。
+
+## 更新日志
+
+查看 [GitHub Releases](https://github.com/xcbclc/istock-shell/releases) 了解详细的更新历史。

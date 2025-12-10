@@ -4,18 +4,18 @@
 
 # @istock-shell/editor
 
-`@istock-shell/editor` 是一个专为命令行界面设计的富文本编辑器库，提供了强大的命令输入、编辑和语法高亮功能。它能够将普通的命令字符串转换成富有标签和样式的HTML内容，让命令、子命令、参数及选项参数等关键元素以更直观、美观的方式呈现给用户。同时支持HTML内容反向转换回原始的命令字符串，实现命令内容的双向处理。
+`@istock-shell/editor` 是一个基于 TipTap 的现代化命令行富文本编辑器库，专为命令行界面设计。它提供了强大的命令输入、编辑、语法高亮、提及建议和键盘快捷键功能，让命令行交互更加直观和高效。
 
 ## ✨ 特性
 
-- 🎨 **语法高亮**: 自动识别命令、参数、选项等元素并应用不同样式
-- 📝 **富文本编辑**: 支持复杂的命令输入和编辑操作
-- 🔄 **双向转换**: HTML与纯文本之间的无损转换
-- 📍 **光标管理**: 精确的光标定位和选择范围控制
-- 📚 **历史记录**: 内置撤销/重做功能
+- 🎨 **语法高亮**: 基于词法分析器自动识别命令、参数、选项等元素并应用不同样式
+- 📝 **富文本编辑**: 基于 TipTap 的现代化编辑体验，支持撤销/重做
+- 💡 **智能提及**: 支持 @ 提及功能，可自定义建议列表和渲染
+- ⌨️ **键盘快捷键**: 完整的快捷键支持，包括回车发送、方向键导航、撤销重做等
 - 🎯 **事件系统**: 完整的事件监听和自定义事件支持
-- 🌏 **中文输入**: 完善的中文输入法支持
-- 🔧 **可扩展**: 模块化设计，易于扩展和定制
+- 🔧 **可扩展**: 模块化设计，基于 TipTap 扩展系统，易于扩展和定制
+- 📍 **光标管理**: 精确的光标定位和文本操作
+- 🌏 **现代化**: 使用 TypeScript 编写，提供完整的类型支持
 
 ## 📦 安装
 
@@ -53,6 +53,60 @@ editor.handleCommandInput('ls -la /home');
 editor.handleCommandInputAppend(' --color=auto');
 ```
 
+### 配置选项
+
+```typescript
+import { CommandEditor } from '@istock-shell/editor';
+import type { CommandEditorOptions } from '@istock-shell/editor';
+
+const options: CommandEditorOptions = {
+  // 命令高亮配置
+  commandHighlighter: {
+    // 会自动使用内置的 Tokenizer
+  },
+
+  // 提及功能配置
+  mention: {
+    HTMLAttributes: {
+      class: 'custom-mention',
+    },
+    suggestionOption: {
+      getSuggestionList: async (query: string) => {
+        // 返回建议列表
+        return [
+          { id: 1, label: 'command1', value: 'cmd1', type: 'command' },
+          { id: 2, label: 'command2', value: 'cmd2', type: 'command' },
+        ];
+      },
+      renderSuggestionList: async (list, state) => {
+        // 渲染建议列表 UI
+        const element = document.createElement('div');
+        element.className = 'suggestion-list';
+        // ... 渲染逻辑
+        return element;
+      },
+      updateSuggestionListPosition: (x, y, position) => {
+        // 更新建议列表位置
+      },
+      onKeyDownSuggestion: (event) => {
+        // 处理建议列表键盘事件
+        return false;
+      },
+      onDestroySuggestion: () => {
+        // 销毁建议列表
+      },
+    },
+  },
+
+  // 键盘快捷键配置
+  keyboardShortcuts: {
+    Enter: () => true, // 自定义回车行为
+  },
+};
+
+const editor = new CommandEditor(inputElement, '', options);
+```
+
 ### 事件监听
 
 ```typescript
@@ -61,127 +115,93 @@ import type { CommandEditorRecommendCmdEvent } from '@istock-shell/editor';
 
 const editor = new CommandEditor(inputElement);
 
-// 监听推荐命令事件
+// 监听推荐命令事件（方向键、Tab键触发）
 inputElement.addEventListener(CommandEditorEventNames.RecommendCmd, (event: CommandEditorRecommendCmdEvent) => {
-  console.log('推荐命令事件:', event.detail.data);
+  const { action, target } = event.detail.data;
+  console.log('推荐命令事件:', action, target);
 });
 
-// 监听发送命令事件
+// 监听发送命令事件（回车键触发）
 inputElement.addEventListener(CommandEditorEventNames.SendCmd, (event) => {
-  console.log('发送命令:', event.detail.data);
+  const { target } = event.detail.data;
+  console.log('发送命令:', target.input);
 });
-
-// 监听重新渲染事件
-inputElement.addEventListener(CommandEditorEventNames.ReRenderCmd, (event) => {
-  console.log('重新渲染命令');
-});
-```
-
-### 光标操作
-
-```typescript
-import { CommandEditorCursor } from '@istock-shell/editor';
-
-const cursor = new CommandEditorCursor(inputElement);
-
-// 设置光标位置（基于文本偏移量）
-cursor.setOffset(10);
-
-// 移动到开始位置
-cursor.moveToStart();
-
-// 移动到结束位置
-cursor.moveToEnd();
-
-// 基于token偏移量移动
-cursor.moveTokenOffset(2);
-
-// 基于节点偏移量移动
-cursor.moveNodeOffset(1);
-```
-
-### 解析器使用
-
-```typescript
-import { CommandEditorParser } from '@istock-shell/editor';
-import type { CommandEditorContentNode } from '@istock-shell/editor';
-import { TokenType } from '@istock-shell/command-parser';
-
-const parser = new CommandEditorParser();
-
-// DOM转文本
-const text = parser.parseDomToText(inputElement);
-
-// 虚拟节点转HTML
-const vNodes: CommandEditorContentNode[] = [
-  { id: 1, type: TokenType.command, value: 'ls' },
-  { id: 2, type: TokenType.option, value: '-la' },
-];
-const html = parser.parseVNodeToHtml(vNodes);
-
-// 虚拟节点转文本
-const plainText = parser.parseVNodeToText(vNodes);
 ```
 
 ## 📚 API 文档
 
 ### CommandEditor
 
-命令编辑器主类，提供完整的编辑功能。
+命令编辑器主类，基于 TipTap 编辑器构建。
 
 #### 属性
 
 - `commandInput: HTMLElement` - 只读，获取命令输入DOM元素
-- `input: string` - 只读，获取当前输入的文本内容
-- `vNodes: CommandEditorContentNode[]` - 只读，获取虚拟节点数组
+- `editor: Editor` - 只读，获取 TipTap 编辑器实例
+- `input: string` - 只读，获取当前输入的纯文本内容
+- `inputJson: object` - 只读，获取当前输入内容的JSON表示
 
 #### 方法
 
-- `constructor(commandInput: HTMLElement)` - 构造函数
+- `constructor(commandInput: HTMLElement, content?: string, options?: CommandEditorOptions)` - 构造函数
 - `onMount(): void` - 组件挂载，设置焦点并初始化事件监听
-- `handleCommandInput(input: string, offsetText?: string, options?: CommandEditorInputOption): void` - 处理命令输入
-- `handleCommandInputAppend(str: string): void` - 追加命令输入
-- `syncVNodeAndHtml(): void` - 同步虚拟节点和HTML
-- `getCursorOffsetText(): number` - 获取光标位置的文本偏移量
+- `handleCommandInput(input: string): void` - 设置命令输入内容
+- `handleCommandInputAppend(str: string): void` - 追加命令输入内容
+- `getCursorOffsetText(): string` - 获取光标位置前的文本内容
+- `getCursorClientRect(): DOMRect` - 获取光标位置的客户端矩形信息
 - `destroy(): void` - 销毁编辑器，清理资源
 
-### CommandEditorCursor
+### 配置选项类型
 
-光标操作类，提供精确的光标控制功能。
+#### CommandEditorOptions
 
-#### 属性
+```typescript
+type CommandEditorOptions = {
+  commandHighlighter?: Partial<CommandHighlighterOption>;
+  mention?: Partial<MentionOptions> & { suggestionOption?: MentionSuggestionOption };
+  keyboardShortcuts?: KeyboardShortcutsOption;
+};
+```
 
-- `selection: Selection` - 浏览器选择对象
+#### CommandHighlighterOption
 
-#### 方法
+```typescript
+interface CommandHighlighterOption {
+  tokenizer: Tokenizer; // 词法分析器实例
+}
+```
 
-- `constructor(commandInput: HTMLElement)` - 构造函数
-- `getOneRange(): Range` - 获取当前有效的Range对象
-- `setOffset(offset: number): void` - 根据文本偏移量设置光标位置
-- `moveToStart(): void` - 移动光标到开始位置
-- `moveToEnd(): void` - 移动光标到结束位置
-- `moveTokenOffset(offset: number): void` - 基于token偏移量移动光标
-- `moveNodeOffset(offset: number): void` - 基于节点偏移量移动光标
+#### MentionSuggestionOption
 
-### CommandEditorParser
+```typescript
+interface MentionSuggestionOption {
+  getSuggestionList: (query: string) => Promise<MentionSuggestionData[]>;
+  renderSuggestionList: (list: MentionSuggestionData[], state: 'start' | 'update') => Promise<HTMLElement | undefined>;
+  updateSuggestionListPosition: (x: number, y: number, position: string) => void;
+  onKeyDownSuggestion: (event: KeyboardEvent) => boolean;
+  onDestroySuggestion: () => void;
+}
+```
 
-解析器类，负责虚拟节点与DOM、文本之间的转换。
+#### MentionSuggestionData
 
-#### 静态属性
+```typescript
+interface MentionSuggestionData extends Record<string, any> {
+  id: string | number;
+  label: string;
+  value: string;
+  type: string;
+  extra?: Record<string, any>;
+}
+```
 
-- `blockTagNames: string[]` - 块级标签名称数组
-- `brTagName: string` - 换行标签名称
-- `spaceRegMatch: RegExp` - 空格字符匹配正则表达式
-- `lineBreak: string` - 换行符
-- `space: string` - 空格字符
+#### KeyboardShortcutsOption
 
-#### 方法
-
-- `parseDomToText(dom: HTMLElement): string` - 将DOM元素解析为纯文本
-- `getOffsetTextForDom(dom: HTMLElement, range: CommandEditorRangInfo): number` - 获取DOM中指定范围的文本偏移量
-- `parseVNodeToHtml(vNodes: CommandEditorContentNode[]): string` - 将虚拟节点数组转换为HTML字符串
-- `parseVNodeToText(vNodes: CommandEditorContentNode[]): string` - 将虚拟节点数组转换为纯文本
-- `findCursorInfoForDom(dom: HTMLElement, offset: number): CommandEditorRangInfo | null` - 根据文本偏移量查找DOM中的光标位置信息
+```typescript
+interface KeyboardShortcutsOption {
+  Enter?: () => Boolean;
+}
+```
 
 ## 🎯 事件系统
 
@@ -191,17 +211,26 @@ const plainText = parser.parseVNodeToText(vNodes);
 enum CommandEditorEventNames {
   RecommendCmd = 'recommendCmd', // 推荐命令事件
   SendCmd = 'sendCmd', // 发送命令事件
-  ReRenderCmd = 'reRenderCmd', // 重新渲染命令事件
 }
 
 enum CommandEditorActionTypes {
-  Auto = 'auto', // 自动操作
-  Up = 'up', // 向上操作
-  Down = 'down', // 向下操作
+  Auto = 'auto', // 自动操作（Tab键）
+  Up = 'up', // 向上操作（方向键上）
+  Down = 'down', // 向下操作（方向键下）
   Undo = 'undo', // 撤销操作
   Redo = 'redo', // 重做操作
 }
 ```
+
+### 键盘快捷键
+
+- `Enter`: 发送命令事件
+- `Shift + Enter`: 插入换行符
+- `Tab`: 触发自动推荐命令事件
+- `Alt/Ctrl/Cmd + ↑`: 触发向上推荐命令事件
+- `Alt/Ctrl/Cmd + ↓`: 触发向下推荐命令事件
+- `Ctrl/Cmd + Z`: 撤销操作
+- `Ctrl/Cmd + Shift + Z`: 重做操作
 
 ### 自定义事件
 
@@ -214,66 +243,91 @@ type CommandEditorCustomEvent<Data = unknown> = {
     sourceEvent?: Event;
   };
 } & Event;
-```
 
-## 🔧 类型定义
-
-```typescript
-// 内容节点类型
-type CommandEditorContentNode = {
-  id?: number;
-} & Token;
-
-// 范围信息类型
-type CommandEditorRangInfo = {
-  endContainer: Node;
-  endOffset: number;
-};
-
-// 输入选项类型
-type CommandEditorInputOption = {
-  action?: CommandEditorActionTypes;
-  event?: Event;
-};
-
-// 推荐命令数据类型
 type CommandEditorRecommendCmdData = {
   action?: CommandEditorActionTypes;
   target: CommandEditor;
 };
+
+type CommandEditorRecommendCmdEvent = CommandEditorCustomEvent<CommandEditorRecommendCmdData>;
 ```
 
 ## 🎨 样式定制
 
-编辑器生成的HTML结构支持CSS样式定制：
+编辑器使用 CSS 类名进行语法高亮，支持以下样式定制：
 
 ```css
 /* 命令样式 */
-[data-type='command'] {
+.is-command {
   color: #0066cc;
   font-weight: bold;
 }
 
-/* 选项样式 */
-[data-type='option'] {
-  color: #cc6600;
-}
-
 /* 参数样式 */
-[data-type='argument'] {
+.is-parameter {
   color: #009900;
 }
 
-/* 字符串样式 */
-[data-type='string'] {
+/* 选项键样式 */
+.is-optionKey {
+  color: #cc6600;
+}
+
+/* 管道符样式 */
+.is-pipe {
   color: #cc0066;
+}
+
+/* 关键命令样式 */
+.is-keyCommand {
+  color: #9900cc;
+}
+
+/* 关键命令内容样式 */
+.is-keyCommandContent {
+  color: #cc9900;
+}
+
+/* 括号样式 */
+.is-parentheses {
+  color: #666666;
+}
+
+/* 提及样式 */
+.is-mention {
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 0 2px;
 }
 ```
 
 ## 🔗 依赖
 
+### 主要依赖
+
+- `@tiptap/core` - TipTap 核心编辑器
+- `@tiptap/starter-kit` - TipTap 基础功能包
+- `@tiptap/extension-mention` - TipTap 提及扩展
+- `@floating-ui/dom` - 浮动定位库
 - `@istock-shell/command-parser` - 命令解析器
 - `@istock-shell/util` - 工具库
+
+### 开发依赖
+
+- `typescript` - TypeScript 支持
+- `rollup` - 构建工具
+- `@rollup/plugin-typescript` - TypeScript 插件
+
+## 🏗️ 架构设计
+
+编辑器采用模块化设计，主要包含以下模块：
+
+1. **CommandEditor**: 主编辑器类，整合所有功能
+2. **CommandHighlighter**: 命令语法高亮扩展
+3. **MentionSuggestion**: 提及建议功能
+4. **KeyboardShortcuts**: 键盘快捷键处理
+
+每个模块都可以独立配置和扩展，基于 TipTap 的扩展系统构建。
 
 ## 🤝 贡献
 
@@ -283,6 +337,10 @@ type CommandEditorRecommendCmdData = {
 
 如果您在使用过程中遇到问题，请通过以下方式获取帮助：
 
-- 提交 GitHub Issue
+- 提交 [GitHub Issue](https://github.com/xcbclc/istock-shell/issues)
 - 查看项目文档
 - 联系项目维护者
+
+## 📄 许可证
+
+MIT License

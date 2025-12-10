@@ -8,7 +8,9 @@
 
 > `const` **Decorator**: `object`
 
-Defined in: src/packages/iswork/src/decorators/index.ts:21
+Defined in: decorators/index.ts:31
+
+装饰器类集合
 
 ## Type declaration
 
@@ -59,3 +61,7 @@ Defined in: src/packages/iswork/src/decorators/index.ts:21
 ### GlobalDomainDecorator
 
 > **GlobalDomainDecorator**: _typeof_ `GlobalDomainDecorator`
+
+## Description
+
+包含所有装饰器类的对象，用于内部引用

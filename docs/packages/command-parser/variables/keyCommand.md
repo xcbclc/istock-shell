@@ -8,7 +8,7 @@
 
 > `const` **keyCommand**: `object`
 
-Defined in: tokenizer.ts:69
+Defined in: tokenizer.ts:71
 
 关键字命令配置
 

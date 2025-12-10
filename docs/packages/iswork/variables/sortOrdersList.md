@@ -8,4 +8,6 @@
 
 > `const` **sortOrdersList**: `string`[]
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:34
+Defined in: orm/query-builder.ts:46
+
+排序方向列表

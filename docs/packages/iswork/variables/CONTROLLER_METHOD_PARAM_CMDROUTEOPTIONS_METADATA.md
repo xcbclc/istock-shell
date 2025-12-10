@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_PARAM_CMDROUTEOPTIONS_METADATA**: _typeof_ `CONTROLLER_METHOD_PARAM_CMDROUTEOPTIONS_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:27
+Defined in: constants/decorator.ts:46
+
+控制器方法参数命令路由选项元数据键

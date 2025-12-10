@@ -25,4 +25,4 @@ editLink: false
 ### 命令示例
 
 `mlcz lshq -mc 历史`
-<IStockShellDemo cmd='mlcz lshq -mc 历史' :domains='[]' :height='480'/>
+<IStockShellDemo cmd='mlcz lshq -mc 历史' :domains='[]' :height='640'/>

@@ -14,7 +14,7 @@ editLink: false
 
 ### 用法
 
-`kzzsd`
+`kzzsd -sdtj [双低条件] -ldzq [轮动周期]`
 
 ### 选项
 
@@ -26,4 +26,4 @@ editLink: false
 ### 命令示例
 
 `kzzsd -ldzq 7 -sdtj 150`
-<IStockShellDemo cmd='kzzsd -ldzq 7 -sdtj 150' :domains='[{"viewName":"可转债","name":"kzz"}]' :height='480'/>
+<IStockShellDemo cmd='kzzsd -ldzq 7 -sdtj 150' :domains='[{"viewName":"可转债","name":"kzz"}]' :height='640'/>

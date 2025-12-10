@@ -6,9 +6,24 @@
 
 # Class: Application
 
-Defined in: src/packages/iswork/src/application/application.ts:17
+Defined in: application/application.ts:32
 
-应用框架入口
+应用框架入口类
+
+## Description
+
+继承自 ApplicationEvent，提供完整的应用程序生命周期管理
+
+## Example
+
+```typescript
+const app = new Application({
+  domainPath: 'my-app',
+  middlewares: [loggerMiddleware],
+});
+
+app.listen(MyDomainClass);
+```
 
 ## Extends
 
@@ -20,17 +35,38 @@ Defined in: src/packages/iswork/src/application/application.ts:17
 
 > **new Application**(`options`): `Application`
 
-Defined in: src/packages/iswork/src/application/application.ts:60
+Defined in: application/application.ts:118
+
+应用程序构造函数
 
 #### Parameters
 
 ##### options
 
-`Partial`\<[`TApplicationOptions`](../type-aliases/TApplicationOptions.md)\> = `{}`
+`Partial`\<[`ApplicationOptions`](../type-aliases/ApplicationOptions.md)\> = `{}`
+
+应用程序配置选项，可选
 
 #### Returns
 
 `Application`
+
+#### Description
+
+初始化应用程序实例，设置配置选项和核心组件
+
+#### Example
+
+```typescript
+const app = new Application({
+  domainPath: 'my-app',
+  middlewares: [authMiddleware, loggerMiddleware],
+  emit: (message) => {
+    // 自定义消息发送逻辑
+    postMessage(message);
+  },
+});
+```
 
 #### Overrides
 
@@ -40,9 +76,11 @@ Defined in: src/packages/iswork/src/application/application.ts:60
 
 ### options
 
-> **options**: [`TApplicationEventOptions`](../type-aliases/TApplicationEventOptions.md)
+> **options**: [`ApplicationEventOptions`](../type-aliases/ApplicationEventOptions.md)
 
-Defined in: src/packages/iswork/src/application/application-event.ts:10
+Defined in: application/application-event.ts:27
+
+应用事件配置选项
 
 #### Inherited from
 
@@ -54,13 +92,17 @@ Defined in: src/packages/iswork/src/application/application-event.ts:10
 
 #### Get Signature
 
-> **get** **allDomain**(): `Domain`\<[`IDomainClass`](../interfaces/IDomainClass.md)\<`unknown`\>\>[]
+> **get** **allDomain**(): `Domain`\<[`DomainClassBase`](../interfaces/DomainClassBase.md)\<`any`\>\>[]
 
-Defined in: src/packages/iswork/src/application/application.ts:31
+Defined in: application/application.ts:62
+
+获取所有已注册的域
 
 ##### Returns
 
-`Domain`\<[`IDomainClass`](../interfaces/IDomainClass.md)\<`unknown`\>\>[]
+`Domain`\<[`DomainClassBase`](../interfaces/DomainClassBase.md)\<`any`\>\>[]
+
+域映射表
 
 ---
 
@@ -70,9 +112,17 @@ Defined in: src/packages/iswork/src/application/application.ts:31
 
 > **get** **emit**(): (`message`, `options?`) => `void`
 
-Defined in: src/packages/iswork/src/application/application-event.ts:11
+Defined in: application/application-event.ts:34
+
+获取消息发送函数
+
+##### Description
+
+返回当前配置的消息发送函数
 
 ##### Returns
+
+消息发送函数
 
 > (`message`, `options?`): `void`
 
@@ -106,13 +156,17 @@ Defined in: src/packages/iswork/src/application/application-event.ts:11
 
 #### Get Signature
 
-> **get** **globalMiddleware**(): [`TMiddleware`](../type-aliases/TMiddleware.md)[]
+> **get** **globalMiddleware**(): [`Middleware`](../type-aliases/Middleware.md)[]
 
-Defined in: src/packages/iswork/src/application/application.ts:27
+Defined in: application/application.ts:54
+
+获取全局中间件列表
 
 ##### Returns
 
-[`TMiddleware`](../type-aliases/TMiddleware.md)[]
+[`Middleware`](../type-aliases/Middleware.md)[]
+
+全局中间件数组
 
 ---
 
@@ -122,11 +176,15 @@ Defined in: src/packages/iswork/src/application/application.ts:27
 
 > **get** **messageChannelManager**(): `MessageChannelManager`
 
-Defined in: src/packages/iswork/src/application/application.ts:35
+Defined in: application/application.ts:70
+
+获取消息通道管理器
 
 ##### Returns
 
 `MessageChannelManager`
+
+消息通道管理器实例
 
 ---
 
@@ -136,13 +194,21 @@ Defined in: src/packages/iswork/src/application/application.ts:35
 
 > **get** **pipeFlowExecute**(): (`pipes`) => `unknown`
 
-Defined in: src/packages/iswork/src/application/application.ts:42
+Defined in: application/application.ts:79
 
-批量执行pipe方法
+获取管道流执行函数
+
+##### Description
+
+批量执行pipe方法的绑定函数
 
 ##### Returns
 
+绑定了上下文的管道流执行函数
+
 > (`pipes`): `unknown`
+
+流式执行管道函数
 
 ###### Parameters
 
@@ -150,9 +216,29 @@ Defined in: src/packages/iswork/src/application/application.ts:42
 
 `object`[]
 
+管道配置数组，每个配置包含管道键和可选的额外参数
+
 ###### Returns
 
 `unknown`
+
+最后一个管道函数的执行结果
+
+###### Description
+
+按顺序执行多个管道函数，前一个管道的结果作为后一个管道的第一个参数
+
+###### Example
+
+```typescript
+const result = pipeManager.flowExecute([
+  { key: 'trim', args: ['  hello  '] },
+  { key: 'uppercase' },
+  { key: 'addPrefix', args: ['Mr. '] },
+]);
+// 执行流程: trim('  hello  ') -> uppercase('hello') -> addPrefix('HELLO', 'Mr. ')
+// 结果: 'Mr. HELLO'
+```
 
 ## Methods
 
@@ -160,13 +246,17 @@ Defined in: src/packages/iswork/src/application/application.ts:42
 
 > **close**(): `void`
 
-Defined in: src/packages/iswork/src/application/application.ts:84
+Defined in: application/application.ts:151
 
-关闭应用
+关闭应用程序
 
 #### Returns
 
 `void`
+
+#### Description
+
+停止应用程序运行，清理资源
 
 ---
 
@@ -174,11 +264,17 @@ Defined in: src/packages/iswork/src/application/application.ts:84
 
 > `protected` **closed**(): `void`
 
-Defined in: src/packages/iswork/src/application/application-event.ts:59
+Defined in: application/application-event.ts:127
+
+应用程序关闭监听事件
 
 #### Returns
 
 `void`
+
+#### Description
+
+在应用程序停止监听消息后触发此事件
 
 #### Inherited from
 
@@ -190,15 +286,17 @@ Defined in: src/packages/iswork/src/application/application-event.ts:59
 
 > **getDomain**\<`T`\>(`name`): `undefined` \| `Domain`\<`T`\>
 
-Defined in: src/packages/iswork/src/application/application.ts:222
+Defined in: application/application.ts:332
 
-获取domain
+获取指定名称的域
 
 #### Type Parameters
 
 ##### T
 
-`T` _extends_ [`IDomainClass`](../interfaces/IDomainClass.md)\<`any`\>
+`T` _extends_ [`DomainClassBase`](../interfaces/DomainClassBase.md)\<`any`\>
+
+域类类型
 
 #### Parameters
 
@@ -206,9 +304,23 @@ Defined in: src/packages/iswork/src/application/application.ts:222
 
 `string`
 
+域名称
+
 #### Returns
 
 `undefined` \| `Domain`\<`T`\>
+
+域实例，如果不存在则返回 undefined
+
+#### Description
+
+根据域名称获取已注册的域实例
+
+#### Example
+
+```typescript
+const userDomain = app.getDomain<UserDomain>('user');
+```
 
 ---
 
@@ -216,7 +328,7 @@ Defined in: src/packages/iswork/src/application/application.ts:222
 
 > **getPipe**\<`Fn`\>(`key`): `Fn`
 
-Defined in: src/packages/iswork/src/application/application.ts:239
+Defined in: application/application.ts:364
 
 获取管道函数
 
@@ -226,15 +338,31 @@ Defined in: src/packages/iswork/src/application/application.ts:239
 
 `Fn` _extends_ `Function`
 
+函数类型
+
 #### Parameters
 
 ##### key
 
 `TPipeKey`
 
+管道函数的键名
+
 #### Returns
 
 `Fn`
+
+管道函数，如果不存在则返回 undefined
+
+#### Description
+
+根据键名获取已注册的管道函数
+
+#### Example
+
+```typescript
+const validator = app.getPipe<(data: any) => any>('validation');
+```
 
 ---
 
@@ -242,13 +370,19 @@ Defined in: src/packages/iswork/src/application/application.ts:239
 
 > **getPipeRecord**(): `Record`\<`string` \| `symbol`, `Function`\>
 
-Defined in: src/packages/iswork/src/application/application.ts:246
+Defined in: application/application.ts:373
 
-获取全部管道函数记录
+获取所有管道函数记录
 
 #### Returns
 
 `Record`\<`string` \| `symbol`, `Function`\>
+
+管道函数记录映射表
+
+#### Description
+
+获取管道管理器中所有已注册的管道函数记录
 
 ---
 
@@ -256,11 +390,17 @@ Defined in: src/packages/iswork/src/application/application.ts:246
 
 > `protected` **initialized**(): `void`
 
-Defined in: src/packages/iswork/src/application/application-event.ts:39
+Defined in: application/application-event.ts:91
+
+应用程序初始化完成事件
 
 #### Returns
 
 `void`
+
+#### Description
+
+在应用程序初始化完成后触发此事件
 
 #### Inherited from
 
@@ -272,29 +412,47 @@ Defined in: src/packages/iswork/src/application/application-event.ts:39
 
 > **listen**(`domainClass`): (`event`) => `Promise`\<`void`\>
 
-Defined in: src/packages/iswork/src/application/application.ts:73
+Defined in: application/application.ts:139
 
-通过domain获取消息处理函数
+启动应用程序监听
 
 #### Parameters
 
 ##### domainClass
 
-[`IDomainClass`](../interfaces/IDomainClass.md)
+[`DomainClassBase`](../interfaces/DomainClassBase.md)
+
+要监听的域类
 
 #### Returns
 
+消息处理回调函数
+
 > (`event`): `Promise`\<`void`\>
+
+消息回调函数
 
 ##### Parameters
 
 ###### event
 
-`MessageEvent`\<[`TCmdpMessage`](../type-aliases/TCmdpMessage.md)\<`any`\>\>
+`MessageEvent`\<[`CmdpMessage`](../type-aliases/CmdpMessage.md)\<`any`\>\>
 
 ##### Returns
 
 `Promise`\<`void`\>
+
+#### Description
+
+通过指定的域类启动应用程序，扫描域并返回消息处理函数
+
+#### Example
+
+```typescript
+const messageHandler = app.listen(MyDomainClass);
+// 在 Web Worker 中使用
+self.addEventListener('message', messageHandler);
+```
 
 ---
 
@@ -302,11 +460,17 @@ Defined in: src/packages/iswork/src/application/application.ts:73
 
 > `protected` **listened**(): `void`
 
-Defined in: src/packages/iswork/src/application/application-event.ts:44
+Defined in: application/application-event.ts:100
+
+应用程序开始监听事件
 
 #### Returns
 
 `void`
+
+#### Description
+
+在应用程序开始监听消息后触发此事件
 
 #### Inherited from
 
@@ -318,11 +482,17 @@ Defined in: src/packages/iswork/src/application/application-event.ts:44
 
 > `protected` **listenInput**(): `void`
 
-Defined in: src/packages/iswork/src/application/application-event.ts:49
+Defined in: application/application-event.ts:109
+
+应用程序接收输入事件
 
 #### Returns
 
 `void`
+
+#### Description
+
+在应用程序接收到输入消息时触发此事件
 
 #### Inherited from
 
@@ -334,11 +504,17 @@ Defined in: src/packages/iswork/src/application/application-event.ts:49
 
 > `protected` **listenOutput**(): `void`
 
-Defined in: src/packages/iswork/src/application/application-event.ts:54
+Defined in: application/application-event.ts:118
+
+应用程序产生输出事件
 
 #### Returns
 
 `void`
+
+#### Description
+
+在应用程序产生输出消息时触发此事件
 
 #### Inherited from
 
@@ -350,9 +526,9 @@ Defined in: src/packages/iswork/src/application/application-event.ts:54
 
 > `protected` **sendAppMessage**(`controller`, `method`, `payload`): `void`
 
-Defined in: src/packages/iswork/src/application/application-event.ts:25
+Defined in: application/application-event.ts:73
 
-发送应用级消息
+发送应用程序级别消息
 
 #### Parameters
 
@@ -360,17 +536,36 @@ Defined in: src/packages/iswork/src/application/application-event.ts:25
 
 `string`
 
+控制器名称，标识消息的处理模块
+
 ##### method
 
 `string`
 
+方法名称，标识具体的事件类型
+
 ##### payload
 
-[`TCmdpPayload`](../type-aliases/TCmdpPayload.md) = `true`
+[`CmdpPayload`](../type-aliases/CmdpPayload.md) = `true`
+
+消息载荷，默认为 true
 
 #### Returns
 
 `void`
+
+#### Description
+
+创建并发送应用程序内部事件消息，用于生命周期事件通知
+
+#### Example
+
+```typescript
+// 发送初始化完成事件
+this.sendAppMessage('lifecycle', 'initialized');
+// 发送自定义事件
+this.sendAppMessage('custom', 'userAction', { action: 'click' });
+```
 
 #### Inherited from
 
@@ -382,19 +577,31 @@ Defined in: src/packages/iswork/src/application/application-event.ts:25
 
 > **useDomain**(`domainClass`): `void`
 
-Defined in: src/packages/iswork/src/application/application.ts:214
+Defined in: application/application.ts:317
 
-新增domain
+添加域
 
 #### Parameters
 
 ##### domainClass
 
-[`IDomainClass`](../interfaces/IDomainClass.md)
+[`DomainClassBase`](../interfaces/DomainClassBase.md)
+
+要添加的域类
 
 #### Returns
 
 `void`
+
+#### Description
+
+向应用程序添加域类，扫描并注册域中的控制器和服务
+
+#### Example
+
+```typescript
+app.useDomain(UserDomain);
+```
 
 ---
 
@@ -402,19 +609,41 @@ Defined in: src/packages/iswork/src/application/application.ts:214
 
 > **useMiddleware**(`fn`): `Application`
 
-Defined in: src/packages/iswork/src/application/application.ts:202
+Defined in: application/application.ts:300
 
-新增中间件
+添加中间件
 
 #### Parameters
 
 ##### fn
 
-[`TMiddleware`](../type-aliases/TMiddleware.md)
+[`Middleware`](../type-aliases/Middleware.md)
+
+中间件函数
 
 #### Returns
 
 `Application`
+
+返回应用程序实例，支持链式调用
+
+#### Description
+
+向应用程序添加中间件函数，中间件将在消息处理过程中执行
+
+#### Throws
+
+当传入的参数不是函数时抛出错误
+
+#### Example
+
+```typescript
+app.useMiddleware(async (ctx, next) => {
+  console.log('Before processing');
+  await next();
+  console.log('After processing');
+});
+```
 
 ---
 
@@ -422,9 +651,9 @@ Defined in: src/packages/iswork/src/application/application.ts:202
 
 > **usePipe**(`key`, `fn`): `void`
 
-Defined in: src/packages/iswork/src/application/application.ts:231
+Defined in: application/application.ts:349
 
-新增管道函数
+添加管道函数
 
 #### Parameters
 
@@ -432,10 +661,27 @@ Defined in: src/packages/iswork/src/application/application.ts:231
 
 `TPipeKey`
 
+管道函数的键名
+
 ##### fn
 
 `Function`
 
+管道函数
+
 #### Returns
 
 `void`
+
+#### Description
+
+向管道管理器添加一个管道函数
+
+#### Example
+
+```typescript
+app.usePipe('validation', (data) => {
+  // 验证逻辑
+  return validatedData;
+});
+```

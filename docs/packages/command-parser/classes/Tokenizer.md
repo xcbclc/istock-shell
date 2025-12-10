@@ -6,7 +6,7 @@
 
 # Class: Tokenizer
 
-Defined in: tokenizer.ts:117
+Defined in: tokenizer.ts:119
 
 词法分析器类
 
@@ -47,7 +47,7 @@ console.log(tokens);
 
 > **symbol**: `object`
 
-Defined in: tokenizer.ts:166
+Defined in: tokenizer.ts:168
 
 符号配置对象
 
@@ -101,7 +101,7 @@ OR 管道符号列表 - 无论第一个命令是否错误，都会执行第二�
 
 > **parse**(`input`, `isCheck`): [`Token`](../type-aliases/Token.md)[]
 
-Defined in: tokenizer.ts:224
+Defined in: tokenizer.ts:226
 
 解析输入字符串为 Token 序列
 

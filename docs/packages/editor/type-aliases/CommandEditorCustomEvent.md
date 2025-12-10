@@ -8,7 +8,7 @@
 
 > **CommandEditorCustomEvent**\<`Data`\> = `object` & `Event`
 
-Defined in: command-editor.ts:63
+Defined in: src/packages/editor/src/command-editor-plus.ts:65
 
 命令编辑器自定义事件类型
 

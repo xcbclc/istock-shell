@@ -8,7 +8,7 @@
 
 > **AstTreeCommand** = `object`
 
-Defined in: ast.ts:77
+Defined in: ast.ts:93
 
 AST 普通命令节点类型定义
 
@@ -20,7 +20,7 @@ AST 普通命令节点类型定义
 
 > **children**: ([`AstTreeParameter`](AstTreeParameter.md) \| [`AstTreeOption`](AstTreeOption.md))[]
 
-Defined in: ast.ts:83
+Defined in: ast.ts:99
 
 子节点列表，包含参数和选项
 
@@ -30,7 +30,7 @@ Defined in: ast.ts:83
 
 > **type**: [`command`](../enumerations/AstTreeType.md#command)
 
-Defined in: ast.ts:79
+Defined in: ast.ts:95
 
 节点类型标识
 
@@ -40,6 +40,6 @@ Defined in: ast.ts:79
 
 > **value**: `string`
 
-Defined in: ast.ts:81
+Defined in: ast.ts:97
 
 命令名称

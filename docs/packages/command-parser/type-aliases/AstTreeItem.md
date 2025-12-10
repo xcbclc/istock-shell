@@ -8,7 +8,7 @@
 
 > **AstTreeItem** = [`AstTreeParentheses`](AstTreeParentheses.md) \| [`AstTreeCommand`](AstTreeCommand.md) \| [`AstTreeKeyCommand`](AstTreeKeyCommand.md) \| [`AstTreePipe`](AstTreePipe.md)
 
-Defined in: ast.ts:109
+Defined in: ast.ts:125
 
 AST 节点联合类型
 

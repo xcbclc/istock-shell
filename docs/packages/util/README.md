@@ -205,18 +205,112 @@ emitter.off('userLogin');
 
 ### ID 生成器 (snow-flake.ts)
 
-基于雪花算法的分布式唯一 ID 生成器。
+基于 Twitter 雪花算法的前端分布式唯一 ID 生成器，专为前端环境优化。
+
+#### 特性
+
+- 🔢 **64位ID结构**：时间戳(41位) + 数据中心ID(5位) + 工作节点ID(5位) + 序列号(12位)
+- 🌐 **分布式支持**：支持32个数据中心，每个数据中心32个工作节点
+- ⚡ **高性能**：每毫秒可生成4096个唯一ID，纯内存操作
+- 📈 **趋势递增**：ID大致按时间顺序递增，有利于数据库索引
+- 🔒 **时钟回退保护**：检测系统时钟回退并抛出异常
+- 📦 **Base62编码**：生成较短的字符串表示，便于传输和存储
+- 🎯 **前端优化**：适用于WebWorker、IndexedDB、P2P通信等场景
+
+#### API
 
 ```typescript
 class FESnowflake {
-  constructor(workerId: number, portId: number);
-  nextId(): string;
-}
+  constructor(workerId?: number, datacenterId?: number);
 
-// 示例
-const snowflake = new FESnowflake(1, 1);
-const id = snowflake.nextId(); // 生成唯一字符串 ID
+  // 生成单个唯一ID
+  nextId(): string;
+
+  // 批量生成ID
+  nextIds(count: number): string[];
+
+  // 解析ID信息（调试用）
+  parseId(id: string): {
+    timestamp: number;
+    datacenterId: number;
+    workerId: number;
+    sequence: number;
+  };
+}
 ```
+
+#### 使用示例
+
+```typescript
+import { FESnowflake } from '@istock-shell/util';
+
+// 基本使用
+const snowflake = new FESnowflake(1, 1);
+const id = snowflake.nextId(); // 生成类似 "2aB9xK7mN" 的ID
+
+// 批量生成
+const ids = snowflake.nextIds(100);
+console.log(ids); // ['2aB9xK7mN', '2aB9xK7mO', ...]
+
+// 解析ID信息（调试用）
+const info = snowflake.parseId(id);
+console.log(info);
+// {
+//   timestamp: 1640995200123,
+//   datacenterId: 1,
+//   workerId: 1,
+//   sequence: 0
+// }
+
+// 多实例部署
+const worker1 = new FESnowflake(1, 1); // 数据中心1，工作节点1
+const worker2 = new FESnowflake(2, 1); // 数据中心1，工作节点2
+const worker3 = new FESnowflake(1, 2); // 数据中心2，工作节点1
+
+// WebWorker 中使用
+// main.js
+const worker = new Worker('worker.js');
+worker.postMessage({ type: 'generateId' });
+
+// worker.js
+const snowflake = new FESnowflake(1, 1);
+self.onmessage = (e) => {
+  if (e.data.type === 'generateId') {
+    const id = snowflake.nextId();
+    self.postMessage({ type: 'id', data: id });
+  }
+};
+
+// IndexedDB 中使用
+const db = await openDB('myDB', 1);
+const tx = db.transaction('items', 'readwrite');
+const store = tx.objectStore('items');
+
+const item = {
+  id: snowflake.nextId(),
+  name: 'Example Item',
+  createdAt: new Date(),
+};
+
+await store.add(item);
+```
+
+#### 适用场景
+
+- **WebWorker 通讯**：为消息生成唯一标识符
+- **IndexedDB 数据库**：作为主键生成器
+- **前端点对点消息传输**：确保消息ID唯一性
+- **分布式前端应用**：多实例环境下的会话ID生成
+- **离线应用**：本地数据同步时的唯一标识
+
+#### 参数说明
+
+- `workerId` (0-31)：工作节点ID，用于区分同一数据中心内的不同实例
+- `datacenterId` (0-31)：数据中心ID，用于区分不同的部署环境或地理位置
+
+#### 时间范围
+
+基于2022-01-01作为epoch起始时间，支持约69年的时间范围（到2091年）。
 
 ### 安全处理 (escape.ts)
 

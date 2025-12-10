@@ -34,6 +34,16 @@ Defined in: ast.ts:21
 
 ---
 
+### mention
+
+> **mention**: `7`
+
+Defined in: ast.ts:27
+
+提及节点类型
+
+---
+
 ### optionKey
 
 > **optionKey**: `6`

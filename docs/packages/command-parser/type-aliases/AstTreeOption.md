@@ -8,7 +8,7 @@
 
 > **AstTreeOption** = `object`
 
-Defined in: ast.ts:49
+Defined in: ast.ts:65
 
 AST 选项键节点类型定义
 
@@ -20,7 +20,7 @@ AST 选项键节点类型定义
 
 > **type**: [`optionKey`](../enumerations/AstTreeType.md#optionkey)
 
-Defined in: ast.ts:51
+Defined in: ast.ts:67
 
 节点类型标识
 
@@ -30,6 +30,6 @@ Defined in: ast.ts:51
 
 > **value**: `string`
 
-Defined in: ast.ts:53
+Defined in: ast.ts:69
 
 选项键值

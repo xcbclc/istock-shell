@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_COMPONENT_METADATA**: _typeof_ `CONTROLLER_METHOD_COMPONENT_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:9
+Defined in: constants/decorator.ts:19
+
+控制器方法组件元数据键

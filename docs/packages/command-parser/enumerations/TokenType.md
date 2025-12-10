@@ -65,6 +65,16 @@ Defined in: tokenizer.ts:15
 
 ---
 
+### mention
+
+> **mention**: `"mention"`
+
+Defined in: tokenizer.ts:33
+
+提及（如 @[id,label] 或 #[id,label]）
+
+---
+
 ### optionKey
 
 > **optionKey**: `"optionKey"`

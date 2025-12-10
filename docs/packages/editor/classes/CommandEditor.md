@@ -6,7 +6,7 @@
 
 # Class: CommandEditor
 
-Defined in: command-editor.ts:79
+Defined in: src/packages/editor/src/command-editor-plus.ts:111
 
 命令编辑器类
 提供命令行输入、编辑、语法高亮、历史记录等功能
@@ -15,9 +15,9 @@ Defined in: command-editor.ts:79
 
 ### Constructor
 
-> **new CommandEditor**(`commandInput`): `CommandEditor`
+> **new CommandEditor**(`commandInput`, `content`, `options`): `CommandEditor`
 
-Defined in: command-editor.ts:127
+Defined in: src/packages/editor/src/command-editor-plus.ts:181
 
 构造函数
 
@@ -28,6 +28,14 @@ Defined in: command-editor.ts:127
 `HTMLElement`
 
 命令输入DOM元素
+
+##### content
+
+`string` = `''`
+
+##### options
+
+[`CommandEditorOptions`](../type-aliases/CommandEditorOptions.md) = `{}`
 
 #### Returns
 
@@ -41,7 +49,7 @@ Defined in: command-editor.ts:127
 
 > **get** **commandInput**(): `HTMLElement`
 
-Defined in: command-editor.ts:103
+Defined in: src/packages/editor/src/command-editor-plus.ts:121
 
 获取命令输入DOM元素
 
@@ -53,13 +61,27 @@ Defined in: command-editor.ts:103
 
 ---
 
+### editor
+
+#### Get Signature
+
+> **get** **editor**(): `Editor`
+
+Defined in: src/packages/editor/src/command-editor-plus.ts:125
+
+##### Returns
+
+`Editor`
+
+---
+
 ### input
 
 #### Get Signature
 
 > **get** **input**(): `string`
 
-Defined in: command-editor.ts:111
+Defined in: src/packages/editor/src/command-editor-plus.ts:133
 
 获取当前输入的文本内容
 
@@ -71,21 +93,39 @@ Defined in: command-editor.ts:111
 
 ---
 
-### vNodes
+### inputJson
 
 #### Get Signature
 
-> **get** **vNodes**(): [`CommandEditorContentNode`](../type-aliases/CommandEditorContentNode.md)[]
+> **get** **inputJson**(): `DocumentType`\<`undefined` \| `Record`\<`string`, `any`\>, `NodeType`\<`string`, `undefined` \| `Record`\<`string`, `any`\>, `any`, (`NodeType`\<`any`, `any`, `any`, `any`\> \| `TextType`\<`MarkType`\<`any`, `any`\>\>)[]\>[]\>
 
-Defined in: command-editor.ts:119
+Defined in: src/packages/editor/src/command-editor-plus.ts:152
 
-获取虚拟节点数组
+获取当前输入的文本内容的JSON表示
 
 ##### Returns
 
-[`CommandEditorContentNode`](../type-aliases/CommandEditorContentNode.md)[]
+`DocumentType`\<`undefined` \| `Record`\<`string`, `any`\>, `NodeType`\<`string`, `undefined` \| `Record`\<`string`, `any`\>, `any`, (`NodeType`\<`any`, `any`, `any`, `any`\> \| `TextType`\<`MarkType`\<`any`, `any`\>\>)[]\>[]\>
 
-虚拟节点数组
+文本内容的JSON表示
+
+---
+
+### mentions
+
+#### Get Signature
+
+> **get** **mentions**(): [`CommandEditorMentionData`](../interfaces/CommandEditorMentionData.md)[]
+
+Defined in: src/packages/editor/src/command-editor-plus.ts:160
+
+获取当前输入的文本内容中的提及数据
+
+##### Returns
+
+[`CommandEditorMentionData`](../interfaces/CommandEditorMentionData.md)[]
+
+提及数据数组
 
 ## Methods
 
@@ -93,10 +133,9 @@ Defined in: command-editor.ts:119
 
 > **destroy**(): `void`
 
-Defined in: command-editor.ts:521
+Defined in: src/packages/editor/src/command-editor-plus.ts:491
 
-销毁编辑器实例
-移除所有事件监听器，清理资源
+销毁编辑器实例及副作用
 
 #### Returns
 
@@ -104,13 +143,29 @@ Defined in: command-editor.ts:521
 
 ---
 
+### getCursorClientRect()
+
+> **getCursorClientRect**(): `DOMRect`
+
+Defined in: src/packages/editor/src/command-editor-plus.ts:460
+
+获取当前光标位置的客户端矩形信息
+
+#### Returns
+
+`DOMRect`
+
+光标位置的DOMRect对象
+
+---
+
 ### getCursorOffsetText()
 
 > **getCursorOffsetText**(): `string`
 
-Defined in: command-editor.ts:432
+Defined in: src/packages/editor/src/command-editor-plus.ts:447
 
-获取光标位置前的所有文本内容
+获取当前光标位置前的文本内容
 
 #### Returns
 
@@ -122,12 +177,11 @@ Defined in: command-editor.ts:432
 
 ### handleCommandInput()
 
-> **handleCommandInput**(`input`, `offsetText`, `options`): `void`
+> **handleCommandInput**(`input`): `void`
 
-Defined in: command-editor.ts:383
+Defined in: src/packages/editor/src/command-editor-plus.ts:318
 
-处理命令输入的公共方法
-解析输入文本为token，更新虚拟节点，并渲染到HTML
+向输入框填充输入内容
 
 #### Parameters
 
@@ -135,19 +189,7 @@ Defined in: command-editor.ts:383
 
 `string`
 
-输入的完整文本
-
-##### offsetText
-
-`string` = `...`
-
-光标位置前的文本内容
-
-##### options
-
-[`CommandEditorInputOption`](../type-aliases/CommandEditorInputOption.md) = `{}`
-
-输入选项
+需要填充的内容
 
 #### Returns
 
@@ -159,10 +201,9 @@ Defined in: command-editor.ts:383
 
 > **handleCommandInputAppend**(`str`): `void`
 
-Defined in: command-editor.ts:401
+Defined in: src/packages/editor/src/command-editor-plus.ts:343
 
-向当前输入内容追加字符串
-智能处理重叠部分，避免重复内容
+合并当前光标位置的文本内容
 
 #### Parameters
 
@@ -170,7 +211,7 @@ Defined in: command-editor.ts:401
 
 `string`
 
-要追加的字符串
+要合并的字符串
 
 #### Returns
 
@@ -182,33 +223,10 @@ Defined in: command-editor.ts:401
 
 > **onMount**(): `void`
 
-Defined in: command-editor.ts:139
+Defined in: src/packages/editor/src/command-editor-plus.ts:219
 
 组件挂载时调用
 设置焦点到输入框并初始化事件监听
-
-#### Returns
-
-`void`
-
----
-
-### syncVNodeAndHtml()
-
-> **syncVNodeAndHtml**(`vNodes`): `void`
-
-Defined in: command-editor.ts:421
-
-同步虚拟节点数据并更新HTML显示
-直接设置虚拟节点数组并重新渲染
-
-#### Parameters
-
-##### vNodes
-
-[`CommandEditorContentNode`](../type-aliases/CommandEditorContentNode.md)[]
-
-新的虚拟节点数组
 
 #### Returns
 

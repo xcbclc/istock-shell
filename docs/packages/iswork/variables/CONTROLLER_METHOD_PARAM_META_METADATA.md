@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_PARAM_META_METADATA**: _typeof_ `CONTROLLER_METHOD_PARAM_META_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:23
+Defined in: constants/decorator.ts:40
+
+控制器方法参数元数据键

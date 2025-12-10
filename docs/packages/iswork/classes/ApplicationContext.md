@@ -6,9 +6,24 @@
 
 # Class: ApplicationContext
 
-Defined in: src/packages/iswork/src/application/context.ts:8
+Defined in: application/context.ts:23
 
-iswork的上下文对象
+应用程序上下文类
+
+## Description
+
+封装应用程序执行期间的上下文信息，包括应用实例、消息数据和命令处理器
+
+## Example
+
+```typescript
+// 通常在中间件中使用
+app.useMiddleware(async (ctx: ApplicationContext, next) => {
+  console.log('处理消息:', ctx.message);
+  console.log('命令路径:', ctx.cmdp.path);
+  await next();
+});
+```
 
 ## Constructors
 
@@ -16,7 +31,9 @@ iswork的上下文对象
 
 > **new ApplicationContext**(`app`, `message`, `options`): `ApplicationContext`
 
-Defined in: src/packages/iswork/src/application/context.ts:22
+Defined in: application/context.ts:63
+
+应用程序上下文构造函数
 
 #### Parameters
 
@@ -24,17 +41,36 @@ Defined in: src/packages/iswork/src/application/context.ts:22
 
 [`Application`](Application.md)
 
+应用程序实例
+
 ##### message
 
-[`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+[`CmdpMessage`](../type-aliases/CmdpMessage.md)
+
+命令消息数据
 
 ##### options
 
-[`TApplicationContextOptions`](../type-aliases/TApplicationContextOptions.md) = `{}`
+[`ApplicationContextOptions`](../type-aliases/ApplicationContextOptions.md) = `{}`
+
+上下文配置选项，可选
 
 #### Returns
 
 `ApplicationContext`
+
+#### Description
+
+初始化应用程序上下文，设置应用实例、消息数据和命令处理器
+
+#### Example
+
+```typescript
+const ctx = new ApplicationContext(app, {
+  path: 'user.create',
+  payload: { name: 'John', email: 'john@example.com' },
+});
+```
 
 ## Properties
 
@@ -42,15 +78,19 @@ Defined in: src/packages/iswork/src/application/context.ts:22
 
 > **cmdp**: [`Cmdp`](Cmdp.md)
 
-Defined in: src/packages/iswork/src/application/context.ts:11
+Defined in: application/context.ts:29
+
+命令处理器实例
 
 ---
 
 ### message
 
-> **message**: [`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+> **message**: [`CmdpMessage`](../type-aliases/CmdpMessage.md)
 
-Defined in: src/packages/iswork/src/application/context.ts:12
+Defined in: application/context.ts:31
+
+原始消息数据
 
 ## Accessors
 
@@ -60,11 +100,15 @@ Defined in: src/packages/iswork/src/application/context.ts:12
 
 > **get** **app**(): [`Application`](Application.md)
 
-Defined in: src/packages/iswork/src/application/context.ts:18
+Defined in: application/context.ts:45
+
+获取应用程序实例
 
 ##### Returns
 
 [`Application`](Application.md)
+
+应用程序实例
 
 ---
 
@@ -72,13 +116,17 @@ Defined in: src/packages/iswork/src/application/context.ts:18
 
 #### Get Signature
 
-> **get** **options**(): [`TApplicationContextOptions`](../type-aliases/TApplicationContextOptions.md)
+> **get** **options**(): [`ApplicationContextOptions`](../type-aliases/ApplicationContextOptions.md)
 
-Defined in: src/packages/iswork/src/application/context.ts:14
+Defined in: application/context.ts:37
+
+获取上下文配置选项
 
 ##### Returns
 
-[`TApplicationContextOptions`](../type-aliases/TApplicationContextOptions.md)
+[`ApplicationContextOptions`](../type-aliases/ApplicationContextOptions.md)
+
+上下文配置选项
 
 ## Methods
 
@@ -86,7 +134,9 @@ Defined in: src/packages/iswork/src/application/context.ts:14
 
 > `static` **create**(`app`, `message`, `options`): `ApplicationContext`
 
-Defined in: src/packages/iswork/src/application/context.ts:31
+Defined in: application/context.ts:87
+
+创建应用程序上下文实例
 
 #### Parameters
 
@@ -94,14 +144,35 @@ Defined in: src/packages/iswork/src/application/context.ts:31
 
 [`Application`](Application.md)
 
+应用程序实例
+
 ##### message
 
-[`TCmdpMessage`](../type-aliases/TCmdpMessage.md)
+[`CmdpMessage`](../type-aliases/CmdpMessage.md)
+
+命令消息数据
 
 ##### options
 
-[`TApplicationContextOptions`](../type-aliases/TApplicationContextOptions.md) = `{}`
+[`ApplicationContextOptions`](../type-aliases/ApplicationContextOptions.md) = `{}`
+
+上下文配置选项，可选
 
 #### Returns
 
 `ApplicationContext`
+
+新的应用程序上下文实例
+
+#### Description
+
+静态工厂方法，用于创建应用程序上下文实例
+
+#### Example
+
+```typescript
+const ctx = ApplicationContext.create(app, {
+  path: 'user.list',
+  payload: { page: 1, limit: 10 },
+});
+```

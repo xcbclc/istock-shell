@@ -8,4 +8,6 @@
 
 > `const` **DESIGN_PARAMTYPES**: `"design:paramtypes"` = `'design:paramtypes'`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:35
+Defined in: constants/decorator.ts:58
+
+TypeScript 设计时参数类型元数据键

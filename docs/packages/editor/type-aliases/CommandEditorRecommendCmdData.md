@@ -8,7 +8,7 @@
 
 > **CommandEditorRecommendCmdData** = `object`
 
-Defined in: command-editor.ts:51
+Defined in: src/packages/editor/src/command-editor-plus.ts:53
 
 命令编辑器推荐命令数据类型
 
@@ -18,7 +18,7 @@ Defined in: command-editor.ts:51
 
 > `optional` **action**: [`CommandEditorActionTypes`](../enumerations/CommandEditorActionTypes.md)
 
-Defined in: command-editor.ts:53
+Defined in: src/packages/editor/src/command-editor-plus.ts:55
 
 操作类型
 
@@ -28,6 +28,6 @@ Defined in: command-editor.ts:53
 
 > **target**: [`CommandEditor`](../classes/CommandEditor.md)
 
-Defined in: command-editor.ts:55
+Defined in: src/packages/editor/src/command-editor-plus.ts:57
 
 目标编辑器实例

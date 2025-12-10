@@ -4,8 +4,8 @@ layout: home
 hero:
   name: iStock Shell
   version: 开发版v0.1
-  text: 下一代金融数据查询终端
-  tagline: 以AI智能分析为核心的专业金融数据分析平台，简单、高效、灵活，并可轻松定制。
+  text: 以AI为核心的下一代金融查询分析终端
+  tagline: 以AI智能分析为核心的专业金融数据查询分析平台，简单、高效、灵活，并可轻松定制。
   image:
     src: ./static/效果图.jpg
     alt: iStock Shell

@@ -8,4 +8,6 @@
 
 > `const` **IOC_INJECT**: _typeof_ `IOC_INJECT`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:31
+Defined in: constants/decorator.ts:52
+
+IoC 注入元数据键

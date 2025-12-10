@@ -11,14 +11,9 @@ import {
   Field,
 } from '@istock-shell/iswork';
 import { AiService } from './ai.service';
-import type { AiModel } from './ai.model';
+import type { AiMessageContext } from './ai.model';
 import cmdJson from './ai.cmd';
 import { isString, ScopeError } from '@istock-shell/util';
-
-interface AiMessageContext {
-  data: AiModel['context'];
-  type: string;
-}
 
 function splitJsonObjects(input: string): string[] {
   if (!input) return [];
@@ -132,7 +127,7 @@ export class AiController {
       return observer;
     }
     if (cmdInfo.meta?.messageId && isString(cmdInfo.meta.messageId)) {
-      this.aiService.setMessageContent(cmdInfo.meta.messageId, { content, context: context?.data ?? [] });
+      this.aiService.setMessageContent(cmdInfo.meta.messageId, { content, context: context });
     }
     // 初步连接
     return {

@@ -23,4 +23,4 @@ editLink: false
 ### 命令示例
 
 `cjdh 门户`
-<IStockShellDemo cmd='cjdh 门户' :domains='[{"viewName":"网站导航","name":"wzdh"}]' :height='480'/>
+<IStockShellDemo cmd='cjdh 门户' :domains='[{"viewName":"网站导航","name":"wzdh"}]' :height='640'/>

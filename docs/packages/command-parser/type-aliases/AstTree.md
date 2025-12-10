@@ -8,7 +8,7 @@
 
 > **AstTree** = [`AstTreeRoot`](AstTreeRoot.md)
 
-Defined in: ast.ts:146
+Defined in: ast.ts:162
 
 AST 树类型别名
 

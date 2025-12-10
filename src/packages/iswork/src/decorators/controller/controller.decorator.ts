@@ -79,10 +79,13 @@ export class ControllerDecorator extends AbstractClassDecorator<ControllerMetada
    */
   handler(aliasOrOptions?: string | string[] | ControllerMetadata) {
     return (target: Function) => {
-      if (!isObject(aliasOrOptions)) {
-        aliasOrOptions = { alias: aliasOrOptions ?? target.name };
-      }
-      Reflect.defineMetadata(this.key, aliasOrOptions, target);
+      const options: ControllerMetadata = !isObject(aliasOrOptions)
+        ? {
+            alias: (aliasOrOptions as string | string[] | undefined) ?? target.name,
+            viewName: target.name,
+          }
+        : (aliasOrOptions as ControllerMetadata);
+      Reflect.defineMetadata(this.key, options, target);
     };
   }
 

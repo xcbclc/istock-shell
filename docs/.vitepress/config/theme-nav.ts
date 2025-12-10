@@ -28,8 +28,8 @@ export default [
   {
     text: '相关库',
     items: [
-      { text: 'Web Worker服务框架', link: '/packages/iswork/README.html' },
-      { text: 'Svelte UI', link: '/packages/shell-ui/README.html' },
+      { text: 'Web Worker框架', link: '/packages/iswork/README.html' },
+      { text: 'Shell UI', link: '/packages/shell-ui/README.html' },
       { text: '命令行解析', link: '/packages/command-parser/README.html' },
       { text: '命令行编辑器', link: '/packages/editor/README.html' },
       { text: '常用工具库', link: '/packages/util/README.html' },

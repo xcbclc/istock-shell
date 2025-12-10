@@ -10,7 +10,7 @@
 
 1. windows下执行istock-any-proxy.exe文件，确保运行成功
 2. http://localhost:8000 + 代理地址路径，组成访问地址
-3. 请求header头添加x-target，值为代理地址
+3. 请求header头添加xx-target，值为代理地址
 4. 发起请求即可
 
 如代理地址为
@@ -19,13 +19,13 @@ https://istock.red/api/akshare/stock_sse_summary
 
 ```shell
 curl --location 'http://localhost:8000/api/akshare/stock_sse_summary' \
---header 'x-target: https://istock.red' \
+--header 'xx-target: https://istock.red' \
 --data ''
 ```
 
 ```javascript
 const myHeaders = new Headers();
-myHeaders.append('x-target', 'https://istock.red');
+myHeaders.append('xx-target', 'https://istock.red');
 const requestOptions = {
   method: 'GET',
   headers: myHeaders,

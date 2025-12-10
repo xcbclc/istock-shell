@@ -6,13 +6,34 @@
 
 # Class: DataSource\<Type\>
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:6
+Defined in: orm/data-source.ts:27
+
+数据源类
+
+## Description
+
+管理数据库连接和仓库，提供统一的数据访问接口
+
+## Example
+
+```typescript
+const dataSource = new DataSource({
+  type: 'memory',
+  name: 'default',
+  entities: [UserModel, PostModel],
+});
+
+await dataSource.initialize();
+const userRepository = await dataSource.getRepository(UserModel);
+```
 
 ## Type Parameters
 
 ### Type
 
-`Type` _extends_ [`TDataSourceType`](../type-aliases/TDataSourceType.md)
+`Type` _extends_ [`DataSourceType`](../type-aliases/DataSourceType.md)
+
+数据源类型
 
 ## Constructors
 
@@ -20,17 +41,36 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:6
 
 > **new DataSource**\<`Type`\>(`options`): `DataSource`\<`Type`\>
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:24
+Defined in: orm/data-source.ts:77
+
+数据源构造函数
 
 #### Parameters
 
 ##### options
 
-[`TDataSourceAllOptions`](../type-aliases/TDataSourceAllOptions.md)\[`Type`\]
+[`DataSourceAllOptions`](../type-aliases/DataSourceAllOptions.md)\[`Type`\]
+
+数据源配置选项
 
 #### Returns
 
 `DataSource`\<`Type`\>
+
+#### Description
+
+创建数据源实例，设置名称和配置选项
+
+#### Example
+
+```typescript
+const dataSource = new DataSource({
+  type: 'indexedDB',
+  name: 'myApp',
+  database: 'myDatabase',
+  entities: [UserModel],
+});
+```
 
 ## Accessors
 
@@ -40,11 +80,15 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:24
 
 > **get** **driver**(): `AbstractDriver`
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:20
+Defined in: orm/data-source.ts:59
+
+获取数据库驱动
 
 ##### Returns
 
 `AbstractDriver`
+
+数据库驱动实例
 
 ---
 
@@ -54,11 +98,15 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:20
 
 > **get** **name**(): `string`
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:12
+Defined in: orm/data-source.ts:43
+
+获取数据源名称
 
 ##### Returns
 
 `string`
+
+数据源名称
 
 ---
 
@@ -66,13 +114,17 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:12
 
 #### Get Signature
 
-> **get** **options**(): [`TDataSourceAllOptions`](../type-aliases/TDataSourceAllOptions.md)\[`Type`\]
+> **get** **options**(): [`DataSourceAllOptions`](../type-aliases/DataSourceAllOptions.md)\[`Type`\]
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:16
+Defined in: orm/data-source.ts:51
+
+获取数据源配置选项
 
 ##### Returns
 
-[`TDataSourceAllOptions`](../type-aliases/TDataSourceAllOptions.md)\[`Type`\]
+[`DataSourceAllOptions`](../type-aliases/DataSourceAllOptions.md)\[`Type`\]
+
+数据源配置选项
 
 ## Methods
 
@@ -80,11 +132,25 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:16
 
 > **connect**(): `Promise`\<`DataSource`\<`Type`\>\>
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:68
+Defined in: orm/data-source.ts:147
+
+连接数据库
 
 #### Returns
 
 `Promise`\<`DataSource`\<`Type`\>\>
+
+数据源实例
+
+#### Description
+
+建立与数据库的连接
+
+#### Example
+
+```typescript
+await dataSource.connect();
+```
 
 ---
 
@@ -92,11 +158,23 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:68
 
 > **disconnect**(): `Promise`\<`void`\>
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:80
+Defined in: orm/data-source.ts:176
+
+断开数据库连接
 
 #### Returns
 
 `Promise`\<`void`\>
+
+#### Description
+
+断开与数据库的连接，释放资源
+
+#### Example
+
+```typescript
+await dataSource.disconnect();
+```
 
 ---
 
@@ -104,9 +182,9 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:80
 
 > **getRepository**(`model`): `Promise`\<[`Repository`](Repository.md)\>
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:34
+Defined in: orm/data-source.ts:94
 
-暴露给基础模型使用的方法
+获取模型仓库
 
 #### Parameters
 
@@ -114,9 +192,24 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:34
 
 _typeof_ [`BaseModel`](BaseModel.md)
 
+模型类
+
 #### Returns
 
 `Promise`\<[`Repository`](Repository.md)\>
+
+模型仓库实例
+
+#### Description
+
+获取指定模型的仓库实例，自动处理连接状态和重连逻辑
+
+#### Example
+
+```typescript
+const userRepository = await dataSource.getRepository(UserModel);
+const users = await userRepository.find();
+```
 
 ---
 
@@ -124,11 +217,26 @@ _typeof_ [`BaseModel`](BaseModel.md)
 
 > **initialize**(): `Promise`\<`DataSource`\<`Type`\>\>
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:51
+Defined in: orm/data-source.ts:121
+
+初始化数据源
 
 #### Returns
 
 `Promise`\<`DataSource`\<`Type`\>\>
+
+数据源实例
+
+#### Description
+
+初始化数据源，创建驱动、建立连接、初始化仓库管理器
+
+#### Example
+
+```typescript
+const dataSource = new DataSource(options);
+await dataSource.initialize();
+```
 
 ---
 
@@ -136,8 +244,22 @@ Defined in: src/packages/iswork/src/orm/data-source.ts:51
 
 > **reconnect**(): `Promise`\<`DataSource`\<`Type`\>\>
 
-Defined in: src/packages/iswork/src/orm/data-source.ts:73
+Defined in: orm/data-source.ts:161
+
+重新连接数据库
 
 #### Returns
 
 `Promise`\<`DataSource`\<`Type`\>\>
+
+数据源实例
+
+#### Description
+
+重新建立与数据库的连接
+
+#### Example
+
+```typescript
+await dataSource.reconnect();
+```

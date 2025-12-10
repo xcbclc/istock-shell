@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_MESSAGE_HANDLER_METADATA**: _typeof_ `CONTROLLER_METHOD_MESSAGE_HANDLER_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:17
+Defined in: constants/decorator.ts:31
+
+控制器方法消息处理器元数据键

@@ -27,4 +27,4 @@ editLink: false
 ### 命令示例
 
 `lsfbsj -gpmc 贵州茅台`
-<IStockShellDemo cmd='lsfbsj -gpmc 贵州茅台' :domains='[{"viewName":"A股","name":"ag"}]' :height='480'/>
+<IStockShellDemo cmd='lsfbsj -gpmc 贵州茅台' :domains='[{"viewName":"A股","name":"ag"}]' :height='640'/>

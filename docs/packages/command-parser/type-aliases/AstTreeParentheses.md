@@ -8,7 +8,7 @@
 
 > **AstTreeParentheses** = `object`
 
-Defined in: ast.ts:118
+Defined in: ast.ts:134
 
 AST 圆括号分组节点类型定义
 
@@ -20,7 +20,7 @@ AST 圆括号分组节点类型定义
 
 > **children**: [`AstTreeItem`](AstTreeItem.md)[]
 
-Defined in: ast.ts:122
+Defined in: ast.ts:138
 
 子节点列表
 
@@ -30,6 +30,6 @@ Defined in: ast.ts:122
 
 > **type**: [`parentheses`](../enumerations/AstTreeType.md#parentheses)
 
-Defined in: ast.ts:120
+Defined in: ast.ts:136
 
 节点类型标识

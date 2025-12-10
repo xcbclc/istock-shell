@@ -27,4 +27,4 @@ editLink: false
 ### 命令示例
 
 `hqbj -gpmc 贵州茅台`
-<IStockShellDemo cmd='hqbj -gpmc 贵州茅台' :domains='[{"viewName":"A股","name":"ag"}]' :height='480'/>
+<IStockShellDemo cmd='hqbj -gpmc 贵州茅台' :domains='[{"viewName":"A股","name":"ag"}]' :height='640'/>

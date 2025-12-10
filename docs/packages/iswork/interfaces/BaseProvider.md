@@ -6,15 +6,19 @@
 
 # Interface: BaseProvider\<Type\>
 
-Defined in: src/packages/iswork/src/interfaces/provider.ts:5
+Defined in: interfaces/provider.ts:14
 
-Provider基类
+提供者基类接口
+
+## Description
+
+所有提供者类型的基础接口，定义了提供者的基本结构
 
 ## Extended by
 
-- [`IClassProvider`](IClassProvider.md)
-- [`IFactoryProvider`](IFactoryProvider.md)
-- [`IValueProvider`](IValueProvider.md)
+- [`ClassProvider`](ClassProvider.md)
+- [`FactoryProvider`](FactoryProvider.md)
+- [`ValueProvider`](ValueProvider.md)
 
 ## Type Parameters
 
@@ -22,10 +26,14 @@ Provider基类
 
 `Type` = `unknown`
 
+提供者提供的类型，默认为 unknown
+
 ## Properties
 
 ### provide
 
-> **provide**: [`TInjectionToken`](../type-aliases/TInjectionToken.md)\<`Type`\>
+> **provide**: [`InjectionToken`](../type-aliases/InjectionToken.md)\<`Type`\>
 
-Defined in: src/packages/iswork/src/interfaces/provider.ts:6
+Defined in: interfaces/provider.ts:16
+
+注入令牌，用于标识要注入的依赖

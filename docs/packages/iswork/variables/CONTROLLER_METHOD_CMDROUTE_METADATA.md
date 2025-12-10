@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_CMDROUTE_METADATA**: _typeof_ `CONTROLLER_METHOD_CMDROUTE_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:19
+Defined in: constants/decorator.ts:34
+
+控制器方法命令路由元数据键

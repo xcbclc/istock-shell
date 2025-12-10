@@ -8,4 +8,6 @@
 
 > `const` **DOMAIN_METADATA**: _typeof_ `DOMAIN_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:3
+Defined in: constants/decorator.ts:10
+
+域元数据键

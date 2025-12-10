@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * @fileoverview iStock Shell CLI工具主入口文件
  * 提供命令行接口用于初始化命令开发、生成文档等功能
@@ -62,7 +64,6 @@ program
     if (action === 'merge') {
       await mergeMarkdown();
     }
-
     if (action === 'ui') {
       await shellUi();
     }

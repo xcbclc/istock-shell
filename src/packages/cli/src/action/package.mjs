@@ -76,7 +76,7 @@ export default async () => {
         /** @type {string} 包名称 */
         name: value,
         /** @type {string} TypeDoc生成命令 */
-        cmd: `typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig-doc.json --out ./docs/packages/${value} ./src/packages/${value}/src/index.ts`,
+        cmd: `npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig-doc.json --out ./docs/packages/${value} ./src/packages/${value}/src/index.ts`,
       };
     });
     // 执行每个包的文档生成命令

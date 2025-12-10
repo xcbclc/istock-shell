@@ -81,6 +81,11 @@ async function processMarkdown(mdContent, basePath) {
   for (let component of components) {
     const originalSveltePath = component.src;
 
+    if (!originalSveltePath) {
+      console.warn(`[Warn] <IStockShellUiExample> tag missing 'src' attribute in ${basePath}`);
+      continue;
+    }
+
     // 获取当前 MD 文件相对于 src 目录的路径
     const mdRelativeDir = path.relative(path.join(shellUiPath, 'src/components'), path.dirname(basePath));
     // 构建新的 Svelte 文件路径

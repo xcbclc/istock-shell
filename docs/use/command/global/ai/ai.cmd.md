@@ -25,4 +25,4 @@ editLink: false
 ### 命令示例
 
 `ai:你好呀?`
-<IStockShellDemo cmd='ai:你好呀?' :domains='[]' :height='480'/>
+<IStockShellDemo cmd='ai:你好呀?' :domains='[]' :height='640'/>

@@ -8,4 +8,6 @@
 
 > `const` **comparisonOperatorsList**: `string`[]
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:77
+Defined in: orm/query-builder.ts:94
+
+完整的比较操作符列表

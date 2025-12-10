@@ -6,22 +6,44 @@
 
 # Function: Injectable()
 
-> **Injectable**(): (`target`) => [`IAnyClass`](../interfaces/IAnyClass.md)\<`any`\>
+> **Injectable**(): (`target`) => [`AnyClass`](../interfaces/AnyClass.md)\<`any`\>
 
-Defined in: src/packages/iswork/src/ioc/decorators/injectable.ts:8
+Defined in: ioc/decorators/injectable.ts:28
 
-定义类能注入装饰器
+可注入装饰器
 
 ## Returns
 
-> (`target`): [`IAnyClass`](../interfaces/IAnyClass.md)\<`any`\>
+类装饰器函数
+
+> (`target`): [`AnyClass`](../interfaces/AnyClass.md)\<`any`\>
 
 ### Parameters
 
 #### target
 
-[`IAnyClass`](../interfaces/IAnyClass.md)\<`any`\>
+[`AnyClass`](../interfaces/AnyClass.md)\<`any`\>
 
 ### Returns
 
-[`IAnyClass`](../interfaces/IAnyClass.md)\<`any`\>
+[`AnyClass`](../interfaces/AnyClass.md)\<`any`\>
+
+## Description
+
+用于标记类可以被依赖注入容器管理，使类能够被注入到其他类中
+
+## Example
+
+```typescript
+@Injectable()
+class UserService {
+  getUsers() {
+    return ['user1', 'user2'];
+  }
+}
+
+@Injectable()
+class UserController {
+  constructor(private userService: UserService) {}
+}
+```

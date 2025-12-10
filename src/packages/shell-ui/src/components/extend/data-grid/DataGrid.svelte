@@ -53,12 +53,6 @@ ShDataGrid 数据网格组件
   items={chartItems}
   itemColWidth="600px"
 />
-
-<p>自定义内容的数据网格</p>
-<ShDataGrid stats={statsData}>
-  <div class="custom-chart">自定义图表内容</div>
-  <div class="custom-data">自定义数据展示</div>
-</ShDataGrid>
 ```
 -->
 
@@ -97,7 +91,7 @@ ShDataGrid 数据网格组件
     items?: DataGridItem[];
     /** 数据项列的宽度，支持数字（像素）或字符串（CSS 单位） @default 480 */
     itemColWidth?: number | string;
-    /** 内容被加载 **/
+    /** 内容加载完成时的回调函数 **/
     onContentLoaded?: () => void;
   }
 

@@ -16,6 +16,7 @@
 - [generateColorPalette](functions/generateColorPalette.md)
 - [getEndAndStartOverlapStr](functions/getEndAndStartOverlapStr.md)
 - [getMessageDataPK](functions/getMessageDataPK.md)
+- [getNonOverlapStr](functions/getNonOverlapStr.md)
 - [getQueryParam](functions/getQueryParam.md)
 - [getStartAndEndOfWeek](functions/getStartAndEndOfWeek.md)
 - [hasLength](functions/hasLength.md)

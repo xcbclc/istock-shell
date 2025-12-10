@@ -8,7 +8,7 @@
 
 > **Token** = `object`
 
-Defined in: tokenizer.ts:41
+Defined in: tokenizer.ts:43
 
 Token 数据结构
 
@@ -20,7 +20,7 @@ Token 数据结构
 
 > **type**: [`TokenType`](../enumerations/TokenType.md)
 
-Defined in: tokenizer.ts:43
+Defined in: tokenizer.ts:45
 
 Token 的类型
 
@@ -30,6 +30,6 @@ Token 的类型
 
 > **value**: `string`
 
-Defined in: tokenizer.ts:45
+Defined in: tokenizer.ts:47
 
 Token 的值

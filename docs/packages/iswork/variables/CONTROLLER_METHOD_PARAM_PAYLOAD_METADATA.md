@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_PARAM_PAYLOAD_METADATA**: _typeof_ `CONTROLLER_METHOD_PARAM_PAYLOAD_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:25
+Defined in: constants/decorator.ts:43
+
+控制器方法参数负载元数据键

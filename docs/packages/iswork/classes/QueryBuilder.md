@@ -6,7 +6,27 @@
 
 # Class: QueryBuilder
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:82
+Defined in: orm/query-builder.ts:115
+
+查询构建器类
+
+## Description
+
+提供链式调用的查询构建功能，支持字段选择、过滤、排序、分页等操作
+
+## Example
+
+```typescript
+const qb = QueryBuilder.create()
+  .select(['id', 'name', 'email'])
+  .where({ name: { $cont: 'john' } })
+  .sort([{ field: 'createdAt', order: 'DESC' }])
+  .limit(10)
+  .offset(0);
+
+const queryString = qb.query();
+// 输出: fields=id,name,email&filter=name||$cont||john&sort=createdAt,DESC&limit=10&offset=0
+```
 
 ## Constructors
 
@@ -14,7 +34,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:82
 
 > **new QueryBuilder**(`params?`): `QueryBuilder`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:147
+Defined in: orm/query-builder.ts:180
 
 #### Parameters
 
@@ -22,7 +42,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:147
 
 查询字符串
 
-`string` | [`IQueryParamsOptions`](../interfaces/IQueryParamsOptions.md)
+`string` | [`QueryParamsOptions`](../interfaces/QueryParamsOptions.md)
 
 #### Returns
 
@@ -34,29 +54,29 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:147
 
 #### Get Signature
 
-> **get** **options**(): [`TQueryBuilderOptions`](../type-aliases/TQueryBuilderOptions.md)
+> **get** **options**(): [`QueryBuilderOptions`](../type-aliases/QueryBuilderOptions.md)
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:140
+Defined in: orm/query-builder.ts:173
 
 获取参数
 
 ##### Returns
 
-[`TQueryBuilderOptions`](../type-aliases/TQueryBuilderOptions.md)
+[`QueryBuilderOptions`](../type-aliases/QueryBuilderOptions.md)
 
 ## Methods
 
 ### getQueryData()
 
-> **getQueryData**(): `Partial`\<[`IParsedRequestParams`](../interfaces/IParsedRequestParams.md)\>
+> **getQueryData**(): `Partial`\<[`ParsedRequestParams`](../interfaces/ParsedRequestParams.md)\>
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:172
+Defined in: orm/query-builder.ts:205
 
 获取查询对象数据
 
 #### Returns
 
-`Partial`\<[`IParsedRequestParams`](../interfaces/IParsedRequestParams.md)\>
+`Partial`\<[`ParsedRequestParams`](../interfaces/ParsedRequestParams.md)\>
 
 ---
 
@@ -64,7 +84,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:172
 
 > **query**(`encode`): `string`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:160
+Defined in: orm/query-builder.ts:193
 
 获取query查询字符串
 
@@ -86,7 +106,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:160
 
 > **resetCache**(): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:285
+Defined in: orm/query-builder.ts:318
 
 重置cache功能
 
@@ -100,7 +120,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:285
 
 > **search**(`s`): `QueryBuilder`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:194
+Defined in: orm/query-builder.ts:227
 
 设置搜索条件
 
@@ -108,7 +128,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:194
 
 ##### s
 
-[`TSCondition`](../type-aliases/TSCondition.md)
+[`SearchCondition`](../type-aliases/SearchCondition.md)
 
 #### Returns
 
@@ -120,7 +140,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:194
 
 > **select**(`fields`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:180
+Defined in: orm/query-builder.ts:213
 
 选择字段
 
@@ -128,7 +148,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:180
 
 ##### fields
 
-[`TQueryFields`](../type-aliases/TQueryFields.md)
+[`QueryFields`](../type-aliases/QueryFields.md)
 
 数组字段名
 
@@ -142,7 +162,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:180
 
 > **setFilter**(`f`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:205
+Defined in: orm/query-builder.ts:238
 
 设置过滤
 
@@ -152,7 +172,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:205
 
 过滤条件
 
-[`TQueryFilter`](../type-aliases/TQueryFilter.md) | [`TQueryFilterArr`](../type-aliases/TQueryFilterArr.md) | ([`TQueryFilter`](../type-aliases/TQueryFilter.md) \| [`TQueryFilterArr`](../type-aliases/TQueryFilterArr.md))[]
+[`QueryFilter`](../type-aliases/QueryFilter.md) | [`QueryFilterArr`](../type-aliases/QueryFilterArr.md) | ([`QueryFilter`](../type-aliases/QueryFilter.md) \| [`QueryFilterArr`](../type-aliases/QueryFilterArr.md))[]
 
 #### Returns
 
@@ -164,7 +184,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:205
 
 > **setIncludeDeleted**(`n`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:290
+Defined in: orm/query-builder.ts:323
 
 #### Parameters
 
@@ -182,7 +202,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:290
 
 > **setJoin**(`j`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:223
+Defined in: orm/query-builder.ts:256
 
 设置联表查询
 
@@ -192,7 +212,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:223
 
 联表查询选项
 
-[`TQueryJoin`](../type-aliases/TQueryJoin.md) | [`TQueryJoinArr`](../type-aliases/TQueryJoinArr.md) | ([`TQueryJoin`](../type-aliases/TQueryJoin.md) \| [`TQueryJoinArr`](../type-aliases/TQueryJoinArr.md))[]
+[`QueryJoin`](../type-aliases/QueryJoin.md) | [`QueryJoinArr`](../type-aliases/QueryJoinArr.md) | ([`QueryJoin`](../type-aliases/QueryJoin.md) \| [`QueryJoinArr`](../type-aliases/QueryJoinArr.md))[]
 
 #### Returns
 
@@ -204,7 +224,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:223
 
 > **setLimit**(`n`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:259
+Defined in: orm/query-builder.ts:292
 
 设置数据数量限制
 
@@ -224,7 +244,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:259
 
 > **setOffset**(`n`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:268
+Defined in: orm/query-builder.ts:301
 
 设置数据起始位置
 
@@ -244,7 +264,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:268
 
 > **setOr**(`f`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:214
+Defined in: orm/query-builder.ts:247
 
 设置或逻辑
 
@@ -254,7 +274,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:214
 
 过滤条件
 
-[`TQueryFilter`](../type-aliases/TQueryFilter.md) | [`TQueryFilterArr`](../type-aliases/TQueryFilterArr.md) | ([`TQueryFilter`](../type-aliases/TQueryFilter.md) \| [`TQueryFilterArr`](../type-aliases/TQueryFilterArr.md))[]
+[`QueryFilter`](../type-aliases/QueryFilter.md) | [`QueryFilterArr`](../type-aliases/QueryFilterArr.md) | ([`QueryFilter`](../type-aliases/QueryFilter.md) \| [`QueryFilterArr`](../type-aliases/QueryFilterArr.md))[]
 
 #### Returns
 
@@ -266,7 +286,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:214
 
 > **setPage**(`n`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:277
+Defined in: orm/query-builder.ts:310
 
 设置页码
 
@@ -286,7 +306,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:277
 
 > **sortBy**(`s`): `this`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:241
+Defined in: orm/query-builder.ts:274
 
 设置排序
 
@@ -296,7 +316,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:241
 
 排序参数条件
 
-[`TQuerySort`](../type-aliases/TQuerySort.md) | [`TQuerySortArr`](../type-aliases/TQuerySortArr.md) | ([`TQuerySort`](../type-aliases/TQuerySort.md) \| [`TQuerySortArr`](../type-aliases/TQuerySortArr.md))[]
+[`QuerySort`](../type-aliases/QuerySort.md) | [`QuerySortArr`](../type-aliases/QuerySortArr.md) | ([`QuerySort`](../type-aliases/QuerySort.md) \| [`QuerySortArr`](../type-aliases/QuerySortArr.md))[]
 
 #### Returns
 
@@ -308,7 +328,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:241
 
 > `static` **create**(`params?`): `QueryBuilder`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:128
+Defined in: orm/query-builder.ts:161
 
 QueryBuilder工厂方法，创建一个QueryBuilder实例
 
@@ -318,7 +338,7 @@ QueryBuilder工厂方法，创建一个QueryBuilder实例
 
 查询参数选项
 
-`string` | [`IQueryParamsOptions`](../interfaces/IQueryParamsOptions.md)
+`string` | [`QueryParamsOptions`](../interfaces/QueryParamsOptions.md)
 
 #### Returns
 
@@ -328,17 +348,17 @@ QueryBuilder工厂方法，创建一个QueryBuilder实例
 
 ### getOptions()
 
-> `static` **getOptions**(): [`IPartialQueryBuilderOptions`](../interfaces/IPartialQueryBuilderOptions.md)
+> `static` **getOptions**(): [`PartialQueryBuilderOptions`](../interfaces/PartialQueryBuilderOptions.md)
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:120
+Defined in: orm/query-builder.ts:153
 
 获取参数
 
 #### Returns
 
-[`IPartialQueryBuilderOptions`](../interfaces/IPartialQueryBuilderOptions.md)
+[`PartialQueryBuilderOptions`](../interfaces/PartialQueryBuilderOptions.md)
 
-IPartialQueryBuilderOptions QueryBuilder选项
+PartialQueryBuilderOptions QueryBuilder选项
 
 ---
 
@@ -346,7 +366,7 @@ IPartialQueryBuilderOptions QueryBuilder选项
 
 > `static` **setOptions**(`options`): `void`
 
-Defined in: src/packages/iswork/src/orm/query-builder.ts:105
+Defined in: orm/query-builder.ts:138
 
 设置参数
 
@@ -354,7 +374,7 @@ Defined in: src/packages/iswork/src/orm/query-builder.ts:105
 
 ##### options
 
-[`IPartialQueryBuilderOptions`](../interfaces/IPartialQueryBuilderOptions.md)
+[`PartialQueryBuilderOptions`](../interfaces/PartialQueryBuilderOptions.md)
 
 QueryBuilder选项
 

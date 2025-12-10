@@ -93,7 +93,6 @@ export default async () => {
 
   // 获取动态配置
   const aliasRecord = await getDomainAliasRecord();
-  console.log('找到文件数量:', cmdFiles.length);
 
   /**
    * 根据输入参数生成命令选项配置
@@ -173,10 +172,9 @@ export default async () => {
    * 生成命令示例
    * @param {string} cmd - 命令名称
    * @param {Array} args - 必选参数配置
-   * @param {Object} options - 选项配置
    * @returns {string} 示例字符串
    */
-  function generateExample(cmd, args, options) {
+  function generateExample(cmd, args) {
     let example = cmd;
 
     args.forEach((arg) => {
@@ -276,7 +274,9 @@ export default async () => {
           // 获取该domain下的所有命令文件
           const domainDir = path.resolve(domainPath, domainName);
           const cmdFiles = getAllCmdFiles(domainDir);
-          console.log(`处理域 ${domainName}, 找到 ${cmdFiles.length} 个命令文件`);
+          if (domainName !== 'akshare') {
+            console.log(`处理域 ${domainName}, 找到 ${cmdFiles.length} 个命令文件`);
+          }
 
           for (const cmdFile of cmdFiles) {
             try {
@@ -285,7 +285,7 @@ export default async () => {
                 const relativePath = cmdFile.replace(domainPath, 'src/worker/domains');
                 const buildFilePath = path.resolve(
                   cliPath,
-                  './dist/worker/domains',
+                  './dist',
                   relativePath.replace('.ts', '.js').replace('src/worker/domains/', '')
                 );
                 if (fs.existsSync(buildFilePath)) {
@@ -316,7 +316,6 @@ export default async () => {
     }
 
     // 处理akshare特殊情况 - 从生成的接口文件中获取命令列表
-    // 处理akshare特殊情况
     if (aliasRecord.akshare) {
       try {
         const akshareDir = path.resolve(rootPath, 'src/worker/akshare');
@@ -336,21 +335,39 @@ export default async () => {
           };
 
           const tsFiles = getAllTsFiles(akshareDir);
+          console.log(`处理域 akshare, 找到 ${tsFiles.length} 个命令文件`);
           for (const tsFile of tsFiles) {
             const content = fs.readFileSync(tsFile, 'utf-8');
-            // 提取接口名称
-            const nameMatches = content.match(/name:\s*['"]([^'"]+)['"]/g);
-            if (nameMatches) {
-              nameMatches.forEach((match) => {
-                const cmdKey = match.match(/name:\s*['"]([^'"]+)['"]/)[1];
-                const titleMatch = content.match(
-                  new RegExp(
-                    `name:\s*['"]${cmdKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][\s\S]*?title:\s*['"]([^'"]+)['"]`
-                  )
-                );
-                const title = titleMatch ? titleMatch[1] : cmdKey;
-                aliasRecord.akshare.cmd[cmdKey] = title;
-              });
+            // 提取导出的接口数组 - 更稳定的方法
+            const arrayMatch = content.match(/export\s+const\s+\w+Interfaces\s*:\s*\w+\[\]\s*=\s*(\[[\s\S]*?\]);/);
+            if (arrayMatch) {
+              const arrayStr = arrayMatch[1];
+              let interfaces;
+              try {
+                // 使用Function构造函数安全地解析数组数据
+                interfaces = new Function('return ' + arrayStr)();
+              } catch (evalError) {
+                // 如果Function解析失败，尝试清理并使用JSON.parse
+                console.info(evalError);
+                try {
+                  const cleanedStr = arrayStr
+                    .replace(/\/\*[\s\S]*?\*\//g, '') // 移除块注释
+                    .replace(/\/\/.*$/gm, '') // 移除行注释
+                    .replace(/,\s*}/g, '}') // 移除对象末尾多余的逗号
+                    .replace(/,\s*]/g, ']'); // 移除数组末尾多余的逗号
+                  interfaces = JSON.parse(cleanedStr);
+                } catch (jsonError) {
+                  console.warn(`解析AKShare接口定义失败: ${tsFile}`, jsonError.message);
+                }
+              }
+
+              if (Array.isArray(interfaces)) {
+                for (const item of interfaces) {
+                  if (item.name && item.title) {
+                    aliasRecord.akshare.cmd[item.name] = item.title;
+                  }
+                }
+              }
             }
           }
         }
@@ -383,7 +400,7 @@ export default async () => {
     const domainName = relativeBuildFilePath.split(/[\/\\]/)[0];
     if (path.extname(file) === '.ts') {
       //处理ts类型
-      const buildFilePath = path.resolve(cliPath, './dist/worker/domains', relativeBuildFilePath.replace('.ts', '.js'));
+      const buildFilePath = path.resolve(cliPath, './dist', relativeBuildFilePath.replace('.ts', '.js'));
       const relativePath = path.relative(currentDirPath, buildFilePath);
       data = await import(relativePath.replaceAll('\\', '/'));
       if (data) data = data.default;
@@ -453,7 +470,7 @@ export default async () => {
               .replaceAll('>', '&gt;')
               .replaceAll('\n', '<br/>');
           },
-          getIStockShellDemoHeight: (_cmdData) => {
+          getIStockShellDemoHeight: () => {
             return 640;
           },
         },
@@ -512,6 +529,7 @@ export default async () => {
                 interfaces = new Function('return ' + arrayStr)();
               } catch (evalError) {
                 console.warn(`解析数组失败，尝试JSON.parse: ${tsFile}`);
+                console.error(evalError);
                 // 如果Function解析失败，尝试清理并使用JSON.parse
                 const cleanedStr = arrayStr
                   .replace(/\/\*[\s\S]*?\*\//g, '') // 移除块注释
@@ -601,7 +619,7 @@ export default async () => {
                     .replaceAll('>', '&gt;')
                     .replaceAll('\n', '<br/>');
                 },
-                getIStockShellDemoHeight: (_cmdData) => {
+                getIStockShellDemoHeight: () => {
                   return 640;
                 },
               },

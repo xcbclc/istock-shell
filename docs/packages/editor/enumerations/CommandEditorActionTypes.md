@@ -6,7 +6,7 @@
 
 # Enumeration: CommandEditorActionTypes
 
-Defined in: command-editor.ts:23
+Defined in: src/packages/editor/src/command-editor-plus.ts:25
 
 命令编辑器操作类型枚举
 
@@ -16,7 +16,7 @@ Defined in: command-editor.ts:23
 
 > **Auto**: `"auto"`
 
-Defined in: command-editor.ts:25
+Defined in: src/packages/editor/src/command-editor-plus.ts:27
 
 自动操作
 
@@ -26,7 +26,7 @@ Defined in: command-editor.ts:25
 
 > **Down**: `"down"`
 
-Defined in: command-editor.ts:29
+Defined in: src/packages/editor/src/command-editor-plus.ts:31
 
 向下操作
 
@@ -36,7 +36,7 @@ Defined in: command-editor.ts:29
 
 > **Redo**: `"redo"`
 
-Defined in: command-editor.ts:33
+Defined in: src/packages/editor/src/command-editor-plus.ts:35
 
 重做操作
 
@@ -46,7 +46,7 @@ Defined in: command-editor.ts:33
 
 > **Undo**: `"undo"`
 
-Defined in: command-editor.ts:31
+Defined in: src/packages/editor/src/command-editor-plus.ts:33
 
 撤销操作
 
@@ -56,6 +56,6 @@ Defined in: command-editor.ts:31
 
 > **Up**: `"up"`
 
-Defined in: command-editor.ts:27
+Defined in: src/packages/editor/src/command-editor-plus.ts:29
 
 向上操作

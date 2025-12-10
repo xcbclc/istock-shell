@@ -8,4 +8,6 @@
 
 > `const` **CONTROLLER_METHOD_PARAM_CMDROUTEARGUMENTS_METADATA**: _typeof_ `CONTROLLER_METHOD_PARAM_CMDROUTEARGUMENTS_METADATA`
 
-Defined in: src/packages/iswork/src/constants/decorator.ts:29
+Defined in: constants/decorator.ts:49
+
+控制器方法参数命令路由参数元数据键

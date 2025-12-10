@@ -19,4 +19,4 @@ editLink: false
 ### 命令示例
 
 `cdesfhq`
-<IStockShellDemo cmd='cdesfhq' :domains='[{"viewName":"成都房产","name":"cdfc"}]' :height='480'/>
+<IStockShellDemo cmd='cdesfhq' :domains='[{"viewName":"成都房产","name":"cdfc"}]' :height='640'/>
