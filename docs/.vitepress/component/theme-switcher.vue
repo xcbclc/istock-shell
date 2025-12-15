@@ -99,11 +99,9 @@
                <!-- 主题信息 -->
               <div class="theme-info">
                  <span class="theme-name">{{ theme.label }}</span
-                >
-                <div class="theme-scheme-badge" :class="theme.scheme">
+                > <!-- <div class="theme-scheme-badge" :class="theme.scheme">
                    {{ theme.scheme === 'dark' ? '深色' : '浅色' }}
-                </div>
-
+                </div> -->
               </div>
                <!-- 选中状态指示器 -->
               <div v-if="currentTheme === theme.value" class="selected-indicator">
@@ -238,7 +236,7 @@ watch(isDark, (newVal) => {
   display: flex;
   align-items: center;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 /* 主题切换按钮 */
@@ -251,13 +249,12 @@ watch(isDark, (newVal) => {
   height: 36px;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
   background-color: transparent;
 }
 
 .theme-toggle-btn:hover {
   background-color: var(--vp-c-bg-soft);
-  transform: scale(1.05);
 }
 
 .theme-toggle-btn:active {
@@ -278,19 +275,22 @@ watch(isDark, (newVal) => {
 /* 主题图标 */
 .theme-icon {
   color: var(--vp-c-text-2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-toggle-btn:hover .theme-icon {
   color: var(--vp-c-brand);
-  transform: rotate(15deg);
+}
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--vp-c-brand);
+  outline-offset: 2px;
 }
 
 
 /* 主题下拉容器 */
 .theme-dropdown {
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-dropdown:hover .theme-menu-warp {
@@ -304,12 +304,11 @@ watch(isDark, (newVal) => {
   position: absolute;
   top: 100%;
   right: 0;
-  width: 320px;
+  width: 360px;
   z-index: 100;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px) scale(0.95);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .theme-dropdown:hover .theme-menu-warp {
@@ -322,13 +321,16 @@ watch(isDark, (newVal) => {
   background-color: var(--vp-c-bg);
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  padding: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 16px 16px;
+  transition: var(--theme-transition);
   scrollbar-width: thin;
   max-height: 480px;
   overflow-y: auto;
   border: 1px solid var(--vp-c-divider-light);
   backdrop-filter: blur(10px);
+  transition: var(--theme-transition);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
 }
 
 /* 自定义滚动条样式 */
@@ -357,9 +359,8 @@ watch(isDark, (newVal) => {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
-  padding-bottom: 10px;
   border-bottom: 1px solid var(--vp-c-divider);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .menu-title {
@@ -367,7 +368,7 @@ watch(isDark, (newVal) => {
   font-weight: 600;
   color: var(--vp-c-text-1);
   margin: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .current-theme-badge {
@@ -377,7 +378,7 @@ watch(isDark, (newVal) => {
   padding: 2px 8px;
   border-radius: 12px;
   font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .current-theme-badge:hover {
@@ -390,7 +391,7 @@ watch(isDark, (newVal) => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 /* 主题选项 */
@@ -401,7 +402,7 @@ watch(isDark, (newVal) => {
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
   border: 2px solid transparent;
   background-color: var(--vp-c-bg-soft);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -459,7 +460,7 @@ watch(isDark, (newVal) => {
   opacity: 0;
   pointer-events: none;
   z-index: 1;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
   animation: brandGlow 0.5s ease-out forwards;
 }
 
@@ -479,7 +480,7 @@ watch(isDark, (newVal) => {
   overflow: hidden;
   position: relative;
   border-radius: 8px 8px 0 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-option:hover .theme-preview {
@@ -495,7 +496,7 @@ watch(isDark, (newVal) => {
   flex: 1;
   height: 100%;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .color-stripe:first-child {
@@ -517,7 +518,7 @@ watch(isDark, (newVal) => {
   display: flex;
   align-items: center;
   border-radius: 0 0 6px 6px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .ui-mock-layout {
@@ -526,7 +527,7 @@ watch(isDark, (newVal) => {
   gap: 2px;
   width: 100%;
   height: 100%;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-option:hover .ui-mock-layout {
@@ -544,7 +545,7 @@ watch(isDark, (newVal) => {
   height: 4px;
   border-radius: 1px;
   opacity: 0.9;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-option:hover .ui-btn {
@@ -571,7 +572,7 @@ watch(isDark, (newVal) => {
   width: 70%;
   border-radius: 1px;
   opacity: 0.8;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-option:hover .ui-title {
@@ -583,7 +584,7 @@ watch(isDark, (newVal) => {
   height: 1.5px;
   width: 50%;
   border-radius: 1px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-option:hover .ui-subtitle {
@@ -597,7 +598,7 @@ watch(isDark, (newVal) => {
   border-radius: 1px;
   position: relative;
   opacity: 0.3;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-option:hover .ui-progress {
@@ -609,7 +610,7 @@ watch(isDark, (newVal) => {
   width: 60%;
   border-radius: 1px;
   opacity: 1;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
 }
 
 .theme-option:hover .ui-progress-fill {
@@ -626,7 +627,10 @@ watch(isDark, (newVal) => {
   border-top: 1px solid var(--vp-c-divider-light);
   position: relative;
   z-index: 2;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .theme-option:hover .theme-info {
@@ -634,12 +638,16 @@ watch(isDark, (newVal) => {
 }
 
 .theme-name {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--vp-c-text-1);
   margin: 0;
   line-height: 1.2;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--theme-transition);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .theme-option:hover .theme-name {
@@ -647,37 +655,35 @@ watch(isDark, (newVal) => {
   transform: translateX(2px);
 }
 
-.theme-scheme {
+.theme-scheme-badge {
   font-size: 10px;
   padding: 3px 8px;
   border-radius: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border: 1px solid transparent;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--vp-c-divider-light);
+  transition: var(--theme-transition);
+  color: var(--vp-c-text-2);
+  background-color: var(--vp-c-bg-soft);
 }
-
-.theme-option:hover .theme-scheme {
+.theme-option:hover .theme-scheme-badge {
   transform: scale(1.05);
 }
-
-.scheme-light {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  color: #92400e;
-  border-color: #f59e0b;
+.theme-scheme-badge.light {
+  color: var(--vp-c-text-2);
+  background-color: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-divider-light);
 }
-
-.scheme-dark {
-  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-  color: #f9fafb;
-  border-color: #6b7280;
+.theme-scheme-badge.dark {
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-bg);
+  border-color: var(--vp-c-divider);
 }
-
-.scheme-auto {
-  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
-  color: #374151;
-  border-color: #9ca3af;
+.theme-scheme-badge.auto {
+  color: var(--vp-c-text-2);
+  background-color: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-divider);
 }
 
 /* 选中状态指示器 */
@@ -692,25 +698,15 @@ watch(isDark, (newVal) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px var(--vp-c-bg), 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 10;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: pulse 2s infinite, slideIn 0.5s ease-out;
+  transition: var(--theme-transition);
+  animation: fadeInScale 0.25s ease-out;
 }
 
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(180deg);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.2) rotate(90deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .selected-indicator svg {
@@ -720,28 +716,17 @@ watch(isDark, (newVal) => {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.9), 0 0 0 0 var(--vp-c-brand);
-  }
-  70% {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.9), 0 0 0 8px transparent;
-  }
-  100% {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.9), 0 0 0 0 transparent;
-  }
-}
+
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .theme-menu {
     width: 320px;
-    padding: 16px;
     max-height: 75vh;
     border-radius: 16px;
   }
 
-  .theme-grid {
+  .themes-grid {
     gap: 12px;
     grid-template-columns: repeat(2, 1fr);
   }
@@ -794,12 +779,13 @@ watch(isDark, (newVal) => {
 @media (max-width: 480px) {
   .theme-menu {
     width: 300px;
-    padding: 14px;
+    padding: 0 12px 12px;
   }
 
-  .theme-grid {
+  .themes-grid {
     gap: 10px;
   }
+}
 
   .theme-preview {
     height: 50px;
@@ -821,6 +807,5 @@ watch(isDark, (newVal) => {
     font-size: 8px;
     padding: 2px 5px;
   }
-}
 </style>
 

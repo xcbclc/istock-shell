@@ -173,3 +173,34 @@
 .VPLocalNav .container .menu {
   flex-direction: row;
 }
+.VPFeatures .icon {
+  overflow: hidden;
+}
+
+.VPFeatures .VPImage {
+  filter: drop-shadow(0 1000px 0 var(--vp-c-brand-1));
+  transform: translateY(-1000px);
+}
+@media (max-width: 960px) {
+  .VPHomeHero .image-container {
+    width: 100%;
+    height: unset;
+  }
+  .VPHomeHero .hero-play {
+    padding-left: 0;
+  }
+  .VPHomeHero .image {
+    margin: 0 0 40px;
+  }
+  .VPContent .VPHome {
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 960px) {
+  .VPHomeHero .image-container {
+    transform: translate(0, 0);
+  }
+  .VPContent .VPHome {
+    margin-bottom: 0;
+  }
+}

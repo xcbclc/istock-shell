@@ -3,42 +3,42 @@ layout: home
 
 hero:
   name: iStock Shell
-  version: 开发版v0.1
-  text: 以AI为核心的下一代金融查询分析终端
-  tagline: 以AI智能分析为核心的专业金融数据查询分析平台，简单、高效、灵活，并可轻松定制。
+  version: Beta v0.1
+  text: AI 原生金融分析终端
+  tagline: 重塑金融数据交互方式。以命令和自然语言为指令，融合大模型智能分析，为您提供专业、极速、深度的市场洞察。
   image:
     src: ./static/效果图.jpg
-    alt: iStock Shell
+    alt: iStock Shell 效果图
   actions:
     - theme: brand
-      text: 快速上手
+      text: 立即开始
       link: /use/quick-start/easy-to-use.html
     - theme: alt
-      text: 在线演示
+      text: 在线体验
       link: https://istock.red/shell
     - theme: alt
-      text: GitHub
+      text: GitHub 源码
       link: https://github.com/xcbclc/istock-shell
 
 video:
   src: https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4
-  poster: https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA-%E5%B0%81%E9%9D%A2.jpg
+  poster: https://cdn.istock.red/video/istock%20shell%E6%BC%94%E7%A4%BA.mp4
 
 features:
-  - title: 简单
-    details: 通过直观的命令输入，轻松查询金融数据，无需任何复杂操作；提供全面且易于理解的命令文档，确保您能快速上手。
+  - title: 智能命令交互
+    details: 强大的命令解析引擎，支持智能补全、别名系统与模糊搜索。像聊天一样简单，比传统终端更高效。
     icon:
       src: ./static/简单.svg
-  - title: 高效
-    details: 强大的自动补全功能，令命令输入流畅自如；支持快速翻阅输入历史，重复查询变得更加迅速。
-    icon:
-      src: ./static/高效.svg
-  - title: 灵活
-    details: 提供丰富的命令参数选择，满足您对数据展示的多样需求；支持使用管道命令，为您的数据查询提供无限可能。
-    icon:
-      src: ./static/灵活.svg
-  - title: 智能分析
-    details: 集成AI智能分析引擎，提供基于大语言模型的数据自动解读、投资策略建议和风险评估；支持自然语言查询，让数据分析更加智能化和个性化。
+  - title: AI 辅助分析
+    details: 集成大语言模型能力，通过 `ai` 命令直接对话。获取市场解读、投资建议，让数据分析更具深度。
     icon:
       src: ./static/智能.svg
+  - title: 全市场数据覆盖
+    details: 深度集成 AkShare 等数据源，覆盖 A股、基金、可转债、期货、外汇等全品类金融数据。
+    icon:
+      src: ./static/高效.svg
+  - title: 可视化与管道操作
+    details: 内置多种专业图表（K线、分时、饼图等）。支持 Unix 风格的管道操作，灵活组合命令，定制分析流。
+    icon:
+      src: ./static/灵活.svg
 ---
