@@ -339,8 +339,20 @@ ShTable 表格组件
     onRowSelect?.(index, checked, selected, rawSelectedRows);
   };
 
+  let captionHeight = 0;
+  let theadHeight = 0;
+
+  const updateHeaderHeight = () => {
+    onSyncAreaHeight?.('header', captionHeight + theadHeight);
+  };
+
   const captionAttachment: Attachment = (element: HTMLTableCaptionElement) => {
-    onSyncAreaHeight?.('header', element.offsetHeight);
+    captionHeight = element.offsetHeight;
+    updateHeaderHeight();
+  };
+  const theadAttachment: Attachment = (element: HTMLTableHeadElement) => {
+    theadHeight = element.offsetHeight;
+    updateHeaderHeight();
   };
 </script>
 
@@ -370,7 +382,7 @@ ShTable 表格组件
 
   <!-- 表头区域 -->
   {#if theadProps.list.length}
-    <thead>
+    <thead {@attach theadAttachment}>
       <!-- 选择列渲染片段 -->
       {#snippet selectionRender()}
         <ShTableTh>
