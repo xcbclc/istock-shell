@@ -14,15 +14,20 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import { CmdWindowsManager } from '@/window';
+  import { getG2Theme } from './g2-theme';
 
   const { windowId, componentInfo, initShow = false, source, onContentLoaded }: CmdMainComponentProps = $props();
   const ctx = CmdWindowsManager.cmdWindowsManager.getCmdContext(windowId);
 
-  const { outputComponent } = ctx.cmdWindow.store;
+  const { outputComponent, theme } = ctx.cmdWindow.store;
   let outputComponentElement: HTMLElement | undefined;
   let observer: IntersectionObserver | undefined;
   let isInViewport: boolean = $state(initShow);
   let isInitComponent: boolean = $state(initShow);
+
+  const chartTheme = $derived.by(() => {
+    return getG2Theme(theme.variables);
+  });
 
   const canSupportLoaded = () => {
     return ['ShMarkdown', 'ShChart', 'ShDataGrid'].includes(componentInfo.component);
@@ -64,8 +69,12 @@
   {#if isInViewport || isInitComponent}
     {@const SvelteComponent =
       outputComponent.getComponentByName(componentInfo.component) || outputComponent.getComponentByName('ShEmpty')}
+    {@const resolvedProps =
+      componentInfo.component === 'ShChart'
+        ? { ...componentInfo.props, options: { ...componentInfo.props?.options, theme: chartTheme } }
+        : componentInfo.props}
     <SvelteComponent
-      {...componentInfo.props}
+      {...resolvedProps}
       {source}
       {windowId}
       class={isInViewport || initShow ? 'opacity-100 transition-opacity' : `opacity-0 invisible`}

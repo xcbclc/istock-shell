@@ -13,3 +13,7 @@ interface ImportMeta {
 interface ErrorConstructor {
   captureStackTrace: Function;
 }
+
+interface Window {
+  CmdWindowsManager: CmdWindowsManager;
+}

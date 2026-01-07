@@ -16,7 +16,7 @@ const tsPlugin: PluginOption = typescript({
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
-    base: './',
+    base: '/shell/',
     plugins: [
       tailwindcss(),
       svelte(),

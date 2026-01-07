@@ -15,7 +15,7 @@
 
   const headers: CmdOutputDocTableHeader[] = [
     { value: '名称' },
-    { value: '描述', size: 'xl' },
+    { value: '描述', size: 'md' },
     { value: '类型' },
     { value: '是否可选' },
     { value: '默认值' },

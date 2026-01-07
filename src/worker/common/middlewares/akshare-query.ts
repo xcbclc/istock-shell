@@ -342,7 +342,6 @@ export const akshareQuery = async (ctx: ApplicationContext, next: () => Promise<
 
     const props: TUiTableProps = matrixToUiTableData(table, apiInterface.title ?? '');
     props.size = 'sm';
-
     let message = ctx.cmdp.getReturnMessage({
       output: [
         {

@@ -10,16 +10,11 @@ import {
   type TStockOption,
 } from './chart.cmd';
 import { ChartBaseService, type TChartOptions } from './chart.base.service';
-import { ThemeService } from '@domains/global/setting/theme/theme.service';
 
 export type TChartData = Array<Record<string, unknown>>;
 
 @Injectable()
 export class ChartService extends ChartBaseService {
-  constructor(readonly themeService: ThemeService) {
-    super(themeService);
-  }
-
   /**
    * 根据参数把二维表格数据转成指定图表
    * @param chatData

@@ -57,10 +57,9 @@
     if (scrollContainer && canScrollEnd) {
       scrollContainer.scrollTop = scrollContainer.scrollHeight + 100;
       cancelScrollId && clearTimeout(cancelScrollId);
-      cancelScrollId = setTimeout(() => {
-        scrollContainer?.lastElementChild?.scrollIntoView?.(false);
+      cancelScrollId = window.setTimeout(() => {
         scrollEnd(isInit);
-      }, 10);
+      }, 15);
     }
   };
 
@@ -81,14 +80,14 @@
   };
 
   $effect(() => {
-    if ((output.count || output.last) && output.loading && !ctx.cmdWindow.isDemoMode && canScrollEnd) {
+    if ((output.count || output.last) && output.loading && !ctx.cmdWindow.isExampleMode && canScrollEnd) {
       scrollEnd();
     }
   });
 
   onMount(() => {
     document.addEventListener('keydown', handleBlockContextmenu.onMenuShortcutKey);
-    if (!ctx.cmdWindow.isDemoMode) {
+    if (!ctx.cmdWindow.isExampleMode) {
       scrollEnd(true);
     }
     return () => {

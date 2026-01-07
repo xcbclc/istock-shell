@@ -14,9 +14,8 @@
     CommandEditorEventNames,
     type CommandEditorRecommendCmdEvent,
     type MentionSuggestionData,
-    type CommandEditorMentionData,
   } from '@istock-shell/editor';
-  import { CmdWindowsManager, type CmdWindowContextData } from '@/window';
+  import { CmdWindowsManager } from '@/window';
   import { RecommendType, type RecommendStoreModel } from '@/store';
   import CmdRecommendList from '../action/CmdRecommendList.svelte';
 
@@ -43,12 +42,8 @@
 
   // 响应式更新编辑器的可编辑状态
   $effect(() => {
-    if (commandEditor) commandEditor.editor.setEditable(contenteditable);
+    commandEditor && commandEditor.editor.setEditable(contenteditable);
   });
-
-  const getSendCmdContext = (mentions: CommandEditorMentionData[]): CmdWindowContextData => {
-    return ctx.getContextData('mention', history.findListById(mentions.map((item) => item.id)));
-  };
 
   const onRecommendClose = () => {
     recommend.data.list = [];
@@ -87,7 +82,7 @@
   const onSendCmd = async () => {
     if (input.canInput) {
       const cmdStr = commandEditor.input;
-      await input.sendCmd(cmdStr, getSendCmdContext(commandEditor.mentions));
+      await input.sendCmd(cmdStr, commandEditor.mentions);
       // 重置
       commandEditor.handleCommandInput('');
       await input.nodeUpdate([], true);
@@ -177,6 +172,7 @@
       keyboardShortcuts: {},
     });
     commandEditor.onMount();
+    commandEditor.editor.setEditable(contenteditable);
     input.bindCommandEditor(commandEditor);
 
     commandEditor.commandInput.addEventListener(CommandEditorEventNames.SendCmd, onSendCmd as EventListener);
@@ -188,7 +184,7 @@
       if (!cmd) return;
       cmd = decodeURIComponent(cmd);
       commandEditor.handleCommandInput(cmd);
-      input.sendCmd(cmd, getSendCmdContext(commandEditor.mentions));
+      input.sendCmd(cmd, commandEditor.mentions);
     }
 
     return () => {

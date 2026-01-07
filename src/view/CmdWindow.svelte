@@ -23,6 +23,14 @@
     ctx.start();
     return () => ctx.destroy();
   });
+
+  let initializedEventDispatched = false;
+  $effect(() => {
+    if (ctx.isInitialized && !initializedEventDispatched) {
+      initializedEventDispatched = true;
+      window.parent?.postMessage({ type: 'cmd:initialized', windowId }, '*');
+    }
+  });
 </script>
 
 {#if ctx.isInitialized}

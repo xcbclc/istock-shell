@@ -1,35 +1,18 @@
-import { type ControllerMethodComponentOutput, type ModelData } from '@istock-shell/iswork';
-import type { G2Spec, LightTheme, DarkTheme } from '@antv/g2';
-import { isNil, ScopeError, getMessageDataPK, EMessageDataFieldType } from '@istock-shell/util';
+import { type ControllerMethodComponentOutput } from '@istock-shell/iswork';
+import type { G2Spec } from '@antv/g2';
+import { isNil, ScopeError, bindMessageContext } from '@istock-shell/util';
 import type { TUiTableProps, TTableFilterConditionRange, TTableFilterItem } from '@/worker/common';
 import { parseFilterConditions } from '@/worker/common';
 import type { TBarOption, TLineOption, TPieOption, TStockOption } from './chart.cmd';
-import { type ThemeService } from '../setting/theme/theme.service';
-import { type ThemeModel } from '../setting/theme/theme.model';
-import { getG2Theme } from './g2-theme';
 
 export type TChartData = Array<Record<string, unknown>>;
 
 export type TChartOptions = G2Spec;
 
 export class ChartBaseService {
-  themeConfig: ModelData<ThemeModel> | undefined;
-  constructor(readonly themeService: ThemeService) {
-    void this.themeService.getList().then(([theme]) => {
-      this.themeConfig = theme;
-    });
-  }
-
   #getDefaultConfig() {
     return {
       autoFit: true,
-    };
-  }
-
-  #getThemeConfig(): LightTheme | DarkTheme {
-    return {
-      type: (this.themeConfig?.variables?.['color-scheme'] ?? 'dark') as 'light' | 'dark',
-      ...getG2Theme(this.themeConfig?.variables),
     };
   }
 
@@ -53,6 +36,7 @@ export class ChartBaseService {
     if (output.component) {
       switch (output.component) {
         case 'ShTable':
+        case 'ShVirtualTable':
           chatData = this.uiTableDataToChartData(output);
       }
     }
@@ -155,7 +139,6 @@ export class ChartBaseService {
     const chatOptions: TChartOptions = {
       type: 'interval',
       ...this.#getDefaultConfig(),
-      theme: this.#getThemeConfig(),
       data: chatData,
       encode: { y, color: category ?? y },
       transform: [{ type: 'stackY' }],
@@ -163,7 +146,7 @@ export class ChartBaseService {
       labels: [
         {
           position: 'outside',
-          text: function (this: typeof ctx, data: Record<string, any>) {
+          text: bindMessageContext(function (this: typeof ctx, data: Record<string, any>) {
             let text = '';
             const value = data[this.y] ?? null;
             if (this.category) {
@@ -175,8 +158,7 @@ export class ChartBaseService {
               text += ` ${this.unit}`;
             }
             return text;
-          },
-          [getMessageDataPK('text', EMessageDataFieldType.Function)]: ctx,
+          }, ctx),
         },
       ],
     };
@@ -196,7 +178,6 @@ export class ChartBaseService {
     const chatOptions: TChartOptions = {
       type: 'interval',
       ...this.#getDefaultConfig(),
-      theme: this.#getThemeConfig(),
       data: chatData,
       encode: { x, y },
     };
@@ -219,7 +200,6 @@ export class ChartBaseService {
     const chatOptions: TChartOptions = {
       type: 'line',
       ...this.#getDefaultConfig(),
-      theme: this.#getThemeConfig(),
       data: chatData,
       encode: { x, y },
     };
@@ -252,20 +232,18 @@ export class ChartBaseService {
     const chatOptions: TChartOptions = {
       type: 'view',
       ...this.#getDefaultConfig(),
-      theme: this.#getThemeConfig(),
       data: {
         value: chatData,
         transform: [
           {
             type: 'map',
-            callback: function (this: typeof ctx, d: Record<string, any>) {
+            callback: bindMessageContext(function (this: typeof ctx, d: Record<string, any>) {
               const date = new Date(d[this.x]);
               if (date.getTime()) {
                 d[this.x] = date;
               }
               return d;
-            },
-            [getMessageDataPK('callback', EMessageDataFieldType.Function)]: ctx,
+            }, ctx),
           },
         ],
       },
@@ -278,10 +256,9 @@ export class ChartBaseService {
           encode: {
             x,
             y: [low, high],
-            color: function (this: typeof ctx, d: Record<string, any>) {
+            color: bindMessageContext(function (this: typeof ctx, d: Record<string, any>) {
               return this.domainRecord[`${Math.sign(d[this.close] - d[this.open])}`];
-            },
-            [getMessageDataPK('color', EMessageDataFieldType.Function)]: ctx,
+            }, ctx),
           },
         },
         {
@@ -289,10 +266,9 @@ export class ChartBaseService {
           encode: {
             x,
             y: [open, close],
-            color: function (this: typeof ctx, d: Record<string, any>) {
+            color: bindMessageContext(function (this: typeof ctx, d: Record<string, any>) {
               return this.domainRecord[`${Math.sign(d[this.close] - d[this.open])}`];
-            },
-            [getMessageDataPK('color', EMessageDataFieldType.Function)]: ctx,
+            }, ctx),
           },
           style: { lineWidth: 3 },
         },

@@ -10,6 +10,7 @@ import { CmdWorkerMessage } from './cmd-worker-message';
 export enum CmdWindowMode {
   normal = '1',
   example = '2',
+  runway = '3',
 }
 
 export type CmdWindowOptions = {
@@ -44,7 +45,13 @@ export class CmdWindow {
     return this.#mode;
   }
   get isDemoMode() {
-    return this.#mode === '2';
+    return this.#mode === CmdWindowMode.example || this.#mode === CmdWindowMode.runway;
+  }
+  get isRunwayMode() {
+    return this.#mode === CmdWindowMode.runway;
+  }
+  get isExampleMode() {
+    return this.#mode === CmdWindowMode.example;
   }
   get workId() {
     return this.#workId;

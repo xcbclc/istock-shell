@@ -36,7 +36,7 @@ export interface ThemeStoreModel extends ModelData<ThemeModel> {}
 
 export const LOCAL_STORE_THEME_TOKEN = 'istock_local_store_theme_token';
 
-export const LOCAL_STORE_THEME_DEMO_TOKEN = 'istock_local_store_theme_demo_token';
+export const LOCAL_STORE_THEME_DEMO_TOKEN = 'daisyui-theme';
 
 export class Theme extends StoreWindow<ThemeStoreModel> {
   readonly #defaultThemeName = 'business';
@@ -63,31 +63,37 @@ export class Theme extends StoreWindow<ThemeStoreModel> {
   protected async init() {
     this.name =
       localStorage.getItem(this.cmdWindow.isDemoMode ? LOCAL_STORE_THEME_DEMO_TOKEN : LOCAL_STORE_THEME_TOKEN) || '';
-    this.storeEffect = createStoreEffects({
-      themeNameChange: () => {
-        if (this.name) {
-          this.useThemeByName(this?.model?.name);
-          this.model.name = this.name;
-          this.variables = this.getVariables();
-          localStorage.setItem(LOCAL_STORE_THEME_TOKEN, this.name);
-        }
-      },
-      themeVarChange: () => {
-        if (this.name) {
-          this.useThemeByName(this.model?.name);
-          const variables = this.getVariables();
-          this.updateModel({ ...this.model, variables });
-        }
-      },
-    });
+    if (!this.cmdWindow.isDemoMode) {
+      this.storeEffect = createStoreEffects({
+        themeNameChange: () => {
+          if (this.name) {
+            this.useThemeByName(this.name);
+            this.model.name = this.name;
+            localStorage.setItem(LOCAL_STORE_THEME_TOKEN, this.name);
+            this.variables = this.getVariables();
+          }
+        },
+        themeVarChange: () => {
+          if (this.name) {
+            this.useThemeByName(this.name);
+            const variables = this.getVariables();
+            this.updateModel({ ...this.model, variables });
+          }
+        },
+      });
+    }
     const model = await this.getActiveTheme();
-    if (model) {
-      this.updateModel(model);
-      this.name = model.name;
-      this.variables = model.variables;
+    if (this.cmdWindow.isDemoMode) {
+      this.useThemeByName(this.name);
+      this.variables = this.getVariables();
     } else {
-      this.useThemeByName(this.#defaultThemeName);
-      this.name = this.#defaultThemeName;
+      if (model) {
+        this.name = model.name;
+        this.variables = model.variables;
+      } else {
+        this.name = this.#defaultThemeName;
+      }
+      this.useThemeByName(this.name);
     }
   }
 
@@ -101,6 +107,11 @@ export class Theme extends StoreWindow<ThemeStoreModel> {
   }
   protected useThemeByName(name: string): void {
     document.documentElement.setAttribute('data-theme', name);
+  }
+  setThemeByName(name: string): void {
+    this.name = name;
+    this.useThemeByName(this.name);
+    this.variables = this.getVariables();
   }
   protected getVariables(): Record<string, string> {
     const record = this.themeVars.reduce<Record<string, string>>((record, key) => {

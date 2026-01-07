@@ -21,6 +21,7 @@
     if (cmdWindow.isDemoMode) return;
     windowView.onWindowViewKeyAction(event);
   };
+  window.CmdWindowsManager = CmdWindowsManager;
   onMount(() => {
     return () => {
       cmdWindow.destroy();
