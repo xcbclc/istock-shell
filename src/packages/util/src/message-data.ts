@@ -26,6 +26,33 @@ export function getMessageDataPK(k: string, type: string | number) {
 }
 
 /**
+ * 判断字段名是否已经是消息数据的主键格式。
+ * @param k - 字段名
+ * @returns 是否为主键
+ */
+export function isMessageDataPK(k: string) {
+  return /^__.*_[0-9]+__$/.test(k);
+}
+
+/**
+ * 绑定消息上下文到函数对象。
+ * 用于 wrap 时自动提取上下文并传递给 Worker 或主线程。
+ *
+ * @param fn - 需要绑定上下文的函数
+ * @param context - 上下文对象
+ * @returns 绑定了上下文的函数
+ */
+export const bindMessageContext = <T extends Function>(fn: T, context: any): T => {
+  Object.defineProperty(fn, '__message_context__', {
+    value: context,
+    enumerable: false,
+    writable: true,
+    configurable: true,
+  });
+  return fn;
+};
+
+/**
  * 包装对象，将其中的函数转为字符串，便于结构化克隆。
  *
  * @param value - 需要包装的对象
@@ -35,20 +62,29 @@ export function getMessageDataPK(k: string, type: string | number) {
  */
 export const wrap = <R = unknown>(value: any): R => {
   if (typeof value !== 'object' || value === null) return value;
+
+  if (isArray(value)) {
+    return value.map((v) => wrap(v)) as any;
+  }
+
   if (isPlainObject(value)) {
+    const newValue: any = {};
     Object.keys(value).forEach((k) => {
       if (isFunction(value[k])) {
         const pk = getMessageDataPK(k, EMessageDataFieldType.Function);
-        value[k] = value[k].toString();
-        if (!value[pk]) value[pk] = null;
+        const context = (value[k] as any)['__message_context__'];
+        newValue[k] = value[k].toString();
+        // 优先使用已存在的 pk (手动设置的情况)，其次使用绑定的上下文，最后默认为 null
+        if (value[pk] === undefined) {
+          newValue[pk] = context !== undefined ? context : null;
+        }
       } else {
-        value[k] = wrap(value[k]);
+        newValue[k] = wrap(value[k]);
       }
     });
+    return newValue;
   }
-  if (isArray(value)) {
-    value = value.map((v) => wrap(v));
-  }
+
   return value;
 };
 
@@ -58,25 +94,35 @@ export const wrap = <R = unknown>(value: any): R => {
  * @param value - 需要还原的对象
  * @returns 还原后的对象
  * @example
- * unWarp({ fn: '() => 1', __fn_0__: null }); // { fn: [Function] }
+ * unwrap({ fn: '() => 1', __fn_0__: null }); // { fn: [Function] }
  */
-export const unWarp = <R = unknown>(value: any): R => {
+export const unwrap = <R = unknown>(value: any): R => {
   if (typeof value !== 'object' || value === null) return value;
+
+  if (isArray(value)) {
+    return value.map((v) => unwrap(v)) as any;
+  }
+
   if (isPlainObject(value)) {
+    const newValue: any = {};
     Object.keys(value).forEach((k) => {
       const pkFn = getMessageDataPK(k, EMessageDataFieldType.Function);
       if (value[pkFn] !== undefined) {
+        // eslint-disable-next-line no-new-func
         const fn = new Function(`return ${value[k]}`)().bind(value[pkFn]);
         const fnCode = value[k].toString();
         fn.toString = () => fnCode;
-        value[k] = fn;
+        newValue[k] = fn;
+        // 可选：清理 pk 字段？保留以防万一
+        // delete value[pkFn];
+      } else if (isMessageDataPK(k)) {
+        newValue[k] = value[k];
       } else {
-        value[k] = unWarp(value[k]);
+        newValue[k] = unwrap(value[k]);
       }
     });
+    return newValue;
   }
-  if (isArray(value)) {
-    value = value.map((v) => unWarp(v));
-  }
+
   return value;
 };

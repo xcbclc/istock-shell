@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { isArray, clone } from '@istock-shell/util';
+import { isArray, wrap } from '@istock-shell/util';
 import {
   getOutputErrorData,
   getCmdOutputLoadingData,
@@ -102,7 +102,7 @@ export class Output extends StoreContext<OutputStoreModel> {
       rowStatus?: number;
       createDate?: Date;
       context?: CmdWindowContextData;
-    } = clone(data);
+    } = wrap(data);
     payload.source = 'db';
     payload.cmd = ''; // todo 单命令需要保存方便搜索
     payload.promptTexts = payload.promptTexts.map((text) => {

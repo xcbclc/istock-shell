@@ -36,15 +36,16 @@ export class CmdRoute extends StoreContext<CmdRouteStoreModel> {
   async getList(): Promise<CmdRouteStoreList> {
     const { payload } = await this.ctx.message.send<CmdRouteStoreData[]>('global', 'cmdRoute.list', {});
     if (payload) {
-      this.list.splice(this.list.length, 0, ...payload);
+      this.list = payload;
     }
     return payload ?? [];
   }
   getCmdpAddressInfo(cmds: string[], domainNames: string[]) {
-    domainNames.push('global');
     const findRoute = (list: Array<ResponseCmdRoute | CmdRouteStoreSubData>, cmd: string) => {
       if (!list) return;
-      return list.find((route) => route.cmd === cmd && domainNames.includes(route.domainName));
+      return list.find(
+        (route) => route.cmd === cmd && (domainNames.includes(route.domainName) || route.domainName === 'global')
+      );
     };
     let route: CmdRouteStoreData | CmdRouteStoreSubData | undefined;
     let cmd = cmds.shift();

@@ -1,4 +1,4 @@
-import { EventEmitter, ScopeError, isNil, isString, unWarp, wrap } from '@istock-shell/util';
+import { EventEmitter, ScopeError, isNil, isString, unwrap, wrap } from '@istock-shell/util';
 import { MessageStatus, Cmdp } from '@istock-shell/iswork';
 import type { CmdWindow } from '@/window/cmd-window.svelte';
 import { CmdWindowsManager } from '@/window/cmd-windows-manager';
@@ -76,7 +76,7 @@ export class CmdWorkerMessage extends EventEmitter {
             error.stack = event.meta?.errorStack + error.stack;
             reject(error);
           } else {
-            resolve(unWarp(event));
+            resolve(unwrap(event));
           }
         });
       }),

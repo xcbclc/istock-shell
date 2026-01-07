@@ -364,11 +364,19 @@ warn('network', '连接超时');
 wrap<R>(value: any): R
 
 // 还原对象（字符串转函数）
-unWarp<R>(value: any): R
+unwrap<R>(value: any): R
+
+// 绑定消息上下文到函数
+bindMessageContext<T>(fn: T, context: any): T
 
 // 示例
 const wrapped = wrap({ fn: () => 1 }); // 函数被转为字符串
-const restored = unWarp(wrapped); // 字符串被还原为函数
+const restored = unwrap(wrapped); // 字符串被还原为函数
+
+// 带上下文的函数
+const ctx = { x: 1 };
+const fn = bindMessageContext(function(this: any) { return this.x; }, ctx);
+const wrappedWithCtx = wrap({ fn });
 ```
 
 ## 类型支持

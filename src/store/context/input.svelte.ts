@@ -1,5 +1,5 @@
 import type { Token } from '@istock-shell/command-parser';
-import { type CommandEditor } from '@istock-shell/editor';
+import type { CommandEditor, CommandEditorMentionData } from '@istock-shell/editor';
 import type { CmdWindowContext, CmdWindowContextData } from '@/window';
 import { createStoreEffects, type StoreConfig, StoreContext } from '@/store';
 
@@ -56,9 +56,9 @@ export class Input extends StoreContext<InputStoreModel> {
   /**
    * 发送命令
    * @param input 命令字符串
-   * @param context 上下文
+   * @param mentions 提及数据
    */
-  async sendCmd(input: string, context?: CmdWindowContextData) {
+  async sendCmd(input: string, mentions: CommandEditorMentionData[] = []) {
     const { shellInfo } = this.ctx.cmdWindow.store;
     if (!shellInfo.readState) {
       shellInfo.readState = true;
@@ -66,11 +66,20 @@ export class Input extends StoreContext<InputStoreModel> {
     if (!this.canInput) return;
     this.canInput = false;
     try {
-      await this.ctx.store.output.sendCmd(input, context);
+      await this.ctx.store.output.sendCmd(input, this.getSendCmdContext(mentions));
     } catch (e) {
       throw e;
     } finally {
       this.canInput = true;
     }
+  }
+  /**
+   * 获取发送命令上下文
+   * @param mentions 提及数据
+   * @returns 上下文数据
+   */
+  getSendCmdContext(mentions: CommandEditorMentionData[]): CmdWindowContextData {
+    const { history } = this.ctx.store;
+    return this.ctx.getContextData('mention', history.findListById(mentions.map((item) => item.id)));
   }
 }

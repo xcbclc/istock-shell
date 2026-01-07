@@ -1,4 +1,4 @@
-import { isArray, isString, wrap, unWarp, isNumber } from '@istock-shell/util';
+import { isArray, isString, wrap, unwrap, isNumber } from '@istock-shell/util';
 import type { IdAnyObject, OrmQuery, ModelType, AnyObj, QueryFilter, QuerySortOperator } from '../../types';
 import type { ParsedRequestParams } from '../../interfaces';
 import { AbstractRunner } from '../abstract-runner';
@@ -116,7 +116,7 @@ export class IndexedDBRunner extends AbstractRunner<Connector> {
       }
     }
     await tx.done;
-    return unWarp<typeof results>(results);
+    return unwrap<typeof results>(results);
   }
 
   /**

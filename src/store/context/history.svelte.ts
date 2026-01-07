@@ -1,5 +1,5 @@
 import type { ModelData } from '@istock-shell/iswork';
-import { sleep } from '@istock-shell/util';
+import { sleep, unwrap } from '@istock-shell/util';
 import type { CmdWindowContext } from '@/window';
 import type { HistoryModel } from '@domains/global/history/history.model';
 import { createStoreEffects, type OutputStoreList, type StoreConfig, StoreContext } from '@/store';
@@ -23,7 +23,7 @@ export class History extends StoreContext<HistoryStoreModel> {
   async getList() {
     const { payload } = await this.ctx.message.send<HistoryStoreList>('global', 'history.list', {});
     if (payload) {
-      this.list = payload;
+      this.list = payload.map((item) => unwrap(item));
     }
     return payload;
   }

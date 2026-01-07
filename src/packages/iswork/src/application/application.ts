@@ -3,7 +3,7 @@
  * @description 提供应用程序的主要功能，包括消息处理、中间件管理、域管理等
  */
 
-import { ScopeError, wrap, unWarp, isAsyncIterableIterator } from '@istock-shell/util';
+import { ScopeError, wrap, unwrap, isAsyncIterableIterator } from '@istock-shell/util';
 import type { DomainClassBase } from '../interfaces';
 import type { Middleware, ApplicationOptions, CmdpMessage } from '../types';
 import { compose } from '../compose';
@@ -162,7 +162,7 @@ export class Application extends ApplicationEvent {
   #callback(_options?: unknown) {
     return async (event: MessageEvent<CmdpMessage<any>>) => {
       this.listenInput();
-      const data = unWarp<CmdpMessage<any>>(event.data);
+      const data = unwrap<CmdpMessage<any>>(event.data);
       // 根据消息创建上下文
       const ctx = this.#Context.create(this, data);
       try {
@@ -265,6 +265,9 @@ export class Application extends ApplicationEvent {
       ctx.cmdp.setReturnMeta('errorMsg', err.message ?? '请求错误');
       ctx.cmdp.setReturnMeta('errorStack', err.stack ?? new Error().stack);
     }
+    // 发送错误消息时meta附带消息传输完成
+    ctx.cmdp.setReturnMeta('status', MessageStatus.COMPLETE);
+
     const returnMeta = ctx.cmdp.getReturnMeta();
     const messageChannelAdapter = ctx.app.messageChannelManager.getMessageChannelAdapter(
       `${returnMeta?.messageId ?? ''}`
@@ -272,9 +275,12 @@ export class Application extends ApplicationEvent {
     const errorMessage = wrap(ctx.cmdp.getReturnMessage({}));
     if (messageChannelAdapter) {
       // 使用通道发送错误消息
-      messageChannelAdapter.send(errorMessage).catch((err) => {
-        throw err;
-      });
+      messageChannelAdapter
+        .send(errorMessage)
+        .then(() => messageChannelAdapter.close())
+        .catch((err) => {
+          throw err;
+        });
     } else {
       // 正常发送错误消息
       this.emit(errorMessage);
