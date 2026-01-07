@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const toolInterfaces: ApiInterface[] = [
     moduleTitle: '工具箱',
     moduleName: 'tool',
     title: '交易日历',
-    name: 'jyrl',
+    name: 'gjx_jyrl',
     api: 'tool_trade_date_hist_sina',
     targetUrl: 'https://finance.sina.com.cn',
     description: '新浪财经-股票交易日历数据',

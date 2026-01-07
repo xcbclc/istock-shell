@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const articleInterfaces: ApiInterface[] = [
     moduleTitle: '政策不确定性数据',
     moduleName: 'article',
     title: 'Oxford-Man',
-    name: 'oxford_man',
+    name: 'bdl_oxford_man',
     api: 'article_oman_rv',
     targetUrl: 'https://realized.oxford-man.ox.ac.uk/data/visualization',
     description: '获取 Oxford-Man 已实现波动率数据',
@@ -98,7 +98,7 @@ export const articleInterfaces: ApiInterface[] = [
     moduleTitle: '政策不确定性数据',
     moduleName: 'article',
     title: 'Risk-Lab',
-    name: 'risk_lab',
+    name: 'bdl_risk_lab',
     api: 'article_rlab_rv',
     targetUrl: 'https://dachxiu.chicagobooth.edu/',
     description: '获取 Risk-Lab 已实现波动率数据',
@@ -134,7 +134,7 @@ export const articleInterfaces: ApiInterface[] = [
     moduleTitle: '政策不确定性数据',
     moduleName: 'article',
     title: 'Current Research Returns',
-    name: 'current_research_returns',
+    name: 'bdl_current_research_returns',
     api: 'article_ff_crr',
     targetUrl: 'https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html',
     description: '获取 Current Research Returns 多因子数据; 更多信息请访问目标地址',
@@ -175,7 +175,7 @@ export const articleInterfaces: ApiInterface[] = [
     moduleTitle: '政策不确定性数据',
     moduleName: 'article',
     title: '国家和地区指数',
-    name: 'gjhdqzs',
+    name: 'bdl_gjhdqzs',
     api: 'article_epu_index',
     targetUrl: 'https://www.policyuncertainty.com/index.html',
     description: '国家或地区的经济政策不确定性(EPU)数据',

@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const toolsInterfaces: ApiInterface[] = [
     moduleTitle: '工具',
     moduleName: 'tools',
     title: '龙虎牛熊多头合约池',
-    name: 'lhnxdthyc',
+    name: 'qhgj_lhnxdthyc',
     api: 'long_pool',
     description: '龙虎牛熊多头合约池接口',
     inputParameters: [
@@ -106,7 +106,7 @@ export const toolsInterfaces: ApiInterface[] = [
     moduleTitle: '工具',
     moduleName: 'tools',
     title: '龙虎牛熊空头合约池',
-    name: 'lhnxkthyc',
+    name: 'qhgj_lhnxkthyc',
     api: 'short_pool',
     description: '龙虎牛熊空头合约池',
     inputParameters: [

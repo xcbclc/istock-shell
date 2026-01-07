@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const fundInterfaces: ApiInterface[] = [
     moduleTitle: '资金',
     moduleName: 'fund',
     title: '每日净流多列表(商品)',
-    name: 'mrjldlb_sp',
+    name: 'zj_mrjldlb_sp',
     api: 'commodity_flow_long',
     description: '每日净流多列表（商品）接口',
     inputParameters: [
@@ -113,7 +113,7 @@ export const fundInterfaces: ApiInterface[] = [
     moduleTitle: '资金',
     moduleName: 'fund',
     title: '每日净流空列表(商品)',
-    name: 'mrjlklb_sp',
+    name: 'zj_mrjlklb_sp',
     api: 'commodity_flow_short',
     description: '每日净流空列表(商品)接口',
     inputParameters: [
@@ -155,7 +155,7 @@ export const fundInterfaces: ApiInterface[] = [
     moduleTitle: '资金',
     moduleName: 'fund',
     title: '每日净流多列表(指数)',
-    name: 'mrjldlb_zs',
+    name: 'zj_mrjldlb_zs',
     api: 'stock_flow_long',
     description: '每日净流多列表(指数)接口',
     inputParameters: [
@@ -197,7 +197,7 @@ export const fundInterfaces: ApiInterface[] = [
     moduleTitle: '资金',
     moduleName: 'fund',
     title: '每日净流空列表(指数)',
-    name: 'mrjlklb_zs',
+    name: 'zj_mrjlklb_zs',
     api: 'stock_flow_short',
     description: '每日净流空列表(指数)接口',
     inputParameters: [
@@ -239,7 +239,7 @@ export const fundInterfaces: ApiInterface[] = [
     moduleTitle: '资金',
     moduleName: 'fund',
     title: '每日商品保证金沉淀变化',
-    name: 'mrspbzjcdbh',
+    name: 'zj_mrspbzjcdbh',
     api: 'money_in_out',
     description: '每日商品保证金沉淀变化接口',
     inputParameters: [

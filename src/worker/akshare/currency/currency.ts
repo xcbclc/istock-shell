@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const currencyInterfaces: ApiInterface[] = [
     moduleTitle: '货币数据',
     moduleName: 'currency',
     title: '货币报价最新数据',
-    name: 'hbbjzxsj',
+    name: 'hb_hbbjzxsj',
     api: 'currency_latest',
     targetUrl: 'https://currencyscoop.com/',
     description: '货币报价最新数据',
@@ -137,7 +137,7 @@ export const currencyInterfaces: ApiInterface[] = [
     moduleTitle: '货币数据',
     moduleName: 'currency',
     title: '货币报价历史数据',
-    name: 'hbbjlssj',
+    name: 'hb_hbbjlssj',
     api: 'currency_history',
     targetUrl: 'https://currencyscoop.com/',
     description: '货币报价历史数据',
@@ -211,7 +211,7 @@ export const currencyInterfaces: ApiInterface[] = [
     moduleTitle: '货币数据',
     moduleName: 'currency',
     title: '货币报价时间序列数据',
-    name: 'hbbjsjxlsj',
+    name: 'hb_hbbjsjxlsj',
     api: 'currency_time_series',
     targetUrl: 'https://currencyscoop.com/',
     description: '货币报价时间序列数据',
@@ -279,7 +279,7 @@ export const currencyInterfaces: ApiInterface[] = [
     moduleTitle: '货币数据',
     moduleName: 'currency',
     title: '货币基础信息查询',
-    name: 'hbjcxxcx',
+    name: 'hb_hbjcxxcx',
     api: 'currency_currencies',
     targetUrl: 'https://currencyscoop.com/',
     description: '所有货币的基础信息',
@@ -378,7 +378,7 @@ export const currencyInterfaces: ApiInterface[] = [
     moduleTitle: '货币数据',
     moduleName: 'currency',
     title: '货币对价格转换',
-    name: 'hbdjgzh',
+    name: 'hb_hbdjgzh',
     api: 'currency_convert',
     targetUrl: 'https://currencyscoop.com/',
     description: '指定货币对指定货币数量的转换后价格',

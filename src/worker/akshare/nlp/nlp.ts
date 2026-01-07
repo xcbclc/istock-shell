@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const nlpInterfaces: ApiInterface[] = [
     moduleTitle: '自然语言处理',
     moduleName: 'nlp',
     title: '知识图谱',
-    name: 'zstp',
+    name: 'zryycl_zstp',
     api: 'nlp_ownthink',
     targetUrl: 'https://ownthink.com/',
     description: '思知-知识图谱的接口, 以此来查询知识图谱数据',
@@ -135,7 +135,7 @@ export const nlpInterfaces: ApiInterface[] = [
     moduleTitle: '自然语言处理',
     moduleName: 'nlp',
     title: '智能问答',
-    name: 'znwd',
+    name: 'zryycl_znwd',
     api: 'nlp_answer',
     targetUrl: 'https://ownthink.com/robot.html',
     description: '思知-对话机器人的接口, 以此来进行智能问答',

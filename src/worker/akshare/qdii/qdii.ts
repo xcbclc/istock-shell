@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const qdiiInterfaces: ApiInterface[] = [
     moduleTitle: 'QDII 数据',
     moduleName: 'qdii',
     title: '欧美指数',
-    name: 'omzs',
+    name: 'qdii_omzs',
     api: 'qdii_e_index_jsl',
     targetUrl: 'https://www.jisilu.cn/data/qdii/#qdiia',
     description: '集思录-T+0 QDII-欧美市场-欧美指数',
@@ -105,7 +105,7 @@ export const qdiiInterfaces: ApiInterface[] = [
     moduleTitle: 'QDII 数据',
     moduleName: 'qdii',
     title: '欧美商品',
-    name: 'omsp',
+    name: 'qdii_omsp',
     api: 'qdii_e_comm_jsl',
     targetUrl: 'https://www.jisilu.cn/data/qdii/#qdiia',
     description: '集思录-T+0 QDII-欧美市场-欧美商品',
@@ -139,7 +139,7 @@ export const qdiiInterfaces: ApiInterface[] = [
     moduleTitle: 'QDII 数据',
     moduleName: 'qdii',
     title: '亚洲指数',
-    name: 'yzzs',
+    name: 'qdii_yzzs',
     api: 'qdii_a_index_jsl',
     targetUrl: 'https://www.jisilu.cn/data/qdii/#qdiia',
     description: '集思录-T+0 QDII-亚洲市场-亚洲指数',

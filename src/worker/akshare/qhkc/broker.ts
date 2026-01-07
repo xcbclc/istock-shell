@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位持仓数据',
-    name: 'xwccsj',
+    name: 'xw_xwccsj',
     api: 'broker_positions',
     description: '席位持仓数据接口',
     inputParameters: [
@@ -141,7 +141,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位盈亏数据',
-    name: 'xwyksj',
+    name: 'xw_xwyksj',
     api: 'broker_calendar',
     description: '席位盈亏数据接口',
     inputParameters: [
@@ -190,7 +190,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位每日大资金流动数据',
-    name: 'xwmrdzjldsj',
+    name: 'xw_xwmrdzjldsj',
     api: 'broker_flow',
     description: '席位每日大资金流动数据接口',
     inputParameters: [
@@ -239,7 +239,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位多空比数据',
-    name: 'xwdkbsj',
+    name: 'xw_xwdkbsj',
     api: 'broker_bbr',
     description: '席位多空比数据接口',
     inputParameters: [
@@ -274,7 +274,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位净持仓保证金变化数据',
-    name: 'xwjccbzjbhsj',
+    name: 'xw_xwjccbzjbhsj',
     api: 'broker_net_money_chge',
     description: '席位净持仓保证金变化数据接口',
     inputParameters: [
@@ -316,7 +316,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位净持仓保证金数据',
-    name: 'xwjccbzjsj',
+    name: 'xw_xwjccbzjsj',
     api: 'broker_net_money',
     description: '席位净持仓保证金数据接口',
     inputParameters: [
@@ -358,7 +358,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位总持仓保证金数据',
-    name: 'xwzccbzjsj',
+    name: 'xw_xwzccbzjsj',
     api: 'broker_total_money',
     description: '席位总持仓保证金数据接口',
     inputParameters: [
@@ -400,7 +400,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位的商品盈亏数据',
-    name: 'xwdspyksj',
+    name: 'xw_xwdspyksj',
     api: 'broker_profit',
     description: '席位的商品盈亏数据接口',
     inputParameters: [
@@ -449,7 +449,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位盈利排行',
-    name: 'xwylpx',
+    name: 'xw_xwylpx',
     api: 'broker_in_profit_list',
     description: '席位盈利排行数据接口',
     inputParameters: [
@@ -498,7 +498,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位亏损排行',
-    name: 'xwkspx',
+    name: 'xw_xwkspx',
     api: 'broker_in_loss_list',
     description: '席位亏损排行数据接口',
     inputParameters: [
@@ -547,7 +547,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '所有席位数据',
-    name: 'syxwsj',
+    name: 'xw_syxwsj',
     api: 'broker_all',
     description: '所有席位数据接口',
     inputParameters: [
@@ -582,7 +582,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '建仓过程',
-    name: 'jcgc',
+    name: 'xw_jcgc',
     api: 'broker_positions_process',
     description: '建仓过程数据接口',
     inputParameters: [
@@ -680,7 +680,7 @@ export const brokerInterfaces: ApiInterface[] = [
     moduleTitle: '席位',
     moduleName: 'broker',
     title: '席位对对碰',
-    name: 'xwddp',
+    name: 'xw_xwddp',
     api: 'broker_pk',
     description: '席位对对碰数据接口',
     inputParameters: [

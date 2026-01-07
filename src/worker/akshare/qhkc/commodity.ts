@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '合约持仓数据',
-    name: 'hyccsj',
+    name: 'sp_hyccsj',
     api: 'variety_positions',
     description: '合约持仓数据接口',
     inputParameters: [
@@ -155,7 +155,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '商品持仓数据',
-    name: 'spccsj',
+    name: 'sp_spccsj',
     api: '```',
     inputParameters: [],
     outputParameters: [],
@@ -167,7 +167,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '商品净持仓数据',
-    name: 'spjccsj',
+    name: 'sp_spjccsj',
     api: 'variety_net_positions',
     description: '商品净持仓数据接口',
     inputParameters: [
@@ -216,7 +216,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '合约行情数据',
-    name: 'hyhqsj',
+    name: 'sp_hyhqsj',
     api: 'variety_quotes',
     description: '合约行情数据接口',
     inputParameters: [
@@ -286,7 +286,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '商品沉淀资金数据',
-    name: 'spcdzjsj',
+    name: 'sp_spcdzjsj',
     api: 'variety_money',
     description: '商品沉淀资金数据接口',
     inputParameters: [
@@ -328,7 +328,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '合约多空比数据',
-    name: 'hydkbsj',
+    name: 'sp_hydkbsj',
     api: 'variety_bbr',
     description: '合约多空比数据接口',
     inputParameters: [
@@ -370,7 +370,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '合约净持仓保证金变化数据',
-    name: 'hyjccbzjbhsj',
+    name: 'sp_hyjccbzjbhsj',
     api: 'variety_net_money_chge',
     description: '合约净持仓保证金变化数据接口',
     inputParameters: [
@@ -412,7 +412,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '合约净持仓保证金数据',
-    name: 'hyjccbzjsj',
+    name: 'sp_hyjccbzjsj',
     api: 'variety_net_money',
     description: '合约净持仓保证金数据接口',
     inputParameters: [
@@ -454,7 +454,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '合约总持仓保证金数据',
-    name: 'hyzccbzjsj',
+    name: 'sp_hyzccbzjsj',
     api: 'variety_total_money',
     description: '合约总持仓保证金数据接口',
     inputParameters: [
@@ -496,7 +496,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '商品的席位盈亏数据',
-    name: 'spdxwyksj',
+    name: 'sp_spdxwyksj',
     api: 'variety_profit',
     description: '商品的席位盈亏数据接口',
     inputParameters: [
@@ -545,7 +545,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '自研指标数据',
-    name: 'zyzbsj',
+    name: 'sp_zyzbsj',
     api: 'variety_strategies',
     description: '自研指标数据接口',
     inputParameters: [
@@ -594,7 +594,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '商品相关研报数据',
-    name: 'spxgybsj',
+    name: 'sp_spxgybsj',
     api: 'variety_reports',
     description: '商品相关研报数据接口',
     inputParameters: [
@@ -650,7 +650,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '商品列表数据',
-    name: 'splbsj',
+    name: 'sp_splbsj',
     api: 'variety_all',
     description: '商品列表数据接口',
     inputParameters: [
@@ -699,7 +699,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '合约索引',
-    name: 'hysy',
+    name: 'sp_hysy',
     api: 'variety_list',
     description: '合约索引数据接口',
     inputParameters: [
@@ -719,7 +719,7 @@ export const commodityInterfaces: ApiInterface[] = [
     moduleTitle: '商品',
     moduleName: 'commodity',
     title: '非期货公司净持仓',
-    name: 'fqhgsjcc',
+    name: 'sp_fqhgsjcc',
     api: 'variety_no_futures',
     description: '非期货公司净持仓数据接口',
     inputParameters: [

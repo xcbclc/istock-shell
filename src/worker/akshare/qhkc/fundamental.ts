@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '基差数据',
-    name: 'jcsj',
+    name: 'jbm_jcsj',
     api: 'basis',
     description: '基差数据接口',
     inputParameters: [
@@ -127,7 +127,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '期限结构',
-    name: 'qxjg',
+    name: 'jbm_qxjg',
     api: 'term_structure',
     description: '期限结构接口',
     inputParameters: [
@@ -169,7 +169,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '利润数据',
-    name: 'lrsj',
+    name: 'jbm_lrsj',
     api: 'profit',
     description: '利润数据接口',
     inputParameters: [
@@ -218,7 +218,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '现货贸易商报价',
-    name: 'xhmysbj',
+    name: 'jbm_xhmysbj',
     api: 'trader_prices',
     description: '现货贸易商报价接口',
     inputParameters: [
@@ -281,7 +281,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '跨期套利数据',
-    name: 'kqtlsj',
+    name: 'jbm_kqtlsj',
     api: 'intertemporal_arbitrage',
     description: '跨期套利数据接口',
     inputParameters: [
@@ -365,7 +365,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '自由价差数据',
-    name: 'zyjcsj',
+    name: 'jbm_zyjcsj',
     api: 'free_spread',
     description: '自由价差数据接口',
     inputParameters: [
@@ -456,7 +456,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '自由价比数据',
-    name: 'zyjbsj',
+    name: 'jbm_zyjbsj',
     api: 'free_ratio',
     description: '自由价比数据接口',
     inputParameters: [
@@ -547,7 +547,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '仓单数据',
-    name: 'cdsj',
+    name: 'jbm_cdsj',
     api: 'warehouse_receipt',
     description: '仓单数据接口',
     inputParameters: [
@@ -596,7 +596,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '仓单汇总数据',
-    name: 'cdhzsj',
+    name: 'jbm_cdhzsj',
     api: 'warehouse_receipt',
     description: '仓单汇总数据接口',
     inputParameters: [
@@ -638,7 +638,7 @@ export const fundamentalInterfaces: ApiInterface[] = [
     moduleTitle: '基本面',
     moduleName: 'fundamental',
     title: '虚实盘比数据',
-    name: 'xspbsj',
+    name: 'jbm_xspbsj',
     api: 'virtual_real',
     description: '虚实盘比数据接口',
     inputParameters: [

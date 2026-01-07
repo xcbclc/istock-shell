@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '碳排放权-国内',
-    name: 'tpfq_gn',
+    name: 'ny_tpfq_gn',
     api: 'energy_carbon_domestic',
     targetUrl: 'http://www.tanjiaoyi.com/',
     description: '碳交易网-行情信息',
@@ -122,7 +122,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '碳排放权-北京',
-    name: 'tpfq_bj',
+    name: 'ny_tpfq_bj',
     api: 'energy_carbon_bj',
     targetUrl: 'https://www.bjets.com.cn/article/jyxx/',
     description: '北京市碳排放权电子交易平台-北京市碳排放权公开交易行情',
@@ -163,7 +163,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '碳排放权-深圳',
-    name: 'tpfq_sz',
+    name: 'ny_tpfq_sz',
     api: 'energy_carbon_sz',
     targetUrl: 'http://www.cerx.cn/dailynewsCN/index.htm',
     description: '深圳碳排放交易所-国内碳情',
@@ -239,7 +239,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '碳排放权-国际',
-    name: 'tpfq_gj',
+    name: 'ny_tpfq_gj',
     api: 'energy_carbon_eu',
     targetUrl: 'http://www.cerx.cn/dailynewsOuter/index.htm',
     description: '深圳碳排放交易所-国际碳情',
@@ -315,7 +315,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '碳排放权-湖北',
-    name: 'tpfq_hb',
+    name: 'ny_tpfq_hb',
     api: 'energy_carbon_hb',
     targetUrl: 'http://www.cerx.cn/dailynewsOuter/index.htm',
     description: '湖北碳排放权交易中心-碳排放权交易数据',
@@ -363,7 +363,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '碳排放权-广州',
-    name: 'tpfq_gz',
+    name: 'ny_tpfq_gz',
     api: 'energy_carbon_gz',
     targetUrl: 'http://www.cnemission.com/article/hqxx/',
     description: '广州碳排放权交易中心-行情信息',
@@ -446,7 +446,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '汽柴油历史调价信息',
-    name: 'qcylstjxx',
+    name: 'ny_qcylstjxx',
     api: 'energy_oil_hist',
     targetUrl: 'https://data.eastmoney.com/cjsj/oil_default.html',
     description: '东方财富-数据中心-中国油价-汽柴油历史调价信息',
@@ -494,7 +494,7 @@ export const energyInterfaces: ApiInterface[] = [
     moduleTitle: '能源数据',
     moduleName: 'energy',
     title: '地区油价',
-    name: 'dqyj',
+    name: 'ny_dqyj',
     api: 'energy_oil_detail',
     targetUrl: 'https://data.eastmoney.com/cjsj/oil_default.html',
     description: '东方财富-数据中心-中国油价-地区油价',

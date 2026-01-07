@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const bankInterfaces: ApiInterface[] = [
     moduleTitle: '银行数据',
     moduleName: 'bank',
     title: '银保监分局本级行政处罚',
-    name: 'ybjfjbjxzcf',
+    name: 'yh_ybjfjbjxzcf',
     api: 'bank_fjcf_table_detail',
     targetUrl: 'https://www.cbirc.gov.cn/cn/view/pages/ItemDetail.html?docId=881574&itemId=4115&generaltype=9',
     description: '首页-政务信息-行政处罚-银保监分局本级-XXXX行政处罚信息公开表, 是信息公开表不是处罚决定书书',

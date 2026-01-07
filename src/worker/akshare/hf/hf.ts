@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const hfInterfaces: ApiInterface[] = [
     moduleTitle: '高频数据',
     moduleName: 'hf',
     title: '标普 500 指数',
-    name: 'bp_500_zs',
+    name: 'gp_bp_500_zs',
     api: 'hf_sp_500',
     targetUrl: 'https://github.com/FutureSharks/financial-data',
     description: '获取标普 500 指数的分钟数据, 由于数据量比较大, 需要等待, 由于服务器在国外, 建议使用代理访问',

@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const dcInterfaces: ApiInterface[] = [
     moduleTitle: '加密货币数据',
     moduleName: 'dc',
     title: '实时数据',
-    name: 'sssj',
+    name: 'jmhb_sssj',
     api: 'crypto_js_spot',
     targetUrl: 'https://datacenter.jin10.com/reportType/dc_bitcoin_current',
     description: '加密货币实时行情',
@@ -147,7 +147,7 @@ export const dcInterfaces: ApiInterface[] = [
     moduleTitle: '加密货币数据',
     moduleName: 'dc',
     title: '比特币持仓报告',
-    name: 'btbccbg',
+    name: 'jmhb_btbccbg',
     api: 'crypto_bitcoin_hold_report',
     targetUrl: 'https://datacenter.jin10.com/dc_report?name=bitcoint',
     description: '比特币持仓报告',
@@ -258,7 +258,7 @@ export const dcInterfaces: ApiInterface[] = [
     moduleTitle: '加密货币数据',
     moduleName: 'dc',
     title: 'CME-成交量报告',
-    name: 'cme_cjlbg',
+    name: 'jmhb_cme_cjlbg',
     api: 'crypto_bitcoin_cme',
     targetUrl: 'https://datacenter.jin10.com/reportType/dc_cme_btc_report',
     description: '芝加哥商业交易所-比特币成交量报告',

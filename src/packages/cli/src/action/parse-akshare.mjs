@@ -22,6 +22,37 @@ const dataPath = path.resolve(cwdPath, './docs/akshare');
 /** @type {string} 输出目录路径 */
 const outputPath = path.resolve(cwdPath, './src/worker/akshare');
 
+const moduleNameMap = {
+  stock: '股票',
+  futures: '期货',
+  option: '期权',
+  bond: '债券',
+  fund: '资金',
+  fund_public: '公募基金',
+  fund_private: '私募基金',
+  bank: '银行',
+  currency: '货币',
+  dc: '加密货币',
+  energy: '能源',
+  event: '迁徙',
+  fx: '外汇',
+  hf: '高频',
+  index: '指数数据',
+  interest_rate: '利率',
+  macro: '宏观',
+  nlp: '自然语言处理',
+  others: '另类',
+  qdii: 'QDII',
+  spot: '现货',
+  tool: '工具箱',
+  article: '波动率',
+  broker: '席位',
+  commodity: '商品',
+  fundamental: '基本面',
+  index_data: '指数信息',
+  tools: '期货工具',
+};
+
 /**
  * 接口参数类型定义
  * @typedef {Object} Parameter
@@ -290,6 +321,34 @@ function extractFirstTitle(content, fileName) {
 }
 
 /**
+ * 处理重复的接口名称，如果有重复则添加数字后缀
+ * @param {ApiInterface[]} interfaces - 接口数组
+ * @returns {ApiInterface[]} 处理后的接口数组
+ */
+function resolveDuplicateNames(interfaces) {
+  const nameMap = new Map();
+
+  // Group interfaces by name
+  for (const iface of interfaces) {
+    if (!nameMap.has(iface.name)) {
+      nameMap.set(iface.name, []);
+    }
+    nameMap.get(iface.name).push(iface);
+  }
+
+  // Process groups
+  for (const [name, group] of nameMap) {
+    if (group.length > 1) {
+      group.forEach((iface, index) => {
+        iface.name = `${name}${index + 1}`;
+      });
+    }
+  }
+
+  return interfaces;
+}
+
+/**
  * 解析qhkc格式的markdown文件中的接口信息
  * @param {string} fileName - 文件名
  * @param {string} filePath - 文件路径
@@ -336,12 +395,20 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
         moduleTitle,
         moduleName: fileName,
         title,
-        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' })
-          .join('')
-          .toLowerCase()
-          .replace(/\s+/g, '_')
-          .replace(/-/g, '_')
-          .replace(/\(([^)]+)\)/g, '_$1'),
+        name: [
+          pinyin(moduleNameMap[fileName] ?? fileName, { pattern: 'first', toneType: 'none', type: 'array' })
+            .join('')
+            .toLowerCase()
+            .replace(/\s+/g, '_')
+            .replace(/-/g, '_')
+            .replace(/\(([^)]+)\)/g, '_$1'),
+          pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' })
+            .join('')
+            .toLowerCase()
+            .replace(/\s+/g, '_')
+            .replace(/-/g, '_')
+            .replace(/\(([^)]+)\)/g, '_$1'),
+        ].join('_'),
       };
       currentSection = null;
       inRequestTable = false;
@@ -401,7 +468,7 @@ function parseQhkcMarkdownFile(fileName, filePath, moduleTitle) {
     interfaces.push(currentInterface);
   }
 
-  return interfaces;
+  return resolveDuplicateNames(interfaces);
 }
 
 /**
@@ -455,12 +522,20 @@ function parseMarkdownFile(fileName, filePath, moduleTitle) {
         moduleTitle,
         moduleName: fileName,
         title,
-        name: pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' })
-          .join('')
-          .toLowerCase()
-          .replace(/\s+/g, '_')
-          .replace(/-/g, '_')
-          .replace(/\(([^)]+)\)/g, '_$1'),
+        name: [
+          pinyin(moduleNameMap[fileName] ?? fileName, { pattern: 'first', toneType: 'none', type: 'array' })
+            .join('')
+            .toLowerCase()
+            .replace(/\s+/g, '_')
+            .replace(/-/g, '_')
+            .replace(/\(([^)]+)\)/g, '_$1'),
+          pinyin(title, { pattern: 'first', toneType: 'none', type: 'array' })
+            .join('')
+            .toLowerCase()
+            .replace(/\s+/g, '_')
+            .replace(/-/g, '_')
+            .replace(/\(([^)]+)\)/g, '_$1'),
+        ].join('_'),
       };
       inInputTable = false;
       inOutputTable = false;
@@ -524,7 +599,7 @@ function parseMarkdownFile(fileName, filePath, moduleTitle) {
     interfaces.push(currentInterface);
   }
 
-  return interfaces;
+  return resolveDuplicateNames(interfaces);
 }
 
 /**
@@ -560,7 +635,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }

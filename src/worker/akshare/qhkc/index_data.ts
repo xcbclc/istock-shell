@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '指数信息',
-    name: 'zsxx',
+    name: 'zsxx_zsxx',
     api: 'index_info',
     description: '指数信息接口',
     inputParameters: [
@@ -148,7 +148,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '指数权重数据',
-    name: 'zsqzsj',
+    name: 'zsxx_zsqzsj',
     api: 'index_weights',
     description: '指数权重数据接口',
     inputParameters: [
@@ -190,7 +190,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '指数行情数据',
-    name: 'zshqsj',
+    name: 'zsxx_zshqsj',
     api: 'index_quotes',
     description: '指数行情数据接口',
     inputParameters: [
@@ -253,7 +253,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '指数沉淀资金数据',
-    name: 'zscdzjsj',
+    name: 'zsxx_zscdzjsj',
     api: 'index_money',
     description: '指数沉淀资金数据接口',
     inputParameters: [
@@ -295,7 +295,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '公共指数列表',
-    name: 'ggzslb',
+    name: 'zsxx_ggzslb',
     api: 'index_official',
     description: '公共指数列表接口',
     inputParameters: [],
@@ -322,7 +322,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '个人指数列表',
-    name: 'grzslb',
+    name: 'zsxx_grzslb',
     api: 'index_mine',
     description: '个人指数列表接口',
     inputParameters: [],
@@ -349,7 +349,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '指数资金动向',
-    name: 'zszjdx',
+    name: 'zsxx_zszjdx',
     api: 'index_trend',
     description: '指数资金动向接口',
     inputParameters: [
@@ -398,7 +398,7 @@ export const index_dataInterfaces: ApiInterface[] = [
     moduleTitle: '指数',
     moduleName: 'index_data',
     title: '指数的席位盈亏数据',
-    name: 'zsdxwyksj',
+    name: 'zsxx_zsdxwyksj',
     api: 'index_profit',
     description: '指数的席位盈亏数据接口',
     inputParameters: [

@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '实时行情数据',
-    name: 'sshqsj',
+    name: 'wh_sshqsj',
     api: 'forex_spot_em',
     targetUrl: 'https://quote.eastmoney.com/center/gridlist.html#forex_all',
     description: '东方财富网-行情中心-外汇市场-所有汇率-实时行情数据',
@@ -154,7 +154,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '历史行情数据',
-    name: 'lshqsj',
+    name: 'wh_lshqsj',
     api: 'forex_hist_em',
     targetUrl: 'https://quote.eastmoney.com/cnyrate/EURCNYC.html',
     description: '东方财富网-行情中心-外汇市场-所有汇率-历史行情数据',
@@ -246,7 +246,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '人民币牌价数据',
-    name: 'rmbpjsj',
+    name: 'wh_rmbpjsj',
     api: 'currency_boc_sina',
     targetUrl:
       'https://biz.finance.sina.com.cn/forex/forex.php?startdate=2012-01-01&enddate=2021-06-14&money_code=EUR&type=0',
@@ -340,7 +340,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '人民币汇率中间价',
-    name: 'rmbhlzjj',
+    name: 'wh_rmbhlzjj',
     api: 'currency_boc_safe',
     targetUrl: 'https://www.safe.gov.cn/safe/rmbhlzjj/index.html',
     description: '外汇管理局-人民币汇率中间价',
@@ -528,7 +528,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '人民币外汇即期报价',
-    name: 'rmbwhjqbj',
+    name: 'wh_rmbwhjqbj',
     api: 'fx_spot_quote',
     targetUrl: 'http://www.chinamoney.com.cn/chinese/mkdatapfx/',
     description: '人民币外汇即期报价',
@@ -540,7 +540,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '人民币外汇远掉报价',
-    name: 'rmbwhydbj',
+    name: 'wh_rmbwhydbj',
     api: 'fx_swap_quote',
     targetUrl: 'http://www.chinamoney.com.cn/chinese/mkdatapfx/',
     description: '人民币外汇远掉报价',
@@ -567,7 +567,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '外币对即期报价',
-    name: 'wbdjqbj',
+    name: 'wh_wbdjqbj',
     api: 'fx_pair_quote',
     targetUrl: 'http://www.chinamoney.com.cn/chinese/mkdatapfx/',
     description: '外币对即期报价',
@@ -601,7 +601,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '指定币种的所有货币对',
-    name: 'zdbzdsyhbd',
+    name: 'wh_zdbzdsyhbd',
     api: 'currency_pair_map',
     targetUrl: 'https://cn.investing.com/currencies/cny-jmd',
     description: '指定币种的所有能够获取到的货币对信息，历史数据可以调用 **ak.currency_history()** 获取',
@@ -638,7 +638,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '货币对-投机情绪报告',
-    name: 'hbd_tjqxbg',
+    name: 'wh_hbd_tjqxbg',
     api: 'macro_fx_sentiment',
     targetUrl: 'https://datacenter.jin10.com/reportType/dc_ssi_trends',
     description: '货币对-投机情绪报告',
@@ -766,7 +766,7 @@ export const fxInterfaces: ApiInterface[] = [
     moduleTitle: '外汇数据',
     moduleName: 'fx',
     title: '外汇行情报价',
-    name: 'whhqbj',
+    name: 'wh_whhqbj',
     api: 'fx_quote_baidu',
     targetUrl: 'https://gushitong.baidu.com/top/foreign-common-%E5%B8%B8%E7%94%A8',
     description: '百度股市通-外汇-行情榜单',

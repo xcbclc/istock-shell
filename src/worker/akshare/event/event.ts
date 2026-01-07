@@ -24,7 +24,7 @@ export interface InputParameter extends Parameter {
   /** 是否必需 */
   isRequired: boolean;
   /** 默认值 */
-  defaultValue?: string;
+  defaultValue?: any;
   /** 可选项 */
   choices?: string[];
 }
@@ -71,7 +71,7 @@ export const eventInterfaces: ApiInterface[] = [
     moduleTitle: '迁徙数据',
     moduleName: 'event',
     title: '迁入与迁出地详情',
-    name: 'qryqcdxq',
+    name: 'qx_qryqcdxq',
     api: 'migration_area_baidu',
     targetUrl: 'https://qianxi.baidu.com/?from=shoubai#city=0',
     description: '百度-百度地图慧眼-百度迁徙-迁入/迁出地数据接口',
@@ -130,7 +130,7 @@ export const eventInterfaces: ApiInterface[] = [
     moduleTitle: '迁徙数据',
     moduleName: 'event',
     title: '迁徙规模',
-    name: 'qxgm',
+    name: 'qx_qxgm',
     api: 'migration_scale_baidu',
     targetUrl: 'https://qianxi.baidu.com/?from=shoubai#city=0',
     description: '百度-百度地图慧眼-百度迁徙-迁徙规模',
