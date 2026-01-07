@@ -127,7 +127,7 @@ ShVirtualTable 虚拟表格组件
   const wrapStyle = $derived.by(() => {
     if (range && virtualList) {
       const height = `${range.totalHeight}px`;
-      const padding = `${range.paddingTop}px 0 ${range.paddingBottom}px 0`;
+      const padding = `${range.paddingTop - headerSize}px 0 ${range.paddingBottom}px 0`;
       return `height: ${height}; padding: ${padding}`;
     }
     return '';
@@ -142,13 +142,31 @@ ShVirtualTable 虚拟表格组件
     range = newRange; // 更新当前可见范围，触发表格重新渲染可见行
   };
 
+  /** 待处理的尺寸更新队列，用于在virtualList未初始化时缓存节点 */
+  let resizeQueue: HTMLElement[] = [];
+
+  /**
+   * 监听virtualList初始化
+   * 当virtualList准备就绪时，处理队列中积压的尺寸更新请求
+   */
+  $effect(() => {
+    if (virtualList && resizeQueue.length > 0) {
+      resizeQueue.forEach((node) => virtualList.onItemResize(node));
+      resizeQueue = []; // 清空队列
+    }
+  });
+
   /**
    * 列表项尺寸变化回调函数
    * 当表格行高度变化时通知虚拟列表重新计算
    * @param node - 表格行DOM元素
    */
   const onItemResize = (node: HTMLElement) => {
-    virtualList?.onItemResize(node); // 调用虚拟列表的尺寸更新方法
+    if (virtualList) {
+      virtualList.onItemResize(node); // 调用虚拟列表的尺寸更新方法
+    } else {
+      resizeQueue.push(node); // 虚拟列表未就绪，加入队列等待处理
+    }
   };
 
   /**

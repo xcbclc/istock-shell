@@ -145,8 +145,11 @@ export class Tokenizer {
   /** OR 管道操作符正则表达式 */
   readonly #pipeOr = /^\|$/;
 
-  /** 命令正则表达式（支持字母和下划线） */
-  readonly #command = /^[a-zA-Z_]$/;
+  /** 命令起始正则表达式（支持字母） */
+  readonly #commandStart = /^[a-zA-Z]$/;
+
+  /** 命令内容正则表达式（支持字母、数字和下划线） */
+  readonly #commandContent = /^[a-zA-Z0-9_]$/;
 
   /** 参数值正则表达式（排除特殊字符） */
   readonly #parameter = /^[^()（）|&\s]$/;
@@ -154,8 +157,8 @@ export class Tokenizer {
   /** 选项键前缀正则表达式 */
   readonly #optionKeyPrefix = /^-$/;
 
-  /** 选项键正则表达式（支持字母、数字、中文） */
-  readonly #optionKey = /^[-a-zA-Z0-9\u4E00-\u9FA5]$/;
+  /** 选项键正则表达式（支持字母、数字、中文、下划线） */
+  readonly #optionKey = /^[-a-zA-Z0-9_\u4E00-\u9FA5]$/;
 
   /** 字符串引号正则表达式（支持单引号、双引号、反引号） */
   readonly #strSymbol = /^['"\`]$/;
@@ -651,9 +654,9 @@ export class Tokenizer {
       }
 
       // 处理命令字符
-      if (this.#command.test(char) && !acceptParameterToken) {
+      if (this.#commandStart.test(char) && !acceptParameterToken) {
         let value = '';
-        while (this.#command.test(char)) {
+        while (this.#commandContent.test(char)) {
           value += char;
           char = input[++index];
         }

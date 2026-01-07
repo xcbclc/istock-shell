@@ -153,7 +153,8 @@ export class VirtualCore {
       newRange.start !== lastRange.start ||
       newRange.end !== lastRange.end ||
       Math.abs(newRange.paddingTop - lastRange.paddingTop) > 1 ||
-      Math.abs(newRange.paddingBottom - lastRange.paddingBottom) > 1
+      Math.abs(newRange.paddingBottom - lastRange.paddingBottom) > 1 ||
+      Math.abs(newRange.totalHeight - lastRange.totalHeight) > 1
     );
   }
 

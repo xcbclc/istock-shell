@@ -88,9 +88,13 @@ ShChart 图表组件
    * 确保图表始终反映最新的配置状态
    */
   $effect(() => {
-    if (hasChartInstance && chart) {
-      chart.options(options); // 更新图表配置选项
-      void chart.render(); // 重新渲染图表以应用新配置
+    if (hasChartInstance) {
+      try {
+        chart?.options(options); // 更新图表配置选项
+        void chart?.render(); // 重新渲染图表以应用新配置
+      } catch (error) {
+        console.error('Failed to update chart options:', error);
+      }
     }
   });
 
@@ -99,8 +103,8 @@ ShChart 图表组件
    * 只有当图表需要显示且在视口内时才真正显示图表
    */
   $effect(() => {
-    if (hasChartInstance && chart) {
-      isInViewport ? chart.show() : chart.hide();
+    if (hasChartInstance) {
+      isInViewport ? chart?.show() : chart?.hide();
     }
   });
 

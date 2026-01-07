@@ -34,7 +34,8 @@ export class CmdRouteController {
     @CmdRouteArguments(0) cmd: string,
     @CmdRouteOptions(cmdJson.命令查找.options.名称) cmdName: string
   ) {
-    const cmdRoutes = await this.cmdRouteService.getDomainCmdRoute(domainName, {
+    const name = domainName.split('.').pop() as string;
+    const cmdRoutes = await this.cmdRouteService.getDomainCmdRoute(name === 'root' ? '' : name, {
       cmd,
       name: cmdName,
     });
