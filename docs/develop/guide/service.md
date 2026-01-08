@@ -42,7 +42,7 @@ import { GpsjService } from './gpsj/gpsj.service'; // [!code ++]
   ],
   middlewares: [transformStockName],
 })
-export class AgDomain {}
+export class AkshareDomain {}
 ```
 
 将服务提供给`gpsj.controller.ts`控制器使用，示例代码：

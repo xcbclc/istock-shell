@@ -4,7 +4,7 @@
 
 ## 定义控制器
 
-创建一个基本控制器，需要使用类和装饰器。装饰器会将类与所需的元数据相关联，并将命令请求绑定到相应的控制器上。我们创建一个`股票数据`的控制器，文件名为`gpsj.controller.ts`，路径：`src/worker/domains/ag/gpsj/gpsj.controller.ts`，示例代码：
+创建一个基本控制器，需要使用类和装饰器。装饰器会将类与所需的元数据相关联，并将命令请求绑定到相应的控制器上。我们创建一个`股票数据`的控制器，文件名为`gpsj.controller.ts`，路径：`src/worker/domains/akshare/gpsj/gpsj.controller.ts`，示例代码：
 
 ```typescript
 import { Controller } from '@istock-shell/iswork';
@@ -37,7 +37,7 @@ export class GpsjController {
 } // [!code ++]
 ```
 
-添加方法后将该控制器导入到`src/worker/domains/ag/ag.domain.ts`中，示例代码：
+添加方法后将该控制器导入到`src/worker/domains/akshare/ag.domain.ts`中，示例代码：
 
 ```typescript
 import { Domain } from '@istock-shell/iswork';
@@ -46,8 +46,8 @@ import { transformStockName } from '@/worker/common';
 import { GpsjController } from './gpsj/gpsj.controller'; // [!code ++]
 // ...
 @Domain({
-  name: 'ag',
-  viewName: 'A股',
+  name: 'akshare',
+  viewName: 'AKSHARE',
   providers: [
     // ...
   ],
@@ -58,7 +58,7 @@ import { GpsjController } from './gpsj/gpsj.controller'; // [!code ++]
   ],
   middlewares: [transformStockName],
 })
-export class AgDomain {}
+export class AkshareDomain {}
 ```
 
 最后在主线程中调用该方法测试，示例代码：

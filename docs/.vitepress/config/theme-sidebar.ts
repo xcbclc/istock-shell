@@ -8,7 +8,70 @@ export default {
       ],
     },
     {
-      text: '命令',
+      text: '核心能力',
+      items: [
+        { text: 'AI 对话', link: '/use/command/global/ai/ai.cmd.html' },
+        // { text: '搜索', link: '/use/command/global/search/search.cmd.html' },
+        { text: '图表', link: '/use/command/global/chart/chart.cmd.html' },
+        { text: '历史命令', link: '/use/command/global/history/history.cmd.html' },
+        { text: '命令路由', link: '/use/command/global/cmd-route/cmd-route.cmd.html' },
+        { text: '用户', link: '/use/command/global/user/user.cmd.html' },
+        { text: '应用域', link: '/use/command/global/domain/domain.cmd.html' },
+      ],
+    },
+    {
+      text: '应用文档',
+      items: [
+        {
+          text: 'AkShare',
+          items: [
+            { text: '政策不确定性数据', link: '/use/command/akshare/article.html' },
+            { text: '银行数据', link: '/use/command/akshare/bank.html' },
+            { text: '债券数据', link: '/use/command/akshare/bond.html' },
+            { text: '货币数据', link: '/use/command/akshare/currency.html' },
+            { text: '加密货币数据', link: '/use/command/akshare/dc.html' },
+            { text: '能源数据', link: '/use/command/akshare/energy.html' },
+            { text: '迁徙数据', link: '/use/command/akshare/event.html' },
+            { text: '私募基金数据', link: '/use/command/akshare/fund.html' },
+            { text: '期货数据', link: '/use/command/akshare/futures.html' },
+            { text: '外汇数据', link: '/use/command/akshare/fx.html' },
+            { text: '高频数据', link: '/use/command/akshare/hf.html' },
+            { text: '指数数据', link: '/use/command/akshare/index.html' },
+            { text: '利率数据', link: '/use/command/akshare/interest_rate.html' },
+            { text: '宏观数据', link: '/use/command/akshare/macro.html' },
+            { text: '自然语言处理', link: '/use/command/akshare/nlp.html' },
+            { text: '期权数据', link: '/use/command/akshare/option.html' },
+            { text: '另类数据', link: '/use/command/akshare/others.html' },
+            { text: 'QDII 数据', link: '/use/command/akshare/qdii.html' },
+            { text: '席位', link: '/use/command/akshare/qhkc.html' },
+            { text: '现货数据', link: '/use/command/akshare/spot.html' },
+            { text: '股票数据', link: '/use/command/akshare/stock.html' },
+            { text: '工具箱', link: '/use/command/akshare/tool.html' },
+          ],
+        },
+        {
+          text: '投资日历',
+          items: [{ text: '投资日历', link: '/use/command/tzrl/tzrl/tzrl.cmd.html' }],
+        },
+        {
+          text: '成都房产',
+          items: [{ text: '成都房产', link: '/use/command/cdfc/cdesf/cdesf.cmd.html' }],
+        },
+        {
+          text: '可转债',
+          items: [
+            { text: '实时数据', link: '/use/command/kzz/kzzsd/kzzsd.cmd.html' },
+            { text: '历史数据', link: '/use/command/kzz/kzzsssj/kzzsssj.cmd.html' },
+          ],
+        },
+        {
+          text: '网站导航',
+          items: [{ text: '财经', link: '/use/command/wzdh/cj/cj.cmd.html' }],
+        },
+      ],
+    },
+    {
+      text: '命令总览',
       items: [{ text: '命令文档', link: '/use/command/index.html' }],
     },
     {
@@ -49,10 +112,7 @@ export default {
     },
     {
       text: '部署',
-      items: [
-        { text: '镜像部署', link: '/develop/deploy/docker.html' },
-        { text: '代理服务', link: '/develop/deploy/proxy.html' },
-      ],
+      items: [{ text: '镜像部署', link: '/develop/deploy/docker.html' }],
     },
     {
       text: '深入理解',
@@ -61,6 +121,14 @@ export default {
         /*{ text: '最佳实践', link: '/develop/best-practices.html' }*/
       ],
     },
+  ],
+  '/std': [
+    { text: '开发', link: '/std/develop.html' },
+    { text: '命令', link: '/std/command.html' },
+    { text: '协议', link: '/std/protocol.html' },
+    { text: '术语', link: '/std/term.html' },
+    { text: 'UI 交互', link: '/std/ui.html' },
+    { text: '数据存储', link: '/std/database.html' },
   ],
   '/packages/shell-ui': [
     {

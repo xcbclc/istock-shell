@@ -16,7 +16,7 @@
 
 ## 应用域中间件
 
-当发起应用域内的消息请求时，`应用域中间件`会在改应用域消息处理程序执行前执行。如果存在`全局中间件`，`全局中间件`比`应用域中间件`先执行。
+当发起应用域内的消息请求时，`应用域中间件`会在该应用域消息处理程序执行前执行。如果存在`全局中间件`，`全局中间件`比`应用域中间件`先执行。
 
 ## 中间件开发与使用
 
@@ -115,5 +115,5 @@ import { transformStockName } from '@/worker/common'; // [!code ++]
   middlewares: [transformStockName], // [!code ++]
   // ...
 })
-export class AgDomain {}
+export class AkshareDomain {}
 ```

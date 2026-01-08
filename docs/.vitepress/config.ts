@@ -12,6 +12,19 @@ export default defineConfig({
     // Vite 配置选项
     server: {
       port: 5172,
+      proxy: {
+        '/shell': {
+          target: 'http://localhost:5173',
+          changeOrigin: true,
+          secure: false,
+          ws: true,
+        },
+        '/api': {
+          target: 'http://localhost:5170',
+          changeOrigin: true,
+          secure: false,
+        },
+      },
     },
     plugins: [tailwindcss(), svelte()],
     css: { preprocessorOptions: { scss: { api: 'modern-compiler' } } },

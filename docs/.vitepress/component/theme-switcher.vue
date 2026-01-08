@@ -189,7 +189,19 @@ const setTheme = (theme: string) => {
 
   // 同步iframe
   document.querySelectorAll('iframe').forEach((el) => {
-    el.contentWindow.document.documentElement.setAttribute('data-theme', theme);
+    const contentWindow = el.contentWindow;
+    if (!contentWindow) return;
+    const doc = contentWindow.document.documentElement;
+    if (doc.getAttribute('data-type') !== 'cmd') return;
+    doc.style.setProperty('min-height', '100vh');
+    doc.style.setProperty(
+      'background-color',
+      getComputedStyle(document.documentElement).getPropertyValue('--color-base-200') || 'transparent'
+    );
+    const cmdWindow = contentWindow.CmdWindowsManager?.cmdWindowsManager?.getCmdWindow?.();
+    console.log(cmdWindow);
+    if (!cmdWindow) return;
+    cmdWindow.store.theme.setThemeByName(theme);
   });
 };
 

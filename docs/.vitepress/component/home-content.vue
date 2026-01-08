@@ -17,7 +17,7 @@
             </h2>
 
             <p class="section-desc">
-               强大的命令解析引擎，支持智能补全、别名系统与模糊搜索。 像聊天一样简单，比传统终端更高效。
+               强大的命令解析引擎，支持智能补全、别名系统。 像聊天一样简单，比传统终端更高效。
             </p>
 
             <div class="feature-highlights">
@@ -71,7 +71,7 @@
           <div class="feature-demo" style="padding-top: 40px">
 
             <div class="demo-card">
-               <IStockShellDemo cmd="help" :height="480" subtitle="命令演示 · Command Demo" />
+               <IStockShellDemo cmd="yyjr akshare && gp_zqlbtj" :height="480" subtitle="命令演示 · Command Demo" />
             </div>
 
           </div>
@@ -91,7 +91,13 @@
           <div class="feature-demo">
 
             <div class="demo-card">
-               <IStockShellDemo cmd="sshqsj hag" :height="420" subtitle="数据查询 · Stock Data Query" />
+               <IStockShellDemo
+                cmd=""
+                mode="3"
+                :cmdAutoCallback="onCmdQueryDataAutoCallback"
+                :height="420"
+                subtitle="数据查询 · Stock Data Query"
+              />
             </div>
 
           </div>
@@ -105,7 +111,7 @@
 
             <p class="section-desc">
                深度集成 AkShare 等数据源，覆盖 A股、港股、美股、期货、基金、外汇等全品类金融数据。
-              一个命令，获取完整市场洞察。
+              使用命令，获取完整市场洞察。
             </p>
 
             <div class="data-categories">
@@ -203,7 +209,11 @@
             </div>
 
             <div class="demo-card">
-               <IStockShellDemo cmd="ai:分析一下当前的A股市场情绪" :height="356" subtitle="AI对话 · AI Conversation" />
+               <IStockShellDemo
+                cmd="ai:请简短总结一下当前的A股市场情绪"
+                :height="356"
+                subtitle="AI对话 · AI Conversation"
+              />
             </div>
 
           </div>
@@ -394,6 +404,53 @@ import { useData } from 'vitepress';
 import IStockShellDemo from './istock-shell-demo.vue';
 
 const { frontmatter: fm } = useData();
+
+const onCmdQueryDataAutoCallback = async (contentWindow: Window, windowId: string) => {
+  const ctx = contentWindow.CmdWindowsManager.cmdWindowsManager.getCmdContext(windowId);
+  if (!ctx) return;
+  const { input, output } = ctx.store;
+  let cmds = [
+    'yyjr akshare',
+    'gp_shzqjys',
+    'gp_zmgg',
+    'gp_zmmg',
+    'qh_np_sshqsj_pz -symbol 黄金',
+    'gmjj_jjyj_xq -symbol 000300',
+    'zq_sshqsj',
+    'zq_sshqsj',
+    'qq_mrtj_shzqjys',
+    'yyjr ../',
+    'lssc',
+  ];
+  while (true) {
+    for (const cmd of cmds) {
+      while (!input.canInput) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+      const lastOutput = output.list[output.list.length - 1];
+      let mentions: Array<{
+        id: string;
+        label: string;
+        mentionSuggestionChar: string;
+      }> = [];
+      if (lastOutput) {
+        mentions.push({
+          id: lastOutput.id,
+          label: lastOutput.input,
+          mentionSuggestionChar: '#',
+        });
+      }
+      let newCmd: string = cmd.replace(/\$\{1\}/g, lastOutput ? `${lastOutput.id},${lastOutput.input}` : '');
+      for (let i = 1; i <= newCmd.length; i++) {
+        input.commandEditor.handleCommandInput(newCmd.slice(0, i));
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+      await input.sendCmd(newCmd, mentions);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
+};
 </script>
 
 <style scoped>

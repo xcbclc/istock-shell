@@ -1,79 +1,129 @@
-欢迎使用`iStock Shell`，这是一个强大的金融数据查询终端，让您能够通过命令行交互方式查询和分析金融数据。下面是如何开始使用的简单指南。
+# 快速上手
 
-访问演示地址 [https://istock.red/shell](https://istock.red/shell)，即可打开`iStock Shell`并开始探索其功能。
+欢迎使用 `iStock Shell`！这是一个 **AI 原生** 的金融数据分析终端，它将传统的命令行交互与大语言模型（LLM）完美融合。在这里，您不仅可以通过精准的命令查询全市场数据，还能使用自然语言与 AI 对话，获取深度的市场洞察。
 
-## 快速开始
+访问演示地址 [https://istock.red/shell](https://istock.red/shell)，立即开启您的金融探索之旅。
 
-### 首次使用注意事项
+## ⚠️ 准备工作
 
-**阅读免责声明**：在使用前，请确保仔细阅读出现的`免责声明`，并理解使用该软件的风险。
+### 阅读免责声明
+
+在使用前，请务必仔细阅读系统弹出的`免责声明`。
 
 ::: warning 注意
-使用本软件意味着您同意免责声明。
+使用本软件意味着您已完全理解并同意免责声明中的所有条款，知晓金融投资存在的风险。
 :::
 
-### 尝试输入命令
+## 💡 核心概念
 
-1. **查找应用**：在底部的输入框中输入应用查找命令`yycz`，查看当前可用的应用列表。按回车键执行，即可看到应用列表输出结果。 示例：
-   <IStockShellDemo cmd="yycz" :domains="[]"/>
+在开始之前，了解以下两个核心概念将有助于您更流畅地使用：
 
-2. **进入应用**：要进入特定应用，输入应用进入命令`yyjr <应用名或应用别名>`。例如，要进入A股应用，输入`yyjr A股`，随后提示符路径会更新为A股应用的环境。 示例：
-   <IStockShellDemo cmd="yyjr A股" :domains="[]" height="200"/>
+- **应用 (App/Domain)**：
+  `iStock Shell` 将不同市场的业务数据划分在不同的"应用"中（如 AKSHARE、投资日历等）。这就好比电脑中的文件夹，您需要进入对应的文件夹才能查看其中的文件。
 
-3. **查找应用命令**：若要了解当前应用下有哪些可用的命令，请输入命令查找命令`mlcz`。这将展示该应用下所有命令的详细列表，包括命令名称、描述、用法和参数等。 示例：
-   <IStockShellDemo cmd="mlcz" :domains="[]"/>
+- **命令 (Command)**：
+  - **全局命令**：在任何位置都能使用的通用指令（如查找应用、AI 对话）。
+  - **应用命令**：仅在特定应用下生效的专业指令（如 AKSHARE 下的"历史行情查询"）。
 
-::: tip 提示
-以上尝试输入的命令都是[`全局命令`](/std/term.html#全局命令)，`全局命令`意味着在任何应用下都可以执行，[`应用命令`](/std/term.html#应用命令)只能在对应应用下执行。
-:::
+## 🚀 基础交互
 
-### 使用应用命令
+### 1. 发现应用 (yycz)
 
-**查询历史行情**：
-以查询A股应用下的历史行情为例，首先进入A股应用(参考：尝试输入命令-进入应用)。
-然后查看历史行情命令用法为`lshqsj [-gpmc <股票名称>] [-ksrq <开始日期>]`。我们输入`lshqsj -gpmc 贵州茅台 -ksrq 20240101`，将输出贵州茅台的历史行情表格数据。 示例：
-<IStockShellDemo cmd="lshqsj -gpmc 贵州茅台 -ksrq 20240101" :domains="[{viewName: 'A股',name: 'ag'}]"/>
+不知道支持哪些应用？使用 `yycz` (应用查找) 命令查看所有可用应用。
 
-## 命令自动补全
+输入：`yycz`
+<IStockShellDemo cmd="yycz" :domains="[]"/>
 
-为了提高命令输入的效率，您可以使用命令自动补全功能：
+### 2. 进入应用 (yyjr)
 
-1. 输入命令前缀（如`ls`），然后按`Tab`键，系统会弹出相关命令的列表。使用上下箭头选择所需命令，然后按回车键补全。
-2. 当输入框显示如`lshqsj`后，继续输入` -`并按`Tab`键，系统将弹出相关参数的列表供选择。
+找到感兴趣的市场后，使用 `yyjr` (应用进入) 命令切换环境。例如，我们要分析 AKSHARE数据：
 
-## 管道操作符
+输入：`yyjr akshare`
+<IStockShellDemo cmd="yyjr akshare" :domains="[]" height="200"/>
 
-使用管道操作符`|`可以将一个命令的输出作为另一个命令的输入，进行更复杂的数据处理。例如，将历史行情数据转换为蜡烛图：
-输入：`lshqsj -gpmc 贵州茅台 -ksrq 20150101 -sjzq 月 | tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低`，示例：
-<IStockShellDemo height="610" cmd="lshqsj -gpmc 贵州茅台 -ksrq 20150101 -sjzq 月 | tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低" :domains="[{viewName: 'A股',name: 'ag'}]"/>
+> **提示**：执行后，命令行的提示符路径会变为 `/akshare`，表示您已成功进入该环境。
 
-## 浏览历史命令
+### 3. 探索功能 (mlcz)
 
-快速访问和修改历史命令可以提高您的工作效率。在输入框中，使用`Ctrl + ↑`向上翻阅历史记录，使用`Ctrl + ↓`向下翻阅。
-例如，找到并选择`lshqsj -gpmc 贵州茅台 -ksrq 20150101 -sjzq 月 | tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低`，您可以继续修改命令，修改为成交额条形图展示。
-修改输入：`lshqsj -gpmc 贵州茅台 -ksrq 20150101 -sjzq 月 | tb txt -x 日期 -y 成交额`，示例：
-<IStockShellDemo height="590" cmd="lshqsj -gpmc 贵州茅台 -ksrq 20150101 -sjzq 月 | tb txt -x 日期 -y 成交额" :domains="[{viewName: 'A股',name: 'ag'}]"/>
+进入应用后，想知道能做什么？使用 `mlcz` (命令查找) 列出当前应用下的所有可用命令。
 
-通过上述步骤，您应该能够开始使用`iStock Shell`进行基本的数据查询和分析。随着对命令的熟悉，您将能够发挥出`iStock Shell`的更多潜力，满足您对金融数据查询和分析的需求。
+输入：`mlcz`
+<IStockShellDemo cmd="mlcz" :domains="[]"/>
 
-## 命令别名
+## 🤖 AI 智能辅助
 
-有时候，我们需要频繁输入的命令可能会很长，每次都输入会降低效率。这时候，给这些长命令取一个别名就很有用。
+`iStock Shell` 内置了大语言模型能力。当您不仅需要数据，更需要分析和建议时，请呼叫 AI。
 
-举个例子，假设你经常需要输入这样一段命令：`lshqsj -gpmc 贵州茅台 -ksrq 20100101 -sjzq 月 | tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低`，
-这段命令有点长，如果每次都要输入，未免太费事了。我们可以给这个命令取一个别名，比如叫做`行情茅台`。
-设置别名的方法很简单：
+### 使用 AI 命令
 
-1. 在命令输出区域，鼠标右键选中`添加别名`菜单，或者使用快捷键`ctrl+alt+a`。
-2. 弹出别名设置菜单，设置别名为`行情茅台`。
+使用 `ai:` 前缀加上您的问题，直接与 AI 对话。
 
-设置成功后，下次你只需要在命令输入框中输入`:行情`，按`tab`键就能在自动补全列表选择`行情茅台`别名，选择该别名后就会输入对应的命令了。
+输入：`ai:简短介绍下当前宏观经济？`
+<IStockShellDemo cmd="ai:简短介绍下当前宏观经济？" :domains="[]" height="400"/>
 
-演示：
+您可以尝试问它："如何分析KDJ指标？" 或 "如何投资A股？"
 
-<video controls width="614">
+## 📊 数据查询与可视化
+
+`iStock Shell` 的强大之处在于灵活的数据处理与可视化能力。
+
+### 查询数据
+
+以查询 **贵州茅台** 的历史行情为例（需先进入 `AKSHARE` 应用）：
+
+输入：`gp_lshqsj_dc1 -symbol 600519 -start_date 20250101`
+<IStockShellDemo cmd="gp_lshqsj_dc1 -symbol 600519 -start_date 20250101" :domains="[{viewName: 'AKSHARE',name: 'akshare'}]"/>
+
+### 管道操作与绘图
+
+支持类 Unix 的管道操作符 `|`，将数据传递给图表工具。
+
+**示例 1：绘制 K 线图**
+将历史行情数据转换为专业的蜡烛图：
+
+输入：`gp_lshqsj_dc1 -symbol 600519 -start_date 20150101 -period monthly | tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低`
+<IStockShellDemo height="610" cmd="gp_lshqsj_dc1 -symbol 600519 -start_date 20150101 -period monthly | tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低" :domains="[{viewName: 'AKSHARE',name: 'akshare'}]"/>
+
+**示例 2：绘制成交额统计图**
+将数据转换为条形图：
+
+输入：`gp_lshqsj_dc1 -symbol 600519 -start_date 20150101 -period monthly | tb txt -x 日期 -y 成交额`
+<IStockShellDemo height="590" cmd="gp_lshqsj_dc1 -symbol 600519 -start_date 20150101 -period monthly | tb txt -x 日期 -y 成交额" :domains="[{viewName: 'AKSHARE',name: 'akshare'}]"/>
+
+## ⚡ 效率倍增技巧
+
+### 1. 智能补全 (Tab)
+
+无需死记硬背命令：
+
+- 输入前缀（如 `ls`）按 `Tab` 键 -> 自动补全命令。
+- 输入命令后（如 `lshqsj`）按空格再按 `Tab` -> 自动提示可用参数（如 `-gpmc`）。
+
+### 2. 历史回溯 (Ctrl + ↑/↓)
+
+想修改刚才的命令？
+
+- 使用 `Ctrl + ↑` 快速调出上一条命令。
+- 使用 `Ctrl + ↓` 向下翻阅历史记录。
+
+### 3. 命令别名 (Alias)
+
+对于常用的长命令，可以给它起个"昵称"。
+
+**操作步骤**：
+
+1. 在命令输出结果区域，点击鼠标**右键**。
+2. 选择 **"添加别名"** (或按 `Ctrl+Alt+A`)。
+3. 输入您喜欢的名称（例如：`茅台行情`）。
+
+**使用别名**：
+输入 `:` (冒号)，按 `Tab` 键，选择您的别名即可一键执行。
+
+<video controls width="100%">
 <source src="https://cdn.istock.red/video/%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D.mp4" type="video/mp4" />
-您的浏览器不支持Video标签。
+您的浏览器不支持 Video 标签。
 </video>
 
-通过设置命令别名，你可以更轻松地使用iStock Shell，不再需要反复输入那些繁长的命令，提高你的工作效率。
+---
+
+现在，您已经掌握了 `iStock Shell` 的基本操作。开始您的探索吧！

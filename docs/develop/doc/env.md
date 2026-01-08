@@ -6,10 +6,14 @@
 
 ### .env
 
-- `VITE_AKSHARE_API`：AkShare服务的接口前缀
-- `VITE_ISTOCK_API`：iStock Shell服务的接口前缀
-- `VITE_SITE_BAIDU_ANALYSIS`：是否开启百度统计代码，自己部署请设置为`false`
+- `VITE_PROXY_API`：代理接口地址前缀
+- `VITE_ISTOCK_API`：istock服务接口
+- `VITE_SITE_BAIDU_ANALYSIS`：百度统计代码
+- `VITE_ISTOCK_TEABLE`：teable服务接口地址
+- `VITE_ISTOCK_BASE`：istock服务接口地址
+- `VITE_INDEXED_DB_NAME`：IndexedDB数据库名称
+- `VITE_INDEXED_DB_VERSION`：IndexedDB数据库版本
 
 ### .env.development
 
-- `VITE_PROXY`：本地启动开发服务时的代理地址，默认值：https://istock.red
+- `VITE_PROXY`：开发接口代理地址，默认值：https://istock.red

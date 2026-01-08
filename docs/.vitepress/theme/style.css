@@ -178,8 +178,8 @@
 }
 
 .VPFeatures .VPImage {
-  filter: drop-shadow(0 1000px 0 var(--vp-c-brand-1));
-  transform: translateY(-1000px);
+  filter: drop-shadow(0 10000px 0 var(--vp-c-brand-1));
+  transform: translateY(-10000px);
 }
 @media (max-width: 960px) {
   .VPHomeHero .image-container {

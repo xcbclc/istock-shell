@@ -45,6 +45,9 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  cmdAutoCallback: {
+    type: Function,
+  },
 });
 const iframeRef = ref<HTMLIFrameElement>();
 const hasBeenInViewport = ref(false);
@@ -74,6 +77,7 @@ onMounted(() => {
     );
     observer.observe(iframeRef.value);
   }
+  window.addEventListener('message', onMessage);
 });
 
 onUnmounted(() => {
@@ -81,7 +85,17 @@ onUnmounted(() => {
     observer.unobserve(iframeRef.value);
     observer.disconnect();
   }
+  window.removeEventListener('message', onMessage);
 });
+
+const onMessage = (event: MessageEvent) => {
+  if (event.data?.type === 'cmd:initialized') {
+    if (iframeRef.value && event.source === iframeRef.value.contentWindow) {
+      props.cmdAutoCallback?.(iframeRef.value.contentWindow, event.data.windowId);
+    }
+  }
+};
+
 const style = computed(() => {
   if (!props.height) return {};
   if (typeof props.height === 'string') {

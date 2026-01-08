@@ -16,47 +16,54 @@
 
 ## 定义及使用应用域
 
-我们将以定义及使用`A股`应用域为例，来具体说明应用域的定义和使用。
+我们将以定义及使用`AKSHARE`应用域为例，来具体说明应用域的定义和使用。
 
 ### 定义应用域
 
-创建`A股`应用域文件`ag.domain.ts`，路径为`src/worker/domains/ag/ag.domain.ts`，然后导入应用域`Domain`装饰器，我们通过`Domain`装饰器将类定义为应用域，示例代码：
+创建`AKSHARE`应用域文件`akshare.domain.ts`，路径为`src/worker/domains/akshare/akshare.domain.ts`，然后导入应用域`Domain`装饰器，我们通过`Domain`装饰器将类定义为应用域，示例代码：
 
 ```typescript
 import { Domain } from '@istock-shell/iswork';
 
 @Domain({
-  name: 'ag',
-  viewName: 'A股',
+  name: 'akshare',
+  viewName: 'AKSAHRE',
   providers: [],
   controllers: [],
   middlewares: [],
 })
-export class AgDomain {}
+export class AkshareDomain {}
 ```
 
 `Domain`装饰器接受如下参数：
 
 ```typescript
-export type TDomainMetadata = {
-  name: string; // 为应用域定义一个唯一的名称
-  viewName: string; // 应用域的显示名称
-  imports?: TMetadataImport[]; // 需要导入的子应用域
-  controllers?: TController[]; // 应用域所属的控制器
-  providers?: TProviderMeta[]; // 提供者，供控制器依赖注入使用，提供者一般是服务类
-  exports?: TMetadataExport[]; // 暴露到外部应用域所使用的控制器或提供者
-  middlewares?: TMiddleware[]; // 应用域所需要使用的中间件
+type DomainMetadata = {
+  /** 为应用域定义一个唯一的名称 */
+  name: string;
+  /** 应用域的显示名称 */
+  viewName: string;
+  /** 需要导入的子应用域 */
+  imports?: MetadataImport[];
+  /** 应用域所属的控制器 */
+  controllers?: ControllerBase[];
+  /** 提供者，供控制器依赖注入使用，提供者一般是服务类 */
+  providers?: ProviderMeta[];
+  /** 暴露到外部应用域所使用的控制器或提供者 */
+  exports?: MetadataExport[];
+  /** 应用域所需要使用的中间件 */
+  middlewares?: Middleware[];
 };
 ```
 
 ### 使用应用域
 
-将`A股`应用域导入到`根`应用域，代码路径`src/worker/domains/root.domain.ts`，示例代码：
+将`AKSHARE`应用域导入到`根`应用域，代码路径`src/worker/domains/root.domain.ts`，示例代码：
 
 ```typescript
 import { Global, Domain } from '@istock-shell/iswork';
 // ...
-import { AgDomain } from './ag/ag.domain'; // [!code ++]
+import { AkshareDomain } from './akshare/akshare.domain'; // [!code ++]
 // ...
 
 @Global()
@@ -65,7 +72,7 @@ import { AgDomain } from './ag/ag.domain'; // [!code ++]
   viewName: '根',
   imports: [
     //...
-    AgDomain, // [!code ++]
+    AkshareDomain, // [!code ++]
     // ...
   ],
   providers: [],

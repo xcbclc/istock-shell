@@ -8,3 +8,6 @@ interface ImportMetaEnv {
   readonly VITE_ISTOCK_SHELL: string;
   readonly VITE_ISTOCK_SHELL_UI_COMPONENT_EDIT_URL: string;
 }
+interface Window {
+  readonly CmdWindowsManager: any;
+}

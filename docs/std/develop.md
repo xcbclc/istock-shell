@@ -1,34 +1,116 @@
 # 开发规范
 
-在开发`iStock Shell`时，遵循以下开发规范能够帮助你保持整个项目的一致性。
+为确保 `iStock Shell` 项目的可维护性、一致性和高质量，所有贡献者必须遵循以下开发规范。本规范涵盖代码风格、架构设计、命名约定及开发流程。
 
-## 代码规范
+## 1. 技术栈概览
 
-`iStock Shell`使用`eslint + prettier + husky + lint-staged`方案来确保代码规范和一致性。这个方案集成了多种常用规范，并通过自动化工具来确保代码风格的统一性和可读性。
+- **核心语言**: [TypeScript](https://www.typescriptlang.org/) (强类型 JavaScript 超集)
+- **构建工具**: [Vite](https://vitejs.dev/) (极速前端构建工具)
+- **UI 框架**: [Svelte](https://svelte.dev/) (高性能组件框架)
+- **包管理**: [pnpm](https://pnpm.io/) (高效的包管理器，使用 Workspaces)
+- **代码规范**: ESLint + Prettier + Husky + Lint-staged
 
-## 命名规范
+## 2. 项目架构
 
-### 文件夹和文件名
+本项目采用 Monorepo 结构，核心代码位于 `src/packages` 目录下：
 
-- 文件夹和文件名使用`短横线(-)`分隔多个单词，以保持统一和易读性。
-- 对于需要区分分类的文件，可以使用`[文件名].[分类].[扩展名]`的命名格式，例如：_.decorator.ts表示装饰器文件，_.domain.ts表示命令域文件，_.controller.ts表示控制器类文件，_.cmd.ts表示命令描述文件，_.service.ts表示命令服务文件，_.model.ts表示命令数据模型文件。
-- UI对应的组件文件名则使用单词`首字母大写`分隔。
+- **`iswork`**: 核心业务框架。实现了 IOC 容器、CMDP 协议、ORM、消息总线等基础设施。
+- **`command-parser`**: 命令解析器。负责词法分析、语法分析及 AST 构建。
+- **`cli`**: 命令行工具。提供开发辅助和脚手架功能。
+- **`shell-ui`**: UI 组件库。包含终端界面、图表展示等 Svelte 组件。
+- **`util`**: 通用工具库。提供底层 helper 函数。
 
-### TypeScript类型和接口
+## 3. 核心概念与分层
 
-- 定义TS类型时，以大写字母`T开头`，命名单词以`首字母大写`分隔。
-- 定义TS接口时，以大写字母`I开头`，命名单词以`首字母大写`分隔。
+`iswork` 框架采用类似于 NestJS 的模块化分层架构：
 
-遵循这些命名规范可以使项目结构清晰，便于团队协作和代码维护。
+### 3.1 Application (应用)
 
-### 命令描述文件
+整个系统的入口，负责初始化上下文、加载配置和启动服务。
 
-描述文件配置数据需要按照默认导出的方式进行，也就是说，你需要将配置数据放在一个默认导出的对象中，如下所示：
+### 3.2 Domain (域/模块)
+
+功能模块的逻辑单元。通过 `@Domain` 装饰器定义，类似于 Angular/NestJS 的 Module。
+
+- **职责**：组织相关的 Controller、Service 和 Provider。
+- **规范**：每个独立的功能块（如股票、期货、系统设置）应作为一个 Domain。
+
+### 3.3 Controller (控制器)
+
+负责处理命令请求。通过 `@Controller` 装饰器定义。
+
+- **职责**：接收 CMDP 消息，解析参数，调用 Service，返回结果。
+- **规范**：文件名以 `.controller.ts` 结尾。
+
+### 3.4 Service/Provider (服务)
+
+封装业务逻辑。通过 `@Injectable` 装饰器定义。
+
+- **职责**：处理复杂业务、数据计算、API 调用。
+- **规范**：文件名以 `.service.ts` 结尾。
+
+### 3.5 Model (模型)
+
+定义数据结构和持久化逻辑。
+
+- **职责**：映射数据库表或 API 数据结构。
+- **支持**：IndexedDB, Memory, Fetch 等多种驱动。
+
+## 4. 命名规范
+
+### 4.1 文件与目录
+
+- **强制**：所有文件名和目录名统一使用 **kebab-case**（短横线命名法）。
+- **结构**：`[功能].[类型].[扩展名]`
+  - 正例：`user-profile.controller.ts`, `auth.service.ts`, `stock-data.model.ts`
+  - 反例：`UserProfileController.ts`, `AuthService.ts`
+
+### 4.2 代码标识符
+
+- **类 (Class)**: PascalCase (大驼峰)，如 `UserController`。
+- **方法/变量**: camelCase (小驼峰)，如 `getUserInfo`。
+- **常量**: UPPER_SNAKE_CASE (全大写下划线)，如 `MAX_RETRY_COUNT`。
+- **接口 (Interface)**: PascalCase，建议不加 `I` 前缀。
+
+## 5. 命令描述文件规范
+
+在定义命令配置时，必须使用 `export default` 导出配置对象，以便 CLI 工具能够自动生成文档和类型定义。
 
 ```typescript
+// 示例：cmd-config.ts
 export default {
-  // 在这里放置你的配置数据
+  cmd: 'hq',
+  description: '获取行情数据',
+  options: [{ name: 'market', parameter: ['m'], parameterType: ['string'], description: '市场代码' }],
 };
 ```
 
-这样的约定设计是为了方便使用命令工具来生成文档。
+## 6. 开发流程与工具
+
+### 6.1 环境准备
+
+确保本地安装了 Node.js (>=16) 和 pnpm (>=7)。
+
+```bash
+# 安装依赖
+pnpm install
+
+# 启动开发服务器
+pnpm dev
+
+# 构建项目
+pnpm build
+```
+
+### 6.2 代码提交
+
+提交代码前，Husky 会自动触发 pre-commit 钩子，执行 lint 和 format 检查。
+请遵循 [Conventional Commits](https://www.conventionalcommits.org/) 规范撰写提交信息：
+
+- `feat`: 新功能
+- `fix`: 修复 Bug
+- `docs`: 文档变更
+- `style`: 代码格式调整（不影响逻辑）
+- `refactor`: 代码重构
+- `test`: 测试相关
+- `chore`: 构建过程或辅助工具变动
