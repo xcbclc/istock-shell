@@ -68,107 +68,107 @@ export interface ApiInterface {
  */
 export const qdiiInterfaces: ApiInterface[] = [
   {
-    moduleTitle: 'QDII 数据',
-    moduleName: 'qdii',
-    title: '欧美指数',
-    name: 'qdii_omzs',
-    api: 'qdii_e_index_jsl',
-    targetUrl: 'https://www.jisilu.cn/data/qdii/#qdiia',
-    description: '集思录-T+0 QDII-欧美市场-欧美指数',
-    remarks: '单次返回所有数据',
-    inputParameters: [],
-    outputParameters: [
+    "moduleTitle": "QDII 数据",
+    "moduleName": "qdii",
+    "title": "欧美指数",
+    "name": "qdii_omzs",
+    "api": "qdii_e_index_jsl",
+    "targetUrl": "https://www.jisilu.cn/data/qdii/#qdiia",
+    "description": "集思录-T+0 QDII-欧美市场-欧美指数",
+    "remarks": "单次返回所有数据",
+    "inputParameters": [],
+    "outputParameters": [
       {
-        title: '成交',
-        name: 'cj',
-        type: 'float64',
-        description: '注意单位: 万元',
-        unit: '万元',
+        "title": "成交",
+        "name": "cj",
+        "type": "float64",
+        "description": "注意单位: 万元",
+        "unit": "万元"
       },
       {
-        title: '场内份额',
-        name: 'cnfe',
-        type: 'int64',
-        description: '注意单位: 万份',
-        unit: '万份',
+        "title": "场内份额",
+        "name": "cnfe",
+        "type": "int64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
       },
       {
-        title: '场内新增',
-        name: 'cnxz',
-        type: 'int64',
-        description: '注意单位: 万份',
-        unit: '万份',
-      },
-    ],
+        "title": "场内新增",
+        "name": "cnxz",
+        "type": "int64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
+      }
+    ]
   },
   {
-    moduleTitle: 'QDII 数据',
-    moduleName: 'qdii',
-    title: '欧美商品',
-    name: 'qdii_omsp',
-    api: 'qdii_e_comm_jsl',
-    targetUrl: 'https://www.jisilu.cn/data/qdii/#qdiia',
-    description: '集思录-T+0 QDII-欧美市场-欧美商品',
-    remarks: '单次返回所有数据',
-    inputParameters: [],
-    outputParameters: [
+    "moduleTitle": "QDII 数据",
+    "moduleName": "qdii",
+    "title": "欧美商品",
+    "name": "qdii_omsp",
+    "api": "qdii_e_comm_jsl",
+    "targetUrl": "https://www.jisilu.cn/data/qdii/#qdiia",
+    "description": "集思录-T+0 QDII-欧美市场-欧美商品",
+    "remarks": "单次返回所有数据",
+    "inputParameters": [],
+    "outputParameters": [
       {
-        title: '成交',
-        name: 'cj',
-        type: 'float64',
-        description: '注意单位: 万元',
-        unit: '万元',
+        "title": "成交",
+        "name": "cj",
+        "type": "float64",
+        "description": "注意单位: 万元",
+        "unit": "万元"
       },
       {
-        title: '场内份额',
-        name: 'cnfe',
-        type: 'int64',
-        description: '注意单位: 万份',
-        unit: '万份',
+        "title": "场内份额",
+        "name": "cnfe",
+        "type": "int64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
       },
       {
-        title: '场内新增',
-        name: 'cnxz',
-        type: 'int64',
-        description: '注意单位: 万份',
-        unit: '万份',
-      },
-    ],
+        "title": "场内新增",
+        "name": "cnxz",
+        "type": "int64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
+      }
+    ]
   },
   {
-    moduleTitle: 'QDII 数据',
-    moduleName: 'qdii',
-    title: '亚洲指数',
-    name: 'qdii_yzzs',
-    api: 'qdii_a_index_jsl',
-    targetUrl: 'https://www.jisilu.cn/data/qdii/#qdiia',
-    description: '集思录-T+0 QDII-亚洲市场-亚洲指数',
-    remarks: '单次返回所有数据',
-    inputParameters: [],
-    outputParameters: [
+    "moduleTitle": "QDII 数据",
+    "moduleName": "qdii",
+    "title": "亚洲指数",
+    "name": "qdii_yzzs",
+    "api": "qdii_a_index_jsl",
+    "targetUrl": "https://www.jisilu.cn/data/qdii/#qdiia",
+    "description": "集思录-T+0 QDII-亚洲市场-亚洲指数",
+    "remarks": "单次返回所有数据",
+    "inputParameters": [],
+    "outputParameters": [
       {
-        title: '成交',
-        name: 'cj',
-        type: 'float64',
-        description: '注意单位: 万元',
-        unit: '万元',
+        "title": "成交",
+        "name": "cj",
+        "type": "float64",
+        "description": "注意单位: 万元",
+        "unit": "万元"
       },
       {
-        title: '场内份额',
-        name: 'cnfe',
-        type: 'int64',
-        description: '注意单位: 万份',
-        unit: '万份',
+        "title": "场内份额",
+        "name": "cnfe",
+        "type": "int64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
       },
       {
-        title: '场内新增',
-        name: 'cnxz',
-        type: 'int64',
-        description: '注意单位: 万份',
-        unit: '万份',
-      },
-    ],
-  },
+        "title": "场内新增",
+        "name": "cnxz",
+        "type": "int64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
+      }
+    ]
+  }
 ];
 
 /**
@@ -177,7 +177,7 @@ export const qdiiInterfaces: ApiInterface[] = [
  * @returns 接口定义或undefined
  */
 export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
-  return qdiiInterfaces.find((item) => item.api === apiName);
+  return qdiiInterfaces.find(item => item.api === apiName);
 }
 
 /**
@@ -186,7 +186,7 @@ export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
  * @returns 接口定义或undefined
  */
 export function getInterfaceByName(name: string): ApiInterface | undefined {
-  return qdiiInterfaces.find((item) => item.name === name);
+  return qdiiInterfaces.find(item => item.name === name);
 }
 
 export default qdiiInterfaces;

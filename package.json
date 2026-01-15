@@ -2,7 +2,7 @@
   "name": "istock-shell",
   "private": false,
   "title": "iStock Shell",
-  "version": "0.1.7",
+  "version": "0.2.1",
   "description": "以AI智能分析为核心的专业金融数据查询分析平台，简单、高效、灵活，并可轻松定制。",
   "type": "module",
   "author": {

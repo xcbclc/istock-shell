@@ -68,75 +68,75 @@ export interface ApiInterface {
  */
 export const toolsInterfaces: ApiInterface[] = [
   {
-    moduleTitle: '工具',
-    moduleName: 'tools',
-    title: '龙虎牛熊多头合约池',
-    name: 'qhgj_lhnxdthyc',
-    api: 'long_pool',
-    description: '龙虎牛熊多头合约池接口',
-    inputParameters: [
+    "moduleTitle": "工具",
+    "moduleName": "tools",
+    "title": "龙虎牛熊多头合约池",
+    "name": "qhgj_lhnxdthyc",
+    "api": "long_pool",
+    "description": "龙虎牛熊多头合约池接口",
+    "inputParameters": [
       {
-        title: 'date',
-        name: 'date',
-        type: '查询日期',
-        description: '2018-08-08',
-        isRequired: true,
-      },
+        "title": "date",
+        "name": "date",
+        "type": "查询日期",
+        "description": "2018-08-08",
+        "isRequired": true
+      }
     ],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'string',
-        description: '品种编码',
-        unit: '',
+        "title": "symbol",
+        "name": "symbol",
+        "type": "string",
+        "description": "品种编码",
+        "unit": ""
       },
       {
-        title: 'code',
-        name: 'code',
-        type: 'string',
-        description: '合约代号',
-        unit: '',
-      },
+        "title": "code",
+        "name": "code",
+        "type": "string",
+        "description": "合约代号",
+        "unit": ""
+      }
     ],
-    remarks: '',
-    targetUrl: '',
+    "remarks": "",
+    "targetUrl": ""
   },
   {
-    moduleTitle: '工具',
-    moduleName: 'tools',
-    title: '龙虎牛熊空头合约池',
-    name: 'qhgj_lhnxkthyc',
-    api: 'short_pool',
-    description: '龙虎牛熊空头合约池',
-    inputParameters: [
+    "moduleTitle": "工具",
+    "moduleName": "tools",
+    "title": "龙虎牛熊空头合约池",
+    "name": "qhgj_lhnxkthyc",
+    "api": "short_pool",
+    "description": "龙虎牛熊空头合约池",
+    "inputParameters": [
       {
-        title: 'date',
-        name: 'date',
-        type: '查询日期',
-        description: '2018-08-08',
-        isRequired: true,
-      },
+        "title": "date",
+        "name": "date",
+        "type": "查询日期",
+        "description": "2018-08-08",
+        "isRequired": true
+      }
     ],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'string',
-        description: '品种编码',
-        unit: '',
+        "title": "symbol",
+        "name": "symbol",
+        "type": "string",
+        "description": "品种编码",
+        "unit": ""
       },
       {
-        title: 'code',
-        name: 'code',
-        type: 'string',
-        description: '合约代号',
-        unit: '',
-      },
+        "title": "code",
+        "name": "code",
+        "type": "string",
+        "description": "合约代号",
+        "unit": ""
+      }
     ],
-    remarks: '',
-    targetUrl: '',
-  },
+    "remarks": "",
+    "targetUrl": ""
+  }
 ];
 
 /**
@@ -145,7 +145,7 @@ export const toolsInterfaces: ApiInterface[] = [
  * @returns 接口定义或undefined
  */
 export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
-  return toolsInterfaces.find((item) => item.api === apiName);
+  return toolsInterfaces.find(item => item.api === apiName);
 }
 
 /**
@@ -154,7 +154,7 @@ export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
  * @returns 接口定义或undefined
  */
 export function getInterfaceByName(name: string): ApiInterface | undefined {
-  return toolsInterfaces.find((item) => item.name === name);
+  return toolsInterfaces.find(item => item.name === name);
 }
 
 export default toolsInterfaces;

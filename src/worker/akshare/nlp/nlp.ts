@@ -68,90 +68,90 @@ export interface ApiInterface {
  */
 export const nlpInterfaces: ApiInterface[] = [
   {
-    moduleTitle: '自然语言处理',
-    moduleName: 'nlp',
-    title: '知识图谱',
-    name: 'zryycl_zstp',
-    api: 'nlp_ownthink',
-    targetUrl: 'https://ownthink.com/',
-    description: '思知-知识图谱的接口, 以此来查询知识图谱数据',
-    remarks: '单次返回查询的数据结果',
-    inputParameters: [
+    "moduleTitle": "自然语言处理",
+    "moduleName": "nlp",
+    "title": "知识图谱",
+    "name": "zryycl_zstp",
+    "api": "nlp_ownthink",
+    "targetUrl": "https://ownthink.com/",
+    "description": "思知-知识图谱的接口, 以此来查询知识图谱数据",
+    "remarks": "单次返回查询的数据结果",
+    "inputParameters": [
       {
-        title: 'word',
-        name: 'word',
-        type: 'str',
-        description: 'word="人工智能"',
-        defaultValue: '人工智能',
-        isRequired: false,
+        "title": "word",
+        "name": "word",
+        "type": "str",
+        "description": "word=\"人工智能\"",
+        "defaultValue": "人工智能",
+        "isRequired": false
       },
       {
-        title: 'indicator',
-        name: 'indicator',
-        type: 'str',
-        description: 'indicator="entity"; Please refer **Indicator Info** table',
-        defaultValue: 'entity',
-        isRequired: false,
+        "title": "indicator",
+        "name": "indicator",
+        "type": "str",
+        "description": "indicator=\"entity\"; Please refer **Indicator Info** table",
+        "defaultValue": "entity",
+        "isRequired": false
       },
       {
-        title: 'fields',
-        name: 'fields',
-        type: 'type',
-        description: 'description',
-        isRequired: true,
+        "title": "fields",
+        "name": "fields",
+        "type": "type",
+        "description": "description",
+        "isRequired": true
       },
       {
-        title: 'entity',
-        name: 'entity',
-        type: 'str',
-        description: '实体名',
-        isRequired: true,
+        "title": "entity",
+        "name": "entity",
+        "type": "str",
+        "description": "实体名",
+        "isRequired": true
       },
       {
-        title: 'desc',
-        name: 'desc',
-        type: 'str',
-        description: '实体简介',
-        isRequired: true,
+        "title": "desc",
+        "name": "desc",
+        "type": "str",
+        "description": "实体简介",
+        "isRequired": true
       },
       {
-        title: 'tag',
-        name: 'tag',
-        type: 'list',
-        description: '实体标签',
-        isRequired: true,
+        "title": "tag",
+        "name": "tag",
+        "type": "list",
+        "description": "实体标签",
+        "isRequired": true
       },
       {
-        title: 'avg',
-        name: 'avg',
-        type: 'pandas.DataFrame',
-        description: '实体属性值，第一列为实体的属性，第二列为实体属性所对应的值',
-        isRequired: true,
-      },
+        "title": "avg",
+        "name": "avg",
+        "type": "pandas.DataFrame",
+        "description": "实体属性值，第一列为实体的属性，第二列为实体属性所对应的值",
+        "isRequired": true
+      }
     ],
-    outputParameters: [],
+    "outputParameters": []
   },
   {
-    moduleTitle: '自然语言处理',
-    moduleName: 'nlp',
-    title: '智能问答',
-    name: 'zryycl_znwd',
-    api: 'nlp_answer',
-    targetUrl: 'https://ownthink.com/robot.html',
-    description: '思知-对话机器人的接口, 以此来进行智能问答',
-    remarks: '单次返回查询的数据结果',
-    inputParameters: [
+    "moduleTitle": "自然语言处理",
+    "moduleName": "nlp",
+    "title": "智能问答",
+    "name": "zryycl_znwd",
+    "api": "nlp_answer",
+    "targetUrl": "https://ownthink.com/robot.html",
+    "description": "思知-对话机器人的接口, 以此来进行智能问答",
+    "remarks": "单次返回查询的数据结果",
+    "inputParameters": [
       {
-        title: 'question',
-        name: 'question',
-        type: 'str',
-        description: 'question="姚明的身高"',
-        defaultValue: '姚明的身高',
-        isRequired: false,
-      },
+        "title": "question",
+        "name": "question",
+        "type": "str",
+        "description": "question=\"姚明的身高\"",
+        "defaultValue": "姚明的身高",
+        "isRequired": false
+      }
     ],
-    outputParameters: [],
-  },
+    "outputParameters": []
+  }
 ];
 
 /**
@@ -160,7 +160,7 @@ export const nlpInterfaces: ApiInterface[] = [
  * @returns 接口定义或undefined
  */
 export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
-  return nlpInterfaces.find((item) => item.api === apiName);
+  return nlpInterfaces.find(item => item.api === apiName);
 }
 
 /**
@@ -169,7 +169,7 @@ export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
  * @returns 接口定义或undefined
  */
 export function getInterfaceByName(name: string): ApiInterface | undefined {
-  return nlpInterfaces.find((item) => item.name === name);
+  return nlpInterfaces.find(item => item.name === name);
 }
 
 export default nlpInterfaces;

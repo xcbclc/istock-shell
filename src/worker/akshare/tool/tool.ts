@@ -68,25 +68,25 @@ export interface ApiInterface {
  */
 export const toolInterfaces: ApiInterface[] = [
   {
-    moduleTitle: '工具箱',
-    moduleName: 'tool',
-    title: '交易日历',
-    name: 'gjx_jyrl',
-    api: 'tool_trade_date_hist_sina',
-    targetUrl: 'https://finance.sina.com.cn',
-    description: '新浪财经-股票交易日历数据',
-    remarks: '单次返回从 1990-12-19 到 2024-12-31 之间的股票交易日历数据, 这里补充 1992-05-04 进入交易日',
-    inputParameters: [],
-    outputParameters: [
+    "moduleTitle": "工具箱",
+    "moduleName": "tool",
+    "title": "交易日历",
+    "name": "gjx_jyrl",
+    "api": "tool_trade_date_hist_sina",
+    "targetUrl": "https://finance.sina.com.cn",
+    "description": "新浪财经-股票交易日历数据",
+    "remarks": "单次返回从 1990-12-19 到 2024-12-31 之间的股票交易日历数据, 这里补充 1992-05-04 进入交易日",
+    "inputParameters": [],
+    "outputParameters": [
       {
-        title: 'trade_date',
-        name: 'trade_date',
-        type: 'object',
-        description: '从 1990-12-19 至 2024-12-31 的股票交易日数据; 这里补充 1992-05-04 进入交易日',
-        unit: '',
-      },
-    ],
-  },
+        "title": "trade_date",
+        "name": "trade_date",
+        "type": "object",
+        "description": "从 1990-12-19 至 2024-12-31 的股票交易日数据; 这里补充 1992-05-04 进入交易日",
+        "unit": ""
+      }
+    ]
+  }
 ];
 
 /**
@@ -95,7 +95,7 @@ export const toolInterfaces: ApiInterface[] = [
  * @returns 接口定义或undefined
  */
 export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
-  return toolInterfaces.find((item) => item.api === apiName);
+  return toolInterfaces.find(item => item.api === apiName);
 }
 
 /**
@@ -104,7 +104,7 @@ export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
  * @returns 接口定义或undefined
  */
 export function getInterfaceByName(name: string): ApiInterface | undefined {
-  return toolInterfaces.find((item) => item.name === name);
+  return toolInterfaces.find(item => item.name === name);
 }
 
 export default toolInterfaces;

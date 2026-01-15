@@ -68,208 +68,208 @@ export interface ApiInterface {
  */
 export const fundInterfaces: ApiInterface[] = [
   {
-    moduleTitle: '资金',
-    moduleName: 'fund',
-    title: '每日净流多列表(商品)',
-    name: 'zj_mrjldlb_sp',
-    api: 'commodity_flow_long',
-    description: '每日净流多列表（商品）接口',
-    inputParameters: [
+    "moduleTitle": "资金",
+    "moduleName": "fund",
+    "title": "每日净流多列表(商品)",
+    "name": "zj_mrjldlb_sp",
+    "api": "commodity_flow_long",
+    "description": "每日净流多列表（商品）接口",
+    "inputParameters": [
       {
-        title: 'date',
-        name: 'date',
-        type: '查询日期',
-        description: '2018-08-08',
-        isRequired: true,
-      },
+        "title": "date",
+        "name": "date",
+        "type": "查询日期",
+        "description": "2018-08-08",
+        "isRequired": true
+      }
     ],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: 'broker',
-        name: 'broker',
-        type: 'string',
-        description: '席位',
-        unit: '',
+        "title": "broker",
+        "name": "broker",
+        "type": "string",
+        "description": "席位",
+        "unit": ""
       },
       {
-        title: 'money',
-        name: 'money',
-        type: 'float',
-        description: '流多资金，单位元',
-        unit: '',
+        "title": "money",
+        "name": "money",
+        "type": "float",
+        "description": "流多资金，单位元",
+        "unit": ""
       },
       {
-        title: 'variety',
-        name: 'variety',
-        type: 'string',
-        description: '品种编码',
-        unit: '',
-      },
+        "title": "variety",
+        "name": "variety",
+        "type": "string",
+        "description": "品种编码",
+        "unit": ""
+      }
     ],
-    remarks: '',
-    targetUrl: '',
+    "remarks": "",
+    "targetUrl": ""
   },
   {
-    moduleTitle: '资金',
-    moduleName: 'fund',
-    title: '每日净流空列表(商品)',
-    name: 'zj_mrjlklb_sp',
-    api: 'commodity_flow_short',
-    description: '每日净流空列表(商品)接口',
-    inputParameters: [
+    "moduleTitle": "资金",
+    "moduleName": "fund",
+    "title": "每日净流空列表(商品)",
+    "name": "zj_mrjlklb_sp",
+    "api": "commodity_flow_short",
+    "description": "每日净流空列表(商品)接口",
+    "inputParameters": [
       {
-        title: 'date',
-        name: 'date',
-        type: '查询日期',
-        description: '2018-08-08',
-        isRequired: true,
-      },
+        "title": "date",
+        "name": "date",
+        "type": "查询日期",
+        "description": "2018-08-08",
+        "isRequired": true
+      }
     ],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: 'broker',
-        name: 'broker',
-        type: 'string',
-        description: '席位',
-        unit: '',
+        "title": "broker",
+        "name": "broker",
+        "type": "string",
+        "description": "席位",
+        "unit": ""
       },
       {
-        title: 'money',
-        name: 'money',
-        type: 'float',
-        description: '流空资金，单位元',
-        unit: '',
+        "title": "money",
+        "name": "money",
+        "type": "float",
+        "description": "流空资金，单位元",
+        "unit": ""
       },
       {
-        title: 'variety',
-        name: 'variety',
-        type: 'string',
-        description: '品种编码',
-        unit: '',
-      },
+        "title": "variety",
+        "name": "variety",
+        "type": "string",
+        "description": "品种编码",
+        "unit": ""
+      }
     ],
-    remarks: '',
-    targetUrl: '',
+    "remarks": "",
+    "targetUrl": ""
   },
   {
-    moduleTitle: '资金',
-    moduleName: 'fund',
-    title: '每日净流多列表(指数)',
-    name: 'zj_mrjldlb_zs',
-    api: 'stock_flow_long',
-    description: '每日净流多列表(指数)接口',
-    inputParameters: [
+    "moduleTitle": "资金",
+    "moduleName": "fund",
+    "title": "每日净流多列表(指数)",
+    "name": "zj_mrjldlb_zs",
+    "api": "stock_flow_long",
+    "description": "每日净流多列表(指数)接口",
+    "inputParameters": [
       {
-        title: 'date',
-        name: 'date',
-        type: '查询日期',
-        description: '2018-08-08',
-        isRequired: true,
-      },
+        "title": "date",
+        "name": "date",
+        "type": "查询日期",
+        "description": "2018-08-08",
+        "isRequired": true
+      }
     ],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: 'broker',
-        name: 'broker',
-        type: 'string',
-        description: '席位',
-        unit: '',
+        "title": "broker",
+        "name": "broker",
+        "type": "string",
+        "description": "席位",
+        "unit": ""
       },
       {
-        title: 'money',
-        name: 'money',
-        type: 'float',
-        description: '流多资金，单位元',
-        unit: '',
+        "title": "money",
+        "name": "money",
+        "type": "float",
+        "description": "流多资金，单位元",
+        "unit": ""
       },
       {
-        title: 'variety',
-        name: 'variety',
-        type: 'string',
-        description: '品种编码',
-        unit: '',
-      },
+        "title": "variety",
+        "name": "variety",
+        "type": "string",
+        "description": "品种编码",
+        "unit": ""
+      }
     ],
-    remarks: '',
-    targetUrl: '',
+    "remarks": "",
+    "targetUrl": ""
   },
   {
-    moduleTitle: '资金',
-    moduleName: 'fund',
-    title: '每日净流空列表(指数)',
-    name: 'zj_mrjlklb_zs',
-    api: 'stock_flow_short',
-    description: '每日净流空列表(指数)接口',
-    inputParameters: [
+    "moduleTitle": "资金",
+    "moduleName": "fund",
+    "title": "每日净流空列表(指数)",
+    "name": "zj_mrjlklb_zs",
+    "api": "stock_flow_short",
+    "description": "每日净流空列表(指数)接口",
+    "inputParameters": [
       {
-        title: 'date',
-        name: 'date',
-        type: '查询日期',
-        description: '2018-08-08',
-        isRequired: true,
-      },
+        "title": "date",
+        "name": "date",
+        "type": "查询日期",
+        "description": "2018-08-08",
+        "isRequired": true
+      }
     ],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: 'broker',
-        name: 'broker',
-        type: 'string',
-        description: '席位',
-        unit: '',
+        "title": "broker",
+        "name": "broker",
+        "type": "string",
+        "description": "席位",
+        "unit": ""
       },
       {
-        title: 'money',
-        name: 'money',
-        type: 'float',
-        description: '流空资金，单位元',
-        unit: '',
+        "title": "money",
+        "name": "money",
+        "type": "float",
+        "description": "流空资金，单位元",
+        "unit": ""
       },
       {
-        title: 'variety',
-        name: 'variety',
-        type: 'string',
-        description: '品种编码',
-        unit: '',
-      },
+        "title": "variety",
+        "name": "variety",
+        "type": "string",
+        "description": "品种编码",
+        "unit": ""
+      }
     ],
-    remarks: '',
-    targetUrl: '',
+    "remarks": "",
+    "targetUrl": ""
   },
   {
-    moduleTitle: '资金',
-    moduleName: 'fund',
-    title: '每日商品保证金沉淀变化',
-    name: 'zj_mrspbzjcdbh',
-    api: 'money_in_out',
-    description: '每日商品保证金沉淀变化接口',
-    inputParameters: [
+    "moduleTitle": "资金",
+    "moduleName": "fund",
+    "title": "每日商品保证金沉淀变化",
+    "name": "zj_mrspbzjcdbh",
+    "api": "money_in_out",
+    "description": "每日商品保证金沉淀变化接口",
+    "inputParameters": [
       {
-        title: 'date',
-        name: 'date',
-        type: '查询日期',
-        description: '2018-08-08',
-        isRequired: true,
-      },
+        "title": "date",
+        "name": "date",
+        "type": "查询日期",
+        "description": "2018-08-08",
+        "isRequired": true
+      }
     ],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'string',
-        description: '品种编码',
-        unit: '',
+        "title": "symbol",
+        "name": "symbol",
+        "type": "string",
+        "description": "品种编码",
+        "unit": ""
       },
       {
-        title: 'chge',
-        name: 'chge',
-        type: 'float',
-        description: '品种沉淀资金变化，单位元',
-        unit: '',
-      },
+        "title": "chge",
+        "name": "chge",
+        "type": "float",
+        "description": "品种沉淀资金变化，单位元",
+        "unit": ""
+      }
     ],
-    remarks: '',
-    targetUrl: '',
-  },
+    "remarks": "",
+    "targetUrl": ""
+  }
 ];
 
 /**
@@ -278,7 +278,7 @@ export const fundInterfaces: ApiInterface[] = [
  * @returns 接口定义或undefined
  */
 export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
-  return fundInterfaces.find((item) => item.api === apiName);
+  return fundInterfaces.find(item => item.api === apiName);
 }
 
 /**
@@ -287,7 +287,7 @@ export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
  * @returns 接口定义或undefined
  */
 export function getInterfaceByName(name: string): ApiInterface | undefined {
-  return fundInterfaces.find((item) => item.name === name);
+  return fundInterfaces.find(item => item.name === name);
 }
 
 export default fundInterfaces;

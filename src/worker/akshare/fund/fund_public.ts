@@ -68,5715 +68,5806 @@ export interface ApiInterface {
  */
 export const fund_publicInterfaces: ApiInterface[] = [
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金基本信息',
-    name: 'gmjj_jjjbxx',
-    api: 'fund_name_em',
-    targetUrl: 'http://fund.eastmoney.com/fund.html',
-    description: '东方财富网-天天基金网-基金数据-所有基金的基本信息数据',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拼音缩写',
-        name: 'pysx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金类型',
-        name: 'jjlx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拼音全称',
-        name: 'pyqc',
-        type: 'object',
-        description: '',
-        unit: '',
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金基本信息",
+    "name": "gmjj_jjjbxx",
+    "api": "fund_name_em",
+    "targetUrl": "http://fund.eastmoney.com/fund.html",
+    "description": "东方财富网-天天基金网-基金数据-所有基金的基本信息数据",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拼音缩写",
+        "name": "pysx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金类型",
+        "name": "jjlx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拼音全称",
+        "name": "pyqc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金基本信息-雪球",
+    "name": "gmjj_jjjbxx_xq",
+    "api": "fund_individual_basic_info_xq",
+    "targetUrl": "https://danjuanfunds.com/funding/000001",
+    "description": "雪球基金-基金详情",
+    "remarks": "单次返回单只基金基本信息",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "timeout",
+        "name": "timeout",
+        "type": "float",
+        "description": "timeout=None; 默认不设置超时参数",
+        "defaultValue": null,
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "item",
+        "name": "item",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "value",
+        "name": "value",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金基本信息-指数型",
+    "name": "gmjj_jjjbxx_zsx",
+    "api": "fund_info_index_em",
+    "targetUrl": "http://fund.eastmoney.com/trade/zs.html",
+    "description": "东方财富网-天天基金网-基金数据-基金基本信息-指数型",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"全部\"; choice of {\"全部\", \"沪深指数\", \"行业主题\", \"大盘指数\", \"中盘指数\", \"小盘指数\", \"股票指数\", \"债券指数\"}",
+        "defaultValue": "全部",
+        "choices": [
+          "全部",
+          "沪深指数",
+          "行业主题",
+          "大盘指数",
+          "中盘指数",
+          "小盘指数",
+          "股票指数",
+          "债券指数"
+        ],
+        "isRequired": false
+      },
+      {
+        "title": "indicator",
+        "name": "indicator",
+        "type": "str",
+        "description": "indicator=\"全部\"; choice of {\"全部\", \"被动指数型\", \"增强指数型\"}",
+        "defaultValue": "全部",
+        "choices": [
+          "全部",
+          "被动指数型",
+          "增强指数型"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金基本信息-雪球',
-    name: 'gmjj_jjjbxx_xq',
-    api: 'fund_individual_basic_info_xq',
-    targetUrl: 'https://danjuanfunds.com/funding/000001',
-    description: '雪球基金-基金详情',
-    remarks: '单次返回单只基金基本信息',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'timeout',
-        name: 'timeout',
-        type: 'float',
-        description: 'timeout=None; 默认不设置超时参数',
-        defaultValue: null,
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: 'item',
-        name: 'item',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'value',
-        name: 'value',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金基本信息-指数型',
-    name: 'gmjj_jjjbxx_zsx',
-    api: 'fund_info_index_em',
-    targetUrl: 'http://fund.eastmoney.com/trade/zs.html',
-    description: '东方财富网-天天基金网-基金数据-基金基本信息-指数型',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description:
-          'symbol="全部"; choice of {"全部", "沪深指数", "行业主题", "大盘指数", "中盘指数", "小盘指数", "股票指数", "债券指数"}',
-        defaultValue: '全部',
-        choices: ['全部', '沪深指数', '行业主题', '大盘指数', '中盘指数', '小盘指数', '股票指数', '债券指数'],
-        isRequired: false,
-      },
-      {
-        title: 'indicator',
-        name: 'indicator',
-        type: 'str',
-        description: 'indicator="全部"; choice of {"全部", "被动指数型", "增强指数型"}',
-        defaultValue: '全部',
-        choices: ['全部', '被动指数型', '增强指数型'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金名称',
-        name: 'jjmc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1周',
-        name: 'j1z',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1月',
-        name: 'j1y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3月',
-        name: 'j3y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近6月',
-        name: 'j6y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1年',
-        name: 'j1n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近2年',
-        name: 'j2n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3年',
-        name: 'j3n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '今年来',
-        name: 'jnl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成立来',
-        name: 'cll',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '起购金额',
-        name: 'qgje',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '跟踪标的',
-        name: 'gzbd',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '跟踪方式',
-        name: 'gzfs',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金申购状态',
-    name: 'gmjj_jjsgzt',
-    api: 'fund_purchase_em',
-    targetUrl: 'http://fund.eastmoney.com/Fund_sgzt_bzdm.html#fcode,asc_1',
-    description: '东方财富网站-天天基金网-基金数据-基金申购状态',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金类型',
-        name: 'jjlx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新净值/万份收益',
-        name: 'zxjz/wfsy',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新净值/万份收益-报告时间',
-        name: 'zxjz/wfsy_bgsj',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '赎回状态',
-        name: 'shzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '下一开放日',
-        name: 'xykfr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '购买起点',
-        name: 'gmqd',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日累计限定金额',
-        name: 'rljxdje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'ETF基金实时行情-东财',
-    name: 'gmjj_etfjjsshq_dc',
-    api: 'fund_etf_spot_em',
-    targetUrl: 'https://quote.eastmoney.com/center/gridlist.html#fund_etf',
-    description: '东方财富-ETF 实时行情',
-    remarks: '单次返回所有数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '名称',
-        name: 'mc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新价',
-        name: 'zxj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'IOPV实时估值',
-        name: 'IOPVssgz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金折价率',
-        name: 'jjzjl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成交量',
-        name: 'cjl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '开盘价',
-        name: 'kpj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高价',
-        name: 'zgj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低价',
-        name: 'zdj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '昨收',
-        name: 'zs',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '换手率',
-        name: 'hsl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '量比',
-        name: 'lb',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '委比',
-        name: 'wb',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '外盘',
-        name: 'wp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '内盘',
-        name: 'np',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '主力净流入-净额',
-        name: 'zljlr_je',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '主力净流入-净占比',
-        name: 'zljlr_jzb',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '超大单净流入-净额',
-        name: 'cddjlr_je',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '超大单净流入-净占比',
-        name: 'cddjlr_jzb',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '大单净流入-净额',
-        name: 'ddjlr_je',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '大单净流入-净占比',
-        name: 'ddjlr_jzb',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '中单净流入-净额',
-        name: 'zdjlr_je',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '中单净流入-净占比',
-        name: 'zdjlr_jzb',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '小单净流入-净额',
-        name: 'xdjlr_je',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '小单净流入-净占比',
-        name: 'xdjlr_jzb',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '现手',
-        name: 'xs',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '买一',
-        name: 'my',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '卖一',
-        name: 'my',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新份额',
-        name: 'zxfe',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '流通市值',
-        name: 'ltsz',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '总市值',
-        name: 'zsz',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '数据日期',
-        name: 'sjrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '更新时间',
-        name: 'gxsj',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'ETF基金实时行情-同花顺',
-    name: 'gmjj_etfjjsshq_ths',
-    api: 'fund_etf_spot_ths',
-    targetUrl: 'https://fund.10jqka.com.cn/datacenter/jz/kfs/etf/',
-    description: '同花顺理财-基金数据-每日净值-ETF-实时行情',
-    remarks: '单次返回指定 date 的所有数据',
-    inputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date=""; 默认返回当前最新的数据',
-        defaultValue: '',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金名称',
-        name: 'jjmc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前-单位净值',
-        name: 'dq_dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前-累计净值',
-        name: 'dq_ljjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前一日-单位净值',
-        name: 'qyr_dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '增长值',
-        name: 'zzz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '增长率',
-        name: 'zzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '赎回状态',
-        name: 'shzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新-交易日',
-        name: 'zx_jyr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新-单位净值',
-        name: 'zx_dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新-累计净值',
-        name: 'zx_ljjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金类型',
-        name: 'jjlx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '查询日期',
-        name: 'cxrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'LOF基金实时行情-东财',
-    name: 'gmjj_lofjjsshq_dc',
-    api: 'fund_lof_spot_em',
-    targetUrl: 'https://quote.eastmoney.com/center/gridlist.html#fund_lof',
-    description: '东方财富-LOF 实时行情',
-    remarks: '单次返回所有数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '名称',
-        name: 'mc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新价',
-        name: 'zxj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成交量',
-        name: 'cjl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '开盘价',
-        name: 'kpj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高价',
-        name: 'zgj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低价',
-        name: 'zdj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '昨收',
-        name: 'zs',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '换手率',
-        name: 'hsl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '流通市值',
-        name: 'ltsz',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '总市值',
-        name: 'zsz',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金实时行情-新浪',
-    name: 'gmjj_jjsshq_xl',
-    api: 'fund_etf_category_sina',
-    targetUrl: 'http://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf',
-    description: '新浪财经-基金列表及行情数据',
-    remarks: '单次返回指定 symbol 基金的所有数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="LOF基金"; choice of {"封闭式基金", "ETF基金", "LOF基金"}',
-        defaultValue: 'LOF基金',
-        choices: ['封闭式基金', 'ETF基金', 'LOF基金'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '名称',
-        name: 'mc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新价',
-        name: 'zxj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '买入',
-        name: 'mr',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '卖出',
-        name: 'mc',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '昨收',
-        name: 'zs',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '今开',
-        name: 'jk',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高',
-        name: 'zg',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低',
-        name: 'zd',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交量',
-        name: 'cjl',
-        type: 'int64',
-        description: '注意单位: 股',
-        unit: '股',
-      },
-      {
-        title: '成交额',
-        name: 'cje',
-        type: 'int64',
-        description: '注意单位: 元',
-        unit: '元',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'ETF基金分时行情-东财',
-    name: 'gmjj_etfjjfshq_dc',
-    api: 'fund_etf_hist_min_em',
-    targetUrl: 'https://quote.eastmoney.com/sz159707.html',
-    description: '东方财富-ETF 分时行情; 该接口只能获取近期的分时数据，注意时间周期的设置',
-    remarks: '单次返回指定 ETF、频率、复权调整和时间区间的分时数据, 其中 1 分钟数据只返回近 5 个交易日数据且不复权',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: "symbol='513500'; ETF 代码可以在 **ak.fund_etf_spot_em()** 中获取",
-        defaultValue: '513500',
-        isRequired: false,
-      },
-      {
-        title: 'start_date',
-        name: 'start_date',
-        type: 'str',
-        description: 'start_date="1979-09-01 09:32:00"; 日期时间; 默认返回所有数据',
-        defaultValue: '1979-09-01 09:32:00',
-        isRequired: false,
-      },
-      {
-        title: 'end_date',
-        name: 'end_date',
-        type: 'str',
-        description: 'end_date="2222-01-01 09:32:00"; 日期时间; 默认返回所有数据',
-        defaultValue: '2222-01-01 09:32:00',
-        isRequired: false,
-      },
-      {
-        title: 'period',
-        name: 'period',
-        type: 'str',
-        description: "period='5'; choice of {'1', '5', '15', '30', '60'}; 其中 1 分钟数据返回近 5 个交易日数据且不复权",
-        defaultValue: '5',
-        choices: [1, 5, 15, 30, 60],
-        isRequired: false,
-      },
-      {
-        title: 'adjust',
-        name: 'adjust',
-        type: 'str',
-        description:
-          "adjust=''; choice of {'', 'qfq', 'hfq'}; '': 不复权, 'qfq': 前复权, 'hfq': 后复权, 其中 1 分钟数据返回近 5 个交易日数据且不复权",
-        defaultValue: '',
-        choices: ['', 'qfq', 'hfq'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '时间',
-        name: 'sj',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '开盘',
-        name: 'kp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '收盘',
-        name: 'sp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高',
-        name: 'zg',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低',
-        name: 'zd',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交量',
-        name: 'cjl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '振幅',
-        name: 'zf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '换手率',
-        name: 'hsl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'LOF基金分时行情-东财',
-    name: 'gmjj_lofjjfshq_dc',
-    api: 'fund_lof_hist_min_em',
-    targetUrl: 'https://quote.eastmoney.com/sz166009.html',
-    description: '东方财富-LOF 分时行情; 该接口只能获取近期的分时数据，注意时间周期的设置',
-    remarks: '单次返回指定 LOF、频率、复权调整和时间区间的分时数据, 其中 1 分钟数据只返回近 5 个交易日数据且不复权',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: "symbol='166009'; LOF 代码可以在 **ak.fund_lof_spot_em()** 中获取",
-        defaultValue: '166009',
-        isRequired: false,
-      },
-      {
-        title: 'start_date',
-        name: 'start_date',
-        type: 'str',
-        description: 'start_date="1979-09-01 09:32:00"; 日期时间; 默认返回所有数据',
-        defaultValue: '1979-09-01 09:32:00',
-        isRequired: false,
-      },
-      {
-        title: 'end_date',
-        name: 'end_date',
-        type: 'str',
-        description: 'end_date="2222-01-01 09:32:00"; 日期时间; 默认返回所有数据',
-        defaultValue: '2222-01-01 09:32:00',
-        isRequired: false,
-      },
-      {
-        title: 'period',
-        name: 'period',
-        type: 'str',
-        description: "period='5'; choice of {'1', '5', '15', '30', '60'}; 其中 1 分钟数据返回近 5 个交易日数据且不复权",
-        defaultValue: '5',
-        choices: [1, 5, 15, 30, 60],
-        isRequired: false,
-      },
-      {
-        title: 'adjust',
-        name: 'adjust',
-        type: 'str',
-        description:
-          "adjust=''; choice of {'', 'qfq', 'hfq'}; '': 不复权, 'qfq': 前复权, 'hfq': 后复权, 其中 1 分钟数据返回近 5 个交易日数据且不复权",
-        defaultValue: '',
-        choices: ['', 'qfq', 'hfq'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '时间',
-        name: 'sj',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '开盘',
-        name: 'kp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '收盘',
-        name: 'sp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高',
-        name: 'zg',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低',
-        name: 'zd',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交量',
-        name: 'cjl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '振幅',
-        name: 'zf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '换手率',
-        name: 'hsl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'ETF基金历史行情-东财',
-    name: 'gmjj_etfjjlshq_dc',
-    api: 'fund_etf_hist_em',
-    targetUrl: 'http://quote.eastmoney.com/sz159707.html',
-    description: '东方财富-ETF 行情; 历史数据按日频率更新, 当日收盘价请在收盘后获取',
-    remarks: '单次返回指定 ETF、指定周期和指定日期间的历史行情日频率数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: "symbol='159707'; ETF 代码可以在 **ak.fund_etf_spot_em()** 中获取或查看东财主页",
-        defaultValue: '159707',
-        isRequired: false,
-      },
-      {
-        title: 'period',
-        name: 'period',
-        type: 'str',
-        description: "period='daily'; choice of {'daily', 'weekly', 'monthly'}",
-        defaultValue: 'daily',
-        choices: ['daily', 'weekly', 'monthly'],
-        isRequired: false,
-      },
-      {
-        title: 'start_date',
-        name: 'start_date',
-        type: 'str',
-        description: "start_date='20000101'; 开始查询的日期",
-        defaultValue: '20000101',
-        isRequired: false,
-      },
-      {
-        title: 'end_date',
-        name: 'end_date',
-        type: 'str',
-        description: "end_date='20230104'; 结束查询的日期",
-        defaultValue: '20230104',
-        isRequired: false,
-      },
-      {
-        title: 'adjust',
-        name: 'adjust',
-        type: 'str',
-        description: '默认返回不复权的数据; qfq: 返回前复权后的数据; hfq: 返回后复权后的数据',
-        defaultValue: '',
-        choices: ['', 'qfq', 'hfq'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '开盘',
-        name: 'kp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '收盘',
-        name: 'sp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高',
-        name: 'zg',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低',
-        name: 'zd',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交量',
-        name: 'cjl',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '振幅',
-        name: 'zf',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '换手率',
-        name: 'hsl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'LOF基金历史行情-东财',
-    name: 'gmjj_lofjjlshq_dc',
-    api: 'fund_lof_hist_em',
-    targetUrl: 'https://quote.eastmoney.com/sz166009.html',
-    description: '东方财富-LOF 行情; 历史数据按日频率更新, 当日收盘价请在收盘后获取',
-    remarks: '单次返回指定 LOF、指定周期和指定日期间的历史行情日频率数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: "symbol='166009'; LOF 代码可以在 **ak.fund_lof_spot_em()** 中获取",
-        defaultValue: '166009',
-        isRequired: false,
-      },
-      {
-        title: 'period',
-        name: 'period',
-        type: 'str',
-        description: "period='daily'; choice of {'daily', 'weekly', 'monthly'}",
-        defaultValue: 'daily',
-        choices: ['daily', 'weekly', 'monthly'],
-        isRequired: false,
-      },
-      {
-        title: 'start_date',
-        name: 'start_date',
-        type: 'str',
-        description: "start_date='20000101'; 开始查询的日期",
-        defaultValue: '20000101',
-        isRequired: false,
-      },
-      {
-        title: 'end_date',
-        name: 'end_date',
-        type: 'str',
-        description: "end_date='20230104'; 结束查询的日期",
-        defaultValue: '20230104',
-        isRequired: false,
-      },
-      {
-        title: 'adjust',
-        name: 'adjust',
-        type: 'str',
-        description: '默认返回不复权的数据; qfq: 返回前复权后的数据; hfq: 返回后复权后的数据',
-        defaultValue: '',
-        choices: ['', 'qfq', 'hfq'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '开盘',
-        name: 'kp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '收盘',
-        name: 'sp',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高',
-        name: 'zg',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低',
-        name: 'zd',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交量',
-        name: 'cjl',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '振幅',
-        name: 'zf',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '换手率',
-        name: 'hsl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金历史行情-新浪',
-    name: 'gmjj_jjlshq_xl',
-    api: 'fund_etf_hist_sina',
-    targetUrl: 'http://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf',
-    description: '新浪财经-基金行情的日频率行情数据',
-    remarks: '单次返回指定基金的所有数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description:
-          'symbol="sh510050"; 基金列表可以通过 **ak.fund_etf_category_sina(symbol="LOF基金")** 可选参数为: 封闭式基金, ETF基金, LOF基金 查询',
-        defaultValue: 'sh510050',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'open',
-        name: 'open',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'high',
-        name: 'high',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'low',
-        name: 'low',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'close',
-        name: 'close',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'volume',
-        name: 'volume',
-        type: 'int64',
-        description: '注意单位: 手',
-        unit: '手',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '开放式基金-实时数据',
-    name: 'gmjj_kfsjj_sssj',
-    api: 'fund_open_fund_daily_em',
-    targetUrl: 'http://fund.eastmoney.com/fund.html#os_0;isall_0;ft_;pt_1',
-    description: '东方财富网-天天基金网-基金数据, 此接口在每个交易日 **16:00-23:00** 更新当日的最新开放式基金净值数据',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float',
-        description: '随时间变动',
-        unit: '',
-      },
-      {
-        title: '累计净值',
-        name: 'ljjz',
-        type: 'float',
-        description: '随时间变动',
-        unit: '',
-      },
-      {
-        title: '前交易日-单位净值',
-        name: 'qjyr_dwjz',
-        type: 'float',
-        description: '随时间变动',
-        unit: '',
-      },
-      {
-        title: '前交易日-累计净值',
-        name: 'qjyr_ljjz',
-        type: 'float',
-        description: '随时间变动',
-        unit: '',
-      },
-      {
-        title: '日增长值',
-        name: 'rzzz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '赎回状态',
-        name: 'shzt',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'str',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '开放式基金-历史数据',
-    name: 'gmjj_kfsjj_lssj',
-    api: 'fund_open_fund_info_em',
-    targetUrl: 'http://fund.eastmoney.com/pingzhongdata/710001.js',
-    description: '东方财富网-天天基金网-基金数据-具体基金信息',
-    remarks: '单次返回当前时刻所有历史数据, 在查询基金数据的时候注意基金前后端问题',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="710001"; 需要基金代码, 可以通过调用 **ak.fund_open_fund_daily_em()** 获取',
-        defaultValue: '710001',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '年份',
-        name: 'nf',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拆分折算日',
-        name: 'cfzsr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拆分类型',
-        name: 'cflx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拆分折算比例',
-        name: 'cfzsbl',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '货币型基金-实时数据',
-    name: 'gmjj_hbxjj_sssj',
-    api: 'fund_money_fund_daily_em',
-    targetUrl: 'http://fund.eastmoney.com/HBJJ_pjsyl.html',
-    description: '东方财富网-天天基金网-基金数据-货币型基金收益, 此接口数据每个交易日 **16:00～23:00**',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前交易日-万份收益',
-        name: 'dqjyr_wfsy',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前交易日-7日年化%',
-        name: 'dqjyr_7rnh%',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前交易日-单位净值',
-        name: 'dqjyr_dwjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前一交易日-万份收益',
-        name: 'qyjyr_wfsy',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前一交易日-7日年化%',
-        name: 'qyjyr_7rnh%',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前一交易日-单位净值',
-        name: 'qyjyr_dwjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日涨幅',
-        name: 'rzf',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成立日期',
-        name: 'clrq',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '可购全部',
-        name: 'kgqb',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '货币型基金-历史数据',
-    name: 'gmjj_hbxjj_lssj',
-    api: 'fund_money_fund_info_em',
-    targetUrl: 'https://fundf10.eastmoney.com/jjjz_000009.html',
-    description: '东方财富网-天天基金网-基金数据-货币型基金-历史净值',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000009"; 需要基金代码, 可以通过调用 **ak.fund_money_fund_daily_em()** 获取',
-        defaultValue: '000009',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '净值日期',
-        name: 'jzrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '每万份收益',
-        name: 'mwfsy',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '7日年化收益率',
-        name: '7rnhsyl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '赎回状态',
-        name: 'shzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '理财型基金-实时数据',
-    name: 'gmjj_lcxjj_sssj',
-    api: 'fund_financial_fund_daily_em',
-    targetUrl: 'http://fund.eastmoney.com/lcjj.html#1_1__0__ljjz,desc_1_os1',
-    description: '东方财富网-天天基金网-基金数据-理财型基金-实时数据, 此接口数据每个交易日 **16:00～23:00** 更新',
-    remarks: '该接口由于目标网站未更新数据，暂时不能返回数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '上一期年化收益率',
-        name: 'syqnhsyl',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前交易日-万份收益',
-        name: 'dqjyr_wfsy',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前交易日-7日年华',
-        name: 'dqjyr_7rnh',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前一个交易日-万份收益',
-        name: 'qygjyr_wfsy',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前一个交易日-7日年华',
-        name: 'qygjyr_7rnh',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '封闭期',
-        name: 'fbq',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '理财型基金-历史数据',
-    name: 'gmjj_lcxjj_lssj',
-    api: 'fund_financial_fund_info_em',
-    targetUrl: 'http://fundf10.eastmoney.com/jjjz_000791.html',
-    description: '东方财富网站-天天基金网-基金数据-理财型基金收益-历史净值明细',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000134"; 基金代码, 可以通过调用 **ak.fund_financial_fund_daily_em()** 获取',
-        defaultValue: '000134',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '净值日期',
-        name: 'jzrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '累计净值',
-        name: 'ljjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '赎回状态',
-        name: 'shzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '分红送配',
-        name: 'fhsp',
-        type: 'object',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '分级基金-实时数据',
-    name: 'gmjj_fjjj_sssj',
-    api: 'fund_graded_fund_daily_em',
-    targetUrl: 'http://fund.eastmoney.com/fjjj.html#1_1__0__zdf,desc_1',
-    description: '东方财富网-天天基金网-基金数据-分级基金-实时数据, 此接口数据每个交易日 **16:00～23:00**',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '累计净值',
-        name: 'ljjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前交易日-单位净值',
-        name: 'qjyr_dwjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '前交易日-累计净值',
-        name: 'qjyr_ljjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长值',
-        name: 'rzzz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '市价',
-        name: 'sj',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '折价率',
-        name: 'zjl',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '分级基金-历史数据',
-    name: 'gmjj_fjjj_lssj',
-    api: 'fund_graded_fund_info_em',
-    targetUrl: 'http://fundf10.eastmoney.com/jjjz_004186.html',
-    description: '东方财富网站-天天基金网-基金数据-分级基金-历史数据',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="150232"; 需要基金代码, 可以通过调用 **ak.fund_graded_fund_daily_em()** 获取',
-        defaultValue: '150232',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '净值日期',
-        name: 'jzrq',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '累计净值',
-        name: 'ljjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float',
-        description:
-          '注意单位: %; 日增长率为空原因如下: 1. 非交易日净值不参与日增长率计算(灰色数据行). 2. 上一交易日净值未披露, 日增长率无法计算.',
-        unit: '%',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '赎回状态',
-        name: 'shzt',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '场内交易基金-实时数据',
-    name: 'gmjj_cnjyjj_sssj',
-    api: 'fund_etf_fund_daily_em',
-    targetUrl: 'http://fund.eastmoney.com/cnjy_dwjz.html',
-    description: '东方财富网站-天天基金网-基金数据-场内交易基金-实时数据, 此接口数据每个交易日 **16:00～23:00**',
-    remarks: '单次返回当前时刻所有数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '类型',
-        name: 'lx',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '当前交易日-单位净值',
-        name: 'dqjyr_dwjz',
-        type: 'float64',
-        description: '会返回具体的日期值作为字段',
-        unit: '',
-      },
-      {
-        title: '当前交易日-累计净值',
-        name: 'dqjyr_ljjz',
-        type: 'float64',
-        description: '会返回具体的日期值作为字段',
-        unit: '',
-      },
-      {
-        title: '前一个交易日-单位净值',
-        name: 'qygjyr_dwjz',
-        type: 'float64',
-        description: '会返回具体的日期值作为字段',
-        unit: '',
-      },
-      {
-        title: '前一个交易日-累计净值',
-        name: 'qygjyr_ljjz',
-        type: 'float64',
-        description: '会返回具体的日期值作为字段',
-        unit: '',
-      },
-      {
-        title: '增长值',
-        name: 'zzz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '增长率',
-        name: 'zzl',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '市价',
-        name: 'sj',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '折价率',
-        name: 'zjl',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '场内交易基金-历史数据',
-    name: 'gmjj_cnjyjj_lssj',
-    api: 'fund_etf_fund_info_em',
-    targetUrl: 'http://fundf10.eastmoney.com/jjjz_004186.html',
-    description: '东方财富网站-天天基金网-基金数据-场内交易基金-历史净值数据',
-    remarks: '单次返回当前时刻所有历史数据',
-    inputParameters: [
-      {
-        title: 'fund',
-        name: 'fund',
-        type: 'str',
-        description: 'fund="511280"; 基金代码, 可以通过调用 **ak.fund_etf_fund_daily_em()** 获取',
-        defaultValue: '511280',
-        isRequired: false,
-      },
-      {
-        title: 'start_date',
-        name: 'start_date',
-        type: 'str',
-        description: 'start_date="20000101"; 开始时间',
-        defaultValue: '20000101',
-        isRequired: false,
-      },
-      {
-        title: 'end_date',
-        name: 'end_date',
-        type: 'str',
-        description: 'end_date="20500101"; 结束时间',
-        defaultValue: '20500101',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '净值日期',
-        name: 'jzrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '累计净值',
-        name: 'ljjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '赎回状态',
-        name: 'shzt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '香港基金-历史数据',
-    name: 'gmjj_xgjj_lssj',
-    api: 'fund_hk_fund_hist_em',
-    targetUrl: 'http://overseas.1234567.com.cn/f10/FundJz/968092#FHPS',
-    description: '东方财富网站-天天基金网-基金数据-香港基金-历史净值明细',
-    remarks: '单次返回指定 code 和 symbol 所有历史数据',
-    inputParameters: [
-      {
-        title: 'code',
-        name: 'code',
-        type: 'str',
-        description: 'code="1002200683"; 香港基金代码, 可以通过调用 **ak.fund_em_hk_rank()** 获取',
-        defaultValue: '1002200683',
-        isRequired: false,
-      },
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="历史净值明细"; choice of {"历史净值明细", "分红送配详情"}',
-        defaultValue: '历史净值明细',
-        choices: ['历史净值明细', '分红送配详情'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '年份',
-        name: 'nf',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '权益登记日',
-        name: 'qydjr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '除息日',
-        name: 'cxr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '分红发放日',
-        name: 'fhffr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '分红金额',
-        name: 'fhje',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位',
-        name: 'dw',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金累计分红',
-    name: 'gmjj_jjljfh',
-    api: 'fund_etf_dividend_sina',
-    targetUrl: 'https://finance.sina.com.cn/fund/quotes/510050/bc.shtml',
-    description: '新浪财经-基金-ETF 基金-累计分红',
-    remarks: '单次返回所有历史数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="sh510050"',
-        defaultValue: 'sh510050',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '除权除息日',
-        unit: '',
-      },
-      {
-        title: '累计分红',
-        name: 'ljfh',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金分红',
-    name: 'gmjj_jjfh',
-    api: 'fund_fh_em',
-    targetUrl: 'http://fund.eastmoney.com/data/fundfenhong.html',
-    description: '天天基金网-基金数据-分红送配-基金分红',
-    remarks: '单次返回所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '权益登记日',
-        name: 'qydjr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '除息日期',
-        name: 'cxrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '分红',
-        name: 'fh',
-        type: 'float64',
-        description: '注意单位: 元/份',
-        unit: '元/份',
-      },
-      {
-        title: '分红发放日',
-        name: 'fhffr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金拆分',
-    name: 'gmjj_jjcf',
-    api: 'fund_cf_em',
-    targetUrl: 'http://fund.eastmoney.com/data/fundchaifen.html',
-    description: '天天基金网-基金数据-分红送配-基金拆分',
-    remarks: '单次返回所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拆分折算日',
-        name: 'cfzsr',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拆分类型',
-        name: 'cflx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '拆分折算',
-        name: 'cfzs',
-        type: 'float64',
-        description: '注意单位: 每份',
-        unit: '每份',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金分红排行',
-    name: 'gmjj_jjfhpx',
-    api: 'fund_fh_rank_em',
-    targetUrl: 'http://fund.eastmoney.com/data/fundleijifenhong.html',
-    description: '天天基金网-基金数据-分红送配-基金分红排行',
-    remarks: '单次返回所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '累计分红',
-        name: 'ljfh',
-        type: 'float64',
-        description: '注意单位: 元/份',
-        unit: '元/份',
-      },
-      {
-        title: '累计次数',
-        name: 'ljcs',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成立日期',
-        name: 'clrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '开放式基金排行',
-    name: 'gmjj_kfsjjpx',
-    api: 'fund_open_fund_rank_em',
-    targetUrl: 'https://fund.eastmoney.com/data/fundranking.html',
-    description: '东方财富网-数据中心-开放式基金排行',
-    remarks: '单次返回当前时刻所有数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="全部"; choice of {"全部", "股票型", "混合型", "债券型", "指数型", "QDII", "FOF"}',
-        defaultValue: '全部',
-        choices: ['全部', '股票型', '混合型', '债券型', '指数型', 'QDII', 'FOF'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '累计净值',
-        name: 'ljjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1周',
-        name: 'j1z',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1月',
-        name: 'j1y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3月',
-        name: 'j3y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近6月',
-        name: 'j6y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1年',
-        name: 'j1n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近2年',
-        name: 'j2n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3年',
-        name: 'j3n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '今年来',
-        name: 'jnl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成立来',
-        name: 'cll',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '自定义',
-        name: 'zdy',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '场内交易基金排行榜',
-    name: 'gmjj_cnjyjjpxb',
-    api: 'fund_exchange_rank_em',
-    targetUrl: 'https://fund.eastmoney.com/data/fbsfundranking.html',
-    description: '东方财富网-数据中心-场内交易基金排行榜',
-    remarks: '单次返回当前时刻所有数据, 每个交易日 17 点后更新',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '类型',
-        name: 'lx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '累计净值',
-        name: 'ljjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '近1周',
-        name: 'j1z',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1月',
-        name: 'j1y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3月',
-        name: 'j3y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近6月',
-        name: 'j6y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1年',
-        name: 'j1n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近2年',
-        name: 'j2n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3年',
-        name: 'j3n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '今年来',
-        name: 'jnl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成立来',
-        name: 'cll',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成立日期',
-        name: 'clrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '货币型基金排行',
-    name: 'gmjj_hbxjjpx',
-    api: 'fund_money_rank_em',
-    targetUrl: 'https://fund.eastmoney.com/data/hbxfundranking.html',
-    description: '东方财富网-数据中心-货币型基金排行',
-    remarks:
-      '单次返回当前时刻所有数据, 每个交易日 17 点后更新, 货币基金的单位净值均为 1.0000 元，最新一年期定存利率: 1.50%',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '万份收益',
-        name: 'wfsy',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '年化收益率7日',
-        name: 'nhsyl7r',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '年化收益率14日',
-        name: 'nhsyl14r',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '年化收益率28日',
-        name: 'nhsyl28r',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1月',
-        name: 'j1y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3月',
-        name: 'j3y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近6月',
-        name: 'j6y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1年',
-        name: 'j1n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近2年',
-        name: 'j2n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3年',
-        name: 'j3n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近5年',
-        name: 'j5n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '今年来',
-        name: 'jnl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成立来',
-        name: 'cll',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '理财基金排行',
-    name: 'gmjj_lcjjpx',
-    api: 'fund_lcx_rank_em',
-    targetUrl: 'https://fund.eastmoney.com/data/lcxfundranking.html#t;c0;r;sSYL_Z;ddesc;pn50;f;os1;',
-    description:
-      '东方财富网-数据中心-理财基金排行, 每个交易日17点后更新, 货币基金的单位净值均为 1.0000 元，最新一年期定存利率: 1.50%',
-    remarks: '由于目标网站没有数据，该接口暂时未能返回数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '万份收益',
-        name: 'wfsy',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '年化收益率7日',
-        name: 'nhsyl7r',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '年化收益率14日',
-        name: 'nhsyl14r',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '年化收益率28日',
-        name: 'nhsyl28r',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1周',
-        name: 'j1z',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1月',
-        name: 'j1y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3月',
-        name: 'j3y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近6月',
-        name: 'j6y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '今年来',
-        name: 'jnl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成立来',
-        name: 'cll',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '可购买',
-        name: 'kgm',
-        type: 'float64',
-        description: '可购买',
-        unit: '',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '香港基金排行',
-    name: 'gmjj_xgjjpx',
-    api: 'fund_hk_rank_em',
-    targetUrl: 'https://overseas.1234567.com.cn/FundList',
-    description: '东方财富网-数据中心-基金排行-香港基金排行',
-    remarks: '单次返回当前时刻所有数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '币种',
-        name: 'bz',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1周',
-        name: 'j1z',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1月',
-        name: 'j1y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3月',
-        name: 'j3y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近6月',
-        name: 'j6y',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1年',
-        name: 'j1n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近2年',
-        name: 'j2n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3年',
-        name: 'j3n',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '今年来',
-        name: 'jnl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '成立来',
-        name: 'cll',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '可购买',
-        name: 'kgm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '香港基金代码',
-        name: 'xgjjdm',
-        type: 'object',
-        description: '用于查询历史净值数据, 通过该字段查询相关的数据',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金业绩-雪球',
-    name: 'gmjj_jjyj_xq',
-    api: 'fund_individual_achievement_xq',
-    targetUrl: 'https://danjuanfunds.com/rn/funding/:code/RankInfo?symbol=000001&fd_type=2&btn_pos=1',
-    description: '雪球基金-基金详情-基金业绩-详情',
-    remarks: '单次返回单只基金业绩详情',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'timeout',
-        name: 'timeout',
-        type: 'float',
-        description: 'timeout=None; 默认不设置超时参数',
-        defaultValue: null,
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '业绩类型',
-        name: 'yjlx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '周期',
-        name: 'zq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '本产品区间收益',
-        name: 'bcpqjsy',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '本产品最大回撒',
-        name: 'bcpzdhs',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '周期收益同类排名',
-        name: 'zqsytlpm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '净值估算',
-    name: 'gmjj_jzgs',
-    api: 'fund_value_estimation_em',
-    targetUrl: 'http://fund.eastmoney.com/fundguzhi.html',
-    description: '东方财富网-数据中心-净值估算',
-    remarks: '单次返回当前交易日指定 symbol 的所有数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description:
-          "symbol='全部'; 默认返回所有数据; choice of {'全部', '股票型', '混合型', '债券型', '指数型', 'QDII', 'ETF联接', 'LOF', '场内交易基金'}",
-        defaultValue: '全部',
-        choices: ['全部', '股票型', '混合型', '债券型', '指数型', 'QDII', 'ETF联接', 'LOF', '场内交易基金'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金名称',
-        name: 'jjmc',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '交易日-估算数据-估算值',
-        name: 'jyr_gssj_gsz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '交易日-估算数据-估算增长率',
-        name: 'jyr_gssj_gszzl',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '交易日-公布数据-单位净值',
-        name: 'jyr_gbsj_dwjz',
-        type: 'float',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '交易日-公布数据-日增长率',
-        name: 'jyr_gbsj_rzzl',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '估算偏差',
-        name: 'gspc',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '交易日-单位净值',
-        name: 'jyr_dwjz',
-        type: 'str',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金数据分析',
-    name: 'gmjj_jjsjfx',
-    api: 'fund_individual_analysis_xq',
-    targetUrl: 'https://danjuanfunds.com/funding/000001',
-    description: '雪球基金-基金详情-数据分析',
-    remarks: '返回单只基金历史表现分析数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'timeout',
-        name: 'timeout',
-        type: 'float',
-        description: 'timeout=None; 默认不设置超时参数',
-        defaultValue: null,
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '周期',
-        name: 'zq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '较同类风险收益比',
-        name: 'jtlfxsyb',
-        type: 'int64',
-        description: '注意单位：%',
-        unit: '',
-      },
-      {
-        title: '较同类抗风险波动',
-        name: 'jtlkfxbd',
-        type: 'int64',
-        description: '注意单位：%',
-        unit: '',
-      },
-      {
-        title: '年化波动率',
-        name: 'nhbdl',
-        type: 'float64',
-        description: '注意单位：%',
-        unit: '',
-      },
-      {
-        title: '年化夏普比率',
-        name: 'nhxpbl',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最大回撤',
-        name: 'zdhc',
-        type: 'float64',
-        description: '注意单位：%',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金盈利概率',
-    name: 'gmjj_jjylgl',
-    api: 'fund_individual_profit_probability_xq',
-    targetUrl: 'https://danjuanfunds.com/funding/000001',
-    description: '雪球基金-基金详情-盈利概率；历史任意时点买入，持有满X时间，盈利概率，以及平均收益',
-    remarks: '单次返回单只基金历史任意时点买入，持有满 X 时间，盈利概率，以及平均收益',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'timeout',
-        name: 'timeout',
-        type: 'float',
-        description: 'timeout=None; 默认不设置超时参数',
-        defaultValue: null,
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '持有时长',
-        name: 'cysc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '盈利概率',
-        name: 'ylgl',
-        type: 'object',
-        description: '注意单位：%',
-        unit: '',
-      },
-      {
-        title: '平均收益',
-        name: 'pjsy',
-        type: 'object',
-        description: '注意单位：%',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金持仓资产比例',
-    name: 'gmjj_jjcczcbl',
-    api: 'fund_individual_detail_hold_xq',
-    targetUrl: 'https://danjuanfunds.com/rn/fund-detail/archive?id=103&code=000001',
-    description: '雪球基金-基金详情-基金持仓-详情',
-    remarks: '单次返回单只基金指定日期的持仓大类资产比例',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date="20231231"; 季度日期',
-        defaultValue: '20231231',
-        isRequired: false,
-      },
-      {
-        title: 'timeout',
-        name: 'timeout',
-        type: 'float',
-        description: 'timeout=None; 默认不设置超时参数',
-        defaultValue: null,
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '资产类型',
-        name: 'zclx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '仓位占比',
-        name: 'cwzb',
-        type: 'float64',
-        description: '注意单位：%',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金交易费率',
-    name: 'gmjj_jjjyfl',
-    api: 'fund_fee_em',
-    targetUrl: 'https://fundf10.eastmoney.com/jjfl_015641.html',
-    description: '天天基金-基金档案-购买信息',
-    remarks: '单次返回指定 symbol 的 indicator 数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="015641"; 基金代码',
-        defaultValue: '015641',
-        isRequired: false,
-      },
-      {
-        title: 'indicator',
-        name: 'indicator',
-        type: 'str',
-        description:
-          'indicator="申购费率"; choice of {"交易状态", "申购与赎回金额", "交易确认日", "运作费用", "认购费率", "申购费率", "赎回费率"}',
-        defaultValue: '申购费率',
-        choices: ['交易状态', '申购与赎回金额', '交易确认日', '运作费用', '认购费率', '申购费率', '赎回费率'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '费用类型',
-        name: 'fylx',
-        type: 'object',
-        description: '',
-        unit: '',
+      {
+        "title": "基金名称",
+        "name": "jjmc",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '条件或名称',
-        name: 'tjhmc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '费用',
-        name: 'fy',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1周",
+        "name": "j1z",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1月",
+        "name": "j1y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3月",
+        "name": "j3y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近6月",
+        "name": "j6y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年",
+        "name": "j1n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近2年",
+        "name": "j2n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年",
+        "name": "j3n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "今年来",
+        "name": "jnl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金交易规则',
-    name: 'gmjj_jjjygz',
-    api: 'fund_individual_detail_info_xq',
-    targetUrl: 'https://danjuanfunds.com/djapi/fund/detail/675091',
-    description: '雪球基金-基金详情-基金交易规则',
-    remarks: '单次返回单只基金基金交易规则',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'timeout',
-        name: 'timeout',
-        type: 'float',
-        description: 'timeout=None; 默认不设置超时参数',
-        defaultValue: null,
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '费用类型',
-        name: 'fylx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '条件或名称',
-        name: 'tjhmc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '费用',
-        name: 'fy',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金持仓',
-    name: 'gmjj_jjcc',
-    api: 'fund_portfolio_hold_em',
-    targetUrl: 'https://fundf10.eastmoney.com/ccmx_000001.html',
-    description: '天天基金网-基金档案-投资组合-基金持仓',
-    remarks: '单次返回指定 symbol 和 date 的所有持仓数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date="2024"; 指定年份',
-        defaultValue: '2024',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '股票代码',
-        name: 'gpdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '股票名称',
-        name: 'gpmc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '占净值比例',
-        name: 'zjzbl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '持股数',
-        name: 'cgs',
-        type: 'float64',
-        description: '注意单位: 万股',
-        unit: '万股',
-      },
-      {
-        title: '持仓市值',
-        name: 'ccsz',
-        type: 'float64',
-        description: '注意单位: 万元',
-        unit: '万元',
-      },
-      {
-        title: '季度',
-        name: 'jd',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '债券持仓',
-    name: 'gmjj_zqcc',
-    api: 'fund_portfolio_bond_hold_em',
-    targetUrl: 'https://fundf10.eastmoney.com/ccmx_000001.html',
-    description: '天天基金网-基金档案-投资组合-债券持仓',
-    remarks: '单次返回指定 symbol 和 date 的所有持仓数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date="2023"; 指定年份',
-        defaultValue: '2023',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
+      {
+        "title": "成立来",
+        "name": "cll",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '债券代码',
-        name: 'zqdm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "手续费",
+        "name": "sxf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '债券名称',
-        name: 'zqmc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "起购金额",
+        "name": "qgje",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '占净值比例',
-        name: 'zjzbl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "跟踪标的",
+        "name": "gzbd",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '持仓市值',
-        name: 'ccsz',
-        type: 'float64',
-        description: '注意单位: 万元',
-        unit: '万元',
-      },
-      {
-        title: '季度',
-        name: 'jd',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
+        "title": "跟踪方式",
+        "name": "gzfs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '行业配置',
-    name: 'gmjj_hypz',
-    api: 'fund_portfolio_industry_allocation_em',
-    targetUrl: 'https://fundf10.eastmoney.com/hytz_000001.html',
-    description: '天天基金网-基金档案-投资组合-行业配置',
-    remarks: '单次返回指定 symbol 和 date 的所有持仓数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="000001"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取',
-        defaultValue: '000001',
-        isRequired: false,
-      },
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date="2023"; 指定年份',
-        defaultValue: '2023',
-        isRequired: false,
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金申购状态",
+    "name": "gmjj_jjsgzt",
+    "api": "fund_purchase_em",
+    "targetUrl": "http://fund.eastmoney.com/Fund_sgzt_bzdm.html#fcode,asc_1",
+    "description": "东方财富网站-天天基金网-基金数据-基金申购状态",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金类型",
+        "name": "jjlx",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
-    ],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '行业类别',
-        name: 'hylb',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '占净值比例',
-        name: 'zjzbl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '市值',
-        name: 'sz',
-        type: 'float64',
-        description: '注意单位: 万元',
-        unit: '万元',
+      {
+        "title": "最新净值/万份收益",
+        "name": "zxjz/wfsy",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '截止时间',
-        name: 'jzsj',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "最新净值/万份收益-报告时间",
+        "name": "zxjz/wfsy_bgsj",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '重大变动',
-    name: 'gmjj_zdbd',
-    api: 'fund_portfolio_change_em',
-    targetUrl: 'https://fundf10.eastmoney.com/ccbd_000001.html',
-    description: '天天基金网-基金档案-投资组合-重大变动',
-    remarks: '单次返回指定 symbol、indicator 和 date 的所有重大变动数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="003567"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取',
-        defaultValue: '003567',
-        isRequired: false,
-      },
-      {
-        title: 'indicator',
-        name: 'indicator',
-        type: 'str',
-        description: 'indicator="累计买入"; choice of {"累计买入", "累计卖出"}',
-        defaultValue: '累计买入',
-        choices: ['累计买入', '累计卖出'],
-        isRequired: false,
-      },
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date="2023"; 指定年份',
-        defaultValue: '2023',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
       {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '股票代码',
-        name: 'gpdm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "赎回状态",
+        "name": "shzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '股票名称',
-        name: 'gpmc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "下一开放日",
+        "name": "xykfr",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '本期累计买入金额',
-        name: 'bqljmrje',
-        type: 'float64',
-        description: '注意单位: 万元',
-        unit: '万元',
+        "title": "购买起点",
+        "name": "gmqd",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '占期初基金资产净值比例',
-        name: 'zqcjjzcjzbl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "日累计限定金额",
+        "name": "rljxdje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '季度',
-        name: 'jd',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
+        "title": "手续费",
+        "name": "sxf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金评级总汇',
-    name: 'gmjj_jjpjzh',
-    api: 'fund_rating_all',
-    targetUrl: 'https://fund.eastmoney.com/data/fundrating.html',
-    description: '天天基金网-基金评级-基金评级总汇',
-    remarks: '单次返回所有基金评级数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '简称',
-        name: 'jc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "ETF基金实时行情-东财",
+    "name": "gmjj_etfjjsshq_dc",
+    "api": "fund_etf_spot_em",
+    "targetUrl": "https://quote.eastmoney.com/center/gridlist.html#fund_etf",
+    "description": "东方财富-ETF 实时行情",
+    "remarks": "单次返回所有数据",
+    "inputParameters": [],
+    "outputParameters": [
       {
-        title: '基金公司',
-        name: 'jjgs',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '5星评级家数',
-        name: '5xpjjs',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "名称",
+        "name": "mc",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '上海证券',
-        name: 'shzq',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "最新价",
+        "name": "zxj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '招商证券',
-        name: 'zszq',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "IOPV实时估值",
+        "name": "IOPVssgz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '济安金信',
-        name: 'jajx',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "基金折价率",
+        "name": "jjzjl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '手续费',
-        name: 'sxf',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '类型',
-        name: 'lx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '上海证券评级',
-    name: 'gmjj_shzqpj',
-    api: 'fund_rating_sh',
-    targetUrl: 'https://fund.eastmoney.com/data/fundrating_3.html',
-    description: '天天基金网-基金评级-上海证券评级',
-    remarks: '单次返回指定交易日的所有基金评级数据',
-    inputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: "date='20230630'; https://fund.eastmoney.com/data/fundrating_3.html 获取查询日期",
-        defaultValue: '20230630',
-        isRequired: false,
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
-    ],
-    outputParameters: [
       {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "成交量",
+        "name": "cjl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '简称',
-        name: 'jc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "开盘价",
+        "name": "kpj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金公司',
-        name: 'jjgs',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "最高价",
+        "name": "zgj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '3年期评级-3年评级',
-        name: '3nqpj_3npj',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "最低价",
+        "name": "zdj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '3年期评级-较上期',
-        name: '3nqpj_jsq',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "昨收",
+        "name": "zs",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '5年期评级-5年评级',
-        name: '5nqpj_5npj',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "换手率",
+        "name": "hsl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '5年期评级-较上期',
-        name: '5nqpj_jsq',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "量比",
+        "name": "lb",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "委比",
+        "name": "wb",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "外盘",
+        "name": "wp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "内盘",
+        "name": "np",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '近1年涨幅',
-        name: 'j1nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "主力净流入-净额",
+        "name": "zljlr_je",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '近3年涨幅',
-        name: 'j3nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "主力净流入-净占比",
+        "name": "zljlr_jzb",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '近5年涨幅',
-        name: 'j5nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "超大单净流入-净额",
+        "name": "cddjlr_je",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '手续费',
-        name: 'sxf',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "超大单净流入-净占比",
+        "name": "cddjlr_jzb",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '类型',
-        name: 'lx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '招商证券评级',
-    name: 'gmjj_zszqpj',
-    api: 'fund_rating_zs',
-    targetUrl: 'http://fund.eastmoney.com/data/fundrating_2.html',
-    description: '天天基金网-基金评级-招商证券评级',
-    remarks: '单次返回指定交易日的所有基金评级数据',
-    inputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: "date='20230331'; https://fund.eastmoney.com/data/fundrating_2.html 获取查询日期",
-        defaultValue: '20230331',
-        isRequired: false,
+        "title": "大单净流入-净额",
+        "name": "ddjlr_je",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
-    ],
-    outputParameters: [
       {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "大单净流入-净占比",
+        "name": "ddjlr_jzb",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '简称',
-        name: 'jc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "中单净流入-净额",
+        "name": "zdjlr_je",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "中单净流入-净占比",
+        "name": "zdjlr_jzb",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金公司',
-        name: 'jjgs',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "小单净流入-净额",
+        "name": "xdjlr_je",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '3年期评级-3年评级',
-        name: '3nqpj_3npj',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "小单净流入-净占比",
+        "name": "xdjlr_jzb",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '3年期评级-较上期',
-        name: '3nqpj_jsq',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "现手",
+        "name": "xs",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "买一",
+        "name": "my",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "卖一",
+        "name": "my",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "最新份额",
+        "name": "zxfe",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '近1年涨幅',
-        name: 'j1nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "流通市值",
+        "name": "ltsz",
+        "type": "int64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '近3年涨幅',
-        name: 'j3nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "总市值",
+        "name": "zsz",
+        "type": "int64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '近5年涨幅',
-        name: 'j5nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "数据日期",
+        "name": "sjrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '手续费',
-        name: 'sxf',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
+        "title": "更新时间",
+        "name": "gxsj",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '济安金信评级',
-    name: 'gmjj_jajxpj',
-    api: 'fund_rating_ja',
-    targetUrl: 'https://fund.eastmoney.com/data/fundrating_4.html',
-    description: '天天基金网-基金评级-济安金信评级',
-    remarks: '单次返回指定交易日的所有基金评级数据',
-    inputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: "date='20200930'; https://fund.eastmoney.com/data/fundrating_4.html 获取查询日期",
-        defaultValue: '20200930',
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '简称',
-        name: 'jc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金公司',
-        name: 'jjgs',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '3年期评级-3年评级',
-        name: '3nqpj_3npj',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '3年期评级-较上期',
-        name: '3nqpj_jsq',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '日增长率',
-        name: 'rzzl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近1年涨幅',
-        name: 'j1nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近3年涨幅',
-        name: 'j3nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '近5年涨幅',
-        name: 'j5nzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '手续费',
-        name: 'sxf',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "ETF基金实时行情-同花顺",
+    "name": "gmjj_etfjjsshq_ths",
+    "api": "fund_etf_spot_ths",
+    "targetUrl": "https://fund.10jqka.com.cn/datacenter/jz/kfs/etf/",
+    "description": "同花顺理财-基金数据-每日净值-ETF-实时行情",
+    "remarks": "单次返回指定 date 的所有数据",
+    "inputParameters": [
       {
-        title: '类型',
-        name: 'lx',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"\"; 默认返回当前最新的数据",
+        "defaultValue": "",
+        "isRequired": false
+      }
     ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金经理',
-    name: 'gmjj_jjjl',
-    api: 'fund_manager_em',
-    targetUrl: 'https://fund.eastmoney.com/manager/default.html',
-    description: '天天基金网-基金数据-基金经理大全',
-    remarks: '单次返回所有基金经理数据',
-    inputParameters: [],
-    outputParameters: [
+    "outputParameters": [
       {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '姓名',
-        name: 'xm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '所属公司',
-        name: 'ssgs',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "基金名称",
+        "name": "jjmc",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '现任基金',
-        name: 'xrjj',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "当前-单位净值",
+        "name": "dq_dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
-      {
-        title: '累计从业时间',
-        name: 'ljcysj',
-        type: 'int64',
-        description: '注意单位: 天',
-        unit: '天',
-      },
-      {
-        title: '现任基金资产总规模',
-        name: 'xrjjzczgm',
-        type: 'float64',
-        description: '注意单位: 亿元',
-        unit: '亿元',
-      },
-      {
-        title: '现任基金最佳回报',
-        name: 'xrjjzjhb',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '新发基金',
-    name: 'gmjj_xfjj',
-    api: 'fund_new_found_em',
-    targetUrl: 'https://fund.eastmoney.com/data/xinfound.html',
-    description: '天天基金网-基金数据-新发基金-新成立基金',
-    remarks: '单次返回所有新发基金数据',
-    inputParameters: [],
-    outputParameters: [
       {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "当前-累计净值",
+        "name": "dq_ljjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "前一日-单位净值",
+        "name": "qyr_dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '发行公司',
-        name: 'fxgs',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "增长值",
+        "name": "zzz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金类型',
-        name: 'jjlx',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "增长率",
+        "name": "zzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '集中认购期',
-        name: 'jzrgq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "赎回状态",
+        "name": "shzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '募集份额',
-        name: 'mjfe',
-        type: 'float64',
-        description: '注意单位: 亿份',
-        unit: '亿份',
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '成立日期',
-        name: 'clrq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "最新-交易日",
+        "name": "zx_jyr",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '成立来涨幅',
-        name: 'cllzf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "最新-单位净值",
+        "name": "zx_dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "最新-累计净值",
+        "name": "zx_ljjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '申购状态',
-        name: 'sgzt',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "基金类型",
+        "name": "jjlx",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '优惠费率',
-        name: 'yhfl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
+        "title": "查询日期",
+        "name": "cxrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '开放式基金',
-    name: 'gmjj_kfsjj',
-    api: 'fund_scale_open_sina',
-    targetUrl: 'https://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf',
-    description: '基金数据中心-基金规模-开放式基金',
-    remarks: '单次返回指定 symbol 的基金规模数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description:
-          'symbol="股票型基金"; choice of {"股票型基金", "混合型基金", "债券型基金", "货币型基金", "QDII基金"}',
-        defaultValue: '股票型基金',
-        choices: ['股票型基金', '混合型基金', '债券型基金', '货币型基金', 'QDII基金'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '注意单位: 元',
-        unit: '元',
-      },
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "LOF基金实时行情-东财",
+    "name": "gmjj_lofjjsshq_dc",
+    "api": "fund_lof_spot_em",
+    "targetUrl": "https://quote.eastmoney.com/center/gridlist.html#fund_lof",
+    "description": "东方财富-LOF 实时行情",
+    "remarks": "单次返回所有数据",
+    "inputParameters": [],
+    "outputParameters": [
       {
-        title: '总募集规模',
-        name: 'zmjgm',
-        type: 'float64',
-        description: '注意单位: 万份',
-        unit: '万份',
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '最近总份额',
-        name: 'zjzfe',
-        type: 'float64',
-        description: '注意单位: 份',
-        unit: '份',
+        "title": "名称",
+        "name": "mc",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '成立日期',
-        name: 'clrq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "最新价",
+        "name": "zxj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '更新日期',
-        name: 'gxrq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '封闭式基金',
-    name: 'gmjj_fbsjj',
-    api: 'fund_scale_close_sina',
-    targetUrl: 'https://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf',
-    description: '基金数据中心-基金规模-封闭式基金',
-    remarks: '单次返回所有封闭式基金的基金规模数据',
-    inputParameters: [],
-    outputParameters: [
       {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "成交量",
+        "name": "cjl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "开盘价",
+        "name": "kpj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '注意单位: 元',
-        unit: '元',
+        "title": "最高价",
+        "name": "zgj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '总募集规模',
-        name: 'zmjgm',
-        type: 'float64',
-        description: '注意单位: 万份',
-        unit: '万份',
+        "title": "最低价",
+        "name": "zdj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '最近总份额',
-        name: 'zjzfe',
-        type: 'float64',
-        description: '注意单位: 份',
-        unit: '份',
+        "title": "昨收",
+        "name": "zs",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '成立日期',
-        name: 'clrq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "换手率",
+        "name": "hsl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "流通市值",
+        "name": "ltsz",
+        "type": "int64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '更新日期',
-        name: 'gxrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
+        "title": "总市值",
+        "name": "zsz",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '分级子基金',
-    name: 'gmjj_fjzjj',
-    api: 'fund_scale_structured_sina',
-    targetUrl: 'https://vip.stock.finance.sina.com.cn/fund_center/index.html#jjgmfjall',
-    description: '基金数据中心-基金规模-分级子基金',
-    remarks: '单次返回所有分级子基金的基金规模数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金简称',
-        name: 'jjjc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '单位净值',
-        name: 'dwjz',
-        type: 'float64',
-        description: '注意单位: 元',
-        unit: '元',
-      },
-      {
-        title: '总募集规模',
-        name: 'zmjgm',
-        type: 'float64',
-        description: '注意单位: 万份',
-        unit: '万份',
-      },
-      {
-        title: '最近总份额',
-        name: 'zjzfe',
-        type: 'float64',
-        description: '注意单位: 份',
-        unit: '份',
-      },
-      {
-        title: '成立日期',
-        name: 'clrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金实时行情-新浪",
+    "name": "gmjj_jjsshq_xl",
+    "api": "fund_etf_category_sina",
+    "targetUrl": "http://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf",
+    "description": "新浪财经-基金列表及行情数据",
+    "remarks": "单次返回指定 symbol 基金的所有数据",
+    "inputParameters": [
       {
-        title: '基金经理',
-        name: 'jjjl',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '更新日期',
-        name: 'gxrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"LOF基金\"; choice of {\"封闭式基金\", \"ETF基金\", \"LOF基金\"}",
+        "defaultValue": "LOF基金",
+        "choices": [
+          "封闭式基金",
+          "ETF基金",
+          "LOF基金"
+        ],
+        "isRequired": false
+      }
     ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金规模详情',
-    name: 'gmjj_jjgmxq',
-    api: 'fund_aum_em',
-    targetUrl: 'https://fund.eastmoney.com/Company/lsgm.html',
-    description: '天天基金网-基金数据-基金规模',
-    remarks: '单次返回所有基金规模数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金公司',
-        name: 'jjgs',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '成立时间',
-        name: 'clsj',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
+    "outputParameters": [
       {
-        title: '全部管理规模',
-        name: 'qbglgm',
-        type: 'float64',
-        description: '注意单位: 亿元',
-        unit: '亿元',
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '全部基金数',
-        name: 'qbjjs',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "名称",
+        "name": "mc",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '全部经理数',
-        name: 'qbjls',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "最新价",
+        "name": "zxj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '更新日期',
-        name: 'gxrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金规模走势',
-    name: 'gmjj_jjgmzs',
-    api: 'fund_aum_trend_em',
-    targetUrl: 'http://fund.eastmoney.com/Company/default.html',
-    description: '天天基金网-基金数据-市场全部基金规模走势',
-    remarks: '单次返回所有市场全部基金规模走势数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'value',
-        name: 'value',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金公司历年管理规模',
-    name: 'gmjj_jjgslnglgm',
-    api: 'fund_aum_hist_em',
-    targetUrl: 'http://fund.eastmoney.com/Company/lsgm.html',
-    description: '天天基金网-基金数据-基金公司历年管理规模排行列表',
-    remarks: '单次返回所有基金公司历年管理规模排行列表数据',
-    inputParameters: [
-      {
-        title: 'year',
-        name: 'year',
-        type: 'str',
-        description: 'year="2023"; 从 2001 年开始',
-        defaultValue: '2023',
-        isRequired: false,
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
-    ],
-    outputParameters: [
       {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '基金公司',
-        name: 'jjgs',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "买入",
+        "name": "mr",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '总规模',
-        name: 'zgm',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "卖出",
+        "name": "mc",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '股票型',
-        name: 'gpx',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "昨收",
+        "name": "zs",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '混合型',
-        name: 'hhx',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "今开",
+        "name": "jk",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '债券型',
-        name: 'zqx',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "最高",
+        "name": "zg",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '指数型',
-        name: 'zsx',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "最低",
+        "name": "zd",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: 'QDII',
-        name: 'QDII',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "成交量",
+        "name": "cjl",
+        "type": "int64",
+        "description": "注意单位: 股",
+        "unit": "股"
       },
       {
-        title: '货币型',
-        name: 'hbx',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-    ],
+        "title": "成交额",
+        "name": "cje",
+        "type": "int64",
+        "description": "注意单位: 元",
+        "unit": "元"
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'REITs-实时行情',
-    name: 'gmjj_reits_sshq',
-    api: 'reits_realtime_em',
-    targetUrl: 'http://quote.eastmoney.com/center/gridlist.html#fund_reits_all',
-    description: '东方财富网-行情中心-REITs-沪深 REITs-实时行情',
-    remarks: '单次返回所有 REITs 的实时行情数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '代码',
-        name: 'dm',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '名称',
-        name: 'mc',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新价',
-        name: 'zxj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '涨跌额',
-        name: 'zde',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "ETF基金分时行情-东财",
+    "name": "gmjj_etfjjfshq_dc",
+    "api": "fund_etf_hist_min_em",
+    "targetUrl": "https://quote.eastmoney.com/sz159707.html",
+    "description": "东方财富-ETF 分时行情; 该接口只能获取近期的分时数据，注意时间周期的设置",
+    "remarks": "单次返回指定 ETF、频率、复权调整和时间区间的分时数据, 其中 1 分钟数据只返回近 5 个交易日数据且不复权",
+    "inputParameters": [
       {
-        title: '涨跌幅',
-        name: 'zdf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol='513500'; ETF 代码可以在 **ak.fund_etf_spot_em()** 中获取",
+        "defaultValue": "513500",
+        "isRequired": false
       },
       {
-        title: '成交量',
-        name: 'cjl',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "start_date",
+        "name": "start_date",
+        "type": "str",
+        "description": "start_date=\"1979-09-01 09:32:00\"; 日期时间; 默认返回所有数据",
+        "defaultValue": "1979-09-01 09:32:00",
+        "isRequired": false
       },
       {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "end_date",
+        "name": "end_date",
+        "type": "str",
+        "description": "end_date=\"2222-01-01 09:32:00\"; 日期时间; 默认返回所有数据",
+        "defaultValue": "2222-01-01 09:32:00",
+        "isRequired": false
       },
       {
-        title: '开盘价',
-        name: 'kpj',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "period",
+        "name": "period",
+        "type": "str",
+        "description": "period='5'; choice of {'1', '5', '15', '30', '60'}; 其中 1 分钟数据返回近 5 个交易日数据且不复权",
+        "defaultValue": "5",
+        "choices": [
+          1,
+          5,
+          15,
+          30,
+          60
+        ],
+        "isRequired": false
       },
       {
-        title: '最高价',
-        name: 'zgj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低价',
-        name: 'zdj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '昨收',
-        name: 'zs',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: 'REITs-历史行情',
-    name: 'gmjj_reits_lshq',
-    api: 'reits_hist_em',
-    targetUrl: 'https://quote.eastmoney.com/sh508097.html',
-    description: '东方财富网-行情中心-REITs-沪深 REITs-历史行情',
-    remarks: '单次返回指定 symbol 的历史行情数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: 'symbol="508097"; REITs 代码',
-        defaultValue: '508097',
-        isRequired: false,
-      },
+        "title": "adjust",
+        "name": "adjust",
+        "type": "str",
+        "description": "adjust=''; choice of {'', 'qfq', 'hfq'}; '': 不复权, 'qfq': 前复权, 'hfq': 后复权, 其中 1 分钟数据返回近 5 个交易日数据且不复权",
+        "defaultValue": "",
+        "choices": [
+          "",
+          "qfq",
+          "hfq"
+        ],
+        "isRequired": false
+      }
     ],
-    outputParameters: [
-      {
-        title: '日期',
-        name: 'rq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '今开',
-        name: 'jk',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最高',
-        name: 'zg',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最低',
-        name: 'zd',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '最新价',
-        name: 'zxj',
-        type: 'float64',
-        description: '',
-        unit: '',
-      },
+    "outputParameters": [
       {
-        title: '成交量',
-        name: 'cjl',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "时间",
+        "name": "sj",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '成交额',
-        name: 'cje',
-        type: 'float64',
-        description: '',
-        unit: '',
+        "title": "开盘",
+        "name": "kp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '振幅',
-        name: 'zf',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "收盘",
+        "name": "sp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '换手',
-        name: 'hs',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金重仓股',
-    name: 'gmjj_jjzcg',
-    api: 'fund_report_stock_cninfo',
-    targetUrl: 'https://webapi.cninfo.com.cn/#/thematicStatistics',
-    description: '巨潮资讯-数据中心-专题统计-基金报表-基金重仓股',
-    remarks: '返回指定 date 的所有数据; date 从 2017 年开始',
-    inputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date="20210630"; choice of {"XXXX0331", "XXXX0630", "XXXX0930", "XXXX1231"}, 其中 XXXX 为年份',
-        defaultValue: '20210630',
-        choices: ['XXXX0331', 'XXXX0630', 'XXXX0930', 'XXXX1231'],
-        isRequired: false,
+        "title": "最高",
+        "name": "zg",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
-    ],
-    outputParameters: [
       {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "最低",
+        "name": "zd",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '股票代码',
-        name: 'gpdm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '股票简称',
-        name: 'gpjc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '报告期',
-        name: 'bgq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "成交量",
+        "name": "cjl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金覆盖家数',
-        name: 'jjfgjs',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '持股总数',
-        name: 'cgzs',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "振幅",
+        "name": "zf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '持股总市值',
-        name: 'cgzsz',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-    ],
+        "title": "换手率",
+        "name": "hsl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金行业配置',
-    name: 'gmjj_jjhypz',
-    api: 'fund_report_industry_allocation_cninfo',
-    targetUrl: 'https://webapi.cninfo.com.cn/#/thematicStatistics',
-    description: '巨潮资讯-数据中心-专题统计-基金报表-基金行业配置',
-    remarks: '返回指定 date 的所有数据; date 从 2017 年开始',
-    inputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'str',
-        description: 'date="20210630"; choice of {"XXXX0331", "XXXX0630", "XXXX0930", "XXXX1231"}, 其中 XXXX 为年份',
-        defaultValue: '20210630',
-        choices: ['XXXX0331', 'XXXX0630', 'XXXX0930', 'XXXX1231'],
-        isRequired: false,
-      },
-    ],
-    outputParameters: [
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "LOF基金分时行情-东财",
+    "name": "gmjj_lofjjfshq_dc",
+    "api": "fund_lof_hist_min_em",
+    "targetUrl": "https://quote.eastmoney.com/sz166009.html",
+    "description": "东方财富-LOF 分时行情; 该接口只能获取近期的分时数据，注意时间周期的设置",
+    "remarks": "单次返回指定 LOF、频率、复权调整和时间区间的分时数据, 其中 1 分钟数据只返回近 5 个交易日数据且不复权",
+    "inputParameters": [
       {
-        title: '行业编码',
-        name: 'hybm',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol='166009'; LOF 代码可以在 **ak.fund_lof_spot_em()** 中获取",
+        "defaultValue": "166009",
+        "isRequired": false
       },
       {
-        title: '证监会行业名称',
-        name: 'zjhhymc',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "start_date",
+        "name": "start_date",
+        "type": "str",
+        "description": "start_date=\"1979-09-01 09:32:00\"; 日期时间; 默认返回所有数据",
+        "defaultValue": "1979-09-01 09:32:00",
+        "isRequired": false
       },
       {
-        title: '报告期',
-        name: 'bgq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "end_date",
+        "name": "end_date",
+        "type": "str",
+        "description": "end_date=\"2222-01-01 09:32:00\"; 日期时间; 默认返回所有数据",
+        "defaultValue": "2222-01-01 09:32:00",
+        "isRequired": false
       },
       {
-        title: '基金覆盖家数',
-        name: 'jjfgjs',
-        type: 'int64',
-        description: '注意单位: 只',
-        unit: '只',
+        "title": "period",
+        "name": "period",
+        "type": "str",
+        "description": "period='5'; choice of {'1', '5', '15', '30', '60'}; 其中 1 分钟数据返回近 5 个交易日数据且不复权",
+        "defaultValue": "5",
+        "choices": [
+          1,
+          5,
+          15,
+          30,
+          60
+        ],
+        "isRequired": false
       },
       {
-        title: '行业规模',
-        name: 'hygm',
-        type: 'float64',
-        description: '注意单位: 亿元',
-        unit: '亿元',
-      },
-      {
-        title: '占净资产比例',
-        name: 'zjzcbl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
-      },
+        "title": "adjust",
+        "name": "adjust",
+        "type": "str",
+        "description": "adjust=''; choice of {'', 'qfq', 'hfq'}; '': 不复权, 'qfq': 前复权, 'hfq': 后复权, 其中 1 分钟数据返回近 5 个交易日数据且不复权",
+        "defaultValue": "",
+        "choices": [
+          "",
+          "qfq",
+          "hfq"
+        ],
+        "isRequired": false
+      }
     ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '基金资产配置',
-    name: 'gmjj_jjzcpz',
-    api: 'fund_report_asset_allocation_cninfo',
-    targetUrl: 'https://webapi.cninfo.com.cn/#/thematicStatistics',
-    description: '巨潮资讯-数据中心-专题统计-基金报表-基金资产配置',
-    remarks: '返回所有基金资产配置数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '报告期',
-        name: 'bgq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金覆盖家数',
-        name: 'jjfgjs',
-        type: 'object',
-        description: '注意单位: 只',
-        unit: '只',
-      },
-      {
-        title: '股票权益类占净资产比例',
-        name: 'gpqylzjzcbl',
-        type: 'object',
-        description: '注意单位: %',
-        unit: '%',
-      },
-      {
-        title: '债券固定收益类占净资产比例',
-        name: 'zqgdsylzjzcbl',
-        type: 'object',
-        description: '注意单位: %',
-        unit: '%',
-      },
+    "outputParameters": [
       {
-        title: '现金货币类占净资产比例',
-        name: 'xjhblzjzcbl',
-        type: 'object',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "时间",
+        "name": "sj",
+        "type": "object",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金市场净资产规模',
-        name: 'jjscjzcgm',
-        type: 'object',
-        description: '注意单位: 亿元',
-        unit: '亿元',
+        "title": "开盘",
+        "name": "kp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '规模变动',
-    name: 'gmjj_gmbd',
-    api: 'fund_scale_change_em',
-    targetUrl: 'https://fund.eastmoney.com/data/gmbdlist.html',
-    description: '天天基金网-基金数据-规模份额-规模变动',
-    remarks: '返回所有规模变动数据',
-    inputParameters: [],
-    outputParameters: [
       {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "收盘",
+        "name": "sp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '截止日期',
-        name: 'jzrq',
-        type: 'object',
-        description: '',
-        unit: '',
+        "title": "最高",
+        "name": "zg",
+        "type": "float64",
+        "description": "",
+        "unit": ""
       },
       {
-        title: '基金家数',
-        name: 'jjjs',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
+        "title": "最低",
+        "name": "zd",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
       {
-        title: '期间申购',
-        name: 'qjsg',
-        type: 'float64',
-        description: '注意单位: 亿份',
-        unit: '亿份',
-      },
+        "title": "成交量",
+        "name": "cjl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
       {
-        title: '期间赎回',
-        name: 'qjsh',
-        type: 'float64',
-        description: '注意单位: 亿份',
-        unit: '亿份',
-      },
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
       {
-        title: '期末总份额',
-        name: 'qmzfe',
-        type: 'float64',
-        description: '注意单位: 亿份',
-        unit: '亿份',
+        "title": "振幅",
+        "name": "zf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
       },
       {
-        title: '期末净资产',
-        name: 'qmjzc',
-        type: 'float64',
-        description: '注意单位: 亿份',
-        unit: '亿份',
-      },
-    ],
+        "title": "换手率",
+        "name": "hsl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
   },
   {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '持有人结构',
-    name: 'gmjj_cyrjg',
-    api: 'fund_hold_structure_em',
-    targetUrl: 'https://fund.eastmoney.com/data/cyrjglist.html',
-    description: '天天基金网-基金数据-规模份额-持有人结构',
-    remarks: '返回所有持有人结构数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: '序号',
-        name: 'xh',
-        type: 'int64',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '截止日期',
-        name: 'jzrq',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "ETF基金历史行情-东财",
+    "name": "gmjj_etfjjlshq_dc",
+    "api": "fund_etf_hist_em",
+    "targetUrl": "http://quote.eastmoney.com/sz159707.html",
+    "description": "东方财富-ETF 行情; 历史数据按日频率更新, 当日收盘价请在收盘后获取",
+    "remarks": "单次返回指定 ETF、指定周期和指定日期间的历史行情日频率数据",
+    "inputParameters": [
       {
-        title: '基金家数',
-        name: 'jjjs',
-        type: 'int64',
-        description: '',
-        unit: '',
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol='159707'; ETF 代码可以在 **ak.fund_etf_spot_em()** 中获取或查看东财主页",
+        "defaultValue": "159707",
+        "isRequired": false
       },
       {
-        title: '机构持有比列',
-        name: 'jgcybl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "period",
+        "name": "period",
+        "type": "str",
+        "description": "period='daily'; choice of {'daily', 'weekly', 'monthly'}",
+        "defaultValue": "daily",
+        "choices": [
+          "daily",
+          "weekly",
+          "monthly"
+        ],
+        "isRequired": false
       },
       {
-        title: '个人持有比列',
-        name: 'grcybl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "start_date",
+        "name": "start_date",
+        "type": "str",
+        "description": "start_date='20000101'; 开始查询的日期",
+        "defaultValue": "20000101",
+        "isRequired": false
       },
       {
-        title: '内部持有比列',
-        name: 'nbcybl',
-        type: 'float64',
-        description: '注意单位: %',
-        unit: '%',
+        "title": "end_date",
+        "name": "end_date",
+        "type": "str",
+        "description": "end_date='20230104'; 结束查询的日期",
+        "defaultValue": "20230104",
+        "isRequired": false
       },
       {
-        title: '总份额',
-        name: 'zfe',
-        type: 'float64',
-        description: '注意单位: 亿份',
-        unit: '亿份',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '股票型基金仓位',
-    name: 'gmjj_gpxjjcw',
-    api: 'fund_stock_position_lg',
-    targetUrl: 'https://legulegu.com/stockdata/fund-position/pos-stock',
-    description: '乐咕乐股-基金仓位-股票型基金仓位',
-    remarks: '返回所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'close',
-        name: 'close',
-        type: 'float64',
-        description: '注意单位: 沪深 300 收盘价',
-        unit: '沪深',
-      },
-      {
-        title: 'position',
-        name: 'position',
-        type: 'float64',
-        description: '注意单位: 持仓比例',
-        unit: '持仓比例',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '平衡混合型基金仓位',
-    name: 'gmjj_phhhxjjcw',
-    api: 'fund_balance_position_lg',
-    targetUrl: 'https://legulegu.com/stockdata/fund-position/pos-pingheng',
-    description: '乐咕乐股-基金仓位-平衡混合型基金仓位',
-    remarks: '返回所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'close',
-        name: 'close',
-        type: 'float64',
-        description: '注意单位: 沪深 300 收盘价',
-        unit: '沪深',
-      },
-      {
-        title: 'position',
-        name: 'position',
-        type: 'float64',
-        description: '注意单位: 持仓比例',
-        unit: '持仓比例',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '灵活配置型基金仓位',
-    name: 'gmjj_lhpzxjjcw',
-    api: 'fund_linghuo_position_lg',
-    targetUrl: 'https://legulegu.com/stockdata/fund-position/pos-linghuo',
-    description: '乐咕乐股-基金仓位-灵活配置型基金仓位',
-    remarks: '返回所有历史数据',
-    inputParameters: [],
-    outputParameters: [
-      {
-        title: 'date',
-        name: 'date',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: 'close',
-        name: 'close',
-        type: 'float64',
-        description: '注意单位: 沪深 300 收盘价',
-        unit: '沪深',
-      },
-      {
-        title: 'position',
-        name: 'position',
-        type: 'float64',
-        description: '注意单位: 持仓比例',
-        unit: '持仓比例',
-      },
-    ],
-  },
-  {
-    moduleTitle: '公募基金数据',
-    moduleName: 'fund_public',
-    title: '人事公告',
-    name: 'gmjj_rsgg',
-    api: 'fund_announcement_personnel_em',
-    targetUrl: 'http://fundf10.eastmoney.com/jjgg_000001_4.html',
-    description: '东方财富网站-天天基金网-基金档案-基金公告-人事调整',
-    remarks: '返回所有历史数据',
-    inputParameters: [
-      {
-        title: 'symbol',
-        name: 'symbol',
-        type: 'str',
-        description: '基金代码，可以通过调用 ak.fund_name_em() 接口获取',
-        isRequired: true,
-      },
+        "title": "adjust",
+        "name": "adjust",
+        "type": "str",
+        "description": "默认返回不复权的数据; qfq: 返回前复权后的数据; hfq: 返回后复权后的数据",
+        "defaultValue": "",
+        "choices": [
+          "",
+          "qfq",
+          "hfq"
+        ],
+        "isRequired": false
+      }
     ],
-    outputParameters: [
-      {
-        title: '基金代码',
-        name: 'jjdm',
-        type: 'object',
-        description: '基金代码',
-        unit: '',
-      },
+    "outputParameters": [
       {
-        title: '公告标题',
-        name: 'ggbt',
-        type: 'object',
-        description: '',
-        unit: '',
-      },
-      {
-        title: '基金名称',
-        name: 'jjmc',
-        type: 'object',
-        description: '基金名称',
-        unit: '',
-      },
-      {
-        title: '公告日期',
-        name: 'ggrq',
-        type: 'object',
-        description: '公告的发布日期',
-        unit: '',
-      },
-      {
-        title: '报告ID',
-        name: 'bgID',
-        type: 'object',
-        description: '获取报告详情的依据; 拼接后可以获取公告地址',
-        unit: '',
-      },
-    ],
-  },
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "开盘",
+        "name": "kp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "收盘",
+        "name": "sp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最高",
+        "name": "zg",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最低",
+        "name": "zd",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成交量",
+        "name": "cjl",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "振幅",
+        "name": "zf",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "换手率",
+        "name": "hsl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "LOF基金历史行情-东财",
+    "name": "gmjj_lofjjlshq_dc",
+    "api": "fund_lof_hist_em",
+    "targetUrl": "https://quote.eastmoney.com/sz166009.html",
+    "description": "东方财富-LOF 行情; 历史数据按日频率更新, 当日收盘价请在收盘后获取",
+    "remarks": "单次返回指定 LOF、指定周期和指定日期间的历史行情日频率数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol='166009'; LOF 代码可以在 **ak.fund_lof_spot_em()** 中获取",
+        "defaultValue": "166009",
+        "isRequired": false
+      },
+      {
+        "title": "period",
+        "name": "period",
+        "type": "str",
+        "description": "period='daily'; choice of {'daily', 'weekly', 'monthly'}",
+        "defaultValue": "daily",
+        "choices": [
+          "daily",
+          "weekly",
+          "monthly"
+        ],
+        "isRequired": false
+      },
+      {
+        "title": "start_date",
+        "name": "start_date",
+        "type": "str",
+        "description": "start_date='20000101'; 开始查询的日期",
+        "defaultValue": "20000101",
+        "isRequired": false
+      },
+      {
+        "title": "end_date",
+        "name": "end_date",
+        "type": "str",
+        "description": "end_date='20230104'; 结束查询的日期",
+        "defaultValue": "20230104",
+        "isRequired": false
+      },
+      {
+        "title": "adjust",
+        "name": "adjust",
+        "type": "str",
+        "description": "默认返回不复权的数据; qfq: 返回前复权后的数据; hfq: 返回后复权后的数据",
+        "defaultValue": "",
+        "choices": [
+          "",
+          "qfq",
+          "hfq"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "开盘",
+        "name": "kp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "收盘",
+        "name": "sp",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最高",
+        "name": "zg",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最低",
+        "name": "zd",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成交量",
+        "name": "cjl",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "振幅",
+        "name": "zf",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "换手率",
+        "name": "hsl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金历史行情-新浪",
+    "name": "gmjj_jjlshq_xl",
+    "api": "fund_etf_hist_sina",
+    "targetUrl": "http://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf",
+    "description": "新浪财经-基金行情的日频率行情数据",
+    "remarks": "单次返回指定基金的所有数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"sh510050\"; 基金列表可以通过 **ak.fund_etf_category_sina(symbol=\"LOF基金\")** 可选参数为: 封闭式基金, ETF基金, LOF基金 查询",
+        "defaultValue": "sh510050",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "open",
+        "name": "open",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "high",
+        "name": "high",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "low",
+        "name": "low",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "close",
+        "name": "close",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "volume",
+        "name": "volume",
+        "type": "int64",
+        "description": "注意单位: 手",
+        "unit": "手"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "开放式基金-实时数据",
+    "name": "gmjj_kfsjj_sssj",
+    "api": "fund_open_fund_daily_em",
+    "targetUrl": "http://fund.eastmoney.com/fund.html#os_0;isall_0;ft_;pt_1",
+    "description": "东方财富网-天天基金网-基金数据, 此接口在每个交易日 **16:00-23:00** 更新当日的最新开放式基金净值数据",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float",
+        "description": "随时间变动",
+        "unit": ""
+      },
+      {
+        "title": "累计净值",
+        "name": "ljjz",
+        "type": "float",
+        "description": "随时间变动",
+        "unit": ""
+      },
+      {
+        "title": "前交易日-单位净值",
+        "name": "qjyr_dwjz",
+        "type": "float",
+        "description": "随时间变动",
+        "unit": ""
+      },
+      {
+        "title": "前交易日-累计净值",
+        "name": "qjyr_ljjz",
+        "type": "float",
+        "description": "随时间变动",
+        "unit": ""
+      },
+      {
+        "title": "日增长值",
+        "name": "rzzz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "赎回状态",
+        "name": "shzt",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "str",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "开放式基金-历史数据",
+    "name": "gmjj_kfsjj_lssj",
+    "api": "fund_open_fund_info_em",
+    "targetUrl": "http://fund.eastmoney.com/pingzhongdata/710001.js",
+    "description": "东方财富网-天天基金网-基金数据-具体基金信息",
+    "remarks": "单次返回当前时刻所有历史数据, 在查询基金数据的时候注意基金前后端问题",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"710001\"; 需要基金代码, 可以通过调用 **ak.fund_open_fund_daily_em()** 获取",
+        "defaultValue": "710001",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "年份",
+        "name": "nf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拆分折算日",
+        "name": "cfzsr",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拆分类型",
+        "name": "cflx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拆分折算比例",
+        "name": "cfzsbl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "货币型基金-实时数据",
+    "name": "gmjj_hbxjj_sssj",
+    "api": "fund_money_fund_daily_em",
+    "targetUrl": "http://fund.eastmoney.com/HBJJ_pjsyl.html",
+    "description": "东方财富网-天天基金网-基金数据-货币型基金收益, 此接口数据每个交易日 **16:00～23:00**",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "当前交易日-万份收益",
+        "name": "dqjyr_wfsy",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "当前交易日-7日年化%",
+        "name": "dqjyr_7rnh%",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "当前交易日-单位净值",
+        "name": "dqjyr_dwjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "前一交易日-万份收益",
+        "name": "qyjyr_wfsy",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "前一交易日-7日年化%",
+        "name": "qyjyr_7rnh%",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "前一交易日-单位净值",
+        "name": "qyjyr_dwjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日涨幅",
+        "name": "rzf",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成立日期",
+        "name": "clrq",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "可购全部",
+        "name": "kgqb",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "货币型基金-历史数据",
+    "name": "gmjj_hbxjj_lssj",
+    "api": "fund_money_fund_info_em",
+    "targetUrl": "https://fundf10.eastmoney.com/jjjz_000009.html",
+    "description": "东方财富网-天天基金网-基金数据-货币型基金-历史净值",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000009\"; 需要基金代码, 可以通过调用 **ak.fund_money_fund_daily_em()** 获取",
+        "defaultValue": "000009",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "净值日期",
+        "name": "jzrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "每万份收益",
+        "name": "mwfsy",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "7日年化收益率",
+        "name": "7rnhsyl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "赎回状态",
+        "name": "shzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "理财型基金-实时数据",
+    "name": "gmjj_lcxjj_sssj",
+    "api": "fund_financial_fund_daily_em",
+    "targetUrl": "http://fund.eastmoney.com/lcjj.html#1_1__0__ljjz,desc_1_os1",
+    "description": "东方财富网-天天基金网-基金数据-理财型基金-实时数据, 此接口数据每个交易日 **16:00～23:00** 更新",
+    "remarks": "该接口由于目标网站未更新数据，暂时不能返回数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "上一期年化收益率",
+        "name": "syqnhsyl",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "当前交易日-万份收益",
+        "name": "dqjyr_wfsy",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "当前交易日-7日年华",
+        "name": "dqjyr_7rnh",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "前一个交易日-万份收益",
+        "name": "qygjyr_wfsy",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "前一个交易日-7日年华",
+        "name": "qygjyr_7rnh",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "封闭期",
+        "name": "fbq",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "理财型基金-历史数据",
+    "name": "gmjj_lcxjj_lssj",
+    "api": "fund_financial_fund_info_em",
+    "targetUrl": "http://fundf10.eastmoney.com/jjjz_000791.html",
+    "description": "东方财富网站-天天基金网-基金数据-理财型基金收益-历史净值明细",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000134\"; 基金代码, 可以通过调用 **ak.fund_financial_fund_daily_em()** 获取",
+        "defaultValue": "000134",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "净值日期",
+        "name": "jzrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计净值",
+        "name": "ljjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "赎回状态",
+        "name": "shzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "分红送配",
+        "name": "fhsp",
+        "type": "object",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "分级基金-实时数据",
+    "name": "gmjj_fjjj_sssj",
+    "api": "fund_graded_fund_daily_em",
+    "targetUrl": "http://fund.eastmoney.com/fjjj.html#1_1__0__zdf,desc_1",
+    "description": "东方财富网-天天基金网-基金数据-分级基金-实时数据, 此接口数据每个交易日 **16:00～23:00**",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计净值",
+        "name": "ljjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "前交易日-单位净值",
+        "name": "qjyr_dwjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "前交易日-累计净值",
+        "name": "qjyr_ljjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长值",
+        "name": "rzzz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "市价",
+        "name": "sj",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "折价率",
+        "name": "zjl",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "分级基金-历史数据",
+    "name": "gmjj_fjjj_lssj",
+    "api": "fund_graded_fund_info_em",
+    "targetUrl": "http://fundf10.eastmoney.com/jjjz_004186.html",
+    "description": "东方财富网站-天天基金网-基金数据-分级基金-历史数据",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"150232\"; 需要基金代码, 可以通过调用 **ak.fund_graded_fund_daily_em()** 获取",
+        "defaultValue": "150232",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "净值日期",
+        "name": "jzrq",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计净值",
+        "name": "ljjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float",
+        "description": "注意单位: %; 日增长率为空原因如下: 1. 非交易日净值不参与日增长率计算(灰色数据行). 2. 上一交易日净值未披露, 日增长率无法计算.",
+        "unit": "%"
+      },
+      {
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "赎回状态",
+        "name": "shzt",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "场内交易基金-实时数据",
+    "name": "gmjj_cnjyjj_sssj",
+    "api": "fund_etf_fund_daily_em",
+    "targetUrl": "http://fund.eastmoney.com/cnjy_dwjz.html",
+    "description": "东方财富网站-天天基金网-基金数据-场内交易基金-实时数据, 此接口数据每个交易日 **16:00～23:00**",
+    "remarks": "单次返回当前时刻所有数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "类型",
+        "name": "lx",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "当前交易日-单位净值",
+        "name": "dqjyr_dwjz",
+        "type": "float64",
+        "description": "会返回具体的日期值作为字段",
+        "unit": ""
+      },
+      {
+        "title": "当前交易日-累计净值",
+        "name": "dqjyr_ljjz",
+        "type": "float64",
+        "description": "会返回具体的日期值作为字段",
+        "unit": ""
+      },
+      {
+        "title": "前一个交易日-单位净值",
+        "name": "qygjyr_dwjz",
+        "type": "float64",
+        "description": "会返回具体的日期值作为字段",
+        "unit": ""
+      },
+      {
+        "title": "前一个交易日-累计净值",
+        "name": "qygjyr_ljjz",
+        "type": "float64",
+        "description": "会返回具体的日期值作为字段",
+        "unit": ""
+      },
+      {
+        "title": "增长值",
+        "name": "zzz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "增长率",
+        "name": "zzl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "市价",
+        "name": "sj",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "折价率",
+        "name": "zjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "场内交易基金-历史数据",
+    "name": "gmjj_cnjyjj_lssj",
+    "api": "fund_etf_fund_info_em",
+    "targetUrl": "http://fundf10.eastmoney.com/jjjz_004186.html",
+    "description": "东方财富网站-天天基金网-基金数据-场内交易基金-历史净值数据",
+    "remarks": "单次返回当前时刻所有历史数据",
+    "inputParameters": [
+      {
+        "title": "fund",
+        "name": "fund",
+        "type": "str",
+        "description": "fund=\"511280\"; 基金代码, 可以通过调用 **ak.fund_etf_fund_daily_em()** 获取",
+        "defaultValue": "511280",
+        "isRequired": false
+      },
+      {
+        "title": "start_date",
+        "name": "start_date",
+        "type": "str",
+        "description": "start_date=\"20000101\"; 开始时间",
+        "defaultValue": "20000101",
+        "isRequired": false
+      },
+      {
+        "title": "end_date",
+        "name": "end_date",
+        "type": "str",
+        "description": "end_date=\"20500101\"; 结束时间",
+        "defaultValue": "20500101",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "净值日期",
+        "name": "jzrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计净值",
+        "name": "ljjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "赎回状态",
+        "name": "shzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "香港基金-历史数据",
+    "name": "gmjj_xgjj_lssj",
+    "api": "fund_hk_fund_hist_em",
+    "targetUrl": "http://overseas.1234567.com.cn/f10/FundJz/968092#FHPS",
+    "description": "东方财富网站-天天基金网-基金数据-香港基金-历史净值明细",
+    "remarks": "单次返回指定 code 和 symbol 所有历史数据",
+    "inputParameters": [
+      {
+        "title": "code",
+        "name": "code",
+        "type": "str",
+        "description": "code=\"1002200683\"; 香港基金代码, 可以通过调用 **ak.fund_em_hk_rank()** 获取",
+        "defaultValue": "1002200683",
+        "isRequired": false
+      },
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"历史净值明细\"; choice of {\"历史净值明细\", \"分红送配详情\"}",
+        "defaultValue": "历史净值明细",
+        "choices": [
+          "历史净值明细",
+          "分红送配详情"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "年份",
+        "name": "nf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "权益登记日",
+        "name": "qydjr",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "除息日",
+        "name": "cxr",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "分红发放日",
+        "name": "fhffr",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "分红金额",
+        "name": "fhje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位",
+        "name": "dw",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金累计分红",
+    "name": "gmjj_jjljfh",
+    "api": "fund_etf_dividend_sina",
+    "targetUrl": "https://finance.sina.com.cn/fund/quotes/510050/bc.shtml",
+    "description": "新浪财经-基金-ETF 基金-累计分红",
+    "remarks": "单次返回所有历史数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"sh510050\"",
+        "defaultValue": "sh510050",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "除权除息日",
+        "unit": ""
+      },
+      {
+        "title": "累计分红",
+        "name": "ljfh",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金分红",
+    "name": "gmjj_jjfh",
+    "api": "fund_fh_em",
+    "targetUrl": "http://fund.eastmoney.com/data/fundfenhong.html",
+    "description": "天天基金网-基金数据-分红送配-基金分红",
+    "remarks": "单次返回所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "权益登记日",
+        "name": "qydjr",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "除息日期",
+        "name": "cxrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "分红",
+        "name": "fh",
+        "type": "float64",
+        "description": "注意单位: 元/份",
+        "unit": "元/份"
+      },
+      {
+        "title": "分红发放日",
+        "name": "fhffr",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金拆分",
+    "name": "gmjj_jjcf",
+    "api": "fund_cf_em",
+    "targetUrl": "http://fund.eastmoney.com/data/fundchaifen.html",
+    "description": "天天基金网-基金数据-分红送配-基金拆分",
+    "remarks": "单次返回所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拆分折算日",
+        "name": "cfzsr",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拆分类型",
+        "name": "cflx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "拆分折算",
+        "name": "cfzs",
+        "type": "float64",
+        "description": "注意单位: 每份",
+        "unit": "每份"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金分红排行",
+    "name": "gmjj_jjfhpx",
+    "api": "fund_fh_rank_em",
+    "targetUrl": "http://fund.eastmoney.com/data/fundleijifenhong.html",
+    "description": "天天基金网-基金数据-分红送配-基金分红排行",
+    "remarks": "单次返回所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计分红",
+        "name": "ljfh",
+        "type": "float64",
+        "description": "注意单位: 元/份",
+        "unit": "元/份"
+      },
+      {
+        "title": "累计次数",
+        "name": "ljcs",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成立日期",
+        "name": "clrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "开放式基金排行",
+    "name": "gmjj_kfsjjpx",
+    "api": "fund_open_fund_rank_em",
+    "targetUrl": "https://fund.eastmoney.com/data/fundranking.html",
+    "description": "东方财富网-数据中心-开放式基金排行",
+    "remarks": "单次返回当前时刻所有数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"全部\"; choice of {\"全部\", \"股票型\", \"混合型\", \"债券型\", \"指数型\", \"QDII\", \"FOF\"}",
+        "defaultValue": "全部",
+        "choices": [
+          "全部",
+          "股票型",
+          "混合型",
+          "债券型",
+          "指数型",
+          "QDII",
+          "FOF"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计净值",
+        "name": "ljjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1周",
+        "name": "j1z",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1月",
+        "name": "j1y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3月",
+        "name": "j3y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近6月",
+        "name": "j6y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年",
+        "name": "j1n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近2年",
+        "name": "j2n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年",
+        "name": "j3n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "今年来",
+        "name": "jnl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "成立来",
+        "name": "cll",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "自定义",
+        "name": "zdy",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "场内交易基金排行榜",
+    "name": "gmjj_cnjyjjpxb",
+    "api": "fund_exchange_rank_em",
+    "targetUrl": "https://fund.eastmoney.com/data/fbsfundranking.html",
+    "description": "东方财富网-数据中心-场内交易基金排行榜",
+    "remarks": "单次返回当前时刻所有数据, 每个交易日 17 点后更新",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "类型",
+        "name": "lx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计净值",
+        "name": "ljjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "近1周",
+        "name": "j1z",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1月",
+        "name": "j1y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3月",
+        "name": "j3y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近6月",
+        "name": "j6y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年",
+        "name": "j1n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近2年",
+        "name": "j2n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年",
+        "name": "j3n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "今年来",
+        "name": "jnl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "成立来",
+        "name": "cll",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "成立日期",
+        "name": "clrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "货币型基金排行",
+    "name": "gmjj_hbxjjpx",
+    "api": "fund_money_rank_em",
+    "targetUrl": "https://fund.eastmoney.com/data/hbxfundranking.html",
+    "description": "东方财富网-数据中心-货币型基金排行",
+    "remarks": "单次返回当前时刻所有数据, 每个交易日 17 点后更新, 货币基金的单位净值均为 1.0000 元，最新一年期定存利率: 1.50%",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "万份收益",
+        "name": "wfsy",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "年化收益率7日",
+        "name": "nhsyl7r",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "年化收益率14日",
+        "name": "nhsyl14r",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "年化收益率28日",
+        "name": "nhsyl28r",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1月",
+        "name": "j1y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3月",
+        "name": "j3y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近6月",
+        "name": "j6y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年",
+        "name": "j1n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近2年",
+        "name": "j2n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年",
+        "name": "j3n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近5年",
+        "name": "j5n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "今年来",
+        "name": "jnl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "成立来",
+        "name": "cll",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "理财基金排行",
+    "name": "gmjj_lcjjpx",
+    "api": "fund_lcx_rank_em",
+    "targetUrl": "https://fund.eastmoney.com/data/lcxfundranking.html#t;c0;r;sSYL_Z;ddesc;pn50;f;os1;",
+    "description": "东方财富网-数据中心-理财基金排行, 每个交易日17点后更新, 货币基金的单位净值均为 1.0000 元，最新一年期定存利率: 1.50%",
+    "remarks": "由于目标网站没有数据，该接口暂时未能返回数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "万份收益",
+        "name": "wfsy",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "年化收益率7日",
+        "name": "nhsyl7r",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "年化收益率14日",
+        "name": "nhsyl14r",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "年化收益率28日",
+        "name": "nhsyl28r",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1周",
+        "name": "j1z",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1月",
+        "name": "j1y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3月",
+        "name": "j3y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近6月",
+        "name": "j6y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "今年来",
+        "name": "jnl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "成立来",
+        "name": "cll",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "可购买",
+        "name": "kgm",
+        "type": "float64",
+        "description": "可购买",
+        "unit": ""
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "香港基金排行",
+    "name": "gmjj_xgjjpx",
+    "api": "fund_hk_rank_em",
+    "targetUrl": "https://overseas.1234567.com.cn/FundList",
+    "description": "东方财富网-数据中心-基金排行-香港基金排行",
+    "remarks": "单次返回当前时刻所有数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "币种",
+        "name": "bz",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1周",
+        "name": "j1z",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1月",
+        "name": "j1y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3月",
+        "name": "j3y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近6月",
+        "name": "j6y",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年",
+        "name": "j1n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近2年",
+        "name": "j2n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年",
+        "name": "j3n",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "今年来",
+        "name": "jnl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "成立来",
+        "name": "cll",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "可购买",
+        "name": "kgm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "香港基金代码",
+        "name": "xgjjdm",
+        "type": "object",
+        "description": "用于查询历史净值数据, 通过该字段查询相关的数据",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金业绩-雪球",
+    "name": "gmjj_jjyj_xq",
+    "api": "fund_individual_achievement_xq",
+    "targetUrl": "https://danjuanfunds.com/rn/funding/:code/RankInfo?symbol=000001&fd_type=2&btn_pos=1",
+    "description": "雪球基金-基金详情-基金业绩-详情",
+    "remarks": "单次返回单只基金业绩详情",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "timeout",
+        "name": "timeout",
+        "type": "float",
+        "description": "timeout=None; 默认不设置超时参数",
+        "defaultValue": null,
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "业绩类型",
+        "name": "yjlx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "周期",
+        "name": "zq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "本产品区间收益",
+        "name": "bcpqjsy",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "本产品最大回撒",
+        "name": "bcpzdhs",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "周期收益同类排名",
+        "name": "zqsytlpm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "净值估算",
+    "name": "gmjj_jzgs",
+    "api": "fund_value_estimation_em",
+    "targetUrl": "http://fund.eastmoney.com/fundguzhi.html",
+    "description": "东方财富网-数据中心-净值估算",
+    "remarks": "单次返回当前交易日指定 symbol 的所有数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol='全部'; 默认返回所有数据; choice of {'全部', '股票型', '混合型', '债券型', '指数型', 'QDII', 'ETF联接', 'LOF', '场内交易基金'}",
+        "defaultValue": "全部",
+        "choices": [
+          "全部",
+          "股票型",
+          "混合型",
+          "债券型",
+          "指数型",
+          "QDII",
+          "ETF联接",
+          "LOF",
+          "场内交易基金"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金名称",
+        "name": "jjmc",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "交易日-估算数据-估算值",
+        "name": "jyr_gssj_gsz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "交易日-估算数据-估算增长率",
+        "name": "jyr_gssj_gszzl",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "交易日-公布数据-单位净值",
+        "name": "jyr_gbsj_dwjz",
+        "type": "float",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "交易日-公布数据-日增长率",
+        "name": "jyr_gbsj_rzzl",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "估算偏差",
+        "name": "gspc",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "交易日-单位净值",
+        "name": "jyr_dwjz",
+        "type": "str",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金数据分析",
+    "name": "gmjj_jjsjfx",
+    "api": "fund_individual_analysis_xq",
+    "targetUrl": "https://danjuanfunds.com/funding/000001",
+    "description": "雪球基金-基金详情-数据分析",
+    "remarks": "返回单只基金历史表现分析数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "timeout",
+        "name": "timeout",
+        "type": "float",
+        "description": "timeout=None; 默认不设置超时参数",
+        "defaultValue": null,
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "周期",
+        "name": "zq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "较同类风险收益比",
+        "name": "jtlfxsyb",
+        "type": "int64",
+        "description": "注意单位：%",
+        "unit": ""
+      },
+      {
+        "title": "较同类抗风险波动",
+        "name": "jtlkfxbd",
+        "type": "int64",
+        "description": "注意单位：%",
+        "unit": ""
+      },
+      {
+        "title": "年化波动率",
+        "name": "nhbdl",
+        "type": "float64",
+        "description": "注意单位：%",
+        "unit": ""
+      },
+      {
+        "title": "年化夏普比率",
+        "name": "nhxpbl",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最大回撤",
+        "name": "zdhc",
+        "type": "float64",
+        "description": "注意单位：%",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金盈利概率",
+    "name": "gmjj_jjylgl",
+    "api": "fund_individual_profit_probability_xq",
+    "targetUrl": "https://danjuanfunds.com/funding/000001",
+    "description": "雪球基金-基金详情-盈利概率；历史任意时点买入，持有满X时间，盈利概率，以及平均收益",
+    "remarks": "单次返回单只基金历史任意时点买入，持有满 X 时间，盈利概率，以及平均收益",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "timeout",
+        "name": "timeout",
+        "type": "float",
+        "description": "timeout=None; 默认不设置超时参数",
+        "defaultValue": null,
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "持有时长",
+        "name": "cysc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "盈利概率",
+        "name": "ylgl",
+        "type": "object",
+        "description": "注意单位：%",
+        "unit": ""
+      },
+      {
+        "title": "平均收益",
+        "name": "pjsy",
+        "type": "object",
+        "description": "注意单位：%",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金持仓资产比例",
+    "name": "gmjj_jjcczcbl",
+    "api": "fund_individual_detail_hold_xq",
+    "targetUrl": "https://danjuanfunds.com/rn/fund-detail/archive?id=103&code=000001",
+    "description": "雪球基金-基金详情-基金持仓-详情",
+    "remarks": "单次返回单只基金指定日期的持仓大类资产比例",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"20231231\"; 季度日期",
+        "defaultValue": "20231231",
+        "isRequired": false
+      },
+      {
+        "title": "timeout",
+        "name": "timeout",
+        "type": "float",
+        "description": "timeout=None; 默认不设置超时参数",
+        "defaultValue": null,
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "资产类型",
+        "name": "zclx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "仓位占比",
+        "name": "cwzb",
+        "type": "float64",
+        "description": "注意单位：%",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金交易费率",
+    "name": "gmjj_jjjyfl",
+    "api": "fund_fee_em",
+    "targetUrl": "https://fundf10.eastmoney.com/jjfl_015641.html",
+    "description": "天天基金-基金档案-购买信息",
+    "remarks": "单次返回指定 symbol 的 indicator 数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"015641\"; 基金代码",
+        "defaultValue": "015641",
+        "isRequired": false
+      },
+      {
+        "title": "indicator",
+        "name": "indicator",
+        "type": "str",
+        "description": "indicator=\"申购费率\"; choice of {\"交易状态\", \"申购与赎回金额\", \"交易确认日\", \"运作费用\", \"认购费率\", \"申购费率\", \"赎回费率\"}",
+        "defaultValue": "申购费率",
+        "choices": [
+          "交易状态",
+          "申购与赎回金额",
+          "交易确认日",
+          "运作费用",
+          "认购费率",
+          "申购费率",
+          "赎回费率"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "费用类型",
+        "name": "fylx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "条件或名称",
+        "name": "tjhmc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "费用",
+        "name": "fy",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金交易规则",
+    "name": "gmjj_jjjygz",
+    "api": "fund_individual_detail_info_xq",
+    "targetUrl": "https://danjuanfunds.com/djapi/fund/detail/675091",
+    "description": "雪球基金-基金详情-基金交易规则",
+    "remarks": "单次返回单只基金基金交易规则",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "timeout",
+        "name": "timeout",
+        "type": "float",
+        "description": "timeout=None; 默认不设置超时参数",
+        "defaultValue": null,
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "费用类型",
+        "name": "fylx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "条件或名称",
+        "name": "tjhmc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "费用",
+        "name": "fy",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金持仓",
+    "name": "gmjj_jjcc",
+    "api": "fund_portfolio_hold_em",
+    "targetUrl": "https://fundf10.eastmoney.com/ccmx_000001.html",
+    "description": "天天基金网-基金档案-投资组合-基金持仓",
+    "remarks": "单次返回指定 symbol 和 date 的所有持仓数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"2024\"; 指定年份",
+        "defaultValue": "2024",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "股票代码",
+        "name": "gpdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "股票名称",
+        "name": "gpmc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "占净值比例",
+        "name": "zjzbl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "持股数",
+        "name": "cgs",
+        "type": "float64",
+        "description": "注意单位: 万股",
+        "unit": "万股"
+      },
+      {
+        "title": "持仓市值",
+        "name": "ccsz",
+        "type": "float64",
+        "description": "注意单位: 万元",
+        "unit": "万元"
+      },
+      {
+        "title": "季度",
+        "name": "jd",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "债券持仓",
+    "name": "gmjj_zqcc",
+    "api": "fund_portfolio_bond_hold_em",
+    "targetUrl": "https://fundf10.eastmoney.com/ccmx_000001.html",
+    "description": "天天基金网-基金档案-投资组合-债券持仓",
+    "remarks": "单次返回指定 symbol 和 date 的所有持仓数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"2023\"; 指定年份",
+        "defaultValue": "2023",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "债券代码",
+        "name": "zqdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "债券名称",
+        "name": "zqmc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "占净值比例",
+        "name": "zjzbl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "持仓市值",
+        "name": "ccsz",
+        "type": "float64",
+        "description": "注意单位: 万元",
+        "unit": "万元"
+      },
+      {
+        "title": "季度",
+        "name": "jd",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "行业配置",
+    "name": "gmjj_hypz",
+    "api": "fund_portfolio_industry_allocation_em",
+    "targetUrl": "https://fundf10.eastmoney.com/hytz_000001.html",
+    "description": "天天基金网-基金档案-投资组合-行业配置",
+    "remarks": "单次返回指定 symbol 和 date 的所有持仓数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"000001\"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取",
+        "defaultValue": "000001",
+        "isRequired": false
+      },
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"2023\"; 指定年份",
+        "defaultValue": "2023",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "行业类别",
+        "name": "hylb",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "占净值比例",
+        "name": "zjzbl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "市值",
+        "name": "sz",
+        "type": "float64",
+        "description": "注意单位: 万元",
+        "unit": "万元"
+      },
+      {
+        "title": "截止时间",
+        "name": "jzsj",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "重大变动",
+    "name": "gmjj_zdbd",
+    "api": "fund_portfolio_change_em",
+    "targetUrl": "https://fundf10.eastmoney.com/ccbd_000001.html",
+    "description": "天天基金网-基金档案-投资组合-重大变动",
+    "remarks": "单次返回指定 symbol、indicator 和 date 的所有重大变动数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"003567\"; 基金代码, 可以通过调用 **ak.fund_name_em()** 接口获取",
+        "defaultValue": "003567",
+        "isRequired": false
+      },
+      {
+        "title": "indicator",
+        "name": "indicator",
+        "type": "str",
+        "description": "indicator=\"累计买入\"; choice of {\"累计买入\", \"累计卖出\"}",
+        "defaultValue": "累计买入",
+        "choices": [
+          "累计买入",
+          "累计卖出"
+        ],
+        "isRequired": false
+      },
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"2023\"; 指定年份",
+        "defaultValue": "2023",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "股票代码",
+        "name": "gpdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "股票名称",
+        "name": "gpmc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "本期累计买入金额",
+        "name": "bqljmrje",
+        "type": "float64",
+        "description": "注意单位: 万元",
+        "unit": "万元"
+      },
+      {
+        "title": "占期初基金资产净值比例",
+        "name": "zqcjjzcjzbl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "季度",
+        "name": "jd",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金评级总汇",
+    "name": "gmjj_jjpjzh",
+    "api": "fund_rating_all",
+    "targetUrl": "https://fund.eastmoney.com/data/fundrating.html",
+    "description": "天天基金网-基金评级-基金评级总汇",
+    "remarks": "单次返回所有基金评级数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "简称",
+        "name": "jc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金公司",
+        "name": "jjgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "5星评级家数",
+        "name": "5xpjjs",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "上海证券",
+        "name": "shzq",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "招商证券",
+        "name": "zszq",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "济安金信",
+        "name": "jajx",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "类型",
+        "name": "lx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "上海证券评级",
+    "name": "gmjj_shzqpj",
+    "api": "fund_rating_sh",
+    "targetUrl": "https://fund.eastmoney.com/data/fundrating_3.html",
+    "description": "天天基金网-基金评级-上海证券评级",
+    "remarks": "单次返回指定交易日的所有基金评级数据",
+    "inputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date='20230630'; https://fund.eastmoney.com/data/fundrating_3.html 获取查询日期",
+        "defaultValue": "20230630",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "简称",
+        "name": "jc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金公司",
+        "name": "jjgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "3年期评级-3年评级",
+        "name": "3nqpj_3npj",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "3年期评级-较上期",
+        "name": "3nqpj_jsq",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "5年期评级-5年评级",
+        "name": "5nqpj_5npj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "5年期评级-较上期",
+        "name": "5nqpj_jsq",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年涨幅",
+        "name": "j1nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年涨幅",
+        "name": "j3nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近5年涨幅",
+        "name": "j5nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "类型",
+        "name": "lx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "招商证券评级",
+    "name": "gmjj_zszqpj",
+    "api": "fund_rating_zs",
+    "targetUrl": "http://fund.eastmoney.com/data/fundrating_2.html",
+    "description": "天天基金网-基金评级-招商证券评级",
+    "remarks": "单次返回指定交易日的所有基金评级数据",
+    "inputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date='20230331'; https://fund.eastmoney.com/data/fundrating_2.html 获取查询日期",
+        "defaultValue": "20230331",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "简称",
+        "name": "jc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金公司",
+        "name": "jjgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "3年期评级-3年评级",
+        "name": "3nqpj_3npj",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "3年期评级-较上期",
+        "name": "3nqpj_jsq",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年涨幅",
+        "name": "j1nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年涨幅",
+        "name": "j3nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近5年涨幅",
+        "name": "j5nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "济安金信评级",
+    "name": "gmjj_jajxpj",
+    "api": "fund_rating_ja",
+    "targetUrl": "https://fund.eastmoney.com/data/fundrating_4.html",
+    "description": "天天基金网-基金评级-济安金信评级",
+    "remarks": "单次返回指定交易日的所有基金评级数据",
+    "inputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date='20200930'; https://fund.eastmoney.com/data/fundrating_4.html 获取查询日期",
+        "defaultValue": "20200930",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "简称",
+        "name": "jc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金公司",
+        "name": "jjgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "3年期评级-3年评级",
+        "name": "3nqpj_3npj",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "3年期评级-较上期",
+        "name": "3nqpj_jsq",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "日增长率",
+        "name": "rzzl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近1年涨幅",
+        "name": "j1nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近3年涨幅",
+        "name": "j3nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "近5年涨幅",
+        "name": "j5nzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "手续费",
+        "name": "sxf",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "类型",
+        "name": "lx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金经理",
+    "name": "gmjj_jjjl",
+    "api": "fund_manager_em",
+    "targetUrl": "https://fund.eastmoney.com/manager/default.html",
+    "description": "天天基金网-基金数据-基金经理大全",
+    "remarks": "单次返回所有基金经理数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "姓名",
+        "name": "xm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "所属公司",
+        "name": "ssgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "现任基金",
+        "name": "xrjj",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "累计从业时间",
+        "name": "ljcysj",
+        "type": "int64",
+        "description": "注意单位: 天",
+        "unit": "天"
+      },
+      {
+        "title": "现任基金资产总规模",
+        "name": "xrjjzczgm",
+        "type": "float64",
+        "description": "注意单位: 亿元",
+        "unit": "亿元"
+      },
+      {
+        "title": "现任基金最佳回报",
+        "name": "xrjjzjhb",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "新发基金",
+    "name": "gmjj_xfjj",
+    "api": "fund_new_found_em",
+    "targetUrl": "https://fund.eastmoney.com/data/xinfound.html",
+    "description": "天天基金网-基金数据-新发基金-新成立基金",
+    "remarks": "单次返回所有新发基金数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "发行公司",
+        "name": "fxgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金类型",
+        "name": "jjlx",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "集中认购期",
+        "name": "jzrgq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "募集份额",
+        "name": "mjfe",
+        "type": "float64",
+        "description": "注意单位: 亿份",
+        "unit": "亿份"
+      },
+      {
+        "title": "成立日期",
+        "name": "clrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成立来涨幅",
+        "name": "cllzf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "申购状态",
+        "name": "sgzt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "优惠费率",
+        "name": "yhfl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "开放式基金",
+    "name": "gmjj_kfsjj",
+    "api": "fund_scale_open_sina",
+    "targetUrl": "https://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf",
+    "description": "基金数据中心-基金规模-开放式基金",
+    "remarks": "单次返回指定 symbol 的基金规模数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"股票型基金\"; choice of {\"股票型基金\", \"混合型基金\", \"债券型基金\", \"货币型基金\", \"QDII基金\"}",
+        "defaultValue": "股票型基金",
+        "choices": [
+          "股票型基金",
+          "混合型基金",
+          "债券型基金",
+          "货币型基金",
+          "QDII基金"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "注意单位: 元",
+        "unit": "元"
+      },
+      {
+        "title": "总募集规模",
+        "name": "zmjgm",
+        "type": "float64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
+      },
+      {
+        "title": "最近总份额",
+        "name": "zjzfe",
+        "type": "float64",
+        "description": "注意单位: 份",
+        "unit": "份"
+      },
+      {
+        "title": "成立日期",
+        "name": "clrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "更新日期",
+        "name": "gxrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "封闭式基金",
+    "name": "gmjj_fbsjj",
+    "api": "fund_scale_close_sina",
+    "targetUrl": "https://vip.stock.finance.sina.com.cn/fund_center/index.html#jjhqetf",
+    "description": "基金数据中心-基金规模-封闭式基金",
+    "remarks": "单次返回所有封闭式基金的基金规模数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "注意单位: 元",
+        "unit": "元"
+      },
+      {
+        "title": "总募集规模",
+        "name": "zmjgm",
+        "type": "float64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
+      },
+      {
+        "title": "最近总份额",
+        "name": "zjzfe",
+        "type": "float64",
+        "description": "注意单位: 份",
+        "unit": "份"
+      },
+      {
+        "title": "成立日期",
+        "name": "clrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "更新日期",
+        "name": "gxrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "分级子基金",
+    "name": "gmjj_fjzjj",
+    "api": "fund_scale_structured_sina",
+    "targetUrl": "https://vip.stock.finance.sina.com.cn/fund_center/index.html#jjgmfjall",
+    "description": "基金数据中心-基金规模-分级子基金",
+    "remarks": "单次返回所有分级子基金的基金规模数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金简称",
+        "name": "jjjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "单位净值",
+        "name": "dwjz",
+        "type": "float64",
+        "description": "注意单位: 元",
+        "unit": "元"
+      },
+      {
+        "title": "总募集规模",
+        "name": "zmjgm",
+        "type": "float64",
+        "description": "注意单位: 万份",
+        "unit": "万份"
+      },
+      {
+        "title": "最近总份额",
+        "name": "zjzfe",
+        "type": "float64",
+        "description": "注意单位: 份",
+        "unit": "份"
+      },
+      {
+        "title": "成立日期",
+        "name": "clrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金经理",
+        "name": "jjjl",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "更新日期",
+        "name": "gxrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金规模详情",
+    "name": "gmjj_jjgmxq",
+    "api": "fund_aum_em",
+    "targetUrl": "https://fund.eastmoney.com/Company/lsgm.html",
+    "description": "天天基金网-基金数据-基金规模",
+    "remarks": "单次返回所有基金规模数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金公司",
+        "name": "jjgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成立时间",
+        "name": "clsj",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "全部管理规模",
+        "name": "qbglgm",
+        "type": "float64",
+        "description": "注意单位: 亿元",
+        "unit": "亿元"
+      },
+      {
+        "title": "全部基金数",
+        "name": "qbjjs",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "全部经理数",
+        "name": "qbjls",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "更新日期",
+        "name": "gxrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金规模走势",
+    "name": "gmjj_jjgmzs",
+    "api": "fund_aum_trend_em",
+    "targetUrl": "http://fund.eastmoney.com/Company/default.html",
+    "description": "天天基金网-基金数据-市场全部基金规模走势",
+    "remarks": "单次返回所有市场全部基金规模走势数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "value",
+        "name": "value",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金公司历年管理规模",
+    "name": "gmjj_jjgslnglgm",
+    "api": "fund_aum_hist_em",
+    "targetUrl": "http://fund.eastmoney.com/Company/lsgm.html",
+    "description": "天天基金网-基金数据-基金公司历年管理规模排行列表",
+    "remarks": "单次返回所有基金公司历年管理规模排行列表数据",
+    "inputParameters": [
+      {
+        "title": "year",
+        "name": "year",
+        "type": "str",
+        "description": "year=\"2023\"; 从 2001 年开始",
+        "defaultValue": "2023",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金公司",
+        "name": "jjgs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "总规模",
+        "name": "zgm",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "股票型",
+        "name": "gpx",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "混合型",
+        "name": "hhx",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "债券型",
+        "name": "zqx",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "指数型",
+        "name": "zsx",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "QDII",
+        "name": "QDII",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "货币型",
+        "name": "hbx",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "REITs-实时行情",
+    "name": "gmjj_reits_sshq",
+    "api": "reits_realtime_em",
+    "targetUrl": "http://quote.eastmoney.com/center/gridlist.html#fund_reits_all",
+    "description": "东方财富网-行情中心-REITs-沪深 REITs-实时行情",
+    "remarks": "单次返回所有 REITs 的实时行情数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "代码",
+        "name": "dm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "名称",
+        "name": "mc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最新价",
+        "name": "zxj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "涨跌额",
+        "name": "zde",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "涨跌幅",
+        "name": "zdf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "成交量",
+        "name": "cjl",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "开盘价",
+        "name": "kpj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最高价",
+        "name": "zgj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最低价",
+        "name": "zdj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "昨收",
+        "name": "zs",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "REITs-历史行情",
+    "name": "gmjj_reits_lshq",
+    "api": "reits_hist_em",
+    "targetUrl": "https://quote.eastmoney.com/sh508097.html",
+    "description": "东方财富网-行情中心-REITs-沪深 REITs-历史行情",
+    "remarks": "单次返回指定 symbol 的历史行情数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "symbol=\"508097\"; REITs 代码",
+        "defaultValue": "508097",
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "日期",
+        "name": "rq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "今开",
+        "name": "jk",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最高",
+        "name": "zg",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最低",
+        "name": "zd",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "最新价",
+        "name": "zxj",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成交量",
+        "name": "cjl",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "成交额",
+        "name": "cje",
+        "type": "float64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "振幅",
+        "name": "zf",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "换手",
+        "name": "hs",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金重仓股",
+    "name": "gmjj_jjzcg",
+    "api": "fund_report_stock_cninfo",
+    "targetUrl": "https://webapi.cninfo.com.cn/#/thematicStatistics",
+    "description": "巨潮资讯-数据中心-专题统计-基金报表-基金重仓股",
+    "remarks": "返回指定 date 的所有数据; date 从 2017 年开始",
+    "inputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"20210630\"; choice of {\"XXXX0331\", \"XXXX0630\", \"XXXX0930\", \"XXXX1231\"}, 其中 XXXX 为年份",
+        "defaultValue": "20210630",
+        "choices": [
+          "XXXX0331",
+          "XXXX0630",
+          "XXXX0930",
+          "XXXX1231"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "股票代码",
+        "name": "gpdm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "股票简称",
+        "name": "gpjc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "报告期",
+        "name": "bgq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金覆盖家数",
+        "name": "jjfgjs",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "持股总数",
+        "name": "cgzs",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "持股总市值",
+        "name": "cgzsz",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金行业配置",
+    "name": "gmjj_jjhypz",
+    "api": "fund_report_industry_allocation_cninfo",
+    "targetUrl": "https://webapi.cninfo.com.cn/#/thematicStatistics",
+    "description": "巨潮资讯-数据中心-专题统计-基金报表-基金行业配置",
+    "remarks": "返回指定 date 的所有数据; date 从 2017 年开始",
+    "inputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "str",
+        "description": "date=\"20210630\"; choice of {\"XXXX0331\", \"XXXX0630\", \"XXXX0930\", \"XXXX1231\"}, 其中 XXXX 为年份",
+        "defaultValue": "20210630",
+        "choices": [
+          "XXXX0331",
+          "XXXX0630",
+          "XXXX0930",
+          "XXXX1231"
+        ],
+        "isRequired": false
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "行业编码",
+        "name": "hybm",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "证监会行业名称",
+        "name": "zjhhymc",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "报告期",
+        "name": "bgq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金覆盖家数",
+        "name": "jjfgjs",
+        "type": "int64",
+        "description": "注意单位: 只",
+        "unit": "只"
+      },
+      {
+        "title": "行业规模",
+        "name": "hygm",
+        "type": "float64",
+        "description": "注意单位: 亿元",
+        "unit": "亿元"
+      },
+      {
+        "title": "占净资产比例",
+        "name": "zjzcbl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "基金资产配置",
+    "name": "gmjj_jjzcpz",
+    "api": "fund_report_asset_allocation_cninfo",
+    "targetUrl": "https://webapi.cninfo.com.cn/#/thematicStatistics",
+    "description": "巨潮资讯-数据中心-专题统计-基金报表-基金资产配置",
+    "remarks": "返回所有基金资产配置数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "报告期",
+        "name": "bgq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金覆盖家数",
+        "name": "jjfgjs",
+        "type": "object",
+        "description": "注意单位: 只",
+        "unit": "只"
+      },
+      {
+        "title": "股票权益类占净资产比例",
+        "name": "gpqylzjzcbl",
+        "type": "object",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "债券固定收益类占净资产比例",
+        "name": "zqgdsylzjzcbl",
+        "type": "object",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "现金货币类占净资产比例",
+        "name": "xjhblzjzcbl",
+        "type": "object",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "基金市场净资产规模",
+        "name": "jjscjzcgm",
+        "type": "object",
+        "description": "注意单位: 亿元",
+        "unit": "亿元"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "规模变动",
+    "name": "gmjj_gmbd",
+    "api": "fund_scale_change_em",
+    "targetUrl": "https://fund.eastmoney.com/data/gmbdlist.html",
+    "description": "天天基金网-基金数据-规模份额-规模变动",
+    "remarks": "返回所有规模变动数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "截止日期",
+        "name": "jzrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金家数",
+        "name": "jjjs",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "期间申购",
+        "name": "qjsg",
+        "type": "float64",
+        "description": "注意单位: 亿份",
+        "unit": "亿份"
+      },
+      {
+        "title": "期间赎回",
+        "name": "qjsh",
+        "type": "float64",
+        "description": "注意单位: 亿份",
+        "unit": "亿份"
+      },
+      {
+        "title": "期末总份额",
+        "name": "qmzfe",
+        "type": "float64",
+        "description": "注意单位: 亿份",
+        "unit": "亿份"
+      },
+      {
+        "title": "期末净资产",
+        "name": "qmjzc",
+        "type": "float64",
+        "description": "注意单位: 亿份",
+        "unit": "亿份"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "持有人结构",
+    "name": "gmjj_cyrjg",
+    "api": "fund_hold_structure_em",
+    "targetUrl": "https://fund.eastmoney.com/data/cyrjglist.html",
+    "description": "天天基金网-基金数据-规模份额-持有人结构",
+    "remarks": "返回所有持有人结构数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "序号",
+        "name": "xh",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "截止日期",
+        "name": "jzrq",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金家数",
+        "name": "jjjs",
+        "type": "int64",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "机构持有比列",
+        "name": "jgcybl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "个人持有比列",
+        "name": "grcybl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "内部持有比列",
+        "name": "nbcybl",
+        "type": "float64",
+        "description": "注意单位: %",
+        "unit": "%"
+      },
+      {
+        "title": "总份额",
+        "name": "zfe",
+        "type": "float64",
+        "description": "注意单位: 亿份",
+        "unit": "亿份"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "股票型基金仓位",
+    "name": "gmjj_gpxjjcw",
+    "api": "fund_stock_position_lg",
+    "targetUrl": "https://legulegu.com/stockdata/fund-position/pos-stock",
+    "description": "乐咕乐股-基金仓位-股票型基金仓位",
+    "remarks": "返回所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "close",
+        "name": "close",
+        "type": "float64",
+        "description": "注意单位: 沪深 300 收盘价",
+        "unit": "沪深"
+      },
+      {
+        "title": "position",
+        "name": "position",
+        "type": "float64",
+        "description": "注意单位: 持仓比例",
+        "unit": "持仓比例"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "平衡混合型基金仓位",
+    "name": "gmjj_phhhxjjcw",
+    "api": "fund_balance_position_lg",
+    "targetUrl": "https://legulegu.com/stockdata/fund-position/pos-pingheng",
+    "description": "乐咕乐股-基金仓位-平衡混合型基金仓位",
+    "remarks": "返回所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "close",
+        "name": "close",
+        "type": "float64",
+        "description": "注意单位: 沪深 300 收盘价",
+        "unit": "沪深"
+      },
+      {
+        "title": "position",
+        "name": "position",
+        "type": "float64",
+        "description": "注意单位: 持仓比例",
+        "unit": "持仓比例"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "灵活配置型基金仓位",
+    "name": "gmjj_lhpzxjjcw",
+    "api": "fund_linghuo_position_lg",
+    "targetUrl": "https://legulegu.com/stockdata/fund-position/pos-linghuo",
+    "description": "乐咕乐股-基金仓位-灵活配置型基金仓位",
+    "remarks": "返回所有历史数据",
+    "inputParameters": [],
+    "outputParameters": [
+      {
+        "title": "date",
+        "name": "date",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "close",
+        "name": "close",
+        "type": "float64",
+        "description": "注意单位: 沪深 300 收盘价",
+        "unit": "沪深"
+      },
+      {
+        "title": "position",
+        "name": "position",
+        "type": "float64",
+        "description": "注意单位: 持仓比例",
+        "unit": "持仓比例"
+      }
+    ]
+  },
+  {
+    "moduleTitle": "公募基金数据",
+    "moduleName": "fund_public",
+    "title": "人事公告",
+    "name": "gmjj_rsgg",
+    "api": "fund_announcement_personnel_em",
+    "targetUrl": "http://fundf10.eastmoney.com/jjgg_000001_4.html",
+    "description": "东方财富网站-天天基金网-基金档案-基金公告-人事调整",
+    "remarks": "返回所有历史数据",
+    "inputParameters": [
+      {
+        "title": "symbol",
+        "name": "symbol",
+        "type": "str",
+        "description": "基金代码，可以通过调用 ak.fund_name_em() 接口获取",
+        "isRequired": true
+      }
+    ],
+    "outputParameters": [
+      {
+        "title": "基金代码",
+        "name": "jjdm",
+        "type": "object",
+        "description": "基金代码",
+        "unit": ""
+      },
+      {
+        "title": "公告标题",
+        "name": "ggbt",
+        "type": "object",
+        "description": "",
+        "unit": ""
+      },
+      {
+        "title": "基金名称",
+        "name": "jjmc",
+        "type": "object",
+        "description": "基金名称",
+        "unit": ""
+      },
+      {
+        "title": "公告日期",
+        "name": "ggrq",
+        "type": "object",
+        "description": "公告的发布日期",
+        "unit": ""
+      },
+      {
+        "title": "报告ID",
+        "name": "bgID",
+        "type": "object",
+        "description": "获取报告详情的依据; 拼接后可以获取公告地址",
+        "unit": ""
+      }
+    ]
+  }
 ];
 
 /**
@@ -5785,7 +5876,7 @@ export const fund_publicInterfaces: ApiInterface[] = [
  * @returns 接口定义或undefined
  */
 export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
-  return fund_publicInterfaces.find((item) => item.api === apiName);
+  return fund_publicInterfaces.find(item => item.api === apiName);
 }
 
 /**
@@ -5794,7 +5885,7 @@ export function getInterfaceByApi(apiName: string): ApiInterface | undefined {
  * @returns 接口定义或undefined
  */
 export function getInterfaceByName(name: string): ApiInterface | undefined {
-  return fund_publicInterfaces.find((item) => item.name === name);
+  return fund_publicInterfaces.find(item => item.name === name);
 }
 
 export default fund_publicInterfaces;
