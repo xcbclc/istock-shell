@@ -3,7 +3,7 @@ import { ScopeError } from '@istock-shell/util';
 import { CONTROLLER_TABLE_RETURN_METADATA } from '../constants';
 import { parseFilterConditions, parseCmdInfoToUnit } from '../index';
 
-export type TTableReturnOptions = {
+export type TableReturnOptions = {
   Model: ModelType;
   caption?: string;
   unit?: string; // 某些数据不是以个分位开始的，初始值需要重置单位。 列名称:行名称·单位
@@ -20,7 +20,7 @@ export class ControllerTableReturnDecorator extends Decorator.ControllerMethodRe
   }
 
   // @ts-expect-error 为了复用ControllerMethodReturnDecorator装饰器代码
-  handler(options: TTableReturnOptions): MethodDecorator {
+  handler(options: TableReturnOptions): MethodDecorator {
     const { Model, caption, unit, pipe } = options;
     const filterConditions = parseFilterConditions(pipe);
     if (Model && Model.prototype instanceof BaseModel) {

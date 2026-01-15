@@ -18,6 +18,7 @@ import { CdfcjysjModel } from '@domains/cdfc/cdesf/cdfcjysj.model';
 import { ThemeModel } from '@domains/global/setting/theme/theme.model';
 import { ProxyModel } from '@domains/global/setting/proxy/proxy.model';
 import { ShortcutModel } from '@domains/global/setting/shortcut/shortcut.model';
+import { GgxxcxModel } from '@domains/akshare/ggxxcx/ggxxcx.model';
 
 export const indexedDataSourceModels = [
   HistoryModel,
@@ -81,3 +82,16 @@ export const initDataSource = async () => {
   });
   await memoryDataSource.initialize();
 };
+
+const akShareFetchDataSource = new DataSource<'fetch'>({
+  name: 'fetch',
+  type: 'fetch',
+  entities: [GgxxcxModel],
+  prefixUrl: import.meta.env.VITE_PROXY_API ?? '/api/v1/proxy',
+  requestOptions: {
+    headers: {
+      'xx-target': import.meta.env.VITE_ISTOCK_AKSHARE ?? 'https://istock.red/api/akshare',
+    },
+  },
+});
+await akShareFetchDataSource.initialize();

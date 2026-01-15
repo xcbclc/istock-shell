@@ -8,6 +8,8 @@ import {
 import { transformStockName, akshareQuery, akshareCmdMap } from '@/worker/common';
 import { CmdRouteService } from '@domains/global/cmd-route/cmd-route.service';
 import { CmdRouteModel } from '@domains/global/cmd-route/cmd-route.model';
+import { GgxxcxController } from './ggxxcx/ggxxcx.controller';
+import { GgxxcxService } from './ggxxcx/ggxxcx.service';
 
 const name = 'akshare';
 
@@ -15,8 +17,8 @@ const name = 'akshare';
 @Domain({
   name,
   viewName: name.toUpperCase(),
-  providers: [CmdRouteService],
-  controllers: [],
+  controllers: [GgxxcxController],
+  providers: [CmdRouteService, GgxxcxService],
   middlewares: [transformStockName, akshareQuery],
 })
 export class AkshareDomain {
