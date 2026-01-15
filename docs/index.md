@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: iStock Shell
-  version: Beta v0.1
+  version: Beta v0.2
   text: AI 原生金融分析终端
   tagline: 重塑金融数据交互方式。以命令和自然语言为指令，融合大模型智能分析，为您提供专业、极速、深度的市场洞察。
   image:

@@ -5,807 +5,757 @@ keywords: [akshare]
 aside: false
 editLink: false
 ---
-
 # akshare
 
-## xwccsj 席位持仓数据
-
+## xw_xwccsj 席位持仓数据 
 席位持仓数据接口
 
 ### 用法
 
-`xwccsj <broker> <date>`
+`xw_xwccsj <broker> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| broker | 永安期货   | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## xwyksj 席位盈亏数据
-
+## xw_xwyksj 席位盈亏数据 
 席位盈亏数据接口
 
 ### 用法
 
-`xwyksj <broker> <start_date> <end_date>`
+`xw_xwyksj <broker> <start_date> <end_date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| start_date | 2018-07-08 | string | false |  |  |
+| end_date | 2018-08-08 | string | false |  |  |
 
-|    名称    | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :--------- | :----: | :------: | :----: | :----: |
-|   broker   | 永安期货   | string |  false   |        |        |
-| start_date | 2018-07-08 | string |  false   |        |        |
-|  end_date  | 2018-08-08 | string |  false   |        |        |
 
-## xwmrdzjldsj 席位每日大资金流动数据
-
+## xw_xwmrdzjldsj 席位每日大资金流动数据 
 席位每日大资金流动数据接口
 
 ### 用法
 
-`xwmrdzjldsj <broker> <date> <offset>`
+`xw_xwmrdzjldsj <broker> <date> <offset>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
+| offset | 1000000 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| broker | 永安期货   | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
-| offset | 1000000    | string |  false   |        |        |
 
-## xwdkbsj 席位多空比数据
-
+## xw_xwdkbsj 席位多空比数据 
 席位多空比数据接口
 
 ### 用法
 
-`xwdkbsj <broker> <date>`
+`xw_xwdkbsj <broker> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| broker | 永安期货   | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## xwjccbzjbhsj 席位净持仓保证金变化数据
-
+## xw_xwjccbzjbhsj 席位净持仓保证金变化数据 
 席位净持仓保证金变化数据接口
 
 ### 用法
 
-`xwjccbzjbhsj <broker> <date>`
+`xw_xwjccbzjbhsj <broker> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| broker | 永安期货   | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## xwjccbzjsj 席位净持仓保证金数据
-
+## xw_xwjccbzjsj 席位净持仓保证金数据 
 席位净持仓保证金数据接口
 
 ### 用法
 
-`xwjccbzjsj <broker> <date>`
+`xw_xwjccbzjsj <broker> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| broker | 永安期货   | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## xwzccbzjsj 席位总持仓保证金数据
-
+## xw_xwzccbzjsj 席位总持仓保证金数据 
 席位总持仓保证金数据接口
 
 ### 用法
 
-`xwzccbzjsj <broker> <date>`
+`xw_xwzccbzjsj <broker> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| broker | 永安期货   | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## xwdspyksj 席位的商品盈亏数据
-
+## xw_xwdspyksj 席位的商品盈亏数据 
 席位的商品盈亏数据接口
 
 ### 用法
 
-`xwdspyksj <broker> <start_date> <end_date>`
+`xw_xwdspyksj <broker> <start_date> <end_date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| start_date | 2018-07-08 | string | false |  |  |
+| end_date | 2018-07-08 | string | false |  |  |
 
-|    名称    | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :--------- | :----: | :------: | :----: | :----: |
-|   broker   | 永安期货   | string |  false   |        |        |
-| start_date | 2018-07-08 | string |  false   |        |        |
-|  end_date  | 2018-07-08 | string |  false   |        |        |
 
-## xwylpx 席位盈利排行
-
+## xw_xwylpx 席位盈利排行 
 席位盈利排行数据接口
 
 ### 用法
 
-`xwylpx <start_date> <end_date> <count>`
+`xw_xwylpx <start_date> <end_date> <count>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| start_date | 2018-07-08 | string | false |  |  |
+| end_date | 2018-07-08 | string | false |  |  |
+| count | 10; 默认10条 | string | false |  |  |
 
-|    名称    | 描述         |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :----------- | :----: | :------: | :----: | :----: |
-| start_date | 2018-07-08   | string |  false   |        |        |
-|  end_date  | 2018-07-08   | string |  false   |        |        |
-|   count    | 10; 默认10条 | string |  false   |        |        |
 
-## xwkspx 席位亏损排行
-
+## xw_xwkspx 席位亏损排行 
 席位亏损排行数据接口
 
 ### 用法
 
-`xwkspx <start_date> <end_date> <count>`
+`xw_xwkspx <start_date> <end_date> <count>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| start_date | 2018-07-08 | string | false |  |  |
+| end_date | 2018-07-08 | string | false |  |  |
+| count | 10; 默认10条 | string | false |  |  |
 
-|    名称    | 描述         |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :----------- | :----: | :------: | :----: | :----: |
-| start_date | 2018-07-08   | string |  false   |        |        |
-|  end_date  | 2018-07-08   | string |  false   |        |        |
-|   count    | 10; 默认10条 | string |  false   |        |        |
 
-## syxwsj 所有席位数据
-
+## xw_syxwsj 所有席位数据 
 所有席位数据接口
 
 ### 用法
 
-`syxwsj <offset_days>`
+`xw_syxwsj <offset_days>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| offset_days | 默认为365，即一年内上过榜的席位 | string | false |  |  |
 
-|    名称     | 描述                            |  类型  | 是否可选 | 默认值 | 可选值 |
-| :---------: | :------------------------------ | :----: | :------: | :----: | :----: |
-| offset_days | 默认为365，即一年内上过榜的席位 | string |  false   |        |        |
 
-## jcgc 建仓过程
-
+## xw_jcgc 建仓过程 
 建仓过程数据接口
 
 ### 用法
 
-`jcgc <broker> <code> [-start_date <start_date>] [-end_date <end_date>]`
+`xw_jcgc <broker> <code> [-start_date <start_date>] [-end_date <end_date>]`
 
 ### 参数
-
-|  名称  | 描述     |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :------- | :----: | :------: | :----: | :----: |
-| broker | 永安期货 | string |  false   |        |        |
-|  code  | rb1810   | string |  false   |        |        |
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker | 永安期货 | string | false |  |  |
+| code | rb1810 | string | false |  |  |
 
 ### 选项
+| 选项参数 | 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :--: | :-- | :--: | :--: | :--: | :--: |
+| `-start_date，--start_date` | start_date | &quot;2020-02-03&quot;; 可选参数 | string | true |  |  |
+| `-end_date，--end_date` | end_date | &quot;2020-06-03&quot;; 可选参数 | string | true |  |  |
 
-|          选项参数           |    名称    | 描述                             |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-------------------------: | :--------: | :------------------------------- | :----: | :------: | :----: | :----: |
-| `-start_date，--start_date` | start_date | &quot;2020-02-03&quot;; 可选参数 | string |   true   |        |        |
-|   `-end_date，--end_date`   |  end_date  | &quot;2020-06-03&quot;; 可选参数 | string |   true   |        |        |
-
-## xwddp 席位对对碰
-
+## xw_xwddp 席位对对碰 
 席位对对碰数据接口
 
 ### 用法
 
-`xwddp <broker1> <broker2> <symbol>`
+`xw_xwddp <broker1> <broker2> <symbol>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| broker1 | 永安期货 | string | false |  |  |
+| broker2 | 兴证期货 | string | false |  |  |
+| symbol | 螺纹钢 | string | false |  |  |
 
-|  名称   | 描述     |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :------- | :----: | :------: | :----: | :----: |
-| broker1 | 永安期货 | string |  false   |        |        |
-| broker2 | 兴证期货 | string |  false   |        |        |
-| symbol  | 螺纹钢   | string |  false   |        |        |
 
-## hyccsj 合约持仓数据
-
+## sp_hyccsj 合约持仓数据 
 合约持仓数据接口
 
 ### 用法
 
-`hyccsj <fields> <code> <date>`
+`sp_hyccsj <fields> <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| fields | longs: 返回多头数据; shorts: 返回空头数据 | string | false |  |  |
+| code | rb1810 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述                                      |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :---------------------------------------- | :----: | :------: | :----: | :----: |
-| fields | longs: 返回多头数据; shorts: 返回空头数据 | string |  false   |        |        |
-|  code  | rb1810                                    | string |  false   |        |        |
-|  date  | 2018-08-08                                | string |  false   |        |        |
 
-## spccsj 商品持仓数据
+## sp_spccsj 商品持仓数据 
+
 
 ### 用法
 
-`spccsj`
+`sp_spccsj`
+
+
 
 ### 命令示例
 
-`spccsj`
-<IStockShellDemo cmd='spccsj' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
-
-## spjccsj 商品净持仓数据
-
+`sp_spccsj`
+<IStockShellDemo cmd='sp_spccsj' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
+## sp_spjccsj 商品净持仓数据 
 商品净持仓数据接口
 
 ### 用法
 
-`spjccsj <symbol> <broker> <date>`
+`sp_spjccsj <symbol> <broker> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| symbol | RB | string | false |  |  |
+| broker | 永安期货 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| symbol | RB         | string |  false   |        |        |
-| broker | 永安期货   | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## hyhqsj 合约行情数据
-
+## sp_hyhqsj 合约行情数据 
 合约行情数据接口
 
 ### 用法
 
-`hyhqsj <code> <date>`
+`sp_hyhqsj <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| code | rb1810 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| code | rb1810     | string |  false   |        |        |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## spcdzjsj 商品沉淀资金数据
-
+## sp_spcdzjsj 商品沉淀资金数据 
 商品沉淀资金数据接口
 
 ### 用法
 
-`spcdzjsj <symbol> <date>`
+`sp_spcdzjsj <symbol> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| symbol | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| symbol | RB         | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## hydkbsj 合约多空比数据
-
+## sp_hydkbsj 合约多空比数据 
 合约多空比数据接口
 
 ### 用法
 
-`hydkbsj <code> <date>`
+`sp_hydkbsj <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| code | rb1810 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| code | rb1810     | string |  false   |        |        |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## hyjccbzjbhsj 合约净持仓保证金变化数据
-
+## sp_hyjccbzjbhsj 合约净持仓保证金变化数据 
 合约净持仓保证金变化数据接口
 
 ### 用法
 
-`hyjccbzjbhsj <code> <date>`
+`sp_hyjccbzjbhsj <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| code | rb1810 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| code | rb1810     | string |  false   |        |        |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## hyjccbzjsj 合约净持仓保证金数据
-
+## sp_hyjccbzjsj 合约净持仓保证金数据 
 合约净持仓保证金数据接口
 
 ### 用法
 
-`hyjccbzjsj <code> <date>`
+`sp_hyjccbzjsj <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| code | rb1810 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| code | rb1810     | string |  false   |        |        |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## hyzccbzjsj 合约总持仓保证金数据
-
+## sp_hyzccbzjsj 合约总持仓保证金数据 
 合约总持仓保证金数据接口
 
 ### 用法
 
-`hyzccbzjsj <code> <date>`
+`sp_hyzccbzjsj <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| code | rb1810 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| code | rb1810     | string |  false   |        |        |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## spdxwyksj 商品的席位盈亏数据
-
+## sp_spdxwyksj 商品的席位盈亏数据 
 商品的席位盈亏数据接口
 
 ### 用法
 
-`spdxwyksj <symbol> <start_date> <end_date>`
+`sp_spdxwyksj <symbol> <start_date> <end_date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| symbol | RB | string | false |  |  |
+| start_date | 2018-02-08 | string | false |  |  |
+| end_date | 2018-08-08 | string | false |  |  |
 
-|    名称    | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :--------- | :----: | :------: | :----: | :----: |
-|   symbol   | RB         | string |  false   |        |        |
-| start_date | 2018-02-08 | string |  false   |        |        |
-|  end_date  | 2018-08-08 | string |  false   |        |        |
 
-## zyzbsj 自研指标数据
-
+## sp_zyzbsj 自研指标数据 
 自研指标数据接口
 
 ### 用法
 
-`zyzbsj <code> <date>`
+`sp_zyzbsj <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| code | rb1810 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| code | rb1810     | string |  false   |        |        |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## spxgybsj 商品相关研报数据
-
+## sp_spxgybsj 商品相关研报数据 
 商品相关研报数据接口
 
 ### 用法
 
-`spxgybsj <csymbolode> <date>`
+`sp_spxgybsj <csymbolode> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| csymbolode | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|    名称    | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :--------- | :----: | :------: | :----: | :----: |
-| csymbolode | RB         | string |  false   |        |        |
-|    date    | 2018-08-08 | string |  false   |        |        |
 
-## splbsj 商品列表数据
-
+## sp_splbsj 商品列表数据 
 商品列表数据接口
 
 ### 用法
 
-`splbsj <csymbolode> <date>`
+`sp_splbsj <csymbolode> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| csymbolode | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|    名称    | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :--------- | :----: | :------: | :----: | :----: |
-| csymbolode | RB         | string |  false   |        |        |
-|    date    | 2018-08-08 | string |  false   |        |        |
 
-## hysy 合约索引
-
+## sp_hysy 合约索引 
 合约索引数据接口
 
 ### 用法
 
-`hysy <date>`
+`sp_hysy <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## fqhgsjcc 非期货公司净持仓
-
+## sp_fqhgsjcc 非期货公司净持仓 
 非期货公司净持仓数据接口
 
 ### 用法
 
-`fqhgsjcc <symbol> <date>`
+`sp_fqhgsjcc <symbol> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| symbol | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称  | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :----: | :--------- | :----: | :------: | :----: | :----: |
-| symbol | RB         | string |  false   |        |        |
-|  date  | 2018-08-08 | string |  false   |        |        |
 
-## mrjldlb_sp 每日净流多列表(商品)
-
+## zj_mrjldlb_sp 每日净流多列表(商品) 
 每日净流多列表（商品）接口
 
 ### 用法
 
-`mrjldlb_sp <date>`
+`zj_mrjldlb_sp <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## mrjlklb_sp 每日净流空列表(商品)
-
+## zj_mrjlklb_sp 每日净流空列表(商品) 
 每日净流空列表(商品)接口
 
 ### 用法
 
-`mrjlklb_sp <date>`
+`zj_mrjlklb_sp <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## mrjldlb_zs 每日净流多列表(指数)
-
+## zj_mrjldlb_zs 每日净流多列表(指数) 
 每日净流多列表(指数)接口
 
 ### 用法
 
-`mrjldlb_zs <date>`
+`zj_mrjldlb_zs <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## mrjlklb_zs 每日净流空列表(指数)
-
+## zj_mrjlklb_zs 每日净流空列表(指数) 
 每日净流空列表(指数)接口
 
 ### 用法
 
-`mrjlklb_zs <date>`
+`zj_mrjlklb_zs <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## mrspbzjcdbh 每日商品保证金沉淀变化
-
+## zj_mrspbzjcdbh 每日商品保证金沉淀变化 
 每日商品保证金沉淀变化接口
 
 ### 用法
 
-`mrspbzjcdbh <date>`
+`zj_mrspbzjcdbh <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## jcsj 基差数据
-
+## jbm_jcsj 基差数据 
 基差数据接口
 
 ### 用法
 
-`jcsj <variety> <date>`
+`jbm_jcsj <variety> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :--------- | :----: | :------: | :----: | :----: |
-| variety | RB         | string |  false   |        |        |
-|  date   | 2018-08-08 | string |  false   |        |        |
 
-## qxjg 期限结构
-
+## jbm_qxjg 期限结构 
 期限结构接口
 
 ### 用法
 
-`qxjg <variety> <date>`
+`jbm_qxjg <variety> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :--------- | :----: | :------: | :----: | :----: |
-| variety | RB         | string |  false   |        |        |
-|  date   | 2018-08-08 | string |  false   |        |        |
 
-## lrsj 利润数据
-
+## jbm_lrsj 利润数据 
 利润数据接口
 
 ### 用法
 
-`lrsj <variety> <date>`
+`jbm_lrsj <variety> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety | RB | string | false |  |  |
+| date | 2018-12-08 | string | false |  |  |
 
-|  名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :--------- | :----: | :------: | :----: | :----: |
-| variety | RB         | string |  false   |        |        |
-|  date   | 2018-12-08 | string |  false   |        |        |
 
-## xhmysbj 现货贸易商报价
-
+## jbm_xhmysbj 现货贸易商报价 
 现货贸易商报价接口
 
 ### 用法
 
-`xhmysbj <variety> <date>`
+`jbm_xhmysbj <variety> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :--------- | :----: | :------: | :----: | :----: |
-| variety | RB         | string |  false   |        |        |
-|  date   | 2018-08-08 | string |  false   |        |        |
 
-## kqtlsj 跨期套利数据
-
+## jbm_kqtlsj 跨期套利数据 
 跨期套利数据接口
 
 ### 用法
 
-`kqtlsj <variety> <code1> <code2> <date>`
+`jbm_kqtlsj <variety> <code1> <code2> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety | RB | string | false |  |  |
+| code1 | 01 | string | false |  |  |
+| code2 | 05 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :--------- | :----: | :------: | :----: | :----: |
-| variety | RB         | string |  false   |        |        |
-|  code1  | 01         | string |  false   |        |        |
-|  code2  | 05         | string |  false   |        |        |
-|  date   | 2018-08-08 | string |  false   |        |        |
 
-## zyjcsj 自由价差数据
-
+## jbm_zyjcsj 自由价差数据 
 自由价差数据接口
 
 ### 用法
 
-`zyjcsj <variety1> <code1> <variety2> <code2> <date>`
+`jbm_zyjcsj <variety1> <code1> <variety2> <code2> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety1 | RB | string | false |  |  |
+| code1 | 01 | string | false |  |  |
+| variety2 | HC | string | false |  |  |
+| code2 | 01 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|   名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :------: | :--------- | :----: | :------: | :----: | :----: |
-| variety1 | RB         | string |  false   |        |        |
-|  code1   | 01         | string |  false   |        |        |
-| variety2 | HC         | string |  false   |        |        |
-|  code2   | 01         | string |  false   |        |        |
-|   date   | 2018-08-08 | string |  false   |        |        |
 
-## zyjbsj 自由价比数据
-
+## jbm_zyjbsj 自由价比数据 
 自由价比数据接口
 
 ### 用法
 
-`zyjbsj <variety1> <code1> <variety2> <code2> <date>`
+`jbm_zyjbsj <variety1> <code1> <variety2> <code2> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety1 | RB | string | false |  |  |
+| code1 | 01 | string | false |  |  |
+| variety2 | HC | string | false |  |  |
+| code2 | 01 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|   名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :------: | :--------- | :----: | :------: | :----: | :----: |
-| variety1 | RB         | string |  false   |        |        |
-|  code1   | 01         | string |  false   |        |        |
-| variety2 | HC         | string |  false   |        |        |
-|  code2   | 01         | string |  false   |        |        |
-|   date   | 2018-08-08 | string |  false   |        |        |
 
-## cdsj 仓单数据
-
+## jbm_cdsj 仓单数据 
 仓单数据接口
 
 ### 用法
 
-`cdsj <variety> <date>`
+`jbm_cdsj <variety> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety | RB | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :--------- | :----: | :------: | :----: | :----: |
-| variety | RB         | string |  false   |        |        |
-|  date   | 2018-08-08 | string |  false   |        |        |
 
-## cdhzsj 仓单汇总数据
-
+## jbm_cdhzsj 仓单汇总数据 
 仓单汇总数据接口
 
 ### 用法
 
-`cdhzsj <date>`
+`jbm_cdhzsj <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## xspbsj 虚实盘比数据
-
+## jbm_xspbsj 虚实盘比数据 
 虚实盘比数据接口
 
 ### 用法
 
-`xspbsj <variety> <code> <date>`
+`jbm_xspbsj <variety> <code> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| variety | RB | string | false |  |  |
+| code | 10 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|  名称   | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :-----: | :--------- | :----: | :------: | :----: | :----: |
-| variety | RB         | string |  false   |        |        |
-|  code   | 10         | string |  false   |        |        |
-|  date   | 2018-08-08 | string |  false   |        |        |
 
-## zsxx 指数信息
-
+## zsxx_zsxx 指数信息 
 指数信息接口
 
 ### 用法
 
-`zsxx <index_id>`
+`zsxx_zsxx <index_id>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string | false |  |  |
 
-|   名称   | 描述                                      |  类型  | 是否可选 | 默认值 | 可选值 |
-| :------: | :---------------------------------------- | :----: | :------: | :----: | :----: |
-| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string |  false   |        |        |
 
-## zsqzsj 指数权重数据
-
+## zsxx_zsqzsj 指数权重数据 
 指数权重数据接口
 
 ### 用法
 
-`zsqzsj <index_id> <date>`
+`zsxx_zsqzsj <index_id> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|   名称   | 描述                                      |  类型  | 是否可选 | 默认值 | 可选值 |
-| :------: | :---------------------------------------- | :----: | :------: | :----: | :----: |
-| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string |  false   |        |        |
-|   date   | 2018-08-08                                | string |  false   |        |        |
 
-## zshqsj 指数行情数据
-
+## zsxx_zshqsj 指数行情数据 
 指数行情数据接口
 
 ### 用法
 
-`zshqsj <index_id> <date>`
+`zsxx_zshqsj <index_id> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|   名称   | 描述                                      |  类型  | 是否可选 | 默认值 | 可选值 |
-| :------: | :---------------------------------------- | :----: | :------: | :----: | :----: |
-| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string |  false   |        |        |
-|   date   | 2018-08-08                                | string |  false   |        |        |
 
-## zscdzjsj 指数沉淀资金数据
-
+## zsxx_zscdzjsj 指数沉淀资金数据 
 指数沉淀资金数据接口
 
 ### 用法
 
-`zscdzjsj <index_id> <date>`
+`zsxx_zscdzjsj <index_id> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|   名称   | 描述                                      |  类型  | 是否可选 | 默认值 | 可选值 |
-| :------: | :---------------------------------------- | :----: | :------: | :----: | :----: |
-| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string |  false   |        |        |
-|   date   | 2018-08-08                                | string |  false   |        |        |
 
-## ggzslb 公共指数列表
-
+## zsxx_ggzslb 公共指数列表 
 公共指数列表接口
 
 ### 用法
 
-`ggzslb`
+`zsxx_ggzslb`
+
+
 
 ### 命令示例
 
-`ggzslb`
-<IStockShellDemo cmd='ggzslb' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
-
-## grzslb 个人指数列表
-
+`zsxx_ggzslb`
+<IStockShellDemo cmd='zsxx_ggzslb' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
+## zsxx_grzslb 个人指数列表 
 个人指数列表接口
 
 ### 用法
 
-`grzslb`
+`zsxx_grzslb`
+
+
 
 ### 命令示例
 
-`grzslb`
-<IStockShellDemo cmd='grzslb' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
-
-## zszjdx 指数资金动向
-
+`zsxx_grzslb`
+<IStockShellDemo cmd='zsxx_grzslb' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
+## zsxx_zszjdx 指数资金动向 
 指数资金动向接口
 
 ### 用法
 
-`zszjdx <index_id> <date>`
+`zsxx_zszjdx <index_id> <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string | false |  |  |
+| date | 2018-08-08 | string | false |  |  |
 
-|   名称   | 描述                                      |  类型  | 是否可选 | 默认值 | 可选值 |
-| :------: | :---------------------------------------- | :----: | :------: | :----: | :----: |
-| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string |  false   |        |        |
-|   date   | 2018-08-08                                | string |  false   |        |        |
 
-## zsdxwyksj 指数的席位盈亏数据
-
+## zsxx_zsdxwyksj 指数的席位盈亏数据 
 指数的席位盈亏数据接口
 
 ### 用法
 
-`zsdxwyksj <index_id> <start_date> <end_date>`
+`zsxx_zsdxwyksj <index_id> <start_date> <end_date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| index_id | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string | false |  |  |
+| start_date | 2018-07-08 | string | false |  |  |
+| end_date | 2018-08-08 | string | false |  |  |
 
-|    名称    | 描述                                      |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--------: | :---------------------------------------- | :----: | :------: | :----: | :----: |
-|  index_id  | index0070c0eb-93ba-2da9-6633-fa70cb90e959 | string |  false   |        |        |
-| start_date | 2018-07-08                                | string |  false   |        |        |
-|  end_date  | 2018-08-08                                | string |  false   |        |        |
 
-## lhnxdthyc 龙虎牛熊多头合约池
-
+## qhgj_lhnxdthyc 龙虎牛熊多头合约池 
 龙虎牛熊多头合约池接口
 
 ### 用法
 
-`lhnxdthyc <date>`
+`qhgj_lhnxdthyc <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
 
-## lhnxkthyc 龙虎牛熊空头合约池
-
+## qhgj_lhnxkthyc 龙虎牛熊空头合约池 
 龙虎牛熊空头合约池
 
 ### 用法
 
-`lhnxkthyc <date>`
+`qhgj_lhnxkthyc <date>`
 
 ### 参数
+| 名称 | 描述 | 类型 | 是否可选 | 默认值 | 可选值 |
+| :--: | :-- | :--: | :--: | :--: | :--: |
+| date | 2018-08-08 | string | false |  |  |
 
-| 名称 | 描述       |  类型  | 是否可选 | 默认值 | 可选值 |
-| :--: | :--------- | :----: | :------: | :----: | :----: |
-| date | 2018-08-08 | string |  false   |        |        |
+

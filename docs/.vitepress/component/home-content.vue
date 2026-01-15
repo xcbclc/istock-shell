@@ -247,35 +247,23 @@
 
             <div class="chart-types">
 
-              <div class="chart-type active">
+              <div
+                v-for="item in chartTypeList"
+                :key="item.label"
+                :class="['chart-type', { active: activeChartLabel === item.label }]"
+                @click="setChartCmd(chartCmdCtx, item)"
+              >
 
-                <div class="chart-icon">📈</div>
-                 <span>K线图</span>
-              </div>
-
-              <div class="chart-type">
-
-                <div class="chart-icon">📊</div>
-                 <span>饼图</span>
-              </div>
-
-              <div class="chart-type">
-
-                <div class="chart-icon">📉</div>
-                 <span>折线图</span>
-              </div>
-
-              <div class="chart-type">
-
-                <div class="chart-icon">📋</div>
-                 <span>表格</span>
+                <div class="chart-icon">{{ item.icon }}</div>
+                 <span>{{ item.label }}</span>
               </div>
 
             </div>
 
             <div class="demo-card">
                <IStockShellDemo
-                cmd='tb bt -y 占比 -lb 产品 -sj [{"产品":"茅台酒","占比":0.8408},{"产品":"其它系列酒","占比":0.137},{"产品":"其它业务","占比":0.0222}]'
+                cmd=""
+                :cmdAutoCallback="onCmdChartAutoCallback"
                 :height="640"
                 subtitle="图表展示 · Charts Showcase"
               />
@@ -400,11 +388,49 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useData } from 'vitepress';
 import IStockShellDemo from './istock-shell-demo.vue';
 
 const { frontmatter: fm } = useData();
 
+const chartTypeList = [
+  {
+    label: 'K线图',
+    icon: '📈',
+    cmd: 'gp_lshqsj_dc1 -symbol 600519 -start_date 20150101 -period monthly | tb gplzt -x 日期 -y1 开盘,收盘 -y2 最高,最低'
+  },
+  {
+    label: '饼图',
+    icon: '📊',
+    cmd: 'tb bt -y 占比 -lb 产品 -sj [{"产品":"茅台酒","占比":0.8408},{"产品":"其它系列酒","占比":0.137},{"产品":"其它业务","占比":0.0222}]'
+  },
+  {
+    label: '折线图',
+    icon: '📉',
+    cmd: 'tb zxt -x 年报 -y 净利润(亿元) -sj [{"年报":"2019年报","净利润(亿元)":412.06,"净利润同比增长":0.1705},{"年报":"2020年报","净利润(亿元)":466.97,"净利润同比增长":0.1333},{"年报":"2021年报","净利润(亿元)":524.6,"净利润同比增长":0.1234},{"年报":"2022年报","净利润(亿元)":627.17,"净利润同比增长":0.1955},{"年报":"2023年报","净利润(亿元)":747.34,"净利润同比增长":0.1916}]'
+  },
+  {
+    label: '表格',
+    icon: '📋',
+    cmd: 'gp_lshqsj_dc1 -symbol 600519 -start_date 20260101'
+  }
+];
+let chartCmdCtx: any = null;
+const activeChartLabel = ref(chartTypeList[0].label);
+const chartCmd = ref(chartTypeList[0].cmd);
+
+const setChartCmd = async (ctx: any, item: typeof chartTypeList[0]) => {
+  chartCmd.value = item.cmd;
+  activeChartLabel.value = item.label;
+
+  if (!ctx) return;
+  const { input } = ctx.store;
+  await input.sendCmd('lssc');
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  input.commandEditor.handleCommandInput(chartCmd.value);
+  await input.sendCmd(chartCmd.value);
+}
 const onCmdQueryDataAutoCallback = async (contentWindow: Window, windowId: string) => {
   const ctx = contentWindow.CmdWindowsManager.cmdWindowsManager.getCmdContext(windowId);
   if (!ctx) return;
@@ -416,8 +442,8 @@ const onCmdQueryDataAutoCallback = async (contentWindow: Window, windowId: strin
     'gp_zmmg',
     'qh_np_sshqsj_pz -symbol 黄金',
     'gmjj_jjyj_xq -symbol 000300',
-    'zq_sshqsj',
-    'zq_sshqsj',
+    'wh_sshqsj',
+    'zq_sshqsj2',
     'qq_mrtj_shzqjys',
     'yyjr ../',
     'lssc',
@@ -451,6 +477,20 @@ const onCmdQueryDataAutoCallback = async (contentWindow: Window, windowId: strin
     await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 };
+const onCmdChartAutoCallback = async (contentWindow: Window, windowId: string) => {
+  const ctx = contentWindow.CmdWindowsManager.cmdWindowsManager.getCmdContext(windowId);
+  if (!ctx) return;
+  const { input } = ctx.store;
+  const cmds = [
+    'yyjr akshare',
+    chartCmd.value,
+  ]
+  for (const cmd of cmds) {
+    input.commandEditor.handleCommandInput(cmd);
+    await input.sendCmd(cmd); 
+  }
+  chartCmdCtx = ctx;
+}
 </script>
 
 <style scoped>

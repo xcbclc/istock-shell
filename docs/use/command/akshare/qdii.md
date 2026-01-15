@@ -5,44 +5,44 @@ keywords: [akshare]
 aside: false
 editLink: false
 ---
-
 # akshare
 
-## omzs 欧美指数
-
+## qdii_omzs 欧美指数 
 集思录-T+0 QDII-欧美市场-欧美指数
 
 ### 用法
 
-`omzs`
+`qdii_omzs`
+
+
 
 ### 命令示例
 
-`omzs`
-<IStockShellDemo cmd='omzs' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
-
-## omsp 欧美商品
-
+`qdii_omzs`
+<IStockShellDemo cmd='qdii_omzs' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
+## qdii_omsp 欧美商品 
 集思录-T+0 QDII-欧美市场-欧美商品
 
 ### 用法
 
-`omsp`
+`qdii_omsp`
+
+
 
 ### 命令示例
 
-`omsp`
-<IStockShellDemo cmd='omsp' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
-
-## yzzs 亚洲指数
-
+`qdii_omsp`
+<IStockShellDemo cmd='qdii_omsp' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
+## qdii_yzzs 亚洲指数 
 集思录-T+0 QDII-亚洲市场-亚洲指数
 
 ### 用法
 
-`yzzs`
+`qdii_yzzs`
+
+
 
 ### 命令示例
 
-`yzzs`
-<IStockShellDemo cmd='yzzs' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
+`qdii_yzzs`
+<IStockShellDemo cmd='qdii_yzzs' :domains='[{"viewName":"akshare","name":"akshare"}]' :height='640'/>
