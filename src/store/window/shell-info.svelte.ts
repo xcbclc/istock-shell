@@ -12,6 +12,7 @@ export interface ShellInfoStoreModel {
   asciiTitle: string;
   disclaimer: string;
   projectInfo: {
+    title: string;
     name: string;
     version: string;
     description: string;
