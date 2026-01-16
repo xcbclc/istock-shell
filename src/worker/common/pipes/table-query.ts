@@ -1,22 +1,22 @@
 export enum ETableFilterOperate {
   '=',
 }
-export type TTableFilterItem = {
+export type TableFilterItem = {
   name?: string;
   value?: string;
   filter?: ETableFilterOperate;
 };
-export type TTableFilterConditionRange = [
-  { row?: TTableFilterItem; column?: TTableFilterItem },
-  { row?: TTableFilterItem; column?: TTableFilterItem },
+export type TableFilterConditionRange = [
+  { row?: TableFilterItem; column?: TableFilterItem },
+  { row?: TableFilterItem; column?: TableFilterItem },
 ];
-export type TTableFilterCondition = {
+export type TableFilterCondition = {
   pipe?: string;
-  row?: TTableFilterItem;
-  column?: TTableFilterItem;
-  range?: TTableFilterConditionRange;
+  row?: TableFilterItem;
+  column?: TableFilterItem;
+  range?: TableFilterConditionRange;
 };
-export type TTableFilterConditions = TTableFilterCondition[];
+export type TableFilterConditions = TableFilterCondition[];
 
 const RangeStartSymbol = '[';
 const RangeEndSymbol = ']';
@@ -63,7 +63,7 @@ export const getConditionStringArray = (inputString: string) => {
  * 解析表格筛选条件
  * @param filterStr
  */
-export const parseFilterConditions = (filterStr: string = ''): TTableFilterConditions => {
+export const parseFilterConditions = (filterStr: string = ''): TableFilterConditions => {
   if (!filterStr) return [];
   const conditionStringArray = getConditionStringArray(filterStr);
   return conditionStringArray
@@ -78,7 +78,7 @@ export const parseFilterConditions = (filterStr: string = ''): TTableFilterCondi
         const [rangeStart, rangeEnd] = rangeStr.split(ConditionSplitReg);
         const [rowStart, columnStart] = rangeStart.split(RowAndColumnSplitReg);
         const [rowEnd, columnEnd] = rangeEnd.split(RowAndColumnSplitReg);
-        const range: TTableFilterConditionRange = [
+        const range: TableFilterConditionRange = [
           { row: rowStart, column: columnStart },
           { row: rowEnd, column: columnEnd },
         ].map((item) => {
@@ -96,8 +96,8 @@ export const parseFilterConditions = (filterStr: string = ''): TTableFilterCondi
               filter: ETableFilterOperate['='],
             },
           };
-        }) as TTableFilterConditionRange;
-        const condition: TTableFilterCondition = {
+        }) as TableFilterConditionRange;
+        const condition: TableFilterCondition = {
           pipe,
           range,
         };
@@ -107,7 +107,7 @@ export const parseFilterConditions = (filterStr: string = ''): TTableFilterCondi
         // todo 暂时只处理=符号
         const [rowName, rowValue] = row.split('=');
         const [columnName, columnValue] = column.split('=');
-        const condition: TTableFilterCondition = {
+        const condition: TableFilterCondition = {
           pipe,
           row: {
             name: rowName,
@@ -123,5 +123,5 @@ export const parseFilterConditions = (filterStr: string = ''): TTableFilterCondi
         return condition;
       }
     })
-    .filter((condition): condition is TTableFilterCondition => Boolean(condition));
+    .filter((condition): condition is TableFilterCondition => Boolean(condition));
 };

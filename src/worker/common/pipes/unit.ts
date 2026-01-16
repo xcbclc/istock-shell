@@ -1,14 +1,14 @@
 import { isNil, isNumber, isString } from '@istock-shell/util';
 import { ENumberUnit, EPercentageUnit, NumberUnits } from '../constants';
-import type { TMatrixTable, TTableBody, TTableHeader, TTableUnit } from '../types';
-import type { TTableFilterConditions } from './table-query';
+import type { MatrixTable, TableBody, TableHeader, TableUnit } from '../types';
+import type { TableFilterConditions } from './table-query';
 
 /**
  * 表格头部单位处理
  * @param header
  * @param unitValue
  */
-const switchHeaderHandler = (header: TTableHeader, unitValue?: TTableUnit): TTableHeader => {
+const switchHeaderHandler = (header: TableHeader, unitValue?: TableUnit): TableHeader => {
   header.unit = unitValue ? { text: unitValue, show: true } : undefined;
   return header;
 };
@@ -18,7 +18,7 @@ const switchHeaderHandler = (header: TTableHeader, unitValue?: TTableUnit): TTab
  * @param body
  * @param unitValue
  */
-const switchBodyHandler = (body: TTableBody, unitValue?: TTableUnit, shwoUnit: boolean = false): TTableBody => {
+const switchBodyHandler = (body: TableBody, unitValue?: TableUnit, shwoUnit: boolean = false): TableBody => {
   const value = body.value;
   body.unit = unitValue ? { text: unitValue, show: shwoUnit } : undefined;
   if (!unitValue || isNil(value) || Number.isNaN(Number(value))) {
@@ -54,8 +54,8 @@ const switchBodyHandler = (body: TTableBody, unitValue?: TTableUnit, shwoUnit: b
  * @param matrix
  * @param tableItemUnits
  */
-export const withUnit = (matrix: TMatrixTable, conditions: TTableFilterConditions = []): TMatrixTable => {
-  const conditionRecord = conditions.reduce<Record<string, TTableUnit>>((record, condition) => {
+export const withUnit = (matrix: MatrixTable, conditions: TableFilterConditions = []): MatrixTable => {
+  const conditionRecord = conditions.reduce<Record<string, TableUnit>>((record, condition) => {
     const { row, column, pipe } = condition;
     if (row?.name && pipe) {
       record[row.name] = pipe;
@@ -65,7 +65,7 @@ export const withUnit = (matrix: TMatrixTable, conditions: TTableFilterCondition
     }
     return record;
   }, {});
-  const columnConditionRecord: Record<string, TTableUnit> = {};
+  const columnConditionRecord: Record<string, TableUnit> = {};
   const [headers, ...body] = matrix;
   // 表头列数据处理
   const newHeader = headers.map((header, columnIndex) => {
@@ -75,10 +75,10 @@ export const withUnit = (matrix: TMatrixTable, conditions: TTableFilterCondition
   });
 
   // 数据列和行处理
-  const newBody: TTableBody[][] = body.map((rows) => {
+  const newBody: TableBody[][] = body.map((rows) => {
     let rowUnit: string | null = null;
     return rows.map((item, columnIndex) => {
-      let unit: TTableUnit = '';
+      let unit: TableUnit = '';
       // 第一列默认为行标题，获取行管道单位
       if (columnIndex === 0 && isString(item.value)) {
         rowUnit = conditionRecord[item.value] ?? null;

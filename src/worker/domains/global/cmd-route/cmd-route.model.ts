@@ -8,7 +8,7 @@ import {
   type ControllerMethodCmdRouteMetadata,
 } from '@istock-shell/iswork';
 
-@Model('cmd-route')
+@Model('cmd_route')
 export class CmdRouteModel extends BaseModel {
   @PrimaryColumn()
   id!: number | string;

@@ -1,7 +1,7 @@
 import type { ApplicationContext, DomainClassBase } from '@istock-shell/iswork';
-import type { TCmdRequest } from '@/worker/common';
+import type { CmdRequest } from '@/worker/common';
 
-interface IGlobalDomain extends DomainClassBase {
+interface GlobalDomain extends DomainClassBase {
   getStockCodeList: () => Promise<Array<{ name: string; code: string }>>;
 }
 
@@ -12,8 +12,8 @@ interface IGlobalDomain extends DomainClassBase {
  */
 export const transformStockName = async (ctx: ApplicationContext, next: () => Promise<unknown>) => {
   const { app, cmdp } = ctx;
-  const data = cmdp.getPayload<TCmdRequest<{ 股票名称?: string; 股票代码?: string }>>();
-  const domain = app.getDomain<IGlobalDomain>('global');
+  const data = cmdp.getPayload<CmdRequest<{ 股票名称?: string; 股票代码?: string }>>();
+  const domain = app.getDomain<GlobalDomain>('global');
   if (domain?.domainClassInstance && data?.options?.['股票名称']) {
     const stockCodeList = await domain.domainClassInstance.getStockCodeList();
     if (stockCodeList.length) {

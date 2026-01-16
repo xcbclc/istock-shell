@@ -5,7 +5,7 @@ import {
 } from '@istock-shell/iswork';
 import { ScopeError, isPlainObject, wrap } from '@istock-shell/util';
 import { getPipeOption, getUnitOption } from '../cmd-template/option';
-import type { TMatrixTable, TUiTableProps } from '../types/index';
+import type { MatrixTable, UiTableProps } from '../types/index';
 import {
   getTableData,
   format,
@@ -336,11 +336,11 @@ export const akshareQuery = async (ctx: ApplicationContext, next: () => Promise<
       .map((param) => `${param.title}:*·${param.unit}`)
       .join(',');
     const pipe: string = options['管道'] ?? '';
-    let table: TMatrixTable = getTableData(list, headers, unit);
+    let table: MatrixTable = getTableData(list, headers, unit);
     table = format(table, parseFilterConditions(pipe), ctx.app.getPipeRecord());
     table = withUnit(table, parseCmdInfoToUnit(ctx, info));
 
-    const props: TUiTableProps = matrixToUiTableData(table, apiInterface.title ?? '');
+    const props: UiTableProps = matrixToUiTableData(table, apiInterface.title ?? '');
     props.size = 'sm';
     let message = ctx.cmdp.getReturnMessage({
       output: [

@@ -23,7 +23,6 @@ const bootstrap = async () => {
   Object.keys(pipes).forEach((key) => {
     app.usePipe(key, pipes[key]);
   });
-
   self.addEventListener('message', messageCallback);
 };
 

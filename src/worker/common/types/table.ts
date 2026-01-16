@@ -1,8 +1,8 @@
 import { type ControllerMethodComponentResponse } from '@istock-shell/iswork';
-import type { TCmdRequest } from './cmd-request';
+import type { CmdRequest } from './cmd-request';
 import type { ENumberUnit, EPercentageUnit } from '../constants';
 
-export type TTableHeader<Key = string> = {
+export type TableHeader<Key = string> = {
   value: Key;
   dataKey: string;
   unit?: {
@@ -11,7 +11,7 @@ export type TTableHeader<Key = string> = {
   };
 };
 
-export type TTableBody<Value = unknown> = {
+export type TableBody<Value = unknown> = {
   value: Value;
   dataKey: string;
   unit?: {
@@ -20,18 +20,18 @@ export type TTableBody<Value = unknown> = {
   };
 };
 
-export type TMatrixTable = [TTableHeader[], ...TTableBody[][]];
+export type MatrixTable = [TableHeader[], ...TableBody[][]];
 
-export type TUiTableProps = {
+export type UiTableProps = {
   caption?: string;
-  thead: TTableHeader[];
-  tbody: TTableBody[][];
+  thead: TableHeader[];
+  tbody: TableBody[][];
   size?: string;
 };
 
-export type TCmdTablePipeRequest<Opt = unknown, Args = unknown[]> = TCmdRequest<
+export type CmdTablePipeRequest<Opt = unknown, Args = unknown[]> = CmdRequest<
   Opt,
   Args,
-  ControllerMethodComponentResponse<TUiTableProps>
+  ControllerMethodComponentResponse<UiTableProps>
 >;
-export type TTableUnit = ENumberUnit | EPercentageUnit | string;
+export type TableUnit = ENumberUnit | EPercentageUnit | string;

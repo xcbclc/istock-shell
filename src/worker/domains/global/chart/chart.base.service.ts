@@ -1,7 +1,7 @@
 import { type ControllerMethodComponentOutput } from '@istock-shell/iswork';
 import type { G2Spec } from '@antv/g2';
 import { isNil, ScopeError, bindMessageContext } from '@istock-shell/util';
-import type { TUiTableProps, TTableFilterConditionRange, TTableFilterItem } from '@/worker/common';
+import type { UiTableProps, TableFilterConditionRange, TableFilterItem } from '@/worker/common';
 import { parseFilterConditions } from '@/worker/common';
 import type { TBarOption, TLineOption, TPieOption, TStockOption } from './chart.cmd';
 
@@ -21,7 +21,7 @@ export class ChartBaseService {
    * @param output
    * @private
    */
-  protected isUiTableOutput(output: unknown): output is Array<ControllerMethodComponentOutput<TUiTableProps>> {
+  protected isUiTableOutput(output: unknown): output is Array<ControllerMethodComponentOutput<UiTableProps>> {
     return !isNil(output);
   }
 
@@ -29,7 +29,7 @@ export class ChartBaseService {
    * 自动转换成图表需要的标准数据
    * @param outputs
    */
-  protected autoToChartData(outputs: Array<ControllerMethodComponentOutput<TUiTableProps>>): TChartData | undefined {
+  protected autoToChartData(outputs: Array<ControllerMethodComponentOutput<UiTableProps>>): TChartData | undefined {
     let chatData: TChartData | undefined;
     // 说明是管道符操作
     const output = outputs[outputs.length - 1];
@@ -46,7 +46,7 @@ export class ChartBaseService {
   /**
    * 表格组件数据转图表标准数据
    */
-  protected uiTableDataToChartData(output: ControllerMethodComponentOutput<TUiTableProps>): TChartData {
+  protected uiTableDataToChartData(output: ControllerMethodComponentOutput<UiTableProps>): TChartData {
     const { thead, tbody } = output.props;
     return tbody.map((row) => {
       const newRow: Record<string, unknown> = {};
@@ -65,9 +65,9 @@ export class ChartBaseService {
    */
   protected filterConditionHandler(data: TChartData, filterStr: string): TChartData {
     const filterConditions = parseFilterConditions(filterStr);
-    const filterRowConditions: TTableFilterItem[] = [];
-    const filterColumnConditions: TTableFilterItem[] = [];
-    const filterRangeConditions: Array<{ range: TTableFilterConditionRange; pipe?: string }> = [];
+    const filterRowConditions: TableFilterItem[] = [];
+    const filterColumnConditions: TableFilterItem[] = [];
+    const filterRangeConditions: Array<{ range: TableFilterConditionRange; pipe?: string }> = [];
     filterConditions.forEach((filterCondition) => {
       if (filterCondition.row) filterRowConditions.push(filterCondition.row);
       if (filterCondition.column) filterColumnConditions.push(filterCondition.column);

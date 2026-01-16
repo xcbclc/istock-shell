@@ -1,9 +1,9 @@
 import { isUndefined } from '@istock-shell/util';
-import type { TTableFilterConditions, TTableFilterItem } from './table-query';
+import type { TableFilterConditions, TableFilterItem } from './table-query';
 import { ETableFilterOperate } from './table-query';
-import type { TMatrixTable, TTableHeader, TTableBody } from '../types';
+import type { MatrixTable, TableHeader, TableBody } from '../types';
 
-export type TTableFormatFilter = {
+export type TableFormatFilter = {
   row: [number, number] | [];
   column: [number, number] | [];
   pipe: Function;
@@ -15,7 +15,7 @@ export type TTableFormatFilter = {
  * 转置 将表格的行变成列，列变成行。
  * @param matrix
  */
-export function transpose<T extends TTableHeader | TTableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
+export function transpose<T extends TableHeader | TableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
   const [headers, ...rows] = matrix;
   const transposed: [T[], ...T[][]] = [headers, ...headers.map((_, colIndex) => rows.map((row) => row[colIndex]))];
   return transposed;
@@ -25,7 +25,7 @@ export function transpose<T extends TTableHeader | TTableBody>(matrix: [T[], ...
  * 90度旋转
  * @param matrix
  */
-export function rotate90<T extends TTableHeader | TTableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
+export function rotate90<T extends TableHeader | TableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
   const [headers, ...rows] = matrix;
   const rotated: [T[], ...T[][]] = [
     headers,
@@ -39,7 +39,7 @@ export function rotate90<T extends TTableHeader | TTableBody>(matrix: [T[], ...T
  * 180度旋转
  * @param matrix
  */
-export function rotate180<T extends TTableHeader | TTableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
+export function rotate180<T extends TableHeader | TableBody>(matrix: [T[], ...T[][]]): [T[], ...T[][]] {
   return rotate90(rotate90(matrix));
 }
 
@@ -48,7 +48,7 @@ export function rotate180<T extends TTableHeader | TTableBody>(matrix: [T[], ...
  * @param matrix
  * @param columnIndex
  */
-export function sortMatrix<T extends TTableHeader | TTableBody>(
+export function sortMatrix<T extends TableHeader | TableBody>(
   matrix: [T[], ...T[][]],
   columnIndex = 0
 ): [T[], ...T[][]] {
@@ -69,7 +69,7 @@ export function sortMatrix<T extends TTableHeader | TTableBody>(
  * @param columnIndex
  * @param filterFunction
  */
-export function filterMatrix<T extends TTableHeader | TTableBody>(
+export function filterMatrix<T extends TableHeader | TableBody>(
   matrix: [T[], ...T[][]],
   columnIndex = 0,
   filterFunction: (element: T) => boolean
@@ -85,7 +85,7 @@ export function filterMatrix<T extends TTableHeader | TTableBody>(
  * @param table2
  * @param joinColumnIndex
  */
-export function joinTables<T extends TTableHeader | TTableBody>(
+export function joinTables<T extends TableHeader | TableBody>(
   table1: [T[], ...T[][]],
   table2: [T[], ...T[][]],
   joinColumnIndex = 0
@@ -114,7 +114,7 @@ export function joinTables<T extends TTableHeader | TTableBody>(
  * @param table1
  * @param table2
  */
-export function mergeTables<T extends TTableHeader | TTableBody>(
+export function mergeTables<T extends TableHeader | TableBody>(
   table1: [T[], ...T[][]],
   table2: [T[], ...T[][]]
 ): [T[], ...T[][]] {
@@ -130,7 +130,7 @@ export function mergeTables<T extends TTableHeader | TTableBody>(
  * @param newRowCount
  * @param newColCount
  */
-export function reshape<T extends TTableHeader | TTableBody>(
+export function reshape<T extends TableHeader | TableBody>(
   matrix: [T[], ...T[][]],
   newRowCount: number,
   newColCount: number
@@ -161,7 +161,7 @@ export function reshape<T extends TTableHeader | TTableBody>(
  * @param matrix
  * @param columnIndex
  */
-export function aggregateSum(matrix: TMatrixTable, columnIndex: number): number {
+export function aggregateSum(matrix: MatrixTable, columnIndex: number): number {
   const [_, ...rows] = matrix;
   return rows.reduce((sum, row) => {
     const value = row[columnIndex]?.value;
@@ -174,7 +174,7 @@ export function aggregateSum(matrix: TMatrixTable, columnIndex: number): number 
  * @param matrix
  * @param groupFunction
  */
-export function groupBy<T extends TTableHeader | TTableBody, K>(
+export function groupBy<T extends TableHeader | TableBody, K>(
   matrix: [T[], ...T[][]],
   groupFunction: (row: T[]) => K
 ): Map<K, [T[], ...T[][]]> {
@@ -206,7 +206,7 @@ export function groupBy<T extends TTableHeader | TTableBody, K>(
  * @param valueIndex
  */
 export function createPivotTable(
-  matrix: TMatrixTable,
+  matrix: MatrixTable,
   rowIndex: number,
   columnIndex: number,
   valueIndex: number
@@ -235,8 +235,8 @@ export function createPivotTable(
  * @param pipeAlias
  */
 export function format(
-  matrix: TMatrixTable,
-  filterConditions: TTableFilterConditions,
+  matrix: MatrixTable,
+  filterConditions: TableFilterConditions,
   pipeAlias: Record<string, Function>
 ) {
   const [headers, ...rows] = matrix;
@@ -251,7 +251,7 @@ export function format(
   };
   // 生成索引范围
   const setupIndex = (
-    filterItem: TTableFilterItem | undefined,
+    filterItem: TableFilterItem | undefined,
     items: any[],
     defaultLength: number,
     type: 'row' | 'column'
@@ -286,12 +286,12 @@ export function format(
     }
   };
 
-  const formatFilters: TTableFormatFilter[] = filterConditions
+  const formatFilters: TableFormatFilter[] = filterConditions
     .map((condition) => {
       const { row, column, range, pipe } = condition;
       if (!pipe || !pipeAlias[pipe]) return null;
 
-      const formatFilter: TTableFormatFilter = {
+      const formatFilter: TableFormatFilter = {
         row: [],
         column: [],
         pipe: pipeAlias[pipe],
@@ -323,7 +323,7 @@ export function format(
       }
       return formatFilter;
     })
-    .filter<TTableFormatFilter>((formatFilter): formatFilter is TTableFormatFilter => Boolean(formatFilter));
+    .filter<TableFormatFilter>((formatFilter): formatFilter is TableFormatFilter => Boolean(formatFilter));
 
   formatFilters.forEach(({ row, column, pipe }) => {
     // 没有范围

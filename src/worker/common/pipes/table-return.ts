@@ -1,5 +1,5 @@
 import { isNumber, isString } from '@istock-shell/util';
-import type { TMatrixTable, TTableBody, TTableHeader } from '../types';
+import type { MatrixTable, TableBody, TableHeader } from '../types';
 import { NumberUnits } from '../constants';
 import { parseFilterConditions } from './table-query';
 /**
@@ -12,7 +12,7 @@ export const getTableData = (
   response: Array<Record<string, unknown>>,
   headers: string[],
   unit: string
-): TMatrixTable => {
+): MatrixTable => {
   const conditions = parseFilterConditions(unit);
   const conditionRecord = conditions.reduce<Record<string, string>>((record, condition) => {
     const { row, column, pipe } = condition;
@@ -25,11 +25,11 @@ export const getTableData = (
     return record;
   }, {});
   const columnPipeRecord: Record<string | number, string> = {};
-  const thead: TTableHeader[] = headers.map((header) => ({
+  const thead: TableHeader[] = headers.map((header) => ({
     value: header,
     dataKey: header,
   }));
-  const tbody: TTableBody[][] = response.map((item) => {
+  const tbody: TableBody[][] = response.map((item) => {
     let rowPipe: string | null = null;
     return thead.map((head, columnIndex) => {
       let value = item[head.dataKey];

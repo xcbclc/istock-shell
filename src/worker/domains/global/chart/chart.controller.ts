@@ -1,5 +1,5 @@
 import { Controller, Method, CmdRoute, Payload, Component } from '@istock-shell/iswork';
-import type { TCmdRequest, TCmdTablePipeRequest } from '@/worker/common';
+import type { CmdRequest, CmdTablePipeRequest } from '@/worker/common';
 import { ChartService } from './chart.service';
 import type {
   TPieOption,
@@ -13,14 +13,14 @@ import type {
 } from './chart.cmd';
 import cmd, { EChartType } from './chart.cmd';
 
-type TViewChartPiePayload = TCmdTablePipeRequest<TPieOption, TPieArguments> | TCmdRequest<TPieOption, TPieArguments>;
-type TViewChartBarPayload = TCmdTablePipeRequest<TBarOption, TBarArguments> | TCmdRequest<TBarOption, TBarArguments>;
+type TViewChartPiePayload = CmdTablePipeRequest<TPieOption, TPieArguments> | CmdRequest<TPieOption, TPieArguments>;
+type TViewChartBarPayload = CmdTablePipeRequest<TBarOption, TBarArguments> | CmdRequest<TBarOption, TBarArguments>;
 type TViewChartLinePayload =
-  | TCmdTablePipeRequest<TLineOption, TLineArguments>
-  | TCmdRequest<TLineOption, TLineArguments>;
+  | CmdTablePipeRequest<TLineOption, TLineArguments>
+  | CmdRequest<TLineOption, TLineArguments>;
 type TViewChartStockPayload =
-  | TCmdTablePipeRequest<TStockOption, TStockArguments>
-  | TCmdRequest<TStockOption, TStockArguments>;
+  | CmdTablePipeRequest<TStockOption, TStockArguments>
+  | CmdRequest<TStockOption, TStockArguments>;
 
 @Controller({
   alias: 'chart',
