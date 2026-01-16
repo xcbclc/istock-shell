@@ -65,17 +65,17 @@ const bootstrap = async () => {
 // ...
 ```
 
-然后测试改功能是否正常。
+然后测试该功能是否正常。
 
 ### 应用域中间件
 
 应用域中间件可以直接参考`将股票名称转换成股票代码`的中间件实现，代码路径为`src/worker/common/middlewares/transform-stock-name.ts`，代码示例：
 
 ```typescript
-import type { ApplicationContext, IDomainClass } from '@istock-shell/iswork';
-import type { TCmdRequest } from '@/worker/common';
+import type { ApplicationContext, DomainClassBase } from '@istock-shell/iswork';
+import type { CmdRequest } from '@/worker/common';
 
-interface IGlobalDomain extends IDomainClass {
+interface GlobalDomain extends DomainClassBase {
   getStockCodeList: () => Promise<Array<{ name: string; code: string }>>;
 }
 
@@ -86,8 +86,8 @@ interface IGlobalDomain extends IDomainClass {
  */
 export const transformStockName = async (ctx: ApplicationContext, next: () => Promise<unknown>) => {
   const { app, cmdp } = ctx;
-  const data = cmdp.getPayload<TCmdRequest<{ 股票名称?: string; 股票代码?: string }>>();
-  const domain = app.getDomain<IGlobalDomain>('global');
+  const data = cmdp.getPayload<CmdRequest<{ 股票名称?: string; 股票代码?: string }>>();
+  const domain = app.getDomain<GlobalDomain>('global');
   if (domain?.domainClassInstance && data?.options?.['股票名称']) {
     const stockCodeList = await domain.domainClassInstance.getStockCodeList();
     if (stockCodeList.length) {
@@ -101,7 +101,7 @@ export const transformStockName = async (ctx: ApplicationContext, next: () => Pr
 };
 ```
 
-使用代码参考路径`src/worker/domains/ag/ag.domain.ts`，代码示例：
+使用代码参考路径`src/worker/domains/akshare/akshare.domain.ts`，代码示例：
 
 ```typescript
 // ...
@@ -109,10 +109,8 @@ import { transformStockName } from '@/worker/common'; // [!code ++]
 // ...
 
 @Domain({
-  name: 'ag',
-  viewName: 'A股',
   // ...
-  middlewares: [transformStockName], // [!code ++]
+  middlewares: [transformStockName, akshareQuery], // [!code ++]
   // ...
 })
 export class AkshareDomain {}

@@ -11,8 +11,9 @@
 - `VITE_SITE_BAIDU_ANALYSIS`：百度统计代码
 - `VITE_ISTOCK_TEABLE`：teable服务接口地址
 - `VITE_ISTOCK_BASE`：istock服务接口地址
-- `VITE_INDEXED_DB_NAME`：IndexedDB数据库名称
-- `VITE_INDEXED_DB_VERSION`：IndexedDB数据库版本
+- `VITE_ISTOCK_AKSHARE`：akshare服务接口地址
+- `VITE_INDEXED_DB_NAME`：indexedDB数据库名称
+- `VITE_INDEXED_DB_VERSION`：indexedDB数据库版本
 
 ### .env.development
 

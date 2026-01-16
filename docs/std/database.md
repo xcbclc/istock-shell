@@ -1,14 +1,14 @@
-# 数据存储规范 (Database Specification)
+# 数据存储规范
 
 本文档定义了 **istock-shell** 项目中数据持久化和存储的标准，基于 **iswork** 框架内置的 ORM 系统，支持多数据源管理和对象关系映射。
 
-## 1. 存储架构 (Storage Architecture)
+## 1. 存储架构
 
 ### 1.1 ORM 系统
 
 项目采用 Code-First 的 ORM（对象关系映射）模式。开发者通过定义 TypeScript 类（Model）来描述数据结构，框架自动处理数据库表的创建和数据的增删改查。
 
-### 1.2 数据源 (Data Source)
+### 1.2 数据源
 
 框架支持多种类型的驱动（Driver），根据应用场景选择合适的存储介质：
 
@@ -18,9 +18,9 @@
 | **Memory**    | `memory`    | 临时数据、单元测试、会话级缓存。                             | 页面刷新丢失 |
 | **HTTP**      | `http`      | 远程 API 数据映射。将后端接口映射为本地模型操作。            | 远程持久化   |
 
-## 2. 模型定义 (Model Definition)
+## 2. 模型定义
 
-### 2.1 实体类 (Entity)
+### 2.1 实体类
 
 所有数据模型类必须继承自 `BaseModel` 或实现相应接口，并使用 `@Model` 装饰器标记。
 
@@ -49,9 +49,9 @@ export class User {
 - **@Column()**: 普通列。支持配置 `nullable`, `default`, `unique`, `type` 等属性。
 - **@Index()**: 创建索引，用于优化查询性能。
 
-## 3. 数据访问 (Data Access)
+## 3. 数据访问
 
-### 3.1 仓储模式 (Repository Pattern)
+### 3.1 仓储模式
 
 **禁止**在 Controller 或 Service 中直接操作底层数据库连接。**必须**通过 `Repository` 对象进行数据访问。
 
@@ -74,7 +74,7 @@ export class UserService {
 }
 ```
 
-### 3.2 查询构建 (Query Builder)
+### 3.2 查询构建
 
 对于复杂查询，应使用 Repository 提供的查询接口或 QueryBuilder（如果支持）。
 
@@ -83,17 +83,13 @@ export class UserService {
 - `save()`: 保存或更新。
 - `delete()`: 删除。
 
-## 4. 最佳实践 (Best Practices)
+## 4. 最佳实践
 
 ### 4.1 异步操作
 
 所有数据库操作均为异步（Async/Await）。开发者必须确保在调用链中正确处理 Promise。
 
-### 4.2 数据同步 (Synchronization)
-
-在开发环境下，DataSource 配置通常开启 `synchronize: true`，框架会自动根据 Model 定义更新数据库 Schema。在生产环境需谨慎处理，避免数据丢失。
-
-### 4.3 命名规范
+### 4.2 命名规范
 
 - **表名**: 使用 `snake_case`（如 `sys_user`, `trade_record`）。
 - **字段名**: 使用 `camelCase`（如 `userName`, `orderId`），ORM 会自动映射。

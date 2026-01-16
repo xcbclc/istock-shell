@@ -39,7 +39,7 @@ CMDP 地址用于唯一标识系统中的资源。
 系统使用以下正则表达式严格校验地址格式：
 
 ```regex
-^cmdp\/\/@\w{1,20}(\.[\w]{1,20}){1,5}:[0-9]{1,4}\/[\w]{1,20}\.[\w]{1,40}$
+^cmdp\/\/@\\w{1,20}(\\.[\\w]{1,20}){1,5}:[0-9]{1,4}\/[\\w]{1,20}\.[\\w]{1,40}$
 ```
 
 ### 2.3 地址示例
@@ -79,13 +79,9 @@ export type CmdpMessage<Payload = CmdpPayload> = {
   export type CmdpMetaValue = string | number | boolean | undefined | null;
 
   export type CmdpMeta = {
-    /** 状态码或状态描述 */
+    /** 状态信息 */
     status?: string | number;
-    /** 消息唯一标识，用于请求响应关联 */
-    messageId?: string;
-    /** 时间戳 */
-    timestamp?: number;
-    /** 其他自定义元数据 */
+    /** 其他元数据字段 */
     [k: string]: CmdpMetaValue;
   } | null;
   ```
@@ -140,7 +136,7 @@ export type CmdpMessage<Payload = CmdpPayload> = {
 
 ## 5. 实现参考
 
-CMDP 协议的完整实现位于 `@istock-shell/iswork` 包中。
+CMDP 协议的完整实现位于 [`@istock-shell/iswork`](/packages/iswork/classes/Cmdp.html) 包中。
 
 - **源码路径**：`packages/iswork/src/cmdp`
 - **核心类**：

@@ -89,7 +89,7 @@ export default {
 
 ### 6.1 环境准备
 
-确保本地安装了 Node.js (>=16) 和 pnpm (>=7)。
+确保本地安装了 Node.js (>=18) 和 pnpm (>=7)。
 
 ```bash
 # 安装依赖

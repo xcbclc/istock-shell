@@ -44,51 +44,61 @@ iStock Shell 采用分层架构设计，严格遵循 **关注点分离 (Separati
 
 ### 1. 命令解析与 AST 构建
 
-当用户在终端输入命令（例如 `stock sh600000 | kline -d`）时，解析器会经历以下过程：
+当用户在终端输入命令（例如 `yyjr akshare`）时，解析器会经历以下过程：
 
 1. **词法分析**: 将字符串分解为 Token 流。
 2. **语法分析**: 构建抽象语法树 (AST)。
-   ```json
-   {
-     "type": "PIPE",
-     "left": { "command": "stock", "args": ["sh600000"] },
-     "right": { "command": "kline", "options": { "d": true } }
-   }
-   ```
 
 ### 2. 消息路由与分发 (CMDP Protocol)
 
 UI 层将解析后的指令封装为标准的 **CMDP (Command Message Data Protocol)** 消息发送给 Worker。
 `isWork` 框架接收消息后，通过 **路由表** 匹配对应的控制器：
 
-- **Domain**: 确定业务域（如 StockDomain）
-- **Controller**: 确定控制器（如 QuoteController）
-- **Method**: 确定执行方法（如 getKline）
+- **Domain**: 确定业务域（如 GlobalDomain）
+- **Controller**: 确定控制器（如 DomainController）
+- **Method**: 确定执行方法（如 changePromptDomain）
 
 ### 3. 业务处理与依赖注入
 
 控制器方法被调用时，IoC 容器会自动注入所需的 `Service`。
 
 ```typescript
-@Controller('quote')
-export class QuoteController {
-  constructor(private stockService: StockService) {} // 自动注入
+// ...
+import { DomainService } from './domain.service';
+import type { DomainModel } from './domain.model';
+// ...
 
-  @Cmd('kline')
-  async getKline(@Payload() symbol: string) {
-    // 业务逻辑处理：查询数据库或请求 API
-    return await this.stockService.fetchKline(symbol);
+@Controller({
+  alias: 'domain',
+  viewName: '应用域',
+})
+export class DomainController {
+  constructor(private readonly domainService: DomainService) {}
+
+  // ...
+
+  @CmdRoute(cmdJson.应用进入)
+  @Method('changePromptDomain')
+  @Component('CmdOutputEvent')
+  async changePromptDomain(ctx: ApplicationContext, @CmdRouteArguments(0) path: string = '.') {
+    const cmdInfo = ctx.cmdp.getInfo();
+    const meta = ctx.cmdp.getMeta<CmdpMeta & { domainName: string }>();
+    const currentDomainPaths = meta.domainName ? meta.domainName.split('.') : [];
+    const domains = await this.domainService.findDomainPaths(
+      ctx,
+      currentDomainPaths,
+      path.replace(/\/$/, '').split('/')
+    );
+    return { data: domains, eventAddress: cmdInfo.address.replace('cmdp:', 'event:') };
   }
+
+  // ...
 }
 ```
 
 ### 4. 结果响应与渲染
 
-业务层处理完成后，结果（可能是 JSON 数据、图表配置或纯文本）通过 Worker 消息返回给 UI。UI 层根据返回的数据类型智能选择渲染器：
-
-- **Text**: 直接输出文本。
-- **JSON**: 格式化展示或表格展示。
-- **Chart Config**: 动态加载 ECharts/G2 等图表库进行渲染。
+业务层处理完成后，结果通过 Worker 消息返回给 UI。UI 层根据返回的数据类型智能选择渲染UI组件：
 
 ## 执行流程图
 

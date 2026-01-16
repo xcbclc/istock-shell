@@ -17,13 +17,11 @@ pnpm istock cmd init
 ### 2. 按提示操作
 
 CLI 会引导你完成以下步骤：
-
-1.  **选择或创建 Domain（应用域）**: 选择命令所属的业务域，或创建一个新的域。
-2.  **输入命令名称**: 例如 `个股信息查询`。
-3.  **输入命令代码**: 例如 `ggxxcx`（建议使用拼音首字母）。
-4.  **确认生成**: 确认无误后，CLI 将自动在 `src/worker/domains/` 下生成相应的文件结构。
-
-生成的文件包括：
+```shell
+✔ 在哪个命令域下开发命令？ akshare
+✔ 您期望命令相关文件名为？(文件名用-符号分割) ggxxcx
+```
+确认无误后，CLI 将自动在 `src/worker/domains/` 下生成相应的文件结构。生成的文件包括：
 
 - `xxx.cmd.ts`: 命令定义与元数据
 - `xxx.controller.ts`: 控制器
@@ -42,7 +40,7 @@ CLI 会引导你完成以下步骤：
 
 ### 步骤 2: 创建目录结构
 
-在 `src/worker/domains/akshare`（假设为 akshare 域）目录下，创建一个名为 `ggxxcx` 的文件夹。
+在 `src/worker/domains/akshare`目录下，创建一个名为 `ggxxcx` 的文件夹。
 
 ```bash
 src/worker/domains/akshare/ggxxcx/
@@ -68,17 +66,27 @@ export class GgxxcxModel extends BaseModel {
 
 ### 步骤 4: 注册数据源
 
-如果使用了新的数据源模型，需要在 `src/worker/datasource-register.ts` 中注册，以便框架能够正确处理数据请求。
+把模型和数据源绑定，需要在 `src/worker/datasource-register.ts` 中注册，以便框架能够正确处理数据请求。
 
 ```typescript
 // src/worker/datasource-register.ts
-import { GgxxcxModel } from '@domains/ag/ggxxcx/ggxxcx.model';
+// ...
+import { GgxxcxModel } from '@domains/akshare/ggxxcx/ggxxcx.model'; // [!code ++]
 
-export const akShareFetchDataSourceModels = [
-  // ...
-  GgxxcxModel,
-  // ...
-];
+// ...
+
+const akShareFetchDataSource = new DataSource<'fetch'>({
+  name: 'fetch',
+  type: 'fetch',
+  entities: [GgxxcxModel], // [!code ++]
+  prefixUrl: import.meta.env.VITE_PROXY_API ?? '/api/v1/proxy',
+  requestOptions: {
+    headers: {
+      'xx-target': import.meta.env.VITE_ISTOCK_AKSHARE ?? 'https://istock.red/api/akshare',
+    },
+  },
+});
+await akShareFetchDataSource.initialize();
 ```
 
 ### 步骤 5: 开发服务层 (Service)
@@ -86,14 +94,13 @@ export const akShareFetchDataSourceModels = [
 创建 `ggxxcx.service.ts`，处理业务逻辑和数据获取。
 
 ```typescript
-import { Injectable, type TModelData } from '@istock-shell/iswork';
+import { Injectable, type ModelData } from '@istock-shell/iswork';
 import { GgxxcxModel } from './ggxxcx.model';
 
 @Injectable()
 export class GgxxcxService {
   async getStockIndividualInfoEm(symbol: string) {
-    // 调用 AKShare 接口
-    return await GgxxcxModel.run<Array<TModelData<GgxxcxModel>>>('/stock_individual_info_em', {
+    return await GgxxcxModel.run<Array<ModelData<GgxxcxModel>>>('/stock_individual_info_em', {
       method: 'get',
       query: {
         symbol,
@@ -108,25 +115,27 @@ export class GgxxcxService {
 创建 `ggxxcx.cmd.ts`，定义命令的名称、用法、参数和选项。这是命令解析器识别命令的关键。
 
 ```typescript
-import { getUnitOption } from '@/worker/common';
+import { getUnitOption, getStockCode, getStockName } from '@/worker/common';
 
 export default {
   个股信息查询: {
     name: '个股信息查询',
     cmd: 'ggxxcx',
-    usage: 'ggxxcx <symbol>',
-    description: '查询个股的基本信息',
+    usage: 'ggxxcx [-gpdm <股票代码>] [-gpmc <股票名称>]',
     options: {
-      // 定义选项，例如单位转换
-      单位: getUnitOption(),
+      单位: getUnitOption({
+        default: '*:总市值·亿，*:流通市值·亿，*:总股本·亿，*:流通股·亿',
+      }),
+      股票代码: getStockCode(),
+      股票名称: getStockName(),
     },
-    args: [
-      {
-        name: 'symbol',
-        required: true,
-        description: '股票代码',
-      },
-    ],
+    source: {
+      title: '个股信息查询',
+      url: 'http://quote.eastmoney.com/concept/sh603777.html?from=classic',
+    },
+    description: '东方财富-个股-股票信息',
+    remarks: '限量: 单次返回指定 symbol 的个股信息',
+    example: 'ggxxcx -gpmc 贵州茅台 -dw',
   },
 };
 ```
@@ -136,32 +145,45 @@ export default {
 创建 `ggxxcx.controller.ts`，将命令映射到服务方法。
 
 ```typescript
-import { Controller, Inject } from '@istock-shell/iswork';
-import { Cmd } from '@/worker/common/decorators'; // 假设有此装饰器
+import { CmdRoute, CmdRouteOptions, Controller, Method } from '@istock-shell/iswork';
+import { TableReturn } from '@/worker/common';
 import { GgxxcxService } from './ggxxcx.service';
+import { GgxxcxModel } from './ggxxcx.model';
+import cmdJson from './ggxxcx.cmd';
 
-@Controller('ggxxcx')
+@Controller({
+  alias: 'ggxxcx',
+  component: { name: 'ShTable' },
+})
 export class GgxxcxController {
-  constructor(@Inject() private readonly service: GgxxcxService) {}
+  constructor(private readonly ggxxcxService: GgxxcxService) {}
 
-  @Cmd('ggxxcx')
-  async execute(payload: any) {
-    // 处理命令执行逻辑
-    const { args } = payload;
-    return await this.service.getStockIndividualInfoEm(args.symbol);
+  @CmdRoute(cmdJson.个股信息查询)
+  @Method({
+    alias: cmdJson.个股信息查询.cmd,
+  })
+  @TableReturn({
+    Model: GgxxcxModel,
+    caption: '东方财富-个股-股票信息',
+  })
+  async getStockIndividualInfoEm(@CmdRouteOptions(cmdJson.个股信息查询.options.股票代码) symbol: string) {
+    return await this.ggxxcxService.getStockIndividualInfoEm(symbol);
   }
 }
 ```
 
 ### 步骤 8: 注册到 Domain
 
-最后，确保在 `src/worker/domains/ag/ag.domain.ts` 中注册了新的 Controller 和 Service。
+最后，确保在 `src/worker/domains/akshare/akshare.domain.ts` 中注册了新的 Controller 和 Service。
 
 ```typescript
+// src/worker/domains/akshare/akshare.domain.ts
+import { GgxxcxController } from './ggxxcx/ggxxcx.controller'; // [!code ++]
+import { GgxxcxService } from './ggxxcx/ggxxcx.service'; // [!code ++]
 @Domain({
   // ...
-  controllers: [GgxxcxController],
-  providers: [GgxxcxService],
+  controllers: [GgxxcxController], // [!code ++]
+  providers: [CmdRouteService, GgxxcxService], // [!code ++]
 })
 export class AkshareDomain {}
 ```
@@ -182,16 +204,10 @@ pnpm run dev
 
 ### 2. 进入应用域
 
-在终端中输入命令进入 A 股应用域（如果你的命令在其他域，请进入相应域）：
+在终端中输入命令进入akshare应用域（如果你的命令在其他域，请进入相应域）：
 
 ```bash
-cd ag
-```
-
-或者使用应用域切换命令：
-
-```bash
-yyjr ag
+yyjr akshare
 ```
 
 ### 3. 查看帮助文档
@@ -199,13 +215,7 @@ yyjr ag
 输入以下命令查看 `ggxxcx` 的自动生成文档：
 
 ```bash
-help ggxxcx
-```
-
-或者：
-
-```bash
-ggxxcx --help
+mlcz ggxxcx
 ```
 
 ### 4. 执行命令
@@ -213,7 +223,7 @@ ggxxcx --help
 尝试执行命令查询数据：
 
 ```bash
-ggxxcx 600519
+ggxxcx -gpmc 贵州茅台
 ```
 
 如果一切顺利，你应该能看到贵州茅台的个股信息以表格形式展示出来。

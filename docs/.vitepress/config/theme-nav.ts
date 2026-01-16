@@ -59,7 +59,7 @@ export default [
       { text: '命令行解析', link: '/packages/command-parser/README.html' },
       { text: '命令行编辑器', link: '/packages/editor/README.html' },
       { text: '常用工具库', link: '/packages/util/README.html' },
-      { text: '项目脚手架', link: '/packages/cli/README.html' },
+      // { text: '项目脚手架', link: '/packages/cli/README.html' },
     ],
   },
   {

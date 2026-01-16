@@ -91,36 +91,62 @@ queryStock(ctx);
 
 ## 控制器类装饰器
 
-控制器类装饰器`Controller`，用来定义一个类是一个装饰器，`Controller`接受`string`(控制器别名)、`string[]`、`TControllerMetadata`三种类型参数。
-下面是`TControllerMetadata`类型介绍：
+控制器类装饰器`Controller`，用来定义一个类是一个装饰器，`Controller`接受`string`(控制器别名)、`string[]`、`ControllerMetadata`三种类型参数。下面是`ControllerMetadata`类型介绍：
 
 ```typescript
-export type TControllerMethodComponentMetadata = {
+export type ControllerMethodComponentMetadata = {
   name: string;
   props?: Record<string, unknown>;
   extra?: Record<string, unknown>;
 };
 
-export type TControllerMetadata = {
+export type ControllerMetadata = {
   alias?: string | string[]; // 控制器别名，默认值为控制器实例类名
   version?: string; // 控制器版本
-  component?: TControllerMethodComponentMetadata; // 定义控制器返回数据的展示组件
-  middlewares?: TMiddleware[]; // 需要运行的中间件
+  component?: ControllerMethodComponentMetadata; // 定义控制器返回数据的展示组件
+  middlewares?: Middleware[]; // 需要运行的中间件
 };
+```
+
+使用示例代码：
+
+```typescript
+import { Controller } from '@istock-shell/iswork';
+
+@Controller({
+  alias: 'gpsj',
+})
+export class GpsjController {}
 ```
 
 ## 方法装饰器
 
 ### 方法
 
-方法装饰器`Method`用来定义控制器的调用方法，它将控制器的方法和控制器方法元数据绑定起来，方便`cmdp`消息能解析到对应的处理方法。`Method`接受`string`(方法别名)、`string[]`、`TControllerMethodMetadata`三种类型参数。
-下面是`TControllerMethodMetadata`类型介绍：
+方法装饰器`Method`用来定义控制器的调用方法，它将控制器的方法和控制器方法元数据绑定起来，方便`cmdp`消息能解析到对应的处理方法。`Method`接受`string`(方法别名)、`string[]`、`ControllerMethodMetadata`三种类型参数。下面是`ControllerMethodMetadata`类型介绍：
 
 ```typescript
-export type TControllerMethodMetadata = {
+export type ControllerMethodMetadata = {
   alias?: string | string[]; // 控制器方法别名，默认值为控制器方法名
   version?: string; // 控制器方法版本
 };
+```
+
+使用示例代码：
+
+```typescript
+import { Controller, Method } from '@istock-shell/iswork';
+
+@Controller({
+  alias: 'gpsj',
+})
+export class GpsjController {
+  @Method({
+    // 查询
+    alias: 'cx',
+  })
+  query() {}
+}
 ```
 
 ### 命令路由
@@ -146,10 +172,10 @@ export class DomainController {
 }
 ```
 
-命令路由装饰器接受`TControllerMethodCmdRoute`类型的参数，下面是`TControllerMethodCmdRoute`类型介绍：
+命令路由装饰器接受`ControllerMethodCmdRoute`类型的参数，下面是`ControllerMethodCmdRoute`类型介绍：
 
 ```typescript
-export type TControllerMethodCmdRouteOptions = {
+export type ControllerMethodCmdRouteOptions = {
   name: string; // 参数名称
   parameter: string[]; // 参数键
   parameterType: string[]; // 对应参数类型 string | number | boolean | array
@@ -159,15 +185,15 @@ export type TControllerMethodCmdRouteOptions = {
   choices?: Array<string | number | boolean | null>; // 参数可选值
 };
 
-export type TControllerMethodCmdRoute = {
+export type ControllerMethodCmdRoute = {
   name: string; // 命令名称
   cmd: string; // 命令
   usage?: string; // 命令用法
   shortDescription?: string; // 命令短介绍
   description?: string; // 命令介绍
-  options?: Record<string, TControllerMethodCmdRouteOptions>; // 命令参数选项
-  subcommand?: TControllerMethodCmdRoute; // 子命令
-  arguments?: TControllerMethodCmdRouteOptions[]; // 命令参数
+  options?: Record<string, ControllerMethodCmdRouteOptions>; // 命令参数选项
+  subcommand?: ControllerMethodCmdRoute; // 子命令
+  arguments?: ControllerMethodCmdRouteOptions[]; // 命令参数
   source?: { title?: string; url?: string };
   remarks?: string;
   example?: string;
@@ -176,11 +202,11 @@ export type TControllerMethodCmdRoute = {
 
 ### 组件
 
-组件装饰器`Component`用来定义用什么组件展示方法返回的数据。`Component`接受`string`、`TControllerMethodComponentMetadata`、`TControllerMethodComponentMetadata[]`类型参数。
-下面是`TControllerMethodComponentMetadata`类型介绍：
+组件装饰器`Component`用来定义用什么组件展示方法返回的数据。`Component`接受`string`、`ControllerMethodComponentMetadata`、`ControllerMethodComponentMetadata[]`类型参数。
+下面是`ControllerMethodComponentMetadata`类型介绍：
 
 ```typescript
-export type TControllerMethodComponentMetadata = {
+export type ControllerMethodComponentMetadata = {
   name: string; // 组件名
   props?: Record<string, unknown>; // 组件参数
   extra?: Record<string, unknown>; // 组件额外参数
@@ -228,11 +254,11 @@ export class CmdRouteController {
 
 ### 返回值处理
 
-返回值处理装饰器`Return`可以定义方法返回数据后，使用哪些管道函数去处理返回数据。`Return`接受参数`string`（管道函数名）、`TControllerMethodReturnMetadata`、`TControllerMethodReturnMetadata`三种类型参数。
-下面是`TControllerMethodReturnMetadata`类型介绍：
+返回值处理装饰器`Return`可以定义方法返回数据后，使用哪些管道函数去处理返回数据。`Return`接受参数`string`（管道函数名）、`ControllerMethodReturnMetadata`、`ControllerMethodReturnMetadata`三种类型参数。
+下面是`ControllerMethodReturnMetadata`类型介绍：
 
 ```typescript
-export type TControllerMethodReturnMetadata = {
+export type ControllerMethodReturnMetadata = {
   name: string; // 管道函数名称
   args?: unknown[]; // 管道函数参数
 };
@@ -242,7 +268,7 @@ export type TControllerMethodReturnMetadata = {
 
 ### payload取值
 
-payload取值装饰器可以获取`cmdp`中的payload数据，它不用传任何参数。使用示例代码：
+payload取值装饰器可以获取`cmdp`消息中的payload数据，它不用传任何参数。使用示例代码：
 
 ```typescript
 import { Controller, Method, Payload } from '@istock-shell/iswork';
@@ -302,7 +328,7 @@ export class AiController {
 
 ### meta字段取值
 
-meta字段取值装饰器`Meta`可以方便获取`cmdp`的meta数据中的值，`Meta`接受`string`参数作为取值key，然后根据取值key获取meta数据中的值。
+meta字段取值装饰器`Meta`可以方便获取`cmdp`消息的meta数据中的值，`Meta`接受`string`参数作为取值key，然后根据取值key获取meta数据中的值。
 使用示例代码：
 
 ```typescript
@@ -365,11 +391,11 @@ export class DomainController {
 
 ### 命令路由选项参数
 
-命令路由选项参数装饰器`CmdRouteOptions`，用来接收命令解析后的选项参数值。`CmdRouteOptions`接受`string`(命令选项参数名字段)、`string[]`、`TControllerMethodCmdRouteOptions`类型参数；也可以不传参数，它将返回所有选项参数值。
-下面是`TControllerMethodCmdRouteOptions`类型介绍：
+命令路由选项参数装饰器`CmdRouteOptions`，用来接收命令解析后的选项参数值。`CmdRouteOptions`接受`string`(命令选项参数名字段)、`string[]`、`ControllerMethodCmdRouteOptions`类型参数；也可以不传参数，它将返回所有选项参数值。
+下面是`ControllerMethodCmdRouteOptions`类型介绍：
 
 ```typescript
-export type TControllerMethodCmdRouteOptions = {
+export type ControllerMethodCmdRouteOptions = {
   name: string; // 参数名称
   parameter: string[]; // 参数键
   parameterType: string[]; // 对应参数类型 string | number | boolean | array
