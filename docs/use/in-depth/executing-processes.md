@@ -17,7 +17,7 @@
 - **捕获**：[`@istock-shell/editor`](/packages/editor/README.html) 实时监听你的键盘输入。
 - **词法分析**：当你按下回车，命令解析器（Command Parser）接管输入字符串。它将文本打散成一个个“Token”（标记）。
 - **语法分析**：Token 被组装成抽象语法树（AST）。系统此刻明白了什么是命令名（`tb`），什么是参数（`gplzt`），什么是选项（`-x`）。
-  - _例如：`yyjr akshare | mlcz -mc 应用` 会被识别为两个独立的命令节点，通过管道连接。_
+  - _例如：`yyjr akshare & mlcz gp` 会被识别为两个独立的命令节点，通过管道连接。_
 
 ### 2. 传输阶段 (Transmission)
 
