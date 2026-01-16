@@ -42,7 +42,7 @@
   <div class="space-y-6 p-1">
     <ShVirtualList bind:this={virtualList} {list} {onRangeChange} keeps={20} class="w-full max-h-320">
       {#snippet itemChildrenRender(item: CmdRouteModel, index: number)}
-        <div class="card bg-base-100 shadow-sm">
+        <div class="card bg-base-100 shadow-sm my-2">
           <div class="card-body p-4 gap-4">
             <!-- 介绍 -->
             <h3 class="card-title text-primary font-bold text-lg">{item.cmd} {item.name}</h3>
