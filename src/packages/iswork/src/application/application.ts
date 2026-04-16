@@ -5,7 +5,7 @@
 
 import { ScopeError, wrap, unwrap, isAsyncIterableIterator } from '@istock-shell/util';
 import type { DomainClassBase } from '../interfaces';
-import type { Middleware, ApplicationOptions, CmdpMessage } from '../types';
+import type { Middleware, ApplicationOptions, CmdpMessage, IPlugin, PluginConfig } from '../types';
 import { compose } from '../compose';
 import { DomainHandler } from '../domain/domain-handler';
 import { PipeManager, type TPipeKey } from '../pipe';
@@ -15,6 +15,7 @@ import { ApplicationEvent } from './application-event';
 import { MessageChannelManager } from './message-channel-manager';
 import { Observable } from '../message/index';
 import { MessageStatus } from '../enums/index';
+import { PluginManager } from '../plugin/plugin-manager';
 
 /**
  * 应用框架入口类
@@ -44,6 +45,8 @@ export class Application extends ApplicationEvent {
   readonly #pipeManager: PipeManager = new PipeManager();
   /** 消息通道管理器实例 */
   readonly #messageChannelManager: MessageChannelManager = new MessageChannelManager();
+  /** 插件管理器实例 */
+  readonly #pluginManager: PluginManager = new PluginManager(this);
   /** 消息回调函数 */
   #messageCallback: (event: MessageEvent<CmdpMessage<any>>) => Promise<void> = async () => {};
 
@@ -69,6 +72,14 @@ export class Application extends ApplicationEvent {
    */
   get messageChannelManager() {
     return this.#messageChannelManager;
+  }
+
+  /**
+   * 获取插件管理器
+   * @returns 插件管理器实例
+   */
+  get pluginManager() {
+    return this.#pluginManager;
   }
 
   /**
@@ -378,5 +389,116 @@ export class Application extends ApplicationEvent {
    */
   getPipeRecord() {
     return this.#pipeManager.getAllRecord();
+  }
+
+  // ==================== 插件管理方法 ====================
+
+  /**
+   * 注册插件
+   * @description 向应用程序注册插件，但不立即安装
+   * @template T 插件配置类型
+   * @param config - 插件配置
+   * @param plugin - 插件实例
+   * @returns 应用程序实例，支持链式调用
+   * @throws {ScopeError} 当插件已存在时抛出错误
+   * @example
+   * ```typescript
+   * app.usePlugin(
+   *   { name: 'logger-plugin', version: '1.0.0' },
+   *   new LoggerPlugin()
+   * );
+   * ```
+   */
+  usePlugin<T = Record<string, unknown>>(config: PluginConfig<T>, plugin: IPlugin<T>) {
+    this.#pluginManager.registerPlugin(config, plugin);
+    return this;
+  }
+
+  /**
+   * 安装插件
+   * @description 安装指定名称的插件，调用插件的 install() 方法
+   * @param pluginName - 插件名称
+   * @returns Promise<void>
+   * @throws {ScopeError} 当插件不存在时抛出错误
+   * @example
+   * ```typescript
+   * await app.installPlugin('logger-plugin');
+   * ```
+   */
+  async installPlugin(pluginName: string): Promise<void> {
+    await this.#pluginManager.installPlugin(pluginName);
+  }
+
+  /**
+   * 卸载插件
+   * @description 卸载指定名称的插件，调用插件的 uninstall() 方法
+   * @param pluginName - 插件名称
+   * @returns Promise<void>
+   * @throws {ScopeError} 当插件不存在时抛出错误
+   * @example
+   * ```typescript
+   * await app.uninstallPlugin('logger-plugin');
+   * ```
+   */
+  async uninstallPlugin(pluginName: string): Promise<void> {
+    await this.#pluginManager.uninstallPlugin(pluginName);
+  }
+
+  /**
+   * 启用插件
+   * @description 启用已注册的插件（如果已安装则无操作）
+   * @param pluginName - 插件名称
+   * @returns Promise<void>
+   */
+  async enablePlugin(pluginName: string): Promise<void> {
+    await this.#pluginManager.enablePlugin(pluginName);
+  }
+
+  /**
+   * 禁用插件
+   * @description 禁用已安装的插件，调用卸载方法
+   * @param pluginName - 插件名称
+   * @returns Promise<void>
+   */
+  async disablePlugin(pluginName: string): Promise<void> {
+    await this.#pluginManager.disablePlugin(pluginName);
+  }
+
+  /**
+   * 获取插件状态
+   * @description 获取指定插件的状态信息
+   * @param pluginName - 插件名称
+   * @returns 插件状态信息，如果插件不存在则返回 undefined
+   */
+  getPluginStatus(pluginName: string) {
+    return this.#pluginManager.getPluginStatus(pluginName);
+  }
+
+  /**
+   * 移除插件
+   * @description 从插件管理器中移除插件（必须先卸载）
+   * @param pluginName - 插件名称
+   * @throws {ScopeError} 当插件未卸载或不存在时抛出错误
+   */
+  removePlugin(pluginName: string): void {
+    this.#pluginManager.removePlugin(pluginName);
+  }
+
+  /**
+   * 安装所有插件
+   * @description 安装所有已注册且启用的插件
+   * @returns Promise<void>
+   */
+  async installAllPlugins(): Promise<void> {
+    await this.#pluginManager.installAllPlugins();
+  }
+
+  /**
+   * 卸载所有插件
+   * @description 卸载所有已安装的插件
+   * @returns Promise<void>
+   */
+  async uninstallAllPlugins(): Promise<void> {
+    await this.#pluginManager.uninstallAllPlugins();
   }
 }

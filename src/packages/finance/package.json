@@ -1,0 +1,53 @@
+{
+  "name": "@istock-shell/finance",
+  "version": "0.1.0",
+  "description": "一个成熟的金融数据分析工具包，提供数据清洗、技术指标、财务指标、统计计算和表格处理等功能",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && rollup -c",
+    "test": "vitest run --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts",
+    "test:coverage": "vitest run --config vitest.config.ts --coverage",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "finance",
+    "financial-analysis",
+    "technical-indicators",
+    "financial-metrics",
+    "data-cleaning",
+    "statistics",
+    "table-operations",
+    "typescript"
+  ],
+  "author": "xcbclc",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcbclc/istock-shell.git",
+    "directory": "src/packages/finance"
+  },
+  "homepage": "https://github.com/xcbclc/istock-shell/tree/main/src/packages/finance",
+  "bugs": {
+    "url": "https://github.com/xcbclc/istock-shell/istock-shell/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "rollup": "^3.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "rollup-plugin-dts": "^5.0.0",
+    "vitest": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0"
+  }
+}
